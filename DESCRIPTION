@@ -1,5 +1,5 @@
 Package: ganalytics
-Title: Interact with Google Analytics within R
+Title: Interact with Google Analytics using R
 Version: 0.1
 Authors@R: person(
     given = "Johann",
