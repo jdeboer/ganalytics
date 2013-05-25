@@ -48,7 +48,8 @@ kGaDimTypes <- list(
   )
 )
 
-data(kGaVars)
+#print(getwd())
+#data("kGaVars",  package = character(0), envir = environment())
 
 kGaOps <- list(
   met = c("==","!=","<",">","<=",">="),
@@ -56,7 +57,6 @@ kGaOps <- list(
 )
 
 kGaPrefix <- "^ga[;\\-\\._]"
-
 
 kGaMax <- list(
   dimensions = 7,

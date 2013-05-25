@@ -1,5 +1,5 @@
-#' ganalytics2
+#' ganalytics
 #'
-#' @name ganalytics2
+#' @name ganalytics
 #' @docType package
 NULL
