@@ -1,22 +1,13 @@
 setMethod(
   f = "GetGaUrl",
-  signature = signature(.Object = ".gaUrlClasses"),
+  signature = signature(".gaUrlClasses"),
   definition = function(.Object) {
+    message("hello")
     as(.Object, "utf8")
-    # new("utf8", .Object)
   }
 )
 
 ### QUERY
-
-#Load required packages
-#try and catch
-
-# Global variables ----
-
-#Load client secret file
-
-#source("rGAnalyticsConfig.R")
 
 ColTypes <- function(df, colNames, asFun, ...) {
   cols <- tolower(names(df)) %in% tolower(colNames)
@@ -129,51 +120,6 @@ GetGaData <- function(query) {
   return(data.ga)
 }
 
-# 
-# GetGaData <- function(query, noSampling == FALSE) {
-#   # For each segment, non-overlapping date range, and profileId...
-#   #   If noSampling then
-#   #     Do we expect the query will result in sampling?
-#   #       If so, then split the date range
-#   #   
-#   #   Fetch the first page of data
-#   #     If the 
-#   #   If GaMaxResults(query) > kGaMaxResults then pagination is required
-#   #     else 
-#   #       Fetch the data
-#   #     If the data is sampled, then split the date range using this formula
-#   #        
-#   
-# #   1,000,000 maximum unique dimension combinations for any type of query. What
-# #   does this mean? Suppose you request a content report for your site, which
-# #   has visits to 1,000,000 unique URLs for the requested date range. In such a
-# #   situation, your report would take a very long time to load in order to
-# #   display all the unique URLs for that date range. To avoid this, Google
-# #   Analytics retrieves a maximum of 1,000,000 unique URLs (or any other
-# #   dimension value) for a given request, divided by the number of days in the
-# #   request. For example: A report for the past 30 days would display
-# #   approximately 30,000 unique URLs (e.g. 1,000,000/30). A report for the past
-# #   60 days will display a maximum of 16,000 unique URLs (e.g. 1,000,000/60). 
-# #   Because unique URLs and campaign keywords repeat across given days, this
-# #   threshold is reached only by sites with lots of unique content and/or
-# #   keywords.
-# #   
-# #   500,000 maximum sessions for special queries where the data is not already
-# #   stored. In many of the reports, the list dimension is fixed, so Analytics
-# #   can store this data. This enables Analytics to deliver timely reporting
-# #   information for large data sets. However, if you request an ad hoc set of
-# #   dimensions, that information is not stored and Analytics will need to
-# #   perform the calculation at the time of the request. In this case, only
-# #   500,000 sessions will be processed in order to improve the response time.
-# #   Your report query might easily exceed 500,000 sessions if you request an
-# #   adhoc dimension over an expanded date range. To get a sense of how many
-# #   sessions might appear in your request, you can use the visits metric over
-# #   the date range you intend to query. This maximum of 500,000 session applies
-# #   per web property.
-#   
-#       # Google API error message, rCurl error, or error reported by R, etc...?
-
-
 #Make a Goolge API request
 GaApiRequest = function(baseURL, request, query, auth) {  
   # Construct URL
@@ -183,16 +129,16 @@ GaApiRequest = function(baseURL, request, query, auth) {
   message ("Sending request to Google Analytics...")
   message (url)
   # Construct the query header containing the OAuth authentication token
-  httpheader <- c(Authorization=paste("OAuth",attributes(auth)$access_token))
+  httpheader <- c(Authorization = paste("OAuth", attributes(auth)$access_token))
   # Send query to Google Analytics API and capture the JSON reponse
   # Try and catch
   # Check the server response code:
   # 400 Bad Request
-  data.json <- GET(url, httpheader=httpheader)
+  data.json <- GET(url, add_headers(httpheader))
   message ("Response received.")
   # Convert the JSON response into a R list
   tryCatch(
-    data.r <- fromJSON(data.json),
+    data.r <- content(data.json),
     error = function(e) stop(e),
     warning = function(w) warning(w)
   )

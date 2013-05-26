@@ -1,4 +1,5 @@
-# ---- GaVar ----
+#' GaVar
+#' @include classCoercion.R
 
 setMethod(
   f = "GaVar",
@@ -15,11 +16,9 @@ setMethod(
   signature = "character",
   definition = function(.Object) {
     gaVar <- tryCatch(
-      #as(.Object, "gaMetVar"),
       new("gaMetVar", .Object),
       error = function(e) {
         tryCatch(
-          #as(.Object, "gaDimVar"),
           new("gaDimVar", .Object),
           error = function(e) {
             stop(e)
@@ -40,7 +39,6 @@ setMethod(
   }
 )
 
-
 # ---- GaVar ----
 
 setMethod(
@@ -59,7 +57,6 @@ setMethod(
     return(.Object)
   }
 )
-
 
 # -- GaMetrics ----
 
@@ -80,7 +77,6 @@ setMethod(
         X = ArgList(.Object, ...),
         FUN = function(x) {
           new(Class = "gaMetVar", x)
-          # as(object = x, Class = "gaMetVar")
         }
       )
     )
@@ -95,7 +91,6 @@ setMethod(
     GaMetrics(as.character(.Object))
   }
 )
-
 
 # -- GaDimensions ----
 
@@ -115,7 +110,6 @@ setMethod(
       lapply(
         X = ArgList(.Object, ...),
         FUN = function(x) {
-          # as(object = x, Class = "gaDimVar")
           new(Class = "gaDimVar", x)
         }
       )
@@ -136,7 +130,7 @@ setMethod(
   f = "GaDimensions",
   signature = "NULL",
   definition = function(.Object) {
-    NULL
+    new("gaDimensions", list())
   }
 )
 
@@ -198,4 +192,3 @@ setMethod(
     return(.Object)
   }
 )
-

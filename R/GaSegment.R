@@ -52,7 +52,7 @@ setMethod(
   f = "GaSegment",
   signature = "NULL",
   definition = function(.Object) {
-    NULL
+    new("gaDynSegment", list())
   }
 )
 
@@ -82,7 +82,6 @@ setMethod(
     return(.Object)
   }
 )
-
 
 setMethod(
   f = "GaSegment",

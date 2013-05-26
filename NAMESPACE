@@ -1,1 +1,5 @@
-exportPattern("^[[:alpha:]]+")
+export(GaIsRegEx)
+import(RJSONIO)
+import(httr)
+import(methods)
+import(plyr)

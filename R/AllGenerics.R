@@ -1,9 +1,9 @@
-## access and replace methods
-#if(!isGeneric("param<-")){ 
-#    setGeneric("param<-", function(object, value) standardGeneric("param<-"))
-#}
-
-# ---- 'GaIsRegEx' ----
+#' @title Generic functions
+#' @description All generic functions defined by ganalytics
+#' @include AllClasses.R
+#' @export
+#' GaIsRegEx
+#' 
 setGeneric(
   name = "GaIsRegEx",
   def = function(.Object) {
@@ -14,7 +14,8 @@ setGeneric(
   valueClass = "logical"
 )
 
-# ---- 'GaVar': Gets or Creates an object from the superclass .gaVar ----
+#' GaVar
+#' Gets or Creates an object from the superclass .gaVar
 setGeneric(
   name = "GaVar",
   def = function(.Object) {
@@ -26,14 +27,16 @@ setGeneric(
 )
 
 # ---- 'GaVar<-': Sets the value of an object or sets its slot belonging to the superclass .gaVar ----
-setGeneric(
-  name = "GaVar<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaVar<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaVar<-")) {
+  setGeneric(
+    name = "GaVar<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaVar<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # ---- 'GaOperator' and 'GaOperator<-' ----
 
@@ -47,14 +50,16 @@ setGeneric(
   valueClass = ".gaOperator"
 )
 
-setGeneric(
-  name = "GaOperator<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaOperator<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaOperator<-")) {
+  setGeneric(
+    name = "GaOperator<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaOperator<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # ------ 'GaDimOperator' and 'GaMetOperator' constructor methods ----
 
@@ -90,15 +95,16 @@ setGeneric(
   valueClass = ".gaOperand"
 )
 
-setGeneric(
-  name = "GaOperand<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaOperand<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
-
+if(!isGeneric("GaOperand<-")) {
+  setGeneric(
+    name = "GaOperand<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaOperand<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # ---- GaNot ----
 
@@ -153,17 +159,19 @@ setGeneric(
       paste("No method defined for object of class", class(.Object), sep = ": ")
     )
   },
-  valueClass = ".gaSegmentOrNULL"
+  valueClass = ".gaSegment"
 )
 
-setGeneric(
-  name = "GaSegment<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaSegment<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaSegment<-")) {
+  setGeneric(
+    name = "GaSegment<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaSegment<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # ---- GaFilter ----
 
@@ -174,20 +182,22 @@ setGeneric(
       paste("No method defined for object of class", class(.Object), sep = ": ")
     )
   },
-  valueClass = ".gaFilterOrNULL"
+  valueClass = "gaFilter"
 )
 
-setGeneric(
-  name = "GaFilter<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaFilter<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
-
-
+if(!isGeneric("GaFilter<-")) {
+  setGeneric(
+    name = "GaFilter<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaFilter<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
+  
 # -- 'GaDateRange' and 'GaDateRange<-' ----
+
 setGeneric(
   name = "GaDateRange",
   def = function(.Object, endDate) {
@@ -198,14 +208,16 @@ setGeneric(
   valueClass = "gaDateRange"
 )
 
-setGeneric(
-  name = "GaDateRange<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaDateRange<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaDateRange<-")) {
+  setGeneric(
+    name = "GaDateRange<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaDateRange<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaStartDate' and 'GaStartDate<-' ----
 
@@ -219,14 +231,16 @@ setGeneric(
   valueClass = "Date"
 )
 
-setGeneric(
-  name = "GaStartDate<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaStartDate<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaStartDate<-")) {
+  setGeneric(
+    name = "GaStartDate<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaStartDate<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaEndDate' and 'GaEndDate<-' ----
 
@@ -240,14 +254,16 @@ setGeneric(
   valueClass = "Date"
 )
 
-setGeneric(
-  name = "GaEndDate<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaEndDate<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaEndDate<-")) {
+  setGeneric(
+    name = "GaEndDate<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaEndDate<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaMetrics' and 'GaMetrics<-' ----
 
@@ -261,14 +277,16 @@ setGeneric(
   valueClass = "gaMetrics"
 )
 
-setGeneric(
-  name = "GaMetrics<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaMetrics<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaMetrics<-")) {
+  setGeneric(
+    name = "GaMetrics<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaMetrics<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaDimensions' and 'GaDimensions<-' ----
 
@@ -279,17 +297,19 @@ setGeneric(
       paste("No method defined for object of class", class(.Object), sep = ": ")
     )
   },
-  valueClass = ".gaDimensionsOrNULL"
+  valueClass = "gaDimensions"
 )
 
-setGeneric(
-  name = "GaDimensions<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaDimensions<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaDimensions<-")) {
+  setGeneric(
+    name = "GaDimensions<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaDimensions<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaSortBy' and 'GaSortBy<-' ----
 
@@ -300,19 +320,22 @@ setGeneric(
       paste("No method defined for object of class", class(.Object), sep = ": ")
     )
   },
-  valueClass = ".gaSortByOrNULL"
+  valueClass = "gaSortBy"
 )
 
-setGeneric(
-  name = "GaSortBy<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaSortBy<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaSortBy<-")) {
+  setGeneric(
+    name = "GaSortBy<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaSortBy<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaProfileId' and 'GaProfileId<-' ----
+
 setGeneric(
   name = "GaProfileId",
   def = function(.Object, ..., desc) {
@@ -323,15 +346,16 @@ setGeneric(
   valueClass = "gaProfileId"
 )
 
-setGeneric(
-  name = "GaProfileId<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaProfileId<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
-
+if(!isGeneric("GaProfileId<-")) {
+  setGeneric(
+    name = "GaProfileId<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaProfileId<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- 'GaMaxResults' and 'GaMaxResults<-' ----
 
@@ -345,24 +369,25 @@ setGeneric(
   valueClass = "numeric"
 )
 
-setGeneric(
-  name = "GaMaxResults<-",
-  def = function(.Object, value) {
-    .Object <- standardGeneric("GaMaxResults<-")
-    validObject(.Object)
-    return(.Object)
-  }
-)
+if(!isGeneric("GaMaxResults<-")) {
+  setGeneric(
+    name = "GaMaxResults<-",
+    def = function(.Object, value) {
+      .Object <- standardGeneric("GaMaxResults<-")
+      validObject(.Object)
+      return(.Object)
+    }
+  )
+}
 
 # -- GetGaUrl ----
 
 setGeneric(
   name = "GetGaUrl",
-  def = function(.Object) {
-    stop(
-      paste("No method defined for object of class", class(.Object), sep = ": ")
-    )
-  },
-  valueClass = "utf8"
+   def = function(.Object) {
+     #standardGeneric("GetGaUrl")
+   },
+  valueClass = "utf8",
+  useAsDefault = FALSE#,
+  #simpleInheritanceOnly = TRUE
 )
-

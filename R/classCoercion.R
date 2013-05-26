@@ -1,8 +1,8 @@
-
-# -- Coercion ----
-
-# ---- Coercing to and from gaDim or gaMet and character ----
-
+#' @title classCoercion.R
+#' @description Methods for coercision between classes
+#' @include AllClasses.R
+#' @name coercion
+# Coercing to and from gaDim or gaMet and character
 setAs(
   from = "character",
   to = "gaMetVar",
@@ -61,8 +61,7 @@ setAs(
   }
 )
 
-# ---- Coercing to and from gaDimOperator or gaMetOperator and character ----
-
+# Coercing to and from gaDimOperator or gaMetOperator and character
 setAs(
   from = "character",
   to = "gaDimOperator",
@@ -121,8 +120,7 @@ setAs(
   }
 )
 
-# ---- Coercing to and from gaDimOperand and character or gaMetOperand and numeric or character ----
-
+# Coercing to and from gaDimOperand and character or gaMetOperand and numeric or character
 setAs(
   from = "character",
   to = "gaDimOperand",
@@ -188,11 +186,7 @@ setAs(
   }
 )
 
-
-# -- Class coercion ----
-
-# ---- Coercing to gaOr or gaAnd ----
-
+# Coercing to gaOr or gaAnd
 setAs(
   from = ".gaExpr",
   to = "gaOr",
@@ -246,8 +240,7 @@ setAs(
   }
 )
 
-# ---- Coercing GA expressions into GA API compatible character strings ----
-
+# Coercing GA expressions into GA API compatible character strings
 setAs(
   from = ".gaExpr",
   to = "character",
@@ -387,8 +380,7 @@ setAs(
   }
 )
 
-# ---- Coercing to gaDynSegment and gaFilter ----
-
+# Coercing to gaDynSegment and gaFilter
 setAs(
   from = "gaOr",
   to = "gaDynSegment",
@@ -449,8 +441,7 @@ setAs(
   }
 )
 
-# ---- Coercing to and from gaSegmentId ----
-
+# Coercing to and from gaSegmentId
 setAs(
   from = "numeric",
   to = "gaSegmentId",
@@ -497,11 +488,7 @@ setAs(
   }
 )
 
-
-# Class coercion ----
-
-# -- gaMetrics, gaDimensions, and gaSortBy to character ----
-
+# Coercing from gaMetrics, gaDimensions, and gaSortBy to character
 setAs(
   from = ".gaVarList",
   to = "character",
@@ -645,17 +632,6 @@ setAs(
   to = "gaProfileId",
   def = function(from) {
     new("gaProfileId", from@.Data)
-  }
-)
-
-
-# Coercion ----
-
-setAs(
-  from = "NULL",
-  to = "utf8",
-  def = function(from) {
-    new(Class = "utf8", "")
   }
 )
 

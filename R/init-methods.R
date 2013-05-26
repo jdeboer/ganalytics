@@ -1,4 +1,5 @@
-# -- Class initialisation methods ----
+#' @title Class initialisation methods
+#' @include AllClasses.R
 
 # ---- .gaVar ----
 
@@ -17,8 +18,9 @@ setMethod(
       }
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
-      varIndex <- pmatch(tmp, tolower(kGaVars$all()))
-      tmp <- kGaVars$all()[varIndex]
+      allVars <- with(kGaVars, union(dims, mets))
+      varIndex <- pmatch(tmp, tolower(allVars))
+      tmp <- allVars[varIndex]
       .Object@.Data <- tmp
       ## If a match was not found, use the var name supplied
       ## As var names can only be a character vector of length 1, and
@@ -107,13 +109,7 @@ setMethod(
           gaOperand <- GaOperand(visitorType[index])
         }
       }
-    }# else if(GaIsRegEx(gaOperator)) {
-    #       gaOperand <- gsub(
-    #         pattern = "([,;])",
-    #         replacement = "\\\\\\1",
-    #         x = gaOperand
-    #       )
-    #     }
+    }
     .Object@gaOperand <- gaOperand
     validObject(.Object)
     if(GaIsRegEx(.Object)) {
@@ -122,7 +118,6 @@ setMethod(
     return(.Object)
   }
 )
-
 
 # -- gaProfileId ----
 
@@ -180,4 +175,3 @@ setMethod(
     return(.Object)
   }
 )
-

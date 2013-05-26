@@ -9,19 +9,14 @@ Authors@R: person(
 Description: S4 classes and methods for interacting with Google Analytics.
     Supports OAuth 2.0 user authentication.
 Depends:
-    R(>= 3.0.0),
-    httr,
-    methods,
-    RJSONIO,
-    plyr
+    R(>= 3.0.0)
 License: MIT
 Collate:
     'ganalytics-package.R'
-    'ganalytics.R'
     'AllClasses.R'
-    'setAs.R'
     'AllGenerics.R'
     'init-methods.R'
+    'classCoercion.R'
     'GaVar.R'
     'GaOperand.R'
     'GaOperator.R'

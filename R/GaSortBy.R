@@ -58,7 +58,7 @@ setMethod(
   f = "GaSortBy",
   signature = "NULL",
   definition = function(.Object, ..., desc = logical(0)) {
-    NULL
+    new("gaSortBy", list(...), desc = desc)
   }
 )
 

@@ -1,4 +1,12 @@
-# -- 'GaFilter' and 'GaFilter<-' ----
+#' @title GaFilter
+#' @description Methods for getting and setting a filter
+#' @include classCoercion.R
+#' @return gaFilter
+#' @examples
+#' myQuery <- GaQuery(profileId = 123456789)
+#' myExpr <- GaExpr("pagePath", "~", "thank")
+#' GaFilter(myQuery) <- myExpr
+#' GetGaData(myQuery)
 
 setMethod(
   f = "GaFilter",
@@ -28,7 +36,7 @@ setMethod(
   f = "GaFilter",
   signature = "NULL",
   definition = function(.Object) {
-    NULL
+    new("gaFilter", list())
   }
 )
 

@@ -1,3 +1,7 @@
+#' @title ganalytics classes
+#' @description Class definitions for ganalytics
+#' @include ganalytics-package.R
+
 # ---- utf8 ----
 setClass(
   Class = "utf8",
@@ -295,18 +299,6 @@ setClassUnion(
   members = c(".gaOperator",".gaCompoundExpr")
 )
 
-setClassUnion(
-  name = ".gaFilterOrNULL",
-  members = c("gaFilter", "NULL")
-)
-
-setClassUnion(
-  name = ".gaSegmentOrNULL",
-  members = c(".gaSegment", "NULL")
-)
-
-# -- Class initialisation methods ----
-
 # ---- GA query dimensions, metrics, and sortby lists ----
 
 setClass(
@@ -393,6 +385,10 @@ setClass(
   representation = representation(
     desc = "logical"
   ),
+  prototype = prototype(
+    list(),
+    desc = logical()
+  ),
   contains = "list",
   validity = function(object) {
     if (
@@ -421,8 +417,6 @@ setClassUnion(
   members = c("gaMetrics", "gaDimensions", "gaSortBy"),
 )
 
-# -- GA query class constructs ----
-
 # ---- Ga Profile ID ----
 
 setClass(
@@ -446,17 +440,25 @@ setClass(
   }
 )
 
-setClassUnion(
-  name = ".gaDimensionsOrNULL",
-  members = c("gaDimensions","NULL")
-)
-
-setClassUnion(
-  name = ".gaSortByOrNULL",
-  members = c("gaSortBy", "NULL")
-)
-
-# Iinitialisation methods ----
+# setClassUnion(
+#   name = ".gaFilterOrNULL",
+#   members = c("gaFilter", "NULL")
+# )
+# 
+# setClassUnion(
+#   name = ".gaSegmentOrNULL",
+#   members = c(".gaSegment", "NULL")
+# )
+# 
+# setClassUnion(
+#   name = ".gaDimensionsOrNULL",
+#   members = c("gaDimensions","NULL")
+# )
+# 
+# setClassUnion(
+#   name = ".gaSortByOrNULL",
+#   members = c("gaSortBy", "NULL")
+# )
 
 # -- GA query construct ----
 
@@ -466,10 +468,10 @@ setClass(
     profileId = "gaProfileId",
     dateRange = "gaDateRange",
     metrics = "gaMetrics",
-    dimensions = ".gaDimensionsOrNULL",
-    sortBy = ".gaSortByOrNULL",
-    filters = ".gaFilterOrNULL",
-    segment = ".gaSegmentOrNULL",
+    dimensions = "gaDimensions",
+    sortBy = "gaSortBy",
+    filters = "gaFilter",
+    segment = ".gaSegment",
     maxResults = "numeric",
     authFile = "character"
   ),
@@ -477,7 +479,7 @@ setClass(
     dateRange = new("gaDateRange"),
     metrics = new("gaMetrics"),
     dimensions = new("gaDimensions"),
-    sortBy = NULL,
+    sortBy = new("gaSortBy"),
     maxResults = kGaMaxResults
   ),
   validity = function(object) {
@@ -514,26 +516,19 @@ setClass(
   }
 )
 
-# -- OUTPUTS ----
-
 setClassUnion(
   name = ".gaUrlClasses",
   members = c(
-    #".gaVarList",
-    "gaMetrics",
-    "gaDimensions",
-    "gaSortBy",
+    ".gaVarList",
     ".gaVar",
     ".gaOperator",
     ".gaOperand",
     ".gaCompoundExpr",
-    #".gaSegment",
-    "gaDynSegment",
-    "gaSegmentId",
+    ".gaSegment",
     "gaFilter",
     "gaProfileId",
     "Date",
-    "gaQuery",
-    "NULL"
+    "gaQuery"#,
+    #"NULL"
   )
 )

@@ -7,7 +7,7 @@ GaQuery <- function(
   endDate = Sys.Date() - 1,
   metrics = "ga:visits",
   dimensions = "ga:date",
-  sortBy = "ga:date",
+  sortBy = NULL,
   filters = NULL,
   segment = NULL,
   maxResults = kGaMaxResults
