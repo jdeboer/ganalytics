@@ -1,11 +1,7 @@
 \name{GaVar}
 \alias{GaVar}
-\title{GaVar
-Gets or Creates an object from the superclass .gaVar}
+\title{GaVar}
 \description{
-  GaVar Gets or Creates an object from the superclass
-  .gaVar
-
   GaVar
 }
 
