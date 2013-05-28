@@ -1,11 +1,11 @@
 \name{GaDateRange}
 \alias{GaDateRange}
-\title{Date range methods}
+\alias{GaDateRange<-}
+\title{GaDateRange
+Get the date range.}
 \description{
-  Methods for setting and getting date range (start and end
-  dates) for ganalytics query objects.
-}
-\details{
-  GaDateRange
+  GaDateRange Get the date range.
+
+  GaDateRange<- Set the date range.
 }
 

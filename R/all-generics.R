@@ -1,18 +1,14 @@
+# Generic functions
+# -----------------
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include ArgList.R
 NULL
 
-# Generic functions
-# -----------------
-# This file lists all of the generic functions available in the ganalytics package.
-
-#' @rdname GaVar
 #' GaVar
 #' Gets or Creates an object from the superclass .gaVar
 #' @export
-#' @genericMethods
-GaVar <- 
+#' @rdname GaVar
 setGeneric(
   name = "GaVar",
   def = function(.Object) {},
@@ -20,11 +16,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaVar
 #' GaVar<-
 #' Sets the value of an object or sets its slot belonging to the superclass .gaVar
 #' @export
-#' @genericMethods
+#' @rdname GaVar
 setGeneric(
   name = "GaVar<-",
   def = function(.Object, value) {
@@ -34,11 +29,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaOperator
 #' GaOperator
 #' Get or create an operator used in an expression.
 #' @export
-#' @genericMethods
+#' @rdname GaOperator
 setGeneric(
   name = "GaOperator",
   def = function(.Object) {},
@@ -46,11 +40,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaOperator
 #' GaOperator<-
 #' Set the operator used in an expression.
 #' @export
-#' @genericMethods
+#' @rdname GaOperator
 setGeneric(
   name = "GaOperator<-",
   def = function(.Object, value) {
@@ -60,11 +53,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaDimOperator
 #' GaDimOperator
 #' Get or create an operator used specifically in a dimension type expression.
 #' @export
-#' @genericMethods
+#' @rdname GaDimOperator
 setGeneric(
   name = "GaDimOperator",
   def = function(.Object) {},
@@ -72,11 +64,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaMetOperator
 #' GaMetOperator
 #' Get or create an operator used specifically in a metric type expression.
 #' @export
-#' @genericMethods
+#' @rdname GaMetOperator
 setGeneric(
   name = "GaMetOperator",
   def = function(.Object) {},
@@ -84,11 +75,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaOperand
 #' GaOperand
 #' Get the operand of an expression.
 #' @export
-#' @genericMethods
+#' @rdname GaOperand
 setGeneric(
   name = "GaOperand",
   def = function(.Object) {},
@@ -96,11 +86,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaOperand
 #' GaOperand<-
 #' Set the operand of an expression.
 #' @export
-#' @genericMethods
+#' @rdname GaOperand
 setGeneric(
   name = "GaOperand<-",
   def = function(.Object, value) {
@@ -110,22 +99,20 @@ setGeneric(
   }
 )
 
-#' @rdname GaIsRegEx
 #' GaIsRegEx
 #' Checks for a regular expression.
 #' @export
-#' @genericMethods
+#' @rdname GaIsRegEx
 setGeneric(
   name = "GaIsRegEx",
   def = function(.Object) {},
   valueClass = "logical"
 )
 
-#' @rdname GaNot
 #' GaNot
 #' NOT an expression.
 #' @export
-#' @genericMethods
+#' @rdname GaNot
 setGeneric(
   name = "GaNot",
   def = function(.Object) {},
@@ -133,7 +120,6 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaExpr
 #' GaExpr
 #' Create an expression.
 #' @examples
@@ -143,8 +129,8 @@ setGeneric(
 #'   GaFilter(myQuery) <- source_matches_google
 #'   GetGaData(myQuery)
 #' }
+#' @rdname GaExpr
 #' @export
-#' @genericMethods
 setGeneric(
   name = "GaExpr",
   def = function(.Object, gaOperator, gaOperand) {},
@@ -152,11 +138,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaOr
 #' GaOr
 #' OR two or more expressions.
+#' @rdname GaOr
 #' @export
-#' @genericMethods
 setGeneric(
   name = "GaOr",
   def = function(.Object, ...) {},
@@ -164,7 +149,6 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaAnd
 #' GaAnd
 #' 
 #' AND two or more ganalytics expressions together.
@@ -173,8 +157,8 @@ setGeneric(
 #' Valid types are either AND, OR, or single expressions.
 #' A single list of objects is also accepted.
 #' 
+#' @rdname GaAnd
 #' @export
-#' @genericMethods
 setGeneric(
   name = "GaAnd",
   def = function(.Object, ...) {},
@@ -182,11 +166,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaSegment
 #' GaSegment
 #' Get the segment.
 #' @export
-#' @genericMethods
+#' @rdname GaSegment
 setGeneric(
   name = "GaSegment",
   def = function(.Object) {},
@@ -194,11 +177,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaSegment
 #' GaSegment<-
 #' Set the segment
 #' @export
-#' @genericMethods
+#' @rdname GaSegment
 setGeneric(
   name = "GaSegment<-",
   def = function(.Object, value) {
@@ -208,11 +190,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaFilter
 #' GaFilter
 #' Get the filter.
 #' @export
-#' @genericMethods
+#' @rdname GaFilter
 setGeneric(
   name = "GaFilter",
   def = function(.Object, ...) {},
@@ -220,11 +201,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaFilter
 #' GaFilter<-
 #' Set the filter.
 #' @export
-#' @genericMethods
+#' @rdname GaFilter
 setGeneric(
   name = "GaFilter<-",
   def = function(.Object, value) {
@@ -234,11 +214,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaDateRange
 #' GaDateRange
 #' Get the date range.
 #' @export
-#' @genericMethods
+#' @rdname GaDateRange
 setGeneric(
   name = "GaDateRange",
   def =  function(.Object, endDate) {},
@@ -246,11 +225,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaDateRange
 #' GaDateRange<-
 #' Set the date range.
 #' @export
-#' @genericMethods
+#' @rdname GaDateRange
 setGeneric(
   name = "GaDateRange<-",
   def = function(.Object, value) {
@@ -260,11 +238,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaStartDate
 #' GaStartDate
 #' Get the start date.
 #' @export
-#' @genericMethods
+#' @rdname GaStartDate
 setGeneric(
   name = "GaStartDate",
   def = function(.Object) {},
@@ -272,11 +249,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaStartDate
 #' GaStartDate<-
 #' Set the start date.
 #' @export
-#' @genericMethods
+#' @rdname GaStartDate
 setGeneric(
   name = "GaStartDate<-",
   def = function(.Object, value) {
@@ -286,11 +262,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaEndDate
 #' GaEndDate
 #' Get the end date of the date range.
 #' @export
-#' @genericMethods
+#' @rdname GaEndDate
 setGeneric(
   name = "GaEndDate",
   def = function(.Object) {},
@@ -298,11 +273,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaEndDate
 #' GaEndDate<-
 #' Set the endDate of the date range.
 #' @export
-#' @genericMethods
+#' @rdname GaEndDate
 setGeneric(
   name = "GaEndDate<-",
   def = function(.Object, value) {
@@ -312,11 +286,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaMetrics
 #' GaMetrics
 #' Get the metrics of the object.
 #' @export
-#' @genericMethods
+#' @rdname GaMetrics
 setGeneric(
   name = "GaMetrics",
   def = function(.Object, ...) {},
@@ -324,11 +297,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaMetrics
 #' GaMetrics<-
 #' Set the metrics of the object.
 #' @export
-#' @genericMethods
+#' @rdname GaMetrics
 setGeneric(
   name = "GaMetrics<-",
   def = function(.Object, value) {
@@ -338,11 +310,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaDimensions
 #' GaDimensions
 #' Get the dimensions of the object.
 #' @export
-#' @genericMethods
+#' @rdname GaDimensions
 setGeneric(
   name = "GaDimensions",
   def = function(.Object, ...) {},
@@ -350,11 +321,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaDimensions
 #' GaDimensions<-
 #' Set the dimensions for the object.
 #' @export
-#' @genericMethods
+#' @rdname GaDimensions
 setGeneric(
   name = "GaDimensions<-",
   def = function(.Object, value) {
@@ -364,11 +334,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaSortBy
 #' GaSortBy
 #' Get the sortBy order of the query.
 #' @export
-#' @genericMethods
+#' @rdname GaSortBy
 setGeneric(
   name = "GaSortBy",
   def = function(.Object, ..., desc = logical(0)) {},
@@ -376,11 +345,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaSortBy
 #' GaSortBy<-
 #' Set the order of rows returned by Google Analytics.
 #' @export
-#' @genericMethods
+#' @rdname GaSortBy
 setGeneric(
   name = "GaSortBy<-",
   def = function(.Object, value) {
@@ -390,11 +358,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaProfileId
 #' GaProfileId
 #' Get the profileId of the query
 #' @export
-#' @genericMethods
+#' @rdname GaProfileId
 setGeneric(
   name = "GaProfileId",
   def = function(.Object) {},
@@ -402,11 +369,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaProfileId
 #' GaProfileId<-
 #' Set the profileId for the query.
 #' @export
-#' @genericMethods
+#' @rdname GaProfileId
 setGeneric(
   name = "GaProfileId<-",
   def = function(.Object, value) {
@@ -416,11 +382,10 @@ setGeneric(
   }
 )
 
-#' @rdname GaMaxResults
 #' GaMaxResults
 #' Get the value set for MaxResults.
 #' @export
-#' @genericMethods
+#' @rdname GaMaxResults
 setGeneric(
   name = "GaMaxResults",
   def = function(.Object) {},
@@ -428,11 +393,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' @rdname GaMaxResults
 #' GaMaxResults<-
 #' Set the maximum rows returned by a ganalytics query.
 #' @export
-#' @genericMethods
+#' @rdname GaMaxResults
 setGeneric(
   name = "GaMaxResults<-",
   def = function(.Object, value) {
@@ -442,11 +406,10 @@ setGeneric(
   }
 )
 
-#' @rdname GetGaUrl
 #' GetGaUrl
 #' Get the utf8 URL string compoent for the given ganalytics object.
 #' @export
-#' @genericMethods
+#' @rdname GetGaUrl
 setGeneric(
   name = "GetGaUrl",
   def = function(.Object) {},

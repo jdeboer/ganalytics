@@ -17,10 +17,34 @@ Imports:
     RJSONIO,
     plyr
 Collate:
+    'globaldata.R'
+    'ArgList.R'
+    'ValidGaOperand.R'
+    'globaldata.R
+    ganalytics
+    A
+    Google
+    Analytics
+    client
+    for
+    R
+    S4
+    classes
+    and
+    methods
+    for
+    interacting
+    with
+    Google
+    Analytics
+    data
+    in
+    R.'
     'ganalytics-package.R'
-    'AllClasses.R'
-    'AllGenerics.R'
-    'classCoercion.R'
+    'all-classes.R'
+    'init-methods.R'
+    'all-generics.R'
+    'all-coercions.R'
     'GaAnd.R'
     'GaDate.R'
     'GaOperand.R'
@@ -36,4 +60,3 @@ Collate:
     'GaSegment.R'
     'GaSortBy.R'
     'GetGa.R'
-    'init-methods.R'

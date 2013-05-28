@@ -1,8 +1,9 @@
-#' ganalytics classes
-#' Class definitions for ganalytics
 #' @include ganalytics-package.R
 #' @include ValidGaOperand.R
 NULL
+
+# Class definitions for ganalytics
+# --------------------------------
 
 # ---- GA dimension and metric variables ----
 
@@ -531,10 +532,6 @@ setClassUnion(
   )
 )
 
-#' @rdname GetGaData
-#' @export
-#' @dev
-# ---- utf8 ----
 setClass(
   Class = "utf8",
   contains = "character"

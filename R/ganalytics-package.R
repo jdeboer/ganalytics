@@ -1,3 +1,4 @@
+#' @include globaldata.R
 #' ganalytics
 #' A Google Analytics client for R
 #' S4 classes and methods for interacting with Google Analytics data in R.
@@ -9,7 +10,4 @@
 #' @import methods
 #' @import RJSONIO
 #' @import plyr
-data(
-  sysdata, globaldata,
-  envir = environment()
-)
+NULL

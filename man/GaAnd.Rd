@@ -2,8 +2,7 @@
 \alias{GaAnd}
 \title{GaAnd}
 \description{
-  methods for ANDing two or more ganalytics expressions
-  together.
+  AND two or more ganalytics expressions together.
 }
 \details{
   Create a new AND expression from one or more arguments
