@@ -36,13 +36,6 @@ Collate:
     'GaNot.R'
     'GaOr.R'
     'GaProfile.R'
-    'all-coercions.R
-    GaQuery
-    Create
-    a
-    ganalytics
-    query
-    object'
     'GaQuery.R'
     'GaSegment.R'
     'GaSortBy.R'

@@ -1,5 +1,7 @@
 \name{GaQuery}
 \alias{GaQuery}
+\title{GaQuery
+Create a ganalytics query object}
 \usage{
   GaQuery(profileId, authFile = "defaultGA.token",
     startDate = Sys.Date() - 8, endDate = Sys.Date() - 1,
@@ -28,5 +30,8 @@
 
   \item{maxResults}{the maximum number of results to
   return, up to 1,000,000}
+}
+\description{
+  GaQuery Create a ganalytics query object
 }
 

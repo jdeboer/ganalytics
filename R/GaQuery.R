@@ -1,7 +1,3 @@
-#' @include all-classes.R
-#' @include init-methods.R
-#' @include all-generics.R
-#' @include all-coercions.R
 #' GaQuery
 #' Create a ganalytics query object
 #' @param profileId profile id to use
@@ -16,6 +12,10 @@
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #' @export
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
 GaQuery <- function(
   profileId,
   authFile = "defaultGA.token",
