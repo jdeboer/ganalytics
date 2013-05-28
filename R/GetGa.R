@@ -81,6 +81,11 @@ if (!is.null(data.ga$error)) {
 return(data.ga)
 }
 
+#' GetGaData
+#' Execute a ganalytics query.
+#' @param query the query to execute.
+#' @return a dataframe
+#' @export
 GetGaData <- function(query) {
   authFile <- query@authFile
   # try and catch  

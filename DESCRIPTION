@@ -20,26 +20,6 @@ Collate:
     'globaldata.R'
     'ArgList.R'
     'ValidGaOperand.R'
-    'globaldata.R
-    ganalytics
-    A
-    Google
-    Analytics
-    client
-    for
-    R
-    S4
-    classes
-    and
-    methods
-    for
-    interacting
-    with
-    Google
-    Analytics
-    data
-    in
-    R.'
     'ganalytics-package.R'
     'all-classes.R'
     'init-methods.R'

@@ -1,3 +1,4 @@
+export(GetGaData)
 exportMethods("GaDateRange<-")
 exportMethods("GaDimensions<-")
 exportMethods("GaEndDate<-")
