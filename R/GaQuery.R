@@ -2,10 +2,20 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-NULL
-
-# -- GaQuery ----
-
+#' GaQuery
+#' Create a ganalytics query object
+#' @param profileId profile id to use
+#' @param authFile auth file to save token to
+#' @param startDate start date
+#' @param endDate end date
+#' @param metrics character vector of metrics
+#' @param dimensions character vector of dimensions
+#' @param sortBy a sort by object
+#' @param filters a filters object
+#' @param segment a segment object
+#' @param maxResults the maximum number of results to return,
+#'  up to 1,000,000
+#' @export
 GaQuery <- function(
   profileId,
   authFile = "defaultGA.token",

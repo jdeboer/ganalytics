@@ -1,3 +1,4 @@
+export(GaQuery)
 export(GetGaData)
 exportMethods("GaDateRange<-")
 exportMethods("GaDimensions<-")
