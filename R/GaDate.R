@@ -1,9 +1,10 @@
-#' @title Date range methods
-#' @description Methods for setting and getting date range (start and end dates) for
-#' ganalytics query objects.
-#' @include AllGenerics.R
-#' @details
-#' GaDateRange
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
+NULL
+
+# GaDateRange
 setMethod(
   f = "GaDateRange",
   signature = "gaDateRange",

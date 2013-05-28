@@ -1,5 +1,8 @@
-#' @title Class initialisation methods
-#' @include AllClasses.R
+#' @include all-classes.R
+NULL
+
+# Class initialisation methods
+# ----------------------------
 
 # ---- .gaVar ----
 

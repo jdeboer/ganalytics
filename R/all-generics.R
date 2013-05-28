@@ -1,26 +1,21 @@
-#' @rdname AllGenerics
-#' Generic functions
-#' All generic functions defined by ganalytics
-#' This file lists all of the generic methods available from ganalytics
-#' @include AllClasses.R
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include ArgList.R
+NULL
 
-#' @rdname GaIsRegEx
-#' GaIsRegEx
-#' Checks for a regular expression.
-#' @export
-GaIsRegEx <- function(.Object) {}
-setGeneric(
-  name = "GaIsRegEx",
-  valueClass = "logical"
-)
+# Generic functions
+# -----------------
+# This file lists all of the generic functions available in the ganalytics package.
 
 #' @rdname GaVar
 #' GaVar
 #' Gets or Creates an object from the superclass .gaVar
 #' @export
-GaVar <- function(.Object) {}
+#' @genericMethods
+GaVar <- 
 setGeneric(
   name = "GaVar",
+  def = function(.Object) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
@@ -29,20 +24,24 @@ setGeneric(
 #' GaVar<-
 #' Sets the value of an object or sets its slot belonging to the superclass .gaVar
 #' @export
-`GaVar<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaVar<-")
-  validObject(.Object)
-  return(.Object)
-}
-setGeneric("GaVar<-")
+#' @genericMethods
+setGeneric(
+  name = "GaVar<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaVar<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
 
 #' @rdname GaOperator
 #' GaOperator
 #' Get or create an operator used in an expression.
 #' @export
-GaOperator <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaOperator",
+  def = function(.Object) {},
   valueClass = ".gaOperator",
   useAsDefault = FALSE
 )
@@ -51,22 +50,24 @@ setGeneric(
 #' GaOperator<-
 #' Set the operator used in an expression.
 #' @export
-`GaOperator<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaOperator<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaOperator<-"
+  name = "GaOperator<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaOperator<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaDimOperator
 #' GaDimOperator
 #' Get or create an operator used specifically in a dimension type expression.
 #' @export
-GaDimOperator <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaDimOperator",
+  def = function(.Object) {},
   valueClass = "gaDimOperator",
   useAsDefault = FALSE
 )
@@ -75,9 +76,10 @@ setGeneric(
 #' GaMetOperator
 #' Get or create an operator used specifically in a metric type expression.
 #' @export
-GaMetOperator <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaMetOperator",
+  def = function(.Object) {},
   valueClass = "gaMetOperator",
   useAsDefault = FALSE
 )
@@ -86,9 +88,10 @@ setGeneric(
 #' GaOperand
 #' Get the operand of an expression.
 #' @export
-GaOperand <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaOperand",
+  def = function(.Object) {},
   valueClass = ".gaOperand",
   useAsDefault = FALSE
 )
@@ -97,22 +100,35 @@ setGeneric(
 #' GaOperand<-
 #' Set the operand of an expression.
 #' @export
-`GaOperand<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaOperand<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaOperand<-"
+  name = "GaOperand<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaOperand<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' @rdname GaIsRegEx
+#' GaIsRegEx
+#' Checks for a regular expression.
+#' @export
+#' @genericMethods
+setGeneric(
+  name = "GaIsRegEx",
+  def = function(.Object) {},
+  valueClass = "logical"
 )
 
 #' @rdname GaNot
 #' GaNot
 #' NOT an expression.
 #' @export
-GaNot <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaNot",
+  def = function(.Object) {},
   valueClass = ".gaLogical",
   useAsDefault = FALSE
 )
@@ -120,10 +136,18 @@ setGeneric(
 #' @rdname GaExpr
 #' GaExpr
 #' Create an expression.
+#' @examples
+#' \donttest{
+#'   myQuery <- GaQuery(profileId = 123456789)
+#'   source_matches_google <- GaExpr("source", "~", "google")
+#'   GaFilter(myQuery) <- source_matches_google
+#'   GetGaData(myQuery)
+#' }
 #' @export
-GaExpr <- function(.Object, gaOperator, gaOperand) {}
+#' @genericMethods
 setGeneric(
   name = "GaExpr",
+  def = function(.Object, gaOperator, gaOperand) {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -132,20 +156,28 @@ setGeneric(
 #' GaOr
 #' OR two or more expressions.
 #' @export
-GaOr <- function(.Object, ...) {}
+#' @genericMethods
 setGeneric(
   name = "GaOr",
+  def = function(.Object, ...) {},
   valueClass = "gaOr",
   useAsDefault = FALSE
 )
 
 #' @rdname GaAnd
 #' GaAnd
-#' AND two or more expressions.
+#' 
+#' AND two or more ganalytics expressions together.
+#' 
+#' Create a new AND expression from one or more arguments
+#' Valid types are either AND, OR, or single expressions.
+#' A single list of objects is also accepted.
+#' 
 #' @export
-GaAnd <- function(.Object, ...) {}
+#' @genericMethods
 setGeneric(
   name = "GaAnd",
+  def = function(.Object, ...) {},
   valueClass = "gaAnd",
   useAsDefault = FALSE
 )
@@ -154,9 +186,10 @@ setGeneric(
 #' GaSegment
 #' Get the segment.
 #' @export
-GaSegment <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaSegment",
+  def = function(.Object) {},
   valueClass = ".gaSegment",
   useAsDefault = FALSE
 )
@@ -165,22 +198,24 @@ setGeneric(
 #' GaSegment<-
 #' Set the segment
 #' @export
-`GaSegment<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaSegment<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
   name = "GaSegment<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaSegment<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaFilter
 #' GaFilter
 #' Get the filter.
 #' @export
-GaFilter <- function(.Object, ...) {}
+#' @genericMethods
 setGeneric(
   name = "GaFilter",
+  def = function(.Object, ...) {},
   valueClass = "gaFilter",
   useAsDefault = FALSE
 )
@@ -189,22 +224,24 @@ setGeneric(
 #' GaFilter<-
 #' Set the filter.
 #' @export
-`GaFilter<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaFilter<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaFilter<-"
+  name = "GaFilter<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaFilter<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaDateRange
 #' GaDateRange
 #' Get the date range.
 #' @export
-GaDateRange <- function(.Object, endDate) {}
+#' @genericMethods
 setGeneric(
   name = "GaDateRange",
+  def =  function(.Object, endDate) {},
   valueClass = "gaDateRange",
   useAsDefault = FALSE
 )
@@ -213,22 +250,24 @@ setGeneric(
 #' GaDateRange<-
 #' Set the date range.
 #' @export
-`GaDateRange<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaDateRange<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaDateRange<-"
+  name = "GaDateRange<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaDateRange<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaStartDate
 #' GaStartDate
 #' Get the start date.
 #' @export
-GaStartDate <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaStartDate",
+  def = function(.Object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -237,22 +276,24 @@ setGeneric(
 #' GaStartDate<-
 #' Set the start date.
 #' @export
-`GaStartDate<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaStartDate<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaStartDate<-"
+  name = "GaStartDate<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaStartDate<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaEndDate
 #' GaEndDate
 #' Get the end date of the date range.
 #' @export
-GaEndDate <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaEndDate",
+  def = function(.Object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -261,22 +302,24 @@ setGeneric(
 #' GaEndDate<-
 #' Set the endDate of the date range.
 #' @export
-`GaEndDate<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaEndDate<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaEndDate<-"
+  name = "GaEndDate<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaEndDate<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaMetrics
 #' GaMetrics
 #' Get the metrics of the object.
 #' @export
-GaMetrics <- function(.Object, ...) {}
+#' @genericMethods
 setGeneric(
   name = "GaMetrics",
+  def = function(.Object, ...) {},
   valueClass = "gaMetrics",
   useAsDefault = FALSE
 )
@@ -285,22 +328,24 @@ setGeneric(
 #' GaMetrics<-
 #' Set the metrics of the object.
 #' @export
-`GaMetrics<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaMetrics<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaMetrics<-"
+  name = "GaMetrics<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaMetrics<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaDimensions
-#' @title GaDimensions
+#' GaDimensions
 #' Get the dimensions of the object.
 #' @export
-GaDimensions <- function(.Object, ...) {}
+#' @genericMethods
 setGeneric(
   name = "GaDimensions",
+  def = function(.Object, ...) {},
   valueClass = "gaDimensions",
   useAsDefault = FALSE
 )
@@ -309,22 +354,24 @@ setGeneric(
 #' GaDimensions<-
 #' Set the dimensions for the object.
 #' @export
-`GaDimensions<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaDimensions<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaDimensions<-"
+  name = "GaDimensions<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaDimensions<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaSortBy
 #' GaSortBy
 #' Get the sortBy order of the query.
 #' @export
-GaSortBy <- function(.Object, ..., desc = logical(0)) {}
+#' @genericMethods
 setGeneric(
   name = "GaSortBy",
+  def = function(.Object, ..., desc = logical(0)) {},
   valueClass = "gaSortBy",
   useAsDefault = FALSE
 )
@@ -333,22 +380,24 @@ setGeneric(
 #' GaSortBy<-
 #' Set the order of rows returned by Google Analytics.
 #' @export
-`GaSortBy<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaSortBy<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaSortBy<-"
+  name = "GaSortBy<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaSortBy<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaProfileId
 #' GaProfileId
 #' Get the profileId of the query
 #' @export
-GaProfileId <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaProfileId",
+  def = function(.Object) {},
   valueClass = "gaProfileId",
   useAsDefault = FALSE
 )
@@ -357,22 +406,24 @@ setGeneric(
 #' GaProfileId<-
 #' Set the profileId for the query.
 #' @export
-`GaProfileId<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaProfileId<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaProfileId<-"
+  name = "GaProfileId<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaProfileId<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GaMaxResults
 #' GaMaxResults
 #' Get the value set for MaxResults.
 #' @export
-GaMaxResults <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GaMaxResults",
+  def = function(.Object) {},
   valueClass = "numeric",
   useAsDefault = FALSE
 )
@@ -381,22 +432,24 @@ setGeneric(
 #' GaMaxResults<-
 #' Set the maximum rows returned by a ganalytics query.
 #' @export
-`GaMaxResults<-` <- function(.Object, value) {
-  .Object <- standardGeneric("GaMaxResults<-")
-  validObject(.Object)
-  return(.Object)
-}
+#' @genericMethods
 setGeneric(
-  name = "GaMaxResults<-"
+  name = "GaMaxResults<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaMaxResults<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' @rdname GetGaUrl
 #' GetGaUrl
 #' Get the utf8 URL string compoent for the given ganalytics object.
 #' @export
-GetGaUrl <- function(.Object) {}
+#' @genericMethods
 setGeneric(
   name = "GetGaUrl",
+  def = function(.Object) {},
   valueClass = "utf8",
   useAsDefault = FALSE
 )

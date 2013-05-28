@@ -1,9 +1,12 @@
-#' @title GaExpr
-#' @description Generate an expression to use for filters or dynamic segments.
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
 #' @include GaVar.R
 #' @include GaOperator.R
 #' @include GaOperand.R
-#' 
+NULL
+
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),

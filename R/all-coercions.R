@@ -1,7 +1,11 @@
-#' @title classCoercion.R
-#' @description Methods for coercision between classes
-#' @include AllClasses.R
-#' @name coercion
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+NULL
+
+# Methods for coercision between classes
+# --------------------------------------
+
 # Coercing to and from gaDim or gaMet and character
 setAs(
   from = "character",

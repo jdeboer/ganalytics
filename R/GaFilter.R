@@ -1,7 +1,5 @@
-#' @title GaFilter
-#' @description Methods for getting and setting a filter
-#' @include classCoercion.R
-#' @return gaFilter
+#' @include all-coercions.R
+NULL
 
 setMethod(
   f = "GaFilter",

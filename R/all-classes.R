@@ -1,12 +1,8 @@
-#' @title ganalytics classes
-#' @description Class definitions for ganalytics
+#' ganalytics classes
+#' Class definitions for ganalytics
 #' @include ganalytics-package.R
-
-# ---- utf8 ----
-setClass(
-  Class = "utf8",
-  contains = "character"
-)
+#' @include ValidGaOperand.R
+NULL
 
 # ---- GA dimension and metric variables ----
 
@@ -126,6 +122,8 @@ setValidity(
 
 # ---- GA simple expressions -------------------------------------------------------
 
+#' @classMethods
+#' @classHierarchy
 setClass(
   Class = ".gaExpr",
   representation = representation(
@@ -531,4 +529,13 @@ setClassUnion(
     "gaQuery"#,
     #"NULL"
   )
+)
+
+#' @rdname GetGaData
+#' @export
+#' @dev
+# ---- utf8 ----
+setClass(
+  Class = "utf8",
+  contains = "character"
 )

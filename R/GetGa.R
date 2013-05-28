@@ -1,3 +1,9 @@
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
+NULL
+
 setMethod(
   f = "GetGaUrl",
   signature = signature(".gaUrlClasses"),

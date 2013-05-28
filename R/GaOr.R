@@ -1,3 +1,9 @@
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
+NULL
+
 # Create a GaOr from one or more metric or dimension expressions
 # Takes one or more Metric or Dimension expressions
 # as separate arguments or as a list.

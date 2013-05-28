@@ -1,5 +1,5 @@
-#' GaVar
-#' @include classCoercion.R
+#' @include all-coercions.R
+NULL
 
 setMethod(
   f = "GaVar",
