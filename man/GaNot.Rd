@@ -1,8 +1,7 @@
 \name{GaNot}
 \alias{GaNot}
-\title{GaNot
-NOT an expression.}
+\title{GaNot}
 \description{
-  GaNot NOT an expression.
+  NOT an expression.
 }
 

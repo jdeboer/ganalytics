@@ -2,8 +2,8 @@
 #' 
 #' Checks whether an operand value is valid for a selected dimension.
 #' 
-#' @param gaVar 
-#' @param gaOperand 
+#' @param gaVar selected dimension to check operand against
+#' @param gaOperand the operand value to check
 #' 
 ValidGaOperand <- function(gaVar, gaOperand) {
   if (gaVar=="ga:date") {

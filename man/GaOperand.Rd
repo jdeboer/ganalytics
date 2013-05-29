@@ -1,11 +1,10 @@
 \name{GaOperand}
 \alias{GaOperand}
 \alias{GaOperand<-}
-\title{GaOperand
-Get the operand of an expression.}
+\title{GaOperand}
 \description{
-  GaOperand Get the operand of an expression.
+  Get the operand of an expression.
 
-  GaOperand<- Set the operand of an expression.
+  Set the operand of an expression.
 }
 

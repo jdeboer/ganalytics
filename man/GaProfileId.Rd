@@ -1,11 +1,10 @@
 \name{GaProfileId}
 \alias{GaProfileId}
 \alias{GaProfileId<-}
-\title{GaProfileId
-Get the profileId of the query}
+\title{GaProfileId}
 \description{
-  GaProfileId Get the profileId of the query
+  Get the profileId of the query
 
-  GaProfileId<- Set the profileId for the query.
+  Set the profileId for the query.
 }
 

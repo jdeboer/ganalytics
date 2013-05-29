@@ -1,11 +1,10 @@
 \name{GaSegment}
 \alias{GaSegment}
 \alias{GaSegment<-}
-\title{GaSegment
-Get the segment.}
+\title{GaSegment}
 \description{
-  GaSegment Get the segment.
+  Get the segment.
 
-  GaSegment<- Set the segment
+  Set the segment
 }
 

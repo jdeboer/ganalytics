@@ -1,11 +1,10 @@
 \name{GaDateRange}
 \alias{GaDateRange}
 \alias{GaDateRange<-}
-\title{GaDateRange
-Get the date range.}
+\title{GaDateRange}
 \description{
-  GaDateRange Get the date range.
+  Get the date range.
 
-  GaDateRange<- Set the date range.
+  Set the date range.
 }
 

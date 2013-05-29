@@ -1,12 +1,10 @@
 \name{GaSortBy}
 \alias{GaSortBy}
 \alias{GaSortBy<-}
-\title{GaSortBy
-Get the sortBy order of the query.}
+\title{GaSortBy}
 \description{
-  GaSortBy Get the sortBy order of the query.
+  Get the sortBy order of the query.
 
-  GaSortBy<- Set the order of rows returned by Google
-  Analytics.
+  Set the order of rows returned by Google Analytics.
 }
 

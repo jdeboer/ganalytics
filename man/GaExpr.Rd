@@ -1,9 +1,8 @@
 \name{GaExpr}
 \alias{GaExpr}
-\title{GaExpr
-Create an expression.}
+\title{GaExpr}
 \description{
-  GaExpr Create an expression.
+  Create an expression.
 }
 \examples{
 \donttest{

@@ -1,11 +1,10 @@
 \name{GaEndDate}
 \alias{GaEndDate}
 \alias{GaEndDate<-}
-\title{GaEndDate
-Get the end date of the date range.}
+\title{GaEndDate}
 \description{
-  GaEndDate Get the end date of the date range.
+  Get the end date of the date range.
 
-  GaEndDate<- Set the endDate of the date range.
+  Set the endDate of the date range.
 }
 

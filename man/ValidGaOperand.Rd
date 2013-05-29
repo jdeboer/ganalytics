@@ -5,9 +5,9 @@
   ValidGaOperand(gaVar, gaOperand)
 }
 \arguments{
-  \item{gaVar}{}
+  \item{gaVar}{selected dimension to check operand against}
 
-  \item{gaOperand}{}
+  \item{gaOperand}{the operand value to check}
 }
 \description{
   Checks whether an operand value is valid for a selected

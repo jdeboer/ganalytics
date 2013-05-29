@@ -1,11 +1,10 @@
 \name{GaFilter}
 \alias{GaFilter}
 \alias{GaFilter<-}
-\title{GaFilter
-Get the filter.}
+\title{GaFilter}
 \description{
-  GaFilter Get the filter.
+  Get the filter.
 
-  GaFilter<- Set the filter.
+  Set the filter.
 }
 

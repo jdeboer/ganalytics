@@ -1,3 +1,11 @@
+document S4 methods - All user-level objects in a package (including S4 classes and methods) should have documentation entries. See the chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.
+
+
+Clean up all-coercions.R:
+ - group coercions methods - need to decide how to group them.
+ - by ability to replace?, by from class?, by to class?, by complexity?, by usage?, by most needed?
+
+
 # 
 # GetGaData <- function(query, noSampling == FALSE) {
 #   # For each segment, non-overlapping date range, and profileId...

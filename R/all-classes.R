@@ -123,8 +123,6 @@ setValidity(
 
 # ---- GA simple expressions -------------------------------------------------------
 
-#' @classMethods
-#' @classHierarchy
 setClass(
   Class = ".gaExpr",
   representation = representation(
@@ -293,10 +291,10 @@ setClassUnion(
   members = c("gaDynSegment", "gaSegmentId")
 )
 
-setClassUnion(
-  name = ".gaLogical",
-  members = c(".gaOperator",".gaCompoundExpr")
-)
+# setClassUnion(
+#   name = ".gaLogical",
+#   members = c(".gaOperator",".gaCompoundExpr")
+# )
 
 # ---- GA query dimensions, metrics, and sortby lists ----
 
@@ -353,10 +351,10 @@ setClass(
 
 setClass(
   Class = "gaDimensions",
-  contains = "list",
   prototype = prototype(
     list(new("gaDimVar"))
   ),
+  contains = "list",
   validity = function(object) {
     if (
       all(
@@ -439,26 +437,6 @@ setClass(
   }
 )
 
-# setClassUnion(
-#   name = ".gaFilterOrNULL",
-#   members = c("gaFilter", "NULL")
-# )
-# 
-# setClassUnion(
-#   name = ".gaSegmentOrNULL",
-#   members = c(".gaSegment", "NULL")
-# )
-# 
-# setClassUnion(
-#   name = ".gaDimensionsOrNULL",
-#   members = c("gaDimensions","NULL")
-# )
-# 
-# setClassUnion(
-#   name = ".gaSortByOrNULL",
-#   members = c("gaSortBy", "NULL")
-# )
-
 # -- GA query construct ----
 
 setClass(
@@ -518,17 +496,20 @@ setClass(
 setClassUnion(
   name = ".gaUrlClasses",
   members = c(
-    ".gaVarList",
+    #".gaCompoundExpr",
+    ".gaExpr", "gaOr", "gaAnd",
+    
+    #".gaVarList",
+    "gaMetrics", "gaDimensions", "gaSortBy",
+    
     ".gaVar",
     ".gaOperator",
     ".gaOperand",
-    ".gaCompoundExpr",
     ".gaSegment",
     "gaFilter",
     "gaProfileId",
     "Date",
-    "gaQuery"#,
-    #"NULL"
+    "gaQuery"
   )
 )
 

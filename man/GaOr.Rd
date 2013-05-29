@@ -1,8 +1,7 @@
 \name{GaOr}
 \alias{GaOr}
-\title{GaOr
-OR two or more expressions.}
+\title{GaOr}
 \description{
-  GaOr OR two or more expressions.
+  OR two or more expressions.
 }
 

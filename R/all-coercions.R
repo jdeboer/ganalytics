@@ -291,18 +291,22 @@ setAs(
   from = "gaAnd",
   to = "character",
   def = function(from) {
-    do.call(
-      paste,
-      c(
-        lapply(
-          X = from,
-          FUN = function(gaOr) {
-            as(gaOr, to)
-          }
-        ),
-        sep = ";"
+    if(length(from) >= 1) {
+      do.call(
+        paste,
+        c(
+          lapply(
+            X = from,
+            FUN = function(gaOr) {
+              as(gaOr, to)
+            }
+          ),
+          sep = ";"
+        )
       )
-    )
+    } else {
+      character(0)
+    }
   }
 )
 
@@ -713,28 +717,28 @@ setAs(
               GetGaUrl(GaMetrics(from)),
               sep = "="
             ),
-            if(!is.null(GaDimensions(from))) {
+            if(length(GaDimensions(from)) >= 1) {
               paste(
                 "dimensions",
                 GetGaUrl(GaDimensions(from)),
                 sep = "="
               )
             },
-            if(!is.null(GaSortBy(from))) {
+            if(length(GaSortBy(from)) >= 1) {
               paste(
                 "sort",
                 GetGaUrl(GaSortBy(from)),
                 sep = "="
               )
             },
-            if(!is.null(GaFilter(from))) {
+            if(length(GaFilter(from)) >= 1) {
               paste(
                 "filters",
                 GetGaUrl(GaFilter(from)),
                 sep = "="
               )
             },
-            if(!is.null(GaSegment(from))) {
+            if(length(GaSegment(from)) >= 1) {
               paste(
                 "segment",
                 GetGaUrl(GaSegment(from)),

@@ -1,9 +1,8 @@
 \name{GaMetOperator}
 \alias{GaMetOperator}
-\title{GaMetOperator
-Get or create an operator used specifically in a metric type expression.}
+\title{GaMetOperator}
 \description{
-  GaMetOperator Get or create an operator used specifically
-  in a metric type expression.
+  Get or create an operator used specifically in a metric
+  type expression.
 }
 

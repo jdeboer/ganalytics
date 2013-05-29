@@ -1,12 +1,10 @@
 \name{GaMaxResults}
 \alias{GaMaxResults}
 \alias{GaMaxResults<-}
-\title{GaMaxResults
-Get the value set for MaxResults.}
+\title{GaMaxResults}
 \description{
-  GaMaxResults Get the value set for MaxResults.
+  Get the value set for MaxResults.
 
-  GaMaxResults<- Set the maximum rows returned by a
-  ganalytics query.
+  Set the maximum rows returned by a ganalytics query.
 }
 

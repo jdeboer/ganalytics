@@ -3,10 +3,13 @@
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include ArgList.R
+#' @include flatten-list.R
 NULL
 
 #' GaVar
+#' 
 #' Gets or Creates an object from the superclass .gaVar
+#' 
 #' @export
 #' @rdname GaVar
 setGeneric(
@@ -17,7 +20,9 @@ setGeneric(
 )
 
 #' GaVar<-
+#' 
 #' Sets the value of an object or sets its slot belonging to the superclass .gaVar
+#' 
 #' @export
 #' @rdname GaVar
 setGeneric(
@@ -30,7 +35,9 @@ setGeneric(
 )
 
 #' GaOperator
+#' 
 #' Get or create an operator used in an expression.
+#' 
 #' @export
 #' @rdname GaOperator
 setGeneric(
@@ -41,7 +48,9 @@ setGeneric(
 )
 
 #' GaOperator<-
+#' 
 #' Set the operator used in an expression.
+#' 
 #' @export
 #' @rdname GaOperator
 setGeneric(
@@ -54,7 +63,9 @@ setGeneric(
 )
 
 #' GaDimOperator
+#' 
 #' Get or create an operator used specifically in a dimension type expression.
+#' 
 #' @export
 #' @rdname GaDimOperator
 setGeneric(
@@ -65,7 +76,9 @@ setGeneric(
 )
 
 #' GaMetOperator
+#' 
 #' Get or create an operator used specifically in a metric type expression.
+#' 
 #' @export
 #' @rdname GaMetOperator
 setGeneric(
@@ -76,7 +89,9 @@ setGeneric(
 )
 
 #' GaOperand
+#' 
 #' Get the operand of an expression.
+#' 
 #' @export
 #' @rdname GaOperand
 setGeneric(
@@ -87,7 +102,9 @@ setGeneric(
 )
 
 #' GaOperand<-
+#' 
 #' Set the operand of an expression.
+#' 
 #' @export
 #' @rdname GaOperand
 setGeneric(
@@ -100,7 +117,9 @@ setGeneric(
 )
 
 #' GaIsRegEx
+#' 
 #' Checks for a regular expression.
+#' 
 #' @export
 #' @rdname GaIsRegEx
 setGeneric(
@@ -110,18 +129,22 @@ setGeneric(
 )
 
 #' GaNot
+#' 
 #' NOT an expression.
+#' 
 #' @export
 #' @rdname GaNot
 setGeneric(
   name = "GaNot",
   def = function(.Object) {},
-  valueClass = ".gaLogical",
+  valueClass = c(".gaOperator",".gaCompoundExpr"),
   useAsDefault = FALSE
 )
 
 #' GaExpr
+#' 
 #' Create an expression.
+#' 
 #' @examples
 #' \donttest{
 #'   myQuery <- GaQuery(profileId = 123456789)
@@ -129,8 +152,9 @@ setGeneric(
 #'   GaFilter(myQuery) <- source_matches_google
 #'   GetGaData(myQuery)
 #' }
-#' @rdname GaExpr
+#' 
 #' @export
+#' @rdname GaExpr
 setGeneric(
   name = "GaExpr",
   def = function(.Object, gaOperator, gaOperand) {},
@@ -139,9 +163,11 @@ setGeneric(
 )
 
 #' GaOr
+#' 
 #' OR two or more expressions.
-#' @rdname GaOr
+#' 
 #' @export
+#' @rdname GaOr
 setGeneric(
   name = "GaOr",
   def = function(.Object, ...) {},
@@ -157,8 +183,8 @@ setGeneric(
 #' Valid types are either AND, OR, or single expressions.
 #' A single list of objects is also accepted.
 #' 
-#' @rdname GaAnd
 #' @export
+#' @rdname GaAnd
 setGeneric(
   name = "GaAnd",
   def = function(.Object, ...) {},
@@ -167,7 +193,9 @@ setGeneric(
 )
 
 #' GaSegment
+#' 
 #' Get the segment.
+#' 
 #' @export
 #' @rdname GaSegment
 setGeneric(
@@ -178,7 +206,9 @@ setGeneric(
 )
 
 #' GaSegment<-
+#' 
 #' Set the segment
+#' 
 #' @export
 #' @rdname GaSegment
 setGeneric(
@@ -191,7 +221,9 @@ setGeneric(
 )
 
 #' GaFilter
+#' 
 #' Get the filter.
+#' 
 #' @export
 #' @rdname GaFilter
 setGeneric(
@@ -202,7 +234,9 @@ setGeneric(
 )
 
 #' GaFilter<-
+#' 
 #' Set the filter.
+#' 
 #' @export
 #' @rdname GaFilter
 setGeneric(
@@ -215,7 +249,9 @@ setGeneric(
 )
 
 #' GaDateRange
+#' 
 #' Get the date range.
+#' 
 #' @export
 #' @rdname GaDateRange
 setGeneric(
@@ -226,7 +262,9 @@ setGeneric(
 )
 
 #' GaDateRange<-
+#' 
 #' Set the date range.
+#' 
 #' @export
 #' @rdname GaDateRange
 setGeneric(
@@ -239,7 +277,9 @@ setGeneric(
 )
 
 #' GaStartDate
+#' 
 #' Get the start date.
+#' 
 #' @export
 #' @rdname GaStartDate
 setGeneric(
@@ -250,7 +290,9 @@ setGeneric(
 )
 
 #' GaStartDate<-
+#' 
 #' Set the start date.
+#' 
 #' @export
 #' @rdname GaStartDate
 setGeneric(
@@ -263,7 +305,9 @@ setGeneric(
 )
 
 #' GaEndDate
+#' 
 #' Get the end date of the date range.
+#' 
 #' @export
 #' @rdname GaEndDate
 setGeneric(
@@ -274,7 +318,9 @@ setGeneric(
 )
 
 #' GaEndDate<-
+#' 
 #' Set the endDate of the date range.
+#' 
 #' @export
 #' @rdname GaEndDate
 setGeneric(
@@ -287,7 +333,9 @@ setGeneric(
 )
 
 #' GaMetrics
+#' 
 #' Get the metrics of the object.
+#' 
 #' @export
 #' @rdname GaMetrics
 setGeneric(
@@ -298,7 +346,9 @@ setGeneric(
 )
 
 #' GaMetrics<-
+#' 
 #' Set the metrics of the object.
+#' 
 #' @export
 #' @rdname GaMetrics
 setGeneric(
@@ -311,7 +361,9 @@ setGeneric(
 )
 
 #' GaDimensions
+#' 
 #' Get the dimensions of the object.
+#' 
 #' @export
 #' @rdname GaDimensions
 setGeneric(
@@ -322,7 +374,9 @@ setGeneric(
 )
 
 #' GaDimensions<-
+#' 
 #' Set the dimensions for the object.
+#' 
 #' @export
 #' @rdname GaDimensions
 setGeneric(
@@ -335,7 +389,9 @@ setGeneric(
 )
 
 #' GaSortBy
+#' 
 #' Get the sortBy order of the query.
+#' 
 #' @export
 #' @rdname GaSortBy
 setGeneric(
@@ -346,7 +402,9 @@ setGeneric(
 )
 
 #' GaSortBy<-
+#' 
 #' Set the order of rows returned by Google Analytics.
+#' 
 #' @export
 #' @rdname GaSortBy
 setGeneric(
@@ -359,7 +417,9 @@ setGeneric(
 )
 
 #' GaProfileId
+#' 
 #' Get the profileId of the query
+#' 
 #' @export
 #' @rdname GaProfileId
 setGeneric(
@@ -370,7 +430,9 @@ setGeneric(
 )
 
 #' GaProfileId<-
+#' 
 #' Set the profileId for the query.
+#' 
 #' @export
 #' @rdname GaProfileId
 setGeneric(
@@ -383,7 +445,9 @@ setGeneric(
 )
 
 #' GaMaxResults
+#' 
 #' Get the value set for MaxResults.
+#' 
 #' @export
 #' @rdname GaMaxResults
 setGeneric(
@@ -394,7 +458,9 @@ setGeneric(
 )
 
 #' GaMaxResults<-
+#' 
 #' Set the maximum rows returned by a ganalytics query.
+#' 
 #' @export
 #' @rdname GaMaxResults
 setGeneric(
@@ -407,8 +473,9 @@ setGeneric(
 )
 
 #' GetGaUrl
+#' 
 #' Get the utf8 URL string compoent for the given ganalytics object.
-#' @export
+#' 
 #' @rdname GetGaUrl
 setGeneric(
   name = "GetGaUrl",

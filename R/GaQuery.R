@@ -44,7 +44,6 @@ GaQuery <- function(
   )
 }
 
-
 setMethod(
   f = "GaMaxResults",
   signature = "gaQuery",

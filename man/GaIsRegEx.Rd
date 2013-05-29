@@ -1,8 +1,7 @@
 \name{GaIsRegEx}
 \alias{GaIsRegEx}
-\title{GaIsRegEx
-Checks for a regular expression.}
+\title{GaIsRegEx}
 \description{
-  GaIsRegEx Checks for a regular expression.
+  Checks for a regular expression.
 }
 

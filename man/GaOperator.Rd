@@ -1,12 +1,10 @@
 \name{GaOperator}
 \alias{GaOperator}
 \alias{GaOperator<-}
-\title{GaOperator
-Get or create an operator used in an expression.}
+\title{GaOperator}
 \description{
-  GaOperator Get or create an operator used in an
-  expression.
+  Get or create an operator used in an expression.
 
-  GaOperator<- Set the operator used in an expression.
+  Set the operator used in an expression.
 }
 
