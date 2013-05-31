@@ -9,11 +9,13 @@ Installation
 ------------
 
 1. Install the necessary packages:
-```r  
+```r
+
 install.packages("devtools")
 library(devtools)
 install_github(repo = "httr", username = "jdeboer", ref = "OAuth2.0-reference-class")
 install_github(repo = "ganalytics", username = "jdeboer")
+
 ```
 2. Prepare your Google APIs application:
   * Browse to [Google API Console] (https://code.google.com/apis/console/)
@@ -37,15 +39,19 @@ install_github(repo = "ganalytics", username = "jdeboer")
   * Return back to R and execute the following substituing `profile_id` with the profile ID you noted down (note a small file will be saved your home directory containing your authentication token):
   a. If you completed step 3:
 ```r  
-  library(ganalytics)
-  myQuery <- GaQuery( profile_id )
-  GetGaData(myQuery)
+
+library(ganalytics)
+myQuery <- GaQuery( profile_id )
+GetGaData(myQuery)
+
 ```  
   b. If you did NOT complete step 3; substitue client_id and client_secret with your details from step 1:
 ```r  
-  library(ganalytics)
-  myQuery <- GaQuery( profile_id )
-  GetGaData(myQuery, key = client_id , secret = client_secret)  
+
+library(ganalytics)
+myQuery <- GaQuery( profile_id )
+GetGaData(myQuery, key = client_id , secret = client_secret)  
+
 ```  
   * You should be directed to http://accounts.google.com within your default web browser asking you to sign-in to your Google account, or if you are already signed-in, you will be asked whether you grant read-only access for your Google Analytics to the Google API product you created in step 1. Make sure you are signed in to the Google account you wish to use, then grant access by selecting "Allow access". You can then close the page and return back to R to continue.
   * After you have successfully executed all of the above R commands you should see the default `ganalytics` report: visits by day for the past 7 days.
