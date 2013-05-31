@@ -7,6 +7,7 @@
 #' @include GaListToDataframe.R
 #' @include GaGetCoreReport.R
 #' @include GaApiRequest.R
+#' @include GaPaginate.R
 NULL
 
 setMethod(
@@ -24,10 +25,20 @@ setMethod(
 #'  Default is to use system environment variable "GANALYTICS_CONSUMER_ID".
 #' @param secret optional OAuth client secret.
 #'  Default is to use system environment variable "GANALYTICS_CONSUMER_SECRET".
+#' @param quiet supress messages
+#' @param details show detailed messages
+#' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
 #' @export
-GetGaData <- function(query, key = NULL, secret = NULL) {
-  oauth_config <- list(
+GetGaData <- function(
+  query,
+  key = NULL,
+  secret = NULL,
+  quiet = FALSE,
+  details = FALSE,
+  .progress = "time"
+) {
+  oauth <- new_oauth(
     key = NULL,
     secret = NULL,
     file = query@authFile,
@@ -37,40 +48,25 @@ GetGaData <- function(query, key = NULL, secret = NULL) {
     access = "token",
     appname = "GANALYTICS"
   )
-  oauth <- do.call(new_oauth, oauth_config)
-  maxRequestedRows <- GaMaxResults(query)
   queryURLs <- GetGaUrl(query)
-  data.ga <- NULL
-  sampled <- FALSE
-  for (queryUrl in queryURLs) {
-    gaResults <- GaListToDataframe(
-      GaGetCoreReport(queryUrl, oauth, startIndex = 1, min(maxRequestedRows, kGaMaxResults))                
-    )
-    if(gaResults$sampled) sampled <- TRUE
-    data.ga <- rbind(
-      data.ga,
-      gaResults$data
-    )
-    maxRows <- min(gaResults$totalResults, maxRequestedRows)
-    if(maxRows > 1) {
-      totalPages <- ceiling(maxRows / kGaMaxResults)
-      if(totalPages > 1) {
-        for(page in 2:totalPages) {
-          startIndex <- kGaMaxResults * (page - 1) + 1
-          maxResults <- min(kGaMaxResults, (maxRows - startIndex) + 1)
-          gaResults <- GaListToDataframe(
-            GaGetCoreReport(queryUrl, oauth, startIndex, maxResults)                
-          )
-          data.ga <- rbind(
-            data.ga,
-            gaResults$data
-          )
-        }
-      }
+  responses <- llply(
+    .data = queryURLs,
+    .fun = GaPaginate,
+    maxRequestedRows = GaMaxResults(query),
+    oauth = oauth,
+    quiet = quiet,
+    details = details,
+    .progress = .progress
+  )
+  data <- ldply(
+    .data = responses,
+    .fun = function(response) {
+      response$data
     }
+  )
+  sampled <- responses[[1]]$sampled
+  if (sampled) {
+    warning("Contains sampled data.")
   }
-  charCols <- lapply(data.ga, class) == "character"
-  data.ga <- ColTypes(df = data.ga, colNames = names(charCols)[charCols], asFun = as.factor)
-  if (sampled) warning("Contains sampled data.")
-  return(data.ga)
+  return(data)
 }

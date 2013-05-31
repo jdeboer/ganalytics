@@ -3,7 +3,8 @@
 \title{GetGaData
 Execute a ganalytics query.}
 \usage{
-  GetGaData(query, key = NULL, secret = NULL)
+  GetGaData(query, key = NULL, secret = NULL,
+    quiet = FALSE, details = FALSE, .progress = "time")
 }
 \arguments{
   \item{query}{the query to execute.}
@@ -14,6 +15,10 @@ Execute a ganalytics query.}
   \item{secret}{optional OAuth client secret.  Default is
   to use system environment variable
   "GANALYTICS_CONSUMER_SECRET".}
+
+  \item{quiet}{supress messages}
+
+  \item{details}{show detailed messages}
 }
 \value{
   a dataframe

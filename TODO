@@ -1,3 +1,9 @@
+Add a new generic and methods for getting and setting the token filename.
+
+
+Check response status codes from Google Analytics
+
+
 document S4 methods - All user-level objects in a package (including S4 classes and methods) should have documentation entries. See the chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.
 
 

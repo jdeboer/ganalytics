@@ -9,17 +9,19 @@ GaListToDataframe <- function(gaData) {
       x = do.call(rbind, gaData$rows),
       stringsAsFactors = FALSE
     )
+    names(gaData$rows) <- gaData$columnHeaders$name
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$dates, asFun = as.Date, format = kGaDateOutFormat)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$ints, asFun = as.integer)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNo2Logical)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaVars$mets, asFun = as.numeric)
+    charCols <- lapply(gaData, class) == "character"
+    gaData <- ColTypes(df = gaData, colNames = names(charCols)[charCols], asFun = as.factor)
   } else {
     cols <- as.list(as.character(gaData$columnHeaders$name))
     names(cols) <- cols
     gaData$rows <- data.frame(cols)[0,]
   }
-  names(gaData$rows) <- gaData$columnHeaders$name
-  gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$dates, asFun = as.Date, format = kGaDateOutFormat)
-  gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$ints, asFun = as.integer)
-  gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
-  gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNo2Logical)
-  gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaVars$mets, asFun = as.numeric)
   names(gaData$rows) <- sub("^ga:", "", names(gaData$rows))
   return(
     list(

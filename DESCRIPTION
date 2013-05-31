@@ -45,4 +45,5 @@ Collate:
     'YesNo2Logical.R'
     'ColTypes.R'
     'GaListToDataframe.R'
+    'GaPaginate.R'
     'GetGa.R'
