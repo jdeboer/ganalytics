@@ -19,6 +19,9 @@ Execute a ganalytics query.}
   \item{quiet}{supress messages}
 
   \item{details}{show detailed messages}
+
+  \item{.progress}{progress bar to display. use .progress =
+  "none" to turn off.}
 }
 \value{
   a dataframe
