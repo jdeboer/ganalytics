@@ -20,23 +20,31 @@ setMethod(
 #' GetGaData
 #' Execute a ganalytics query.
 #' @param query the query to execute.
+#' @param key optional OAuth client ID.
+#'  Default is to use system environment variable "GANALYTICS_CONSUMER_ID".
+#' @param secret optional OAuth client secret.
+#'  Default is to use system environment variable "GANALYTICS_CONSUMER_SECRET".
 #' @return a dataframe
 #' @export
-GetGaData <- function(query) {
-  authFile <- query@authFile
-  # try and catch  
-  print(paste("Token auth file provided: ", authFile))  
-  if (authFile=="") {
-    message("Authentication token file not provided!")
-    stop("Error: Please specify the auth token file's location.")
-  }
+GetGaData <- function(query, key = NULL, secret = NULL) {
+  oauth_config <- list(
+    key = NULL,
+    secret = NULL,
+    file = query@authFile,
+    scope = "https://www.googleapis.com/auth/analytics.readonly",
+    base_url = "https://accounts.google.com/o/oauth2",
+    authorize = "auth",
+    access = "token",
+    appname = "GANALYTICS"
+  )
+  oauth <- do.call(new_oauth, oauth_config)
   maxRequestedRows <- GaMaxResults(query)
   queryURLs <- GetGaUrl(query)
   data.ga <- NULL
   sampled <- FALSE
   for (queryUrl in queryURLs) {
     gaResults <- GaListToDataframe(
-      GaGetCoreReport(queryUrl, authFile, startIndex = 1, min(maxRequestedRows, kGaMaxResults))                
+      GaGetCoreReport(queryUrl, oauth, startIndex = 1, min(maxRequestedRows, kGaMaxResults))                
     )
     if(gaResults$sampled) sampled <- TRUE
     data.ga <- rbind(
@@ -51,7 +59,7 @@ GetGaData <- function(query) {
           startIndex <- kGaMaxResults * (page - 1) + 1
           maxResults <- min(kGaMaxResults, (maxRows - startIndex) + 1)
           gaResults <- GaListToDataframe(
-            GaGetCoreReport(queryUrl, authFile, startIndex, maxResults)                
+            GaGetCoreReport(queryUrl, oauth, startIndex, maxResults)                
           )
           data.ga <- rbind(
             data.ga,

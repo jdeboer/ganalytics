@@ -30,11 +30,6 @@ kGaDimTypes <- list(
 # Constants
 # ---------
 
-# Google APIs OAuth2.0 URLs
-auth_url <- "https://accounts.google.com/o/oauth2/auth"
-token_url <- "https://accounts.google.com/o/oauth2/token"
-scope_url <- "https://www.googleapis.com/auth/analytics.readonly"
-
 # Google APIs requests base URLs
 management.api <- "https://www.googleapis.com/analytics/v3/management"
 reporting.api <- "https://www.googleapis.com/analytics/v3/data/ga"

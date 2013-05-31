@@ -3,7 +3,7 @@
 \title{GaQuery
 Create a ganalytics query object}
 \usage{
-  GaQuery(profileId, authFile = "defaultGA.token",
+  GaQuery(profileId, authFile = "~/ganalytics_token.RDS",
     startDate = Sys.Date() - 8, endDate = Sys.Date() - 1,
     metrics = "ga:visits", dimensions = "ga:date",
     sortBy = NULL, filters = NULL, segment = NULL,
