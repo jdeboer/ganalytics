@@ -36,7 +36,7 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
   * Click *OK*, then *OK* again. Log-off windows then log-on again, or simply restart.
 
 ### 4. Authenticate while attempting your first query with ganalytics
-  * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed via the Admin page in Google Analytics under *"Profile Settings"*, or by simply copying from the browser's address bar when viewing a report in Google Analytics; look for the digits between the letter **"p"** and trailing **"/"**, e.g. ".../a11111111w22222222p33333333/". Note: a function for accessing this from within R will be available in the near future.
+  * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed via the Admin page in Google Analytics under *"Profile Settings"*, or by simply copying from the browser's address bar when viewing a report in Google Analytics; look for the digits between the letter **"p"** and trailing **"/"**, e.g. `.../a11111111w22222222p33333333/` has a profile ID of `33333333`. Note: a function for accessing this from within R will be available in the near future.
   * Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down. (Please be aware that a small file will be saved to your home directory ("My Documents" in Windows) containing your new reusable authentication token):
   
 a. **If you completed step 3**:
@@ -63,3 +63,6 @@ Useful references
 
 1. [Google Analytics Core Reporting API reference guide](https://developers.google.com/analytics/devguides/reporting/core/v3/reference)
 2. [Google Analytics Dimensions and Metrics reference](https://developers.google.com/analytics/devguides/reporting/core/dimsmets)
+3. [Creating a Google API project](https://developers.google.com/console/help/#creatingdeletingprojects)
+4. [Generating an OAuth 2.0 client ID for Google APIs](https://developers.google.com/console/help/#generatingoauth2)
+5. [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
