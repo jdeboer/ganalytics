@@ -58,6 +58,34 @@ GetGaData(myQuery, key = client_id , secret = client_secret)
   * After you have successfully executed all of the above R commands you should see the output of the default `ganalytics` report: *visits by day for the past 7 days*.
 
 
+Examples
+--------
+
+As demonstrated in the installation steps above, before executing any of the following examples, the `ganalytics` package must be loaded and a new gaQuery object be generated with a Google Analytics profile ID assigned to it. The following code performs these steps: (Remember to replace `123456789` with the profile ID you wish to use.) 
+
+```r
+library(ganalytics)
+myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics profile ID
+```
+If you have just completed the installation steps, then you would have already done this.
+
+**The following examples assume you have successfully complete the above steps.**
+
+### Example 1 - Setting the date range
+
+```r
+# Set the date range from 1 January 2013 to 31 May 2013. Dates are specified in the format "YYYY-MM-DD".
+GaDateRange(myQuery) <- GaDataRange("2013-01-01", "2013-05-31")
+myData <- GetGaData(myQuery)
+summary(myData)
+```
+
+### Example 2 - Choosing what metrics to report
+
+### Example 3 - Selecting what dimensions to split your metrics by
+
+### Example 4 -  
+
 Useful references
 -----------------
 
