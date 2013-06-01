@@ -15,7 +15,7 @@ Installation
 ```r
 install.packages("devtools") # Installs the latest version of devtools available from CRAN
 library(devtools)
-install_github(repo = "httr", username = "jdeboer", ref = "OAuth2.0-reference-class") # a dev branch of httr.
+install_github(repo = "httr", username = "jdeboer") # a fork of httr.
 install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics from the GitHub repository.
 ```
 ### 2. Prepare your Google APIs application
