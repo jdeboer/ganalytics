@@ -58,7 +58,7 @@ GetGaData(myQuery, key = client_id , secret = client_secret)
   * After you have successfully executed all of the above R commands you should see the output of the default `ganalytics` report: *visits by day for the past 7 days*.
 
 
-Useful reference:
+Useful references
 -----------------
 
 1. [Google Analytics Core Reporting API reference guide](https://developers.google.com/analytics/devguides/reporting/core/v3/reference)
