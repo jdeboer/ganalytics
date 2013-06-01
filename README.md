@@ -36,7 +36,7 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
   * Click *OK*, then *OK* again. Log-off windows then log-on again, or simply restart.
 
 ### 4. Authenticate while attempting your first query with ganalytics
-  * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed via the Admin page in Google Analytics under *"Profile Settings"*, or by simply copying from the browser's address bar when viewing a report in Google Analytics; look for the digits between the letter **"p"** and trailing **"/"**, e.g. ".../a11111111w22222222p33333333/". Note: a function for accessing this from within R will be available in the near future.
+  * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed via the Admin page in Google Analytics under *"Profile Settings"*, or by simply copying from the browser's address bar when viewing a report in Google Analytics; look for the digits between the letter **"p"** and trailing **"/"**, e.g. `.../a11111111w22222222p33333333/` has a profile ID of `33333333`. Note: a function for accessing this from within R will be available in the near future.
   * Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down. (Please be aware that a small file will be saved to your home directory ("My Documents" in Windows) containing your new reusable authentication token):
   
 a. **If you completed step 3**:
@@ -58,8 +58,39 @@ GetGaData(myQuery, key = client_id , secret = client_secret)
   * After you have successfully executed all of the above R commands you should see the output of the default `ganalytics` report: *visits by day for the past 7 days*.
 
 
+Examples
+--------
+
+As demonstrated in the installation steps above, before executing any of the following examples, the `ganalytics` package must be loaded and a new gaQuery object be generated with a Google Analytics profile ID assigned to it. The following code performs these steps: (Remember to replace `123456789` with the profile ID you wish to use.) 
+
+```r
+library(ganalytics)
+myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics profile ID
+```
+If you have just completed the installation steps, then you would have already done this.
+
+**The following examples assume you have successfully complete the above steps.**
+
+### Example 1 - Setting the date range
+
+```r
+# Set the date range from 1 January 2013 to 31 May 2013. Dates are specified in the format "YYYY-MM-DD".
+GaDateRange(myQuery) <- GaDataRange("2013-01-01", "2013-05-31")
+myData <- GetGaData(myQuery)
+summary(myData)
+```
+
+### Example 2 - Choosing what metrics to report
+
+### Example 3 - Selecting what dimensions to split your metrics by
+
+### Example 4 -  
+
 Useful references
 -----------------
 
 1. [Google Analytics Core Reporting API reference guide](https://developers.google.com/analytics/devguides/reporting/core/v3/reference)
 2. [Google Analytics Dimensions and Metrics reference](https://developers.google.com/analytics/devguides/reporting/core/dimsmets)
+3. [Creating a Google API project](https://developers.google.com/console/help/#creatingdeletingprojects)
+4. [Generating an OAuth 2.0 client ID for Google APIs](https://developers.google.com/console/help/#generatingoauth2)
+5. [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
