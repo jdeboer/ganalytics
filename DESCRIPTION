@@ -12,9 +12,8 @@ License: MIT
 Depends:
     R(>= 3.0.0)
 Imports:
-    httr,
     methods,
-    RJSONIO,
+    httr,
     plyr
 Collate:
     'globaldata.R'

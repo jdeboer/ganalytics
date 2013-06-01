@@ -8,9 +8,8 @@
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
 #'   
 #' @keywords package
-#' @import httr
 #' @import methods
-#' @import RJSONIO
+#' @import httr
 #' @import plyr
 #' @docType package
 #' @name ganalytics

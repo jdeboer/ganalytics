@@ -7,6 +7,7 @@ NULL
 
 # ---- GA dimension and metric variables ----
 
+#' @export
 setClass(
   Class = "gaMetVar",
   prototype = prototype("ga:visits"),
@@ -20,6 +21,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaDimVar",
   prototype = prototype("ga:date"),
@@ -51,6 +53,7 @@ setValidity(
 
 # ---- GA expression operators ----
 
+#' @export
 setClass(
   Class = "gaMetOperator",
   contains = "character",
@@ -64,6 +67,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaDimOperator",
   contains = "character",
@@ -95,11 +99,13 @@ setValidity(
 
 # ---- GA expression operands ----
 
+#' @export
 setClass(
   Class = "gaMetOperand",
   contains = "numeric"
 )
 
+#' @export
 setClass(
   Class = "gaDimOperand",
   contains = "character"
@@ -133,6 +139,7 @@ setClass(
   contains = "VIRTUAL"
 )
 
+#' @export
 setClass(
   Class = "gaMetExpr",
   contains = ".gaExpr",
@@ -149,6 +156,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaDimExpr",
   contains = ".gaExpr",
@@ -178,6 +186,7 @@ setClass(
 
 # ---- GA 'AND' and 'OR' compound expressions -------------------------------
 
+#' @export
 setClass(
   Class = "gaOr",
   contains = "list",
@@ -202,6 +211,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaAnd",
   contains = "list",
@@ -232,6 +242,7 @@ setClassUnion(
 
 # ---- GA filter ----
 
+#' @export
 setClass(
   Class = "gaFilter",
   contains = "gaAnd",
@@ -264,11 +275,13 @@ setClass(
 
 # ---- GA Dynamic and pre-defined segments ----
 
+#' @export
 setClass(
   Class = "gaDynSegment",
   contains = "gaAnd"
 )
 
+#' @export
 setClass(
   Class = "gaSegmentId",
   contains = "character",
@@ -298,6 +311,7 @@ setClassUnion(
 
 # ---- GA query dimensions, metrics, and sortby lists ----
 
+#' @export
 setClass(
   Class = "gaDateRange",
   representation = representation(
@@ -321,6 +335,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaMetrics",
   prototype = prototype(
@@ -349,6 +364,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaDimensions",
   prototype = prototype(
@@ -377,6 +393,7 @@ setClass(
   }
 )
 
+#' @export
 setClass(
   Class = "gaSortBy",
   representation = representation(
@@ -416,6 +433,7 @@ setClassUnion(
 
 # ---- Ga Profile ID ----
 
+#' @export
 setClass(
   Class = "gaProfileId",
   contains = "character",
@@ -439,6 +457,7 @@ setClass(
 
 # -- GA query construct ----
 
+#' @export
 setClass(
   Class = "gaQuery",
   representation = representation(
