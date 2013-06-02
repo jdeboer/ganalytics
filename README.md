@@ -17,14 +17,18 @@ Installation
 #### Prerequisites
 * Ensure you have installed the latest version of [R](http://cran.r-project.org/)
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
+* For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/wiki/Philosophy#getting-started)
 
 #### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
 
 ```r
-install.packages("devtools") # Installs the latest version of devtools available from CRAN
+# Install the required packages from CRAN
+install.packages(c("devtools", "plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"), dependencies = TRUE) # 
+# Install ganalytics and httr branches from GitHub.
 library(devtools)
-install_github(repo = "httr", username = "jdeboer") # a fork of httr.
-install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics from the GitHub repository.
+install_github(repo = "httr", username = "jdeboer")
+install_github(repo = "ganalytics", username = "jdeboer")
+# End
 ```
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
@@ -63,16 +67,15 @@ _Note: For further information about Google APIs please refer to the References 
 
   _Note: A function for accessing your profile IDs within R will be available in the near future._
 
-* Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down:
-
-  _Note: A small file named `ganalytics_token.RDS` will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
-  
+* Return to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down:
+ 
 ##### If you completed step 3
 
 ```r
 library(ganalytics)
 myQuery <- GaQuery( profile_id )
 GetGaData(myQuery)
+# End
 ```
 
 ##### If you did NOT complete step 3
@@ -82,12 +85,14 @@ In addition to your `profile_id`, also substitute `client_id` and `client_secret
 library(ganalytics)
 myQuery <- GaQuery( profile_id )
 GetGaData(myQuery, key = client_id , secret = client_secret)
+# End
 ```
 
 * You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
 * Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
 * If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; visits by day for the past 7 days.
 
+_Note: A small file named `ganalytics_token.RDS` will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
 
 Examples
 --------
@@ -101,6 +106,7 @@ The following code performs these steps: (Remember to replace `123456789` with t
 ```r
 library(ganalytics)
 myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics profile ID
+#End
 ```
 If you have just completed the installation steps, then you would have done this already.
 
@@ -124,6 +130,7 @@ GaEndDate(myQuery) <- "2013-03-31"
 
 myData <- GetGaData(myQuery)
 summary(myData)
+#End
 ```
 
 ### Example 2 - Choosing what metrics to report
@@ -142,6 +149,7 @@ GaMetrics(myQuery) <- c("ga:pageviews", "ga.Visits")
 
 myData <- GetGaData(myQuery)
 summary(myData)
+#End
 ```
 
 ### Example 3 - Selecting what dimensions to split your metrics by
@@ -156,6 +164,7 @@ GaDateRange(myQuery) <- c("2012-10-01", "2013-03-31")
 myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
+#End
 ```
 
 ### Example 4 - Sort by
@@ -167,6 +176,7 @@ GaSortBy(myQuery) <- "-pageviews"
 myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
+#End
 ```
 
 ### Example 5 - Row filters
@@ -184,6 +194,7 @@ GaFilter(myQuery) <- NULL
 
 myData <- GetGaData(myQuery)
 head(myData)
+#End
 ```
 
 ### Example 6 - Combining filters with AND
@@ -205,6 +216,7 @@ GaDimensions(myQuery) <- c(GaDimensions(myQuery), "medium")
 
 myData <- GetGaData(myQuery)
 head(myData)
+#End
 ```
 
 ### Example 7 - Combining filters with OR
@@ -218,6 +230,7 @@ GaFilter(myQuery) <- loyalOrRecent
 
 myData <- GetGaData(myQuery)
 summary(myData)
+#End
 ```
 
 ### Example 8 - Filters that combine ORs with ANDs
@@ -239,6 +252,7 @@ GaDimensions(myQuery) <- c("visitCount", "daysSince", "dayOfWeek")
 
 myData <- GetGaData(myQuery)
 summary(myData)
+#End
 ```
 ### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 
@@ -260,6 +274,7 @@ library(plyr)
 myData <- arrange(myData, desc(visitCount), daysSinceLastVisit)
 head(myData)
 tail(myData)
+#End
 ```
 ### Example 10 - Visit segmentation
 
@@ -280,6 +295,7 @@ GaSortBy(myQuery) <- "-visits"
 
 myData <- GetGaData(myQuery)
 head(myData)
+#End
 ```
 
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
@@ -310,17 +326,20 @@ with(visits_by_dayOfWeek, barplot(visits, names.arg=dayOfWeek))
 # Visits by hour of day
 visits_by_hour <- ddply(myData, ~hour, summarise, visits = sum(visits))
 with(visits_by_hour, barplot(visits, names.arg=hour))
+#End
 ```
 
 ### Example 12 - Using ggplot2
 To run this example first install ggplot2 if you haven't already.
 ```r
 install.packages("ggplot2")
+#End
 ```
 
 Once installed, then run the following example.
 ```r
 library(ggplot2)
+library(plyr)
 
 # Visits by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
@@ -353,6 +372,8 @@ qplot(
   position = "stack",
   stat = "identity"
 )
+
+# End
 ```
 
 Useful references
