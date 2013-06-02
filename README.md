@@ -106,7 +106,7 @@ The following code performs these steps: (Remember to replace `123456789` with t
 ```r
 library(ganalytics)
 myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics profile ID
-#End
+# End
 ```
 If you have just completed the installation steps, then you would have done this already.
 
@@ -130,7 +130,7 @@ GaEndDate(myQuery) <- "2013-03-31"
 
 myData <- GetGaData(myQuery)
 summary(myData)
-#End
+# End
 ```
 
 ### Example 2 - Choosing what metrics to report
@@ -149,7 +149,7 @@ GaMetrics(myQuery) <- c("ga:pageviews", "ga.Visits")
 
 myData <- GetGaData(myQuery)
 summary(myData)
-#End
+# End
 ```
 
 ### Example 3 - Selecting what dimensions to split your metrics by
@@ -164,7 +164,7 @@ GaDateRange(myQuery) <- c("2012-10-01", "2013-03-31")
 myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
-#End
+# End
 ```
 
 ### Example 4 - Sort by
@@ -176,7 +176,7 @@ GaSortBy(myQuery) <- "-pageviews"
 myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
-#End
+# End
 ```
 
 ### Example 5 - Row filters
@@ -194,7 +194,7 @@ GaFilter(myQuery) <- NULL
 
 myData <- GetGaData(myQuery)
 head(myData)
-#End
+# End
 ```
 
 ### Example 6 - Combining filters with AND
@@ -216,7 +216,7 @@ GaDimensions(myQuery) <- c(GaDimensions(myQuery), "medium")
 
 myData <- GetGaData(myQuery)
 head(myData)
-#End
+# End
 ```
 
 ### Example 7 - Combining filters with OR
@@ -230,7 +230,7 @@ GaFilter(myQuery) <- loyalOrRecent
 
 myData <- GetGaData(myQuery)
 summary(myData)
-#End
+# End
 ```
 
 ### Example 8 - Filters that combine ORs with ANDs
@@ -252,7 +252,7 @@ GaDimensions(myQuery) <- c("visitCount", "daysSince", "dayOfWeek")
 
 myData <- GetGaData(myQuery)
 summary(myData)
-#End
+# End
 ```
 ### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 
@@ -274,7 +274,7 @@ library(plyr)
 myData <- arrange(myData, desc(visitCount), daysSinceLastVisit)
 head(myData)
 tail(myData)
-#End
+# End
 ```
 ### Example 10 - Visit segmentation
 
@@ -295,7 +295,7 @@ GaSortBy(myQuery) <- "-visits"
 
 myData <- GetGaData(myQuery)
 head(myData)
-#End
+# End
 ```
 
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
@@ -326,7 +326,7 @@ with(visits_by_dayOfWeek, barplot(visits, names.arg=dayOfWeek))
 # Visits by hour of day
 visits_by_hour <- ddply(myData, ~hour, summarise, visits = sum(visits))
 with(visits_by_hour, barplot(visits, names.arg=hour))
-#End
+# End
 ```
 
 ### Example 12 - Using ggplot2
