@@ -56,7 +56,7 @@ _Note: For further information about Google APIs please refer to the References 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
 ### 4. Authenticate and attempt your first query with ganalytics
-* To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed from either:
+* To perform a query you will need to obtain your **Google Analytics profile ID**. This can be accessed from either:
   * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
   * the **Admin page** in Google Analytics under **Profile Settings**, or
   * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a profile ID of `33333333`.
