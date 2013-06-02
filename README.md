@@ -23,7 +23,7 @@ Installation
 
 ```r
 # Install the required packages from CRAN
-install.packages(c("devtools", "plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"), dependencies = TRUE) # 
+install.packages(c("devtools", "plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"), dependencies = TRUE)
 # Install ganalytics and httr branches from GitHub.
 library(devtools)
 install_github(repo = "httr", username = "jdeboer")
