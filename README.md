@@ -8,12 +8,17 @@ S4 classes and methods for interactive use of the Google Analytics core reportin
 
 Installation
 ------------
-### Prerequisites
-1. Ensure you have installed the latest version of [R](http://cran.r-project.org/)
-2. If using Windows, also install the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
-
 ### 1. Install the necessary packages into R
-  * Execute the following statements in R:
+
+#### Warning
+* The `ganalytics` package and the required branch of `httr` are currently under active development.
+* The installation procedure below installs directly from the respective GitHub repositories.
+
+#### Prerequisites
+* Ensure you have installed the latest version of [R](http://cran.r-project.org/)
+* If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
+
+#### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
 
 ```r
 install.packages("devtools") # Installs the latest version of devtools available from CRAN
@@ -22,49 +27,72 @@ install_github(repo = "httr", username = "jdeboer") # a fork of httr.
 install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics from the GitHub repository.
 ```
 ### 2. Prepare your Google API application
-  * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
-  * Check you are **signed in to Google** with the account you wish to use.
-  * Choose **"Create project..."** from the Google API Console (or choose an existing project if you have one already.)
-  * From the Services page, set the status of **Analytics API** to **ON**.
-  * From the API Access page, click the blue button to **"Create an OAuth 2.0 client ID"**.
-  * Complete the form; **Product Name** is required - give it a unique name, e.g. "ganalytics for R", keep in mind you may want add more Google services in future, e.g. YouTube Analytics, so it's suggested to keep the name generic but unique to you.
-  * *Client ID Settings* > *Application type*: choose **"Installed application"** with **"Other"** as the sub-type.
-  * Note down your **Client ID** and **Client secret**.
+* Browse to [**Google API Console**] (https://code.google.com/apis/console/)
+* Check you are **signed in to Google** with the account you wish to use.
+* Choose **Create project** from the Google API Console (or choose an existing project if you have one already.)
+* From the Services page, set the status of **Analytics API** to **ON**.
+* You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
+* Go to the **API Access page**, then click the blue button **Create an OAuth 2.0 client ID**.
+* Enter a unique **Product Name** (keep in mind you may want to add more Google services in future). This is the only required form field. Click **Next**.
+* Within **Client ID Settings**, select **Installed application** as the **Application type** and choose **Other** as the **Installed application type**. Click **Create client ID**.
+* Note your **Client ID** and **Client secret**.
 
 ### 3. Set your system environment variables (this is optional but recommended)
-  * In Windows 7: Search for *"Edit environment variables for your account"* from the start menu.
-  * Within *Environment variables* > *User variables*: Add the following variables separately by selecting *New* and entering the name and values for each with the details you noted down from step 2:
-  a. name = `GANALYTICS_CONSUMER_ID`, value = `<Your client ID>`
-  b. name = `GANALYTICS_CONSUMER_SECRET`, value = `<Your client secret>`
-  * Click *OK*, then *OK* again. Log-off windows then log-on again, or simply restart.
+* Add the following two user variables:
+
+| Variable name                 | Variable value         |
+| ----------------------------- | ---------------------- |
+| `GANALYTICS_CONSUMER_ID`      | `<Your client ID>`     |
+| `GANALYTICS_CONSUMER_SECRET`  | `<Your client secret>` |
+
+* To do this in Windows 7:
+  * Search for and select **"Edit environment variables for your account"** from the Start menu.
+  * Within the **Environment variables** window, add the above **User variables** by selecting **New** and entering the **Variable name** and **Variable value**, then click **OK** for each.
+  * Click **OK**.
+  * **Restart** your computer for the new environment variables to take effect.
 
 ### 4. Authenticate while attempting your first query with ganalytics
-  * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed via the Admin page in Google Analytics under *"Profile Settings"*, or by simply copying from the browser's address bar when viewing a report in Google Analytics; look for the digits between the letter **"p"** and trailing **"/"**, e.g. `.../a11111111w22222222p33333333/` has a profile ID of `33333333`. Note: a function for accessing this from within R will be available in the near future.
-  * Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down. (Please be aware that a small file will be saved to your home directory ("My Documents" in Windows) containing your new reusable authentication token):
+* To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed from either:
+  * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
+  * the **Admin page** in Google Analytics under **Profile Settings**, or
+  * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a profile ID of `33333333`.
+
+  _Note: a function for accessing your profile IDs within R will be available in the near future._
+
+* Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down:
+
+  _Note: a small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
   
-a. **If you completed step 3**:
+##### If you completed step 3
 
 ```r
 library(ganalytics)
 myQuery <- GaQuery( profile_id )
 GetGaData(myQuery)
 ```
-  b. **If you did NOT complete step 3**; also substitute `client_id` and `client_secret` below with your details from step 2:
+
+##### If you did NOT complete step 3
+In addition to your `profile_id`, also substitute `client_id` and `client_secret` below with your details from step 2
 
 ```r
 library(ganalytics)
 myQuery <- GaQuery( profile_id )
 GetGaData(myQuery, key = client_id , secret = client_secret)  
 ```
-  * You should be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
-  * Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
-  * After you have successfully executed all of the above R commands you should see the output of the default `ganalytics` report: *visits by day for the past 7 days*.
+
+* You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
+* Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
+* If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; visits by day for the past 7 days.
 
 
 Examples
 --------
 
-As demonstrated in the installation steps above, before executing any of the following examples, the `ganalytics` package must be loaded and a new gaQuery object be generated with a Google Analytics profile ID assigned to it. The following code performs these steps: (Remember to replace `123456789` with the profile ID you wish to use.) 
+As demonstrated in the installation steps above, before executing any of the following examples:
+* load the `ganalytics` package
+* generate a gaQuery object with a Google Analytics profile ID assigned to it.
+
+The following code performs these steps: (Remember to replace `123456789` with the profile ID you wish to use.) 
 
 ```r
 library(ganalytics)
