@@ -29,7 +29,7 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
 * Check you are **signed in to Google** with the account you wish to use.
-* Choose **Create project** from the Google API Console (or choose an existing project if you have one already.)
+* Choose **Create project** from the Google API Console (or choose an existing project if you have one already).
 * From the Services page, set the status of **Analytics API** to **ON**.
 * You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
 * Go to the **API Access page**, then click the blue button **Create an OAuth 2.0 client ID**.
@@ -51,7 +51,7 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
 
-### 4. Authenticate while attempting your first query with ganalytics
+### 4. Authenticate and attempt your first query with ganalytics
 * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed from either:
   * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
   * the **Admin page** in Google Analytics under **Profile Settings**, or
@@ -267,3 +267,6 @@ Useful references
 3. [Creating a Google API project](https://developers.google.com/console/help/#creatingdeletingprojects)
 4. [Generating an OAuth 2.0 client ID for Google APIs](https://developers.google.com/console/help/#generatingoauth2)
 5. [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
+6. [Setting environment variables in Windows XP](http://support.microsoft.com/kb/310519)
+7. [Setting environment variables in OSX](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/Articles/EnvironmentVars.html)
+8. [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)
