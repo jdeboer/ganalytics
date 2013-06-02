@@ -42,10 +42,10 @@ _Note: For further information about Google APIs please refer to the References 
 ### 3. Set your system environment variables (this is optional but recommended)
 * Add the following two user variables:
 
-| Variable name                 | Variable value         |
-| ----------------------------- | ---------------------- |
-| `GANALYTICS_CONSUMER_ID`      | `<Your client ID>`     |
-| `GANALYTICS_CONSUMER_SECRET`  | `<Your client secret>` |
+|     | Variable name                 | Variable value         |
+| --- | ----------------------------- | ---------------------- |
+|   1 | `GANALYTICS_CONSUMER_ID`      | `<Your client ID>`     |
+|   2 | `GANALYTICS_CONSUMER_SECRET`  | `<Your client secret>` |
 
 * To do this in Windows 7:
   * Search for and select **"Edit environment variables for your account"** from the Start menu.
