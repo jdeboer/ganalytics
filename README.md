@@ -22,12 +22,14 @@ Installation
 #### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
 
 ```r
-# Install the required packages from CRAN
-install.packages(c("devtools", "plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"), dependencies = TRUE)
-# Install ganalytics and httr branches from GitHub.
+# Install devtools via CRAN
+install.packages("devtools", dependencies = TRUE)
+# Install ganalytics and httr branches via GitHub repositories.
 library(devtools)
 install_github(repo = "httr", username = "jdeboer")
 install_github(repo = "ganalytics", username = "jdeboer")
+# Install dependencies
+install.packages(c("plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"))
 # End
 ```
 ### 2. Prepare your Google API application
