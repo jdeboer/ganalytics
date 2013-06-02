@@ -18,7 +18,7 @@ library(devtools)
 install_github(repo = "httr", username = "jdeboer") # a fork of httr.
 install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics from the GitHub repository.
 ```
-### 2. Prepare your Google APIs application
+### 2. Prepare your Google API application
   * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
   * Check you are **signed in to Google** with the account you wish to use.
   * Choose **"Create project..."** from the Google API Console (or choose an existing project if you have one already.)
@@ -74,17 +74,111 @@ If you have just completed the installation steps, then you would have already d
 ### Example 1 - Setting the date range
 
 ```r
-# Set the date range from 1 January 2013 to 31 May 2013. Dates are specified in the format "YYYY-MM-DD".
-GaDateRange(myQuery) <- GaDataRange("2013-01-01", "2013-05-31")
+# Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
+GaDateRange(myQuery) <- c("2013-01-01", "2013-05-31")
+myData <- GetGaData(myQuery)
+summary(myData)
+# Adjust the start date to 1 March 2013:
+GaStartDate(myQuery) <- "2013-03-01"
+# Adjust the end date to 31 March 2013:
+GaEndDate(myQuery) <- "2013-03-31"
 myData <- GetGaData(myQuery)
 summary(myData)
 ```
 
 ### Example 2 - Choosing what metrics to report
 
+```r
+# Report number of page views instead
+GaMetrics(myQuery) <- "pageivews"
+myData <- GetGaData(myQuery)
+summary(myData)
+# Report both pageviews and visits
+GaMetrics(myQuery) <- c("pageviews", "visits")
+# These variations are also acceptable
+GaMetrics(myQuery) <- c("ga:pageviews", "ga.visits")
+myData <- GetGaData(myQuery)
+summary(myData)
+```
+
 ### Example 3 - Selecting what dimensions to split your metrics by
 
-### Example 4 -  
+```r
+# Similar to metrics, but for dimensions
+GaDimensions(myQuery) <- c("year", "week", "dayofweek", "hour")
+# Lets set a wider date range
+GaDateRange(myQuery) <- c("2012-10-01", "2013-03-31")
+myData <- GetGaData(myQuery)
+head(myData)
+tail(myData)
+```
+
+### Example 4 - Sort by
+
+```r
+# Sort by descending number of pageviews
+GaSortBy(myQuery) <- "-pageviews"
+myData <- GetGaData(myQuery)
+head(myData)
+tail(myData)
+```
+
+### Example 5 - Filters
+
+```r
+# Filter for Sunday visits only
+sundayExpr <- GaExpr("dayofweek", "=", "0")
+GaFilter(myQuery) <- sundayExpr
+myData <- GetGaData(myQuery)
+summary(myData)
+# Remove the filter
+GaFilter(myQuery) <- NULL
+myData <- GetGaData(myQuery)
+summary(myData)
+```
+
+### Example 6 - Combining filters with AND
+
+```r
+# Expression to define Sunday visits
+sundayExpr <- GaExpr("dayofweek", "=", "0")
+# Expression to define organic search visits
+organicExpr <- GaExpr("medium", "=", "organic")
+# Expression to define organic search visits made on a Sunday
+sundayOrganic <- GaAnd(sundayExpr, organicExpr)
+myData <- GetGaData(myQuery)
+summary(myData)
+# Let's concatenate medium to the dimensions for our query
+GaDimensions(myData) <- c(GaDimensions(myData), "medium")
+myData <- GetGaData(myQuery)
+summary(myData)
+```
+
+### Example 7 - Combining filters with OR
+
+```r
+# In a similar way to AND
+loyalVisitor <- expr("visitCount", "!~", "^[0-3]$") # Must have made more than 3 visits
+recentVisitor <- expr("daysSinceLastVisit"), "~", "^[0-6]$") # Must have visited sometime within the past 7 days.
+loyalOrRecentVisitor <- 
+```
+
+### Example 8 - Segment
+
+```r
+# 
+```
+### Example 9 - Segment
+
+```r
+# 
+```
+
+### Example 7 -  Using automatic pagination to get more than 10,000 rows of data per query
+
+```r
+# 
+```
 
 Useful references
 -----------------
