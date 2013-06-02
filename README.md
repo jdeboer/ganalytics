@@ -32,7 +32,7 @@ install_github(repo = "ganalytics", username = "jdeboer")
 install.packages(c("plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
 # End
 ```
-#### Restart R.
+#### Now, restart R. This is important to ensure you have a clean workspace and avoid errors.
 
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
