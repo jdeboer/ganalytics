@@ -2,6 +2,10 @@
 #' @include YesNo2Logical.R
 NULL
 
+FactorInt <- function(x) {
+  factor(as.numeric(x), ordered = TRUE)
+}
+
 GaListToDataframe <- function(gaData) {
   gaData$columnHeaders <- as.data.frame(do.call(rbind, gaData$columnHeaders))
   if (gaData$totalResults > 0) {
@@ -11,12 +15,12 @@ GaListToDataframe <- function(gaData) {
     )
     names(gaData$rows) <- gaData$columnHeaders$name
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$dates, asFun = as.Date, format = kGaDateOutFormat)
-    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$ints, asFun = as.integer)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedFactors, asFun = FactorInt)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNo2Logical)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaVars$mets, asFun = as.numeric)
-    charCols <- lapply(gaData, class) == "character"
-    gaData <- ColTypes(df = gaData, colNames = names(charCols)[charCols], asFun = as.factor)
+    charCols <- lapply(gaData$rows, class) == "character"
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = names(charCols)[charCols], asFun = factor)
   } else {
     cols <- as.list(as.character(gaData$columnHeaders$name))
     names(cols) <- cols

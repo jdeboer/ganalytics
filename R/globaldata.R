@@ -1,7 +1,18 @@
 # Google Analytics dimension types
+
+kGaDayOfWeek <- c(
+  "Sun",
+  "Mon",
+  "Tue",
+  "Wed",
+  "Thu",
+  "Fri",
+  "Sat"
+)
+
 kGaDimTypes <- list(
   dates = "ga:date",
-  ints = c(
+  orderedFactors = c(
     "ga:dayOfWeek",
     "ga:hour",
     "ga:year",
