@@ -29,7 +29,7 @@ library(devtools)
 install_github(repo = "httr", username = "jdeboer")
 install_github(repo = "ganalytics", username = "jdeboer")
 # Install dependencies
-install.packages(c("plyr", "stringr", "RJSONIO", "RCurl", "Rook", "httpuv"))
+install.packages(c("plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
 # End
 ```
 ### 2. Prepare your Google API application
