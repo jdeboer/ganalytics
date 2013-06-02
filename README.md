@@ -37,6 +37,8 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
 * Within **Client ID Settings**, select **Installed application** as the **Application type** and choose **Other** as the **Installed application type**. Click **Create client ID**.
 * Note your **Client ID** and **Client secret**.
 
+_Note: For further information about Google APIs please refer to the References section at the end of this document._
+
 ### 3. Set your system environment variables (this is optional but recommended)
 * Add the following two user variables:
 
@@ -51,17 +53,19 @@ install_github(repo = "ganalytics", username = "jdeboer") # installs ganalytics 
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
 
+  _Note: For other operating systems please refer to the Reference section at the end of this document._
+
 ### 4. Authenticate and attempt your first query with ganalytics
 * To perform a basic query, you will need to obtain your Google Analytics **profile ID**. This can be accessed from either:
   * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
   * the **Admin page** in Google Analytics under **Profile Settings**, or
   * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a profile ID of `33333333`.
 
-  _Note: a function for accessing your profile IDs within R will be available in the near future._
+  _Note: A function for accessing your profile IDs within R will be available in the near future._
 
 * Return back to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down:
 
-  _Note: a small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
+  _Note: A small file named `ganalytics_token.RDS` will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
   
 ##### If you completed step 3
 
