@@ -8,9 +8,12 @@ S4 classes and methods for interactive use of the Google Analytics core reportin
 
 Installation
 ------------
+### Prerequisites
+1. Ensure you have installed the latest version of [R](http://cran.r-project.org/)
+2. If using Windows, also install the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 
 ### 1. Install the necessary packages into R
-  * execute the following statements in R:
+  * Execute the following statements in R:
 
 ```r
 install.packages("devtools") # Installs the latest version of devtools available from CRAN
@@ -53,7 +56,7 @@ library(ganalytics)
 myQuery <- GaQuery( profile_id )
 GetGaData(myQuery, key = client_id , secret = client_secret)  
 ```
-  * You should be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account, or if you are already signed-in, you will be asked to grant read-only access for your Google Analytics account to the Google API product you created in step 1.
+  * You should be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
   * Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
   * After you have successfully executed all of the above R commands you should see the output of the default `ganalytics` report: *visits by day for the past 7 days*.
 
@@ -158,8 +161,8 @@ summary(myData)
 
 ```r
 # In a similar way to AND
-loyalVisitor <- expr("visitCount", "!~", "^[0-3]$") # Must have made more than 3 visits
-recentVisitor <- expr("daysSinceLastVisit"), "~", "^[0-6]$") # Must have visited sometime within the past 7 days.
+loyalVisitor <- expr("visitCount", "!~", "^[0-3]$") # Made more than 3 visits
+recentVisitor <- expr("daysSinceLastVisit"), "~", "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecentVisitor <- 
 ```
 
