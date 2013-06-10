@@ -21,5 +21,6 @@ GaGetCoreReport <- function(queryUrl, oauth, startIndex = 1, maxResults = 10000,
       )
     )
   }
+  data.ga <- GaListToDataframe(data.ga)
   return(data.ga)
 }
