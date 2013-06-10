@@ -4,7 +4,8 @@ library(plyr)
 library(stringr)
 
 # At present the Dims and Mets reference guide does not mention
-# the isTablet dimension.
+# the isTablet or dimension(n) dimensions, or metric(n) metrics.
+# https://developers.google.com/analytics/devguides/reporting/core/dimsmets/visitor
 
 # The home page URL of Dimensions and Metrics reference guide
 base_url <- "https://developers.google.com/analytics/devguides/reporting/core/dimsmets"
