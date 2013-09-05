@@ -39,8 +39,8 @@ GetGaData <- function(
   .progress = "time"
 ) {
   oauth <- new_oauth(
-    key = NULL,
-    secret = NULL,
+    key,
+    secret,
     file = query@authFile,
     scope = "https://www.googleapis.com/auth/analytics.readonly",
     base_url = "https://accounts.google.com/o/oauth2",
