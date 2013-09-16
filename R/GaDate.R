@@ -4,6 +4,33 @@
 #' @include all-coercions.R
 NULL
 
+GaSplitDateRange <- function(dateRange, N) {
+  # TO DO
+  # Assert:
+  # N >= 0 and length(dateRange) == 1
+  # 
+  # If N = 0 then split date range into single days
+  # If N = 1, then the date range returned will be of length 1
+  #   i.e. it will be the same or of shorter length than the original.
+  #
+  # Set new start dates
+  if(N == 0) {
+    N <- as.numeric(max(GaEndDate(dateRange)) - min(GaStartDate(dateRange)))
+  }
+  browser()
+  GaStartDate(dateRange) <- seq(
+    from = GaStartDate(dateRange),
+    to = GaEndDate(dateRange),
+    length.out = N + 1
+  )[-(N + 1)]
+  # Set new end dates
+  GaEndDate(dateRange) <- c(
+    GaStartDate(dateRange)[-1] - 1,
+    GaEndDate(dateRange)[N]
+  )
+  return(dateRange)
+}
+
 # GaDateRange
 setMethod(
   f = "GaDateRange",
