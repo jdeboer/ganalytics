@@ -61,6 +61,8 @@ _Note: For further information about Google APIs please refer to the References 
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
 
+* To do this in Mac OS there is a free open source utility called [EnvPane](https://github.com/hschmidt/EnvPane)
+
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
 ### 4. Authenticate and attempt your first query with ganalytics
@@ -389,5 +391,6 @@ Useful references
 4. [Generating an OAuth 2.0 client ID for Google APIs](https://developers.google.com/console/help/#generatingoauth2)
 5. [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
 6. [Setting environment variables in Windows XP](http://support.microsoft.com/kb/310519)
-7. [Setting environment variables in OSX](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/Articles/EnvironmentVars.html)
-8. [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)
+7. [Setting environment variables in earlier versions of OSX](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/Articles/EnvironmentVars.html)
+8. [EnvPane utility for setting environment variables in OSX](https://github.com/hschmidt/EnvPane)
+9. [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)
