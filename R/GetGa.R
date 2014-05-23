@@ -44,13 +44,17 @@ GetGaData <- function(
   if (is.null(key)) {
     key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
   }
+  if (is.null(key)) {
+    secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
+  }
   oauth <- oauth2.0_token(
     endpoint = oauth_endpoints("google"),
     app = oauth_app(
       appname = appname, key = key, secret = secret
     ),
-    use_oob = FALSE,
-    scope = "https://www.googleapis.com/auth/analytics.readonly"
+    scope = "https://www.googleapis.com/auth/analytics.readonly",
+    use_oob = use_oob,
+    cache = cache
   )
   queryURLs <- GetGaUrl(query)
   responses <- llply(

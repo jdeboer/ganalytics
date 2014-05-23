@@ -14,35 +14,38 @@ Depends:
 Imports:
     methods,
     httr,
-    plyr
+    plyr,
+    stringr,
+    httpuv,
+    jsonlite
 Collate:
-    'globaldata.R'
     'ArgList.R'
-    'ValidGaOperand.R'
+    'ColTypes.R'
+    'globaldata.R'
     'ganalytics-package.R'
+    'ValidGaOperand.R'
     'all-classes.R'
     'init-methods.R'
     'flatten-list.R'
     'all-generics.R'
     'all-coercions.R'
     'GaAnd.R'
+    'GaApiRequest.R'
     'GaDate.R'
-    'GaOperand.R'
-    'GaOperator.R'
     'GaVar.R'
+    'GaOperator.R'
+    'GaOperand.R'
     'GaExpr.R'
     'GaFilter.R'
+    'GaGetCoreReport.R'
     'GaIsRegEx.R'
+    'YesNo2Logical.R'
+    'GaListToDataframe.R'
     'GaNot.R'
     'GaOr.R'
+    'GaPaginate.R'
     'GaProfile.R'
     'GaQuery.R'
     'GaSegment.R'
     'GaSortBy.R'
-    'GaApiRequest.R'
-    'GaGetCoreReport.R'
-    'YesNo2Logical.R'
-    'ColTypes.R'
-    'GaListToDataframe.R'
-    'GaPaginate.R'
     'GetGa.R'
