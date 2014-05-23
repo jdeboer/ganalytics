@@ -14,21 +14,33 @@ GaSplitDateRange <- function(dateRange, N) {
   #   i.e. it will be the same or of shorter length than the original.
   #
   # Set new start dates
-  if(N == 0) {
-    N <- as.numeric(max(GaEndDate(dateRange)) - min(GaStartDate(dateRange)))
+  maxN <- as.numeric(max(GaEndDate(dateRange)) - min(GaStartDate(dateRange))) + 1
+  if(N <= 0 | N > maxN) {
+    N <- maxN
   }
-  browser()
-  GaStartDate(dateRange) <- seq(
-    from = GaStartDate(dateRange),
-    to = GaEndDate(dateRange),
+  start <- min(GaStartDate(dateRange))
+  end <- max(GaEndDate(dateRange))
+  start <- seq(
+    from = start,
+    to = end + 1,
     length.out = N + 1
   )[-(N + 1)]
   # Set new end dates
-  GaEndDate(dateRange) <- c(
-    GaStartDate(dateRange)[-1] - 1,
-    GaEndDate(dateRange)[N]
+  end <- c(
+    start[-1] - 1,
+    end
   )
+  GaDateRange(dateRange) <- GaDateRange(start, end)
   return(dateRange)
+}
+
+GetGaDataByDateRange <- function(query, dates) {
+  adply(dates, 1, function(dateRange) {
+    GaDateRange(query) <- GaDateRange(dateRange$start, dateRange$end)
+    output <- GetGaData(query)
+    if(nrow(output)==0){output <- NULL}
+    return(output)
+  })
 }
 
 # GaDateRange
