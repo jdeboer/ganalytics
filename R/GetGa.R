@@ -44,7 +44,7 @@ GetGaData <- function(
   if (is.null(key)) {
     key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
   }
-  if (is.null(key)) {
+  if (is.null(secret)) {
     secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
   }
   oauth <- oauth2.0_token(

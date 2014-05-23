@@ -14,7 +14,7 @@ GaApiRequest = function(baseURL, request, query, oauth, quiet = FALSE, details =
   # Check the server response code:
   # 400 Bad Request
   # Convert the JSON response into a R list
-  data.r <- content(data.json)
+  data.r <- fromJSON(content(data.json, as = "text"))
   data.r <- GaListToDataframe(data.r)
   # Return the list containing Google Analytics API response
   return(data.r)
