@@ -4,4 +4,9 @@ query <- NULL
 
 oauth <- GaAuth()
 
-meta_data <- GaApiRequest(baseURL = meta_api, request = report_type, query = query, oauth = oauth)
+meta_data <- ganalytics:::GaApiRequest(baseURL = meta_api, request = report_type, query = query, oauth = oauth)
+
+vars <- meta_data$items
+
+df <- ldply(vars, function(var) {data.frame(var$attributes[c('type', 'uiName')])})
+
