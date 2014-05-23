@@ -36,17 +36,21 @@ GetGaData <- function(
   secret = NULL,
   quiet = FALSE,
   details = FALSE,
-  .progress = "time"
+  .progress = "time",
+  use_oob = FALSE,
+  cache = getOption("httr_oauth_cache")
 ) {
-  oauth <- new_oauth(
-    key = NULL,
-    secret = NULL,
-    file = query@authFile,
-    scope = "https://www.googleapis.com/auth/analytics.readonly",
-    base_url = "https://accounts.google.com/o/oauth2",
-    authorize = "auth",
-    access = "token",
-    appname = "GANALYTICS"
+  appname <- "GANALYTICS"
+  if (is.null(key)) {
+    key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
+  }
+  oauth <- oauth2.0_token(
+    endpoint = oauth_endpoints("google"),
+    app = oauth_app(
+      appname = appname, key = key, secret = secret
+    ),
+    use_oob = FALSE,
+    scope = "https://www.googleapis.com/auth/analytics.readonly"
   )
   queryURLs <- GetGaUrl(query)
   responses <- llply(
