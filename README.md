@@ -19,7 +19,7 @@ Installation
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/wiki/Philosophy#getting-started)
 
-#### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
+#### Execute the following statements in R to install `ganalytics`:
 
 ```r
 # Install devtools via CRAN
@@ -28,7 +28,7 @@ install.packages("devtools", dependencies = TRUE)
 library(devtools)
 install_github(repo = "ganalytics", username = "jdeboer")
 # Install dependencies
-install.packages(c("plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
+install.packages(c("httr", "plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
 # End
 ```
 #### Now, restart R. This is important to ensure you have a clean workspace and to avoid errors.
