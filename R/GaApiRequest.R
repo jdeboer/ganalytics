@@ -2,7 +2,6 @@
 GaApiRequest = function(baseURL, request, query, oauth, quiet = FALSE, details = FALSE) {  
   # Construct URL
   url <- paste(baseURL, "/", request, if(length(query) == 1){paste0("?", query)}, sep="")
-  url <- paste(baseURL, "/", request, "?", query, sep = "")
   url <- gsub(pattern = "\\+", replacement = "%2B", x = url)
   # Print the URL to the console
   if (details) {
