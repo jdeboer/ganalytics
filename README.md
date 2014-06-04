@@ -11,7 +11,7 @@ Installation
 ### 1. Install the necessary packages into R
 
 #### Warning
-* The `ganalytics` package and the required branch of `httr` are currently under active development.
+* The `ganalytics` package is currently under development.
 * The installation procedure below installs directly from the respective GitHub repositories.
 
 #### Prerequisites
@@ -19,17 +19,16 @@ Installation
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/wiki/Philosophy#getting-started)
 
-#### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
+#### Execute the following statements in R to install `ganalytics`:
 
 ```r
 # Install devtools via CRAN
 install.packages("devtools", dependencies = TRUE)
-# Install ganalytics and httr branches via GitHub repositories.
+# Install ganalytics via the GitHub repository.
 library(devtools)
-install_github(repo = "httr", username = "jdeboer")
 install_github(repo = "ganalytics", username = "jdeboer")
 # Install dependencies
-install.packages(c("plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
+install.packages(c("httr", "plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
 # End
 ```
 #### Now, restart R. This is important to ensure you have a clean workspace and to avoid errors.
