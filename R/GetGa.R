@@ -8,6 +8,7 @@
 #' @include GaGetCoreReport.R
 #' @include GaApiRequest.R
 #' @include GaPaginate.R
+#' @include GaAuth.R
 NULL
 
 setMethod(
@@ -41,21 +42,8 @@ GetGaData <- function(
   cache = getOption("httr_oauth_cache")
 ) {
   appname <- "GANALYTICS"
-  if (is.null(key)) {
-    key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
-  }
-  if (is.null(secret)) {
-    secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
-  }
-  oauth <- oauth2.0_token(
-    endpoint = oauth_endpoints("google"),
-    app = oauth_app(
-      appname = appname, key = key, secret = secret
-    ),
-    scope = "https://www.googleapis.com/auth/analytics.readonly",
-    use_oob = use_oob,
-    cache = cache
-  )
+  scope <- "https://www.googleapis.com/auth/analytics.readonly"
+  oauth <- GaAuth(appname = appname, scope = scope, key = key, secret = secret, use_oob = use_oob, cache = cache)
   queryURLs <- GetGaUrl(query)
   responses <- llply(
     .data = queryURLs,

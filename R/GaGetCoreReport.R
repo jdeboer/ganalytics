@@ -13,6 +13,7 @@ GaGetCoreReport <- function(queryUrl, oauth, startIndex = 1, maxResults = 10000,
     sep = "&"
   )
   data.ga <- GaApiRequest(reporting.api, request, queryUrl, oauth, quiet, details)
+  data.ga <- GaListToDataframe(data.ga)
   if (!is.null(data.ga$error)) {
     stop(
       with(
@@ -21,5 +22,6 @@ GaGetCoreReport <- function(queryUrl, oauth, startIndex = 1, maxResults = 10000,
       )
     )
   }
+  data.ga <- GaListToDataframe(data.ga)
   return(data.ga)
 }

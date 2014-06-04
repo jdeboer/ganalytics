@@ -1,4 +1,5 @@
 #' @include all-coercions.R
+#' @include meta.R
 NULL
 
 setMethod(

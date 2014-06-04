@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.1
+Version: 0.2
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
@@ -31,7 +31,9 @@ Collate:
     'all-coercions.R'
     'GaAnd.R'
     'GaApiRequest.R'
+    'GaAuth.R'
     'GaDate.R'
+    'meta.R'
     'GaVar.R'
     'GaOperator.R'
     'GaOperand.R'
