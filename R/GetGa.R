@@ -72,7 +72,7 @@ GetGaData <- function(
       response$data
     }
   )
-  sampled <- responses[[1]]$sampled
+  sampled <- any(laply(responses, function(response) {response$sampled}))
   if (sampled) {
     warning("Contains sampled data.")
   }
