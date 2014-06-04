@@ -11,7 +11,7 @@ Installation
 ### 1. Install the necessary packages into R
 
 #### Warning
-* The `ganalytics` package and the required branch of `httr` are currently under active development.
+* The `ganalytics` package is currently under development.
 * The installation procedure below installs directly from the respective GitHub repositories.
 
 #### Prerequisites
@@ -19,17 +19,16 @@ Installation
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/wiki/Philosophy#getting-started)
 
-#### Execute the following statements in R to install `ganalytics` and the required branch of `httr`:
+#### Execute the following statements in R to install `ganalytics`:
 
 ```r
 # Install devtools via CRAN
 install.packages("devtools", dependencies = TRUE)
-# Install ganalytics and httr branches via GitHub repositories.
+# Install ganalytics via the GitHub repository.
 library(devtools)
-install_github(repo = "httr", username = "jdeboer")
 install_github(repo = "ganalytics", username = "jdeboer")
 # Install dependencies
-install.packages(c("plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
+install.packages(c("httr", "plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
 # End
 ```
 #### Now, restart R. This is important to ensure you have a clean workspace and to avoid errors.
@@ -60,6 +59,8 @@ _Note: For further information about Google APIs please refer to the References 
   * Within the **Environment variables** window, add the above **User variables** by selecting **New** and entering the **Variable name** and **Variable value**, then click **OK** for each.
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
+
+* To do this in Mac OS there is a free open source utility called [EnvPane](https://github.com/hschmidt/EnvPane)
 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
@@ -389,5 +390,6 @@ Useful references
 4. [Generating an OAuth 2.0 client ID for Google APIs](https://developers.google.com/console/help/#generatingoauth2)
 5. [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
 6. [Setting environment variables in Windows XP](http://support.microsoft.com/kb/310519)
-7. [Setting environment variables in OSX](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/Articles/EnvironmentVars.html)
-8. [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)
+7. [Setting environment variables in earlier versions of OSX](https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPRuntimeConfig/Articles/EnvironmentVars.html)
+8. [EnvPane utility for setting environment variables in OSX](https://github.com/hschmidt/EnvPane)
+9. [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)

@@ -1,3 +1,4 @@
+
 #' @include ColTypes.R
 #' @include YesNo2Logical.R
 NULL
@@ -7,10 +8,9 @@ FactorInt <- function(x) {
 }
 
 GaListToDataframe <- function(gaData) {
-  gaData$columnHeaders <- as.data.frame(do.call(rbind, gaData$columnHeaders))
   if (gaData$totalResults > 0) {
     gaData$rows <- as.data.frame(
-      x = do.call(rbind, gaData$rows),
+      gaData$rows,
       stringsAsFactors = FALSE
     )
     names(gaData$rows) <- gaData$columnHeaders$name
@@ -22,7 +22,7 @@ GaListToDataframe <- function(gaData) {
     charCols <- lapply(gaData$rows, class) == "character"
     gaData$rows <- ColTypes(df = gaData$rows, colNames = names(charCols)[charCols], asFun = factor)
   } else {
-    cols <- as.list(as.character(gaData$columnHeaders$name))
+    cols <- as.list(names(gaData$rows) <- gaData$columnHeaders$name)
     names(cols) <- cols
     gaData$rows <- data.frame(cols)[0,]
   }

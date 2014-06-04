@@ -11,6 +11,7 @@
 #' @import methods
 #' @import httr
 #' @import plyr
+#' @import stringr
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package
