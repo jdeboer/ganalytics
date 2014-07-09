@@ -27,11 +27,11 @@ GaMetaUpdate <- function() {
     premiumMaxTemplateIndex = as.numeric(premiumMaxTemplateIndex)
   )
   df <- cbind(vars, attributes)
-  
   kGaVars <- dlply(df, "type", function(vars) {vars$id})
   kGaVars <- rename(kGaVars, replace = c("DIMENSION" = "dims", "METRIC" = "mets"))
+  kGaVars_df <- df
   metafile <- file.path(system.file(package = "ganalytics"), "R", "sysdata.rda")
-  print(metafile)
-  #save(kGaVars, file = metafile)
+  print(paste("Updating metadata file:", metafile))
+  save(kGaVars, kGaVars_df, file = metafile)
   return(kGaVars)
 }

@@ -18,7 +18,10 @@ GaListToDataframe <- function(gaData) {
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedFactors, asFun = FactorInt)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNo2Logical)
-    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaVars$mets, asFun = as.numeric)
+    metric_cols <- gaData$columnHeaders$name[gaData$columnHeaders$columnType == "METRIC"]
+    gaData$rows[metric_cols] <- data.frame(llply(gaData$rows[metric_cols], as.numeric))
+    #gaData$rows <- as.numeric(gaData$rows[metric_cols])
+    #gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaVars$mets, asFun = as.numeric)
     charCols <- lapply(gaData$rows, class) == "character"
     gaData$rows <- ColTypes(df = gaData$rows, colNames = names(charCols)[charCols], asFun = factor)
   } else {

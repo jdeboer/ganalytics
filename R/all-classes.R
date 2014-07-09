@@ -7,13 +7,20 @@ NULL
 
 # ---- GA dimension and metric variables ----
 
+IsVarMatch <- function(thisVar, inVars) {
+  inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
+  inVars <- paste0("^", inVars, "$")
+  any(str_detect(thisVar, ignore.case(inVars)))
+}
+
 #' @export
 setClass(
   Class = "gaMetVar",
   prototype = prototype("ga:visits"),
   contains = "character",
   validity = function(object) {
-    if (tolower(object@.Data) %in% tolower(kGaVars$mets)) {
+#    if (tolower(object@.Data) %in% tolower(kGaVars$mets)) {
+    if (IsVarMatch(object@.Data, kGaVars$mets)) {
       return(TRUE)
     } else {
       paste("Invalid GA metric name", object@.Data, sep = ": ")
@@ -27,7 +34,8 @@ setClass(
   prototype = prototype("ga:date"),
   contains = "character",
   validity = function(object) {
-    if (tolower(object@.Data) %in% tolower(kGaVars$dims)) {
+#    if (tolower(object@.Data) %in% tolower(kGaVars$dims)) {
+    if (IsVarMatch(object@.Data, kGaVars$dims)) {
       return(TRUE)
     } else {
       paste("Invalid GA dimension name", object@.Data, sep = ": ")

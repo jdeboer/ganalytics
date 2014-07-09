@@ -8,7 +8,7 @@ GaPaginate <- function(queryUrl, maxRequestedRows, oauth, quiet = FALSE, details
     quiet = quiet,
     details = details
   )
-  # Build up a data.frame containing the data.
+
   data <- gaPage$data
   # Is GA reporting sampled data?
   sampled <- gaPage$sampled

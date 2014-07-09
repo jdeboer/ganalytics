@@ -33,9 +33,9 @@ setMethod(
         .Object@.Data <- value
       }
       validObject(.Object)
-      if (is.na(tmp[1])) {
-        stop(paste("Invalid metric or dimension", value[1], sep = ": "))
-      }
+#       if (is.na(tmp[1])) {
+#         stop(paste("Invalid metric or dimension", value[1], sep = ": "))
+#       }
     }
     return(.Object)
   }
