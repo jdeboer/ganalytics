@@ -50,4 +50,5 @@ Collate:
     'GaQuery.R'
     'GaSegment.R'
     'GaSortBy.R'
+    'GaSplitDateRange.R'
     'GetGa.R'

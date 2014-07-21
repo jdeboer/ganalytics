@@ -25,16 +25,18 @@ GaListToDataframe <- function(gaData) {
     charCols <- lapply(gaData$rows, class) == "character"
     gaData$rows <- ColTypes(df = gaData$rows, colNames = names(charCols)[charCols], asFun = factor)
   } else {
-    cols <- as.list(names(gaData$rows) <- gaData$columnHeaders$name)
+    cols <- as.list(gaData$columnHeaders$name)
     names(cols) <- cols
     gaData$rows <- data.frame(cols)[0,]
+    names(gaData$rows) <- gaData$columnHeaders$name
   }
-  names(gaData$rows) <- sub("^ga:", "", names(gaData$rows))
+  names(gaData$rows) <- sub("^ga[:\\.]", "", names(gaData$rows))
   return(
     list(
       data = gaData$rows,
       totalResults = max(gaData$totalResults, 1),
-      sampled = gaData$containsSampledData
+      sampled = gaData$containsSampledData,
+      viewId = gaData$query$ids
     )
   )
 }

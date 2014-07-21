@@ -9,6 +9,7 @@
 #' @include GaApiRequest.R
 #' @include GaPaginate.R
 #' @include GaAuth.R
+#' @include GaSplitDateRange.R
 NULL
 
 setMethod(
@@ -39,7 +40,8 @@ GetGaData <- function(
   details = FALSE,
   .progress = "time",
   use_oob = FALSE,
-  cache = getOption("httr_oauth_cache")
+  cache = getOption("httr_oauth_cache"),
+  addViewId = FALSE
 ) {
   appname <- "GANALYTICS"
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
@@ -57,7 +59,11 @@ GetGaData <- function(
   data <- ldply(
     .data = responses,
     .fun = function(response) {
-      response$data
+      df <- response$data
+      if(addViewId & nrow(df) >= 1) {
+        df <- mutate(df, viewId = response$viewId)
+      }
+      return(df)
     }
   )
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
