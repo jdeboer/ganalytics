@@ -95,7 +95,7 @@ GetGaData(myQuery, key = client_id , secret = client_secret)
 
 * You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
 * Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
-* If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; visits by day for the past 7 days.
+* If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; sessions by day for the past 7 days.
 
 _Note: A small file named `ganalytics_token.RDS` will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
 
@@ -147,10 +147,10 @@ GaMetrics(myQuery) <- "pageviews"
 myData <- GetGaData(myQuery)
 summary(myData)
 
-# Report both pageviews and visits
-GaMetrics(myQuery) <- c("pageviews", "visits")
+# Report both pageviews and sessions
+GaMetrics(myQuery) <- c("pageviews", "sessions")
 # These variations are also acceptable
-GaMetrics(myQuery) <- c("ga:pageviews", "ga.Visits")
+GaMetrics(myQuery) <- c("ga:pageviews", "ga.sessions")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -161,7 +161,7 @@ summary(myData)
 
 ```r
 # Similar to metrics, but for dimensions
-GaDimensions(myQuery) <- c("year", "week", "dayofweek", "hour")
+GaDimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
 
 # Lets set a wider date range
 GaDateRange(myQuery) <- c("2012-10-01", "2013-03-31")
@@ -187,7 +187,7 @@ tail(myData)
 ### Example 5 - Row filters
 
 ```r
-# Filter for Sunday visits only
+# Filter for Sunday sessions only
 sundayExpr <- GaExpr("dayofweek", "=", "0")
 GaFilter(myQuery) <- sundayExpr
 
@@ -205,11 +205,11 @@ head(myData)
 ### Example 6 - Combining filters with AND
 
 ```r
-# Expression to define Sunday visits
+# Expression to define Sunday sessions
 sundayExpr <- GaExpr("dayofweek", "=", "0")
-# Expression to define organic search visits
+# Expression to define organic search sessions
 organicExpr <- GaExpr("medium", "=", "organic")
-# Expression to define organic search visits made on a Sunday
+# Expression to define organic search sessions made on a Sunday
 sundayOrganic <- GaAnd(sundayExpr, organicExpr)
 GaFilter(myQuery) <- sundayOrganic
 
@@ -228,8 +228,8 @@ head(myData)
 
 ```r
 # In a similar way to AND
-loyalExpr <- GaExpr("visitCount", "!~", "^[0-3]$") # Made more than 3 visits
-recentExpr <- GaExpr("daysSinceLastVisit", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
+recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- GaOr(loyalExpr, recentExpr)
 GaFilter(myQuery) <- loyalOrRecent
 
@@ -241,10 +241,10 @@ summary(myData)
 ### Example 8 - Filters that combine ORs with ANDs
 
 ```r
-loyalExpr <- GaExpr("visitCount", "!~", "^[0-3]$") # Made more than 3 visits
-recentExpr <- GaExpr("daysSinceLastVisit", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
+recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- GaOr(loyalExpr, recentExpr)
-sundayExpr <- GaExpr("dayofweek", "=", "0")
+sundayExpr <- GaExpr("dayOfWeek", "=", "0")
 loyalOrRecent_Sunday <- GaAnd(loyalOrRecent, sundayExpr)
 GaFilter(myQuery) <- loyalOrRecent_Sunday
 
@@ -252,8 +252,8 @@ myData <- GetGaData(myQuery)
 summary(myData)
 
 # Perform the same query but change which dimensions to view
-# - Notice "daysSince" is conveniently accepted as a partial match for "daysSinceLastVisit".
-GaDimensions(myQuery) <- c("visitCount", "daysSince", "dayOfWeek")
+# - Notice "daysSince" is conveniently accepted as a partial match for "daysSinceLastSession".
+GaDimensions(myQuery) <- c("sessionCount", "daysSince", "dayOfWeek")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -264,19 +264,19 @@ summary(myData)
 ```r
 # Continuing from example 8...
 
-# Change filter to loyal visit AND recent visits AND visited on Sunday
+# Change filter to loyal session AND recent sessions AND visited on Sunday
 loyalAndRecent_Sunday <- GaAnd(loyalExpr, recentExpr, sundayExpr)
 GaFilter(myQuery) <- loyalAndRecent_Sunday
 
 # Sort by decending visit count and ascending days since last visit.
-GaSortBy(myQuery) <- c("-visitCount", "+daysSince")
+GaSortBy(myQuery) <- c("-sessionCount", "+daysSince")
 myData <- GetGaData(myQuery)
 head(myData)
 
 # Notice that Google Analytics' Core Reporting API doesn't recognise 'numerical' dimensions as
 # ordered factors when sorting. We can use R to sort instead, using a plyr::arrange function.
 library(plyr)
-myData <- arrange(myData, desc(visitCount), daysSinceLastVisit)
+myData <- arrange(myData, desc(sessionCount), daysSinceLastSession)
 head(myData)
 tail(myData)
 # End
@@ -285,7 +285,7 @@ tail(myData)
 
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
-# Define a segment for visits where a "thank-you", "thankyou" or "success" page was viewed.
+# Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
 thankyouExpr <- GaExpr("pagePath", "~", "thank\\-?you|success")
 GaSegment(myQuery) <- thankyouExpr
 
@@ -295,8 +295,8 @@ GaFilter(myQuery) <- NULL
 # Split by traffic source and medium
 GaDimensions(myQuery) <- c("source", "medium")
 
-# Sort by decending number of visits
-GaSortBy(myQuery) <- "-visits"
+# Sort by decending number of sessions
+GaSortBy(myQuery) <- "-sessions"
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -306,14 +306,14 @@ head(myData)
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
 
 ```r
-# Visits by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
 GaFilter(myQuery) <- NULL
 GaSegment(myQuery) <- NULL
 # Define our date range
 GaDateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
-GaMetrics(myQuery) <- "visits"
+GaMetrics(myQuery) <- "sessions"
 GaDimensions(myQuery) <- c("date", "dayOfWeek", "hour")
 # Let's allow a maximum of 17544 rows (default is 10000)
 GaMaxResults(myQuery) <- 17544
@@ -324,13 +324,13 @@ nrow(myData)
 ## Let's use plyr::ddply to analyse the data
 library(plyr)
 
-# Visits by day of week
-visits_by_dayOfWeek <- ddply(myData, ~dayOfWeek, summarise, visits = sum(visits))
-with(visits_by_dayOfWeek, barplot(visits, names.arg=dayOfWeek))
+# Sessions by day of week
+sessions_by_dayOfWeek <- ddply(myData, ~dayOfWeek, summarise, sessions = sum(sessions))
+with(sessions_by_dayOfWeek, barplot(sessions, names.arg=dayOfWeek))
 
-# Visits by hour of day
-visits_by_hour <- ddply(myData, ~hour, summarise, visits = sum(visits))
-with(visits_by_hour, barplot(visits, names.arg=hour))
+# Sessions by hour of day
+sessions_by_hour <- ddply(myData, ~hour, summarise, sessions = sum(sessions))
+with(sessions_by_hour, barplot(sessions, names.arg=hour))
 # End
 ```
 
@@ -346,31 +346,31 @@ Once installed, then run the following example.
 library(ggplot2)
 library(plyr)
 
-# Visits by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
 GaFilter(myQuery) <- NULL
 GaSegment(myQuery) <- NULL
 # Define our date range
 GaDateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
-GaMetrics(myQuery) <- "visits"
+GaMetrics(myQuery) <- "sessions"
 GaDimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
 # Let's allow a maximum of 40000 rows (default is 10000)
 GaMaxResults(myQuery) <- 40000
 
 myData <- GetGaData(myQuery)
 
-# Visits by hour of day and day of week
-avg_visits_by_hour_wday_mobile <- ddply(myData, ~hour + dayOfWeek + isMobile, summarise, visits = mean(visits))
+# Sessions by hour of day and day of week
+avg_sessions_by_hour_wday_mobile <- ddply(myData, ~hour + dayOfWeek + isMobile, summarise, sessions = mean(sessions))
 
 # Relabel the days of week
-levels(avg_visits_by_hour_wday_mobile$dayOfWeek) <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+levels(avg_sessions_by_hour_wday_mobile$dayOfWeek) <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 
 # Plot the summary data
 qplot(
   x = hour,
-  y = visits,
-  data = avg_visits_by_hour_wday_mobile,
+  y = sessions,
+  data = avg_sessions_by_hour_wday_mobile,
   facets = ~dayOfWeek,
   fill = isMobile,
   geom = "bar",
