@@ -265,7 +265,7 @@ setGeneric(
 #' @rdname GaSegmentCondition
 setGeneric(
   name = "GaSegmentCondition",
-  def = function(.Object, ...) {},
+  def = function(.Object, ..., scope = "sessions") {},
   valueClass = "gaSegmentCondition",
   useAsDefault = FALSE
 )
@@ -278,7 +278,7 @@ setGeneric(
 #' @rdname GaSegment
 setGeneric(
   name = "GaSegment",
-  def = function(.Object, ...) {},
+  def = function(.Object, ..., scope = "sessions") {},
   valueClass = ".gaSegment",
   useAsDefault = FALSE
 )

@@ -4,7 +4,7 @@
 \alias{GaSegment<-}
 \title{GaSegment}
 \usage{
-GaSegment(.Object, ...)
+GaSegment(.Object, ..., scope = "sessions")
 
 GaSegment(.Object) <- value
 }

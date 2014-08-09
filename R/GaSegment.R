@@ -51,10 +51,27 @@ setMethod(
 
 setMethod(
   f = "GaSegmentCondition",
+  signature = ".gaCompoundExpr",
+  definition = function(.Object) {
+    GaSegmentCondition(GaNonSequenceCondition(.Object))
+    #as(.Object, "GaSegmentCondition")
+  }
+)
+
+setMethod(
+  f = "GaSegmentCondition",
   signature = ".gaDimensionOrMetricConditions",
-  definition = function(.Object, ...) {
+  definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
-    new("gaSegmentCondition", exprList)
+    new("gaSegmentCondition", exprList, conditionScope = scope)
+  }
+)
+
+setMethod(
+  f = "GaSegmentCondition",
+  signature = "gaSegmentCondition",
+  definition = function(.Object) {
+    .Object
   }
 )
 
@@ -87,20 +104,20 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = "gaDynSegment",
-  definition = function(.Object, ...) {
-    exprList <- list(.Object, ...)
-    new("gaDynSegment", exprList)
+  definition = function(.Object) {
+    .Object
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = ".gaCompoundExpr",
-  definition = function(.Object, ...) {
+  definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
     exprList <- lapply(exprList, function(expr) {
       GaSegmentCondition(
-        GaNonSequenceCondition(expr)
+        GaNonSequenceCondition(expr),
+        scope = scope
       )
     })
     new("gaDynSegment", exprList)
@@ -118,12 +135,28 @@ setMethod(
 
 setMethod(
   f = "GaSegment",
-  signature = "gaFilter",
-  definition = function(.Object, ...) {
+  signature = ".gaDimensionOrMetricConditions",
+  definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
     exprList <- lapply(exprList, function(expr) {
       GaSegmentCondition(
-        GaNonSequenceCondition(expr)
+        expr,
+        scope = scope
+      )
+    })
+    do.call(GaSegment, exprList)
+  }
+)
+
+setMethod(
+  f = "GaSegment",
+  signature = "gaFilter",
+  definition = function(.Object, ..., scope) {
+    exprList <- list(.Object, ...)
+    exprList <- lapply(exprList, function(expr) {
+      GaSegmentCondition(
+        GaNonSequenceCondition(expr),
+        scope = scope
       )
     })
     new("gaDynSegment", exprList)

@@ -3,7 +3,7 @@
 \alias{GaSegmentCondition}
 \title{GaSegmentCondition}
 \usage{
-GaSegmentCondition(.Object, ...)
+GaSegmentCondition(.Object, ..., scope = "sessions")
 }
 \description{
 Create a new gaSegmentCondition object
