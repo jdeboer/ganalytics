@@ -98,6 +98,11 @@ setMethod(
   signature = ".gaCompoundExpr",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
+    exprList <- lapply(exprList, function(expr) {
+      GaSegmentCondition(
+        GaNonSequenceCondition(expr)
+      )
+    })
     new("gaDynSegment", exprList)
   }
 )
@@ -116,6 +121,11 @@ setMethod(
   signature = "gaFilter",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
+    exprList <- lapply(exprList, function(expr) {
+      GaSegmentCondition(
+        GaNonSequenceCondition(expr)
+      )
+    })
     new("gaDynSegment", exprList)
   }
 )

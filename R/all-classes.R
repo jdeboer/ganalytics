@@ -636,7 +636,7 @@ setClassUnion(
   name = ".gaUrlClasses",
   members = c(
     #".gaCompoundExpr",
-    ".gaExpr", "gaOr", "gaAnd",
+    ".gaExpr", "gaOr", "gaAnd", "gaDynSegment",
     
     #".gaVarList",
     "gaMetrics", "gaDimensions", "gaSortBy",

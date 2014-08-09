@@ -869,7 +869,7 @@ setAs(
             },
             paste(
               "samplingLevel",
-              GetGaUrl(GetSamplingLevel(from)),
+              as(GaSamplingLevel(from), "character"),
               sep = "="
             )
           )
