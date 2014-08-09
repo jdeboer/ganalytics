@@ -311,10 +311,97 @@ setAs(
 )
 
 setAs(
+  from = "gaSequenceCondition",
+  to = "character",
+  def = function(from) {
+    if(length(from) >= 1) {
+      paste0(
+        "sequence::",
+        if(from@negation) {"!"} else {""},
+        do.call(
+          paste0,
+          c(
+            lapply(
+              X = seq_along(from),
+              FUN = function(sequenceStep) {
+                paste0(
+                  if(sequenceStep > 1) {
+                    if(from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
+                  } else {
+                    if(from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
+                  },
+                  as(from[[sequenceStep]], to)
+                )
+              }
+            )
+          )
+        )
+      )
+    } else {
+      character(0)
+    }
+  }
+)
+
+setAs(
+  from = "gaNonSequenceCondition",
+  to = "character",
+  def = function(from) {
+    paste0(
+      "condition::",
+      if(from@negation) {"!"} else {""},
+      as(as(from, "gaAnd"), "character")
+    )
+  }
+)
+
+setAs(
+  from = "gaSegmentCondition",
+  to = "character",
+  def = function(from) {
+    if(length(from) >= 1) {
+      paste(
+        from@conditionScope,
+        do.call(
+          paste,
+          c(
+            lapply(
+              X = from,
+              FUN = function(dimOrMetCondition) {
+                as(dimOrMetCondition, to)
+              }
+            ),
+            sep = ";"
+          )
+        ),
+        sep = "::"
+      )
+    } else {
+      character(0)
+    }
+  }
+)
+
+setAs(
   from = "gaDynSegment",
   to = "character",
   def = function(from) {
-    paste("dynamic", as(as(from, "gaAnd"), to), sep = "::")
+    if(length(from) >= 1) {
+      do.call(
+        paste,
+        c(
+          lapply(
+            X = from,
+            FUN = function(segmentCondition) {
+              as(segmentCondition, to)
+            }
+          ),
+          sep = ";"
+        )
+      )
+    } else {
+      character(0)
+    }
   }
 )
 
@@ -401,6 +488,14 @@ setAs(
 )
 
 setAs(
+  from = "gaAnd",
+  to = "gaDynSegment",
+  def = function(from) {
+    new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
+  }
+)
+
+setAs(
   from = ".gaExpr",
   to = "gaDynSegment",
   def = function(from) {
@@ -446,6 +541,33 @@ setAs(
   to = "gaDynSegment",
   def = function(from) {
     new(Class=to, from@.Data)
+  }
+)
+
+# Coercing to gaSegmentCondition and gaNonSequenceCondition
+setAs(
+  from = ".gaCompoundExpr",
+  to = "gaSegmentCondition",
+  def = function(from) {
+    new(Class = to, list(GaNonSequenceCondition(from)))
+  }
+)
+
+setAs(
+  from = ".gaCompoundExpr",
+  to = "gaNonSequenceCondition",
+  def = function(from) {
+    new(Class = to, GaAnd(from))
+  }
+)
+
+# Coercing to gaSequenceCondition
+
+setAs(
+  from = ".gaCompoundExpr",
+  to = "gaSequenceCondition",
+  def = function(from) {
+    new(Class = to, GaAnd(from))
   }
 )
 
@@ -744,7 +866,12 @@ setAs(
                 GetGaUrl(GaSegment(from)),
                 sep = "="
               )
-            }
+            },
+            paste(
+              "samplingLevel",
+              GetGaUrl(GetSamplingLevel(from)),
+              sep = "="
+            )
           )
           return(
             new(

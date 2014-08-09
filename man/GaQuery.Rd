@@ -7,7 +7,8 @@ Create a ganalytics query object}
 GaQuery(profileId, authFile = "~/ganalytics_token.RDS",
   startDate = Sys.Date() - 8, endDate = Sys.Date() - 1,
   metrics = "ga:visits", dimensions = "ga:date", sortBy = NULL,
-  filters = NULL, segment = NULL, maxResults = kGaMaxResults)
+  filters = NULL, segment = NULL, samplingLevel = "DEFAULT",
+  maxResults = kGaMaxResults)
 }
 \arguments{
 \item{profileId}{profile id to use}
@@ -27,6 +28,8 @@ GaQuery(profileId, authFile = "~/ganalytics_token.RDS",
 \item{filters}{a filters object}
 
 \item{segment}{a segment object}
+
+\item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
 
 \item{maxResults}{the maximum number of results to return,
 up to 1,000,000}

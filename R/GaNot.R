@@ -64,3 +64,12 @@ setMethod(
     .Object <- as(.Object, "gaAnd")
   }
 )
+
+setMethod(
+  f = "GaNot",
+  signature = ".gaDimensionOrMetricConditions",
+  definition = function(.Object) {
+    .Object@negation <- !.Object@negation
+    return(.Object)
+  }
+)

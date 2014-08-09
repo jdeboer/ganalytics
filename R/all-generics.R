@@ -157,7 +157,7 @@ setGeneric(
 #' @rdname GaExpr
 setGeneric(
   name = "GaExpr",
-  def = function(.Object, gaOperator, gaOperand) {},
+  def = function(.Object, gaOperator, gaOperand, metricScope = "perSession") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -192,6 +192,84 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' GaPrecedes
+#' 
+#' Create a gaSequenceStep object
+#' 
+#' @export
+#' @rdname GaPrecedes
+setGeneric(
+  name = "GaPrecedes",
+  def = function(.Object, ...) {},
+  valueClass = "gaSequenceStep",
+  useAsDefault = FALSE
+)
+
+#' GaImmediatelyPrecedes
+#' 
+#' Create a gaSequenceStep object
+#' 
+#' @export
+#' @rdname GaImmediatelyPrecedes
+setGeneric(
+  name = "GaImmediatelyPrecedes",
+  def = function(.Object, ...) {},
+  valueClass = "gaSequenceStep",
+  useAsDefault = FALSE
+)
+
+#' GaStartsWith
+#' 
+#' Create a gaSequenceStep object
+#' 
+#' @export
+#' @rdname GaStartsWith
+setGeneric(
+  name = "GaStartsWith",
+  def = function(.Object, ...) {},
+  valueClass = "gaSequenceStep",
+  useAsDefault = FALSE
+)
+
+#' GaSequenceCondition
+#' 
+#' Create a new gaSequenceCondition object
+#' 
+#' @export
+#' @rdname GaSequenceCondition
+setGeneric(
+  name = "GaSequenceCondition",
+  def = function(.Object, ...) {},
+  valueClass = "gaSequenceCondition",
+  useAsDefault = FALSE
+)
+
+#' GaNonSequenceCondition
+#' 
+#' Create a new gaNonSequenceCondition object
+#' 
+#' @export
+#' @rdname GaNonSequenceCondition
+setGeneric(
+  name = "GaNonSequenceCondition",
+  def = function(.Object, ...) {},
+  valueClass = "gaNonSequenceCondition",
+  useAsDefault = FALSE
+)
+
+#' GaSegmentCondition
+#' 
+#' Create a new gaSegmentCondition object
+#' 
+#' @export
+#' @rdname GaSegmentCondition
+setGeneric(
+  name = "GaSegmentCondition",
+  def = function(.Object, ...) {},
+  valueClass = "gaSegmentCondition",
+  useAsDefault = FALSE
+)
+
 #' GaSegment
 #' 
 #' Get the segment.
@@ -200,7 +278,7 @@ setGeneric(
 #' @rdname GaSegment
 setGeneric(
   name = "GaSegment",
-  def = function(.Object) {},
+  def = function(.Object, ...) {},
   valueClass = ".gaSegment",
   useAsDefault = FALSE
 )
@@ -467,6 +545,34 @@ setGeneric(
   name = "GaMaxResults<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("GaMaxResults<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' GaSamplingLevel
+#' 
+#' Get the sampling level.
+#' 
+#' @export
+#' @rdname GaSamplingLevel
+setGeneric(
+  name = "GaSamplingLevel",
+  def = function(.Object) {},
+  valueClass = "character",
+  useAsDefault = FALSE
+)
+
+#' GaSamplingLevel<-
+#' 
+#' Set the sampling level for a ganalytics query.
+#' 
+#' @export
+#' @rdname GaSamplingLevel
+setGeneric(
+  name = "GaSamplingLevel<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaSamplingLevel<-")
     validObject(.Object)
     return(.Object)
   }

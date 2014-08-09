@@ -9,6 +9,7 @@
 #' @param sortBy a sort by object
 #' @param filters a filters object
 #' @param segment a segment object
+#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #' @export
@@ -26,6 +27,7 @@ GaQuery <- function(
   sortBy = NULL,
   filters = NULL,
   segment = NULL,
+  samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
   new("gaQuery",
@@ -39,6 +41,7 @@ GaQuery <- function(
       sortBy = GaSortBy(sortBy),
       filters = GaFilter(filters),
       segment = GaSegment(segment),
+      samplingLevel = samplingLevel,
       maxResults = maxResults,
       authFile = authFile
   )
@@ -57,6 +60,24 @@ setMethod(
   signature = c("gaQuery", "ANY"),
   definition = function(.Object, value) {
     .Object@maxResults <- as.numeric(value)
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+setMethod(
+  f = "GaSamplingLevel",
+  signature = "gaQuery",
+  definition = function(.Object) {
+    .Object@samplingLevel
+  }
+)
+
+setMethod(
+  f = "GaSamplingLevel<-",
+  signature = c("gaQuery", "ANY"),
+  definition = function(.Object, value) {
+    .Object@samplingLevel <- as.character(value)
     validObject(.Object)
     return(.Object)
   }

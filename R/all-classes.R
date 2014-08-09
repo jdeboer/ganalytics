@@ -150,6 +150,12 @@ setClass(
 #' @export
 setClass(
   Class = "gaMetExpr",
+  representation = representation(
+    metricScope = "character"
+  ),
+  prototype = prototype(
+    metricScope = "perSession"
+  ),
   contains = ".gaExpr",
   validity = function(object) {
     if (!class(object@gaVar)=="gaMetVar") {
@@ -158,6 +164,10 @@ setClass(
       return("gaOperator must be of class gaMetOperator")
     } else if (!class(object@gaOperand)=="gaMetOperand") {
       return("gaOperand must be of class gaMetOperand")
+    } else if (!length(object@metricScope) == 1) {
+      return("metricScope must be of length 1.")
+    } else if (!(object@metricScope %in% c("perUser", "perSession", "perHit"))) {
+      return("metricScope must be one of 'perUser', 'perSession' or 'perHit'.")
     } else {
       return(TRUE)
     }
@@ -283,10 +293,104 @@ setClass(
 
 # ---- GA Dynamic and pre-defined segments ----
 
+setClass(
+  Class = ".gaDimensionOrMetricConditions",
+  representation = representation(
+    negation = "logical"
+  ),
+  prototype = prototype(
+    negation = FALSE
+  ),
+  contains = "VIRTUAL",
+  validity = function(object) {
+    if (length(object@negation) == 1) {
+      TRUE
+    } else {
+      "Slot negation must be of length 1."
+    }
+  }
+)
+
+#' @export
+setClass(
+  Class = "gaSequenceStep",
+  representation = representation(
+    immediatelyPrecedes = "logical"
+  ),
+  prototype = prototype(
+    immediatelyPrecedes = FALSE
+  ),
+  contains = "gaAnd",
+  validity = function(object) {
+    if (length(object@immediatelyPrecedes) == 1) {
+      return(TRUE)
+    } else {
+      return("immediatelyPrecedes must be of length 1.")
+    }
+  }
+)
+
+#' @export
+setClass(
+  Class = "gaSequenceCondition",
+  contains = c("list", ".gaDimensionOrMetricConditions"),
+  validity = function(object) {
+    if (all(sapply(object@.Data, function(x) {
+      inherits(x, "gaSequenceStep")
+    }))) {
+      TRUE
+    } else {
+      "All conditions within a sequence list must belong to the superclass gaSequenceStep."
+    }
+  }
+)
+
+#' @export
+setClass(
+  Class = "gaNonSequenceCondition",
+  contains = c("gaAnd", ".gaDimensionOrMetricConditions")
+)
+
+#' @export
+setClass(
+  Class = "gaSegmentCondition",
+  representation = representation(
+    conditionScope = "character"
+  ),
+  prototype = prototype(
+    conditionScope = "sessions"
+  ),
+  contains = "list",
+  validity = function(object) {
+    if (all(sapply(object@.Data, function(x) {
+      inherits(x, ".gaDimensionOrMetricConditions")
+    }))) {
+      if (length(object@conditionScope) == 1) {
+        if (object@conditionScope %in% c("users", "sessions")) {
+          TRUE
+        } else {
+          "Slot 'conditionScope' must be either 'users' or 'sessions'."
+        }
+      } else {
+        "Slot 'conditionScope' must be of length 1."
+      }
+    } else {
+      "All conditions within a gaSegmentCondition list must belong to the superclass .gaDimensionOrMetricConditions."
+    }
+  }
+)
+
 #' @export
 setClass(
   Class = "gaDynSegment",
-  contains = "gaAnd"
+  contains = "list",
+  validity = function(object) {
+    if (all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
+      TRUE
+    } else {
+      "All objects with a gaDynSegment list must belong to the class gaSegmentCondition."
+    } 
+  }
 )
 
 #' @export
@@ -465,6 +569,8 @@ setClass(
 
 # -- GA query construct ----
 
+samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
+
 #' @export
 setClass(
   Class = "gaQuery",
@@ -476,6 +582,7 @@ setClass(
     sortBy = "gaSortBy",
     filters = "gaFilter",
     segment = ".gaSegment",
+    samplingLevel = "character",
     maxResults = "numeric",
     authFile = "character"
   ),
@@ -484,6 +591,7 @@ setClass(
     metrics = new("gaMetrics"),
     dimensions = new("gaDimensions"),
     sortBy = new("gaSortBy"),
+    samplingLevel = "DEFAULT",
     maxResults = kGaMaxResults
   ),
   validity = function(object) {
@@ -501,7 +609,11 @@ setClass(
                 )
               )
             ) {
-              return(TRUE)
+              if ((length(object@samplingLevel) != 1) | !(object@samplingLevel %in% samplingLevel_levels)) {
+                return(paste("samplingLevel must be one of:", samplingLevel_levels))
+              } else {
+                return(TRUE)
+              }
             } else {
               return("sortBy must contain varNames also used as metrics and/or dimensions")
             }
