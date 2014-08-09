@@ -3,7 +3,7 @@
 \alias{GaExpr}
 \title{GaExpr}
 \usage{
-GaExpr(.Object, gaOperator, gaOperand, metricScope = "perSession")
+GaExpr(.Object, gaOperator, gaOperand, metricScope = "")
 }
 \description{
 Create an expression.

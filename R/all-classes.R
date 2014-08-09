@@ -150,12 +150,6 @@ setClass(
 #' @export
 setClass(
   Class = "gaMetExpr",
-  representation = representation(
-    metricScope = "character"
-  ),
-  prototype = prototype(
-    metricScope = "perSession"
-  ),
   contains = ".gaExpr",
   validity = function(object) {
     if (!class(object@gaVar)=="gaMetVar") {
@@ -164,10 +158,27 @@ setClass(
       return("gaOperator must be of class gaMetOperator")
     } else if (!class(object@gaOperand)=="gaMetOperand") {
       return("gaOperand must be of class gaMetOperand")
-    } else if (!length(object@metricScope) == 1) {
+    } else {
+      return(TRUE)
+    }
+  }
+)
+
+#' @export
+setClass(
+  Class = "gaSegMetExpr",
+  representation = representation(
+    metricScope = "character"
+  ),
+  prototype = prototype(
+    metricScope = "perSession"
+  ),
+  contains = "gaMetExpr",
+  validity =  function(object) {
+    if (!length(object@metricScope) == 1) {
       return("metricScope must be of length 1.")
-    } else if (!(object@metricScope %in% c("perUser", "perSession", "perHit"))) {
-      return("metricScope must be one of 'perUser', 'perSession' or 'perHit'.")
+    } else if (!(object@metricScope %in% c("", "perUser", "perSession", "perHit"))) {
+      return("metricScope must be one of '', 'perUser', 'perSession' or 'perHit'.")
     } else {
       return(TRUE)
     }

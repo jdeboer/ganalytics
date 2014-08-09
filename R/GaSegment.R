@@ -75,6 +75,25 @@ setMethod(
   }
 )
 
+# ---- GaScopeLevel, GaScopeLevel<- ----
+
+setMethod(
+  f = "GaScopeLevel",
+  signature = "gaSegmentCondition",
+  definition = function(.Object) {
+    .Object@conditionScope
+  }
+)
+
+setMethod(
+  f = "GaScopeLevel<-",
+  signature = c("gaSegmentCondition", "character"),
+  definition = function(.Object, value) {
+    .Object@conditionScope <- value
+    return(.Object)
+  }
+)
+
 # ---- GaSegment, GaSegment<- ----
 
 setMethod(

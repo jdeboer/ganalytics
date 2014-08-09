@@ -252,6 +252,9 @@ setAs(
     new(
       to,
       .Data <- paste(
+        if(class(from) == "gaSegMetExpr") {
+          if(from@metricScope != "") paste0(from@metricScope, "::")
+        },
         as(from@gaVar, to),
         as(from@gaOperator, to),
         as(

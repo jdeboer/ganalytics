@@ -157,7 +157,7 @@ setGeneric(
 #' @rdname GaExpr
 setGeneric(
   name = "GaExpr",
-  def = function(.Object, gaOperator, gaOperand, metricScope = "perSession") {},
+  def = function(.Object, gaOperator, gaOperand, metricScope = "") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -268,6 +268,36 @@ setGeneric(
   def = function(.Object, ..., scope = "sessions") {},
   valueClass = "gaSegmentCondition",
   useAsDefault = FALSE
+)
+
+#' GaScopeLevel
+#' 
+#' Get the scope level of a gaDynSegment or gaMetExpr
+#' 
+#' @export
+#' @rdname GaScopeLevel
+setGeneric(
+  name = "GaScopeLevel",
+  def = function(.Object) {},
+  valueClass = "character",
+  useAsDefault = FALSE
+)
+
+#' GaScopeLevel<-
+#' 
+#' Set the scope level of a gaDynSegment or a gaMetExpr
+#' For segments, one of 'users' or 'sessions'
+#' For metric expressions one of 'perUser', 'perSession' or 'perHit'
+#' 
+#' @export
+#' @rdname GaScopeLevel
+setGeneric(
+  name = "GaScopeLevel<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaScopeLevel<-")
+    validObject(.Object)
+    return(.Object)
+  }
 )
 
 #' GaSegment

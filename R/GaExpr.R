@@ -25,19 +25,49 @@ setMethod(
     } else if (class(gaVar) == "gaMetVar") {
       gaOperator <- GaMetOperator(gaOperator)
       gaOperand <- GaOperand(as.numeric(gaOperand))
-      gaExprClass <- "gaMetExpr"
-      new(
-        Class = gaExprClass,
-        gaVar = gaVar,
-        gaOperator = gaOperator,
-        gaOperand = gaOperand,
-        metricScope = metricScope
-      )
+      if (metricScope != "") {
+        gaExprClass <- "gaSegMetExpr"
+        new(
+          Class = gaExprClass,
+          gaVar = gaVar,
+          gaOperator = gaOperator,
+          gaOperand = gaOperand,
+          metricScope = metricScope
+        )
+      } else {
+        gaExprClass <- "gaMetExpr"
+        new(
+          Class = gaExprClass,
+          gaVar = gaVar,
+          gaOperator = gaOperator,
+          gaOperand = gaOperand
+        )
+      }
     } else {
       stop(
         paste("Unsupported .gaVar class", class(gaVar), sep=": ")
       )
     }
+  }
+)
+
+# ---- GaScopeLevel, GaScopeLevel<- ----
+
+setMethod(
+  f = "GaScopeLevel",
+  signature = "gaSegMetExpr",
+  definition = function(.Object) {
+    .Object@metricScope
+  }
+)
+
+setMethod(
+  f = "GaScopeLevel<-",
+  signature = c("gaMetExpr", "character"),
+  definition = function(.Object, value) {
+    .Object <- as(.Object, "gaSegMetScope")
+    .Object@metricScope <- value
+    return(.Object)
   }
 )
 
