@@ -40,12 +40,12 @@ GetGaData <- function(
   details = FALSE,
   .progress = "time",
   use_oob = FALSE,
-  cache = getOption("httr_oauth_cache"),
+  #cache = getOption("httr_oauth_cache"),
   addViewId = FALSE
 ) {
   appname <- "GANALYTICS"
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
-  if (!is.na(cache)) {cache <- query@authFile}
+  cache <- query@authFile
   oauth <- GaAuth(appname = appname, scope = scope, key = key, secret = secret, use_oob = use_oob, cache = cache)
   queryURLs <- GetGaUrl(query)
   responses <- llply(

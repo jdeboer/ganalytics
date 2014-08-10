@@ -6,7 +6,7 @@ Execute a ganalytics query.}
 \usage{
 GetGaData(query, key = NULL, secret = NULL, quiet = FALSE,
   details = FALSE, .progress = "time", use_oob = FALSE,
-  cache = getOption("httr_oauth_cache"), addViewId = FALSE)
+  addViewId = FALSE)
 }
 \arguments{
 \item{query}{the query to execute.}
