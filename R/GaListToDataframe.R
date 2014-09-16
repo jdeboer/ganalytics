@@ -36,6 +36,8 @@ GaListToDataframe <- function(gaData) {
       data = gaData$rows,
       totalResults = max(gaData$totalResults, 1),
       sampled = gaData$containsSampledData,
+      sampleSize = gaData$sampleSize,
+      sampleSpace = gaData$sampleSpace,
       viewId = gaData$query$ids
     )
   )

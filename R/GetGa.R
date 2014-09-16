@@ -64,6 +64,8 @@ GetGaData <- function(
       if(addViewId & nrow(df) >= 1) {
         df <- mutate(df, viewId = response$viewId)
       }
+      attr(df, "sampleSize") <- response$sampleSize
+      attr(df, "sampleSpace") <- response$sampleSpace
       return(df)
     }
   )

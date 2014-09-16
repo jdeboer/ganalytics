@@ -12,6 +12,8 @@ GaPaginate <- function(queryUrl, maxRequestedRows, oauth, quiet = FALSE, details
   viewId <- gaPage$viewId
   # Is GA reporting sampled data?
   sampled <- gaPage$sampled
+  sampleSize = gaPage$sampleSize
+  sampleSpace = gaPage$sampleSpace
   # How many rows do I need in total?
   maxRows <- min(gaPage$totalResults, maxRequestedRows)
   # How many pages would that be?
@@ -44,7 +46,9 @@ GaPaginate <- function(queryUrl, maxRequestedRows, oauth, quiet = FALSE, details
     list(
       data = data,
       sampled = sampled,
-      viewId = viewId
+      viewId = viewId,
+      sampleSize = sampleSize,
+      sampleSpace = sampleSpace
     )
   )
 }
