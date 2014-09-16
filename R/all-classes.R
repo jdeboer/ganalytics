@@ -16,7 +16,7 @@ IsVarMatch <- function(thisVar, inVars) {
 #' @export
 setClass(
   Class = "gaMetVar",
-  prototype = prototype("ga:visits"),
+  prototype = prototype("ga:sessions"),
   contains = "character",
   validity = function(object) {
 #    if (tolower(object@.Data) %in% tolower(kGaVars$mets)) {

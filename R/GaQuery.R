@@ -22,7 +22,7 @@ GaQuery <- function(
   authFile = "~/ganalytics_token.RDS",
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
-  metrics = "ga:visits",
+  metrics = "ga:sessions",
   dimensions = "ga:date",
   sortBy = NULL,
   filters = NULL,
