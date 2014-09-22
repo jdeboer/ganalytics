@@ -52,8 +52,9 @@ setMethod(
 setMethod(
   f = "GaSegmentCondition",
   signature = ".gaCompoundExpr",
-  definition = function(.Object) {
-    GaSegmentCondition(GaNonSequenceCondition(.Object))
+  definition = function(.Object, ..., scope) {
+    exprList <- list(.Object, ...)
+    GaSegmentCondition(do.call(GaNonSequenceCondition, exprList), scope = scope)
     #as(.Object, "GaSegmentCondition")
   }
 )
