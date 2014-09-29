@@ -153,7 +153,7 @@ setAs(
   from = "gaMetOperand",
   to = "character",
   def = function(from) {
-    as.character(from@.Data)
+    format(from@.Data, scientific = FALSE)
   },
   replace = function(from, value) {
     from@.Data <- as.numeric(value)
