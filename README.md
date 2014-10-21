@@ -33,13 +33,13 @@ devtools::install_github("jdeboer/ganalytics")
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
 * Check you are **signed in to Google** with the account you wish to use.
-* Choose **Create project** from the Google API Console (or choose an existing project if you have one already).
-* From the Services page, set the status of **Analytics API** to **ON**.
+* Choose **Create project** from the Google API Console and give your project a name (or choose an existing project if you have one already). You may need to wait a minute for the project to be created once you submit the form.
+* From the **APIs** page, set the status of **Analytics API** to **ON**.
 * You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
-* Go to the **API Access page**, then click the blue button **Create an OAuth 2.0 client ID**.
-* Enter a unique **Product Name** (keep in mind you may want to add more Google services in future). This is the only required form field. Click **Next**.
-* Within **Client ID Settings**, select **Installed application** as the **Application type** and choose **Other** as the **Installed application type**. Click **Create client ID**.
-* Note your **Client ID** and **Client secret**.
+* Go to the **Credentials** page and click the blue button **Create new client ID**.
+* Select **Installed application** as the application type.
+* Select **Other** as the Installed Application Type.
+* Note your **Client ID** and **Client secret** or download the JSON file for future reference.
 
 _Note: For further information about Google APIs please refer to the References section at the end of this document._
 
