@@ -17,21 +17,18 @@ Installation
 #### Prerequisites
 * Ensure you have installed the latest version of [R](http://cran.r-project.org/)
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
-* For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/wiki/Philosophy#getting-started)
+* For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/blob/master/README.md)
 
 #### Execute the following statements in R to install `ganalytics`:
 
 ```r
-# Install devtools via CRAN
+# Install the latest version of devtools via CRAN
 install.packages("devtools", dependencies = TRUE)
 # Install ganalytics via the GitHub repository.
-library(devtools)
-install_github(repo = "ganalytics", username = "jdeboer")
-# Install dependencies
-install.packages(c("httr", "plyr", "stringr", "RJSONIO", "Rook", "httpuv"))
+devtools::install_github("jdeboer/ganalytics")
 # End
 ```
-#### Now, restart R. This is important to ensure you have a clean workspace and to avoid errors.
+#### Now, restart R. This is important to ensure you have a clean workspace to possible avoid errors.
 
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
@@ -65,30 +62,30 @@ _Note: For further information about Google APIs please refer to the References 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
 ### 4. Authenticate and attempt your first query with ganalytics
-* To perform a query you will need to obtain your **Google Analytics profile ID**. This can be accessed from either:
+* To perform a query you will need to obtain your **Google Analytics view ID**. This can be accessed from either:
   * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
-  * the **Admin page** in Google Analytics under **Profile Settings**, or
-  * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a profile ID of `33333333`.
+  * the **Admin page** in Google Analytics under **View Settings**, or
+  * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
-  _Note: A function for accessing your profile IDs within R will be available in the near future._
+  _Note: A function for accessing your view IDs within R will be available in the near future._
 
-* Return to R and execute the following, remembering to substitute `profile_id` with the profile ID you noted down:
+* Return to R and execute the following, remembering to substitute `view_id` with the view ID you noted down:
  
 ##### If you completed step 3
 
 ```r
 library(ganalytics)
-myQuery <- GaQuery( profile_id )
+myQuery <- GaQuery( view_id )
 GetGaData(myQuery)
 # End
 ```
 
 ##### If you did NOT complete step 3
-In addition to your `profile_id`, also substitute `client_id` and `client_secret` below with your details from step 2
+In addition to your `view_id`, also substitute `client_id` and `client_secret` below with your details from step 2
 
 ```r
 library(ganalytics)
-myQuery <- GaQuery( profile_id )
+myQuery <- GaQuery( view_id )
 GetGaData(myQuery, key = client_id , secret = client_secret)
 # End
 ```
@@ -104,13 +101,13 @@ Examples
 
 As demonstrated in the installation steps above, before executing any of the following examples:
 1. load the `ganalytics` package
-2. generate a gaQuery object with a Google Analytics profile ID assigned to it.
+2. generate a gaQuery object with a Google Analytics view ID assigned to it.
 
-The following code performs these steps: (Remember to replace `123456789` with the profile ID you wish to use.) 
+The following code performs these steps: (Remember to replace `123456789` with the view ID you wish to use.) 
 
 ```r
 library(ganalytics)
-myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics profile ID
+myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics view ID
 # End
 ```
 If you have just completed the installation steps, then you would have done this already.
@@ -281,7 +278,7 @@ head(myData)
 tail(myData)
 # End
 ```
-### Example 10 - Visit segmentation
+### Example 10 - Session segmentation
 
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
