@@ -28,7 +28,7 @@ install.packages("devtools", dependencies = TRUE)
 devtools::install_github("jdeboer/ganalytics")
 # End
 ```
-#### Now, restart R. This is important to ensure you have a clean workspace to possible avoid errors.
+#### Now, restart R. This is important to ensure you have a clean workspace to avoid possible errors.
 
 ### 2. Prepare your Google API application
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
