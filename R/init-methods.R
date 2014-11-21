@@ -22,6 +22,9 @@ setMethod(
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
       allVars <- with(kGaVars, union(dims, mets))
+      #allVars <- str_replace(allVars, "XX", replacement = "[0-9]+")
+      #allVars <- paste0("^", allVars, "$")
+      ### pmatch cannot work with regular expresions ###
       varIndex <- pmatch(tmp, tolower(allVars))
       tmp <- allVars[varIndex]
       .Object@.Data <- tmp

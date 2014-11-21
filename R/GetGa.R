@@ -36,23 +36,34 @@ GetGaData <- function(
   query,
   key = NULL,
   secret = NULL,
+  credsFile = list(client_id = key, client_secret = secret),
   quiet = FALSE,
   details = FALSE,
   .progress = "time",
   use_oob = FALSE,
-  #cache = getOption("httr_oauth_cache"),
   addViewId = FALSE
 ) {
   appname <- "GANALYTICS"
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
   cache <- query@authFile
-  oauth <- GaAuth(appname = appname, scope = scope, key = key, secret = secret, use_oob = use_oob, cache = cache)
+  userName <- query@userName
+  creds <- list(
+    app = app_oauth_creds(
+      appname = appname,
+      creds = credsFile
+    ),
+    user = list(
+      login = userName,
+      cache = cache,
+      use_oob = use_oob
+    )
+  )
   queryURLs <- GetGaUrl(query)
   responses <- llply(
     .data = queryURLs,
     .fun = GaPaginate,
     maxRequestedRows = GaMaxResults(query),
-    oauth = oauth,
+    creds = creds,
     quiet = quiet,
     details = details,
     .progress = .progress

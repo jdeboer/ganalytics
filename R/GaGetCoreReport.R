@@ -1,7 +1,6 @@
 #' @include GaApiRequest.R
 NULL
-
-GaGetCoreReport <- function(queryUrl, oauth, startIndex = 1, maxResults = 10000, quiet = FALSE, details = FALSE) {
+GaGetCoreReport <- function(queryUrl, creds, startIndex = 1, maxResults = 10000, quiet = FALSE, details = FALSE) {
   request <- ""
   queryUrl <- paste(
     queryUrl,
@@ -12,7 +11,7 @@ GaGetCoreReport <- function(queryUrl, oauth, startIndex = 1, maxResults = 10000,
     ),
     sep = "&"
   )
-  data.ga <- GaApiRequest(reporting.api, request, queryUrl, oauth, quiet, details)
+  data.ga <- GaApiRequest(reporting.api, request, queryUrl, creds, quiet, details)
   if (!is.null(data.ga$error)) {
     stop(
       with(

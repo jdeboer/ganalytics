@@ -595,7 +595,8 @@ setClass(
     segment = ".gaSegment",
     samplingLevel = "character",
     maxResults = "numeric",
-    authFile = "character"
+    authFile = "character",
+    userName = "character"
   ),
   prototype = prototype(
     dateRange = new("gaDateRange"),

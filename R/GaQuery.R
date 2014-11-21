@@ -28,7 +28,8 @@ GaQuery <- function(
   filters = NULL,
   segment = NULL,
   samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults
+  maxResults = kGaMaxResults,
+  userName = character(0)
 ) {
   new("gaQuery",
       profileId = GaProfileId(profileId),
@@ -43,7 +44,8 @@ GaQuery <- function(
       segment = GaSegment(segment),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
-      authFile = authFile
+      authFile = authFile,
+      userName = userName
   )
 }
 

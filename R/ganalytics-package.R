@@ -13,6 +13,8 @@
 #' @import plyr
 #' @import stringr
 #' @import jsonlite
+#' @import XML
+#' @import selectr
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package

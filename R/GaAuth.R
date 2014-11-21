@@ -3,8 +3,15 @@ GaAuth <- function(
   scope = "https://www.googleapis.com/auth/analytics.readonly",
   key = NULL, secret = NULL,
   use_oob = FALSE,
-  cache = getOption("httr_oauth_cache")
+  cache = getOption("httr_oauth_cache"),
+  client_secrets_path = NULL
 ) {
+  # Check if client_secret_path points to a valid json file with a client ID and secret
+  
+  ## TO DO
+  
+  ##
+  
   if (is.null(key)) {
     key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
   }
