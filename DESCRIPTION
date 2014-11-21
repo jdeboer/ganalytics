@@ -17,7 +17,9 @@ Imports:
     plyr,
     stringr,
     httpuv,
-    jsonlite
+    jsonlite,
+    XML,
+    selectr
 Collate:
     'ArgList.R'
     'ColTypes.R'

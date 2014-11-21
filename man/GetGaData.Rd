@@ -4,9 +4,9 @@
 \title{GetGaData
 Execute a ganalytics query.}
 \usage{
-GetGaData(query, key = NULL, secret = NULL, quiet = FALSE,
-  details = FALSE, .progress = "time", use_oob = FALSE,
-  addViewId = FALSE)
+GetGaData(query, key = NULL, secret = NULL, credsFile = list(client_id =
+  key, client_secret = secret), quiet = FALSE, details = FALSE,
+  .progress = "time", use_oob = FALSE, addViewId = FALSE)
 }
 \arguments{
 \item{query}{the query to execute.}

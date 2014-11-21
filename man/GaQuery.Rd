@@ -8,7 +8,7 @@ GaQuery(profileId, authFile = "~/ganalytics_token.RDS",
   startDate = Sys.Date() - 8, endDate = Sys.Date() - 1,
   metrics = "ga:sessions", dimensions = "ga:date", sortBy = NULL,
   filters = NULL, segment = NULL, samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults)
+  maxResults = kGaMaxResults, userName = character(0))
 }
 \arguments{
 \item{profileId}{profile id to use}
