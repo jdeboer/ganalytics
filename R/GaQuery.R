@@ -19,7 +19,8 @@
 #' @include all-coercions.R
 GaQuery <- function(
   profileId,
-  authFile = "~/ganalytics_token.RDS",
+  userName = character(0),
+  authFile = character(0),
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "ga:sessions",
@@ -28,9 +29,15 @@ GaQuery <- function(
   filters = NULL,
   segment = NULL,
   samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults,
-  userName = character(0)
+  maxResults = kGaMaxResults
 ) {
+  if (length(authFile) == 0) {
+    if (length(userName) == 0) {
+      authFile <- "~/ganalytics_token.RDS"
+    } else {
+      authFile <- paste0(userName, "_ga_auth.RDS")
+    }
+  }
   new("gaQuery",
       profileId = GaProfileId(profileId),
       dateRange = GaDateRange(

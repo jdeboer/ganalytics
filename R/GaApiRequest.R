@@ -34,7 +34,8 @@ google_api_request <- function(creds, scope,
       fields = parse_field_list(fields)
     ),
     body_list = body_list,
-    user = creds$user
+    user = creds$user,
+    use_oob = creds$use_oob
   )
 }
 
@@ -43,6 +44,7 @@ api_request <- function(api_name, app, base_url,
                         queries = NULL, body_list = NULL,
                         user = list(login = NA, cache = NA),
                         oauth_in_header = TRUE,
+                        use_oob = FALSE,
                         oauth_version = "2.0") {
   req_type <- toupper(req_type)
   api_name <- tolower(api_name)
@@ -76,6 +78,7 @@ api_request <- function(api_name, app, base_url,
         endpoint = endpoint,
         app = app,
         scope = scope,
+        use_oob = use_oob,
         as_header = oauth_in_header,
         cache = user$cache,
         if(api_name == "facebook") {

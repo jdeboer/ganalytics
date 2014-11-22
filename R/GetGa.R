@@ -54,9 +54,9 @@ GetGaData <- function(
     ),
     user = list(
       login = userName,
-      cache = cache,
-      use_oob = use_oob
-    )
+      cache = cache
+    ),
+    use_oob = use_oob
   )
   queryParams <- GetGaQueries(query)
   responses <- alply(
