@@ -13,10 +13,10 @@
 NULL
 
 setMethod(
-  f = "GetGaUrl",
+  f = "GetGaQueries",
   signature = signature(".gaUrlClasses"),
   definition = function(.Object) {
-    as(.Object, "utf8")
+    as(.Object, "matrix")
   }
 )
 
@@ -58,9 +58,10 @@ GetGaData <- function(
       use_oob = use_oob
     )
   )
-  queryURLs <- GetGaUrl(query)
-  responses <- llply(
-    .data = queryURLs,
+  queryParams <- GetGaQueries(query)
+  responses <- alply(
+    .data = queryParams,
+    .margins = 2,
     .fun = GaPaginate,
     maxRequestedRows = GaMaxResults(query),
     creds = creds,
@@ -79,7 +80,7 @@ GetGaData <- function(
       attr(df, "sampleSpace") <- response$sampleSpace
       return(df)
     }
-  )
+  )[-1]
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
   if (sampled) {
     warning("Contains sampled data.")

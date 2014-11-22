@@ -1,17 +1,6 @@
 #Make a Goolge API request
-####
-GaApiRequest = function(baseURL, request, query, creds, quiet = FALSE, details = FALSE) {  
-  request <- "data/ga"
-  ga_api_request(creds = creds, request = paste(request, query, sep = "?"))
-}
 
-ga_api_request <- function(creds, request, req_type = "GET", body_list = NULL, fields = NULL, queries = NULL) {
-  scope <- c(
-    "https://www.googleapis.com/auth/analytics",
-    "https://www.googleapis.com/auth/analytics.edit",
-    "https://www.googleapis.com/auth/analytics.readonly",
-    "https://www.googleapis.com/auth/analytics.manage.users"
-  )
+ga_api_request <- function(creds, request, scope = "https://www.googleapis.com/auth/analytics", req_type = "GET", body_list = NULL, fields = NULL, queries = NULL) {
   base_url <- "https://www.googleapis.com/analytics/v3"
   request <- c(
     "upload"[attr(request, "upload")],
@@ -47,6 +36,87 @@ google_api_request <- function(creds, scope,
     body_list = body_list,
     user = creds$user
   )
+}
+
+api_request <- function(api_name, app, base_url,
+                        scope = NULL, req_type = "GET",
+                        queries = NULL, body_list = NULL,
+                        user = list(login = NA, cache = NA),
+                        oauth_in_header = TRUE,
+                        oauth_version = "2.0") {
+  req_type <- toupper(req_type)
+  api_name <- tolower(api_name)
+  stopifnot(
+    req_type %in% c("GET", "POST", "PUT", "DELETE")
+  )
+  url <- form_url(base_url, queries)
+  endpoint <- oauth_endpoints(name = api_name)
+  if(length(user$login) != 1) {user$login <- NA}
+  if(!is.na(user$login)) {
+    endpoint$authorize <- modify_url(
+      endpoint$authorize,
+      query = list(login_hint = user$login)
+    )
+  }
+  scope <- if(!is.null(scope)) {
+    paste(scope, collapse = " ")
+  }
+  switch(
+    oauth_version,
+    `1.0` = {
+      token <- oauth1.0_token(
+        endpoint = endpoint,
+        app = app,
+        permission = scope,
+        cache = user$cache
+      )
+    },
+    `2.0` = {
+      token <- oauth2.0_token(
+        endpoint = endpoint,
+        app = app,
+        scope = scope,
+        as_header = oauth_in_header,
+        cache = user$cache,
+        if(api_name == "facebook") {
+          type = "application/x-www-form-urlencoded"
+        }
+      )
+    }
+  )
+  args <- list(
+    url = url,
+    config = config(token = token)
+  )
+  if(!is.null(body_list)) {
+    body <- toJSON(
+      body_list,
+      pretty = TRUE#, asIs = TRUE #, auto_unbox = TRUE
+    )
+    args$config <- c(
+      args$config,
+      add_headers(
+        `Content-Type` = "application/json"
+      )
+    )
+    args <- c(args, list(body = body))
+  }
+  
+  attempts <- 0
+  succeeded <- FALSE
+  while (attempts <= 5 & !succeeded) {
+    attempts <- attempts + 1
+    response <- do.call(req_type, args)
+    json_content <- response_to_list(response)
+    if (any(json_content$error$errors$reason %in% c('userRateLimitExceeded', 'quotaExceeded'))) {
+      Sys.sleep((2 ^ attempts) + runif(min = 0, max = 1000))
+    } else {
+      message(json_content$error$message)
+      stop_for_status(response)
+      succeeded <- TRUE
+    }
+  }
+  json_content
 }
 
 form_url <- function(base_url, queries = NULL) {
@@ -92,101 +162,6 @@ response_to_list <- function(response) {
     }
   }
   return(response)
-}
-
-api_request <- function(api_name, app, base_url,
-                        scope = NULL, req_type = "GET",
-                        queries = NULL, body_list = NULL,
-                        user = list(login = NA, cache = NA),
-                        oauth_in_header = TRUE,
-                        oauth_version = "2.0") {
-  req_type <- toupper(req_type)
-  api_name <- tolower(api_name)
-  stopifnot(
-    req_type %in% c("GET", "POST", "PUT", "DELETE")
-  )
-  url <- form_url(base_url, queries)
-  endpoint <- oauth_endpoints(name = api_name)
-  if(api_name == "twitter") {
-    endpoint$authorize <- "https://api.twitter.com/oauth/authorize"
-  }
-  if(length(user$login) != 1) {user$login <- NA}
-  if(!is.na(user$login)) {
-    endpoint$authorize <- modify_url(
-      endpoint$authorize,
-      query = list(login_hint = user$login)
-    )
-  }
-  scope <- if(!is.null(scope)) {
-    paste(scope, collapse = " ")
-  }
-  switch(
-    oauth_version,
-    `1.0` = {
-      token <- oauth1.0_token(
-        endpoint = endpoint,
-        app = app,
-        permission = scope,
-        cache = user$cache
-      )
-    },
-    `2.0` = {
-      token <- if (api_name != "linkedin") {
-        oauth2.0_token(
-          endpoint = endpoint,
-          app = app,
-          scope = scope,
-          as_header = oauth_in_header,
-          cache = user$cache,
-          if(api_name == "facebook") {
-            type = "application/x-www-form-urlencoded"
-          }
-        )
-      } else {
-        TokenLinkedIn <- R6::R6Class("TokenLinkedIn", inherit = Token2.0, list(
-          sign = function(method, url) {
-            url <- parse_url(url)
-            url$query$oauth2_access_token <- self$credentials$access_token
-            list(url = build_url(url), config = config())
-          }
-        ))
-        TokenLinkedIn$new(endpoint = endpoint, app = app)
-      }
-    }
-  )
-  args <- list(
-    url = url,
-    config = config(token = token)
-  )
-  if(!is.null(body_list)) {
-    body <- toJSON(
-      body_list,
-      pretty = TRUE#, asIs = TRUE #, auto_unbox = TRUE
-    )
-    args$config <- c(
-      args$config,
-      add_headers(
-        `Content-Type` = "application/json"
-      )
-    )
-    args <- c(args, list(body = body))
-  }
-  
-  attempts <- 0
-  succeeded <- FALSE
-  while (attempts <= 5 & !succeeded) {
-    attempts <- attempts + 1
-    response <- do.call(req_type, args)
-    json_content <- response_to_list(response)
-    if (any(json_content$error$errors$reason %in% c('userRateLimitExceeded', 'quotaExceeded'))) {
-      Sys.sleep((2 ^ n) + runif(min = 0, max = 1000))
-    } else {
-      message(json_content$error$message)
-      stop_for_status(response)
-      succeeded <- TRUE
-    }
-  }
-  json_content
 }
 
 app_oauth_creds <- function(appname, creds = NULL) {

@@ -891,3 +891,50 @@ setAs(
     )
   }
 )
+
+setAs(
+  from = "gaQuery",
+  to = "matrix",
+  def = function(from) {
+    profilesDatesSegments <- do.call(
+      what = rbind,
+      args = lapply(
+        X = GaProfileId(from),
+        FUN = function(profileId) {
+          data.frame(
+            startDate = GaStartDate(from),
+            endDate = GaEndDate(from),
+            profileId = profileId,
+            stringsAsFactors = FALSE
+          )
+        }
+      )
+    )
+    params <- mapply(
+      FUN = function(startDate, endDate, profileId) {
+        c(
+          "ids" = GetGaQueries(GaProfileId(profileId)),
+          "start-date" = as.character(startDate),
+          "end-date" = as.character(endDate),
+          "metrics" = as(GaMetrics(from), "character"),
+          "dimensions" = if(length(GaDimensions(from)) >= 1) {
+            as(GaDimensions(from), "character")
+          },
+          "sort" = if(length(GaSortBy(from)) >= 1) {
+            as(GaSortBy(from), "character")
+          },
+          "filters" = if(length(GaFilter(from)) >= 1) {
+            as(GaFilter(from), "character")
+          },
+          "segment" = if(length(GaSegment(from)) >= 1) {
+            as(GaSegment(from), "character")
+          },
+          "samplingLevel" = as(GaSamplingLevel(from), "character")
+        )
+      },
+      profilesDatesSegments$startDate,
+      profilesDatesSegments$endDate,
+      profilesDatesSegments$profileId
+    )
+  }
+)

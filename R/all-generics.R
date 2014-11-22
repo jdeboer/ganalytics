@@ -619,3 +619,15 @@ setGeneric(
   valueClass = "utf8",
   useAsDefault = FALSE
 )
+
+#' GetGaQueries
+#' 
+#' Get the chracter string query compoents for the given ganalytics object.
+#' 
+#' @rdname GetGaUrl
+setGeneric(
+  name = "GetGaQueries",
+  def = function(.Object) {},
+  valueClass = "matrix",
+  useAsDefault = FALSE
+)

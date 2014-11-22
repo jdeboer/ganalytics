@@ -1,17 +1,14 @@
 #' @include GaApiRequest.R
 NULL
-GaGetCoreReport <- function(queryUrl, creds, startIndex = 1, maxResults = 10000, quiet = FALSE, details = FALSE) {
-  request <- ""
-  queryUrl <- paste(
-    queryUrl,
-    paste(
-      paste("start-index", startIndex, sep = "="),
-      paste("max-results", maxResults, sep = "="),
-      sep = "&"
-    ),
-    sep = "&"
+GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, quiet = FALSE, details = FALSE) {
+  request <- "data/ga"
+  scope <- "https://www.googleapis.com/auth/analytics.readonly"
+  query <- c(
+    query,
+    "start-index" = startIndex,
+    "max-results" = maxResults
   )
-  data.ga <- GaApiRequest(reporting.api, request, queryUrl, creds, quiet, details)
+  data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query)
   if (!is.null(data.ga$error)) {
     stop(
       with(

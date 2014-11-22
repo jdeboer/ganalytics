@@ -1,7 +1,7 @@
-GaPaginate <- function(queryUrl, maxRequestedRows, creds, quiet = FALSE, details = FALSE) {
+GaPaginate <- function(query, maxRequestedRows, creds, quiet = FALSE, details = FALSE) {
   # Get the first page to determine the total number of rows available.
   gaPage <- GaGetCoreReport(
-    queryUrl = queryUrl,
+    query = query,
     creds = creds,
     startIndex = 1,
     maxResults = min(maxRequestedRows, kGaMaxResults),
@@ -30,7 +30,7 @@ GaPaginate <- function(queryUrl, maxRequestedRows, creds, quiet = FALSE, details
       maxResults <- min(kGaMaxResults, (maxRows - startIndex) + 1)
       # Get the rows of data for this page...
       gaPage <- GaGetCoreReport(
-        queryUrl,
+        query,
         creds,
         startIndex,
         maxResults,
