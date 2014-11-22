@@ -582,6 +582,8 @@ setClass(
 
 samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
 
+setClassUnion("characterOrList", c("character", "list"))
+
 #' @export
 setClass(
   Class = "gaQuery",
@@ -596,7 +598,8 @@ setClass(
     samplingLevel = "character",
     maxResults = "numeric",
     authFile = "character",
-    userName = "character"
+    userName = "character",
+    appCreds = "characterOrList"
   ),
   prototype = prototype(
     dateRange = new("gaDateRange"),

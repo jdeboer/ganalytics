@@ -20,6 +20,7 @@
 GaQuery <- function(
   profileId,
   userName = character(0),
+  appCreds = character(0),
   authFile = character(0),
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
@@ -52,7 +53,8 @@ GaQuery <- function(
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       authFile = authFile,
-      userName = userName
+      userName = userName,
+      appCreds = appCreds
   )
 }
 

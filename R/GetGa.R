@@ -23,10 +23,6 @@ setMethod(
 #' GetGaData
 #' Execute a ganalytics query.
 #' @param query the query to execute.
-#' @param key optional OAuth client ID.
-#'  Default is to use system environment variable "GANALYTICS_CONSUMER_ID".
-#' @param secret optional OAuth client secret.
-#'  Default is to use system environment variable "GANALYTICS_CONSUMER_SECRET".
 #' @param quiet supress messages
 #' @param details show detailed messages
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
@@ -34,9 +30,6 @@ setMethod(
 #' @export
 GetGaData <- function(
   query,
-  key = NULL,
-  secret = NULL,
-  credsFile = list(client_id = key, client_secret = secret),
   quiet = FALSE,
   details = FALSE,
   .progress = "time",
@@ -47,6 +40,7 @@ GetGaData <- function(
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
   cache <- query@authFile
   userName <- query@userName
+  credsFile <- query@appCreds
   creds <- list(
     app = app_oauth_creds(
       appname = appname,
