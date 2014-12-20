@@ -112,7 +112,7 @@ api_request <- function(api_name, app, base_url,
     response <- do.call(req_type, args)
     json_content <- response_to_list(response)
     if (any(json_content$error$errors$reason %in% c('userRateLimitExceeded', 'quotaExceeded'))) {
-      Sys.sleep((2 ^ attempts) + runif(min = 0, max = 1000))
+      Sys.sleep((2 ^ attempts) + runif(n = 1, min = 0, max = 1))
     } else {
       message(json_content$error$message)
       stop_for_status(response)
