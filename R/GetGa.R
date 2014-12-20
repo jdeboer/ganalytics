@@ -3,13 +3,12 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include ColTypes.R
-#' @include YesNo2Logical.R
+#' @include YesNoToLogical.R
 #' @include GaListToDataframe.R
 #' @include GaGetCoreReport.R
 #' @include GaApiRequest.R
 #' @include GaPaginate.R
 #' @include GaAuth.R
-#' @include GaSplitDateRange.R
 NULL
 
 setMethod(

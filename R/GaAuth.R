@@ -1,31 +1,28 @@
-GaAuth <- function(
-  appname = "GANALYTICS",
-  scope = "https://www.googleapis.com/auth/analytics.readonly",
-  key = NULL, secret = NULL,
+#'@export
+GaCreds <- function(
+  userName = character(0),
+  appCreds = NULL,
+  cache = character(0),
   use_oob = FALSE,
-  cache = getOption("httr_oauth_cache"),
-  client_secrets_path = NULL
-) {
-  # Check if client_secret_path points to a valid json file with a client ID and secret
-  
-  ## TO DO
-  
-  ##
-  
-  if (is.null(key)) {
-    key <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
+  appname = "GANALYTICS"
+){
+  if (length(cache) == 0) {
+    if (length(userName) == 0) {
+      cache <- "~/ganalytics_token.RDS"
+    } else {
+      cache <- paste0("~/.", userName, "_ga_auth.RDS")
+    }
   }
-  if (is.null(secret)) {
-    secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
-  }
-  oauth <- oauth2.0_token(
-    endpoint = oauth_endpoints("google"),
-    app = oauth_app(
-      appname = appname, key = key, secret = secret
+  list(
+    app = app_oauth_creds(
+      appname = appname,
+      creds = appCreds
     ),
-    scope = scope,
-    use_oob = use_oob,
-    cache = cache
+    user = list(
+      login = userName,
+      cache = cache
+    ),
+    use_oob = use_oob
   )
-  return(oauth)
 }
+

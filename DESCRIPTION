@@ -19,7 +19,8 @@ Imports:
     httpuv,
     jsonlite,
     XML,
-    selectr
+    selectr,
+    lubridate
 Collate:
     'ArgList.R'
     'ColTypes.R'
@@ -43,7 +44,7 @@ Collate:
     'GaFilter.R'
     'GaGetCoreReport.R'
     'GaIsRegEx.R'
-    'YesNo2Logical.R'
+    'YesNoToLogical.R'
     'GaListToDataframe.R'
     'GaNot.R'
     'GaOr.R'
@@ -52,5 +53,4 @@ Collate:
     'GaQuery.R'
     'GaSegment.R'
     'GaSortBy.R'
-    'GaSplitDateRange.R'
     'GetGa.R'

@@ -11,10 +11,11 @@
 #' @import methods
 #' @import httr
 #' @import plyr
+#' @importFrom lubridate now
 #' @import stringr
 #' @import jsonlite
 #' @import XML
-#' @import selectr
+#' @importFrom selectr querySelector
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package

@@ -1,6 +1,6 @@
 
 #' @include ColTypes.R
-#' @include YesNo2Logical.R
+#' @include YesNoToLogical.R
 NULL
 
 FactorInt <- function(x) {
@@ -17,7 +17,7 @@ GaListToDataframe <- function(gaData) {
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$dates, asFun = as.Date, format = kGaDateOutFormat)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedFactors, asFun = FactorInt)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
-    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNo2Logical)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNoToLogical)
     metric_cols <- gaData$columnHeaders$name[gaData$columnHeaders$columnType == "METRIC"]
     gaData$rows[metric_cols] <- data.frame(llply(gaData$rows[metric_cols], as.numeric))
     #gaData$rows <- as.numeric(gaData$rows[metric_cols])

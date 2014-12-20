@@ -7,15 +7,10 @@ NULL
 #' @return a data.frame
 #' @export
 GaMetaUpdate <- function() {
-  meta_api <- "https://www.googleapis.com/analytics/v3/metadata"
-  report_type <- "ga/columns"
-  query <- NULL
-  appname <- "GANALYTICS"
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
-  
-  oauth <- GaAuth(appname = appname, scope = scope)
-  
-  meta_data <- GaApiRequest(baseURL = meta_api, request = report_type, query = query, oauth = oauth)
+  creds <- GaCreds()
+  request <- c("metadata", "ga", "columns")
+  meta_data <- ga_api_request(creds = creds, request = request, scope = scope)
   vars <- meta_data$items[names(meta_data$items) != "attributes"]
   attributes <- meta_data$items$attributes
   attributes <- mutate(

@@ -36,7 +36,7 @@ GaQuery <- function(
     if (length(userName) == 0) {
       authFile <- "~/ganalytics_token.RDS"
     } else {
-      authFile <- paste0(userName, "_ga_auth.RDS")
+      authFile <- paste0("~/.", userName, "_ga_auth.RDS")
     }
   }
   new("gaQuery",
