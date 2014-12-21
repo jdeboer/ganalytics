@@ -22,14 +22,13 @@ Imports:
     selectr,
     lubridate
 Collate:
-    'ArgList.R'
     'ColTypes.R'
     'globaldata.R'
     'ganalytics-package.R'
     'ValidGaOperand.R'
     'all-classes.R'
     'init-methods.R'
-    'flatten-list.R'
+    'helper-functions.R'
     'all-generics.R'
     'all-coercions.R'
     'GaAnd.R'
