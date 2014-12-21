@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.3
+Version: 0.3.9
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
@@ -54,3 +54,5 @@ Collate:
     'GaSegment.R'
     'GaSortBy.R'
     'GetGa.R'
+    'ga-management-classes.R'
+    'ManagementApiRequests.R'

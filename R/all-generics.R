@@ -631,3 +631,17 @@ setGeneric(
   valueClass = "matrix",
   useAsDefault = FALSE
 )
+
+#' GetGaData
+#' 
+#' Fetch the data for the query or object from the Google Analytics API.
+#' 
+#' @export
+#' @rdname GetGaData
+setGeneric("GetGaData", def = function(
+  object, 
+  creds,
+  scope,
+  ...
+) {
+  standardGeneric("GetGaData")

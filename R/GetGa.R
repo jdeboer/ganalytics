@@ -27,36 +27,28 @@ setMethod(
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
 #' @export
-GetGaData <- function(
-  query,
+setMethod("GetGaData", "gaQuery", function(
+  object,
+  creds = NULL,
+  scope = "https://www.googleapis.com/auth/analytics.readonly",
   quiet = FALSE,
   details = FALSE,
   .progress = "time",
   use_oob = FALSE,
   addViewId = FALSE
 ) {
-  appname <- "GANALYTICS"
-  scope <- "https://www.googleapis.com/auth/analytics.readonly"
-  cache <- query@authFile
-  userName <- query@userName
-  credsFile <- query@appCreds
-  creds <- list(
-    app = app_oauth_creds(
-      appname = appname,
-      creds = credsFile
-    ),
-    user = list(
-      login = userName,
-      cache = cache
-    ),
+  creds <- GaCreds(
+    userName = object@userName,
+    appCreds = object@appCreds,
+    cache = object@authFile,
     use_oob = use_oob
   )
-  queryParams <- GetGaQueries(query)
+  queryParams <- GetGaQueries(object)
   responses <- alply(
     .data = queryParams,
     .margins = 2,
     .fun = GaPaginate,
-    maxRequestedRows = GaMaxResults(query),
+    maxRequestedRows = GaMaxResults(object),
     creds = creds,
     quiet = quiet,
     details = details,
@@ -79,4 +71,4 @@ GetGaData <- function(
     warning("Contains sampled data.")
   }
   return(data)
-}
+})
