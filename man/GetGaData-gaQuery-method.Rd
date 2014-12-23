@@ -6,9 +6,8 @@
 \title{GetGaData
 Execute a ganalytics query.}
 \usage{
-\S4method{GetGaData}{gaQuery}(object, creds = NULL,
-  scope = "https://www.googleapis.com/auth/analytics.readonly",
-  quiet = FALSE, details = FALSE, .progress = "time", use_oob = FALSE,
+\S4method{GetGaData}{gaQuery}(object, creds = NULL, quiet = FALSE,
+  details = FALSE, .progress = "time", use_oob = FALSE,
   addViewId = FALSE)
 }
 \arguments{

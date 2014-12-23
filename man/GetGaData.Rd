@@ -4,7 +4,7 @@
 \alias{GetGaData}
 \title{GetGaData}
 \usage{
-GetGaData(object, creds, scope, ...)
+GetGaData(object, creds, ...)
 }
 \description{
 Fetch the data for the query or object from the Google Analytics API.

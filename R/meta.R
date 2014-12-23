@@ -1,4 +1,4 @@
-#' @include GaAuth.R
+#' @include GaCreds.R
 NULL
 
 #' GaMetaUpdate

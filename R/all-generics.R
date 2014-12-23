@@ -2,8 +2,7 @@
 # -----------------
 #' @include all-classes.R
 #' @include init-methods.R
-#' @include ArgList.R
-#' @include flatten-list.R
+#' @include helper-functions.R
 NULL
 
 #' GaVar
@@ -505,7 +504,7 @@ setGeneric(
 setGeneric(
   name = "GaSortBy",
   def = function(.Object, ..., desc = logical(0)) {},
-  valueClass = "gaSortBy",
+  valueClass = c("gaSortBy", "gaQuery"),
   useAsDefault = FALSE
 )
 
@@ -641,7 +640,11 @@ setGeneric(
 setGeneric("GetGaData", def = function(
   object, 
   creds,
-  scope,
   ...
 ) {
   standardGeneric("GetGaData")
+})
+
+setGeneric("GaGetRequest", def = function(object) {
+  standardGeneric("GaGetRequest")
+})

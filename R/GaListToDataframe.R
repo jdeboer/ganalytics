@@ -1,7 +1,18 @@
+YesNoToLogical <- function(char) {
+  if (length(char) > 0) {
+    char[char=="Yes"] <- "TRUE"
+    char[char=="No"] <- "FALSE"
+  }
+  char <- as.logical(char)
+  return(char)
+}
 
-#' @include ColTypes.R
-#' @include YesNoToLogical.R
-NULL
+ColTypes <- function(df, colNames, asFun, ...) {
+  #cols <- aaply(tolower(names(df)), 1, function(df_col) {any(str_detect(df_col, colNames))})
+  cols <- tolower(names(df)) %in% tolower(colNames)
+  if(TRUE %in% cols) df[cols] <- lapply(X = df[cols], FUN = asFun, ...)
+  return(df)
+}
 
 FactorInt <- function(x) {
   factor(as.numeric(x), ordered = TRUE)

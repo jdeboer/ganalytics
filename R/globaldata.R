@@ -1,5 +1,22 @@
 # Google Analytics dimension types
 
+ga_scopes <- c(
+  default = "https://www.googleapis.com/auth/analytics",
+  edit = "https://www.googleapis.com/auth/analytics.edit",
+  read_only = "https://www.googleapis.com/auth/analytics.readonly",
+  manage_users = "https://www.googleapis.com/auth/analytics.manage.users"
+)
+
+gtm_scopes <- c(
+  read_only = "https://www.googleapis.com/auth/tagmanager.readonly",
+  edit_containers = "https://www.googleapis.com/auth/tagmanager.edit.containers",
+  delete_containers = "https://www.googleapis.com/auth/tagmanager.delete.containers",
+  edit_container_versions = "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
+  publish = "https://www.googleapis.com/auth/tagmanager.publish",
+  manage_users = "https://www.googleapis.com/auth/tagmanager.manage.users",
+  manage_accounts = "https://www.googleapis.com/auth/tagmanager.manage.accounts"
+)
+
 kGaDayOfWeek <- c(
   "Sun",
   "Mon",

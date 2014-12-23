@@ -1,6 +1,15 @@
 #Make a Goolge API request
 
-ga_api_request <- function(creds, request, scope = "https://www.googleapis.com/auth/analytics", req_type = "GET", body_list = NULL, fields = NULL, queries = NULL) {
+ga_api_request <- function(
+  creds,
+  request,
+  scope = ga_scopes["read_only"],
+  req_type = "GET",
+  body_list = NULL,
+  fields = NULL,
+  queries = NULL
+) {
+  stopifnot(scope %in% ga_scopes)
   base_url <- "https://www.googleapis.com/analytics/v3"
   request <- c(
     "upload"[attr(request, "upload")],
@@ -80,10 +89,7 @@ api_request <- function(api_name, app, base_url,
         scope = scope,
         use_oob = use_oob,
         as_header = oauth_in_header,
-        cache = user$cache,
-        if(api_name == "facebook") {
-          type = "application/x-www-form-urlencoded"
-        }
+        cache = user$cache
       )
     }
   )
