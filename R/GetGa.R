@@ -2,10 +2,8 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include GaListToDataframe.R
 #' @include GaGetCoreReport.R
 #' @include GaApiRequest.R
-#' @include GaPaginate.R
 #' @include GaCreds.R
 NULL
 
