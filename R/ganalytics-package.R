@@ -11,7 +11,7 @@
 #' @import methods
 #' @import httr
 #' @import plyr
-#' @importFrom lubridate now
+#' @importFrom lubridate now ymd_hms
 #' @import stringr
 #' @import jsonlite
 #' @import XML

@@ -1,5 +1,6 @@
-#' @include helper-functions.R
 #' @include ganalytics-package.R
+#' @include helper-functions.R
+#' @include ga-management-classes.R
 NULL
 
 # Class definitions for ganalytics
@@ -7,59 +8,18 @@ NULL
 
 # ---- GA dimension and metric variables ----
 
-IsVarMatch <- function(thisVar, inVars) {
-  inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
-  inVars <- paste0("^", inVars, "$")
-  any(str_detect(thisVar, ignore.case(inVars)))
-}
-
-#' ValidGaOperand
-#' 
-#' Checks whether an operand value is valid for a selected dimension.
-#' 
-#' @param gaVar selected dimension to check operand against
-#' @param gaOperand the operand value to check
-#' 
-ValidGaOperand <- function(gaVar, gaOperand) {
-  test <- switch(
-    gaVar,
-    "ga:date" = grepl(pattern = "^[0-9]{8}$", x = gaOperand) &&
-      (as.Date(x = gaOperand, format = kGaDateOutFormat) >= kGaDateOrigin),
-    "ga:year" = grepl(pattern = "^[0-9]{4}$", x = gaOperand) &&
-      (as.Date(x = gaOperand, format = "%Y") >= kGaDateOrigin),
-    "ga:month" = grepl(pattern = "^(0[1-9]|1[0-2])$", x = gaOperand),
-    "ga:week" = grepl(pattern = "^([0-4][1-9]|5[0-3])$", x = gaOperand),
-    "ga:day" = grepl(pattern = "^([0-2][0-9][1-9]|3[0-5][0-9]|36[0-6])$", x = gaOperand),
-    "ga:hour" = grepl(pattern = "^([01][0-9]|2[0-3])$", x = gaOperand),
-    "ga:dayOfWeek" = grepl(pattern = "^[0-6]$", x = gaOperand),
-    "ga:visitorType" = gaOperand %in% c("New Visitor", "Returning Visitor"),
-    TRUE
-  )
-  if (gaVar %in% c("ga:nthMonth", "ga:nthWeek", "ga:nthDay", "ga:pageDepth", "ga:visitLength", "ga:visitCount", "ga:daysSinceLastVisit")) {
-    test <- as.numeric(gaOperand) > 0
-  } else if (gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
-    test <- gaOperand %in% c("Yes", "No")
-  }
-  if (test) {
-    return(TRUE)
-  } else {
-    return(paste("Invalid", gaVar, "operand:", gaOperand))
-  }
-}
-
-
 #' @export
 setClass(
   Class = "gaMetVar",
   prototype = prototype("ga:sessions"),
   contains = "character",
   validity = function(object) {
-#    if (tolower(object@.Data) %in% tolower(kGaVars$mets)) {
-    if (IsVarMatch(object@.Data, kGaVars$mets)) {
-      return(TRUE)
-    } else {
-      paste("Invalid GA metric name", object@.Data, sep = ": ")
+    if (!IsVarMatch(object@.Data, kGaVars$mets)) {
+      return(
+        paste("Invalid GA metric name", object@.Data, sep = ": ")
+      )  
     }
+    return(TRUE)
   }
 )
 
@@ -69,12 +29,12 @@ setClass(
   prototype = prototype("ga:date"),
   contains = "character",
   validity = function(object) {
-#    if (tolower(object@.Data) %in% tolower(kGaVars$dims)) {
-    if (IsVarMatch(object@.Data, kGaVars$dims)) {
-      return(TRUE)
-    } else {
-      paste("Invalid GA dimension name", object@.Data, sep = ": ")
+    if (!IsVarMatch(object@.Data, kGaVars$dims)) {
+      return(
+        paste("Invalid GA dimension name", object@.Data, sep = ": ")
+      )  
     }
+    return(TRUE)
   }
 )
 
@@ -86,13 +46,20 @@ setClassUnion(
 setValidity(
   Class=".gaVar",
   method=function(object) {
-    if(length(object) == 1) {
-      return(TRUE)
-    } else {
+    if(length(object) != 1) {
       return("gaVar's must be a character vector of length 1")
     }
+    return(TRUE)
   }
 )
+
+IsVarMatch <- function(thisVar, inVars) {
+  # The following method is a temporary workaround to support XX placeholders in dimension and metric
+  # names, such as with custom dimensions, metrics and various goal related variables.
+  inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
+  inVars <- paste0("^", inVars, "$")
+  any(str_detect(thisVar, ignore.case(inVars)))
+}
 
 # ---- GA expression operators ----
 
@@ -102,11 +69,12 @@ setClass(
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
-    if (object@.Data %in% kGaOps$met) {
-      return(TRUE)
-    } else {
-      paste("Invalid metric operator", object@.Data, sep = ": ")
+    if (!(object@.Data %in% kGaOps$met)) {
+      return(
+        paste("Invalid metric operator", object@.Data, sep = ": ")
+      )
     }
+    return(TRUE)
   }
 )
 
@@ -116,13 +84,24 @@ setClass(
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
-    if (object@.Data %in% kGaOps$dim) {
-      return(TRUE)
-    } else {
-      paste("Invalid dimension operator", object@.Data, sep = ": ")
+    if (!(object@.Data %in% kGaOps$dim)) {
+      return(
+        paste("Invalid dimension operator", object@.Data, sep = ": ")
+      )
     }
+    return(TRUE)
   }
 )
+
+# export
+# setClass(
+#   #{dimensionOrMetricName}<>{minValue}_{maxValue} #For metrics or numerical dimensions, also dates
+#   #{dimensionName}[]{value1}|{value2}|...
+#   #A maximum of 10 values per in-list dimension condition is allowed. Only for dimensions
+#   contains = ".gaOperator"
+#   #dateOfSession<>2014-05-20_2014-05-30
+#   dateOfSession is a special dimension
+# )
 
 setClassUnion(
   name = ".gaOperator",
@@ -132,11 +111,10 @@ setClassUnion(
 setValidity(
   Class = ".gaOperator",
   method = function(object) {
-    if(length(object) == 1) {
-      return(TRUE)
-    } else {
+    if(length(object) != 1) {
       return("gaOperator's must be character vector of length 1")
     }
+    return(TRUE)
   }
 )
 
@@ -154,20 +132,43 @@ setClass(
   contains = "character"
 )
 
+#' @export
+setClass(
+  "gaDimOperandList",
+  contains = "list",
+  validity = function(object) {
+    if (length(object) < 1) {
+      return(
+        "A gaDimOperandList must be of at least length 1"
+      )
+    }
+    if (any(lapply(object, class) != "gaDimOperand")) {
+      return(
+        "All items within a gaDimOperandList must be of class gaDimOperand"
+      )
+    }
+    return(TRUE)
+  }
+)
+
 setClassUnion(
-  name = ".gaOperand",
+  name = ".gaOperandScalar",
   members = c("gaMetOperand", "gaDimOperand")
 )
 
 setValidity(
-  Class = ".gaOperand",
+  Class = ".gaOperandScalar",
   method = function(object) {
-    if(length(object) == 1) {
-      return(TRUE)
-    } else {
+    if(length(object) != 1) {
       return(".gaOperand must be a vector of length 1")
     }
+    return(TRUE)
   }
+)
+
+setClassUnion(
+  name = ".gaOperand",
+  members = c(".gaOperandScalar", "gaDimOperandList")
 )
 
 # ---- GA simple expressions -------------------------------------------------------
@@ -247,6 +248,40 @@ setClass(
     }
   }
 )
+
+#' ValidGaOperand
+#' 
+#' Checks whether an operand value is valid for a selected dimension.
+#' 
+#' @param gaVar selected dimension to check operand against
+#' @param gaOperand the operand value to check
+#' 
+ValidGaOperand <- function(gaVar, gaOperand) {
+  test <- switch(
+    gaVar,
+    "ga:date" = grepl(pattern = "^[0-9]{8}$", x = gaOperand) &&
+      (as.Date(x = gaOperand, format = kGaDateOutFormat) >= kGaDateOrigin),
+    "ga:year" = grepl(pattern = "^[0-9]{4}$", x = gaOperand) &&
+      (as.Date(x = gaOperand, format = "%Y") >= kGaDateOrigin),
+    "ga:month" = grepl(pattern = "^(0[1-9]|1[0-2])$", x = gaOperand),
+    "ga:week" = grepl(pattern = "^([0-4][1-9]|5[0-3])$", x = gaOperand),
+    "ga:day" = grepl(pattern = "^([0-2][0-9][1-9]|3[0-5][0-9]|36[0-6])$", x = gaOperand),
+    "ga:hour" = grepl(pattern = "^([01][0-9]|2[0-3])$", x = gaOperand),
+    "ga:dayOfWeek" = grepl(pattern = "^[0-6]$", x = gaOperand),
+    "ga:visitorType" = gaOperand %in% c("New Visitor", "Returning Visitor"),
+    TRUE
+  )
+  if (gaVar %in% c("ga:nthMonth", "ga:nthWeek", "ga:nthDay", "ga:pageDepth", "ga:visitLength", "ga:visitCount", "ga:daysSinceLastVisit")) {
+    test <- as.numeric(gaOperand) > 0
+  } else if (gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
+    test <- gaOperand %in% c("Yes", "No")
+  }
+  if (test) {
+    return(TRUE)
+  } else {
+    return(paste("Invalid", gaVar, "operand:", gaOperand))
+  }
+}
 
 # ---- GA 'AND' and 'OR' compound expressions -------------------------------
 

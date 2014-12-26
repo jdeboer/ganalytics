@@ -63,7 +63,7 @@ GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, ..
     "start-index" = startIndex,
     "max-results" = maxResults
   )
-  data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query, ...)
+  data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query)
   if (!is.null(data.ga$error)) {
     stop(with(
         data.ga$error,
