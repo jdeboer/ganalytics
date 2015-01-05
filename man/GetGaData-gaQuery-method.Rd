@@ -6,15 +6,10 @@
 \title{GetGaData
 Execute a ganalytics query.}
 \usage{
-\S4method{GetGaData}{gaQuery}(object, creds = NULL, quiet = FALSE,
-  details = FALSE, .progress = "time", use_oob = FALSE,
-  addViewId = FALSE)
+\S4method{GetGaData}{gaQuery}(object, creds = NULL, .progress = "time",
+  use_oob = FALSE, addViewId = FALSE)
 }
 \arguments{
-\item{quiet}{supress messages}
-
-\item{details}{show detailed messages}
-
 \item{.progress}{progress bar to display. use .progress = "none" to turn off.}
 
 \item{query}{the query to execute.}

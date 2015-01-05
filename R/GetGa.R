@@ -18,26 +18,24 @@ setMethod(
 #' GetGaData
 #' Execute a ganalytics query.
 #' @param query the query to execute.
-#' @param quiet supress messages
-#' @param details show detailed messages
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
 #' @export
 setMethod("GetGaData", "gaQuery", function(
   object,
   creds = NULL,
-  quiet = FALSE,
-  details = FALSE,
   .progress = "time",
   use_oob = FALSE,
   addViewId = FALSE
 ) {
-  creds <- GaCreds(
-    userName = object@userName,
-    appCreds = object@appCreds,
-    cache = object@authFile,
-    use_oob = use_oob
-  )
+  if (is.null(creds)) {
+    creds <- GaCreds(
+      userName = object@userName,
+      appCreds = object@appCreds,
+      cache = object@authFile,
+      use_oob = use_oob
+    )
+  }
   queryParams <- GetGaQueries(object)
   responses <- alply(
     .data = queryParams,
@@ -45,8 +43,6 @@ setMethod("GetGaData", "gaQuery", function(
     .fun = GaPaginate,
     maxRequestedRows = GaMaxResults(object),
     creds = creds,
-    quiet = quiet,
-    details = details,
     .progress = .progress
   )
   data <- ldply(
