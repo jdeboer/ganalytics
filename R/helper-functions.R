@@ -49,6 +49,23 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
   return(ret)
 }
 
+checkDataFrameClasses <- function(object, matchClasses) {
+  objectClasses <- lapply(object, class)
+  ret <- lapply(names(matchClasses), function(className) {
+    if(!(matchClasses[className] %in% objectClasses[[className]])) {
+      return(paste0("<", className, "> must be of class '", matchClasses[className], "'."))
+    } else {
+      TRUE
+    }
+  })
+  invalidClasses <- sapply(ret, function(x){!identical(x, TRUE)})
+  if (any(invalidClasses)) {
+    return(unlist(ret[invalidClasses]))
+  } else {
+    TRUE
+  }
+}
+
 #' ArgList
 #' If the only argument passed was already a list, then extract that list.
 #' @param ... arguments or list of arguments

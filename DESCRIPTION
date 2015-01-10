@@ -20,12 +20,12 @@ Imports:
     jsonlite,
     XML,
     selectr,
-    lubridate
+    lubridate,
+    R6
 Collate:
     'helper-functions.R'
     'globaldata.R'
     'ganalytics-package.R'
-    'ga-management-classes.R'
     'all-classes.R'
     'init-methods.R'
     'all-generics.R'
@@ -41,7 +41,6 @@ Collate:
     'GaExpr.R'
     'GaFilter.R'
     'GaGetCoreReport.R'
-    'GaManagementMethods.R'
     'GaNot.R'
     'GaOr.R'
     'GaQuery.R'
@@ -49,4 +48,4 @@ Collate:
     'GaSortBy.R'
     'GaView.R'
     'GetGa.R'
-    'ManagementApiRequests.R'
+    'management-api-classes.R'

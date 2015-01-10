@@ -9,6 +9,7 @@
 #'   
 #' @keywords package
 #' @import methods
+#' @import R6
 #' @import httr
 #' @import plyr
 #' @importFrom lubridate now ymd_hms

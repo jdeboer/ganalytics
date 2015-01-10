@@ -64,10 +64,10 @@ setMethod("GetGaData", "gaQuery", function(
   return(data)
 })
 
-setMethod("GetGaData", "Resource", function(object, creds) {
-  GaGetManagementData(object, creds)
-})
-
-setMethod("GetGaData", "Collection", function(object, creds) {
-  GaGetManagementData(object, creds)
-})
+# setMethod("GetGaData", "Resource", function(object, creds) {
+#   GaGetManagementData(object, creds)
+# })
+# 
+# setMethod("GetGaData", "Collection", function(object, creds) {
+#   GaGetManagementData(object, creds)
+# })

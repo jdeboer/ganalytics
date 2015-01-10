@@ -1,6 +1,5 @@
 #' @include ganalytics-package.R
 #' @include helper-functions.R
-#' @include ga-management-classes.R
 NULL
 
 # Class definitions for ganalytics
