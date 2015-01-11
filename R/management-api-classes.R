@@ -262,7 +262,6 @@ GaView <- R6Class(
     eCommerceTracking = NA,
     enhancedECommerceTracking = NA,
     modify = function(field_list) {
-      field_list <- private$field_corrections(field_list)
       super$modify(field_list)
       self
     },
