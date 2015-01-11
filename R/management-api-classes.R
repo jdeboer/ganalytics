@@ -21,57 +21,60 @@ currency_levels <- c(
   ".GaResource",
   inherit = .GaManagementApi,
   public = list(
-    id = NULL,
-    name = NULL,
-    created = NULL,
-    updated = NULL,
+    id = NA,
+    name = NA,
+    created = NA,
+    updated = NA,
     parent = NULL,
     modify = function(field_list) {
-      if(!is.null(field_list$id)) self$id <- field_list$id
-      if(!is.null(field_list$name)) self$name <- field_list$name
-      if(!is.null(field_list$created)) self$created <- field_list$created
-      if(!is.null(field_list$updated)) self$updated <- field_list$updated
+      l_ply(names(field_list), function(field_name) {
+        if (exists(field_name, self)) {
+          self[[field_name]] <- field_list[[field_name]]
+        }
+      })
       self
     },
     initialize = function(parent = NULL, id = NULL) {
       self$parent <- parent
       self$id <- id
-      self$get()
-    },
-    refresh = function() {
-      self$initialize(id = self$id)
+      if(is.null(id)) {
+        self
+      } else {
+        self$get()
+      }
     },
     get = function() {
-      if (!is.null(self$id)) {
+      if (!is.null(self$req_path)) {
         scope <- ga_scopes['read_only']
         response <- ga_api_request(
           creds = self$creds,
           request = c("management", self$req_path),
           scope = scope
         )
-        field_list <- as.list(mutate(
-          response,
-          created = ymd_hms(created),
-          updated = ymd_hms(updated)
-        ))
-        self$modify(field_list)
-        private$response <- response
+        updated_fields <- private$field_corrections(response)
+        self$modify(updated_fields)
       }
-      return(self)
+      self
     }
   ),
   active = list(
     req_path = function() {
       if (is.null(self$id)) {
-        return(NULL)
+        NULL
       } else {
         c(self$parent$req_path, private$request, self$id)
       }
     }
   ),
   private = list(
-    request = character(),
-    response = list()
+    request = NULL,
+    field_corrections = function(field_list) {
+      mutate(
+        field_list,
+        created = ymd_hms(created),
+        updated = ymd_hms(updated)
+      )
+    }
   )
 )
 
@@ -92,37 +95,31 @@ currency_levels <- c(
           request = c("management", self$req_path),
           scope = scope
         )
-        response$items <- mutate(
-          response$items,
-          created = ymd_hms(created),
-          updated = ymd_hms(updated)
-        )
-        self$summary <- response$items
+        self$summary <- private$field_corrections(response$items)
         rownames(self$summary) <- self$summary$id
       }
-      return(self)
+      self
     },
     initialize = function(parent = NULL) {
       self$parent = parent
       self$get()
-    },
-    refresh = function() {
-      self$initialize(parent = self$parent)
     }
   ),
   active = list(
-    #     entities = function() {
-    #       ret <- llply(self$summary$id, function(id) {
-    #         self$get_entity(id = id)
-    #       })
-    #       names(ret) <- self$summary$id
-    #       return(ret)
-    #     },
     entities = function() {
       ret <- alply(self$summary, 1, function(summary_row) {
         field_list <- as.list(summary_row)
-        entity <- private$entity_class$new(parent = self$parent)
-        entity$modify(field_list = field_list)
+        id <- summary_row$id
+        updated <- summary_row$updated
+        entity <- private$entities_cache[[id]]
+        if (
+          !is(entity, private$entity_class$classname) |
+            identical(entity$updated != updated, TRUE)
+        ) {
+          entity <- private$entity_class$new(parent = self$parent)
+          entity$modify(field_list = field_list)
+          private$entities_cache[[id]] <- entity
+        }
         entity
       })
       attributes(ret) <- NULL
@@ -130,6 +127,10 @@ currency_levels <- c(
       ret
     },
     req_path = function() {
+      # if this is top most level, e.g. 'Accounts', then there is no parent and
+      # therefore there will not exist a parent request path, i.e. it will be NULL.
+      # Otherwise, if there is a parent, but it has no request path, then this
+      # should also not have a request path.
       if (!is.null(self$parent) & is.null(self$parent$req_path)) {
         return(NULL)
       } else {
@@ -139,7 +140,9 @@ currency_levels <- c(
   ),
   private = list(
     request = character(),
-    entity_class = NULL
+    entity_class = .GaResource,
+    field_corrections = .GaResource$private_methods$field_corrections,
+    entities_cache = list()
   )
 )
 
@@ -149,15 +152,15 @@ GaAccount <- R6Class(
   inherit = .GaResource,
   public = list(
     get = function() {
-      if (!is.null(self$id)) {
-        account <- GaAccounts$new()$summary[self$id, ]
-        self$modify(as.list(account))
+      if (!is.null(self$req_path)) {
+        account_fields <- GaAccounts$new()$summary[self$id, ]
+        self$modify(account_fields)
       }
       self
     },
     initialize = function(parent = NULL, id = NULL) {
-      stopifnot(is(parent, "NULL"))
-      super$initialize(parent = parent, id = id)
+      stopifnot(parent == NULL)
+      super$initialize(id = id)
     }
   ),
   active = list(
@@ -179,28 +182,9 @@ GaAccount <- R6Class(
 GaAccounts <- R6Class(
   "GaAccounts",
   inherit = .GaCollection,
-  public = list(
-    initialize = function(parent = NULL) {
-      stopifnot(is(parent, "NULL"))
-      super$initialize(parent)
-    }
-  ),
   private = list(
     request = "accounts",
     entity_class = GaAccount
-  ),
-  active = list(
-    entities = function() {
-      ret <- alply(self$summary, 1, function(summary_row) {
-        field_list <- as.list(summary_row)
-        entity <- private$entity_class$new(parent = self$parent)
-        entity$modify(field_list = field_list)
-        entity
-      })
-      attributes(ret) <- NULL
-      names(ret) <- self$summary$id
-      ret
-    }
   )
 )
 
@@ -209,25 +193,12 @@ GaProperty <- R6Class(
   "GaProperty",
   inherit = .GaResource,
   public = list(
-    websiteUrl = NULL,
-    industryVertical = NULL,
-    defaultViewId = NULL,
-    modify = function(field_list) {
-      super$modify(field_list)
-      if(!is.null(field_list$websiteUrl)) self$websiteUrl <- field_list$websiteUrl
-      if(!is.null(field_list$industryVertical)) self$industryVertical <- field_list$industryVertical
-      if(!is.null(field_list$defaultViewId)) self$defaultViewId <- field_list$defaultProfileId
-      self
-    },
-    get = function() {
-      super$get()
-      property <- private$response
-      self$modify(as.list(property))
-      self
-    },
+    websiteUrl = NA,
+    industryVertical = NA,
+    defaultViewId = NA,
     initialize = function(parent, id = NULL) {
       stopifnot(is(parent, "GaAccount"))
-      super$initialize(parent, id)
+      super$initialize(parent = parent, id = id)
     }
   ),
   active = list(
@@ -237,11 +208,22 @@ GaProperty <- R6Class(
       } else {
         private$views_cache <- GaViews$new(parent = self)
       } 
+    },
+    defaultView = function() {
+      #self$views$entities[[self$defaultViewId]]
+      self$views$get_entity(id = self$defaultViewId)
     }
   ),
   private = list(
     request = "webproperties",
-    views_cache = NULL
+    views_cache = NULL,
+    field_corrections = function(field_list) {
+      field_list <- super$field_corrections(field_list)
+      rename(
+        field_list,
+        replace = c("defaultProfileId" = "defaultViewId")
+      )
+    }
   )
 )
 
@@ -252,12 +234,13 @@ GaProperties <- R6Class(
   public = list(
     initialize = function(parent) {
       stopifnot(is(parent, "GaAccount"))
-      super$initialize(parent)
+      super$initialize(parent = parent)
     }
   ),
   private = list(
     request = "webproperties",
-    entity_class = GaProperty
+    entity_class = GaProperty,
+    field_corrections = GaProperty$private_methods$field_corrections
   )
 )
 
@@ -266,38 +249,21 @@ GaView <- R6Class(
   "GaView",
   inherit = .GaResource,
   public = list(
-    type = NULL,
-    currency = NULL,
-    timezone = NULL,
-    websiteUrl = NULL,
-    defaultPage = NULL,
-    excludeQueryParameters = NULL,
-    siteSearchQueryParameters = NULL,
-    stripSiteSearchQueryParameters = NULL,
-    siteSearchCategoryParameters = NULL,
-    stripSiteSearchCategoryParameters = NULL,
-    eCommerceTracking = NULL,
-    enhancedECommerceTracking = NULL,
+    type = NA,
+    currency = NA,
+    timezone = NA,
+    websiteUrl = NA,
+    defaultPage = NA,
+    excludeQueryParameters = NA,
+    siteSearchQueryParameters = NA,
+    stripSiteSearchQueryParameters = NA,
+    siteSearchCategoryParameters = NA,
+    stripSiteSearchCategoryParameters = NA,
+    eCommerceTracking = NA,
+    enhancedECommerceTracking = NA,
     modify = function(field_list) {
+      field_list <- private$field_corrections(field_list)
       super$modify(field_list)
-      if(!is.null(field_list$type)) self$type <- factor(field_list$type, levels = view_type_levels)
-      if(!is.null(field_list$currency)) self$currency <- factor(field_list$currency, levels = currency_levels)
-      if(!is.null(field_list$timezone)) self$timezone <- as.character(field_list$timezone)
-      if(!is.null(field_list$websiteUrl)) self$websiteUrl <- as.character(field_list$websiteUrl)
-      if(!is.null(field_list$defaultPage)) self$defaultPage <- as.character(field_list$defaultPage)
-      if(!is.null(field_list$excludeQueryParameters)) self$excludeQueryParameters <- as.character(field_list$excludeQueryParameters)
-      if(!is.null(field_list$siteSearchQueryParameters)) self$siteSearchQueryParameters <- as.character(field_list$siteSearchQueryParameters)
-      if(!is.null(field_list$stripSiteSearchQueryParameters)) self$stripSiteSearchQueryParameters <- identical(field_list$stripSiteSearchQueryParameters, TRUE)
-      if(!is.null(field_list$siteSearchCategoryParameters)) self$siteSearchCategoryParameters <- as.character(field_list$siteSearchCategoryParameters)
-      if(!is.null(field_list$stripSiteSearchCategoryParameters)) self$stripSiteSearchCategoryParameters <- identical(field_list$stripSiteSearchCategoryParameters, TRUE)
-      if(!is.null(field_list$eCommerceTracking)) self$eCommerceTracking <- field_list$eCommerceTracking
-      if(!is.null(field_list$enhancedECommerceTracking)) self$enhancedECommerceTracking <- field_list$enhancedECommerceTracking
-      self
-    },
-    get = function() {
-      super$get()
-      view <- private$response
-      self$modify(as.list(view))
       self
     },
     initialize = function(parent, id = NULL) {
@@ -306,7 +272,17 @@ GaView <- R6Class(
     }
   ),
   private = list(
-    request = "profiles"
+    request = "profiles",
+    field_corrections = function(field_list) {
+      field_list <- super$field_corrections(field_list)
+      mutate(
+        field_list,
+        type = factor(type, levels = view_type_levels),
+        currency = factor(currency, levels = currency_levels),
+        stripSiteSearchQueryParameters = identical(field_list$stripSiteSearchQueryParameters, TRUE),
+        stripSiteSearchCategoryParameters = identical(field_list$stripSiteSearchCategoryParameters, TRUE)        
+      )
+    }
   )
 )
 
@@ -315,13 +291,6 @@ GaViews <- R6Class(
   "GaViews",
   inherit = .GaCollection,
   public = list(
-    get = function() {
-      super$get()
-      self$summary$type <- factor(self$summary$type, levels = view_type_levels)
-      self$summary$currency <- factor(self$summary$currency, levels = currency_levels)
-      self$summary$stripSiteSearchQueryParameters <- identical(self$summary$stripSiteSearchQueryParameters, TRUE)
-      self$summary$stripSiteSearchCategoryParameters <- identical(self$summary$stripSiteSearchCategoryParameters, TRUE)
-    },
     initialize = function(parent) {
       stopifnot(is(parent, "GaProperty"))
       super$initialize(parent)
@@ -329,6 +298,8 @@ GaViews <- R6Class(
   ),
   private = list(
     request = "profiles",
-    entity_class = GaView
+    entity_class = GaView,
+    field_corrections = GaView$private_methods$field_corrections
   )
 )
+
