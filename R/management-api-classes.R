@@ -1,3 +1,5 @@
+# API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
+
 view_type_levels <- c("WEB", "APP")
 
 currency_levels <- c(
@@ -52,8 +54,19 @@ include_exclude_filter_match_type_levels <- c(
   public = list(
     creds = GaCreds()
   ),
-  active = list(
-    req_path = function() {}
+  private = list(
+    request = NULL,
+    scope = ga_scopes['read_only'],
+    field_corrections = function(field_list) {
+      if(exists("created", field_list)) {
+        field_list$created <- ymd_hms(field_list$created)
+      }
+      if(exists("updated", field_list)) {
+        field_list$updated <- ymd_hms(field_list$updated)
+      }
+      field_list
+    },
+    parent_class_name = "NULL"
   )
 )
 
@@ -75,7 +88,7 @@ include_exclude_filter_match_type_levels <- c(
       self
     },
     initialize = function(parent = NULL, id = NULL) {
-      stopifnot(is(parent, private$parent_class_name))
+      stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
       self$id <- id
       if(is.null(id)) {
@@ -85,38 +98,37 @@ include_exclude_filter_match_type_levels <- c(
       }
     },
     get = function() {
-      if (!is.null(self$req_path)) {
-        scope <- ga_scopes['read_only']
+      if (!is.null(self$.req_path)) {
         response <- ga_api_request(
           creds = self$creds,
-          request = c("management", self$req_path),
-          scope = scope
+          request = c("management", self$.req_path),
+          scope = private$scope
         )
         updated_fields <- private$field_corrections(response)
         self$modify(updated_fields)
       }
       self
+    },
+    .child_nodes = function(class_generator) {
+      class_name <- class_generator$classname
+      if (is(private$cache[[class_name]], class_name)) {
+        private$cache[[class_name]]
+      } else {
+        private$cache[[class_name]] <- class_generator$new(parent = self)
+      }
     }
   ),
   active = list(
-    req_path = function() {
+    .req_path = function() {
       if (is.null(self$id)) {
         NULL
       } else {
-        c(self$parent$req_path, private$request, self$id)
+        c(self$parent$.req_path, private$request, self$id)
       }
     }
   ),
   private = list(
-    parent_class_name = "NULL",
-    request = NULL,
-    field_corrections = function(field_list) {
-      mutate(
-        field_list,
-        created = ymd_hms(field_list$created),
-        updated = ymd_hms(field_list$updated)
-      )
-    }
+    cache = list()
   )
 )
 
@@ -132,12 +144,11 @@ include_exclude_filter_match_type_levels <- c(
       entity
     },
     get = function() {
-      if (!is.null(self$req_path)) {
-        scope <- ga_scopes['read_only']
+      if (!is.null(self$.req_path)) {
         response <- ga_api_request(
           creds = self$creds,
-          request = c("management", self$req_path),
-          scope = scope
+          request = c("management", self$.req_path),
+          scope = private$scope
         )
         self$summary <- private$field_corrections(response$items)
         rownames(self$summary) <- self$summary$id
@@ -145,51 +156,55 @@ include_exclude_filter_match_type_levels <- c(
       self
     },
     initialize = function(parent = NULL) {
-      private$request <- private$entity_class$private_fields$request
-      private$parent_class_name <- private$entity_class$private_fields$parent_class_name
-      stopifnot(is(parent, private$parent_class_name))
+      entity_class_private <- with(private$entity_class, c(private_fields, private_methods))
+      private$request <- entity_class_private$request
+      private$parent_class_name <- entity_class_private$parent_class_name
+      stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
       self$get()
     }
   ),
   active = list(
     entities = function() {
-      ret <- alply(self$summary, 1, function(summary_row) {
-        field_list <- as.list(summary_row)
-        id <- summary_row$id
-        updated <- summary_row$updated
-        entity <- private$entities_cache[[id]]
-        if (
-          !is(entity, private$entity_class$classname) |
-            identical(entity$updated != updated, TRUE)
-        ) {
-          entity <- private$entity_class$new(parent = self$parent)
-          entity$modify(field_list = field_list)
-          private$entities_cache[[id]] <- entity
-        }
-        entity
-      })
-      attributes(ret) <- NULL
-      names(ret) <- self$summary$id
-      ret
+      if (is.data.frame(self$summary)) {
+        ret <- alply(self$summary, 1, function(summary_row) {
+          field_list <- as.list(summary_row)
+          id <- summary_row$id
+          updated <- summary_row$updated
+          entity <- private$entities_cache[[id]]
+          if (
+            !is(entity, private$entity_class$classname) |
+              identical(entity$updated != updated, TRUE)
+          ) {
+            entity <- private$entity_class$new(parent = self$parent)
+            entity$modify(field_list = field_list)
+            private$entities_cache[[id]] <- entity
+          }
+          entity
+        })
+        attributes(ret) <- NULL
+        names(ret) <- self$summary$id
+        return(ret)
+      } else {
+        return(NULL)
+      }
     },
-    req_path = function() {
+    .req_path = function() {
       # if this is top most level, e.g. 'Accounts' or "UserSegments", then there
       # is no parent and therefore there will not exist a parent request path,
       # i.e. it will be NULL. Otherwise, if there is a parent, but it has no
       # request path, then this should also not have a request path.
-      if (!is.null(self$parent) & is.null(self$parent$req_path)) {
+      if (!is.null(self$parent) & is.null(self$parent$.req_path)) {
         return(NULL)
+      } else if (is(self$parent, private$parent_class_name)) {
+        c(self$parent$.req_path, private$request)
       } else {
-        c(self$parent$req_path, private$request)
+        return(NULL)
       }
     }
   ),
   private = list(
-    request = NULL,
-    parent_class_name = NULL,
     entity_class = .GaResource,
-    field_corrections = .GaResource$private_methods$field_corrections,
     entities_cache = list()
   )
 )
@@ -238,7 +253,7 @@ GaAccount <- R6Class(
   inherit = .GaResource,
   public = list(
     get = function() {
-      if (!is.null(self$req_path)) {
+      if (!is.null(self$.req_path)) {
         account_fields <- GaAccounts$new()$summary[self$id, ]
         self$modify(account_fields)
       }
@@ -246,18 +261,11 @@ GaAccount <- R6Class(
     }
   ),
   active = list(
-    properties = function() {
-      if (is(private$properties_cache, "GaProperties")) {
-        private$properties_cache
-      } else {
-        private$properties_cache <- GaProperties$new(parent = self)
-      } 
-    }
+    properties = function() {self$.child_nodes(GaProperties)}
   ),
   private = list(
     parent_class_name = "NULL",
-    request = "accounts",
-    properties_cache = list()
+    request = "accounts"
   )
 )
 
@@ -271,8 +279,8 @@ GaAccounts <- R6Class(
 )
 
 #' @export
-GaFilter <- R6Class(
-  "GaFilter",
+GaViewFilter <- R6Class(
+  "GaViewFilter",
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaAccount",
@@ -281,11 +289,11 @@ GaFilter <- R6Class(
 )
 
 #' @export
-GaFilters <- R6Class(
-  "GaFilters",
+GaViewFilters <- R6Class(
+  "GaViewFilters",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaFilter
+    entity_class = GaViewFilter
   )
 )
 
@@ -295,7 +303,9 @@ GaAccountUserLink <- R6Class(
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaAccount",
-    request = "entityUserLinks"
+    request = "entityUserLinks",
+    scope = ga_scopes[c('read_only', 'manage_users')],
+    field_corrections = function(field_list) {field_list}
   )
 )
 
@@ -304,7 +314,9 @@ GaAccountUserLinks <- R6Class(
   "GaAccountUserLinks",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaAccountUserLink
+    entity_class = GaAccountUserLink,
+    scope = GaAccountUserLink$private_fields$scope,
+    field_corrections = GaAccountUserLink$private_methods$field_corrections
   )
 )
 
@@ -318,13 +330,7 @@ GaProperty <- R6Class(
     defaultViewId = NA
   ),
   active = list(
-    views = function() {
-      if (is(private$views_cache, "GaViews")) {
-        private$views_cache
-      } else {
-        private$views_cache <- GaViews$new(parent = self)
-      } 
-    },
+    views = function() {self$.child_nodes(GaViews)},
     defaultView = function() {
       self$views$entities[[self$defaultViewId]]
     }
@@ -332,7 +338,6 @@ GaProperty <- R6Class(
   private = list(
     parent_class_name = "GaAccount",
     request = "webproperties",
-    views_cache = list(),
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
       rename(
@@ -348,7 +353,8 @@ GaProperties <- R6Class(
   "GaProperties",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaProperty
+    entity_class = GaProperty,
+    field_corrections = GaProperty$private_methods$field_corrections
   )
 )
 
@@ -358,7 +364,9 @@ GaPropertyUserLink <- R6Class(
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaProperty",
-    request = "entityUserLinks"
+    request = "entityUserLinks",
+    scope = ga_scopes[c('read_only', 'manage_users')],
+    field_corrections = function(field_list) {field_list}
   )
 )
 
@@ -367,7 +375,9 @@ GaPropertyUserLinks <- R6Class(
   "GaPropertyUserLinks",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaPropertyUserLink
+    entity_class = GaPropertyUserLink,
+    scope = GaPropertyUserLink$private_fields$scope,
+    field_corrections = GaPropertyUserLink$private_methods$field_corrections
   )
 )
 
@@ -447,48 +457,15 @@ GaView <- R6Class(
     enhancedECommerceTracking = NA
   ),
   active = list(
-    goals = function() {
-      if (is(private$goals_cache, "GaGoals")) {
-        private$goals_cache
-      } else {
-        private$goals_cache <- GaGoals$new(parent = self)
-      } 
-    },
-    experiments = function() {
-      if (is(private$experiments_cache, "GaExperiments")) {
-        private$experiments_cache
-      } else {
-        private$experiments_cache <- GaExperiments$new(parent = self)
-      }
-    },
-    unsampledReports = function() {
-      if (is(private$unsampledReports_cache, "GaUnsampledReports")) {
-        private$unsampledReports_cache
-      } else {
-        private$unsampledReports_cache <- GaUnsampledReports$new(parent = self)
-      }
-    },
-    viewUserLinks = function() {
-      if (is(private$viewUserLinks_cache, "GaViewUserLinks")) {
-        private$viewUserLinks_cache
-      } else {
-        private$viewUserLinks_cache <- GaViewUserLinks$new(parent = self)
-      }
-    },
-    viewFilterLinks = function() {
-      if (is(private$viewFilterLinks_cache, "GaViewFilterLinks")) {
-        private$viewFilterLinks_cache
-      } else {
-        private$viewFilterLinks_cache <- GaViewFilterLinks$new(parent = self)
-      }
-    }
+    goals = function() {self$.child_nodes(GaGoals)},
+    experiments = function() {self$.child_nodes(GaExperiments)},
+    unsampledReports = function() {self$.child_nodes(GaUnsampledReports)},
+    viewUserLinks = function() {self$.child_nodes(GaViewUserLinks)},
+    viewFilterLinks = function() {self$.child_nodes(GaViewFilterLinks)}
   ),
   private = list(
     parent_class_name = "GaProperty",
     request = "profiles",
-    goals_cache = list(),
-    experiments_cache = list(),
-    unsampledReports_cache = list(),
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
       mutate(
@@ -507,7 +484,8 @@ GaViews <- R6Class(
   "GaViews",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaView
+    entity_class = GaView,
+    field_corrections = GaView$private_methods$field_corrections
   )
 )
 
@@ -517,7 +495,8 @@ GaGoal <- R6Class(
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaView",
-    request = "goals"
+    request = "goals",
+    field_corrections = function(field_list) {field_list}
   )
 )
 
@@ -526,7 +505,8 @@ GaGoals <- R6Class(
   "GaGoals",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaGoal
+    entity_class = GaGoal,
+    field_corrections = GaGoal$private_methods$field_corrections
   )
 )
 
@@ -574,7 +554,9 @@ GaViewUserLink <- R6Class(
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaView",
-    request = "entityUserLinks"
+    request = "entityUserLinks",
+    scope = ga_scopes[c('read_only', 'manage_users')],
+    field_corrections = function(field_list) {field_list}
   )
 )
 
@@ -583,7 +565,9 @@ GaViewUserLinks <- R6Class(
   "GaViewUserLinks",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaViewUserLink
+    entity_class = GaViewUserLink,
+    scope = GaViewUserLink$private_fields$scope,
+    field_corrections = GaViewUserLink$private_methods$field_corrections
   )
 )
 
@@ -593,7 +577,8 @@ GaViewFilterLink <- R6Class(
   inherit = .GaResource,
   private = list(
     parent_class_name = "GaView",
-    request = "profileFilterLinks"
+    request = "profileFilterLinks"#,
+    #field_corrections = function(field_list) {field_list}
   )
 )
 
@@ -602,7 +587,8 @@ GaViewFilterLinks <- R6Class(
   "GaViewFilterLinks",
   inherit = .GaCollection,
   private = list(
-    entity_class = GaViewFilterLink
+    entity_class = GaViewFilterLink#,
+    #field_corrections = GaViewFilterLink$private_methods$field_corrections
   )
 )
 
