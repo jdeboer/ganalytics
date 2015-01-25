@@ -639,7 +639,7 @@ setGeneric(
 #' @rdname GetGaData
 setGeneric("GetGaData", def = function(
   object, 
-  creds,
+  creds = NULL,
   ...
 ) {
   standardGeneric("GetGaData")

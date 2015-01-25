@@ -1,3 +1,6 @@
+#'@include ganalytics-package.R
+#'@include GaApiRequest.R
+
 # API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
 
 user_permission_levels <- c(
@@ -76,7 +79,7 @@ include_exclude_filter_match_type_levels <- c(
         if(exists("updated", field_list)) {
           field_list$updated <- ymd_hms(field_list$updated)
         }
-        subset(field_list, select = c(-kind, -selfLink, -childLink, -parentLink))
+        field_list[!(names(field_list) %in% c("kind", "selfLink", "childLink", "parentLink"))]
       } else {
         field_list
       }

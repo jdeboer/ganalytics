@@ -2,6 +2,8 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include ganalytics-package.R
+#' @include helper-functions.R
 NULL
 
 # ---- GaOperand ----
@@ -32,14 +34,13 @@ setMethod(
 
 setMethod(
   f = "GaOperand<-",
-  signature = c(".gaOperand", "ANY"),
+  signature = ".gaOperandScalar",
   definition = function(.Object, value) {
     to <- class(value)
     as(.Object, to) <- value
     return(.Object)
   }
 )
-
 
 # ---- GaOperand ----
 

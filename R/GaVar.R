@@ -1,4 +1,8 @@
 #' @include all-coercions.R
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include helper-functions.R
 #' @include meta.R
 NULL
 

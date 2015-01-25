@@ -12,11 +12,12 @@
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
-#' @export
+#' @include helper-functions.R
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @export
 GaQuery <- function(
   profileId,
   userName = character(0),
@@ -32,13 +33,6 @@ GaQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if (length(authFile) == 0) {
-    if (length(userName) == 0) {
-      authFile <- "~/ganalytics_token.RDS"
-    } else {
-      authFile <- paste0("~/.", userName, "_ga_auth.RDS")
-    }
-  }
   new("gaQuery",
       profileId = GaProfileId(profileId),
       dateRange = GaDateRange(

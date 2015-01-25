@@ -5,6 +5,8 @@
 #' @include GaVar.R
 #' @include GaOperator.R
 #' @include GaOperand.R
+#' @include ganalytics-package.R
+#' @include helper-functions.R
 NULL
 
 setMethod(

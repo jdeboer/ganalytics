@@ -7,7 +7,7 @@ NULL
 
 # ---- GA dimension and metric variables ----
 
-#' @export
+
 setClass(
   Class = "gaMetVar",
   prototype = prototype("ga:sessions"),
@@ -22,7 +22,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaDimVar",
   prototype = prototype("ga:date"),
@@ -62,7 +62,7 @@ IsVarMatch <- function(thisVar, inVars) {
 
 # ---- GA expression operators ----
 
-#' @export
+
 setClass(
   Class = "gaMetOperator",
   contains = "character",
@@ -77,7 +77,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaDimOperator",
   contains = "character",
@@ -119,19 +119,19 @@ setValidity(
 
 # ---- GA expression operands ----
 
-#' @export
+
 setClass(
   Class = "gaMetOperand",
   contains = "numeric"
 )
 
-#' @export
+
 setClass(
   Class = "gaDimOperand",
   contains = "character"
 )
 
-#' @export
+
 setClass(
   "gaDimOperandList",
   contains = "list",
@@ -182,7 +182,7 @@ setClass(
   contains = "VIRTUAL"
 )
 
-#' @export
+
 setClass(
   Class = "gaMetExpr",
   contains = ".gaExpr",
@@ -199,7 +199,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaSegMetExpr",
   representation = representation(
@@ -220,7 +220,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaDimExpr",
   contains = ".gaExpr",
@@ -231,17 +231,14 @@ setClass(
       return("gaOperator must be of class gaDimOperator")
     } else if (!class(object@gaOperand)=="gaDimOperand") {
       return("gaOperand must be of class gaDimOperand")
-    } else if (GaIsRegEx(object@gaOperator)) {
-      regExLen <- nchar(object@gaOperand)
-      if (regExLen > 128) {
-        return(
-          paste("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length", regExLen, sep = " = ")
-        )
-      }
+    } else if (GaIsRegEx(object@gaOperator) & nchar(object@gaOperand) > 128) {
+      return(
+        paste("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length", nchar(object@gaOperand), sep = " = ")
+      )
     } else if (object@gaOperator %in% c("!=", "==")) {
-      if (ValidGaOperand(object@gaVar, object@gaOperand)) {
-        return(TRUE)
-      }
+      return(
+        ValidGaOperand(object@gaVar, object@gaOperand)
+      )
     } else {
       return(TRUE)
     }
@@ -284,7 +281,7 @@ ValidGaOperand <- function(gaVar, gaOperand) {
 
 # ---- GA 'AND' and 'OR' compound expressions -------------------------------
 
-#' @export
+
 setClass(
   Class = "gaOr",
   contains = "list",
@@ -309,7 +306,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaAnd",
   contains = "list",
@@ -340,7 +337,7 @@ setClassUnion(
 
 # ---- GA filter ----
 
-#' @export
+
 setClass(
   Class = "gaFilter",
   contains = "gaAnd",
@@ -391,7 +388,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaSequenceStep",
   representation = representation(
@@ -410,7 +407,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaSequenceCondition",
   contains = c("list", ".gaDimensionOrMetricConditions"),
@@ -425,13 +422,13 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaNonSequenceCondition",
   contains = c("gaAnd", ".gaDimensionOrMetricConditions")
 )
 
-#' @export
+
 setClass(
   Class = "gaSegmentCondition",
   representation = representation(
@@ -460,7 +457,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaDynSegment",
   contains = "list",
@@ -473,7 +470,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaSegmentId",
   contains = "character",
@@ -503,7 +500,7 @@ setClassUnion(
 
 # ---- GA query dimensions, metrics, and sortby lists ----
 
-#' @export
+
 setClass(
   Class = "gaDateRange",
   representation = representation(
@@ -527,7 +524,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaMetrics",
   prototype = prototype(
@@ -556,7 +553,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaDimensions",
   prototype = prototype(
@@ -585,7 +582,7 @@ setClass(
   }
 )
 
-#' @export
+
 setClass(
   Class = "gaSortBy",
   representation = representation(
@@ -625,7 +622,7 @@ setClassUnion(
 
 # ---- Ga Profile ID ----
 
-#' @export
+
 setClass(
   Class = "gaProfileId",
   contains = "character",
@@ -653,7 +650,7 @@ samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
 
 setClassUnion("characterOrList", c("character", "list"))
 
-#' @export
+
 setClass(
   Class = "gaQuery",
   representation = representation(

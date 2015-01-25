@@ -20,7 +20,6 @@ setMethod(
 #' @param query the query to execute.
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
-#' @export
 setMethod("GetGaData", "gaQuery", function(
   object,
   creds = NULL,

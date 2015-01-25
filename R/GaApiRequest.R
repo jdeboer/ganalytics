@@ -1,4 +1,5 @@
 #Make a Goolge API request
+#'@include ganalytics-package.R
 
 ga_api_request <- function(
   creds,
@@ -197,7 +198,13 @@ response_to_list <- function(response) {
 
 app_oauth_creds <- function(appname, creds = NULL) {
   if (typeof(creds) == "character" & length(creds) == 1) {
-    creds <- fromJSON(creds)
+    if(validate(creds)) {
+      creds <- fromJSON(creds)
+    } else if (file.exists(creds)) {
+      creds <- fromJSON(creds)
+    } else {
+      creds <- NULL
+    }
   }
   if (typeof(creds) != "list") {
     if (length(creds) == 2) {

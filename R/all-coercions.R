@@ -1,6 +1,7 @@
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
+#' @include helper-functions.R
 NULL
 
 # Methods for coercision between classes

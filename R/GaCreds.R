@@ -1,7 +1,8 @@
+#'@include ganalytics-package.R
 #'@export
 GaCreds <- function(
   userName = character(0),
-  appCreds = NULL,
+  appCreds = ".app_oauth_creds.json",
   cache = character(0),
   use_oob = FALSE,
   appname = "GANALYTICS"
