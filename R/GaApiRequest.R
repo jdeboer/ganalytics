@@ -27,6 +27,27 @@ ga_api_request <- function(
   )
 }
 
+gtm_api_request <- function(
+  creds,
+  request,
+  scope = gtm_scopes["read_only"],
+  req_type = "GET",
+  body_list = NULL,
+  fields = NULL
+) {
+  stopifnot(scope %in% gtm_scopes)
+  base_url <- "https://www.googleapis.com/tagmanager/v1"
+  google_api_request(
+    creds = creds,
+    scope = scope,
+    request = request,
+    base_url = base_url,
+    req_type = req_type,
+    body_list = body_list,
+    fields = fields
+  )
+}
+
 google_api_request <- function(creds, scope,
                                request, base_url,
                                queries = NULL, req_type = "GET",
@@ -134,9 +155,10 @@ form_url <- function(base_url, queries = NULL) {
       base_url,
       if(length(queries) >= 1) {
         paste(
-          aaply(queries, 1, function(query){
+          aaply(seq_along(queries), 1, function(query_index){
+            query <- queries[query_index]
             query <- str_replace_all(query, "\\+", "%2B")
-            paste(names(query), URLencode(as.character(query), reserved = TRUE), sep = "=")
+            paste(names(queries)[query_index], URLencode(as.character(query), reserved = TRUE), sep = "=")
           }),
           collapse = "&"
         )

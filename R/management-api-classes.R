@@ -1,5 +1,9 @@
 # API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
 
+user_permission_levels <- c(
+  "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"
+)
+
 view_type_levels <- c("WEB", "APP")
 
 currency_levels <- c(
@@ -50,29 +54,40 @@ include_exclude_filter_match_type_levels <- c(
   "BEGINS_WITH", "EQUAL", "ENDS_WITH", "CONTAINS", "MATCHES"
 )
 
-.GaManagementApi <- R6Class(
+.gaManagementApi <- R6Class(
   public = list(
-    creds = GaCreds()
+    creds = GaCreds(),
+    get = function() {
+      ga_api_request(
+        creds = self$creds,
+        request = c("management", self$.req_path),
+        scope = private$scope
+      )
+    }
   ),
   private = list(
     request = NULL,
     scope = ga_scopes['read_only'],
     field_corrections = function(field_list) {
-      if(exists("created", field_list)) {
-        field_list$created <- ymd_hms(field_list$created)
+      if(is.data.frame(field_list)) {
+        if(exists("created", field_list)) {
+          field_list$created <- ymd_hms(field_list$created)
+        }
+        if(exists("updated", field_list)) {
+          field_list$updated <- ymd_hms(field_list$updated)
+        }
+        subset(field_list, select = c(-kind, -selfLink, -childLink, -parentLink))
+      } else {
+        field_list
       }
-      if(exists("updated", field_list)) {
-        field_list$updated <- ymd_hms(field_list$updated)
-      }
-      field_list
     },
     parent_class_name = "NULL"
   )
 )
 
-.GaResource <- R6Class(
-  ".GaResource",
-  inherit = .GaManagementApi,
+.gaResource <- R6Class(
+  ".gaResource",
+  inherit = .gaManagementApi,
   public = list(
     id = NA,
     name = NA,
@@ -99,11 +114,7 @@ include_exclude_filter_match_type_levels <- c(
     },
     get = function() {
       if (!is.null(self$.req_path)) {
-        response <- ga_api_request(
-          creds = self$creds,
-          request = c("management", self$.req_path),
-          scope = private$scope
-        )
+        response <- super$get()
         updated_fields <- private$field_corrections(response)
         self$modify(updated_fields)
       }
@@ -132,9 +143,9 @@ include_exclude_filter_match_type_levels <- c(
   )
 )
 
-.GaCollection <- R6Class(
-  ".GaCollection",
-  inherit = .GaManagementApi,
+.gaCollection <- R6Class(
+  ".gaCollection",
+  inherit = .gaManagementApi,
   public = list(
     summary = data.frame(),
     parent = NULL,
@@ -145,13 +156,8 @@ include_exclude_filter_match_type_levels <- c(
     },
     get = function() {
       if (!is.null(self$.req_path)) {
-        response <- ga_api_request(
-          creds = self$creds,
-          request = c("management", self$.req_path),
-          scope = private$scope
-        )
+        response <- super$get()
         self$summary <- private$field_corrections(response$items)
-        rownames(self$summary) <- self$summary$id
       }
       self
     },
@@ -204,15 +210,20 @@ include_exclude_filter_match_type_levels <- c(
     }
   ),
   private = list(
-    entity_class = .GaResource,
+    entity_class = .gaResource,
     entities_cache = list()
   )
 )
 
 #' @export
-GaUserSegment <- R6Class(
-  "GaUserSegment",
-  inherit = .GaResource,
+gaUserSegment <- R6Class(
+  "gaUserSegment",
+  inherit = .gaResource,
+  public = list(
+    type = NA,
+    segmentId = NA,
+    definition = NA
+  ),
   private = list(
     parent_class_name = "NULL",
     request = "segments"
@@ -220,18 +231,18 @@ GaUserSegment <- R6Class(
 )
 
 #' @export
-GaUserSegments <- R6Class(
-  "GaUserSegments",
-  inherit = .GaCollection,
+gaUserSegments <- R6Class(
+  "gaUserSegments",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaUserSegment
+    entity_class = gaUserSegment
   )
 )
 
 #' @export
-GaAccountSummary <- R6Class(
-  "GaAccountSummary",
-  inherit = .GaResource,
+gaAccountSummary <- R6Class(
+  "gaAccountSummary",
+  inherit = .gaResource,
   private = list(
     parent_class_name = "NULL",
     request = "accountSummaries"
@@ -239,209 +250,262 @@ GaAccountSummary <- R6Class(
 )
 
 #' @export
-GaAccountSummaries <- R6Class(
-  "GaAccountSummaries",
-  inherit = .GaCollection,
+gaAccountSummaries <- R6Class(
+  "gaAccountSummaries",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaAccountSummary
+    entity_class = gaAccountSummary
   )
 )
 
 #' @export
-GaAccount <- R6Class(
-  "GaAccount",
-  inherit = .GaResource,
+gaAccount <- R6Class(
+  "gaAccount",
+  inherit = .gaResource,
   public = list(
     get = function() {
       if (!is.null(self$.req_path)) {
-        account_fields <- GaAccounts$new()$summary[self$id, ]
+        account_fields <- gaAccounts$new()$summary[self$id, ]
         self$modify(account_fields)
       }
       self
     }
   ),
   active = list(
-    properties = function() {self$.child_nodes(GaProperties)}
-  ),
-  private = list(
-    parent_class_name = "NULL",
-    request = "accounts"
-  )
-)
-
-#' @export
-GaAccounts <- R6Class(
-  "GaAccounts",
-  inherit = .GaCollection,
-  private = list(
-    entity_class = GaAccount
-  )
-)
-
-#' @export
-GaViewFilter <- R6Class(
-  "GaViewFilter",
-  inherit = .GaResource,
-  private = list(
-    parent_class_name = "GaAccount",
-    request = "filters"
-  )
-)
-
-#' @export
-GaViewFilters <- R6Class(
-  "GaViewFilters",
-  inherit = .GaCollection,
-  private = list(
-    entity_class = GaViewFilter
-  )
-)
-
-#' @export
-GaAccountUserLink <- R6Class(
-  "GaAccountUserLink",
-  inherit = .GaResource,
-  private = list(
-    parent_class_name = "GaAccount",
-    request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')],
-    field_corrections = function(field_list) {field_list}
-  )
-)
-
-#' @export
-GaAccountUserLinks <- R6Class(
-  "GaAccountUserLinks",
-  inherit = .GaCollection,
-  private = list(
-    entity_class = GaAccountUserLink,
-    scope = GaAccountUserLink$private_fields$scope,
-    field_corrections = GaAccountUserLink$private_methods$field_corrections
-  )
-)
-
-#' @export
-GaProperty <- R6Class(
-  "GaProperty",
-  inherit = .GaResource,
-  public = list(
-    websiteUrl = NA,
-    industryVertical = NA,
-    defaultViewId = NA
-  ),
-  active = list(
-    views = function() {self$.child_nodes(GaViews)},
-    defaultView = function() {
-      self$views$entities[[self$defaultViewId]]
+    properties = function() {self$.child_nodes(gaProperties)},
+    users = function() {
+      tryCatch(
+        self$.child_nodes(gaAccountUserLinks),
+        error = function(e) {
+          e$message
+        }
+      )
     }
   ),
   private = list(
-    parent_class_name = "GaAccount",
-    request = "webproperties",
+    parent_class_name = "NULL",
+    request = "accounts",
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
-      rename(
+      mutate(
         field_list,
-        replace = c("defaultProfileId" = "defaultViewId")
+        permissions = lapply(permissions$effective, factor,
+          levels = user_permission_levels
+        )
       )
     }
   )
 )
 
 #' @export
-GaProperties <- R6Class(
-  "GaProperties",
-  inherit = .GaCollection,
+gaAccounts <- R6Class(
+  "gaAccounts",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaProperty,
-    field_corrections = GaProperty$private_methods$field_corrections
+    entity_class = gaAccount,
+    field_corrections = gaAccount$private_methods$field_corrections
   )
 )
 
 #' @export
-GaPropertyUserLink <- R6Class(
-  "GaPropertyUserLink",
-  inherit = .GaResource,
+gaViewFilter <- R6Class(
+  "gaViewFilter",
+  inherit = .gaResource,
+  public = list(
+    type = NA,
+    details = NA
+  ),
   private = list(
-    parent_class_name = "GaProperty",
+    parent_class_name = "gaAccount",
+    request = "filters"
+  )
+)
+
+#' @export
+gaViewFilters <- R6Class(
+  "gaViewFilters",
+  inherit = .gaCollection,
+  private = list(
+    entity_class = gaViewFilter
+  )
+)
+
+#' @export
+gaAccountUserLink <- R6Class(
+  "gaAccountUserLink",
+  inherit = .gaResource,
+  private = list(
+    parent_class_name = "gaAccount",
     request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')],
-    field_corrections = function(field_list) {field_list}
+    scope = ga_scopes[c('read_only', 'manage_users')]#,
+    #field_corrections = function(field_list) {field_list}
   )
 )
 
 #' @export
-GaPropertyUserLinks <- R6Class(
-  "GaPropertyUserLinks",
-  inherit = .GaCollection,
+gaAccountUserLinks <- R6Class(
+  "gaAccountUserLinks",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaPropertyUserLink,
-    scope = GaPropertyUserLink$private_fields$scope,
-    field_corrections = GaPropertyUserLink$private_methods$field_corrections
+    entity_class = gaAccountUserLink,
+    scope = gaAccountUserLink$private_fields$scope#,
+    #field_corrections = gaAccountUserLink$private_methods$field_corrections
   )
 )
 
 #' @export
-GaAdwordsLink <- R6Class(
-  "GaAdwordsLink",
-  inherit = .GaResource,
+gaProperty <- R6Class(
+  "gaProperty",
+  inherit = .gaResource,
+  public = list(
+    websiteUrl = NA,
+    industryVertical = NA,
+    defaultViewId = NA
+  ),
+  active = list(
+    views = function() {self$.child_nodes(gaViews)},
+    defaultView = function() {
+      self$views$entities[[self$defaultViewId]]
+    },
+    users = function() {
+      tryCatch(
+        self$.child_nodes(gaPropertyUserLinks),
+        error = function(e) {
+          e$message
+        }
+      )
+    },
+    adwordsLinks = function() {self$.child_nodes(gaAdwordsLinks)},
+    dataSources = function() {self$.child_nodes(gaDataSources)}
+  ),
   private = list(
-    parent_class_name = "GaProperty",
+    parent_class_name = "gaAccount",
+    request = "webproperties",
+    field_corrections = function(field_list) {
+      if(is.data.frame(field_list)) {
+        field_list <- super$field_corrections(field_list)
+        field_list <- subset(field_list, select = c(-accountId, -internalWebPropertyId))
+        rename(
+          field_list,
+          replace = c("defaultProfileId" = "defaultViewId")
+        )
+      } else {
+        field_list
+      }
+    }
+  )
+)
+
+#' @export
+gaProperties <- R6Class(
+  "gaProperties",
+  inherit = .gaCollection,
+  private = list(
+    entity_class = gaProperty,
+    field_corrections = gaProperty$private_methods$field_corrections
+  )
+)
+
+#' @export
+gaPropertyUserLink <- R6Class(
+  "gaPropertyUserLink",
+  inherit = .gaResource,
+  private = list(
+    parent_class_name = "gaProperty",
+    request = "entityUserLinks",
+    scope = ga_scopes[c('read_only', 'manage_users')]#,
+    #field_corrections = function(field_list) {field_list}
+  )
+)
+
+#' @export
+gaPropertyUserLinks <- R6Class(
+  "gaPropertyUserLinks",
+  inherit = .gaCollection,
+  private = list(
+    entity_class = gaPropertyUserLink,
+    scope = gaPropertyUserLink$private_fields$scope#,
+    #field_corrections = gaPropertyUserLink$private_methods$field_corrections
+  )
+)
+
+#' @export
+gaAdwordsLink <- R6Class(
+  "gaAdwordsLink",
+  inherit = .gaResource,
+  private = list(
+    parent_class_name = "gaProperty",
     request = "entityAdWordsLinks"
   )
 )
 
 #' @export
-GaAdwordsLinks <- R6Class(
-  "GaAdwordsLinks",
-  inherit = .GaCollection,
+gaAdwordsLinks <- R6Class(
+  "gaAdwordsLinks",
+  inherit = .gaCollection,
+  public = list(
+    adWordsAccounts = NA
+  ),
   private = list(
-    entity_class = GaAdwordsLink
+    entity_class = gaAdwordsLink
   )
 )
 
 #' @export
-GaDataSource <- R6Class(
-  "GaDataSource",
-  inherit = .GaResource,
+gaDataSource <- R6Class(
+  "gaDataSource",
+  inherit = .gaResource,
+  public = list(
+    description = NA,
+    type = NA,
+    importBehavior = NA,
+    profilesLinked = NA
+  ),
+  active = list(
+    uploads = function(){self$.child_nodes(gaUploads)}
+  ),
   private = list(
-    parent_class_name = "GaProperty",
+    parent_class_name = "gaProperty",
     request = "customDataSources"
   )
 )
 
 #' @export
-GaDataSources <- R6Class(
-  "GaDataSources",
-  inherit = .GaCollection,
+gaDataSources <- R6Class(
+  "gaDataSources",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaDataSource
+    entity_class = gaDataSource
   )
 )
 
 #' @export
-GaUpload <- R6Class(
-  "GaUpload",
-  inherit = .GaResource,
+gaUpload <- R6Class(
+  "gaUpload",
+  inherit = .gaResource,
+  public = list(
+    status = NA,
+    errors = NA
+  ),
   private = list(
-    parent_class_name = "GaDataSource",
+    parent_class_name = "gaDataSource",
     request = "uploads"
   )
 )
 
 #' @export
-GaUploads <- R6Class(
-  "GaUploads",
-  inherit = .GaCollection,
+gaUploads <- R6Class(
+  "gaUploads",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaUpload
+    entity_class = gaUpload
   )
 )
 
 #' @export
-GaView <- R6Class(
-  "GaView",
-  inherit = .GaResource,
+gaView <- R6Class(
+  "gaView",
+  inherit = .gaResource,
   public = list(
     type = NA,
     currency = NA,
@@ -457,14 +521,21 @@ GaView <- R6Class(
     enhancedECommerceTracking = NA
   ),
   active = list(
-    goals = function() {self$.child_nodes(GaGoals)},
-    experiments = function() {self$.child_nodes(GaExperiments)},
-    unsampledReports = function() {self$.child_nodes(GaUnsampledReports)},
-    viewUserLinks = function() {self$.child_nodes(GaViewUserLinks)},
-    viewFilterLinks = function() {self$.child_nodes(GaViewFilterLinks)}
+    goals = function() {self$.child_nodes(gaGoals)},
+    experiments = function() {self$.child_nodes(gaExperiments)},
+    unsampledReports = function() {self$.child_nodes(gaUnsampledReports)},
+    users = function() {
+      tryCatch(
+        self$.child_nodes(gaViewUserLinks),
+        error = function(e) {
+          e$message
+        }
+      )
+    },
+    viewFilterLinks = function() {self$.child_nodes(gaViewFilterLinks)}
   ),
   private = list(
-    parent_class_name = "GaProperty",
+    parent_class_name = "gaProperty",
     request = "profiles",
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
@@ -480,115 +551,151 @@ GaView <- R6Class(
 )
 
 #' @export
-GaViews <- R6Class(
-  "GaViews",
-  inherit = .GaCollection,
+gaViews <- R6Class(
+  "gaViews",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaView,
-    field_corrections = GaView$private_methods$field_corrections
+    entity_class = gaView,
+    field_corrections = gaView$private_methods$field_corrections
   )
 )
 
 #' @export
-GaGoal <- R6Class(
-  "GaGoal",
-  inherit = .GaResource,
+gaGoal <- R6Class(
+  "gaGoal",
+  inherit = .gaResource,
+  public = list(
+    type = NA,
+    value = NA,
+    active = NA,
+    details = NA
+  ),
   private = list(
-    parent_class_name = "GaView",
-    request = "goals",
-    field_corrections = function(field_list) {field_list}
+    parent_class_name = "gaView",
+    request = "goals"#,
+    #field_corrections = function(field_list) {field_list}
   )
 )
 
 #' @export
-GaGoals <- R6Class(
-  "GaGoals",
-  inherit = .GaCollection,
+gaGoals <- R6Class(
+  "gaGoals",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaGoal,
-    field_corrections = GaGoal$private_methods$field_corrections
+    entity_class = gaGoal#,
+    #field_corrections = gaGoal$private_methods$field_corrections
   )
 )
 
 #' @export
-GaExperiment <- R6Class(
-  "GaExperiment",
-  inherit = .GaResource,
+gaExperiment <- R6Class(
+  "gaExperiment",
+  inherit = .gaResource,
+  public = list(
+    description = NA,
+    objectiveMetric = NA,
+    optimizationType = NA,
+    status = NA,
+    winnerFound = NA,
+    startTime = NA,
+    endTime = NA,
+    reasonExperimentEnded = NA,
+    rewriteVariationUrlsAsOriginal = NA,
+    winnerConfidenceLevel = NA,
+    minimumExperimentLengthInDays = NA,
+    trafficCoverage = NA,
+    equalWeighting = NA,
+    servingFramework = NA,
+    variations = NA
+  ),
   private = list(
-    parent_class_name = "GaView",
+    parent_class_name = "gaView",
     request = "experiments"
   )
 )
 
 #' @export
-GaExperiments <- R6Class(
-  "GaExperiments",
-  inherit = .GaCollection,
+gaExperiments <- R6Class(
+  "gaExperiments",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaExperiment
+    entity_class = gaExperiment
   )
 )
 
 #' @export
-GaUnsampledReport <- R6Class(
-  "GaUnsampledReport",
-  inherit = .GaResource,
+gaUnsampledReport <- R6Class(
+  "gaUnsampledReport",
+  inherit = .gaResource,
+  public = list(
+    title = NA,
+    startDate = NA,
+    endDate = NA,
+    metrics = NA,
+    dimensions = NA,
+    filters = NA,
+    segment = NA,
+    status = NA,
+    downloadType = NA,
+    driveDownloadDetails = NA,
+    cloudStorageDownloadDetails = NA
+  ),
   private = list(
-    parent_class_name = "GaView",
+    parent_class_name = "gaView",
     request = "unsampledReports"
   )
 )
 
 #' @export
-GaUnsampledReports <- R6Class(
-  "GaUnsampledReports",
-  inherit = .GaCollection,
+gaUnsampledReports <- R6Class(
+  "gaUnsampledReports",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaUnsampledReport
+    entity_class = gaUnsampledReport
   )
 )
 
 #' @export
-GaViewUserLink <- R6Class(
-  "GaViewUserLink",
-  inherit = .GaResource,
+gaViewUserLink <- R6Class(
+  "gaViewUserLink",
+  inherit = .gaResource,
   private = list(
-    parent_class_name = "GaView",
+    parent_class_name = "gaView",
     request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')],
-    field_corrections = function(field_list) {field_list}
+    scope = ga_scopes[c('read_only', 'manage_users')]#,
+    #field_corrections = function(field_list) {field_list}
   )
 )
 
 #' @export
-GaViewUserLinks <- R6Class(
-  "GaViewUserLinks",
-  inherit = .GaCollection,
+gaViewUserLinks <- R6Class(
+  "gaViewUserLinks",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaViewUserLink,
-    scope = GaViewUserLink$private_fields$scope,
-    field_corrections = GaViewUserLink$private_methods$field_corrections
+    entity_class = gaViewUserLink,
+    scope = gaViewUserLink$private_fields$scope#,
+    #field_corrections = gaViewUserLink$private_methods$field_corrections
   )
 )
 
 #' @export
-GaViewFilterLink <- R6Class(
-  "GaViewFilterLink",
-  inherit = .GaResource,
+gaViewFilterLink <- R6Class(
+  "gaViewFilterLink",
+  inherit = .gaResource,
   private = list(
-    parent_class_name = "GaView",
+    parent_class_name = "gaView",
     request = "profileFilterLinks"#,
     #field_corrections = function(field_list) {field_list}
   )
 )
 
 #' @export
-GaViewFilterLinks <- R6Class(
-  "GaViewFilterLinks",
-  inherit = .GaCollection,
+gaViewFilterLinks <- R6Class(
+  "gaViewFilterLinks",
+  inherit = .gaCollection,
   private = list(
-    entity_class = GaViewFilterLink#,
-    #field_corrections = GaViewFilterLink$private_methods$field_corrections
+    entity_class = gaViewFilterLink#,
+    #field_corrections = gaViewFilterLink$private_methods$field_corrections
   )
 )
 
