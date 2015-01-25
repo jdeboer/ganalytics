@@ -29,4 +29,3 @@ GaCreds <- function(
     use_oob = use_oob
   )
 }
-
