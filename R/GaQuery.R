@@ -19,7 +19,7 @@
 #' @include all-coercions.R
 #' @export
 GaQuery <- function(
-  view,
+  view = GaAccounts()$entities[[1]],
   userName = character(0),
   appCreds = character(0),
   authFile = character(0),

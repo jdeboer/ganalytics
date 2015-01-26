@@ -24,11 +24,22 @@ setMethod(
   }
 )
 
+# Passing a property object to GaQuery will select the default view of that property
 setMethod(
   f = "GaProfileId",
   signature = "gaProperty",
   definition = function(.Object) {
     GaProfileId(.Object$defaultView)
+  }
+)
+
+# Passing an account object to GaQuery will select the first property of that account
+# which is then used to select a view (as per above).
+setMethod(
+  f = "GaProfileId",
+  signature = "gaAccount",
+  definition = function(.Object) {
+    GaProfileId(.Object$properties$entities[[1]])
   }
 )
 

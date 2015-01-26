@@ -338,6 +338,8 @@ GaAccount <- function(id = NULL, creds = GaCreds()){
   gaAccount$new(id = id, creds = creds)
 }
 
+setOldClass(c("gaAccount", "R6"))
+
 gaAccounts <- R6Class(
   "gaAccounts",
   inherit = .gaCollection,
