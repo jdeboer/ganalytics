@@ -1,4 +1,5 @@
 #' @include all-classes.R
+#' @include management-api-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
@@ -12,6 +13,22 @@ setMethod(
   signature = "gaProfileId",
   definition = function(.Object) {
     return(.Object)
+  }
+)
+
+setMethod(
+  f = "GaProfileId",
+  signature = "gaView",
+  definition = function(.Object) {
+    GaProfileId(.Object$id)
+  }
+)
+
+setMethod(
+  f = "GaProfileId",
+  signature = "gaProperty",
+  definition = function(.Object) {
+    GaProfileId(.Object$defaultView)
   }
 )
 

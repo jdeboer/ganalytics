@@ -46,8 +46,8 @@ Collate:
     'GaQuery.R'
     'GaSegment.R'
     'GaSortBy.R'
+    'management-api-classes.R'
     'GaView.R'
     'GetGa.R'
-    'management-api-classes.R'
 Suggests:
     testthat

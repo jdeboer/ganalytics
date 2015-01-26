@@ -441,6 +441,8 @@ gaProperty <- R6Class(
   )
 )
 
+setOldClass(c("gaProperty", "R6"))
+
 #' @export
 gaProperties <- R6Class(
   "gaProperties",
@@ -594,6 +596,8 @@ gaView <- R6Class(
     }
   )
 )
+
+setOldClass(c("gaView", "R6"))
 
 #' @export
 gaViews <- R6Class(

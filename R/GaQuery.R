@@ -19,7 +19,7 @@
 #' @include all-coercions.R
 #' @export
 GaQuery <- function(
-  profileId,
+  view,
   userName = character(0),
   appCreds = character(0),
   authFile = character(0),
@@ -34,7 +34,7 @@ GaQuery <- function(
   maxResults = kGaMaxResults
 ) {
   new("gaQuery",
-      profileId = GaProfileId(profileId),
+      profileId = GaProfileId(view),
       dateRange = GaDateRange(
         as.Date(startDate),
         as.Date(endDate)
