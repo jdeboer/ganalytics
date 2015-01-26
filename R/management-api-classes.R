@@ -57,6 +57,10 @@ include_exclude_filter_match_type_levels <- c(
   "BEGINS_WITH", "EQUAL", "ENDS_WITH", "CONTAINS", "MATCHES"
 )
 
+user_segment_type_levels <- c(
+  "BUILT_IN", "CUSTOM"
+)
+
 .gaManagementApi <- R6Class(
   public = list(
     creds = GaCreds(),
@@ -92,7 +96,7 @@ include_exclude_filter_match_type_levels <- c(
   ".gaResource",
   inherit = .gaManagementApi,
   public = list(
-    id = NA,
+    id = NULL,
     name = NA,
     created = NA,
     updated = NA,
@@ -105,9 +109,10 @@ include_exclude_filter_match_type_levels <- c(
       })
       self
     },
-    initialize = function(parent = NULL, id = NULL) {
+    initialize = function(parent = NULL, id = NULL, creds = GaCreds()) {
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
+      self$creds <- creds
       self$id <- id
       if(is.null(id)) {
         self
@@ -164,11 +169,12 @@ include_exclude_filter_match_type_levels <- c(
       }
       self
     },
-    initialize = function(parent = NULL) {
+    initialize = function(parent = NULL, creds = GaCreds()) {
       entity_class_private <- with(private$entity_class, c(private_fields, private_methods))
       private$request <- entity_class_private$request
       private$parent_class_name <- entity_class_private$parent_class_name
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
+      self$creds <- creds
       self$parent <- parent
       self$get()
     }
@@ -218,7 +224,6 @@ include_exclude_filter_match_type_levels <- c(
   )
 )
 
-#' @export
 gaUserSegment <- R6Class(
   "gaUserSegment",
   inherit = .gaResource,
@@ -229,20 +234,40 @@ gaUserSegment <- R6Class(
   ),
   private = list(
     parent_class_name = "NULL",
-    request = "segments"
+    request = "segments",
+    field_corrections = function(field_list) {
+      field_list <- super$field_corrections(field_list)
+      mutate(
+        field_list,
+        type = factor(type, levels = user_segment_type_levels)
+      )
+    }
   )
 )
 
 #' @export
+GaUserSegment <- function(id = NULL, definition = NA, creds = GaCreds()){
+  userSegment <- gaUserSegment$new(id = id, creds = creds)
+  if (is.null(id)) {
+    userSegment$definition <- definition
+  }
+  userSegment
+}
+
 gaUserSegments <- R6Class(
   "gaUserSegments",
   inherit = .gaCollection,
   private = list(
-    entity_class = gaUserSegment
+    entity_class = gaUserSegment,
+    field_corrections = gaUserSegment$private_methods$field_corrections
   )
 )
 
 #' @export
+GaUserSegments <- function(creds = GaCreds()){
+  gaUserSegments$new(creds = creds)
+}
+
 gaAccountSummary <- R6Class(
   "gaAccountSummary",
   inherit = .gaResource,
@@ -253,6 +278,10 @@ gaAccountSummary <- R6Class(
 )
 
 #' @export
+GaAccountSummary <- function(id = NULL, creds = GaCreds()){
+  gaAccountSummary$new(id = id, creds = creds)
+}
+
 gaAccountSummaries <- R6Class(
   "gaAccountSummaries",
   inherit = .gaCollection,
@@ -262,6 +291,10 @@ gaAccountSummaries <- R6Class(
 )
 
 #' @export
+GaAccountSummaries <- function(creds = GaCreds()){
+  gaAccountSummaries$new(creds = creds)
+}
+
 gaAccount <- R6Class(
   "gaAccount",
   inherit = .gaResource,
@@ -301,6 +334,10 @@ gaAccount <- R6Class(
 )
 
 #' @export
+GaAccount <- function(id = NULL, creds = GaCreds()){
+  gaAccount$new(id = id, creds = creds)
+}
+
 gaAccounts <- R6Class(
   "gaAccounts",
   inherit = .gaCollection,
@@ -309,6 +346,11 @@ gaAccounts <- R6Class(
     field_corrections = gaAccount$private_methods$field_corrections
   )
 )
+
+#' @export
+GaAccounts <- function(creds = GaCreds()){
+  gaAccounts$new(creds = creds)
+}
 
 #' @export
 gaViewFilter <- R6Class(
