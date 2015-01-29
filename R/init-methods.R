@@ -77,7 +77,7 @@ setMethod(
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- sub(kGaPrefix, "gaid::", value)
-      if (!grepl("^gaid::[0-9]+$", value)) {
+      if (!grepl("^gaid::\\-?[0-9]+$", value)) {
         value <- paste("gaid", value, sep="::")
       }
       .Object@.Data <- value

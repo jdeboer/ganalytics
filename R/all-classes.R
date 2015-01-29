@@ -480,15 +480,15 @@ setClass(
   contains = "character",
   validity = function(object) {
     pattern <- "^gaid::\\-?[0-9]+$"
-    if (length(object) == 1) {
-      if (grepl(pattern = pattern, x = object@.Data)) {
-        return(TRUE)
-      } else {
-        paste("gaSegmentId must match the regular expression", pattern, sep = "")
-      }
-    } else {
+    if (length(object) != 1) {
       return("gaSegmentId must be a character vector of length 1")
     }
+    if (!grepl(pattern = pattern, x = object@.Data)) {
+      return(
+        paste("gaSegmentId must match the regular expression ", pattern, sep = "")
+      )
+    }
+    TRUE
   }
 )
 

@@ -175,7 +175,17 @@ gaUserSegment <- R6Class(
   public = list(
     type = NA,
     segmentId = NA,
-    definition = NA
+    definition = NA,
+    get = function() {
+      if (!is.null(self$.req_path)) {
+        user_segment_fields <- subset(
+          gaUserSegments$new()$summary,
+          subset = id == self$id
+        )
+        self$modify(user_segment_fields)
+      }
+      self
+    }
   ),
   private = list(
     parent_class_name = "NULL",
@@ -192,6 +202,7 @@ gaUserSegment <- R6Class(
 
 #' @export
 GaUserSegment <- function(id = NULL, definition = NA, creds = GaCreds()){
+  id <- sub("^gaid::", "", id)
   userSegment <- gaUserSegment$new(id = id, creds = creds)
   if (is.null(id)) {
     userSegment$definition <- definition
@@ -216,6 +227,18 @@ GaUserSegments <- function(creds = GaCreds()){
 gaAccountSummary <- R6Class(
   "gaAccountSummary",
   inherit = .gaResource,
+  public = list(
+    get = function() {
+      if (!is.null(self$.req_path)) {
+        account_summary_fields <- subset(
+          gaAccountSummaries$new()$summary,
+          subset = id == self$id
+        )
+        self$modify(account_summary_fields)
+      }
+      self
+    }
+  ),
   private = list(
     parent_class_name = "NULL",
     request = "accountSummaries"
@@ -246,7 +269,10 @@ gaAccount <- R6Class(
   public = list(
     get = function() {
       if (!is.null(self$.req_path)) {
-        account_fields <- gaAccounts$new()$summary[self$id, ]
+        account_fields <- subset(
+          gaAccounts$new()$summary,
+          subset = id == self$id
+        )
         self$modify(account_fields)
       }
       self
