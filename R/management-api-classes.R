@@ -1,65 +1,10 @@
 #'@include ganalytics-package.R
+#'@include all-generics.R
 #'@include GaApiRequest.R
+#'@include GaCreds.R
+NULL
 
 # API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
-
-user_permission_levels <- c(
-  "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"
-)
-
-view_type_levels <- c("WEB", "APP")
-
-currency_levels <- c(
-  "ARS", "AUD", "BGN", "BRL", "CAD", "CHF",
-  "CNY", "CZK", "DKK", "EUR", "GBP", "HKD",
-  "HUF", "IDR", "INR", "JPY", "KRW", "LTL",
-  "MXN", "NOK", "NZD", "PHP", "PLN", "RUB",
-  "SEK", "THB", "TRY", "TWD", "USD", "VND", "ZAR"
-)
-
-filter_type_levels <- c(
-  "INCLUDE", "EXCLUDE",
-  "LOWERCASE", "UPPERCASE",
-  "SEARCH_AND_REPLACE", "ADVANCED"
-)
-
-filter_field_levels <- c(
-  "UNUSED",
-  "PAGE_REQUEST_URI", "PAGE_HOSTNAME", "PAGE_TITLE",
-  "REFERRAL", "COST_DATA_URI", "HIT_TYPE",
-  "INTERNAL_SEARCH_TERM", "INTERNAL_SEARCH_TYPE",
-  "SOURCE_PROPERTY_TRACKING_ID",
-  "CAMPAIGN_SOURCE", "CAMPAIGN_MEDIUM", "CAMPAIGN_NAME", "CAMPAIGN_AD_GROUP",
-  "CAMPAIGN_TERM", "CAMPAIGN_CONTENT", "CAMPAIGN_CODE", "CAMPAIGN_REFERRAL_PATH",
-  "TRANSACTION_COUNTRY", "TRANSACTION_REGION",
-  "TRANSACTION_CITY", "TRANSACTION_AFFILIATION",
-  "ITEM_NAME", "ITEM_CODE", "ITEM_VARIATION",
-  "TRANSACTION_ID", "TRANSACTION_CURRENCY_CODE",
-  "PRODUCT_ACTION_TYPE",
-  "BROWSER", "BROWSER_VERSION", "BROWSER_SIZE", "PLATFORM",
-  "PLATFORM_VERSION", "LANGUAGE", "SCREEN_RESOLUTION", "SCREEN_COLORS",
-  "JAVA_ENABLED", "FLASH_VERSION", "GEO_SPEED", "VISITOR_TYPE",
-  "GEO_ORGANIZATION", "GEO_DOMAIN", "GEO_IP_ADDRESS", "GEO_IP_VERSION",
-  "GEO_COUNTRY", "GEO_REGION", "GEO_CITY",
-  "EVENT_CATEGORY", "EVENT_ACTION", "EVENT_LABEL",
-  "CUSTOM_FIELD_1", "CUSTOM_FIELD_2", "USER_DEFINED_VALUE",
-  "APP_ID", "APP_INSTALLER_ID", "APP_NAME", "APP_VERSION", "SCREEN",
-  "IS_APP", "IS_FATAL_EXCEPTION", "EXCEPTION_DESCRIPTION",
-  "IS_MOBILE", "IS_TABLET",
-  "MOBILE_HAS_QWERTY_KEYBOARD", "MOBILE_HAS_NFC_SUPPORT",
-  "MOBILE_HAS_CELLULAR_RADIO", "MOBILE_HAS_WIFI_SUPPORT",
-  "MOBILE_BRAND_NAME", "MOBILE_MODEL_NAME",
-  "MOBILE_MARKETING_NAME", "MOBILE_POINTING_METHOD",
-  "SOCIAL_NETWORK", "SOCIAL_ACTION", "SOCIAL_ACTION_TARGET"
-)
-
-include_exclude_filter_match_type_levels <- c(
-  "BEGINS_WITH", "EQUAL", "ENDS_WITH", "CONTAINS", "MATCHES"
-)
-
-user_segment_type_levels <- c(
-  "BUILT_IN", "CUSTOM"
-)
 
 .gaManagementApi <- R6Class(
   public = list(
@@ -338,8 +283,6 @@ GaAccount <- function(id = NULL, creds = GaCreds()){
   gaAccount$new(id = id, creds = creds)
 }
 
-setOldClass(c("gaAccount", "R6"))
-
 gaAccounts <- R6Class(
   "gaAccounts",
   inherit = .gaCollection,
@@ -442,8 +385,6 @@ gaProperty <- R6Class(
     }
   )
 )
-
-setOldClass(c("gaProperty", "R6"))
 
 #' @export
 gaProperties <- R6Class(
@@ -598,8 +539,6 @@ gaView <- R6Class(
     }
   )
 )
-
-setOldClass(c("gaView", "R6"))
 
 #' @export
 gaViews <- R6Class(

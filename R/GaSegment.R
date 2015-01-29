@@ -3,6 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include helper-functions.R
+#' @include management-api-classes.R
 NULL
 
 # ---- GaPrecedes, GaImmediatelyPrecedes, GaStartsWith, GaSequenceCondition ----
@@ -56,7 +57,6 @@ setMethod(
   definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
     GaSegmentCondition(do.call(GaNonSequenceCondition, exprList), scope = scope)
-    #as(.Object, "GaSegmentCondition")
   }
 )
 
@@ -234,5 +234,13 @@ setMethod(
     .Object@segment <- GaSegment(value)
     validObject(.Object)
     return(.Object)
+  }
+)
+
+setMethod(
+  f = "GaSegment",
+  signature = "gaUserSegment",
+  definition = function(.Object) {
+    GaSegment(.Object$segmentId)
   }
 )

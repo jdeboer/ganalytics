@@ -1,6 +1,7 @@
-#Make a Goolge API request
 #'@include ganalytics-package.R
+NULL
 
+#Make a Goolge API request
 ga_api_request <- function(
   creds,
   request,

@@ -1,4 +1,6 @@
 #'@include ganalytics-package.R
+NULL
+
 #'@export
 GaCreds <- function(
   userName = character(0),

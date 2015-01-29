@@ -2,8 +2,8 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include ganalytics-package.R
 #' @include helper-functions.R
-
 NULL
 
 # ---- GaOperator, GaDimOperator, GaMetOperator ----

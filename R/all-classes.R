@@ -7,6 +7,10 @@ NULL
 
 # ---- GA dimension and metric variables ----
 
+setOldClass(c("gaUserSegment", "R6"))
+setOldClass(c("gaAccount", "R6"))
+setOldClass(c("gaProperty", "R6"))
+setOldClass(c("gaView", "R6"))
 
 setClass(
   Class = "gaMetVar",
@@ -649,7 +653,6 @@ setClass(
 samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
 
 setClassUnion("characterOrList", c("character", "list"))
-
 
 setClass(
   Class = "gaQuery",

@@ -611,6 +611,14 @@ setAs(
 )
 
 setAs(
+  from = "gaUserSegment",
+  to = "gaSegmentId",
+  def = function(from) {
+    new(to, GaSegment(from))
+  }
+)
+
+setAs(
   from = "gaSegmentId",
   to = "character",
   def = function(from) {

@@ -1,3 +1,11 @@
+#' @include helper-functions.R
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
+#' @include ganalytics-package.R
+NULL
+
 #' GaQuery
 #' Create a ganalytics query object
 #' @param profileId profile id to use
@@ -12,11 +20,6 @@
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
-#' @include helper-functions.R
-#' @include all-classes.R
-#' @include init-methods.R
-#' @include all-generics.R
-#' @include all-coercions.R
 #' @export
 GaQuery <- function(
   view = GaAccounts()$entities[[1]],

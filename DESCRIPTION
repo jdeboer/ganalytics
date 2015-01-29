@@ -44,9 +44,9 @@ Collate:
     'GaNot.R'
     'GaOr.R'
     'GaQuery.R'
+    'management-api-classes.R'
     'GaSegment.R'
     'GaSortBy.R'
-    'management-api-classes.R'
     'GaView.R'
     'GetGa.R'
 Suggests:

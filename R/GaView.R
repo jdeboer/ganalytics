@@ -1,4 +1,5 @@
 #' @include all-classes.R
+#' @include ganalytics-package.R
 #' @include management-api-classes.R
 #' @include init-methods.R
 #' @include all-generics.R

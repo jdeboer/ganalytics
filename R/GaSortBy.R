@@ -3,6 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include helper-functions.R
+#' @include ganalytics-package.R
 NULL
 
 # -- GaSortBy ----

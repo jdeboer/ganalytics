@@ -1,8 +1,6 @@
 # Generic functions
 # -----------------
 #' @include all-classes.R
-#' @include init-methods.R
-#' @include helper-functions.R
 NULL
 
 #' GaVar

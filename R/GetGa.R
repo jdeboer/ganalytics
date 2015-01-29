@@ -2,9 +2,8 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include ganalytics-package.R
 #' @include GaGetCoreReport.R
-#' @include GaApiRequest.R
-#' @include GaCreds.R
 NULL
 
 setMethod(
@@ -62,11 +61,3 @@ setMethod("GetGaData", "gaQuery", function(
   }
   return(data)
 })
-
-# setMethod("GetGaData", "Resource", function(object, creds) {
-#   GaGetManagementData(object, creds)
-# })
-# 
-# setMethod("GetGaData", "Collection", function(object, creds) {
-#   GaGetManagementData(object, creds)
-# })

@@ -4,6 +4,7 @@
 #' @include all-generics.R
 #' @include helper-functions.R
 #' @include GaApiRequest.R
+NULL
 
 GaPaginate <- function(query, maxRequestedRows, creds) {
   # Get the first page to determine the total number of rows available.
