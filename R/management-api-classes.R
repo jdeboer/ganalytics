@@ -78,7 +78,7 @@ NULL
       if (is(private$cache[[class_name]], class_name)) {
         private$cache[[class_name]]
       } else {
-        private$cache[[class_name]] <- class_generator$new(parent = self)
+        private$cache[[class_name]] <- class_generator$new(parent = self, creds = self$creds)
       }
     }
   ),
@@ -103,7 +103,7 @@ NULL
     summary = data.frame(),
     parent = NULL,
     get_entity = function(id) {
-      entity <- private$entity_class$new(parent = self$parent, id = id)
+      entity <- private$entity_class$new(parent = self$parent, id = id, creds = self$creds)
       private$entities_cache[[id]] <- entity
       entity
     },
@@ -136,7 +136,7 @@ NULL
             !is(entity, private$entity_class$classname) |
               identical(entity$updated != updated, TRUE)
           ) {
-            entity <- private$entity_class$new(parent = self$parent)
+            entity <- private$entity_class$new(parent = self$parent, creds = self$creds)
             entity$modify(field_list = field_list)
             private$entities_cache[[id]] <- entity
           }
@@ -179,7 +179,7 @@ gaUserSegment <- R6Class(
     get = function() {
       if (!is.null(self$.req_path)) {
         user_segment_fields <- subset(
-          gaUserSegments$new()$summary,
+          gaUserSegments$new(creds = self$creds)$summary,
           subset = id == self$id
         )
         self$modify(user_segment_fields)
@@ -231,7 +231,7 @@ gaAccountSummary <- R6Class(
     get = function() {
       if (!is.null(self$.req_path)) {
         account_summary_fields <- subset(
-          gaAccountSummaries$new()$summary,
+          gaAccountSummaries$new(creds = self$creds)$summary,
           subset = id == self$id
         )
         self$modify(account_summary_fields)
@@ -270,7 +270,7 @@ gaAccount <- R6Class(
     get = function() {
       if (!is.null(self$.req_path)) {
         account_fields <- subset(
-          gaAccounts$new()$summary,
+          gaAccounts$new(creds = self$creds)$summary,
           subset = id == self$id
         )
         self$modify(account_fields)
@@ -401,13 +401,9 @@ gaProperty <- R6Class(
       if(is.data.frame(field_list)) {
         field_list <- super$field_corrections(field_list)
         field_list <- subset(field_list, select = c(-accountId, -internalWebPropertyId))
-        rename(
-          field_list,
-          replace = c("defaultProfileId" = "defaultViewId")
-        )
-      } else {
-        field_list
+        names(field_list)[names(field_list) == "defaultProfileId"] <- "defaultViewId"
       }
+      field_list
     }
   )
 )
@@ -555,13 +551,11 @@ gaView <- R6Class(
     request = "profiles",
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
-      mutate(
-        field_list,
-        type = factor(type, levels = view_type_levels),
-        currency = factor(currency, levels = currency_levels),
-        stripSiteSearchQueryParameters = identical(field_list$stripSiteSearchQueryParameters, TRUE),
-        stripSiteSearchCategoryParameters = identical(field_list$stripSiteSearchCategoryParameters, TRUE)        
-      )
+      field_list$type = factor(field_list$type, levels = view_type_levels)
+      field_list$currency = factor(field_list$currency, levels = currency_levels)
+      field_list$stripSiteSearchQueryParameters = identical(field_list$stripSiteSearchQueryParameters, TRUE)
+      field_list$stripSiteSearchCategoryParameters = identical(field_list$stripSiteSearchCategoryParameters, TRUE)
+      field_list
     }
   )
 )

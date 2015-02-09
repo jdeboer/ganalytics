@@ -49,5 +49,6 @@ Collate:
     'GaSortBy.R'
     'GaView.R'
     'GetGa.R'
+    'gtm-api-classes.R'
 Suggests:
     testthat
