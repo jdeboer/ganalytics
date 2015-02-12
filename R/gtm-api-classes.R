@@ -217,6 +217,7 @@ gtmPermission <- R6Class(
   private = list(
     parent_class_name = "gtmAccount",
     request = "permissions",
+    scope = gtm_scopes[c('read_only', 'manage_users')],
     resource_name = "permission"
   )
 )
@@ -226,7 +227,8 @@ gtmPermissions <- R6Class(
   inherit = .gtmCollection,
   private = list(
     entity_class = gtmPermission,
-    collection_name = "userAccess"
+    collection_name = "userAccess",
+    scope = gtmPermission$private_fields$scope
   )
 )
 

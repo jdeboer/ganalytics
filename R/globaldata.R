@@ -92,6 +92,10 @@ user_permission_levels <- c(
   "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"
 )
 
+gtm_container_permission_levels <- c(
+  "read", "edit", "delete", "publish"
+)
+
 view_type_levels <- c("WEB", "APP")
 
 currency_levels <- c(
