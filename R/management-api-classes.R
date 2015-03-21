@@ -374,13 +374,14 @@ gaViewFilter <- R6Class(
   active = list(
     api_list = function() {
       type <- self$type
+      details <- as.list(self$details[[1]])
       details <- switch(self$type, 
-        ADVANCED = list(advancedDetails = self$details),
-        EXCLUDE = list(excludeDetails = self$details),
-        INCLUDE = list(includeDetails = self$details),
-        LOWERCASE = list(lowercaseDetails = self$details),
-        SEARCH_AND_REPLACE = list(searchAndReplaceDetails = self$details),
-        UPPERCASE = list(uppercaseDetails = self$details)
+        ADVANCED = list(advancedDetails = details),
+        EXCLUDE = list(excludeDetails = details),
+        INCLUDE = list(includeDetails = details),
+        LOWERCASE = list(lowercaseDetails = details),
+        SEARCH_AND_REPLACE = list(searchAndReplaceDetails = details),
+        UPPERCASE = list(uppercaseDetails = details)
       )
       c(super$api_list, list(type = type), details) 
     }
@@ -390,15 +391,18 @@ gaViewFilter <- R6Class(
     request = "filters",
     field_corrections = function(field_list){
       field_list <- super$field_corrections(field_list)
-      details <- switch(field_list$type, 
-        ADVANCED = field_list$advancedDetails,
-        EXCLUDE = field_list$excludeDetails,
-        INCLUDE = field_list$includeDetails,
-        LOWERCASE = field_list$lowercaseDetails,
-        SEARCH_AND_REPLACE = field_list$searchAndReplaceDetails,
-        UPPERCASE = field_list$uppercaseDetails
-      )
-      field_list$details <- list(details)
+      details <- alply(field_list, 1, function(row) {
+        details <- switch(row$type, 
+          ADVANCED = row$advancedDetails,
+          EXCLUDE = row$excludeDetails,
+          INCLUDE = row$includeDetails,
+          LOWERCASE = row$lowercaseDetails,
+          SEARCH_AND_REPLACE = row$searchAndReplaceDetails,
+          UPPERCASE = row$uppercaseDetails
+        )
+      })
+      attributes(details) <- NULL
+      field_list$details <- details
       field_list
     }
   )
