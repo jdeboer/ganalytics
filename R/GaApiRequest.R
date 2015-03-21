@@ -159,7 +159,7 @@ form_url <- function(base_url, queries = NULL) {
         paste(
           aaply(seq_along(queries), 1, function(query_index){
             query <- queries[query_index]
-            query <- str_replace_all(query, "\\+", "%2B")
+            # query <- str_replace_all(query, "\\+", "%2B")
             paste(names(queries)[query_index], URLencode(as.character(query), reserved = TRUE), sep = "=")
           }),
           collapse = "&"
