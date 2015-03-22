@@ -175,6 +175,10 @@ NULL
 gtmAccount <- R6Class(
   "gtmAccount",
   inherit = .gtmResource,
+  public = list(
+    shareData = NA,
+    fingerprint = NA
+  ),
   active = list(
     containers = function() {self$.child_nodes(gtmContainers)},
     permissions = function() {
@@ -214,6 +218,11 @@ GtmAccounts <- function(creds = GaCreds()){
 gtmPermission <- R6Class(
   "gtmPermission",
   inherit = .gtmResource,
+  public = list(
+    emailAddress = NA,
+    accountAccess = NA,
+    containerAccess = NA
+  ),
   private = list(
     parent_class_name = "gtmAccount",
     request = "permissions",
@@ -235,6 +244,16 @@ gtmPermissions <- R6Class(
 gtmContainer <- R6Class(
   "gtmContainer",
   inherit = .gtmResource,
+  public = list(
+    domainName = NA,
+    publicId = NA,
+    timeZoneCountryId = NA,
+    timeZoneId = NA,
+    notes = NA,
+    usageContext = NA,
+    enabledBuiltInVariable = NA,
+    fingerprint = NA
+  ),
   active = list(
     tags = function() {self$.child_nodes(gtmTags)},
     rules = function() {self$.child_nodes(gtmRules)},
@@ -268,6 +287,20 @@ gtmContainers <- R6Class(
 gtmTag <- R6Class(
   "gtmTag",
   inherit = .gtmResource,
+  public = list(
+    type = NA,
+    firingRuleId = NA,
+    blockingRuleId = NA,
+    firingTriggerId = NA,
+    blockingTriggerId = NA,
+    liveOnly = NA,
+    priority = NA,
+    notes = NA,
+    scheduleStartMs = NA,
+    scheduleEndMs = NA,
+    parameter = NA,
+    fingerprint = NA
+  ),
   private = list(
     parent_class_name = "gtmContainer",
     request = "tags",
@@ -286,6 +319,11 @@ gtmTags <- R6Class(
 gtmRule <- R6Class(
   "gtmRule",
   inherit = .gtmResource,
+  public = list(
+    notes = NA,
+    condition = NA,
+    fingerprint = NA
+  ),
   private = list(
     parent_class_name = "gtmContainer",
     request = "rules",
@@ -304,6 +342,22 @@ gtmRules <- R6Class(
 gtmTrigger <- R6Class(
   "gtmTrigger",
   inherit = .gtmResource,
+  public = list(
+    type = NA,
+    customEventFilter = NA,
+    filter = NA,
+    autoEventFilter = NA,
+    waitForTags = NA,
+    checkValidation = NA,
+    waitForTagsTimeout = NA,
+    uniqueTriggerId = NA,
+    eventName = NA,
+    interval = NA,
+    limit = NA,
+    enableAllVideos = NA,
+    videoPercentageList = NA,
+    fingerprint = NA
+  ),
   private = list(
     parent_class_name = "gtmContainer",
     request = "triggers",
@@ -321,6 +375,16 @@ gtmTriggers <- R6Class(
 
 gtmMacro <- R6Class(
   "gtmMacro",
+  public = list(
+    type = NA,
+    notes = NA,
+    scheduleStartMs = NA,
+    scheduleEndMs = NA,
+    parameter = NA,
+    enablingRuleId = NA,
+    disablingRuleId = NA,
+    fingerprint = NA
+  ),
   inherit = .gtmResource,
   private = list(
     parent_class_name = "gtmContainer",
@@ -340,6 +404,16 @@ gtmMacros <- R6Class(
 gtmVariable <- R6Class(
   "gtmVariable",
   inherit = .gtmResource,
+  public = list(
+    type = NA,
+    notes = NA,
+    scheduleStartMs = NA,
+    scheduleEndMs = NA,
+    parameter = NA,
+    enablingTriggerId = NA,
+    disablingTriggerId = NA,
+    fingerprint = NA
+  ),
   private = list(
     parent_class_name = "gtmContainer",
     request = "variables",
@@ -358,6 +432,17 @@ gtmVariables <- R6Class(
 gtmContainerVersion <- R6Class(
   "gtmContainerVersion",
   inherit = .gtmResource,
+  public = list(
+    deleted = NA,
+    notes = NA,
+    container = NA,
+    macro = NA,
+    rule = NA,
+    tag = NA,
+    trigger = NA,
+    variable = NA,
+    fingerprint = NA
+  ),
   private = list(
     parent_class_name = "gtmContainer",
     request = "versions",
