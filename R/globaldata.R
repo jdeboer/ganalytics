@@ -58,10 +58,6 @@ kGaDimTypes <- list(
 # Constants
 # ---------
 
-# Google APIs requests base URLs
-management.api <- "https://www.googleapis.com/analytics/v3/management"
-reporting.api <- "https://www.googleapis.com/analytics/v3/data/ga"
-
 # Google Analytics date formats
 kGaDateInFormat <- "%Y-%m-%d"
 kGaDateOutFormat <- "%Y%m%d"

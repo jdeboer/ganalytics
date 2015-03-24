@@ -457,11 +457,56 @@ gaViewFilters <- R6Class(
 gaAccountUserLink <- R6Class(
   "gaAccountUserLink",
   inherit = .gaResource,
-  # properties and api_list active property to be implemented
+  public = list(
+    email = NA,
+    local_permissions = list(
+      READ_AND_ANALYZE = TRUE,
+      COLLABORATE = TRUE,
+      EDIT = FALSE,
+      MANAGE_USERS = FALSE
+    ),
+    effective_permissions = list(
+      READ_AND_ANALYZE = TRUE,
+      COLLABORATE = TRUE,
+      EDIT = FALSE,
+      MANAGE_USERS = FALSE
+    ),
+    modify = function(field_list) {
+      super$modify(field_list)
+      self$local_permissions <- unlist(self$local_permissions, recursive = FALSE)
+      self$effective_permissions <- unlist(self$effective_permissions, recursive = FALSE)
+    }
+  ),
+  active = list(
+    api_list = function() {
+      list(
+        entity = list(
+          accountRef = list(
+            id  = self$parent$id
+          )
+        ),
+        userRef = list(
+          email = self$email
+        ),
+        permissions = list(
+          local = unlist(unsplit_permissions(list(self$local_permissions)))
+        )
+      )
+    }
+  ),
   private = list(
     parent_class_name = "gaAccount",
     request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')]
+    scope = ga_scopes['manage_users'],
+    field_corrections = function(field_list) {
+      field_list <- super$field_corrections(field_list)
+      field_list$email <- field_list$userRef$email
+      field_list <- mutate(
+        field_list,
+        local_permissions = split_permissions(permissions$local),
+        effective_permissions = split_permissions(permissions$effective)
+      )
+    }
   )
 )
 
@@ -479,7 +524,8 @@ gaAccountUserLinks <- R6Class(
   ),
   private = list(
     entity_class = gaAccountUserLink,
-    scope = gaAccountUserLink$private_fields$scope
+    scope = gaAccountUserLink$private_fields$scope,
+    field_corrections = gaAccountUserLink$private_methods$field_corrections
   )
 )
 
@@ -550,7 +596,7 @@ gaPropertyUserLink <- R6Class(
   private = list(
     parent_class_name = "gaProperty",
     request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')]
+    scope = ga_scopes['manage_users']
   )
 )
 
@@ -954,7 +1000,7 @@ gaViewUserLink <- R6Class(
   private = list(
     parent_class_name = "gaView",
     request = "entityUserLinks",
-    scope = ga_scopes[c('read_only', 'manage_users')]
+    scope = ga_scopes['manage_users']
   )
 )
 

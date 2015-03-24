@@ -74,3 +74,22 @@ ArgList <- function(...) {
     unlist(x = list(...), recursive = FALSE)
   )
 }
+
+split_permissions <- function(permissions) {
+  permission_levels <- user_permission_levels
+  names(permission_levels) <- permission_levels
+  x <- llply(permissions, function(permission_set) {
+    y <- llply(permission_levels, function(level) {
+      level %in% permission_set
+    })
+  })
+}
+
+unsplit_permissions <- function(permissions) {
+  x <- llply(permissions, function(permission_set) {
+    names(permission_set)[unlist(permission_set)]
+  })
+}
+
+
+
