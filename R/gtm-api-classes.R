@@ -8,17 +8,25 @@ NULL
   ".gtmManagementApi",
   public = list(
     creds = GaCreds(),
-    get = function() {
+    get = function(max_results = NULL) {
+      req_type <- "GET"
       gtm_api_request(
         creds = self$creds,
         request = self$.req_path,
-        scope = private$scope
+        scope = private$scope,
+        req_type = req_type,
+        max_results = max_results
       )
+    },
+    initialize = function(creds = GaCreds()) {
+      self$creds = creds
     }
   ),
   private = list(
     request = NULL,
     scope = gtm_scopes['read_only'],
+    parent_class_name = "NULL",
+    resource_name = NULL,
     field_corrections = function(field_list) {
       if(is.data.frame(field_list)) {
         if(exists("created", field_list)) {
@@ -27,13 +35,9 @@ NULL
         if(exists("updated", field_list)) {
           field_list$updated <- ymd_hms(field_list$updated)
         }
-        field_list[!(names(field_list) %in% c("kind", "selfLink", "childLink", "parentLink"))]
-      } else {
-        field_list
       }
-    },
-    parent_class_name = "NULL",
-    resource_name = NULL
+	  field_list[!(names(field_list) %in% c("kind", "selfLink", "childLink", "parentLink"))]
+    }
   )
 )
 
@@ -41,7 +45,7 @@ NULL
   ".gtmResource",
   inherit = .gtmManagementApi,
   public = list(
-    id = NULL,
+    id = NA,
     name = NA,
     created = NA,
     updated = NA,
@@ -54,16 +58,15 @@ NULL
       })
       self
     },
-    initialize = function(parent = NULL, id = NULL, creds = GaCreds()) {
+    initialize = function(creds = GaCreds(), parent = NULL, id = NA) {
+      super$initialize(creds = creds)
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
-      self$creds <- creds
       self$id <- id
-      if(is.null(id)) {
-        self
-      } else {
+      if(!is.na(id)) {
         self$get()
       }
+      self
     },
     get = function() {
       if (!is.null(self$.req_path)) {
@@ -84,7 +87,7 @@ NULL
   ),
   active = list(
     .req_path = function() {
-      if (is.null(self$id)) {
+      if (is.na(self$id)) {
         NULL
       } else {
         c(self$parent$.req_path, private$request, self$id)
@@ -114,7 +117,8 @@ NULL
       }
       self
     },
-    initialize = function(parent = NULL, creds = GaCreds()) {
+    initialize = function(creds = GaCreds(), parent = NULL) {
+      super$initialize(creds = creds)
       entity_class_private <- with(private$entity_class, c(private_fields, private_methods))
       private$request <- entity_class_private$request
       private$parent_class_name <- entity_class_private$parent_class_name
@@ -123,10 +127,8 @@ NULL
         private$collection_name <- private$request
       }
       private$resource_name <- entity_class_private$resource_name
-      self$creds <- creds
       self$parent <- parent
       self$get()
-      self
     }
   ),
   active = list(
@@ -146,9 +148,9 @@ NULL
         })
         attributes(ret) <- NULL
         names(ret) <- self$summary$id
-        return(ret)
+        ret
       } else {
-        return(NULL)
+        NULL
       }
     },
     .req_path = function() {
@@ -157,11 +159,11 @@ NULL
       # i.e. it will be NULL. Otherwise, if there is a parent, but it has no
       # request path, then this should also not have a request path.
       if (!is.null(self$parent) & is.null(self$parent$.req_path)) {
-        return(NULL)
+        NULL
       } else if (is(self$parent, private$parent_class_name)) {
         c(self$parent$.req_path, private$request)
       } else {
-        return(NULL)
+        NULL
       }
     }
   ),
