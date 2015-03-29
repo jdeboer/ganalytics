@@ -505,6 +505,8 @@ setClassUnion(
 # ---- GA query dimensions, metrics, and sortby lists ----
 
 
+# Validity check to implement: Ensure date does not preceed Google Analytics launch date 2005-01-01
+
 setClass(
   Class = "gaDateRange",
   representation = representation(
@@ -668,7 +670,8 @@ setClass(
     maxResults = "numeric",
     authFile = "character",
     userName = "character",
-    appCreds = "characterOrList"
+    appCreds = "characterOrList",
+    creds = "list"
   ),
   prototype = prototype(
     dateRange = new("gaDateRange"),

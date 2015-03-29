@@ -5,9 +5,10 @@
 \title{GaQuery
 Create a ganalytics query object}
 \usage{
-GaQuery(view = GaAccounts()$entities[[1]], userName = character(0),
-  appCreds = character(0), authFile = character(0), startDate = Sys.Date()
-  - 8, endDate = Sys.Date() - 1, metrics = "ga:sessions",
+GaQuery(view = GaAccounts()$entities[[1]], creds = list(),
+  userName = character(0), appCreds = character(0),
+  authFile = character(0), startDate = Sys.Date() - 8,
+  endDate = Sys.Date() - 1, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL, segment = NULL,
   samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
 }

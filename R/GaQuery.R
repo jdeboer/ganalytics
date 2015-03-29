@@ -23,6 +23,7 @@ NULL
 #' @export
 GaQuery <- function(
   view = GaAccounts()$entities[[1]],
+  creds = list(),
   userName = character(0),
   appCreds = character(0),
   authFile = character(0),
@@ -36,6 +37,9 @@ GaQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
+  if (length(creds) == 0 & length(appCreds) == 0 & length(authFile) == 0 & is(view, ".gaManagementApi")) {
+    creds <- view$creds
+  }
   new("gaQuery",
       profileId = GaProfileId(view),
       dateRange = GaDateRange(
@@ -51,7 +55,8 @@ GaQuery <- function(
       maxResults = maxResults,
       authFile = authFile,
       userName = userName,
-      appCreds = appCreds
+      appCreds = appCreds,
+      creds = creds
   )
 }
 

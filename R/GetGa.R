@@ -27,12 +27,16 @@ setMethod("GetGaData", "gaQuery", function(
   addViewId = FALSE
 ) {
   if (is.null(creds)) {
-    creds <- GaCreds(
-      userName = object@userName,
-      appCreds = object@appCreds,
-      cache = object@authFile,
-      use_oob = use_oob
-    )
+    if (length(object@creds) > 0) {
+      creds <- object@creds
+    } else {
+      creds <- GaCreds(
+        userName = object@userName,
+        appCreds = object@appCreds,
+        cache = object@authFile,
+        use_oob = use_oob
+      )
+    }
   }
   queryParams <- GetGaQueries(object)
   responses <- alply(
