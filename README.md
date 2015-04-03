@@ -19,7 +19,7 @@ Installation
 ### 1. Install the necessary packages into R
 
 #### Warning
-* The `ganalytics` package is currently under development.
+* The ganalytics package is currently under development.
 * The installation procedure below installs directly from the respective GitHub repositories.
 
 #### Prerequisites
@@ -27,7 +27,7 @@ Installation
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/blob/master/README.md)
 
-#### Execute the following statements in R to install `ganalytics`:
+#### Execute the following statements in R to install ganalytics:
 ```r
 # Install the latest version of devtools via CRAN
 install.packages("devtools", dependencies = TRUE)
@@ -35,9 +35,10 @@ install.packages("devtools", dependencies = TRUE)
 devtools::install_github("jdeboer/ganalytics")
 # End
 ```
-#### Now, restart R. This is important to ensure you have a clean workspace to avoid possible errors.
+#### Now, restart R.
+* This is important to ensure you have a clean workspace to avoid possible errors.
 
-### 2. Prepare your Google API application (you only need to do this once)
+### 2. Prepare your Google API application _(you only need to do this once)_
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
 * Check you are **signed into Google** with the account you wish to use.
 * Choose **Create Project** from the Google API Console and give your project a name (or choose an existing project if you have one already).
@@ -48,9 +49,9 @@ devtools::install_github("jdeboer/ganalytics")
 * Select **Other** as the Installed Application Type.
 * Note your **Client ID** and **Client Secret** and download the JSON file to your R working directory.
 
-_Note: For further information about Google APIs please refer to the References section at the end of this document._
+_Note: For further information about Google APIs please refer to the [References section](https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references) at the end of this document._
 
-### 3. Set your system environment variables (this is optional but recommended)
+### 3. Set your system environment variables _(this is optional but recommended)_
 * Add the following two user variables:
 
   |     | Variable name                 | Variable value         |
@@ -74,10 +75,10 @@ _Note: For further information about Google APIs please refer to the References 
   * The browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
 * **If you do not provide a view ID then:**
-  * If you have access to only one Google Analytics account, with one property, then `ganalytics` will automatically select the default view for you.
+  * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.
   * Otherwise it will select the first property from the first account it finds in the list of accounts you have access to.
 
-* Return to R and execute the following the load the `ganalytics` package:
+* Return to R and execute the following the load the ganalytics package:
   ```r
   library(ganalytics)
   ```
@@ -105,7 +106,7 @@ _Note: For further information about Google APIs please refer to the References 
 
 * You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.
 * Make sure you are signed into the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
-* If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; sessions by day for the past 7 days.
+* If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days.
 
 _Note: A small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
 
@@ -114,7 +115,7 @@ Examples
 
 As demonstrated in the installation steps above, before executing any of the following examples:
 
-1. load the `ganalytics` package
+1. load the ganalytics package
 2. generate a `gaQuery` object with a Google Analytics view ID and API app credentials assigned to it.
 
 ### Asumptions
