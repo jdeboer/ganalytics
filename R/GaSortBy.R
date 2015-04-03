@@ -70,12 +70,29 @@ setMethod(
   }
 )
 
+# 
+# setMethod(
+#   f = "GaSortBy",
+#   signature = "gaQuery",
+#   definition = function(.Object) {
+#     .Object@sortBy
+#   }
+# )
 
 setMethod(
   f = "GaSortBy",
-  signature = "gaQuery",
-  definition = function(.Object) {
-    .Object@sortBy
+  signature = c("gaQuery", "ANY"),
+  definition = function(.Object, value) {
+    if (missing(value)) {
+      .Object@sortBy
+    } else {
+      if(length(value) < 1) {
+        value <- NULL
+      }
+      .Object@sortBy <- GaSortBy(value)
+      validObject(.Object)
+      return(.Object)
+    }
   }
 )
 

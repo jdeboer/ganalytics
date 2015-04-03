@@ -4,7 +4,6 @@
 #' @include all-generics.R
 #' @include helper-functions.R
 #' @include GaApiRequest.R
-#' @include GaCreds.R
 NULL
 
 #' GaMetaUpdate

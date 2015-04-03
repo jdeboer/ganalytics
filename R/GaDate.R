@@ -199,6 +199,9 @@ setMethod(
   }
 )
 
+setMethod("GaDateRange<-", c("gaQuery", "Date"), function(.Object, value) {
+  GaDateRange(.Object, as.character(value))
+})
 
 setMethod(
   f = "GaStartDate",
