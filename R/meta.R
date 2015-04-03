@@ -8,12 +8,11 @@ NULL
 
 #' GaMetaUpdate
 #' Update the metadata file
-#' Update the package system file containing meta data about valid dimensions and metrics, etc.
+#' Update the package system file containing metadata about valid dimensions and metrics, etc.
+#' This function should be used prior to package build.
 #' @return a data.frame
-#' @export
-GaMetaUpdate <- function() {
-  scope <- "https://www.googleapis.com/auth/analytics.readonly"
-  creds <- GoogleApiCreds()
+GaMetaUpdate <- function(creds = GoogleApiCreds()) {
+  scope <- ga_scopes['read_only']
   request <- c("metadata", "ga", "columns")
   meta_data <- ga_api_request(creds = creds, request = request, scope = scope)
   vars <- meta_data$items[names(meta_data$items) != "attributes"]
@@ -30,8 +29,8 @@ GaMetaUpdate <- function() {
   kGaVars <- dlply(df, "type", function(vars) {vars$id})
   kGaVars <- rename(kGaVars, replace = c("DIMENSION" = "dims", "METRIC" = "mets"))
   kGaVars_df <- df
-  metafile <- file.path(system.file(package = "ganalytics"), "R", "sysdata.rda")
-  print(paste("Updating metadata file:", metafile))
+  metafile <- file.path("R", "sysdata.rda")
+  message(paste("Updating metadata file:", metafile))
   save(kGaVars, kGaVars_df, file = metafile)
   return(kGaVars)
 }

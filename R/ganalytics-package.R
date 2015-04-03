@@ -16,7 +16,7 @@
 #'   stop_for_status content oauth_app modify_url add_headers GET POST PUT
 #'   DELETE
 #' @importFrom stringr str_c str_detect str_replace_all str_replace ignore.case
-#' @importFrom plyr aaply mutate alply l_ply ldply laply llply
+#' @importFrom plyr aaply mutate alply l_ply ldply laply llply dlply rename
 #' @importFrom XML xmlParse xmlToList xmlApply
 #' @importFrom jsonlite toJSON fromJSON validate
 #' @docType package

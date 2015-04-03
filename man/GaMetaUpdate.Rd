@@ -4,9 +4,10 @@
 \alias{GaMetaUpdate}
 \title{GaMetaUpdate
 Update the metadata file
-Update the package system file containing meta data about valid dimensions and metrics, etc.}
+Update the package system file containing metadata about valid dimensions and metrics, etc.
+This function should be used prior to package build.}
 \usage{
-GaMetaUpdate()
+GaMetaUpdate(creds = GoogleApiCreds())
 }
 \value{
 a data.frame
@@ -14,6 +15,7 @@ a data.frame
 \description{
 GaMetaUpdate
 Update the metadata file
-Update the package system file containing meta data about valid dimensions and metrics, etc.
+Update the package system file containing metadata about valid dimensions and metrics, etc.
+This function should be used prior to package build.
 }
 
