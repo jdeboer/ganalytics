@@ -53,10 +53,10 @@ _Note: For further information about Google APIs please refer to the References 
 ### 3. Set your system environment variables (this is optional but recommended)
 * Add the following two user variables:
 
-|     | Variable name                 | Variable value         |
-| --- | ----------------------------- | ---------------------- |
-|   1 | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
-|   2 | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
+  |     | Variable name                 | Variable value         |
+  | --- | ----------------------------- | ---------------------- |
+  |   1 | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
+  |   2 | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
 
 * To do this in Windows:
   * Search for and select **"Edit Environment Variables For Your Account"** from the Start menu.
@@ -78,36 +78,30 @@ _Note: For further information about Google APIs please refer to the References 
   * Otherwise it will select the first property from the first account it finds in the list of accounts you have access to.
 
 * Return to R and execute the following the load the `ganalytics` package:
-
-```r
-library(ganalytics)
-```
+  ```r
+  library(ganalytics)
+  ```
 
 * If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign into Google Analytics:
-
-```
-my_creds <- GoogleApiCreds("you@company.com")
-```
+  ```r
+  my_creds <- GoogleApiCreds("you@company.com")
+  ```
 
 * Otherwise do one of the following:
   * If you downloaded the JSON file containing your Google API app credentials, then provide the filename:
-
-```
-my_creds <- GoogleApiCreds("you@company.com", "client_secret.json")
-```
-
+    ```r
+    my_creds <- GoogleApiCreds("you@company.com", "client_secret.json")
+    ```
   * Instead of a filename you may supply the `client_id` and `client_secret` directly:
-
-```
-my_creds <- GoogleApiCreds("you@company.com", list(client_id = "<client id>", client_secret = "<client secret>"))
-```
+    ```r
+    my_creds <- GoogleApiCreds("you@company.com", list(client_id = "<client id>", client_secret = "<client secret>"))
+    ```
 
 * Now formulate and run your Google Analytics query, remembering to substitute `view_id` with the view ID you wish to use:
-
-```r
-myQuery <- GaQuery( view_id, my_creds )
-GetGaData(myQuery)
-```
+  ```r
+  myQuery <- GaQuery( view_id, my_creds )
+  GetGaData(myQuery)
+  ```
 
 * You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.
 * Make sure you are signed into the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
@@ -128,7 +122,6 @@ As demonstrated in the installation steps above, before executing any of the fol
 **The following examples assume you have successfully completed the above steps.**
 
 ### Example 1 - Setting the date range
-
 ```r
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
 GaDateRange(myQuery) <- c("2013-01-01", "2013-05-31")
@@ -147,7 +140,6 @@ summary(myData)
 ```
 
 ### Example 2 - Choosing what metrics to report
-
 ```r
 # Report number of page views instead
 GaMetrics(myQuery) <- "pageviews"
@@ -166,7 +158,6 @@ summary(myData)
 ```
 
 ### Example 3 - Selecting what dimensions to split your metrics by
-
 ```r
 # Similar to metrics, but for dimensions
 GaDimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
@@ -181,7 +172,6 @@ tail(myData)
 ```
 
 ### Example 4 - Sort by
-
 ```r
 # Sort by descending number of pageviews
 GaSortBy(myQuery) <- "-pageviews"
@@ -193,7 +183,6 @@ tail(myData)
 ```
 
 ### Example 5 - Row filters
-
 ```r
 # Filter for Sunday sessions only
 sundayExpr <- GaExpr("dayofweek", "=", "0")
@@ -211,7 +200,6 @@ head(myData)
 ```
 
 ### Example 6 - Combining filters with AND
-
 ```r
 # Expression to define Sunday sessions
 sundayExpr <- GaExpr("dayofweek", "=", "0")
@@ -233,7 +221,6 @@ head(myData)
 ```
 
 ### Example 7 - Combining filters with OR
-
 ```r
 # In a similar way to AND
 loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
@@ -247,7 +234,6 @@ summary(myData)
 ```
 
 ### Example 8 - Filters that combine ORs with ANDs
-
 ```r
 loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
 recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
@@ -267,8 +253,8 @@ myData <- GetGaData(myQuery)
 summary(myData)
 # End
 ```
-### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 
+### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 ```r
 # Continuing from example 8...
 
@@ -289,8 +275,8 @@ head(myData)
 tail(myData)
 # End
 ```
-### Example 10 - Session segmentation
 
+### Example 10 - Session segmentation
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
@@ -312,7 +298,6 @@ head(myData)
 ```
 
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
-
 ```r
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
@@ -346,7 +331,6 @@ with(sessions_by_hour, barplot(sessions, names.arg=hour))
 To run this example first install ggplot2 if you haven't already.
 ```r
 install.packages("ggplot2")
-#End
 ```
 
 Once installed, then run the following example.
