@@ -30,7 +30,7 @@ setMethod("GetGaData", "gaQuery", function(
     if (length(object@creds) > 0) {
       creds <- object@creds
     } else {
-      creds <- GaCreds(
+      creds <- GoogleApiCreds(
         userName = object@userName,
         appCreds = object@appCreds,
         cache = object@authFile,

@@ -47,7 +47,7 @@ GaFilter(test_query) <- NULL
 my_segments <- GaUserSegments(creds = creds)
 GaSegment(test_query) <- my_segments$entities[[1]]
 
-creds <- GaCreds("analytics@lovesdata.net")
+creds <- GoogleApiCreds("analytics@lovesdata.net")
 
 library(plyr)
 
@@ -259,7 +259,7 @@ views_summary <- summarise(views_summary,
 
 app_views <- subset(views_summary, subset = type == "APP")
 
-creds <- GaCreds("demo@lovesdata.net")
+creds <- GoogleApiCreds("demo@lovesdata.net")
 my_accounts <- GaAccounts(creds)
 my_account <- my_accounts$get_entity(id = 32554188) # 33109290
 my_account

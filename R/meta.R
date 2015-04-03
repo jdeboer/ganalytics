@@ -13,7 +13,7 @@ NULL
 #' @export
 GaMetaUpdate <- function() {
   scope <- "https://www.googleapis.com/auth/analytics.readonly"
-  creds <- GaCreds()
+  creds <- GoogleApiCreds()
   request <- c("metadata", "ga", "columns")
   meta_data <- ga_api_request(creds = creds, request = request, scope = scope)
   vars <- meta_data$items[names(meta_data$items) != "attributes"]

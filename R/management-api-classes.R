@@ -99,7 +99,7 @@ gaUserSegment <- R6Class(
 )
 
 #' @export
-GaUserSegment <- function(id = NULL, definition = NA, creds = GaCreds()){
+GaUserSegment <- function(id = NULL, definition = NA, creds = GoogleApiCreds()){
   id <- sub("^gaid::", "", id)
   userSegment <- gaUserSegment$new(id = id, creds = creds)
   if (is.null(id)) {
@@ -122,7 +122,7 @@ gaUserSegments <- R6Class(
 )
 
 #' @export
-GaUserSegments <- function(creds = GaCreds()){
+GaUserSegments <- function(creds = GoogleApiCreds()){
   gaUserSegments$new(creds = creds)
 }
 
@@ -149,7 +149,7 @@ gaAccountSummary <- R6Class(
 )
 
 #' @export
-GaAccountSummary <- function(id = NULL, creds = GaCreds()){
+GaAccountSummary <- function(id = NULL, creds = GoogleApiCreds()){
   gaAccountSummary$new(id = id, creds = creds)
 }
 
@@ -166,7 +166,7 @@ gaAccountSummaries <- R6Class(
 )
 
 #' @export
-GaAccountSummaries <- function(creds = GaCreds()){
+GaAccountSummaries <- function(creds = GoogleApiCreds()){
   gaAccountSummaries$new(creds = creds)
 }
 
@@ -216,7 +216,7 @@ gaAccount <- R6Class(
 )
 
 #' @export
-GaAccount <- function(id = NULL, creds = GaCreds()){
+GaAccount <- function(id = NULL, creds = GoogleApiCreds()){
   gaAccount$new(id = id, creds = creds)
 }
 
@@ -234,7 +234,7 @@ gaAccounts <- R6Class(
 )
 
 #' @export
-GaAccounts <- function(creds = GaCreds()){
+GaAccounts <- function(creds = GoogleApiCreds()){
   gaAccounts$new(creds = creds)
 }
 

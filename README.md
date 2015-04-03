@@ -5,13 +5,21 @@ Interact with **Google Analytics** using **R**
 
 S4 classes and methods for interactive use of the Google Analytics core reporting API using R.
 
+Updates
+-------
+
+There is now support for user and session level condition based segments as well as sequential segmentation.
+
+Also recently added is Google Management API support (still a work in progress) - so now you can get details in R about what goals you have defined, accounts, properties, views, etc. There are *write* methods in there too, but these have not been fully tested so perhaps try them under a test login if you want, otherwise just avoid using the "INSERT", "UPDATE" and "DELETE" methods.
+
+There is also some basic support for the Google Tag Manager API, but again, still work in progress.
 
 Installation
 ------------
 ### 1. Install the necessary packages into R
 
 #### Warning
-* The `ganalytics` package is currently under development.
+* The ganalytics package is currently under development.
 * The installation procedure below installs directly from the respective GitHub repositories.
 
 #### Prerequisites
@@ -19,8 +27,7 @@ Installation
 * If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/blob/master/README.md)
 
-#### Execute the following statements in R to install `ganalytics`:
-
+#### Execute the following statements in R to install ganalytics:
 ```r
 # Install the latest version of devtools via CRAN
 install.packages("devtools", dependencies = TRUE)
@@ -28,96 +35,94 @@ install.packages("devtools", dependencies = TRUE)
 devtools::install_github("jdeboer/ganalytics")
 # End
 ```
-#### Now, restart R. This is important to ensure you have a clean workspace to avoid possible errors.
+#### Now, restart R.
+* This is important to ensure you have a clean workspace to avoid possible errors.
 
-### 2. Prepare your Google API application
+### 2. Prepare your Google API application _(you only need to do this once)_
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
-* Check you are **signed in to Google** with the account you wish to use.
-* Choose **Create project** from the Google API Console and give your project a name (or choose an existing project if you have one already). You may need to wait a minute for the project to be created once you submit the form.
-* From the **APIs** page, set the status of **Analytics API** to **ON**.
+* Check you are **signed into Google** with the account you wish to use.
+* Choose **Create Project** from the Google API Console and give your project a name (or choose an existing project if you have one already).
+* From the **APIs** page, enable the **Analytics API**. You may also want to enable the **Tag Manager API** if you wish to try that.
 * You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
-* Go to the **Credentials** page and click the blue button **Create new client ID**.
-* Select **Installed application** as the application type.
+* Go to the **Credentials** page and click the blue button **Create New Client ID**.
+* Select **Installed Application** as the application type.
 * Select **Other** as the Installed Application Type.
-* Note your **Client ID** and **Client secret** or download the JSON file for future reference.
+* Note your **Client ID** and **Client Secret** and download the JSON file to your R working directory.
 
-_Note: For further information about Google APIs please refer to the References section at the end of this document._
+_Note: For further information about Google APIs please refer to the [References section](https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references) at the end of this document._
 
-### 3. Set your system environment variables (this is optional but recommended)
+### 3. Set your system environment variables _(this is optional but recommended)_
 * Add the following two user variables:
 
-|     | Variable name                 | Variable value         |
-| --- | ----------------------------- | ---------------------- |
-|   1 | `GANALYTICS_CONSUMER_ID`      | `<Your client ID>`     |
-|   2 | `GANALYTICS_CONSUMER_SECRET`  | `<Your client secret>` |
+  |     | Variable name                 | Variable value         |
+  | --- | ----------------------------- | ---------------------- |
+  |   1 | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
+  |   2 | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
 
-* To do this in Windows 7:
-  * Search for and select **"Edit environment variables for your account"** from the Start menu.
-  * Within the **Environment variables** window, add the above **User variables** by selecting **New** and entering the **Variable name** and **Variable value**, then click **OK** for each.
+* To do this in Windows:
+  * Search for and select **"Edit Environment Variables For Your Account"** from the Start menu.
+  * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
-
-* To do this in Mac OS there is a free open source utility called [EnvPane](https://github.com/hschmidt/EnvPane)
+* To do this in Mac OS, there is a free open source utility called [EnvPane](https://github.com/hschmidt/EnvPane)
 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
 ### 4. Authenticate and attempt your first query with ganalytics
-* To perform a query you will need to obtain your **Google Analytics view ID**. This can be accessed from either:
-  * using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
-  * the **Admin page** in Google Analytics under **View Settings**, or
-  * the browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
+* To perform a query you will need to obtain your **Google Analytics view ID**. This can be accessed in a number of ways:
+  * Using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
+  * The **Admin page** in Google Analytics under **View Settings**, or
+  * The browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
-  _Note: A function for accessing your view IDs within R will be available in the near future._
+* **If you do not provide a view ID then:**
+  * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.
+  * Otherwise it will select the first property from the first account it finds in the list of accounts you have access to.
 
-* Return to R and execute the following, remembering to substitute `view_id` with the view ID you noted down:
- 
-##### If you completed step 3
+* Return to R and execute the following the load the ganalytics package:
+  ```r
+  library(ganalytics)
+  ```
 
-```r
-library(ganalytics)
-myQuery <- GaQuery( view_id )
-GetGaData(myQuery)
-# End
-```
+* If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign into Google Analytics:
+  ```r
+  my_creds <- GoogleApiCreds("you@company.com")
+  ```
 
-##### If you did NOT complete step 3
-In addition to your `view_id`, also substitute `client_id` and `client_secret` below with your details from step 2
+* Otherwise do one of the following:
+  * If you downloaded the JSON file containing your Google API app credentials, then provide the filename:
+    ```r
+    my_creds <- GoogleApiCreds("you@company.com", "client_secret.json")
+    ```
+  * Instead of a filename you may supply the `client_id` and `client_secret` directly:
+    ```r
+    my_creds <- GoogleApiCreds("you@company.com", list(client_id = "<client id>", client_secret = "<client secret>"))
+    ```
 
-```r
-library(ganalytics)
-myQuery <- GaQuery( view_id )
-GetGaData(myQuery, key = client_id , secret = client_secret)
-# End
-```
+* Now formulate and run your Google Analytics query, remembering to substitute `view_id` with the view ID you wish to use:
+  ```r
+  myQuery <- GaQuery( view_id, my_creds )
+  GetGaData(myQuery)
+  ```
 
-* You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API product you created in step 1.
-* Make sure you are signed in to the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
-* If you have successfully executed all of the above R commands you should see the output of the default `ganalytics` query; sessions by day for the past 7 days.
+* You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.
+* Make sure you are signed into the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
+* If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days.
 
-_Note: A small file named `ganalytics_token.RDS` will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
+_Note: A small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
 
 Examples
 --------
 
 As demonstrated in the installation steps above, before executing any of the following examples:
-1. load the `ganalytics` package
-2. generate a gaQuery object with a Google Analytics view ID assigned to it.
 
-The following code performs these steps: (Remember to replace `123456789` with the view ID you wish to use.) 
-
-```r
-library(ganalytics)
-myQuery <- GaQuery( 123456789 )  # Replace this with your Google Analytics view ID
-# End
-```
-If you have just completed the installation steps, then you would have done this already.
+1. load the ganalytics package
+2. generate a `gaQuery` object with a Google Analytics view ID and API app credentials assigned to it.
 
 ### Asumptions
 
-The following examples assume you have successfully completed the above steps and that you have set your operating system's **environment variables** as described in step 3.
+**The following examples assume you have successfully completed the above steps.**
 
 ### Example 1 - Setting the date range
-
 ```r
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
 GaDateRange(myQuery) <- c("2013-01-01", "2013-05-31")
@@ -136,7 +141,6 @@ summary(myData)
 ```
 
 ### Example 2 - Choosing what metrics to report
-
 ```r
 # Report number of page views instead
 GaMetrics(myQuery) <- "pageviews"
@@ -155,7 +159,6 @@ summary(myData)
 ```
 
 ### Example 3 - Selecting what dimensions to split your metrics by
-
 ```r
 # Similar to metrics, but for dimensions
 GaDimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
@@ -170,7 +173,6 @@ tail(myData)
 ```
 
 ### Example 4 - Sort by
-
 ```r
 # Sort by descending number of pageviews
 GaSortBy(myQuery) <- "-pageviews"
@@ -182,7 +184,6 @@ tail(myData)
 ```
 
 ### Example 5 - Row filters
-
 ```r
 # Filter for Sunday sessions only
 sundayExpr <- GaExpr("dayofweek", "=", "0")
@@ -200,7 +201,6 @@ head(myData)
 ```
 
 ### Example 6 - Combining filters with AND
-
 ```r
 # Expression to define Sunday sessions
 sundayExpr <- GaExpr("dayofweek", "=", "0")
@@ -222,7 +222,6 @@ head(myData)
 ```
 
 ### Example 7 - Combining filters with OR
-
 ```r
 # In a similar way to AND
 loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
@@ -236,7 +235,6 @@ summary(myData)
 ```
 
 ### Example 8 - Filters that combine ORs with ANDs
-
 ```r
 loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
 recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
@@ -256,8 +254,8 @@ myData <- GetGaData(myQuery)
 summary(myData)
 # End
 ```
-### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 
+### Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 ```r
 # Continuing from example 8...
 
@@ -278,8 +276,8 @@ head(myData)
 tail(myData)
 # End
 ```
-### Example 10 - Session segmentation
 
+### Example 10 - Session segmentation
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
@@ -301,7 +299,6 @@ head(myData)
 ```
 
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
-
 ```r
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
@@ -335,7 +332,6 @@ with(sessions_by_hour, barplot(sessions, names.arg=hour))
 To run this example first install ggplot2 if you haven't already.
 ```r
 install.packages("ggplot2")
-#End
 ```
 
 Once installed, then run the following example.

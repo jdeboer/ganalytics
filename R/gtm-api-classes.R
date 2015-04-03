@@ -80,7 +80,7 @@ gtmAccount <- R6Class(
 )
 
 #' @export
-GtmAccount <- function(id = NULL, creds = GaCreds()){
+GtmAccount <- function(id = NULL, creds = GoogleApiCreds()){
   gtmAccount$new(id = id, creds = creds)
 }
 
@@ -93,7 +93,7 @@ gtmAccounts <- R6Class(
 )
 
 #' @export
-GtmAccounts <- function(creds = GaCreds()){
+GtmAccounts <- function(creds = GoogleApiCreds()){
   gtmAccounts$new(creds = creds)
 }
 
