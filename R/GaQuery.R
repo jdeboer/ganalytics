@@ -22,7 +22,7 @@ NULL
 #'  up to 1,000,000
 #' @export
 GaQuery <- function(
-  view = GaAccounts()$entities[[1]],
+  view = NA,
   creds = list(),
   userName = character(0),
   appCreds = character(0),
@@ -37,7 +37,10 @@ GaQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if (length(creds) == 0 & length(appCreds) == 0 & length(authFile) == 0 & is(view, ".gaManagementApi")) {
+  if(is.na(view)) {
+    view <- GaAccounts(creds = creds)$entities[[1]]
+  }
+  if (length(creds) == 0 & length(appCreds) == 0 & length(authFile) == 0 & is(view, ".gaResource")) {
     creds <- view$creds
   }
   new("gaQuery",
@@ -58,6 +61,60 @@ GaQuery <- function(
       appCreds = appCreds,
       creds = creds
   )
+}
+
+modify_query <- function(
+  query, # A single query object
+  ids = NA, # A vector of of view IDs
+  periods = NA, # A vector of lubridate period objects
+  columns = NA, # metrics, dimensions and sorting are inferred by non ambiguious character vector called columns
+  filters = NA, # A vector of gaFilter objects
+  segments = NA, # A vector of gaSegment objects
+  sampling_level = NA,
+  max_results = NA,
+  user_name = NA,
+  app_creds = NA,
+  start_date = NA,
+  end_date = NA,
+  metrics = NA,
+  dimensions = NA,
+  sort_by = NA
+) {
+  if (!is.na(ids)) {
+    GaProfileId(query) <- ids
+  }
+  if (!is.na(start_date)) {
+    GaStartDate(query) <- start_date
+  }
+  if (!is.na(end_date)) {
+    GaEndDate(query) <- end_date
+  }
+  if (!is.na(metrics)) {
+    GaMetrics(query) <- metrics
+  }
+  if (!is.na(dimensions)) {
+    GaDimensions(query) <- dimensions
+  }
+  if (!is.na(sort_by)) {
+    GaSortBy(query) <- sort_by
+  }
+  if (!is.na(filters)) {
+    GaFilters(query) <- filters
+  }
+  if (!is.na(segment)) {
+    GaSegment(query) <- segment
+  }
+  if (!is.na(sampling_level)) {
+    GaSamplingLevel(query) <- sampling_level
+  }
+  if (!is.na(max_results)) {
+    GaMaxResults(query) <- max_results
+  }
+  # The following are yet to be implemented
+  # user_name
+  # app_creds
+  # period
+  # columns
 }
 
 setMethod(
