@@ -13,8 +13,8 @@ GaDateRange(myQuery) <- period
 
 GaMetrics(myQuery) <- c("ga:impressions","ga:adClicks","ga:adCost","ga:transactions")
 GaDimensions(myQuery) <- c("ga:campaign")
-#segment <- c("gaid::-4")
-#GaSegment(myQuery) <- segment
+segment <- c("gaid::-4")
+GaSegment(myQuery) <- segment
 
 
 
@@ -44,7 +44,7 @@ test_get_report <- GetGaData(test_query)
 
 GaFilter(test_query) <- NULL
 
-my_segments <- GaUserSegments()
+my_segments <- GaUserSegments(creds = creds)
 GaSegment(test_query) <- my_segments$entities[[1]]
 
 creds <- GaCreds("analytics@lovesdata.net")

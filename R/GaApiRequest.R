@@ -1,14 +1,5 @@
-#' @importFrom httr oauth_endpoints oauth1.0_token oauth2.0_token config 
-#'   stop_for_status content oauth_app modify_url add_headers GET POST PUT
-#'   DELETE
-#' @importFrom stringr str_c str_detect str_replace_all
-#' @importFrom plyr aaply
-#' @importFrom XML xmlParse xmlToList xmlApply
-#' @importFrom selectr querySelectorAll
-#' @importFrom jsonlite toJSON fromJSON validate
-NULL
-
 #' @export
+#' @include ganalytics-package.R
 GoogleApiCreds <- function(
   userName = character(0),
   appCreds = NULL,
