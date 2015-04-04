@@ -5,15 +5,12 @@
 \title{GaQuery
 Create a ganalytics query object}
 \usage{
-GaQuery(view = NA, creds = list(), userName = character(0),
-  appCreds = character(0), authFile = character(0), startDate = Sys.Date()
-  - 8, endDate = Sys.Date() - 1, metrics = "ga:sessions",
+GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
+  endDate = Sys.Date() - 1, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL, segment = NULL,
   samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
 }
 \arguments{
-\item{authFile}{auth file to save token to}
-
 \item{startDate}{start date}
 
 \item{endDate}{end date}
@@ -34,6 +31,8 @@ GaQuery(view = NA, creds = list(), userName = character(0),
 up to 1,000,000}
 
 \item{profileId}{profile id to use}
+
+\item{authFile}{auth file to save token to}
 }
 \description{
 GaQuery

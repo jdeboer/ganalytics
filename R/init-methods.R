@@ -22,7 +22,7 @@ setMethod(
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
       varIndex <- pmatch(tmp, tolower(kGaVars$allVars))
-      tmp <- allVars[varIndex]
+      tmp <- kGaVars$allVars[varIndex]
       .Object@.Data <- tmp
       ## If a match was not found, use the var name supplied to
       ## let validation fail through the validObject method
