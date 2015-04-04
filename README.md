@@ -143,7 +143,7 @@ As demonstrated in the installation steps above, before executing any of the fol
 
 ### Asumptions
 
-**The following examples assume you have successfully completed the above steps.**
+**The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: `myQuery`.**
 
 ### Example 1 - Setting the date range
 
