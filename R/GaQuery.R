@@ -23,10 +23,7 @@ NULL
 #' @export
 GaQuery <- function(
   view = NA,
-  creds = list(),
-  userName = character(0),
-  appCreds = character(0),
-  authFile = character(0),
+  creds = GoogleApiCreds(),
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "ga:sessions",
@@ -37,10 +34,10 @@ GaQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if(is.na(view)) {
+  if(missing(view)) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
-  if (length(creds) == 0 & length(appCreds) == 0 & length(authFile) == 0 & is(view, ".gaResource")) {
+  if (missing(creds) & is(view, ".gaResource")) {
     creds <- view$creds
   }
   new("gaQuery",
