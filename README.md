@@ -83,7 +83,7 @@ _Note: For further information about Google APIs please refer to the [References
   library(ganalytics)
   ```
 
-* If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign into Google Analytics:
+* If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign-in to Google Analytics:
   ```r
   my_creds <- GoogleApiCreds("you@company.com")
   ```
