@@ -66,7 +66,8 @@ _Note: For further information about Google APIs please refer to the [References
   * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
-* To do this in Mac OS, there is a free open source utility called [EnvPane](https://github.com/hschmidt/EnvPane)
+* Alternatively you can use `Sys.setenv(GOOGLE_APIS_CONSUMER_ID = "<Your client ID>", GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>")`, or create an `.Renviron` file on Unix-like systems. (Thanks to @unikum for these suggestions.)
+* There is also free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
