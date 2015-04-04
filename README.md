@@ -116,7 +116,20 @@ _Note: For further information about Google APIs please refer to the [References
 
 * You should then be directed to *http://accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.
 * Make sure you are signed into the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
-* If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days.
+
+If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days, for example:
+
+```
+        date sessions
+1 2015-03-27     2988
+2 2015-03-28     1594
+3 2015-03-29     1912
+4 2015-03-30     3061
+5 2015-03-31     2609
+6 2015-04-01     2762
+7 2015-04-02     2179
+8 2015-04-03     1552
+```
 
 _Note: A small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
 
