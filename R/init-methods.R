@@ -17,28 +17,20 @@ setMethod(
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
       if (!grepl("^ga:[a-z0-9]+$", tmp)) {
-        tmp <- paste("ga", tmp, sep=":")
+        tmp <- paste0("ga:", tmp)
       }
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
-      allVars <- with(kGaVars, union(dims, mets))
-      #allVars <- str_replace(allVars, "XX", replacement = "[0-9]+")
-      #allVars <- paste0("^", allVars, "$")
-      ### pmatch cannot work with regular expresions ###
-      varIndex <- pmatch(tmp, tolower(allVars))
+      varIndex <- pmatch(tmp, tolower(kGaVars$allVars))
       tmp <- allVars[varIndex]
       .Object@.Data <- tmp
-      ## If a match was not found, use the var name supplied
-      ## As var names can only be a character vector of length 1, and
-      ## as is.na will only check the first element of a vector, then
-      ## only check the first element.
+      ## If a match was not found, use the var name supplied to
+      ## let validation fail through the validObject method
+      ## is.na can only work with a vector of length 1.
       if (is.na(.Object@.Data[1])) {
         .Object@.Data <- value
       }
       validObject(.Object)
-#       if (is.na(tmp[1])) {
-#         stop(paste("Invalid metric or dimension", value[1], sep = ": "))
-#       }
     }
     return(.Object)
   }
@@ -53,6 +45,8 @@ setMethod(
     if (!missing(value)) {
       if (value == "=") value <- "=="
       else if (value %in% c("!","=!")) value <- "!="
+      else if (value == "][") value <- "[]"
+      else if (value == "><") value <- "<>"
       else if (value == "<<") value <- "<"
       else if (value == ">>") value <- ">"
       else if (value == "=>") value <- ">="
@@ -64,7 +58,7 @@ setMethod(
       .Object@.Data <- value
       validObject(.Object)
     }
-    return(.Object)
+    .Object
   }
 )
 
@@ -78,7 +72,7 @@ setMethod(
     if (!missing(value)) {
       value <- sub(kGaPrefix, "gaid::", value)
       if (!grepl("^gaid::\\-?[0-9]+$", value)) {
-        value <- paste("gaid", value, sep="::")
+        value <- paste("gaid", value, sep = "::")
       }
       .Object@.Data <- value
       validObject(.Object)
@@ -98,9 +92,7 @@ setMethod(
         yesNo <- c("Yes", "No")
         index <- pmatch(x = tolower(gaOperand), table = tolower(yesNo))
         if (is.na(index)) {
-          stop(
-            paste(gaVar, "Invalid operand", gaOperand, sep = ": ")
-          )
+          stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
         } else {
           gaOperand <- GaOperand(yesNo[index])
         }
@@ -108,20 +100,18 @@ setMethod(
         visitorType <- c("New Visitor", "Returning Visitor")
         index <- pmatch(x = tolower(gaOperand), table = tolower(visitorType))
         if (is.na(index)) {
-          stop(
-            paste(gaVar, "Invalid operand", gaOperand, sep = ": ")
-          )
+          stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
         } else {
           gaOperand <- GaOperand(visitorType[index])
         }
       }
     }
     .Object@gaOperand <- gaOperand
-    validObject(.Object)
     if(GaIsRegEx(.Object)) {
       GaOperand(.Object) <- tolower(GaOperand(.Object))
-    }    
-    return(.Object)
+    }
+    validObject(.Object)
+    .Object
   }
 )
 
@@ -133,20 +123,16 @@ setMethod(
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- sub(kGaPrefix, "ga:", value)
-      value <- sapply(
-        X = value,
-        FUN = function(x) {
-          if (!grepl("^ga:[0-9]+$", x)) {
-            x <- paste("ga", x, sep=":")
-          } else {
-            x
-          }
+      value <- sapply(value, function(x) {
+        if (!grepl("^ga:[0-9]+$", x)) {
+          x <- paste("ga", x, sep = ":")
         }
-      )
+        x
+      })
       .Object@.Data <- unique(value)
       validObject(.Object)
     }
-    return(.Object)
+    .Object
   }
 )
 
@@ -156,6 +142,10 @@ setMethod(
   f = "initialize",
   signature = "gaDateRange",
   definition = function(.Object, startDate, endDate) {
+    # If startDate and endDate are provided then
+    # bind every combination of startDate and endDate
+    # into a data.frame, keep only the unique rows,
+    # and use these start and end dates for this object.
     if(!(missing(startDate)||missing(endDate))) {
       dates <- do.call(
         what = rbind,
@@ -178,6 +168,6 @@ setMethod(
       .Object@endDate <- dates$endDate
       validObject(.Object)
     }
-    return(.Object)
+    .Object
   }
 )

@@ -6,8 +6,8 @@
 #' @include management-api-classes.R
 NULL
 
-# Methods for coercision between classes
-# --------------------------------------
+# Methods for coercion between classes
+# ------------------------------------
 
 # Coercing to and from gaDim or gaMet and character
 setAs(

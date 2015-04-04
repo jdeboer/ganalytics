@@ -8,7 +8,6 @@
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
 #'   
 #' @keywords package
-#' @import methods
 #' @importFrom R6 R6Class
 #' @importFrom lubridate now ymd_hms
 #' @importFrom selectr querySelector querySelectorAll

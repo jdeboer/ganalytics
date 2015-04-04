@@ -47,6 +47,8 @@ GaFilter(test_query) <- NULL
 my_segments <- GaUserSegments(creds = creds)
 GaSegment(test_query) <- my_segments$entities[[1]]
 
+GetGaData(test_query)
+
 creds <- GoogleApiCreds("analytics@lovesdata.net")
 
 library(plyr)

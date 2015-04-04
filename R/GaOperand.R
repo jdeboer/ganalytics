@@ -34,7 +34,7 @@ setMethod(
 
 setMethod(
   f = "GaOperand<-",
-  signature = ".gaOperandScalar",
+  signature = ".gaOperand",
   definition = function(.Object, value) {
     to <- class(value)
     as(.Object, to) <- value

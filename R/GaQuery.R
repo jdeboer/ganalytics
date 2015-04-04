@@ -56,9 +56,6 @@ GaQuery <- function(
       segment = GaSegment(segment),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
-      authFile = authFile,
-      userName = userName,
-      appCreds = appCreds,
       creds = creds
   )
 }
