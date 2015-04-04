@@ -78,7 +78,7 @@ _Note: For further information about Google APIs please refer to the [References
   * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.
   * Otherwise it will select the first property from the first account it finds in the list of accounts you have access to.
 
-* Return to R and execute the following the load the ganalytics package:
+* Return to R and execute the following to load the ganalytics package:
   ```r
   library(ganalytics)
   ```
