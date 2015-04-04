@@ -57,14 +57,14 @@ GaPaginate <- function(query, maxRequestedRows, creds) {
 
 GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000) {
   request <- "data/ga"
-  scope <- "https://www.googleapis.com/auth/analytics.readonly"
+  scope <- ga_scopes['read_only']
   query <- c(
     query,
     "start-index" = startIndex,
     "max-results" = maxResults
   )
   data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query)
-  if (!is.null(data.ga$error)) {
+  if (length(data.ga$error) > 1) {
     stop(with(
         data.ga$error,
         paste("Google Analytics error", code, message, sep = " : ")
@@ -83,13 +83,16 @@ YesNoToLogical <- function(char) {
   return(char)
 }
 
+#' This function applies asFun to the selected columns from the data.frame, df,
+#' matched by colNames (case insensitive).
 ColTypes <- function(df, colNames, asFun, ...) {
-  #cols <- aaply(tolower(names(df)), 1, function(df_col) {any(str_detect(df_col, colNames))})
   cols <- tolower(names(df)) %in% tolower(colNames)
   if(TRUE %in% cols) df[cols] <- lapply(X = df[cols], FUN = asFun, ...)
   return(df)
 }
 
+# Some dimensions in Google Analytics, although with numerical values, should be
+# treated as categorical because they dimensions rather than metrics.
 FactorInt <- function(x) {
   factor(as.numeric(x), ordered = TRUE)
 }
@@ -114,7 +117,7 @@ GaListToDataframe <- function(gaData) {
   } else {
     cols <- as.list(gaData$columnHeaders$name)
     names(cols) <- cols
-    gaData$rows <- data.frame(cols)[0,]
+    gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0,]
     names(gaData$rows) <- gaData$columnHeaders$name
   }
   names(gaData$rows) <- sub("^ga[:\\.]", "", names(gaData$rows))

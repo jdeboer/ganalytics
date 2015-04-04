@@ -238,7 +238,6 @@ GaAccounts <- function(creds = GoogleApiCreds()){
   gaAccounts$new(creds = creds)
 }
 
-#' @export
 gaViewFilter <- R6Class(
   "gaViewFilter",
   inherit = .gaResource,
@@ -289,7 +288,6 @@ gaViewFilter <- R6Class(
   )
 )
 
-#' @export
 gaViewFilters <- R6Class(
   "gaViewFilters",
   inherit = .gaCollection,
@@ -299,7 +297,6 @@ gaViewFilters <- R6Class(
   )
 )
 
-#' @export
 gaAccountUserLink <- R6Class(
   "gaAccountUserLink",
   inherit = .gaResource,
@@ -356,7 +353,6 @@ gaAccountUserLink <- R6Class(
   )
 )
 
-#' @export
 gaAccountUserLinks <- R6Class(
   "gaAccountUserLinks",
   inherit = .gaCollection,
@@ -375,7 +371,6 @@ gaAccountUserLinks <- R6Class(
   )
 )
 
-#' @export
 gaProperty <- R6Class(
   "gaProperty",
   inherit = .gaResource,
@@ -421,7 +416,6 @@ gaProperty <- R6Class(
   )
 )
 
-#' @export
 gaProperties <- R6Class(
   "gaProperties",
   inherit = .gaCollection,
@@ -434,7 +428,6 @@ gaProperties <- R6Class(
   )
 )
 
-#' @export
 gaPropertyUserLink <- R6Class(
   "gaPropertyUserLink",
   inherit = .gaResource,
@@ -446,7 +439,6 @@ gaPropertyUserLink <- R6Class(
   )
 )
 
-#' @export
 gaPropertyUserLinks <- R6Class(
   "gaPropertyUserLinks",
   inherit = .gaCollection,
@@ -464,7 +456,6 @@ gaPropertyUserLinks <- R6Class(
   )
 )
 
-#' @export
 gaAdwordsLink <- R6Class(
   "gaAdwordsLink",
   inherit = .gaResource,
@@ -485,7 +476,6 @@ gaAdwordsLink <- R6Class(
   )
 )
 
-#' @export
 gaAdwordsLinks <- R6Class(
   "gaAdwordsLinks",
   inherit = .gaCollection,
@@ -494,7 +484,6 @@ gaAdwordsLinks <- R6Class(
   )
 )
 
-#' @export
 gaCustomDimension <- R6Class(
   "gaCustomDimension",
   inherit = .gaResource,
@@ -518,7 +507,6 @@ gaCustomDimension <- R6Class(
   )
 )
 
-#' @export
 gaCustomDimensions <- R6Class(
   "gaCustomDimensions",
   inherit = .gaCollection,
@@ -530,7 +518,6 @@ gaCustomDimensions <- R6Class(
   )
 )
 
-#' @export
 gaCustomMetric <- R6Class(
   "gaCustomMetric",
   inherit = .gaResource,
@@ -560,7 +547,6 @@ gaCustomMetric <- R6Class(
   )
 )
 
-#' @export
 gaCustomMetrics <- R6Class(
   "gaCustomMetrics",
   inherit = .gaCollection,
@@ -572,7 +558,6 @@ gaCustomMetrics <- R6Class(
   )
 )
 
-#' @export
 gaDataSource <- R6Class(
   "gaDataSource",
   inherit = .gaResource,
@@ -600,7 +585,6 @@ gaDataSource <- R6Class(
   )
 )
 
-#' @export
 gaDataSources <- R6Class(
   "gaDataSources",
   inherit = .gaCollection,
@@ -613,7 +597,6 @@ gaDataSources <- R6Class(
   )
 )
 
-#' @export
 gaUpload <- R6Class(
   "gaUpload",
   inherit = .gaResource,
@@ -628,7 +611,6 @@ gaUpload <- R6Class(
   )
 )
 
-#' @export
 gaUploads <- R6Class(
   "gaUploads",
   inherit = .gaCollection,
@@ -638,7 +620,6 @@ gaUploads <- R6Class(
   )
 )
 
-#' @export
 gaView <- R6Class(
   "gaView",
   inherit = .gaResource,
@@ -700,7 +681,6 @@ gaView <- R6Class(
   )
 )
 
-#' @export
 gaViews <- R6Class(
   "gaViews",
   inherit = .gaCollection,
@@ -710,7 +690,6 @@ gaViews <- R6Class(
   )
 )
 
-#' @export
 gaGoal <- R6Class(
   "gaGoal",
   inherit = .gaResource,
@@ -734,7 +713,6 @@ gaGoal <- R6Class(
   )
 )
 
-#' @export
 gaGoals <- R6Class(
   "gaGoals",
   inherit = .gaCollection,
@@ -743,7 +721,6 @@ gaGoals <- R6Class(
   )
 )
 
-#' @export
 gaExperiment <- R6Class(
   "gaExperiment",
   inherit = .gaResource,
@@ -792,7 +769,6 @@ gaExperiment <- R6Class(
   )
 )
 
-#' @export
 gaExperiments <- R6Class(
   "gaExperiments",
   inherit = .gaCollection,
@@ -801,7 +777,6 @@ gaExperiments <- R6Class(
   )
 )
 
-#' @export
 gaUnsampledReport <- R6Class(
   "gaUnsampledReport",
   inherit = .gaResource,
@@ -826,7 +801,6 @@ gaUnsampledReport <- R6Class(
   )
 )
 
-#' @export
 gaUnsampledReports <- R6Class(
   "gaUnsampledReports",
   inherit = .gaCollection,
@@ -838,7 +812,6 @@ gaUnsampledReports <- R6Class(
   )
 )
 
-#' @export
 gaViewUserLink <- R6Class(
   "gaViewUserLink",
   inherit = .gaResource,
@@ -850,7 +823,6 @@ gaViewUserLink <- R6Class(
   )
 )
 
-#' @export
 gaViewUserLinks <- R6Class(
   "gaViewUserLinks",
   inherit = .gaCollection,
@@ -868,7 +840,6 @@ gaViewUserLinks <- R6Class(
   )
 )
 
-#' @export
 gaViewFilterLink <- R6Class(
   "gaViewFilterLink",
   inherit = .gaResource,
@@ -879,7 +850,6 @@ gaViewFilterLink <- R6Class(
   )
 )
 
-#' @export
 gaViewFilterLinks <- R6Class(
   "gaViewFilterLinks",
   inherit = .gaCollection,
@@ -888,3 +858,7 @@ gaViewFilterLinks <- R6Class(
   )
 )
 
+setOldClass(c("gaUserSegment", "R6"))
+setOldClass(c("gaAccount", "R6"))
+setOldClass(c("gaProperty", "R6"))
+setOldClass(c("gaView", "R6"))

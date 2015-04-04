@@ -4,6 +4,8 @@
 #' @include all-generics.R
 #' @include helper-functions.R
 #' @include GaApiRequest.R
+#' @importFrom plyr mutate alply
+#' @importFrom stringr str_replace
 NULL
 
 #' GaMetaUpdate
@@ -29,6 +31,21 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   kGaVars <- dlply(df, "type", function(vars) {vars$id})
   kGaVars <- rename(kGaVars, replace = c("DIMENSION" = "dims", "METRIC" = "mets"))
   kGaVars_df <- df
+  
+  kGaVars_df <- mutate(
+    kGaVars_df,
+    lower_bounds = do.call(pmin, c(kGaVars_df[12:15], na.rm = TRUE)),
+    upper_bounds = do.call(pmax, c(kGaVars_df[12:15], na.rm = TRUE))
+  )
+  kGaVars$allVars <- unlist(alply(kGaVars_df, 1, function(var_def){
+    ret <- if(!is.na(var_def$upper_bounds)) {
+      str_replace(var_def$id, "XX", seq(var_def$lower_bounds, var_def$upper_bounds))
+    } else {
+      var_def$id
+    }
+    ret
+  }, .expand = FALSE), use.names = FALSE)
+  
   metafile <- file.path("R", "sysdata.rda")
   message(paste("Updating metadata file:", metafile))
   save(kGaVars, kGaVars_df, file = metafile)

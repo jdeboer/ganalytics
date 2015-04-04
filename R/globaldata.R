@@ -67,8 +67,8 @@ kGaDateOrigin <- as.Date("2005-01-01")
 
 # Google Analytics expression operators
 kGaOps <- list(
-  met = c("==","!=","<",">","<=",">="),
-  dim = c("==","!=","=~","!~","=@","!@")
+  met = c("==", "!=", "<", ">", "<=", ">="),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
 )
 
 # ganalytics tolerated dimension and metric prefixes
