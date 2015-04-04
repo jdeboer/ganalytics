@@ -6,6 +6,9 @@ library(ganalytics)
 creds <- GoogleApiCreds(appCreds = ".app_oauth_creds.json")
 
 test_query <- GaQuery(creds = creds)
+
+GaDimensions(test_query) <- c("date","experimentId")
+
 myQuery <- test_query
 
 period <- c("2015-03-02", "2015-03-09")
