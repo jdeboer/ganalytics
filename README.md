@@ -278,8 +278,7 @@ myData <- GetGaData(myQuery)
 summary(myData)
 
 # Perform the same query but change which dimensions to view
-# - Notice "daysSince" is conveniently accepted as a partial match for "daysSinceLastSession".
-GaDimensions(myQuery) <- c("sessionCount", "daysSince", "dayOfWeek")
+GaDimensions(myQuery) <- c("sessionCount", "daysSinceLastSession", "dayOfWeek")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -296,7 +295,7 @@ loyalAndRecent_Sunday <- GaAnd(loyalExpr, recentExpr, sundayExpr)
 GaFilter(myQuery) <- loyalAndRecent_Sunday
 
 # Sort by decending visit count and ascending days since last visit.
-GaSortBy(myQuery) <- c("-sessionCount", "+daysSince")
+GaSortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
 myData <- GetGaData(myQuery)
 head(myData)
 
