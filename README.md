@@ -3,7 +3,7 @@ ganalytics
 
 Interact with **Google Analytics** using **R**
 
-S4 classes and methods for interactive use of the Google Analytics core reporting API using R.
+Classes and methods for interactive use of the Google Analytics core reporting and management APIs using R.
 
 Updates
 -------
