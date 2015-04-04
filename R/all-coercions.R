@@ -2,6 +2,8 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include helper-functions.R
+#' @include gtm-api-classes.R
+#' @include management-api-classes.R
 NULL
 
 # Methods for coercision between classes
