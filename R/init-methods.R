@@ -20,12 +20,15 @@ setMethod(
       if (!any(grepl("^ga:[a-z0-9]+$", tmp))) {
         tmp <- paste0("ga:", tmp)
       }
+      if(str_detect(value, ignore.case("dateofsession"))) {
+        tmp <- "dateOfSession"
+      }
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
-      allVars <- tolower(kGaVars$allVars)
-      allVars_short <- kGaVars_df$id
+      allVars <- tolower(union(kGaVars$allVars, "dateOfSession"))
+      allVars_short <- union(kGaVars_df$id, "dateOfSession")
       varIndex <- charmatch(tmp, allVars)
-      matches <- kGaVars$allVars[varIndex]
+      matches <- union(kGaVars$allVars, "dateOfSession")[varIndex]
       if (identical(any(varIndex == 0), TRUE)) {
         stop(paste0(
           "Ambiguous var name: ", paste0(value[varIndex == 0], collapse = ", "), ". Did you mean any of these?:\n",

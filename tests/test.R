@@ -3,6 +3,8 @@
 
 library(ganalytics)
 
+GetGaData(GaQuery())
+
 GaOperand(c(1, 2))
 
 creds <- GoogleApiCreds(appCreds = ".app_oauth_creds.json")

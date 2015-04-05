@@ -23,12 +23,15 @@ setClass(
   }
 )
 
+#   dateOfSession is a special dimension
+#   #dateOfSession<>2014-05-20_2014-05-30
+
 setClass(
   Class = "gaDimVar",
   prototype = prototype("ga:date"),
   contains = "character",
   validity = function(object) {
-    if (IsVarMatch(object@.Data, kGaVars$dims)) {
+    if (IsVarMatch(object@.Data, union("dateOfSession", kGaVars$dims))) {
       TRUE
     } else {
       paste("Invalid GA dimension name", object@.Data, sep = ": ")
@@ -101,7 +104,7 @@ setClass(
     } else if (length(object) == 2) {
       if (object[1] > object[2]) {
         "The first value in a range must not be greater than the second"
-      }
+      } else TRUE
     } else TRUE
   }
 )
@@ -174,10 +177,6 @@ setClass(
   }
 )
 
-#   #{dimensionOrMetricName}<>{minValue}_{maxValue} #For metrics or numerical dimensions, also dates
-#   #dateOfSession<>2014-05-20_2014-05-30
-#   dateOfSession is a special dimension
-
 setClass(
   Class = "gaDimExpr",
   contains = ".gaExpr",
@@ -188,15 +187,22 @@ setClass(
       is(object@gaOperand, "gaDimOperand")
     )
     if (valid == TRUE) {
+      if (object@gaOperator == "<>") {
+        rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
+        if (!(object@gaVar %in% rangeDimVars)) {
+          return("A range operator only supports numerical dimensions or metrics")
+        }
+      }
       if (!(length(object@gaOperand) == 1 | object@gaOperator %in% c("<>", "[]"))) {
-        "gaOperand must be of length 1 unless using a range '<>' or list '[]' operator."
+        return("gaOperand must be of length 1 unless using a range '<>' or list '[]' operator.")
       } else if (!(length(object@gaOperand) <= 2 | object@gaOperator == "[]")) {
-        "gaOperand may only be greater than length 2 if using a list operator '[]'."
+        return("gaOperand may only be greater than length 2 if using a list operator '[]'.")
       } else if (GaIsRegEx(object@gaOperator)) {
         if (nchar(object@gaOperand) > 128) {
-          paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@gaOperand))
+          return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@gaOperand)))
         }
-      } else if (object@gaOperator %in% c("!=", "==", "<>", "[]")) {
+      }
+      if (object@gaOperator %in% c("!=", "==", "<>", "[]")) {
         ValidGaOperand(object@gaVar, object@gaOperand)
       } else TRUE
     } else valid
@@ -350,11 +356,9 @@ setClass(
   validity = function(object) {
     pattern <- "^gaid::\\-?[0-9]+$"
     if (length(object) != 1) {
-      return("gaSegmentId must be a character vector of length 1")
+      "gaSegmentId must be a character vector of length 1"
     } else if (!grepl(pattern = pattern, x = object@.Data)) {
-      return(
-        paste("gaSegmentId must match the regular expression ", pattern, sep = "")
-      )
+      paste("gaSegmentId must match the regular expression ", pattern, sep = "")
     } else TRUE
   }
 )

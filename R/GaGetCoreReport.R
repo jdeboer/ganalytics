@@ -105,7 +105,7 @@ GaListToDataframe <- function(gaData) {
     )
     names(gaData$rows) <- gaData$columnHeaders$name
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$dates, asFun = as.Date, format = kGaDateOutFormat)
-    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedFactors, asFun = FactorInt)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedIntFactors, asFun = FactorInt)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNoToLogical)
     metric_cols <- gaData$columnHeaders$name[gaData$columnHeaders$columnType == "METRIC"]
