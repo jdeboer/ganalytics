@@ -261,11 +261,7 @@ setAs(
         as(from@gaVar, to),
         as(from@gaOperator, to),
         as(
-          object = gsub(
-            pattern = "([,;])",
-            replacement = "\\\\\\1",
-            x = from@gaOperand
-          ),
+          object = compileOperand(from),
           Class = to
         ),
         sep = ""
@@ -273,6 +269,20 @@ setAs(
     )
   }
 )
+
+compileOperand <- function(from) {
+  operand <- gsub(
+    pattern = "([,;])",
+    replacement = "\\\\\\1",
+    x = from@gaOperand
+  )
+  if (from@gaOperator == "[]") {
+    operand <- paste0(operand, collapse = "|")
+  } else if (from@gaOperator == "<>") {
+    operand <- paste0(operand, collapse = "_")
+  }
+  operand
+}
 
 setAs(
   from = "gaOr",

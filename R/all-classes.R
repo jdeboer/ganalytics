@@ -1,5 +1,6 @@
 #' @importFrom methods setClass setClassUnion setValidity prototype
 #' @importFrom stringr str_replace str_detect ignore.case
+#' @importFrom assertthat validate_that
 #' @include ganalytics-package.R
 #' @include helper-functions.R
 NULL
@@ -43,11 +44,7 @@ setClassUnion(
 setValidity(
   Class = ".gaVar",
   method = function(object) {
-    if(length(object) == 1) {
-      TRUE
-    } else {
-      "gaVar must be a of length 1."
-    }
+    validate_that(length(object) == 1)
   }
 )
 
@@ -87,11 +84,7 @@ setClassUnion(
 setValidity(
   Class = ".gaOperator",
   method = function(object) {
-    if(length(object) == 1) {
-      TRUE
-    } else {
-      "gaOperator's must be character vector of length 1"
-    }
+    validate_that(length(object) == 1)
   }
 )
 
@@ -101,9 +94,15 @@ setClass(
   Class = "gaMetOperand",
   contains = "numeric",
   validity = function(object) {
-    if (length(object) %in% c(1, 2)) {
-      TRUE
-    } else return("A gaMetOperand must be of length 1 or 2")
+    if (!(length(object) %in% c(1, 2))) {
+      "A gaMetOperand must be of length 1 or 2"
+    } else if (any(is.na(object))) {
+      "A gaMetOperand connot contain NA values"
+    } else if (length(object) == 2) {
+      if (object[1] > object[2]) {
+        "The first value in a range must not be greater than the second"
+      }
+    } else TRUE
   }
 )
 
@@ -111,9 +110,10 @@ setClass(
   Class = "gaDimOperand",
   contains = "character",
   validity = function(object) {
-    if (length(object) < 1) {
-      return("A gaDimOperand must be of at least length 1")
-    } else TRUE
+    validate_that(
+      length(object) >= 1,
+      length(object) <= 10
+    )
   }
 )
 
@@ -138,21 +138,22 @@ setClass(
   Class = "gaMetExpr",
   contains = ".gaExpr",
   validity = function(object) {
-    if (!class(object@gaVar)=="gaMetVar") {
-      return("gaVar must be of class gaMetVar")
-    } else if (!class(object@gaOperator)=="gaMetOperator") {
-      return("gaOperator must be of class gaMetOperator")
-    } else if (!class(object@gaOperand)=="gaMetOperand") {
-      return("gaOperand must be of class gaMetOperand")
-    } else if (object@gaOperator != "<>") {
-      if (length(object@gaOperand) != 1) {
-        return("gaOperand must be of length 1 unless using a range operator '<>'.")
-      } else TRUE
-    } else {
-      if (length(object@gaOperand) != 2) {
-        return("gaOperand must be of length 2 when using a range operator '<>'.")
-      } else TRUE
-    }
+    valid <- validate_that(
+      is(object@gaVar, "gaMetVar"),
+      is(object@gaOperator, "gaMetOperator"),
+      is(object@gaOperand, "gaMetOperand")
+    )
+    if (valid == TRUE) {
+      if (object@gaOperator != "<>") {
+        if (length(object@gaOperand) != 1) {
+          "gaOperand must be of length 1 unless using a range operator '<>'."
+        } else TRUE
+      } else {
+        if (length(object@gaOperand) != 2) {
+          "gaOperand must be of length 2 when using a range operator '<>'."
+        } else TRUE
+      }
+    } else valid
   }
 )
 
@@ -166,17 +167,14 @@ setClass(
   ),
   contains = "gaMetExpr",
   validity = function(object) {
-    if (!length(object@metricScope) == 1) {
-      return("metricScope must be of length 1.")
-    } else if (!(object@metricScope %in% c("perUser", "perSession", "perHit"))) {
-      return("metricScope must be one of 'perUser', 'perSession' or 'perHit'.")
-    } else TRUE
+    validate_that(
+      length(object@metricScope) == 1,
+      object@metricScope %in% c("perUser", "perSession", "perHit")
+    )
   }
 )
 
 #   #{dimensionOrMetricName}<>{minValue}_{maxValue} #For metrics or numerical dimensions, also dates
-#   #{dimensionName}[]{value1}|{value2}|...
-#   #A maximum of 10 values per in-list dimension condition is allowed. Only for dimensions
 #   #dateOfSession<>2014-05-20_2014-05-30
 #   dateOfSession is a special dimension
 
@@ -184,31 +182,24 @@ setClass(
   Class = "gaDimExpr",
   contains = ".gaExpr",
   validity = function(object) {
-    if (!class(object@gaVar)=="gaDimVar") {
-      return("gaVar must be of class gaDimVar")
-    } else if (!class(object@gaOperator)=="gaDimOperator") {
-      return("gaOperator must be of class gaDimOperator")
-    } else if (!class(object@gaOperand)=="gaDimOperand") {
-      return("gaOperand must be of class gaDimOperand")
-    } else if (!(
-      length(object@gaOperand) == 1 |
-        object@gaOperator %in% c("<>", "[]")
-      )) {
-      return("gaOperand must be of length 1 unless using a range '<>' or list '[]' operator.")
-    } else if (!(
-      length(object@gaOperand) <= 2 |
-        object@gaOperator == "[]"
-      )) {
-      return("gaOperand may only be greater than length 2 if using a list operator '[]'.")
-    } else if (GaIsRegEx(object@gaOperator) & nchar(object@gaOperand) > 128) {
-      return(
-        paste("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length", nchar(object@gaOperand), sep = " = ")
-      )
-    } else if (object@gaOperator %in% c("!=", "==", "<>", "[]")) {
-      return(
+    valid <- validate_that(
+      is(object@gaVar, "gaDimVar"),
+      is(object@gaOperator, "gaDimOperator"),
+      is(object@gaOperand, "gaDimOperand")
+    )
+    if (valid == TRUE) {
+      if (!(length(object@gaOperand) == 1 | object@gaOperator %in% c("<>", "[]"))) {
+        "gaOperand must be of length 1 unless using a range '<>' or list '[]' operator."
+      } else if (!(length(object@gaOperand) <= 2 | object@gaOperator == "[]")) {
+        "gaOperand may only be greater than length 2 if using a list operator '[]'."
+      } else if (GaIsRegEx(object@gaOperator)) {
+        if (nchar(object@gaOperand) > 128) {
+          paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@gaOperand))
+        }
+      } else if (object@gaOperator %in% c("!=", "==", "<>", "[]")) {
         ValidGaOperand(object@gaVar, object@gaOperand)
-      )
-    } else TRUE
+      } else TRUE
+    } else valid
   }
 )
 
@@ -218,12 +209,10 @@ setClass(
   Class = "gaOr",
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, function(x) {
-      inherits(x, ".gaExpr")
-      }))) {
-      "gaOr must be a list containing objects that all inherit from the class .gaExpr"
-    } else {
+    if (all(sapply(object@.Data, inherits, ".gaExpr"))) {
       TRUE
+    } else {
+      "gaOr must be a list containing objects that all inherit from the class .gaExpr"
     }
   }
 )
@@ -232,12 +221,10 @@ setClass(
   Class = "gaAnd",
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, function(x) {
-        class(x) == "gaOr"
-      }))) {
-      "gaAnd must be a list containing objects all of the class gaOr"
-    } else {
+    if (all(sapply(object@.Data, is, "gaOr"))) {
       TRUE
+    } else {
+      "gaAnd must be a list containing objects all of the class gaOr"
     }
   }
 )
@@ -263,14 +250,9 @@ setClass(
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
     if (
-      all(
-        sapply(
-          object@.Data,
-          function(gaOr) {
-            length(unique(sapply(gaOr, class))) == 1
-          }
-        )
-      )
+      all(sapply(object@.Data, function(gaOr) {
+        length(unique(sapply(gaOr, class))) == 1
+      }))
     ) {
       TRUE
     } else {
@@ -291,11 +273,9 @@ setClass(
   ),
   contains = "VIRTUAL",
   validity = function(object) {
-    if (length(object@negation) == 1) {
-      TRUE
-    } else {
-      "Slot negation must be of length 1."
-    }
+    validate_that(
+      length(object@negation) == 1
+    )
   }
 )
 
@@ -309,11 +289,9 @@ setClass(
   ),
   contains = "gaAnd",
   validity = function(object) {
-    if (length(object@immediatelyPrecedes) == 1) {
-      TRUE
-    } else {
-      "immediatelyPrecedes must be of length 1."
-    }
+    validate_that(
+      length(object@immediatelyPrecedes) == 1
+    )
   }
 )
 
@@ -321,9 +299,7 @@ setClass(
   Class = "gaSequenceCondition",
   contains = c("list", ".gaDimensionOrMetricConditions"),
   validity = function(object) {
-    if (all(sapply(object@.Data, function(x) {
-      inherits(x, "gaSequenceStep")
-    }))) {
+    if (all(sapply(object@.Data, inherits, "gaSequenceStep"))) {
       TRUE
     } else {
       "All conditions within a sequence list must belong to the superclass gaSequenceStep."
@@ -346,14 +322,12 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, function(x) {
-      inherits(x, ".gaDimensionOrMetricConditions")
-      }))) {
-      return("All conditions within a gaSegmentCondition list must belong to the superclass .gaDimensionOrMetricConditions.")
+    if (!all(sapply(object@.Data, inherits, ".gaDimensionOrMetricConditions"))) {
+      "All conditions within a gaSegmentCondition list must belong to the superclass .gaDimensionOrMetricConditions."
     } else if (length(object@conditionScope) != 1) {
-      return("Slot 'conditionScope' must be of length 1.")
+      "Slot 'conditionScope' must be of length 1."
     } else if (!(object@conditionScope %in% c("users", "sessions"))) {
-      return("Slot 'conditionScope' must be either 'users' or 'sessions'.")
+      "Slot 'conditionScope' must be either 'users' or 'sessions'."
     } else TRUE
   }
 )
@@ -404,11 +378,11 @@ setClass(
   ),
   validity = function(object) {
     if (length(object@startDate) != length(object@endDate)) {
-      return("startDate and endDate must be the same length")
+      "startDate and endDate must be the same length"
     } else if (all(object@startDate > object@endDate)) {
-      return("endDate cannot be before startDate")
+      "endDate cannot be before startDate"
     } else if (object@startDate < kGaDateOrigin) {
-      return("Start date cannot preceed Google Analytics launch date 2005-01-01")
+      paste("Start date cannot preceed Google Analytics launch date:", kGaDateOrigin)
     } else TRUE
   }
 )
@@ -420,14 +394,10 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object, function(gaVar) {
-        class(gaVar) == "gaMetVar"
-      }))) {
-      return("Must be a list containing objects of class gaMetVar")
+    if (!all(sapply(object, is, "gaMetVar"))) {
+      "Must be a list containing objects of class gaMetVar"
     } else if (length(object) > kGaMax$metrics) {
-      return(
-        paste("Maximum of", kGaMax$metrics, "metrics allowed.", sep = " ")
-      )
+      paste("Maximum of", kGaMax$metrics, "metrics allowed.", sep = " ")
     } else TRUE
   }
 )
@@ -439,14 +409,10 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object, function(gaVar) {
-      class(gaVar) == "gaDimVar"
-    }))) {
-      return("Must be a list containing objects of class gaDimVar")
+    if (!all(sapply(object, is, "gaDimVar"))) {
+      "Must be a list containing objects of class gaDimVar"
     } else if (length(object) > kGaMax$dimensions) {
-      return(
-        paste("Maximum of", kGaMax$dimensions, "dimensions allowed.", sep = " ")
-      )
+      paste("Maximum of", kGaMax$dimensions, "dimensions allowed.", sep = " ")
     } else TRUE
   }
 )
@@ -462,12 +428,10 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, function(gaVar) {
-        inherits(gaVar, ".gaVar")
-      }))) {
-      return("Must be a list containing objects of class .gaVar")
+    if (!all(sapply(object@.Data, is, ".gaVar"))) {
+      "Must be a list containing objects of class .gaVar"
     } else if (length(object@.Data) != length(object@desc)) {
-      return("List vector and desc vector must be of equal lengths")
+      "List vector and desc vector must be of equal lengths"
     } else TRUE
   }
 )
@@ -484,11 +448,11 @@ setClass(
   Class = "gaProfileId",
   contains = "character",
   validity = function(object) {
-    if (!all(sapply(object, function(profileId) {
-        grepl(pattern = "^ga:[0-9]+$",  x = profileId)
-    }))) {
-      return("gaProfileId must be an string of digits preceeded by 'ga:'")      
-    } else TRUE
+    if (all(str_detect(object, "^ga:[0-9]+$"))) {
+      TRUE
+    } else {
+      "gaProfileId must be an string of digits preceeded by 'ga:'"
+    }
   }
 )
 
@@ -520,19 +484,20 @@ setClass(
     creds = list()
   ),
   validity = function(object) {
-    if (length(object@maxResults) != 1) {
-      return("maxResults must be of length 1")
-    } else if (object@maxResults < 1) {
-      return("maxResults must be at least 1")
-    } else if (object@maxResults > kGaMaxRows) {
-      return("maxResults cannot be greater than 1,000,000")
-    } else if (!all(object@sortBy %in% union(object@metrics, object@dimensions))) {
-      return("sortBy must contain varNames also used as metrics and/or dimensions")
-    } else if (length(object@samplingLevel) != 1) {
-      return("samplingLevel must be of length 1")
-    } else if (!(object@samplingLevel %in% samplingLevel_levels)) {
-      return(paste("samplingLevel must be one of:", samplingLevel_levels))
-    } else TRUE
+    valid <- validate_that(
+      length(object@maxResults) == 1,
+      object@maxResults >= 1,
+      length(object@samplingLevel) == 1
+    )
+    if (valid == TRUE) {
+      if (object@maxResults > kGaMaxRows) {
+        "maxResults cannot be greater than 1,000,000"
+      } else if (!all(object@sortBy %in% union(object@metrics, object@dimensions))) {
+        "sortBy must contain varNames also used as metrics and/or dimensions"
+      } else if (!(object@samplingLevel %in% samplingLevel_levels)) {
+        paste("samplingLevel must be one of:", paste(samplingLevel_levels, collapse = ", "))
+      } else TRUE
+    } else valid
   }
 )
 

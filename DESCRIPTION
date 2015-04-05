@@ -21,7 +21,8 @@ Imports:
     XML,
     selectr,
     lubridate,
-    R6
+    R6,
+    assertthat
 Collate:
     'helper-functions.R'
     'globaldata.R'
