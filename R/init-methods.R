@@ -1,4 +1,5 @@
 #' @include all-classes.R
+#' @importFrom stringr str_match
 NULL
 
 # Class initialisation methods
@@ -16,14 +17,37 @@ setMethod(
       ## Check var name starts with ga:
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
-      if (!grepl("^ga:[a-z0-9]+$", tmp)) {
+      if (!any(grepl("^ga:[a-z0-9]+$", tmp))) {
         tmp <- paste0("ga:", tmp)
       }
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
-      varIndex <- pmatch(tmp, tolower(kGaVars$allVars))
-      tmp <- kGaVars$allVars[varIndex]
-      .Object@.Data <- tmp
+      allVars <- tolower(kGaVars$allVars)
+      allVars_short <- kGaVars_df$id
+      varIndex <- charmatch(tmp, allVars)
+      matches <- kGaVars$allVars[varIndex]
+      if (identical(any(varIndex == 0), TRUE)) {
+        stop(paste0(
+          "Ambiguous var name: ", paste0(value[varIndex == 0], collapse = ", "), ". Did you mean any of these?:\n",
+          paste(allVars_short[str_detect(allVars_short, ignore.case(paste0("^", tmp[varIndex == 0])))], collapse = ", ")
+        ))
+      } else if (any(is.na(varIndex))) {
+        possible_matches <- allVars_short[str_detect(allVars_short, ignore.case(value[is.na(varIndex)]))]
+        if (length(possible_matches) == 1) {
+          matches <- possible_matches
+        } else {
+          stop(paste0(
+            "No matching var name: ", paste0(value[is.na(varIndex)], collapse = ", "),
+            if (length(possible_matches) > 0) {
+              paste(
+                ". Did you mean any of these?:\n",
+                paste(possible_matches, collapse = ", ")
+              )
+            }
+          ))
+        }
+      }
+      .Object@.Data <- matches
       ## If a match was not found, use the var name supplied to
       ## let validation fail through the validObject method
       ## is.na can only work with a vector of length 1.
@@ -61,7 +85,6 @@ setMethod(
     .Object
   }
 )
-
 
 # ---- gaSegmentId ----
 

@@ -3,6 +3,8 @@
 
 library(ganalytics)
 
+GaOperand(c(1, 2))
+
 creds <- GoogleApiCreds(appCreds = ".app_oauth_creds.json")
 
 test_query <- GaQuery(creds = creds)
@@ -10,6 +12,8 @@ test_query <- GaQuery(creds = creds)
 GaDimensions(test_query) <- c("date","experimentId")
 
 myQuery <- test_query
+
+GaExpr("ga:date", "==", "2013/6/1")
 
 period <- c("2015-03-02", "2015-03-09")
 GaDateRange(myQuery) <- period

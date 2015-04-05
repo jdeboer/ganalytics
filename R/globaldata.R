@@ -55,6 +55,8 @@ kGaDimTypes <- list(
   )
 )
 
+samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
+
 # Constants
 # ---------
 

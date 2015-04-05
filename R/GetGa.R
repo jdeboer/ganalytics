@@ -8,7 +8,7 @@ NULL
 
 setMethod(
   f = "GetGaQueries",
-  signature = signature(".gaUrlClasses"),
+  signature = signature("gaQuery"),
   definition = function(.Object) {
     as(.Object, "matrix")
   }

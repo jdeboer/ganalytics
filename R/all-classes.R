@@ -236,10 +236,10 @@ setClassUnion(
   members = c(".gaExpr", "gaOr", "gaAnd")
 )
 
-setClassUnion(
-  name = ".gaLogical",
-  members = c(".gaOperator",".gaCompoundExpr")
-)
+# setClassUnion(
+#   name = ".gaLogical",
+#   members = c(".gaOperator",".gaCompoundExpr")
+# )
 
 # ---- GA filter ----
 
@@ -458,8 +458,6 @@ setClass(
 
 # -- GA query construct ----
 
-samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
-
 setClass(
   Class = "gaQuery",
   slots = c(
@@ -501,27 +499,3 @@ setClass(
   }
 )
 
-setClassUnion(
-  name = ".gaUrlClasses",
-  members = c(
-    #".gaCompoundExpr",
-    ".gaExpr", "gaOr", "gaAnd", "gaDynSegment",
-    
-    #".gaVarList",
-    "gaMetrics", "gaDimensions", "gaSortBy",
-    
-    ".gaVar",
-    ".gaOperator",
-    ".gaOperand",
-    ".gaSegment",
-    "gaFilter",
-    "gaProfileId",
-    "Date",
-    "gaQuery"
-  )
-)
-
-setClass(
-  Class = "utf8",
-  contains = "character"
-)
