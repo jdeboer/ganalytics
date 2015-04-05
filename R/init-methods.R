@@ -1,5 +1,6 @@
 #' @include all-classes.R
 #' @importFrom stringr str_match
+#' @importFrom lubridate ymd
 NULL
 
 # Class initialisation methods
@@ -113,7 +114,7 @@ setMethod(
   definition = function(.Object, gaVar, gaOperator, gaOperand) {
     .Object@gaVar <- gaVar
     .Object@gaOperator <- gaOperator
-    if(gaOperator %in% c("!=", "==")) {
+    if(gaOperator %in% c("!=", "==", "[]", "<>")) {
       if(gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
         yesNo <- c("Yes", "No")
         index <- pmatch(x = tolower(gaOperand), table = tolower(yesNo))
@@ -131,7 +132,9 @@ setMethod(
           gaOperand <- GaOperand(visitorType[index])
         }
       } else if(gaVar == "ga:date") {
-        gaOperand <- GaOperand(format(as.Date(gaOperand), format = "%Y%m%d"))
+        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y%m%d"))
+      } else if(gaVar == "dateOfSession") {
+        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y-%m-%d"))
       }
     }
     .Object@gaOperand <- gaOperand

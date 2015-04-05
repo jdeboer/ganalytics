@@ -1,5 +1,3 @@
-# Google Analytics dimension types
-
 ga_scopes <- c(
   default = "https://www.googleapis.com/auth/analytics",
   edit = "https://www.googleapis.com/auth/analytics.edit",
@@ -27,6 +25,7 @@ kGaDayOfWeek <- c(
   "Sat"
 )
 
+# Google Analytics dimension types
 kGaDimTypes <- list(
   dates = c(
     "dateOfSession",

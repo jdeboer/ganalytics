@@ -68,7 +68,7 @@ setMethod(
 
 setMethod(
   f = "GaNot",
-  signature = ".gaDimensionOrMetricConditions",
+  signature = ".gaSimpleOrSequence",
   definition = function(.Object) {
     .Object@negation <- !.Object@negation
     return(.Object)

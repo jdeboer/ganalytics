@@ -23,15 +23,12 @@ setClass(
   }
 )
 
-#   dateOfSession is a special dimension
-#   #dateOfSession<>2014-05-20_2014-05-30
-
 setClass(
   Class = "gaDimVar",
   prototype = prototype("ga:date"),
   contains = "character",
   validity = function(object) {
-    if (IsVarMatch(object@.Data, union("dateOfSession", kGaVars$dims))) {
+    if (IsVarMatch(object@.Data, kGaVars$dims)) {
       TRUE
     } else {
       paste("Invalid GA dimension name", object@.Data, sep = ": ")
@@ -242,11 +239,6 @@ setClassUnion(
   members = c(".gaExpr", "gaOr", "gaAnd")
 )
 
-# setClassUnion(
-#   name = ".gaLogical",
-#   members = c(".gaOperator",".gaCompoundExpr")
-# )
-
 # ---- GA filter ----
 
 setClass(
@@ -255,14 +247,28 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
-    if (
-      all(sapply(object@.Data, function(gaOr) {
+    if (all(sapply(object@.Data, function(gaOr) {
         length(unique(sapply(gaOr, class))) == 1
-      }))
-    ) {
+      }))) {
       TRUE
     } else {
-      "An OR expression within a filter cannot mix metrics and dimensions."
+      return("An OR expression within a filter cannot mix metrics and dimensions.")
+    }
+
+    if (all(sapply(object@.Data, function(gaOr) {
+      sapply(gaOr, function(expr) {GaVar(expr) != "dateOfSession"})
+    }))) {
+      TRUE
+    } else {
+      return("Filters do not support the 'dateOfSession' dimension. Use 'ga:date' instead.")
+    }
+    
+    if (all(sapply(object@.Data, function(gaOr) {
+      sapply(gaOr, function(expr) {!(GaOperator(expr) %in% c("<>", "[]"))})
+    }))) {
+      TRUE
+    } else {
+      return("Filters do not support <> and [] operators.")
     }
   }
 )
@@ -270,7 +276,17 @@ setClass(
 # ---- GA dynamic and pre-defined segments ----
 
 setClass(
-  Class = ".gaDimensionOrMetricConditions",
+  Class = "gaDimensionOrMetricCondition",
+  contains = "gaAnd",
+  validity = function(object) {
+    TRUE # The following checks are yet to be implemented
+    # The maximum date range for dateOfSession is 31 days.
+    # The dateOfSession dimension can only be used with a <> operator.
+  }
+)
+
+setClass(
+  Class = ".gaSimpleOrSequence",
   slots = c(
     negation = "logical"
   ),
@@ -293,7 +309,7 @@ setClass(
   prototype = prototype(
     immediatelyPrecedes = FALSE
   ),
-  contains = "gaAnd",
+  contains = "gaDimensionOrMetricCondition",
   validity = function(object) {
     validate_that(
       length(object@immediatelyPrecedes) == 1
@@ -303,19 +319,24 @@ setClass(
 
 setClass(
   Class = "gaSequenceCondition",
-  contains = c("list", ".gaDimensionOrMetricConditions"),
+  contains = c("list", ".gaSimpleOrSequence"),
   validity = function(object) {
     if (all(sapply(object@.Data, inherits, "gaSequenceStep"))) {
       TRUE
     } else {
-      "All conditions within a sequence list must belong to the superclass gaSequenceStep."
+      "All conditions within a sequence list must belong to the superclass 'gaSequenceStep'."
     }
   }
 )
 
+# Constraints
+# The constraints related to dimension and metric conditions are:
+# A maximum of 10 dimension or metric conditions per segment.
+# The maximum expression length for dimension conditions is 1024 characters.
+
 setClass(
   Class = "gaNonSequenceCondition",
-  contains = c("gaAnd", ".gaDimensionOrMetricConditions")
+  contains = c("gaDimensionOrMetricCondition", ".gaSimpleOrSequence")
 )
 
 setClass(
@@ -328,8 +349,8 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, inherits, ".gaDimensionOrMetricConditions"))) {
-      "All conditions within a gaSegmentCondition list must belong to the superclass .gaDimensionOrMetricConditions."
+    if (!all(sapply(object@.Data, inherits, ".gaSimpleOrSequence"))) {
+      "All conditions within a gaSegmentCondition list must belong to the superclass '.gaSimpleOrSequence'."
     } else if (length(object@conditionScope) != 1) {
       "Slot 'conditionScope' must be of length 1."
     } else if (!(object@conditionScope %in% c("users", "sessions"))) {
@@ -345,7 +366,7 @@ setClass(
     if (all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
       TRUE
     } else {
-      "All objects with a gaDynSegment list must belong to the class gaSegmentCondition."
+      "All objects with a gaDynSegment list must belong to the class 'gaSegmentCondition'."
     } 
   }
 )
@@ -446,7 +467,6 @@ setClassUnion(
 )
 
 # ---- Ga Profile ID ----
-
 
 setClass(
   Class = "gaProfileId",

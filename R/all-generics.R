@@ -134,7 +134,7 @@ setGeneric(
 setGeneric(
   name = "GaNot",
   def = function(.Object) {},
-  valueClass = c(".gaOperator", ".gaCompoundExpr", ".gaDimensionOrMetricConditions"),
+  valueClass = c(".gaOperator", ".gaCompoundExpr", ".gaSimpleOrSequence"),
   useAsDefault = FALSE
 )
 

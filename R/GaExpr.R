@@ -65,11 +65,36 @@ setMethod(
 
 setMethod(
   f = "GaScopeLevel<-",
+  signature = c("gaSegMetExpr", "character"),
+  definition = function(.Object, value) {
+    .Object@metricScope <- value
+    .Object
+  }
+)
+
+setMethod(
+  f = "GaScopeLevel<-",
   signature = c("gaMetExpr", "character"),
   definition = function(.Object, value) {
     .Object <- as(.Object, "gaSegMetScope")
     .Object@metricScope <- value
-    return(.Object)
+    .Object
   }
 )
 
+setMethod(
+  f = "GaScopeLevel",
+  signature = "gaSegmentCondition",
+  definition = function(.Object) {
+    .Object@conditionScope
+  }
+)
+
+setMethod(
+  f = "GaScopeLevel<-",
+  signature = c("gaSegmentCondition", "character"),
+  definition = function(.Object, value) {
+    .Object@conditionScope <- value
+    .Object
+  }
+)

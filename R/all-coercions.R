@@ -400,6 +400,14 @@ setAs(
 )
 
 setAs(
+  from = "gaAnd",
+  to = "gaFilter",
+  def = function(from) {
+    new(to, from)
+  }
+)
+
+setAs(
   from = ".gaExpr",
   to = "gaFilter",
   def = function(from) {

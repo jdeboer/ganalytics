@@ -62,7 +62,7 @@ setMethod(
 
 setMethod(
   f = "GaSegmentCondition",
-  signature = ".gaDimensionOrMetricConditions",
+  signature = ".gaSimpleOrSequence",
   definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
     new("gaSegmentCondition", exprList, conditionScope = scope)
@@ -156,7 +156,7 @@ setMethod(
 
 setMethod(
   f = "GaSegment",
-  signature = ".gaDimensionOrMetricConditions",
+  signature = ".gaSimpleOrSequence",
   definition = function(.Object, ..., scope) {
     exprList <- list(.Object, ...)
     exprList <- lapply(exprList, function(expr) {
