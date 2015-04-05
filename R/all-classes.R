@@ -144,17 +144,15 @@ setClass(
       return("gaOperator must be of class gaMetOperator")
     } else if (!class(object@gaOperand)=="gaMetOperand") {
       return("gaOperand must be of class gaMetOperand")
-    } else if (!(
-      length(object@gaOperand) == 1 &
-        object@gaOperator != "<>"
-      )) {
-      return("gaOperand must be of length 1 unless using a range operator '<>'.")
-    } else if (!(
-      length(object@gaOperand) == 2 &
-        object@gaOperator == "<>"
-    )) {
-      return("gaOperand must be of length 2 when using a range operator '<>'.")
-    } else TRUE
+    } else if (object@gaOperator != "<>") {
+      if (length(object@gaOperand) != 1) {
+        return("gaOperand must be of length 1 unless using a range operator '<>'.")
+      } else TRUE
+    } else {
+      if (length(object@gaOperand) != 2) {
+        return("gaOperand must be of length 2 when using a range operator '<>'.")
+      } else TRUE
+    }
   }
 )
 
