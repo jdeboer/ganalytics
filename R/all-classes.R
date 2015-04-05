@@ -102,8 +102,8 @@ setClass(
   contains = "numeric",
   validity = function(object) {
     if (length(object) %in% c(1, 2)) {
-      return("A gaMetOperand must be of length 1 or 2")
-    } else TRUE
+      TRUE
+    } else return("A gaMetOperand must be of length 1 or 2")
   }
 )
 
