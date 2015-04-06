@@ -208,7 +208,7 @@ setAs(
 
 compileOperand <- function(from) {
   operand <- gsub(
-    pattern = "([,;])",
+    pattern = "([,;\\\\])",
     replacement = "\\\\\\1",
     x = from@gaOperand
   )
