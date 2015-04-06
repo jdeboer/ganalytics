@@ -611,7 +611,7 @@ setAs(
     profilesDatesSegments <- do.call(
       what = rbind,
       args = lapply(
-        X = GaProfileId(from),
+        X = GaView(from),
         FUN = function(profileId) {
           data.frame(
             startDate = GaStartDate(from),
@@ -625,7 +625,7 @@ setAs(
     params <- mapply(
       FUN = function(startDate, endDate, profileId) {
         c(
-          "ids" = as(GaProfileId(profileId), "character"),
+          "ids" = as(GaView(profileId), "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(GaMetrics(from), "character"),

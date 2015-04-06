@@ -279,9 +279,29 @@ setClass(
   Class = "gaDimensionOrMetricCondition",
   contains = "gaAnd",
   validity = function(object) {
-    TRUE # The following checks are yet to be implemented
-    # The maximum date range for dateOfSession is 31 days.
-    # The dateOfSession dimension can only be used with a <> operator.
+    if (all(sapply(object@.Data, function(gaOr) {
+      sapply(gaOr, function(expr) {
+        if (GaOperator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
+          (GaOperand(expr)[2] - GaOperand(expr)[1] + 1) <= 31
+        } else TRUE
+      })
+    }))) {
+      TRUE
+    } else {
+      return("The maximum date range for dateOfSession is 31 days.")
+    }
+    
+    if (all(sapply(object@.Data, function(gaOr) {
+      sapply(gaOr, function(expr) {
+        if (GaVar(expr) == "dateOfSession") {
+          GaOperator(expr) == "<>"
+        } else TRUE
+      })
+    }))) {
+      TRUE
+    } else {
+      return("The dateOfSession dimension can only be used with a <> operator.")
+    }
   }
 )
 
@@ -329,11 +349,6 @@ setClass(
   }
 )
 
-# Constraints
-# The constraints related to dimension and metric conditions are:
-# A maximum of 10 dimension or metric conditions per segment.
-# The maximum expression length for dimension conditions is 1024 characters.
-
 setClass(
   Class = "gaNonSequenceCondition",
   contains = c("gaDimensionOrMetricCondition", ".gaSimpleOrSequence")
@@ -363,11 +378,13 @@ setClass(
   Class = "gaDynSegment",
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
-      TRUE
-    } else {
+    if (!all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentCondition'."
-    } 
+    } else if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
+      "The maximum expression length for dimension conditions is 1024 characters."
+    } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
+      "A maximum of 10 dimension or metric conditions per segment."
+    } else TRUE
   }
 )
 

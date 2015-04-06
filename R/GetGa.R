@@ -45,11 +45,11 @@ setMethod("GetGaData", "gaQuery", function(
       if(addViewId & nrow(df) >= 1) {
         df <- mutate(df, viewId = response$viewId)
       }
-      attr(df, "sampleSize") <- response$sampleSize
-      attr(df, "sampleSpace") <- response$sampleSpace
       return(df)
     }
   )[-1]
+  attr(data, "sampleSize") <- sum(laply(responses, function(response){as.numeric(response$sampleSize)}))
+  attr(data, "sampleSpace") <- sum(laply(responses, function(response){as.numeric(response$sampleSpace)}))
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
   if (sampled) {
     warning("Contains sampled data.")

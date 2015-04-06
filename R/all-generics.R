@@ -521,29 +521,29 @@ setGeneric(
   }
 )
 
-#' GaProfileId
+#' GaView
 #' 
 #' Get the profileId of the query
 #' 
 #' @export
-#' @rdname GaProfileId
+#' @rdname GaView
 setGeneric(
-  name = "GaProfileId",
+  name = "GaView",
   def = function(.Object) {},
   valueClass = "gaProfileId",
   useAsDefault = FALSE
 )
 
-#' GaProfileId<-
+#' GaView<-
 #' 
 #' Set the profileId for the query.
 #' 
 #' @export
-#' @rdname GaProfileId
+#' @rdname GaView
 setGeneric(
-  name = "GaProfileId<-",
+  name = "GaView<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaProfileId<-")
+    .Object <- standardGeneric("GaView<-")
     validObject(.Object)
     return(.Object)
   }
@@ -586,7 +586,7 @@ setGeneric(
 setGeneric(
   name = "GaSamplingLevel",
   def = function(.Object) {},
-  valueClass = "character",
+  valueClass = c("character", "list"),
   useAsDefault = FALSE
 )
 
@@ -629,8 +629,4 @@ setGeneric("GetGaData", def = function(
   ...
 ) {
   standardGeneric("GetGaData")
-})
-
-setGeneric("GaGetRequest", def = function(object) {
-  standardGeneric("GaGetRequest")
 })

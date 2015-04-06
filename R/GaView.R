@@ -7,10 +7,10 @@
 #' @include helper-functions.R
 NULL
 
-# -- GaProfileId ----
+# -- GaView ----
 
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "gaProfileId",
   definition = function(.Object) {
     return(.Object)
@@ -18,34 +18,34 @@ setMethod(
 )
 
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "gaView",
   definition = function(.Object) {
-    GaProfileId(.Object$id)
+    GaView(.Object$id)
   }
 )
 
 # Passing a property object to GaQuery will select the default view of that property
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "gaProperty",
   definition = function(.Object) {
-    GaProfileId(.Object$defaultView)
+    GaView(.Object$defaultView)
   }
 )
 
 # Passing an account object to GaQuery will select the first property of that account
 # which is then used to select a view (as per above).
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "gaAccount",
   definition = function(.Object) {
-    GaProfileId(.Object$properties$entities[[1]])
+    GaView(.Object$properties$entities[[1]])
   }
 )
 
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "character",
   definition = function(.Object) {
     new(Class = "gaProfileId", .Object)
@@ -53,10 +53,10 @@ setMethod(
 )
 
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "numeric",
   definition = function(.Object) {
-    GaProfileId(
+    GaView(
       as.character(.Object)
     )
   }
@@ -64,7 +64,7 @@ setMethod(
 
 
 setMethod(
-  f = "GaProfileId",
+  f = "GaView",
   signature = "gaQuery",
   definition = function(.Object) {
     .Object@profileId
@@ -72,11 +72,17 @@ setMethod(
 )
 
 setMethod(
-  f = "GaProfileId<-",
+  f = "GaView<-",
   signature = c("gaQuery", "ANY"),
   definition = function(.Object, value) {
-    .Object@profileId <- GaProfileId(value)
+    .Object@profileId <- GaView(value)
     validObject(.Object)
     return(.Object)
   }
 )
+
+
+#'@export GaProfileId
+GaProfileId <- GaView
+#'@export GaProfileId<-
+`GaProfileId<-` <- `GaView<-`
