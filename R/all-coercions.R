@@ -4,6 +4,7 @@
 #' @include helper-functions.R
 #' @include gtm-api-classes.R
 #' @include management-api-classes.R
+#' @importFrom assertthat assert_that
 NULL
 
 # Methods for coercion between classes
@@ -158,6 +159,17 @@ setAs(
   from = "gaAnd",
   to = "gaOr",
   def = function(from) {
+    # This is currently only legal if the gaAnd object does not contain any gaOr
+    # object of length greater than 1 OR if there is only one gaOr. Otherwise,
+    # in a future implementation if any gaOr objects have a length greater than
+    # 1, then they will need to be shortened to length 1 which is only possible
+    # if each expression within that gaOr shares the same dimension and the
+    # expression operators and operands can be combined either as a match regex
+    # or a match list.
+    
+    # Check that all contained gaOr objects in the list have a length of 1
+    assert_that(all(sapply(from, length) == 1) | length(from) == 1)
+    
     # Break apart the AND expression into OR expressions
     # then break apart each OR expression into single
     # expressions. Concatenate the single expressions

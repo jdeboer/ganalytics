@@ -26,13 +26,3 @@ setMethod(
   }
 )
 
-
-# -- GaVar ----
-setMethod(
-  f = "GaVar",
-  signature = ".gaVarList",
-  definition = function(.Object) {
-    return(.Object@.Data)
-  }
-)
-
