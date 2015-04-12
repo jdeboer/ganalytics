@@ -11,6 +11,8 @@ GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
   samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
 }
 \arguments{
+\item{creds}{authentication credentials object created using GoogleApiCreds()}
+
 \item{startDate}{start date}
 
 \item{endDate}{end date}
@@ -31,8 +33,6 @@ GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
 up to 1,000,000}
 
 \item{profileId}{profile id to use}
-
-\item{authFile}{auth file to save token to}
 }
 \description{
 GaQuery

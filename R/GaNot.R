@@ -62,13 +62,13 @@ setMethod(
       X = .Object,
       FUN = GaNot
     )
-    .Object <- as(.Object, "gaAnd")
+    .Object <- do.call(GaAnd, .Object)
   }
 )
 
 setMethod(
   f = "GaNot",
-  signature = ".gaDimensionOrMetricConditions",
+  signature = ".gaSimpleOrSequence",
   definition = function(.Object) {
     .Object@negation <- !.Object@negation
     return(.Object)

@@ -4,7 +4,7 @@
 \alias{GaNonSequenceCondition}
 \title{GaNonSequenceCondition}
 \usage{
-GaNonSequenceCondition(.Object, ...)
+GaNonSequenceCondition(.Object, ..., negation = FALSE)
 }
 \description{
 Create a new gaNonSequenceCondition object

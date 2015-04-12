@@ -4,8 +4,9 @@
 #' @include all-generics.R
 #' @include helper-functions.R
 #' @include GaApiRequest.R
-#' @importFrom plyr mutate alply
+#' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace
+#' @importFrom devtools use_data
 NULL
 
 #' GaMetaUpdate
@@ -46,8 +47,23 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
     ret
   }, .expand = FALSE), use.names = FALSE)
   
-  metafile <- file.path("R", "sysdata.rda")
-  message(paste("Updating metadata file:", metafile))
-  save(kGaVars, kGaVars_df, file = metafile)
-  return(kGaVars)
+  kGaVars$dims <- c(kGaVars$dims, "dateOfSession")
+  kGaVars$allVars <- c(kGaVars$allVars, "dateOfSession")
+  
+  kGaVars_df$allowedInFilters <- TRUE
+  
+  kGaVars_df <- rbind.fill(kGaVars_df, data.frame(
+    id = "dateOfSession",
+    type = "DIMENSION",
+    dataType = "STRING",
+    group = "Session",
+    status = "PUBLIC",
+    uiName = "Date of Session",
+    description = "Only for use in segments.",
+    allowedInSegments = TRUE,
+    allowedInFilters = FALSE
+  ))
+  
+  use_data(kGaVars, kGaVars_df, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  
 }

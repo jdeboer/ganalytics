@@ -63,8 +63,8 @@ setMethod(
   f = "GaDateRange",
   signature = c("character", "character"),
   definition = function(.Object, endDate) {
-    startDate <- as.Date(.Object, format = kGaDateInFormat)
-    endDate <- as.Date(endDate, format = kGaDateInFormat)
+    startDate <- as.Date(parse_date(.Object, output_format = kGaDateInFormat), format = kGaDateInFormat)
+    endDate <- as.Date(parse_date(endDate, output_format = kGaDateInFormat), format = kGaDateInFormat)
     new("gaDateRange", startDate, endDate)
   }
 )
@@ -82,7 +82,7 @@ setMethod(
   f = "GaStartDate",
   signature = "character",
   definition = function(.Object) {
-    as.Date(.Object, format = kGaDateInFormat)
+    as.Date(parse_date(.Object, output_format = kGaDateInFormat), format = kGaDateInFormat)
   }
 )
 
@@ -90,7 +90,7 @@ setMethod(
   f = "GaEndDate",
   signature = "character",
   definition = function(.Object) {
-    as.Date(.Object, format = kGaDateInFormat)
+    as.Date(parse_date(.Object, output_format = kGaDateInFormat), format = kGaDateInFormat)
   }
 )
 
@@ -114,7 +114,7 @@ setMethod(
   f = "GaStartDate<-",
   signature = c("gaDateRange", "character"),
   definition = function(.Object, value) {
-    startDate <- as.Date(value, format = kGaDateInFormat)
+    startDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
     endDate <- GaEndDate(.Object)
     GaDateRange(startDate, endDate)
   }
@@ -125,7 +125,7 @@ setMethod(
   signature = c("gaDateRange", "character"),
   definition = function(.Object, value) {
     startDate <- GaStartDate(.Object)
-    endDate <- as.Date(value, format = kGaDateInFormat)
+    endDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
     GaDateRange(startDate, endDate)
   }
 )
@@ -134,7 +134,7 @@ setMethod(
   f = "GaStartDate<-",
   signature = c("gaDateRange", "Date"),
   definition = function(.Object, value) {
-    startDate <- as.Date(value, format = kGaDateInFormat)
+    startDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
     endDate <- GaEndDate(.Object)
     GaDateRange(startDate, endDate)
   }
@@ -145,7 +145,7 @@ setMethod(
   signature = c("gaDateRange", "Date"),
   definition = function(.Object, value) {
     startDate <- GaStartDate(.Object)
-    endDate <- as.Date(value, format = kGaDateInFormat)
+    endDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
     GaDateRange(startDate, endDate)
   }
 )
@@ -157,8 +157,8 @@ setMethod(
     if (length(value) != 2) {
       stop("value must contain the start date and end date in a character vecotr of legnth 2.")
     } else {
-      startDate <- as.Date(value[1], format = kGaDateInFormat)
-      endDate <- as.Date(value[2], format = kGaDateInFormat)
+      startDate <- as.Date(parse_date(value[1], output_format = kGaDateInFormat), format = kGaDateInFormat)
+      endDate <- as.Date(parse_date(value[2], output_format = kGaDateInFormat), format = kGaDateInFormat)
       new("gaDateRange", startDate, endDate)
     }
   }
@@ -190,8 +190,8 @@ setMethod(
     if (length(value) != 2) {
       stop("value must contain the start date and end date in a character vecotr of legnth 2.")
     } else {
-      startDate <- as.Date(value[1], format = kGaDateInFormat)
-      endDate <- as.Date(value[2], format = kGaDateInFormat)
+      startDate <- as.Date(parse_date(value[1], output_format = kGaDateInFormat), format = kGaDateInFormat)
+      endDate <- as.Date(parse_date(value[2], output_format = kGaDateInFormat), format = kGaDateInFormat)
       newDateRange <- new("gaDateRange", startDate, endDate)
       GaDateRange(.Object) <- newDateRange
       return(.Object)

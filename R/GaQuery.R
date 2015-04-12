@@ -9,7 +9,7 @@ NULL
 #' GaQuery
 #' Create a ganalytics query object
 #' @param profileId profile id to use
-#' @param authFile auth file to save token to
+#' @param creds authentication credentials object created using GoogleApiCreds()
 #' @param startDate start date
 #' @param endDate end date
 #' @param metrics character vector of metrics
@@ -41,7 +41,7 @@ GaQuery <- function(
     creds <- view$creds
   }
   new("gaQuery",
-      profileId = GaProfileId(view),
+      profileId = GaView(view),
       dateRange = GaDateRange(
         as.Date(startDate),
         as.Date(endDate)
@@ -66,8 +66,7 @@ modify_query <- function(
   segments = NA, # A vector of gaSegment objects
   sampling_level = NA,
   max_results = NA,
-  user_name = NA,
-  app_creds = NA,
+  creds = NA,
   start_date = NA,
   end_date = NA,
   metrics = NA,
@@ -75,7 +74,7 @@ modify_query <- function(
   sort_by = NA
 ) {
   if (!is.na(ids)) {
-    GaProfileId(query) <- ids
+    GaView(query) <- ids
   }
   if (!is.na(start_date)) {
     GaStartDate(query) <- start_date
@@ -105,10 +104,9 @@ modify_query <- function(
     GaMaxResults(query) <- max_results
   }
   # The following are yet to be implemented
-  # user_name
-  # app_creds
-  # period
+  # periods
   # columns
+  # creds
 }
 
 setMethod(
@@ -144,5 +142,15 @@ setMethod(
     .Object@samplingLevel <- as.character(value)
     validObject(.Object)
     return(.Object)
+  }
+)
+
+setMethod(
+  f = "GaSamplingLevel",
+  signature = "data.frame",
+  definition = function(.Object) {
+    sample_params <- attributes(.Object)[c("sampleSize", "sampleSpace")]
+    sample_params$sampleRate <- sample_params$sampleSize / sample_params$sampleSpace
+    sample_params
   }
 )

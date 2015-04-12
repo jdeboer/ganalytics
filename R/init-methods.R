@@ -1,4 +1,6 @@
 #' @include all-classes.R
+#' @importFrom stringr str_match
+#' @importFrom lubridate ymd
 NULL
 
 # Class initialisation methods
@@ -16,14 +18,40 @@ setMethod(
       ## Check var name starts with ga:
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
-      if (!grepl("^ga:[a-z0-9]+$", tmp)) {
+      if (!any(grepl("^ga:[a-z0-9]+$", tmp))) {
         tmp <- paste0("ga:", tmp)
+      }
+      if(str_detect(value, ignore.case("dateofsession"))) {
+        tmp <- "dateOfSession"
       }
       ## Replace GA Var with correct casing of valid Var Name
       ## Partial matches are accepted
-      varIndex <- pmatch(tmp, tolower(kGaVars$allVars))
-      tmp <- kGaVars$allVars[varIndex]
-      .Object@.Data <- tmp
+      allVars <- tolower(union(kGaVars$allVars, "dateOfSession"))
+      allVars_short <- union(kGaVars_df$id, "dateOfSession")
+      varIndex <- charmatch(tmp, allVars)
+      matches <- union(kGaVars$allVars, "dateOfSession")[varIndex]
+      if (identical(any(varIndex == 0), TRUE)) {
+        stop(paste0(
+          "Ambiguous var name: ", paste0(value[varIndex == 0], collapse = ", "), ". Did you mean any of these?:\n",
+          paste(allVars_short[str_detect(allVars_short, ignore.case(paste0("^", tmp[varIndex == 0])))], collapse = ", ")
+        ))
+      } else if (any(is.na(varIndex))) {
+        possible_matches <- allVars_short[str_detect(allVars_short, ignore.case(value[is.na(varIndex)]))]
+        if (length(possible_matches) == 1) {
+          matches <- possible_matches
+        } else {
+          stop(paste0(
+            "No matching var name: ", paste0(value[is.na(varIndex)], collapse = ", "),
+            if (length(possible_matches) > 0) {
+              paste(
+                ". Did you mean any of these?:\n",
+                paste(possible_matches, collapse = ", ")
+              )
+            }
+          ))
+        }
+      }
+      .Object@.Data <- matches
       ## If a match was not found, use the var name supplied to
       ## let validation fail through the validObject method
       ## is.na can only work with a vector of length 1.
@@ -62,7 +90,6 @@ setMethod(
   }
 )
 
-
 # ---- gaSegmentId ----
 
 setMethod(
@@ -87,16 +114,21 @@ setMethod(
   definition = function(.Object, gaVar, gaOperator, gaOperand) {
     .Object@gaVar <- gaVar
     .Object@gaOperator <- gaOperator
-    if(gaOperator %in% c("!=", "==")) {
-      if(gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
-        yesNo <- c("Yes", "No")
-        index <- pmatch(x = tolower(gaOperand), table = tolower(yesNo))
+    if(gaOperator %in% c("!=", "==", "[]", "<>")) {
+      if(gaVar %in% kGaDimTypes$bools) {
+        yesNo <- c("No" = FALSE, "Yes" = TRUE)
+        index <- pmatch(x = tolower(gaOperand), table = tolower(names(yesNo)))
         if (is.na(index)) {
-          stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+          index <- which(gaOperand == yesNo)
+          if (length(index) == 1) {
+            gaOperand <- GaOperand(names(yesNo)[index])
+          } else {
+            stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+          }
         } else {
-          gaOperand <- GaOperand(yesNo[index])
+          gaOperand <- GaOperand(names(yesNo)[index])
         }
-      } else if(gaVar == "ga:visitorType") {
+      } else if(gaVar %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
         index <- pmatch(x = tolower(gaOperand), table = tolower(visitorType))
         if (is.na(index)) {
@@ -105,7 +137,9 @@ setMethod(
           gaOperand <- GaOperand(visitorType[index])
         }
       } else if(gaVar == "ga:date") {
-        gaOperand <- GaOperand(format(as.Date(gaOperand), format = "%Y%m%d"))
+        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y%m%d"))
+      } else if(gaVar == "dateOfSession") {
+        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y-%m-%d"))
       }
     }
     .Object@gaOperand <- gaOperand
