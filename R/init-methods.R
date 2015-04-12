@@ -115,15 +115,20 @@ setMethod(
     .Object@gaVar <- gaVar
     .Object@gaOperator <- gaOperator
     if(gaOperator %in% c("!=", "==", "[]", "<>")) {
-      if(gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
-        yesNo <- c("Yes", "No")
-        index <- pmatch(x = tolower(gaOperand), table = tolower(yesNo))
+      if(gaVar %in% kGaDimTypes$bools) {
+        yesNo <- c("No" = FALSE, "Yes" = TRUE)
+        index <- pmatch(x = tolower(gaOperand), table = tolower(names(yesNo)))
         if (is.na(index)) {
-          stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+          index <- which(gaOperand == yesNo)
+          if (length(index) == 1) {
+            gaOperand <- GaOperand(names(yesNo)[index])
+          } else {
+            stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+          }
         } else {
-          gaOperand <- GaOperand(yesNo[index])
+          gaOperand <- GaOperand(names(yesNo)[index])
         }
-      } else if(gaVar == "ga:visitorType") {
+      } else if(gaVar %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
         index <- pmatch(x = tolower(gaOperand), table = tolower(visitorType))
         if (is.na(index)) {

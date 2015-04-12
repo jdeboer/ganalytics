@@ -236,7 +236,7 @@ setGeneric(
 #' @rdname GaSequenceCondition
 setGeneric(
   name = "GaSequenceCondition",
-  def = function(.Object, ...) {},
+  def = function(.Object, ..., negation = FALSE) {},
   valueClass = "gaSequenceCondition",
   useAsDefault = FALSE
 )
@@ -249,7 +249,7 @@ setGeneric(
 #' @rdname GaNonSequenceCondition
 setGeneric(
   name = "GaNonSequenceCondition",
-  def = function(.Object, ...) {},
+  def = function(.Object, ..., negation = FALSE) {},
   valueClass = "gaNonSequenceCondition",
   useAsDefault = FALSE
 )
@@ -630,3 +630,28 @@ setGeneric("GetGaData", def = function(
 ) {
   standardGeneric("GetGaData")
 })
+
+#' GaCreds
+#' 
+#' Get or set the authentication credentials for a Google Analytics query object.
+#' 
+#' @export
+#' @rdname GaCreds
+setGeneric("GaCreds", def = function(object = "GANALYTICS", creds = NULL, ...) {
+  standardGenericric("GaCreds")
+})
+
+#' GaCreds<-
+#' 
+#' Set the authentication credentials for a Google Analytics query object.
+#' 
+#' @export
+#' @rdname GaCreds
+setGeneric(
+  name = "GaCreds<-",
+  def = function(object, value) {
+    object <- standardGeneric("GaCreds<-")
+    validObject(object)
+    return(object)
+  }
+)

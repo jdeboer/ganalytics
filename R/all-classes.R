@@ -232,13 +232,6 @@ setClass(
   }
 )
 
-# ---- Simple and compound expression class union ----
-
-setClassUnion(
-  name = ".gaCompoundExpr",
-  members = c(".gaExpr", "gaOr", "gaAnd")
-)
-
 # ---- GA filter ----
 
 setClass(
@@ -406,6 +399,14 @@ setClassUnion(
   members = c("gaDynSegment", "gaSegmentId")
 )
 
+# ---- Simple and compound expression class union ----
+
+setClassUnion(
+  name = ".gaCompoundExpr",
+  members = c(".gaExpr", "gaOr", "gaAnd", "gaFilter", "gaSequenceStep", "gaNonSequenceCondition")
+  # "gaFilter", "gaSequenceStep" and "gaNonSequenceCondition" already inherit from gaAnd
+)
+
 # ---- GA query dimensions, metrics, and sortby lists ----
 
 setClass(
@@ -423,7 +424,7 @@ setClass(
       "startDate and endDate must be the same length"
     } else if (all(object@startDate > object@endDate)) {
       "endDate cannot be before startDate"
-    } else if (object@startDate < kGaDateOrigin) {
+    } else if (all(object@startDate < kGaDateOrigin)) {
       paste("Start date cannot preceed Google Analytics launch date:", kGaDateOrigin)
     } else TRUE
   }

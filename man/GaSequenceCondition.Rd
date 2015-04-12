@@ -4,7 +4,7 @@
 \alias{GaSequenceCondition}
 \title{GaSequenceCondition}
 \usage{
-GaSequenceCondition(.Object, ...)
+GaSequenceCondition(.Object, ..., negation = FALSE)
 }
 \description{
 Create a new gaSequenceCondition object

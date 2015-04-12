@@ -1,11 +1,5 @@
-Add a new generic and methods for getting and setting the authentication creds.
-
 Check response status codes from Google Analytics
-
-document S4 methods - All user-level objects in a package (including S4 classes and methods) should have documentation entries.
 
 Clean up all-coercions.R:
  - group coercions methods - need to decide how to group them.
  - by ability to replace?, by from class?, by to class?, by complexity?, by usage?, by most needed?
-
-Implement an optional resampling technique to take the reported sample rate and if not NaN or not NA or not 100% then if a number greater than 0 and less than 1, then use this to split the date range further if not already at daily level.

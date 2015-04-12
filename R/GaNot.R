@@ -62,7 +62,7 @@ setMethod(
       X = .Object,
       FUN = GaNot
     )
-    .Object <- as(.Object, "gaAnd")
+    .Object <- do.call(GaAnd, .Object)
   }
 )
 

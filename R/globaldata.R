@@ -81,7 +81,8 @@ kGaDimTypes <- list(
     "ga:isTablet",
     "ga:javaEnabled",
     "ga:searchUsed",
-    "ga:isTrueViewVideoAd"
+    "ga:isTrueViewVideoAd",
+    "ga:hasSocialSourceReferral"
   )
 )
 

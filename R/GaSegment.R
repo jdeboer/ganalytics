@@ -34,10 +34,21 @@ setMethod(
 
 setMethod(
   f = "GaSequenceCondition",
-  signature = "gaSequenceStep",
-  definition = function(.Object, ...) {
+  signature = ".gaCompoundExpr",
+  definition = function(.Object, ..., negation) {
     exprList <- list(.Object, ...)
-    new("gaSequenceCondition", exprList)
+    exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
+    new("gaSequenceCondition", exprList, negation = negation)
+  }
+)
+
+setMethod(
+  f = "GaSequenceCondition",
+  signature = "gaSequenceStep",
+  definition = function(.Object, ..., negation) {
+    exprList <- list(.Object, ...)
+    exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
+    new("gaSequenceCondition", exprList, negation = negation)
   }
 )
 
@@ -46,8 +57,10 @@ setMethod(
 setMethod(
   f = "GaNonSequenceCondition",
   signature = ".gaCompoundExpr",
-  definition = function(.Object) {
-    as(.Object, "gaNonSequenceCondition")
+  definition = function(.Object, ..., negation) {
+    exprList <- list(.Object, ...)
+    exprList <- do.call("GaAnd", lapply(exprList, function(expr){as(expr, "gaAnd")}))
+    new("gaNonSequenceCondition", exprList, negation = negation)
   }
 )
 

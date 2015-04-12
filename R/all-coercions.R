@@ -162,7 +162,7 @@ setAs(
     # then break apart each OR expression into single
     # expressions. Concatenate the single expressions
     # back up the chain. Then convert array into a list of
-    # expressions to use for a new AND expression.
+    # expressions to use for a new OR expression.
     new(
       to, as.list(
         do.call(

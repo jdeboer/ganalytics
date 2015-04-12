@@ -10,11 +10,11 @@ test_that("GaVar generates a .gaVar object of the appropriate subclass", {
 })
 
 test_that("Initialisation of a .gaVar object corrects the variable name", {
-  expect_equal(GaVar("medium"), GaVar("ga:medium"))
-  expect_equal(GaVar("pagepath"), GaVar("ga:pagePath"))
-  expect_equal(GaVar("landingpage"), GaVar("ga:landingPagePath"))
-  expect_equal(GaVar("dateofsess"), GaVar("dateOfSession"))
-  expect_equal(GaVar("completionsall"), GaVar("ga:goalCompletionsAll"))
+  expect_identical(GaVar("medium"), GaVar("ga:medium"))
+  expect_identical(GaVar("pagepath"), GaVar("ga:pagePath"))
+  expect_identical(GaVar("landingpage"), GaVar("ga:landingPagePath"))
+  expect_identical(GaVar("dateofsess"), GaVar("dateOfSession"))
+  expect_identical(GaVar("completionsall"), GaVar("ga:goalCompletionsAll"))
 })
 
 context("Forming a basic condition expression")
@@ -29,13 +29,22 @@ test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
 })
 
 test_that(".gaExpr objects coerce to character", {
-  expect_equal(as(GaExpr("eventcategory", "~=", "^video"), "character"), "ga:eventCategory=~^video")
-  expect_equal(as(GaExpr("ga:uniquePageviews", ">", 5), "character"), "ga:uniquePageviews>5")
-  expect_equal(as(GaExpr("pagePath", "~", "[;,\\-].+"), "character"), "ga:pagePath=~[\\;\\,\\\\-].+")
+  expect_equal(as(
+    GaExpr("eventcategory", "~=", "^video"),
+    "character"), "ga:eventCategory=~^video")
+  expect_equal(as(
+    GaExpr("ga:uniquePageviews", ">", 5),
+    "character"), "ga:uniquePageviews>5")
+  expect_equal(as(
+    GaExpr("pagePath", "~", "[;,\\-].+"),
+    "character"), "ga:pagePath=~[\\;\\,\\\\-].+")
 })
 
 test_that("GaNot can be used to invert an expression", {
-  expect_equal(GaNot(GaExpr("pageviews", ">", 10)), GaExpr("pageviews", "<=", 10))
+  expect_identical(
+    GaNot(GaExpr("pageviews", ">", 10)),
+    GaExpr("pageviews", "<=", 10)
+  )
 })
 
 context("Combining basic condition expressions with AND and OR")
@@ -82,15 +91,22 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
       GaExpr("deviceCategory", "=", "mobile")
     ),
     "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile")
-#   expect_error(
-#     GaOr(
-#       GaAnd(
-#         GaExpr("eventValue", "<", 50),
-#         GaExpr("keyword", "@", "contact")
-#       ),
-#       GaExpr("deviceCategory", "=", "mobile")
-#     )
-#   )
+  expect_error(
+    GaOr(
+      GaAnd(
+        GaExpr("eventValue", "<", 50),
+        GaExpr("keyword", "@", "contact")
+      ),
+      GaExpr("deviceCategory", "=", "mobile")
+    )
+  )
+})
+
+test_that("ORed expressions can be NOTed", {
+  expect_identical(
+    GaNot(GaOr(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
+    GaAnd(GaExpr("source", "!=", "google"), GaExpr("medium", "!=", "organic"))
+  )
 })
 
 context("Using expressions to create filters")
@@ -129,3 +145,114 @@ test_that("ANDed (but not ORed) filter expressions may mix dimensions with metri
   )
 })
 
+context("Correct formatting of operators and operands used in API queries")
+
+test_that("expressions for each type of operator are correctly formatted when coerced to character", {
+  expect_equal(as(
+    GaExpr("dateOfSession", "<>", c("2015-01-01", "2015-01-15")),
+    "character"), "dateOfSession<>2015-01-01_2015-01-15")
+  expect_equal(as(
+    GaExpr("source", "[]", c("google", "email", "youtube")),
+    "character"), "ga:source[]google|email|youtube")
+})
+
+test_that("expressions operands are corrected depending on the type of dimension and operator", {
+  expect_equal(as(
+    GaExpr("date", "!=", "2014-01-01"),
+    "character"), "ga:date!=20140101")
+  expect_equal(as(
+    GaExpr("date", "!=", "20140101"),
+    "character"), "ga:date!=20140101")
+  expect_equal(as(
+    GaExpr("istablet", "=", TRUE),
+    "character"), "ga:isTablet==Yes")
+  expect_equal(as(
+    GaExpr("istablet", "=", "no"),
+    "character"), "ga:isTablet==No")
+  expect_equal(as(
+    GaExpr("usertype", "=", "returning"),
+    "character"), "ga:userType==Returning Visitor")
+})
+
+context("Segmentation queries are correctly format for API requests")
+
+test_that("segment expressions are correctly coerced to character string", {
+  expect_equal(
+    as(
+      GaSegment(
+        GaSegmentCondition(
+          GaNonSequenceCondition(GaExpr("source", "=", "google")),
+          GaSequenceCondition(
+            GaStartsWith(GaExpr("pagepath", "=", "/")),
+            GaImmediatelyPrecedes(GaExpr("pagepath", "=", "/products/")),
+            GaPrecedes(GaExpr("exitPage", "=", "/"))
+          ),
+          scope = "sessions"
+        ),
+        GaSegmentCondition(
+          GaNonSequenceCondition(GaExpr("deviceCategory", "=", "mobile")),
+          scope = "users"
+        )
+      ),
+      "character"),
+    "sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/;users::condition::ga:deviceCategory==mobile")
+})
+
+test_that("segment expressions can be negated", {
+  expect_equal(as(
+    GaNonSequenceCondition(
+      GaExpr("source", "=", "google"),
+      negation = TRUE
+    ),
+    "character"), "condition::!ga:source==google")
+  expect_identical(
+    GaNonSequenceCondition(
+      GaExpr("source", "=", "google"),
+      negation = TRUE
+    ),
+    GaNot(GaNonSequenceCondition(
+      GaExpr("source", "=", "google"),
+      negation = FALSE
+    ))
+  )
+})
+
+context("Constructing Core Reporting API queries")
+
+test_that("Queries are constructed correctly for API requests", {
+  expect_equal(
+    as(
+      GaQuery(view = 0, startDate = "2015-01-01", endDate = "2015-01-28",
+              metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
+              filters = GaExpr("source", "=", "google"), segment = GaExpr("country", "=", "Australia"),
+              maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
+      "matrix")[,1],
+    c(
+      ids = "ga:0",
+      `start-date` = "2015-01-01",
+      `end-date` = "2015-01-28",
+      metrics = "ga:sessions",
+      dimensions = "ga:deviceCategory",
+      sort = "ga:deviceCategory",
+      filters = "ga:source==google",
+      segment = "sessions::condition::ga:country==Australia",
+      samplingLevel = "HIGHER_PRECISION"
+    )
+  )
+})
+
+test_that("providing multiple view IDs, date ranges and multiple segments coerces to a multiple column matrix", {
+  expect_equal(
+    dim(
+      as(
+        GaQuery(view = c(0, 1, 2),
+                startDate = c("2014-01-01", "2014-01-01"),
+                endDate = c("2015-01-01", "2015-01-28"),
+                metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
+                filters = GaExpr("source", "=", "google"),
+                segment = GaExpr("country", "=", "Australia"),
+                maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
+        "matrix")
+    ), c(9, 6)
+  )
+})
