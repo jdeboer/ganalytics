@@ -18,7 +18,7 @@ GoogleApiCreds <- function(
     }
     cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
   }
-  list(
+  creds <- list(
     app = app_oauth_creds(
       appname = appname,
       creds = appCreds
@@ -28,6 +28,48 @@ GoogleApiCreds <- function(
       cache = cache
     ),
     use_oob = use_oob
+  )
+}
+
+app_oauth_creds <- function(appname, creds = NULL) {
+  if (typeof(creds) == "character" & length(creds) == 1) {
+    if(validate(creds)) {
+      creds <- fromJSON(creds)
+    } else if (file.exists(creds)) {
+      creds <- fromJSON(creds)
+    } else {
+      creds <- NULL
+    }
+    if("installed" %in% names(creds)) {
+      creds <- creds$installed
+    }
+  }
+  if (typeof(creds) != "list") {
+    if (length(creds) == 2 &
+          identical(all(names(creds) %in% c("client_id", "client_secret")), TRUE)) {
+      creds <- as.list(creds)
+    } else {
+      creds <- list(client_id = NULL, client_secret = NULL)
+    }
+  }
+  if (is.null(creds$client_id)) {
+    creds$client_id <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
+    if (nchar(creds$client_id) == 0) {
+      creds$client_id <- Sys.getenv("GANALYTICS_CONSUMER_ID")
+      if (nchar(creds$client_id) > 0) appname <- "GANALYTICS"
+    }
+  }
+  if (is.null(creds$client_secret)) {
+    creds$client_secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
+    if (nchar(creds$client_secret) == 0) {
+      creds$client_secret <- Sys.getenv("GANALYTICS_CONSUMER_SECRET")
+      if (nchar(creds$client_secret) > 0) appname <- "GANALYTICS"
+    }
+  }
+  oauth_app(
+    appname = appname,
+    key = creds$client_id,
+    secret = creds$client_secret
   )
 }
 
@@ -176,48 +218,6 @@ response_to_list <- function(response) {
     }
   }
   return(response)
-}
-
-app_oauth_creds <- function(appname, creds = NULL) {
-  if (typeof(creds) == "character" & length(creds) == 1) {
-    if(validate(creds)) {
-      creds <- fromJSON(creds)
-    } else if (file.exists(creds)) {
-      creds <- fromJSON(creds)
-    } else {
-      creds <- NULL
-    }
-    if("installed" %in% names(creds)) {
-      creds <- creds$installed
-    }
-  }
-  if (typeof(creds) != "list") {
-    if (length(creds) == 2 &
-          identical(all(names(creds) %in% c("client_id", "client_secret")), TRUE)) {
-      creds <- as.list(creds)
-    } else {
-      creds <- list(client_id = NULL, client_secret = NULL)
-    }
-  }
-  if (is.null(creds$client_id)) {
-    creds$client_id <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
-    if (nchar(creds$client_id) == 0) {
-      creds$client_id <- Sys.getenv("GANALYTICS_CONSUMER_ID")
-      if (nchar(creds$client_id) > 0) appname <- "GANALYTICS"
-    }
-  }
-  if (is.null(creds$client_secret)) {
-    creds$client_secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
-    if (nchar(creds$client_secret) == 0) {
-      creds$client_secret <- Sys.getenv("GANALYTICS_CONSUMER_SECRET")
-      if (nchar(creds$client_secret) > 0) appname <- "GANALYTICS"
-    }
-  }
-  oauth_app(
-    appname = appname,
-    key = creds$client_id,
-    secret = creds$client_secret
-  )
 }
 
 # This function accepts a recursive list of list elements, each named to represent a field,

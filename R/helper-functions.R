@@ -1,3 +1,9 @@
+#' @importFrom lubridate ymd
+
+parse_date <- function(date, output_format = kGaDateInFormat) {
+  format(ymd(date), format = output_format)
+}
+
 #' IsVarMatch
 #' The following method is a temporary workaround to support XX placeholders in dimension and metric
 #' names, such as with custom dimensions, metrics and various goal related variables.
@@ -133,6 +139,4 @@ unsplit_permissions <- function(permissions) {
     names(permission_set)[unlist(permission_set)]
   })
 }
-
-
 

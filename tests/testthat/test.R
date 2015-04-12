@@ -26,6 +26,7 @@ test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
   expect_is(GaExpr("hostname", "!", "google.com"), "gaDimExpr")
   expect_is(GaExpr("totalevents", "=>", 5), "gaMetExpr")
   expect_error(GaExpr("entrances", "=@", "23"))
+  expect_error(GaExpr("pageviews", "+", 2), "Invalid metric operator")
 })
 
 test_that(".gaExpr objects coerce to character", {
@@ -100,6 +101,14 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
       GaExpr("deviceCategory", "=", "mobile")
     )
   )
+  expect_equal(as(
+    GaOr(
+      GaAnd(
+        GaExpr("eventValue", "<", 50),
+        GaExpr("keyword", "@", "contact")
+      )
+    ),
+  "character"), "ga:eventValue<50,ga:keyword=@contact")
 })
 
 test_that("ORed expressions can be NOTed", {
@@ -127,7 +136,8 @@ test_that("ANDed (but not ORed) filter expressions may mix dimensions with metri
     GaFilter(GaOr(GaExpr("pageviews", ">", 10), GaExpr("entrances", "<", 5))),
     "character"), "ga:pageviews>10,ga:entrances<5")
   expect_error(
-    GaFilter(GaOr(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5)))
+    GaFilter(GaOr(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
+    "cannot mix metrics and dimensions"
   )
   expect_equal(as(
     GaFilter(GaAnd(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
@@ -152,8 +162,17 @@ test_that("expressions for each type of operator are correctly formatted when co
     GaExpr("dateOfSession", "<>", c("2015-01-01", "2015-01-15")),
     "character"), "dateOfSession<>2015-01-01_2015-01-15")
   expect_equal(as(
+    GaExpr("daysSinceLastSession", "<>", c(1, 5)),
+    "character"), "ga:daysSinceLastSession<>1_5")
+  expect_equal(as(
+    GaExpr("pageviews", "<>", c(10, 50)),
+    "character"), "ga:pageviews<>10_50")
+  expect_error(GaExpr("pageviews", "<>", c(50, 10))) # Second value must be greater than first
+  expect_equal(as(
     GaExpr("source", "[]", c("google", "email", "youtube")),
     "character"), "ga:source[]google|email|youtube")
+  expect_error(GaExpr("source", "==", c("google", "email", "youtube")))
+  expect_error(GaExpr("pageviews", "!=", c(1, 2)))
 })
 
 test_that("expressions operands are corrected depending on the type of dimension and operator", {
@@ -174,7 +193,7 @@ test_that("expressions operands are corrected depending on the type of dimension
     "character"), "ga:userType==Returning Visitor")
 })
 
-context("Segmentation queries are correctly format for API requests")
+context("Segmentation queries are correctly formatted for API requests")
 
 test_that("segment expressions are correctly coerced to character string", {
   expect_equal(
@@ -217,7 +236,99 @@ test_that("segment expressions can be negated", {
   )
 })
 
+test_that("segments can be selected by ID and parsed", {
+  expect_identical(
+    GaSegment(-1),
+    GaSegment("gaid::-1"),
+  )
+  expect_identical(
+    GaSegment("gaid::1"),
+    GaSegment("1")
+  )
+  expect_equal(
+    as(GaSegment("gaid::-1"), "character"),
+    "gaid::-1"
+  )
+  expect_equal(
+    as(GaSegment("gaid::1"), "character"),
+    "gaid::1"
+  )
+})
+
 context("Constructing Core Reporting API queries")
+
+test_that("GaStartDate, GaEndDate, and GaDateRange give correct formats for API requests", {
+  expect_equal(
+    as(GaStartDate("2011-01-01"), "character"),
+    "2011-01-01"
+  )
+  expect_equal(
+    as(GaEndDate("2011-01-01"), "character"),
+    "2011-01-01"
+  )
+  expect_equal(
+    as(GaStartDate("20110101"), "character"),
+    "2011-01-01"
+  )
+  expect_identical(
+    GaDateRange("2011-01-01", "20110131"),
+    GaDateRange("20110101", "2011-01-31")
+  )
+  expect_identical(
+    GaDateRange("2011-01-01", "2011-01-31"),
+    GaDateRange(as.Date("2011-01-01"), as.Date("2011-01-31"))
+  )
+})
+
+test_that("Sortby parameter is corrected coerced to character", {
+  expect_equal(as(
+    GaSortBy(c("+source", "-pageviews", "+ga:hostname")),
+    "character"), "ga:source,-ga:pageviews,ga:hostname")
+  expect_equal(as(
+    GaSortBy(c("-source", "+pageviews", "-ga:hostname")),
+    "character"), "-ga:source,ga:pageviews,-ga:hostname")
+})
+
+test_that("Query limits are enforced", {
+  expect_error(
+    GaQuery(view = 0, dimensions = c(
+      "source", "medium", "campaign", "adContent", "landingpage", "secondpage", "exitpage", "deviceCategory"
+    )),
+    "Maximum of 7 dimensions"
+  )
+  expect_equal(
+    length(GaDimensions(GaQuery(view = 0, dimensions = NULL))),
+    0
+  )
+  expect_error(
+    GaQuery(view = 0, metrics = c(
+      "users", "sessions", "pageviews", "uniquepageviews",
+      "sessionDuration", "bounces", "transactions", "items", "transactionrevenue",
+      "goalcompletions", "totalevents", "uniqueevents"
+    )),
+    "Maximum of 10 metrics"
+  )
+  expect_error(
+    GaQuery(view = 0, metrics = NULL)
+  )
+  expect_error(
+    # Sort only by dimensions or metrics values that you have used in the
+    # dimensions or metrics parameters. If your request sorts on a field that is
+    # not indicated in either the dimensions or metrics parameter, you will
+    # receive a error.
+    GaQuery(view = 0, metrics = "pageviews", dimensions = "source", sortBy = "campaign")
+  )
+  # You can filter for a dimension or metric that is not part of your query,
+  # provided all dimensions/metrics in the request and the filter are valid
+  # combinations.
+  expect_identical(
+    GaFilter(GaExpr("pageviews", ">", 1)),
+    GaFilter(
+      GaQuery(view = 0, dimensions = "source", metrics = "sessions",
+              filters = GaExpr("pageviews", ">", 1))
+    )
+  )
+})
 
 test_that("Queries are constructed correctly for API requests", {
   expect_equal(
