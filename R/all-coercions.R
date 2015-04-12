@@ -143,15 +143,7 @@ setAs(
   from = ".gaExpr",
   to = "gaAnd",
   def = function(from) {
-    new(
-      Class = to,
-      list(
-        as(
-          object = from,
-          Class = "gaOr"
-        )
-      )
-    )
+    new(Class = to, list(as(object = from, Class = "gaOr")))
   }
 )
 
@@ -195,7 +187,7 @@ setAs(
   }
 )
 
-# Coercing GA expressions into GA API compatible character strings
+# Coercing GA expressions to and from GA API compatible character strings
 setAs(
   from = ".gaExpr",
   to = "character",
@@ -218,9 +210,21 @@ setAs(
   }
 )
 
+setAs(from = "character", to = ".gaExpr", def = function(from) {
+  ops <- union(kGaOps$met, kGaOps$dim)
+  ops <- str_replace_all(ops, "(\\[|\\])", "\\\\\\1")
+  ops <- paste(ops, collapse = "|")
+  gaOperator <- str_match(from, ops)[1,1]
+  x <- str_split_fixed(from, ops, 2)
+  gaVar <- x[1,1]
+  gaOperand <- x[1,2]
+  expr <- GaExpr(gaVar, gaOperator, parseOperand(gaOperand, gaOperator))
+  expr
+})
+
 compileOperand <- function(from) {
   operand <- gsub(
-    pattern = "([,;\\\\])",
+    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
     replacement = "\\\\\\1",
     x = from@gaOperand
   )
@@ -230,6 +234,15 @@ compileOperand <- function(from) {
     operand <- paste0(operand, collapse = "_")
   }
   operand
+}
+
+parseOperand <- function(operand, operator) {
+  if (operator == "[]") {
+    operand <- str_split(operand, "\\|")[[1]]
+  } else if (operator == "<>") {
+    operand <- str_split_fixed(operand, "_", 2)[1,]
+  }
+  operand <- gsub("\\\\", "\\", operand)
 }
 
 setAs(
