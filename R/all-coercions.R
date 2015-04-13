@@ -236,6 +236,7 @@ compileOperand <- function(from) {
   operand
 }
 
+# Need to consider escaping of the following characters in the operand:\|,;_
 parseOperand <- function(operand, operator) {
   if (operator == "[]") {
     operand <- str_split(operand, "\\|")[[1]]
