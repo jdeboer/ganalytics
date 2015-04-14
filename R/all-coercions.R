@@ -198,8 +198,8 @@ setAs(
         if(class(from) == "gaSegMetExpr") {
           if(from@metricScope != "") paste0(from@metricScope, "::")
         },
-        as(from@gaVar, to),
-        as(from@gaOperator, to),
+        as(from@var, to),
+        as(from@operator, to),
         as(
           object = compileOperand(from),
           Class = to
@@ -214,11 +214,11 @@ setAs(from = "character", to = ".gaExpr", def = function(from) {
   ops <- union(kGaOps$met, kGaOps$dim)
   ops <- str_replace_all(ops, "(\\[|\\])", "\\\\\\1")
   ops <- paste(ops, collapse = "|")
-  gaOperator <- str_match(from, ops)[1,1]
+  operator <- str_match(from, ops)[1,1]
   x <- str_split_fixed(from, ops, 2)
-  gaVar <- x[1,1]
-  gaOperand <- x[1,2]
-  expr <- GaExpr(gaVar, gaOperator, parseOperand(gaOperand, gaOperator))
+  var <- x[1,1]
+  operand <- x[1,2]
+  expr <- GaExpr(var, operator, parseOperand(operand, operator))
   expr
 })
 
@@ -226,11 +226,11 @@ compileOperand <- function(from) {
   operand <- gsub(
     pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
     replacement = "\\\\\\1",
-    x = from@gaOperand
+    x = from@operand
   )
-  if (from@gaOperator == "[]") {
+  if (from@operator == "[]") {
     operand <- paste0(operand, collapse = "|")
-  } else if (from@gaOperator == "<>") {
+  } else if (from@operator == "<>") {
     operand <- paste0(operand, collapse = "_")
   }
   operand

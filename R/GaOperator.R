@@ -48,7 +48,7 @@ setMethod(
   f = "GaOperator",
   signature = ".expr",
   definition = function(.Object) {
-    GaOperator(.Object@gaOperator)
+    GaOperator(.Object@operator)
   }
 )
 
@@ -56,7 +56,7 @@ setMethod(
   f = "GaOperator<-",
   signature = ".expr",
   definition = function(.Object, value) {
-    GaOperator(.Object@gaOperator) <- value
+    GaOperator(.Object@operator) <- value
     return(.Object)
   }
 )

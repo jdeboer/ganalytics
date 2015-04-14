@@ -111,38 +111,38 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = "gaDimExpr",
-  definition = function(.Object, gaVar, gaOperator, gaOperand) {
-    .Object@gaVar <- gaVar
-    .Object@gaOperator <- gaOperator
-    if(gaOperator %in% c("!=", "==", "[]", "<>")) {
-      if(gaVar %in% kGaDimTypes$bools) {
+  definition = function(.Object, var, operator, operand) {
+    .Object@var <- var
+    .Object@operator <- operator
+    if(operator %in% c("!=", "==", "[]", "<>")) {
+      if(var %in% kGaDimTypes$bools) {
         yesNo <- c("No" = FALSE, "Yes" = TRUE)
-        index <- pmatch(x = tolower(gaOperand), table = tolower(names(yesNo)))
+        index <- pmatch(x = tolower(operand), table = tolower(names(yesNo)))
         if (is.na(index)) {
-          index <- which(gaOperand == yesNo)
+          index <- which(operand == yesNo)
           if (length(index) == 1) {
-            gaOperand <- GaOperand(names(yesNo)[index])
+            operand <- GaOperand(names(yesNo)[index])
           } else {
-            stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+            stop(paste(var, "Invalid operand", operand, sep = ": "))
           }
         } else {
-          gaOperand <- GaOperand(names(yesNo)[index])
+          operand <- GaOperand(names(yesNo)[index])
         }
-      } else if(gaVar %in% c("ga:visitorType", "ga:userType")) {
+      } else if(var %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
-        index <- pmatch(x = tolower(gaOperand), table = tolower(visitorType))
+        index <- pmatch(x = tolower(operand), table = tolower(visitorType))
         if (is.na(index)) {
-          stop(paste(gaVar, "Invalid operand", gaOperand, sep = ": "))
+          stop(paste(var, "Invalid operand", operand, sep = ": "))
         } else {
-          gaOperand <- GaOperand(visitorType[index])
+          operand <- GaOperand(visitorType[index])
         }
-      } else if(gaVar == "ga:date") {
-        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y%m%d"))
-      } else if(gaVar == "dateOfSession") {
-        gaOperand <- GaOperand(format(ymd(gaOperand), format = "%Y-%m-%d"))
+      } else if(var == "ga:date") {
+        operand <- GaOperand(format(ymd(operand), format = "%Y%m%d"))
+      } else if(var == "dateOfSession") {
+        operand <- GaOperand(format(ymd(operand), format = "%Y-%m-%d"))
       }
     }
-    .Object@gaOperand <- gaOperand
+    .Object@operand <- operand
     if(GaIsRegEx(.Object)) {
       GaOperand(.Object) <- tolower(GaOperand(.Object))
     }

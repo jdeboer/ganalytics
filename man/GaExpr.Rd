@@ -4,7 +4,7 @@
 \alias{GaExpr}
 \title{GaExpr}
 \usage{
-GaExpr(.Object, gaOperator, gaOperand, metricScope = "")
+GaExpr(.Object, operator, operand, metricScope = "")
 }
 \description{
 Create an expression.

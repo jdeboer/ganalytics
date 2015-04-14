@@ -12,42 +12,42 @@ NULL
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
-  definition = function(.Object, gaOperator, gaOperand, metricScope) {
-    gaVar <- GaVar(.Object)
-    if (class(gaVar) == "gaDimVar") {
-      gaOperator <- GaDimOperator(gaOperator)
-      gaOperand <- GaOperand(as.character(gaOperand))
+  definition = function(.Object, operator, operand, metricScope) {
+    var <- GaVar(.Object)
+    if (class(var) == "gaDimVar") {
+      operator <- GaDimOperator(operator)
+      operand <- GaOperand(as.character(operand))
       gaExprClass <- "gaDimExpr"
       new(
         Class = gaExprClass,
-        gaVar = gaVar,
-        gaOperator = gaOperator,
-        gaOperand = gaOperand
+        var = var,
+        operator = operator,
+        operand = operand
       )
-    } else if (class(gaVar) == "gaMetVar") {
-      gaOperator <- GaMetOperator(gaOperator)
-      gaOperand <- GaOperand(as.numeric(gaOperand))
+    } else if (class(var) == "gaMetVar") {
+      operator <- GaMetOperator(operator)
+      operand <- GaOperand(as.numeric(operand))
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
           Class = gaExprClass,
-          gaVar = gaVar,
-          gaOperator = gaOperator,
-          gaOperand = gaOperand,
+          var = var,
+          operator = operator,
+          operand = operand,
           metricScope = metricScope
         )
       } else {
         gaExprClass <- "gaMetExpr"
         new(
           Class = gaExprClass,
-          gaVar = gaVar,
-          gaOperator = gaOperator,
-          gaOperand = gaOperand
+          var = var,
+          operator = operator,
+          operand = operand
         )
       }
     } else {
       stop(
-        paste("Unsupported .gaVar class", class(gaVar), sep=": ")
+        paste("Unsupported .gaVar class", class(var), sep=": ")
       )
     }
   }

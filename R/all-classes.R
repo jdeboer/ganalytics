@@ -173,36 +173,43 @@ setClassUnion(
 setClass(
   Class = ".gaExpr",
   slots = c(
-    gaVar = ".gaVar",
-    gaOperator = ".gaOperator",
-    gaOperand = ".gaOperand"
+    var = ".gaVar",
+    operator = ".gaOperator",
+    operand = ".gaOperand"
   )
 )
 
 setClass(
   Class = ".mcfExpr",
   slots = c(
-    gaVar = ".mcfVar",
-    gaOperator = ".gaOperator",
-    gaOperand = ".gaOperand"
-  )
+    var = ".mcfVar",
+    operator = ".gaOperator",
+    operand = ".gaOperand"
+  ),
+  validity = function(object) {
+    validate_that(
+      length(object@var) == 1,
+      length(object@operator) == 1,
+      length(object@operand) == 1
+    )
+  }
 )
 
 setClass(
   Class = ".metExpr",
   slots = c(
-    gaVar = ".metVar",
-    gaOperator = "gaMetOperator",
-    gaOperand = "gaMetOperand"
+    var = ".metVar",
+    operator = "gaMetOperator",
+    operand = "gaMetOperand"
   )
 )
 
 setClass(
   Class = ".dimExpr",
   slots = c(
-    gaVar = ".dimVar",
-    gaOperator = "gaDimOperator",
-    gaOperand = "gaDimOperand"
+    var = ".dimVar",
+    operator = "gaDimOperator",
+    operand = "gaDimOperand"
   )
 )
 
@@ -211,28 +218,21 @@ setClassUnion(".expr", c(".gaExpr", ".mcfExpr", ".metExpr", ".dimExpr"))
 setClass(
   Class = "gaMetExpr",
   slots = c(
-    gaVar = "gaMetVar",
-    gaOperator = "gaMetOperator",
-    gaOperand = "gaMetOperand"
+    var = "gaMetVar",
+    operator = "gaMetOperator",
+    operand = "gaMetOperand"
   ),
-  contains = ".gaExpr",
+  contains = c(".gaExpr", ".metExpr"),
   validity = function(object) {
-    valid <- validate_that(
-      is(object@gaVar, "gaMetVar"),
-      is(object@gaOperator, "gaMetOperator"),
-      is(object@gaOperand, "gaMetOperand")
-    )
-    if (valid == TRUE) {
-      if (object@gaOperator != "<>") {
-        if (length(object@gaOperand) != 1) {
-          "gaOperand must be of length 1 unless using a range operator '<>'."
-        } else TRUE
-      } else {
-        if (length(object@gaOperand) != 2) {
-          "gaOperand must be of length 2 when using a range operator '<>'."
-        } else TRUE
-      }
-    } else valid
+    if (object@operator == "<>") {
+      if (length(object@operand) != 2) {
+        "operand must be of length 2 when using a range operator '<>'."
+      } else TRUE
+    } else {
+      if (length(object@operand) != 1) {
+        "operand must be of length 1 unless using a range operator '<>'."
+      } else TRUE
+    }
   }
 )
 
@@ -255,47 +255,40 @@ setClass(
 
 setClass(
   Class = "gaDimExpr",
-  contains = ".gaExpr",
   slots = c(
-    gaVar = "gaDimVar",
-    gaOperator = "gaDimOperator",
-    gaOperand = "gaDimOperand"
+    var = "gaDimVar",
+    operator = "gaDimOperator",
+    operand = "gaDimOperand"
   ),
+  contains = c(".gaExpr", ".dimExpr"),
   validity = function(object) {
-    valid <- validate_that(
-      is(object@gaVar, "gaDimVar"),
-      is(object@gaOperator, "gaDimOperator"),
-      is(object@gaOperand, "gaDimOperand")
-    )
-    if (valid == TRUE) {
-      if (object@gaOperator == "<>") {
-        rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
-        if (!(object@gaVar %in% rangeDimVars)) {
-          return("A range operator only supports numerical dimensions or metrics")
-        }
+    if (object@operator == "<>") {
+      rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
+      if (!(object@var %in% rangeDimVars)) {
+        return("A range operator only supports numerical dimensions or metrics")
       }
-      if (!(length(object@gaOperand) == 1 | object@gaOperator %in% c("<>", "[]"))) {
-        return("gaOperand must be of length 1 unless using a range '<>' or list '[]' operator.")
-      } else if (!(length(object@gaOperand) <= 2 | object@gaOperator == "[]")) {
-        return("gaOperand may only be greater than length 2 if using a list operator '[]'.")
-      } else if (GaIsRegEx(object@gaOperator)) {
-        if (nchar(object@gaOperand) > 128) {
-          return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@gaOperand)))
-        }
+    }
+    if (!(length(object@operand) == 1 | object@operator %in% c("<>", "[]"))) {
+      return("operand must be of length 1 unless using a range '<>' or list '[]' operator.")
+    } else if (!(length(object@operand) <= 2 | object@operator == "[]")) {
+      return("operand may only be greater than length 2 if using a list operator '[]'.")
+    } else if (GaIsRegEx(object@operator)) {
+      if (nchar(object@operand) > 128) {
+        return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@operand)))
       }
-      if (object@gaOperator %in% c("!=", "==", "<>", "[]")) {
-        ValidGaOperand(object@gaVar, object@gaOperand)
-      } else TRUE
-    } else valid
+    }
+    if (object@operator %in% c("!=", "==", "<>", "[]")) {
+      ValidGaOperand(object@var, object@operand)
+    } else TRUE
   }
 )
 
 setClass(
   "mcfMetExpr",
   slots = c(
-    gaVar = "mcfMetVar",
-    gaOperator = "gaMetOperator",
-    gaOperand = "gaMetOperand"
+    var = "mcfMetVar",
+    operator = "gaMetOperator",
+    operand = "gaMetOperand"
   ),
   contains = c(".mcfExpr", ".metExpr")
 )
@@ -303,9 +296,9 @@ setClass(
 setClass(
   "mcfDimExpr",
   slots = c(
-    gaVar = "mcfDimVar",
-    gaOperator = "gaDimOperator",
-    gaOperand = "gaDimOperand"
+    var = "mcfDimVar",
+    operator = "gaDimOperator",
+    operand = "gaDimOperand"
   ),
   contains = c(".mcfExpr", ".dimExpr")
 )

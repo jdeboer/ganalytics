@@ -4,12 +4,12 @@
 \alias{ValidGaOperand}
 \title{ValidGaOperand}
 \usage{
-ValidGaOperand(gaVar, gaOperand)
+ValidGaOperand(var, operand)
 }
 \arguments{
-\item{gaVar}{selected dimension to check operand against}
+\item{var}{selected dimension to check operand against}
 
-\item{gaOperand}{the operand value to check}
+\item{operand}{the operand value to check}
 }
 \description{
 Checks whether an operand value is valid for a selected dimension.

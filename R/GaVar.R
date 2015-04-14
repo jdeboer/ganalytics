@@ -21,7 +21,7 @@ setMethod(
   f = "GaVar",
   signature = "character",
   definition = function(.Object) {
-    gaVar <- tryCatch(
+    var <- tryCatch(
       new("gaMetVar", .Object),
       error = function(e) {
         tryCatch(
@@ -32,7 +32,7 @@ setMethod(
         )
       }
     )
-    return (gaVar)
+    return (var)
   }
 )
 
@@ -51,7 +51,7 @@ setMethod(
   f = "GaVar",
   signature = ".expr",
   definition = function(.Object) {
-    GaVar(.Object@gaVar)
+    GaVar(.Object@var)
   }
 )
 
@@ -59,7 +59,7 @@ setMethod(
   f = "GaVar<-",
   signature = ".expr",
   definition = function(.Object, value) {
-    GaVar(.Object@gaVar) <- value
+    GaVar(.Object@var) <- value
     return(.Object)
   }
 )

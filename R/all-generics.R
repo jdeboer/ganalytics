@@ -154,7 +154,7 @@ setGeneric(
 #' @rdname GaExpr
 setGeneric(
   name = "GaExpr",
-  def = function(.Object, gaOperator, gaOperand, metricScope = "") {},
+  def = function(.Object, operator, operand, metricScope = "") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
