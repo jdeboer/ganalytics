@@ -36,13 +36,49 @@ setClass(
   }
 )
 
+setClass(
+  Class = "mcfMetVar",
+  prototype = prototype("mcf:totalConversions"),
+  contains = "character",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kMcfVars$mets)) {
+      TRUE
+    } else {
+      paste("Invalid MCF metric name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClass(
+  Class = "mcfDimVar",
+  prototype = prototype("mcf:nthDay"),
+  contains = "character",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kMcfVars$dims)) {
+      TRUE
+    } else {
+      paste("Invalid MCF dimension name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClassUnion(
+  name = ".mcfVar",
+  members = c("mcfMetVar", "mcfDimVar")
+)
+
 setClassUnion(
   name = ".gaVar",
   members = c("gaMetVar", "gaDimVar")
 )
 
+setClassUnion(
+  name = ".var",
+  members = c(".gaVar", ".mcfVar")
+)
+
 setValidity(
-  Class = ".gaVar",
+  Class = ".var",
   method = function(object) {
     validate_that(length(object) == 1)
   }
@@ -123,6 +159,8 @@ setClassUnion(
 )
 
 # ---- GA simple expressions -------------------------------------------------------
+
+# Need to define classes for expressions using exclusive MCF dimensions or MCF metrics
 
 setClass(
   Class = ".gaExpr",
@@ -431,22 +469,40 @@ setClass(
 )
 
 setClass(
-  Class = "gaMetrics",
+  Class = ".gaMetrics",
   prototype = prototype(
     list(new("gaMetVar"))
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object, is, "gaMetVar"))) {
-      "Must be a list containing objects of class gaMetVar"
-    } else if (length(object) > kGaMax$metrics) {
+    if (length(object) > kGaMax$metrics) {
       paste("Maximum of", kGaMax$metrics, "metrics allowed.", sep = " ")
     } else TRUE
   }
 )
 
 setClass(
-  Class = "gaDimensions",
+  Class = "gaMetrics",
+  contains = ".gaMetrics",
+  validity = function(object) {
+    if (!all(sapply(object, is, "gaMetVar"))) {
+      "Must be a list containing objects of class gaMetVar"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = "mcfMetrics",
+  contains = ".gaMetrics",
+  validity = function(object) {
+    if (!all(sapply(object, is, "mcfMetVar"))) {
+      "Must be a list containing objects of class mcfMetVar"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = ".gaDimensions",
   prototype = prototype(
     list(new("gaDimVar"))
   ),
@@ -461,7 +517,27 @@ setClass(
 )
 
 setClass(
-  Class = "gaSortBy",
+  Class = "gaDimensions",
+  contains = ".gaDimensions",
+  validity = function(object) {
+    if (!all(sapply(object, is, "gaDimVar"))) {
+      "Must be a list containing objects of class gaDimVar"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = "mcfDimensions",
+  contains = ".gaDimensions",
+  validity = function(object) {
+    if (!all(sapply(object, is, "mcfDimVar"))) {
+      "Must be a list containing objects of class mcfDimVar"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = ".gaSortBy",
   slots = c(
     desc = "logical"
   ),
@@ -471,17 +547,35 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
+    if (length(object@.Data) != length(object@desc)) {
+      "List vector and desc vector must be of equal lengths"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = "gaSortBy",
+  contains = ".gaSortBy",
+  validity = function(object) {
     if (!all(sapply(object@.Data, is, ".gaVar"))) {
       "Must be a list containing objects of class .gaVar"
-    } else if (length(object@.Data) != length(object@desc)) {
-      "List vector and desc vector must be of equal lengths"
+    } else TRUE
+  }
+)
+
+setClass(
+  Class = "mcfSortBy",
+  contains = ".gaSortBy",
+  validity = function(object) {
+    if (!all(sapply(object@.Data, is, ".mcfVar"))) { # Need to define .mcfVar
+      "Must be a list containing objects of class .mcfVar"
     } else TRUE
   }
 )
 
 setClassUnion(
   name = ".gaVarList",
-  members = c("gaMetrics", "gaDimensions", "gaSortBy"),
+  members = c(".gaMetrics", ".gaDimensions", ".gaSortBy"),
 )
 
 # ---- Ga Profile ID ----
@@ -501,24 +595,20 @@ setClass(
 # -- GA query construct ----
 
 setClass(
-  Class = "gaQuery",
+  Class = ".gaQuery",
   slots = c(
     profileId = "gaProfileId",
     dateRange = "gaDateRange",
-    metrics = "gaMetrics",
-    dimensions = "gaDimensions",
-    sortBy = "gaSortBy",
+    metrics = ".gaMetrics",
+    dimensions = ".gaDimensions",
+    sortBy = ".gaSortBy",
     filters = "gaFilter",
-    segment = ".gaSegment",
     samplingLevel = "character",
     maxResults = "numeric",
     creds = "list"
   ),
   prototype = prototype(
     dateRange = new("gaDateRange"),
-    metrics = new("gaMetrics"),
-    dimensions = new("gaDimensions"),
-    sortBy = new("gaSortBy"),
     samplingLevel = "DEFAULT",
     maxResults = kGaMaxResults,
     creds = list()
@@ -541,3 +631,25 @@ setClass(
   }
 )
 
+setClass(
+  Class = "gaQuery",
+  slots = c(
+    segment = ".gaSegment"
+  ),
+  prototype = prototype(
+    metrics = new("gaMetrics"),
+    dimensions = new("gaDimensions"),
+    sortBy = new("gaSortBy")
+  ),
+  contains = ".gaQuery"
+)
+
+setClass(
+  Class = "mcfQuery",
+  prototype = prototype(
+    metrics = new("mcfMetrics"), # To be changed to mcfMetrics when class is defined
+    dimensions = new("mcfDimensions"), # To be changed to mcfDimensions when class is defined
+    sortBy = new("mcfSortBy")
+  ),
+  contains = ".gaQuery"
+)

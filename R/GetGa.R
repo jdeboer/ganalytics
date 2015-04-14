@@ -30,6 +30,7 @@ setMethod("GetGaData", "gaQuery", function(
     creds <- object@creds
   }
   queryParams <- GetGaQueries(object)
+  # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(
     .data = queryParams,
     .margins = 2,

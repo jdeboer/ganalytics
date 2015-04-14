@@ -55,6 +55,25 @@ GaPaginate <- function(query, maxRequestedRows, creds) {
   )
 }
 
+GagetMcfReport <- function(query, creds, startIndex = 1, maxResults = 10000) {
+  request <- "data/mcf"
+  scope <- ga_scopes['read_only']
+  query <- c(
+    query,
+    "start-index" = startIndex,
+    "max-results" = maxResults
+  )
+  data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query)
+  if (length(data.ga$error) > 1) {
+    stop(with(
+      data.ga$error,
+      paste("Google Analytics error", code, message, sep = " : ")
+    ))
+  }
+  data.ga <- GaListToDataframe(data.ga)
+  return(data.ga)
+}
+
 GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000) {
   request <- "data/ga"
   scope <- ga_scopes['read_only']
