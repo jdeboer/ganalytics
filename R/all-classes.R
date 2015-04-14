@@ -63,18 +63,28 @@ setClass(
 )
 
 setClassUnion(
-  name = ".mcfVar",
-  members = c("mcfMetVar", "mcfDimVar")
-)
-
-setClassUnion(
   name = ".gaVar",
   members = c("gaMetVar", "gaDimVar")
 )
 
 setClassUnion(
+  name = ".mcfVar",
+  members = c("mcfMetVar", "mcfDimVar")
+)
+
+setClassUnion(
+  name = ".metVar",
+  members = c("gaMetVar", "mcfMetVar")
+)
+
+setClassUnion(
+  name = ".dimVar",
+  members = c("gaDimVar", "mcfDimVar")
+)
+
+setClassUnion(
   name = ".var",
-  members = c(".gaVar", ".mcfVar")
+  members = c(".gaVar", ".mcfVar", ".metVar", ".dimVar")
 )
 
 setValidity(
@@ -160,20 +170,51 @@ setClassUnion(
 
 # ---- GA simple expressions -------------------------------------------------------
 
-# Need to define classes for expressions using exclusive MCF dimensions or MCF metrics
-
 setClass(
   Class = ".gaExpr",
   slots = c(
     gaVar = ".gaVar",
     gaOperator = ".gaOperator",
     gaOperand = ".gaOperand"
-  ),
-  contains = "VIRTUAL"
+  )
 )
 
 setClass(
+  Class = ".mcfExpr",
+  slots = c(
+    gaVar = ".mcfVar",
+    gaOperator = ".gaOperator",
+    gaOperand = ".gaOperand"
+  )
+)
+
+setClass(
+  Class = ".metExpr",
+  slots = c(
+    gaVar = ".metVar",
+    gaOperator = "gaMetOperator",
+    gaOperand = "gaMetOperand"
+  )
+)
+
+setClass(
+  Class = ".dimExpr",
+  slots = c(
+    gaVar = ".dimVar",
+    gaOperator = "gaDimOperator",
+    gaOperand = "gaDimOperand"
+  )
+)
+
+setClassUnion(".expr", c(".gaExpr", ".mcfExpr", ".metExpr", ".dimExpr"))
+
+setClass(
   Class = "gaMetExpr",
+  slots = c(
+    gaVar = "gaMetVar",
+    gaOperator = "gaMetOperator",
+    gaOperand = "gaMetOperand"
+  ),
   contains = ".gaExpr",
   validity = function(object) {
     valid <- validate_that(
@@ -215,6 +256,11 @@ setClass(
 setClass(
   Class = "gaDimExpr",
   contains = ".gaExpr",
+  slots = c(
+    gaVar = "gaDimVar",
+    gaOperator = "gaDimOperator",
+    gaOperand = "gaDimOperand"
+  ),
   validity = function(object) {
     valid <- validate_that(
       is(object@gaVar, "gaDimVar"),
@@ -244,16 +290,36 @@ setClass(
   }
 )
 
+setClass(
+  "mcfMetExpr",
+  slots = c(
+    gaVar = "mcfMetVar",
+    gaOperator = "gaMetOperator",
+    gaOperand = "gaMetOperand"
+  ),
+  contains = c(".mcfExpr", ".metExpr")
+)
+
+setClass(
+  "mcfDimExpr",
+  slots = c(
+    gaVar = "mcfDimVar",
+    gaOperator = "gaDimOperator",
+    gaOperand = "gaDimOperand"
+  ),
+  contains = c(".mcfExpr", ".dimExpr")
+)
+
 # ---- GA 'AND' and 'OR' compound expressions -------------------------------
 
 setClass(
   Class = "gaOr",
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, inherits, ".gaExpr"))) {
+    if (all(sapply(object@.Data, inherits, ".expr"))) {
       TRUE
     } else {
-      "gaOr must be a list containing objects that all inherit from the class .gaExpr"
+      "gaOr must be a list containing objects that all inherit from the class .expr"
     }
   }
 )
@@ -441,7 +507,7 @@ setClassUnion(
 
 setClassUnion(
   name = ".gaCompoundExpr",
-  members = c(".gaExpr", "gaOr", "gaAnd", "gaFilter", "gaSequenceStep", "gaNonSequenceCondition")
+  members = c(".expr", ".gaExpr", ".mcfExpr", "gaOr", "gaAnd", "gaFilter", "gaSequenceStep", "gaNonSequenceCondition")
   # "gaFilter", "gaSequenceStep" and "gaNonSequenceCondition" already inherit from gaAnd
 )
 
@@ -469,10 +535,7 @@ setClass(
 )
 
 setClass(
-  Class = ".gaMetrics",
-  prototype = prototype(
-    list(new("gaMetVar"))
-  ),
+  Class = ".metrics",
   contains = "list",
   validity = function(object) {
     if (length(object) > kGaMax$metrics) {
@@ -483,7 +546,10 @@ setClass(
 
 setClass(
   Class = "gaMetrics",
-  contains = ".gaMetrics",
+  contains = ".metrics",
+  prototype = prototype(
+    list(new("gaMetVar"))
+  ),
   validity = function(object) {
     if (!all(sapply(object, is, "gaMetVar"))) {
       "Must be a list containing objects of class gaMetVar"
@@ -493,7 +559,10 @@ setClass(
 
 setClass(
   Class = "mcfMetrics",
-  contains = ".gaMetrics",
+  contains = ".metrics",
+  prototype = prototype(
+    list(new("mcfMetVar"))
+  ),
   validity = function(object) {
     if (!all(sapply(object, is, "mcfMetVar"))) {
       "Must be a list containing objects of class mcfMetVar"
@@ -502,10 +571,7 @@ setClass(
 )
 
 setClass(
-  Class = ".gaDimensions",
-  prototype = prototype(
-    list(new("gaDimVar"))
-  ),
+  Class = ".dimensions",
   contains = "list",
   validity = function(object) {
     if (!all(sapply(object, is, "gaDimVar"))) {
@@ -518,7 +584,10 @@ setClass(
 
 setClass(
   Class = "gaDimensions",
-  contains = ".gaDimensions",
+  prototype = prototype(
+    list(new("gaDimVar"))
+  ),
+  contains = ".dimensions",
   validity = function(object) {
     if (!all(sapply(object, is, "gaDimVar"))) {
       "Must be a list containing objects of class gaDimVar"
@@ -528,7 +597,10 @@ setClass(
 
 setClass(
   Class = "mcfDimensions",
-  contains = ".gaDimensions",
+  prototype = prototype(
+    list(new("mcfDimVar"))
+  ),
+  contains = ".dimensions",
   validity = function(object) {
     if (!all(sapply(object, is, "mcfDimVar"))) {
       "Must be a list containing objects of class mcfDimVar"
@@ -575,7 +647,7 @@ setClass(
 
 setClassUnion(
   name = ".gaVarList",
-  members = c(".gaMetrics", ".gaDimensions", ".gaSortBy"),
+  members = c(".metrics", ".dimensions", ".gaSortBy"),
 )
 
 # ---- Ga Profile ID ----
@@ -595,12 +667,12 @@ setClass(
 # -- GA query construct ----
 
 setClass(
-  Class = ".gaQuery",
+  Class = ".query",
   slots = c(
     profileId = "gaProfileId",
     dateRange = "gaDateRange",
-    metrics = ".gaMetrics",
-    dimensions = ".gaDimensions",
+    metrics = ".metrics",
+    dimensions = ".dimensions",
     sortBy = ".gaSortBy",
     filters = "gaFilter",
     samplingLevel = "character",
@@ -641,7 +713,7 @@ setClass(
     dimensions = new("gaDimensions"),
     sortBy = new("gaSortBy")
   ),
-  contains = ".gaQuery"
+  contains = ".query"
 )
 
 setClass(
@@ -651,5 +723,5 @@ setClass(
     dimensions = new("mcfDimensions"), # To be changed to mcfDimensions when class is defined
     sortBy = new("mcfSortBy")
   ),
-  contains = ".gaQuery"
+  contains = ".query"
 )

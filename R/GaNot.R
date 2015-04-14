@@ -47,7 +47,7 @@ setMethod(
 
 setMethod(
   f = "GaNot",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object) {
     GaOperator(.Object) <- GaNot(GaOperator(.Object))
     return(.Object)

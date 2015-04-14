@@ -46,7 +46,7 @@ setMethod(
 
 setMethod(
   f = "GaOperand",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object) {
     GaOperand(.Object@gaOperand)
   }
@@ -54,7 +54,7 @@ setMethod(
 
 setMethod(
   f = "GaOperand<-",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object, value) {
     GaOperand(.Object@gaOperand) <- value
     return(.Object)

@@ -46,7 +46,7 @@ setMethod(
 
 setMethod(
   f = "GaOperator",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object) {
     GaOperator(.Object@gaOperator)
   }
@@ -54,7 +54,7 @@ setMethod(
 
 setMethod(
   f = "GaOperator<-",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object, value) {
     GaOperator(.Object@gaOperator) <- value
     return(.Object)
@@ -75,7 +75,7 @@ setMethod(
 
 setMethod(
   f = "GaIsRegEx",
-  signature = ".gaExpr",
+  signature = ".expr",
   definition = function(.Object) {
     GaIsRegEx(GaOperator(.Object))
   }
