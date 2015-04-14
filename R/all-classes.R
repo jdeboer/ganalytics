@@ -332,19 +332,35 @@ setClass(
 # ---- GA filter ----
 
 setClass(
-  Class = "gaFilter",
+  ".filter",
   contains = "gaAnd",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
     if (all(sapply(object@.Data, function(gaOr) {
-        length(unique(sapply(gaOr, class))) == 1
-      }))) {
+      length(unique(sapply(gaOr, class))) == 1
+    }))) {
       TRUE
     } else {
       return("An OR expression within a filter cannot mix metrics and dimensions.")
     }
+  }
+)
 
+setClass(
+  Class = "gaFilter",
+  contains = ".filter",
+  validity = function(object) {
+    ## Check that single expressions within each OR expression exclusively
+    ## belong to .gaExpr class
+    if (all(sapply(object@.Data, function(gaOr) {
+      all(sapply(gaOr, is, ".gaExpr"))
+    }))) {
+      TRUE
+    } else {
+      return("All expressions within a gaFilter must be of superclass .gaExpr")
+    }
+    
     if (all(sapply(object@.Data, function(gaOr) {
       sapply(gaOr, function(expr) {GaVar(expr) != "dateOfSession"})
     }))) {
@@ -359,6 +375,22 @@ setClass(
       TRUE
     } else {
       return("Filters do not support <> and [] operators.")
+    }
+  }
+)
+
+setClass(
+  Class = "mcfFilter",
+  contains = ".filter",
+  validity = function(object) {
+    ## Check that single expressions within each OR expression exclusively
+    ## belong to .mcfExpr class
+    if (all(sapply(object@.Data, function(gaOr) {
+      all(sapply(gaOr, is, ".mcfExpr"))
+    }))) {
+      TRUE
+    } else {
+      return("All expressions within a gaFilter must be of superclass .mcfExpr")
     }
   }
 )
@@ -667,7 +699,7 @@ setClass(
     metrics = ".metrics",
     dimensions = ".dimensions",
     sortBy = ".gaSortBy",
-    filters = "gaFilter",
+    filters = ".filter",
     samplingLevel = "character",
     maxResults = "numeric",
     creds = "list"
@@ -699,6 +731,10 @@ setClass(
 setClass(
   Class = "gaQuery",
   slots = c(
+    metrics = "gaMetrics",
+    dimensions = "gaDimensions",
+    sortBy = "gaSortBy",
+    filters = "gaFilter",
     segment = ".gaSegment"
   ),
   prototype = prototype(
@@ -711,6 +747,12 @@ setClass(
 
 setClass(
   Class = "mcfQuery",
+  slots = c(
+    metrics = "mcfMetrics",
+    dimensions = "mcfDimensions",
+    sortBy = "mcfSortBy",
+    filters = "mcfFilter"
+  ),
   prototype = prototype(
     metrics = new("mcfMetrics"), # To be changed to mcfMetrics when class is defined
     dimensions = new("mcfDimensions"), # To be changed to mcfDimensions when class is defined
