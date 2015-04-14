@@ -69,7 +69,7 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   mcf_ref_html <- html(mcf_var_ref)
   kMcfVars <- list(
     dims = html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a")),
-    mets = html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))
+    mets = html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a"))
   )
   
   use_data(kGaVars, kGaVars_df, kMcfVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
