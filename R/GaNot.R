@@ -9,7 +9,7 @@ NULL
 
 setMethod(
   f = "GaNot",
-  signature = ".gaOperator",
+  signature = ".operator",
   definition = function(.Object) {
     if (.Object == "==") {
       GaOperator(.Object) <- "!="
@@ -41,7 +41,7 @@ setMethod(
     } else if (.Object == "!@") {
       GaOperator(.Object) <- "=@"
       return(.Object)
-    }
+    } else stop(paste(.Object, "cannot be NOTed."))
   }
 )
 

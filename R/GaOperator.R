@@ -10,7 +10,7 @@ NULL
 
 setMethod(
   f = "GaOperator",
-  signature = ".gaOperator",
+  signature = ".operator",
   definition = function(.Object) {
     return(.Object)
   }
@@ -18,7 +18,7 @@ setMethod(
 
 setMethod(
   f = "GaOperator<-",
-  signature = c(".gaOperator", "character"),
+  signature = c(".operator", "character"),
   definition = function(.Object, value) {
     as(.Object, "character") <- value
     return(.Object)
@@ -65,7 +65,7 @@ setMethod(
 
 setMethod(
   f = "GaIsRegEx",
-  signature = "gaDimOperator",
+  signature = ".dimOperator",
   definition = function(.Object) {
     return(
       .Object %in% c("=~", "!~")

@@ -97,28 +97,43 @@ setValidity(
 # ---- GA expression operators ----
 
 setClass(
-  Class = "gaMetOperator",
+  Class = ".operator",
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
-    if (object@.Data %in% kGaOps$met) {
-      TRUE
-    } else {
-      paste("Invalid metric operator", object@.Data, sep = ": ")
-    }
+    validate_that(length(object) == 1)
+  }
+)
+
+setClass(
+  Class = "gaMetOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kGaOps$met)
   }
 )
 
 setClass(
   Class = "gaDimOperator",
-  contains = "character",
-  prototype = prototype("=="),
+  contains = ".operator",
   validity = function(object) {
-    if (object@.Data %in% kGaOps$dim) {
-      TRUE
-    } else {
-      paste("Invalid dimension operator", object@.Data, sep = ": ")
-    }
+    validate_that(object@.Data %in% kGaOps$dim)
+  }
+)
+
+setClass(
+  Class = "mcfMetOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kGaOps$met)
+  }
+)
+
+setClass(
+  Class = "mcfDimOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kGaOps$dim)
   }
 )
 
@@ -127,11 +142,19 @@ setClassUnion(
   members = c("gaMetOperator", "gaDimOperator")
 )
 
-setValidity(
-  Class = ".gaOperator",
-  method = function(object) {
-    validate_that(length(object) == 1)
-  }
+setClassUnion(
+  name = ".mcfOperator",
+  members = c("mcfMetOperator", "mcfDimOperator")
+)
+
+setClassUnion(
+  name = ".dimOperator",
+  members = c("gaDimOperator", "mcfDimOperator")
+)
+
+setClassUnion(
+  name = ".metOperator",
+  members = c("gaMetOperator", "mcfMetOperator")
 )
 
 # ---- GA expression operands ----
@@ -183,7 +206,7 @@ setClass(
   Class = ".mcfExpr",
   slots = c(
     var = ".mcfVar",
-    operator = ".gaOperator",
+    operator = ".mcfOperator",
     operand = ".gaOperand"
   ),
   validity = function(object) {
@@ -199,7 +222,7 @@ setClass(
   Class = ".metExpr",
   slots = c(
     var = ".metVar",
-    operator = "gaMetOperator",
+    operator = ".metOperator",
     operand = "gaMetOperand"
   )
 )
@@ -208,7 +231,7 @@ setClass(
   Class = ".dimExpr",
   slots = c(
     var = ".dimVar",
-    operator = "gaDimOperator",
+    operator = ".dimOperator",
     operand = "gaDimOperand"
   )
 )
@@ -287,7 +310,7 @@ setClass(
   "mcfMetExpr",
   slots = c(
     var = "mcfMetVar",
-    operator = "gaMetOperator",
+    operator = "mcfMetOperator",
     operand = "gaMetOperand"
   ),
   contains = c(".mcfExpr", ".metExpr")
@@ -297,7 +320,7 @@ setClass(
   "mcfDimExpr",
   slots = c(
     var = "mcfDimVar",
-    operator = "gaDimOperator",
+    operator = "mcfDimOperator",
     operand = "gaDimOperand"
   ),
   contains = c(".mcfExpr", ".dimExpr")

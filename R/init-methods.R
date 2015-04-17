@@ -64,11 +64,11 @@ setMethod(
   }
 )
 
-# ---- .gaOperator ----
+# ---- .operator ----
 
 setMethod(
   f = "initialize",
-  signature = ".gaOperator",
+  signature = ".operator",
   definition = function(.Object, value) {
     if (!missing(value)) {
       if (value == "=") value <- "=="

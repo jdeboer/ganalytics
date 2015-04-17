@@ -40,7 +40,7 @@ setGeneric(
 setGeneric(
   name = "GaOperator",
   def = function(.Object) {},
-  valueClass = ".gaOperator",
+  valueClass = ".operator",
   useAsDefault = FALSE
 )
 
@@ -68,7 +68,7 @@ setGeneric(
 setGeneric(
   name = "GaDimOperator",
   def = function(.Object) {},
-  valueClass = "gaDimOperator",
+  valueClass = ".dimOperator",
   useAsDefault = FALSE
 )
 
@@ -81,7 +81,7 @@ setGeneric(
 setGeneric(
   name = "GaMetOperator",
   def = function(.Object) {},
-  valueClass = "gaMetOperator",
+  valueClass = ".metOperator",
   useAsDefault = FALSE
 )
 
@@ -134,7 +134,7 @@ setGeneric(
 setGeneric(
   name = "GaNot",
   def = function(.Object) {},
-  valueClass = c(".gaOperator", ".gaCompoundExpr", ".gaSimpleOrSequence"),
+  valueClass = c(".operator", ".gaCompoundExpr", ".gaSimpleOrSequence"),
   useAsDefault = FALSE
 )
 

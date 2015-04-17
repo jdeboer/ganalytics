@@ -26,7 +26,7 @@ test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
   expect_is(GaExpr("hostname", "!", "google.com"), "gaDimExpr")
   expect_is(GaExpr("totalevents", "=>", 5), "gaMetExpr")
   expect_error(GaExpr("entrances", "=@", "23"))
-  expect_error(GaExpr("pageviews", "+", 2), "Invalid metric operator")
+  expect_error(GaExpr("pageviews", "+", 2))
 })
 
 test_that(".gaExpr objects coerce to character", {
