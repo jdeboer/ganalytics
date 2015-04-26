@@ -12,7 +12,7 @@ setMethod(
   f = "GaOperand",
   signature = ".gaOperand",
   definition = function(.Object) {
-    return(.Object@.Data)
+    return(.Object)
   }
 )
 

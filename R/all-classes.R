@@ -156,36 +156,70 @@ setClassUnion(
 # ---- GA expression operands ----
 
 setClass(
-  Class = "gaMetOperand",
+  ".metOperand",
   contains = "numeric",
   validity = function(object) {
-    if (!(length(object) %in% c(1, 2))) {
-      "A gaMetOperand must be of length 1 or 2"
-    } else if (any(is.na(object))) {
-      "A gaMetOperand connot contain NA values"
-    } else if (length(object) == 2) {
-      if (object[1] > object[2]) {
-        "The first value in a range must not be greater than the second"
-      } else TRUE
-    } else TRUE
+    validate_that(any(is.na(object)) == FALSE)
   }
 )
 
 setClass(
-  Class = "gaDimOperand",
-  contains = "character",
+  ".dimOperand",
+  contains = "character"
+)
+
+setClass(
+  "gaMetOperand",
+  contains = c(".metOperand"),
   validity = function(object) {
-    validate_that(
-      length(object) >= 1,
-      length(object) <= 10
-    )
+    if (length(object) == 2) {
+      if (object[1] > object[2]) {
+        "The first value in a range must not be greater than the second"
+      } else TRUE
+    } else validate_that(length(object) <= 2)
   }
 )
 
-setClassUnion(
-  name = ".gaOperand",
-  members = c("gaMetOperand", "gaDimOperand")
+setClass(
+  "gaDimOperand",
+  contains = ".dimOperand",
+  validity = function(object) {
+    validate_that(length(object) <= 10)
+  }
 )
+
+setClass(
+  "mcfMetOperand",
+  contains = ".metOperand"
+)
+
+setClass(
+  "mcfDimOperand",
+  contains = ".dimOperand"
+)
+
+setClassUnion(
+  ".gaOperand",
+  c("gaMetOperand", "gaDimOperand")
+)
+
+setClassUnion(
+  ".mcfOperand",
+  c("mcfMetOperand", "mcfDimOperand")
+)
+
+setValidity(".mcfOperand", function(object) {
+  validate_that(length(object) == 1)
+})
+
+setClassUnion(".operand", c(
+  "gaMetOperand", "gaDimOperand",
+  "mcfMetOperand", "mcfDimOperand"
+))
+
+setValidity(".operand", function(object){
+  validate_that(length(object) >= 1)
+})
 
 # ---- GA simple expressions -------------------------------------------------------
 
