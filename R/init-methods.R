@@ -161,7 +161,7 @@ setMethod(
       }
     }
     .Object@operand <- operand
-    if(GaIsRegEx(.Object)) {
+    if(IsRegEx(.Object)) {
       GaOperand(.Object) <- tolower(GaOperand(.Object))
     }
     validObject(.Object)
