@@ -42,3 +42,11 @@ setMethod(
   }
 )
 
+setMethod(
+  f = "&",
+  signature = c(".gaCompoundExpr", ".gaCompoundExpr"),
+  definition = function(e1, e2) {
+    GaAnd(e1, e2)
+  }
+)
+

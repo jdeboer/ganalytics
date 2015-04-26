@@ -26,3 +26,10 @@ setMethod(
   }
 )
 
+setMethod(
+  f = "|",
+  signature = c(".gaCompoundExpr", ".gaCompoundExpr"),
+  definition = function(e1, e2) {
+    GaOr(e1, e2)
+  }
+)

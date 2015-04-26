@@ -46,11 +46,27 @@ setMethod(
 )
 
 setMethod(
+  f = "!",
+  signature = ".operator",
+  definition = function(x) {
+    GaNot(x)
+  }
+)
+
+setMethod(
   f = "GaNot",
   signature = ".expr",
   definition = function(.Object) {
     GaOperator(.Object) <- GaNot(GaOperator(.Object))
     return(.Object)
+  }
+)
+
+setMethod(
+  f = "!",
+  signature = ".expr",
+  definition = function(x) {
+    GaNot(x)
   }
 )
 
@@ -67,10 +83,26 @@ setMethod(
 )
 
 setMethod(
+  f = "!",
+  signature = "gaOr",
+  definition = function(x) {
+    GaNot(x)
+  }
+)
+
+setMethod(
   f = "GaNot",
   signature = ".gaSimpleOrSequence",
   definition = function(.Object) {
     .Object@negation <- !.Object@negation
     return(.Object)
+  }
+)
+
+setMethod(
+  f = "!",
+  signature = ".gaSimpleOrSequence",
+  definition = function(x) {
+    GaNot(x)
   }
 )
