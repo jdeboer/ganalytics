@@ -18,9 +18,7 @@ setMethod(
       ## Check var name starts with ga:
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
-      if (!any(grepl("^ga:[a-z0-9]+$", tmp))) {
-        tmp <- paste0("ga:", tmp)
-      }
+      tmp <- sub("^(ga:)?([a-z0-9]+)$", "ga:\\2", tmp)
       if(str_detect(value, ignore.case("dateofsession"))) {
         tmp <- "dateOfSession"
       }
@@ -71,7 +69,7 @@ setMethod(
     if (!missing(value)) {
       tmp <- tolower(value)
       tmp <- sub(kGaPrefix, "mcf:", tmp)
-      tmp <- sub("(^mcf:)?(.*)", "mcf:\\2", tmp)
+      tmp <- sub("^(mcf:)?(.*)", "mcf:\\2", tmp)
       allVars <- with(kMcfVars, union(dims, mets))
       varIndex <- charmatch(tmp, tolower(allVars))
       tmp <- allVars[varIndex]

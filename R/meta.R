@@ -5,7 +5,7 @@
 #' @include helper-functions.R
 #' @include GaApiRequest.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
-#' @importFrom stringr str_replace
+#' @importFrom stringr str_replace str_trim
 #' @importFrom devtools use_data
 #' @importFrom rvest html html_nodes html_text
 NULL
@@ -68,10 +68,17 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   mcf_var_ref <- "http://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
   mcf_ref_html <- html(mcf_var_ref)
   kMcfVars <- list(
-    dims = html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a")),
-    mets = html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a"))
+    dims = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
+    mets = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
   
-  use_data(kGaVars, kGaVars_df, kMcfVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  rt_var_ref <- "http://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
+  rt_ref_html <- html(rt_var_ref)
+  kRtVars <- list(
+    dims = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
+    mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
+  )
+  
+  use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
   
 }

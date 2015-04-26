@@ -70,6 +70,32 @@ setClass(
   }
 )
 
+setClass(
+  Class = "rtMetVar",
+  prototype = prototype("rt:activeUsers"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kRtVars$mets)) {
+      TRUE
+    } else {
+      paste("Invalid RT metric name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClass(
+  Class = "rtDimVar",
+  prototype = prototype("rt:minutesAgo"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kRtVars$dims)) {
+      TRUE
+    } else {
+      paste("Invalid RT dimension name", object@.Data, sep = ": ")
+    }
+  }
+)
+
 setClassUnion(
   name = ".gaVar",
   members = c("gaMetVar", "gaDimVar")
@@ -81,13 +107,18 @@ setClassUnion(
 )
 
 setClassUnion(
+  name = ".rtVar",
+  members = c("rtMetVar", "rtDimVar")
+)
+
+setClassUnion(
   name = ".metVar",
-  members = c("gaMetVar", "mcfMetVar")
+  members = c("gaMetVar", "mcfMetVar", "rtMetVar")
 )
 
 setClassUnion(
   name = ".dimVar",
-  members = c("gaDimVar", "mcfDimVar")
+  members = c("gaDimVar", "mcfDimVar", "rtDimVar")
 )
 
 # ---- GA expression operators ----
@@ -289,6 +320,9 @@ setClass(
   }
 )
 
+## TO DO move validation of <> expressions to gaSegMetExpr, as filters do not support this
+## TO DO - test that filters do not support <> and []
+
 setClass(
   Class = "gaSegMetExpr",
   slots = c(
@@ -305,6 +339,8 @@ setClass(
     )
   }
 )
+
+## TO DO - similarly to gaSegMetExpr, define a gaSegDimExpr for validating use of <> and [] expressions.
 
 setClass(
   Class = "gaDimExpr",
@@ -449,6 +485,8 @@ setClass(
 )
 
 # ---- GA dynamic and pre-defined segments ----
+
+## TO DO - rename these classes to be clear they are segmentation classes.
 
 setClass(
   Class = "gaDimensionOrMetricCondition",
