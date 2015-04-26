@@ -64,6 +64,24 @@ setMethod(
   }
 )
 
+setMethod(
+  f = "initialize",
+  signature = ".mcfVar",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      tmp <- tolower(value)
+      tmp <- sub(kGaPrefix, "mcf:", tmp)
+      tmp <- sub("(^mcf:)?(.*)", "mcf:\\2", tmp)
+      allVars <- with(kMcfVars, union(dims, mets))
+      varIndex <- charmatch(tmp, tolower(allVars))
+      tmp <- allVars[varIndex]
+      .Object@.Data <- tmp
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
 # ---- .operator ----
 
 setMethod(

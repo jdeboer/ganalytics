@@ -11,9 +11,17 @@ NULL
 # ---- GA dimension and metric variables ----
 
 setClass(
+  Class = ".var",
+  contains = "character",
+  validity = function(object) {
+    validate_that(length(object) == 1)
+  }
+)
+
+setClass(
   Class = "gaMetVar",
   prototype = prototype("ga:sessions"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
     if (IsVarMatch(object@.Data, kGaVars$mets)) {
       TRUE
@@ -26,7 +34,7 @@ setClass(
 setClass(
   Class = "gaDimVar",
   prototype = prototype("ga:date"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
     if (IsVarMatch(object@.Data, kGaVars$dims)) {
       TRUE
@@ -39,7 +47,7 @@ setClass(
 setClass(
   Class = "mcfMetVar",
   prototype = prototype("mcf:totalConversions"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
     if (IsVarMatch(object@.Data, kMcfVars$mets)) {
       TRUE
@@ -52,7 +60,7 @@ setClass(
 setClass(
   Class = "mcfDimVar",
   prototype = prototype("mcf:nthDay"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
     if (IsVarMatch(object@.Data, kMcfVars$dims)) {
       TRUE
@@ -80,18 +88,6 @@ setClassUnion(
 setClassUnion(
   name = ".dimVar",
   members = c("gaDimVar", "mcfDimVar")
-)
-
-setClassUnion(
-  name = ".var",
-  members = c(".gaVar", ".mcfVar", ".metVar", ".dimVar")
-)
-
-setValidity(
-  Class = ".var",
-  method = function(object) {
-    validate_that(length(object) == 1)
-  }
 )
 
 # ---- GA expression operators ----

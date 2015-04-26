@@ -31,6 +31,34 @@ setGeneric(
   }
 )
 
+#' McfVar
+#' 
+#' Gets or Creates an object from the superclass .gaVar
+#' 
+#' @export
+#' @rdname GaVar
+setGeneric(
+  name = "McfVar",
+  def = function(.Object) {},
+  valueClass = "character",
+  useAsDefault = FALSE
+)
+
+#' McfVar<-
+#' 
+#' Sets the value of an object or sets its slot belonging to the superclass .mcfVar
+#' 
+#' @export
+#' @rdname McfVar
+setGeneric(
+  name = "McfVar<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfVar<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
 #' GaOperator
 #' 
 #' Get or create an operator used in an expression.

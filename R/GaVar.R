@@ -7,6 +7,8 @@
 #' @include meta.R
 NULL
 
+# ---- GaVar ----
+
 setMethod(
   f = "GaVar",
   signature = ".gaVar",
@@ -45,8 +47,6 @@ setMethod(
   }
 )
 
-# ---- GaVar ----
-
 setMethod(
   f = "GaVar",
   signature = ".expr",
@@ -69,6 +69,37 @@ setMethod(
   signature = ".gaVarList",
   definition = function(.Object) {
     return(.Object@.Data)
+  }
+)
+
+# ---- McfVar ----
+
+setMethod(
+  f = "McfVar",
+  signature = ".mcfVar",
+  definition = function(.Object) {
+    return(.Object)
+  }
+)
+
+## Create a gaMet or gaDim object
+## GaVar takes a GA variable and determines whether to return a Dimension or Metric object
+setMethod(
+  f = "McfVar",
+  signature = "character",
+  definition = function(.Object) {
+    var <- tryCatch(
+      new("mcfMetVar", .Object),
+      error = function(e) {
+        tryCatch(
+          new("mcfDimVar", .Object),
+          error = function(e) {
+            stop(e)
+          }
+        )
+      }
+    )
+    return (var)
   }
 )
 

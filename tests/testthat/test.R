@@ -367,3 +367,11 @@ test_that("providing multiple view IDs, date ranges and multiple segments coerce
     ), c(9, 6)
   )
 })
+
+test_that("MCF vars can be generated using McfVar", {
+  expect_equal(
+    as(McfVar("mcf:totalConversions"), "character"),
+    "mcf:totalConversions"
+  )
+})
+
