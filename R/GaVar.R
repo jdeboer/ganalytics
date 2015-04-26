@@ -82,8 +82,8 @@ setMethod(
   }
 )
 
-## Create a gaMet or gaDim object
-## GaVar takes a GA variable and determines whether to return a Dimension or Metric object
+## Create a mcfMet or mcfDim object
+## McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
 setMethod(
   f = "McfVar",
   signature = "character",
@@ -93,6 +93,37 @@ setMethod(
       error = function(e) {
         tryCatch(
           new("mcfDimVar", .Object),
+          error = function(e) {
+            stop(e)
+          }
+        )
+      }
+    )
+    return (var)
+  }
+)
+
+# ---- RtVar ----
+
+setMethod(
+  f = "RtVar",
+  signature = ".rtVar",
+  definition = function(.Object) {
+    return(.Object)
+  }
+)
+
+## Create a rtMet or rtDim object
+## McfVar takes a RT variable and determines whether to return a Dimension or Metric object
+setMethod(
+  f = "RtVar",
+  signature = "character",
+  definition = function(.Object) {
+    var <- tryCatch(
+      new("rtMetVar", .Object),
+      error = function(e) {
+        tryCatch(
+          new("rtDimVar", .Object),
           error = function(e) {
             stop(e)
           }

@@ -33,10 +33,10 @@ setGeneric(
 
 #' McfVar
 #' 
-#' Gets or Creates an object from the superclass .gaVar
+#' Gets or Creates an object from the superclass .mcfVar
 #' 
 #' @export
-#' @rdname GaVar
+#' @rdname McfVar
 setGeneric(
   name = "McfVar",
   def = function(.Object) {},
@@ -54,6 +54,34 @@ setGeneric(
   name = "McfVar<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("McfVar<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' RtVar
+#' 
+#' Gets or Creates an object from the superclass .rtVar
+#' 
+#' @export
+#' @rdname RtVar
+setGeneric(
+  name = "RtVar",
+  def = function(.Object) {},
+  valueClass = "character",
+  useAsDefault = FALSE
+)
+
+#' RtVar<-
+#' 
+#' Sets the value of an object or sets its slot belonging to the superclass .rtVar
+#' 
+#' @export
+#' @rdname RtVar
+setGeneric(
+  name = "RtVar<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("RtVar<-")
     validObject(.Object)
     return(.Object)
   }
