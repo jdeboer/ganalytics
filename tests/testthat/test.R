@@ -375,3 +375,9 @@ test_that("MCF vars can be generated using McfVar", {
   )
 })
 
+test_that("RT vars can be generated using RtVar", {
+  expect_equal(
+    as(RtVar("rt:activeUsers"), "character"),
+    "rt:activeUsers"
+  )
+})

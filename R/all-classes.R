@@ -495,7 +495,7 @@ setClass(
     if (all(sapply(object@.Data, function(gaOr) {
       sapply(gaOr, function(expr) {
         if (GaOperator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
-          (GaOperand(expr)[2] - GaOperand(expr)[1] + 1) <= 31
+          (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
         } else TRUE
       })
     }))) {

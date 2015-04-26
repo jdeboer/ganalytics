@@ -155,12 +155,12 @@ setMethod(
         if (is.na(index)) {
           index <- which(operand == yesNo)
           if (length(index) == 1) {
-            operand <- GaOperand(names(yesNo)[index])
+            operand <- Operand(names(yesNo)[index])
           } else {
             stop(paste(var, "Invalid operand", operand, sep = ": "))
           }
         } else {
-          operand <- GaOperand(names(yesNo)[index])
+          operand <- Operand(names(yesNo)[index])
         }
       } else if(var %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
@@ -168,17 +168,17 @@ setMethod(
         if (is.na(index)) {
           stop(paste(var, "Invalid operand", operand, sep = ": "))
         } else {
-          operand <- GaOperand(visitorType[index])
+          operand <- Operand(visitorType[index])
         }
       } else if(var == "ga:date") {
-        operand <- GaOperand(format(ymd(operand), format = "%Y%m%d"))
+        operand <- Operand(format(ymd(operand), format = "%Y%m%d"))
       } else if(var == "dateOfSession") {
-        operand <- GaOperand(format(ymd(operand), format = "%Y-%m-%d"))
+        operand <- Operand(format(ymd(operand), format = "%Y-%m-%d"))
       }
     }
     .Object@operand <- operand
     if(IsRegEx(.Object)) {
-      GaOperand(.Object) <- tolower(GaOperand(.Object))
+      Operand(.Object) <- tolower(Operand(.Object))
     }
     validObject(.Object)
     .Object

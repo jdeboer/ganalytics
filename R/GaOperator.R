@@ -42,6 +42,22 @@ setMethod(
 )
 
 
+setMethod(
+  f = "McfDimOperator",
+  signature = "character",
+  definition = function(.Object) {
+    as(.Object, "mcfDimOperator")
+  }
+)
+
+setMethod(
+  f = "McfMetOperator",
+  signature = "character",
+  definition = function(.Object) {
+    as(.Object, "mcfMetOperator")
+  }
+)
+
 # ---- GaOperator, GaDimOperator, GaMetOperator ----
 
 setMethod(

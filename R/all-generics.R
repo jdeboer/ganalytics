@@ -141,29 +141,55 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaOperand
+#' McfDimOperator
+#' 
+#' Get or create an operator used specifically in a dimension type expression.
+#' 
+#' @export
+#' @rdname McfDimOperator
+setGeneric(
+  name = "McfDimOperator",
+  def = function(.Object) {},
+  valueClass = ".dimOperator",
+  useAsDefault = FALSE
+)
+
+#' McfMetOperator
+#' 
+#' Get or create an operator used specifically in a metric type expression.
+#' 
+#' @export
+#' @rdname McfMetOperator
+setGeneric(
+  name = "McfMetOperator",
+  def = function(.Object) {},
+  valueClass = ".metOperator",
+  useAsDefault = FALSE
+)
+
+#' Operand
 #' 
 #' Get the operand of an expression.
 #' 
 #' @export
-#' @rdname GaOperand
+#' @rdname Operand
 setGeneric(
-  name = "GaOperand",
+  name = "Operand",
   def = function(.Object) {},
   valueClass = ".gaOperand",
   useAsDefault = FALSE
 )
 
-#' GaOperand<-
+#' Operand<-
 #' 
 #' Set the operand of an expression.
 #' 
 #' @export
-#' @rdname GaOperand
+#' @rdname Operand
 setGeneric(
-  name = "GaOperand<-",
+  name = "Operand<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaOperand<-")
+    .Object <- standardGeneric("Operand<-")
     validObject(.Object)
     return(.Object)
   }
@@ -200,7 +226,7 @@ setGeneric(
 #' 
 #' @examples
 #' \donttest{
-#'   myQuery <- GaQuery(profileId = 123456789)
+#'   myQuery <- GaQuery(view = 123456789)
 #'   source_matches_google <- GaExpr("source", "~", "google")
 #'   GaFilter(myQuery) <- source_matches_google
 #'   GetGaData(myQuery)
@@ -212,6 +238,48 @@ setGeneric(
   name = "GaExpr",
   def = function(.Object, operator, operand, metricScope = "") {},
   valueClass = ".gaExpr",
+  useAsDefault = FALSE
+)
+
+#' McfExpr
+#' 
+#' Create an expression.
+#' 
+#' @examples
+#' \donttest{
+#'   myQuery <- McfQuery(view = 123456789)
+#'   source_matches_google <- McfExpr("mcf:source", "~", "google")
+#'   Filter(myQuery) <- source_matches_google
+#'   GetData(myQuery)
+#' }
+#' 
+#' @export
+#' @rdname McfExpr
+setGeneric(
+  name = "McfExpr",
+  def = function(.Object, operator, operand) {},
+  valueClass = ".mcfExpr",
+  useAsDefault = FALSE
+)
+
+#' RtExpr
+#' 
+#' Create an expression.
+#' 
+#' @examples
+#' \donttest{
+#'   myQuery <- RtQuery(view = 123456789)
+#'   source_matches_google <- RtExpr("rt:source", "~", "google")
+#'   Filter(myQuery) <- source_matches_google
+#'   GetData(myQuery)
+#' }
+#' 
+#' @export
+#' @rdname RtExpr
+setGeneric(
+  name = "RtExpr",
+  def = function(.Object, operator, operand) {},
+  valueClass = ".rtExpr",
   useAsDefault = FALSE
 )
 

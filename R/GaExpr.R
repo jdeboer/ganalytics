@@ -4,7 +4,7 @@
 #' @include all-coercions.R
 #' @include GaVar.R
 #' @include GaOperator.R
-#' @include GaOperand.R
+#' @include Operand.R
 #' @include ganalytics-package.R
 #' @include helper-functions.R
 NULL
@@ -16,7 +16,7 @@ setMethod(
     var <- GaVar(.Object)
     if (class(var) == "gaDimVar") {
       operator <- GaDimOperator(operator)
-      operand <- GaOperand(as.character(operand))
+      operand <- Operand(as.character(operand))
       gaExprClass <- "gaDimExpr"
       new(
         Class = gaExprClass,
@@ -26,7 +26,7 @@ setMethod(
       )
     } else if (class(var) == "gaMetVar") {
       operator <- GaMetOperator(operator)
-      operand <- GaOperand(as.numeric(operand))
+      operand <- Operand(as.numeric(operand))
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
@@ -48,6 +48,39 @@ setMethod(
     } else {
       stop(
         paste("Unsupported .gaVar class", class(var), sep=": ")
+      )
+    }
+  }
+)
+
+setMethod(
+  f = "McfExpr",
+  signature = c("character", "character", "ANY"),
+  definition = function(.Object, operator, operand) {
+    var <- McfVar(.Object)
+    if (class(var) == "mcfDimVar") {
+      operator <- McfDimOperator(operator)
+      operand <- Operand(as.character(operand))
+      exprClass <- "mcfDimExpr"
+      new(
+        Class = exprClass,
+        var = var,
+        operator = operator,
+        operand = operand
+      )
+    } else if (class(var) == "mcfMetVar") {
+      operator <- McfMetOperator(operator)
+      operand <- Operand(as.numeric(operand))
+      exprClass <- "mcfMetExpr"
+      new(
+        Class = exprClass,
+        var = var,
+        operator = operator,
+        operand = operand
+      )
+    } else {
+      stop(
+        paste("Unsupported .mcfVar class", class(var), sep=": ")
       )
     }
   }

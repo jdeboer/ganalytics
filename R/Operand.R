@@ -6,18 +6,18 @@
 #' @include helper-functions.R
 NULL
 
-# ---- GaOperand ----
+# ---- Operand ----
 
 setMethod(
-  f = "GaOperand",
-  signature = ".gaOperand",
+  f = "Operand",
+  signature = ".operand",
   definition = function(.Object) {
     return(.Object)
   }
 )
 
 setMethod(
-  f = "GaOperand",
+  f = "Operand",
   signature = "character",
   definition = function(.Object) {
     as(.Object, "gaDimOperand")
@@ -25,7 +25,7 @@ setMethod(
 )
 
 setMethod(
-  f = "GaOperand",
+  f = "Operand",
   signature = "numeric",
   definition = function(.Object) {
     as(.Object, "gaMetOperand")
@@ -33,7 +33,7 @@ setMethod(
 )
 
 setMethod(
-  f = "GaOperand<-",
+  f = "Operand<-",
   signature = ".gaOperand",
   definition = function(.Object, value) {
     to <- class(value)
@@ -42,21 +42,21 @@ setMethod(
   }
 )
 
-# ---- GaOperand ----
+# ---- Operand ----
 
 setMethod(
-  f = "GaOperand",
+  f = "Operand",
   signature = ".expr",
   definition = function(.Object) {
-    GaOperand(.Object@operand)
+    Operand(.Object@operand)
   }
 )
 
 setMethod(
-  f = "GaOperand<-",
+  f = "Operand<-",
   signature = ".expr",
   definition = function(.Object, value) {
-    GaOperand(.Object@operand) <- value
+    Operand(.Object@operand) <- value
     return(.Object)
   }
 )
