@@ -3,20 +3,15 @@
 \name{GaVar}
 \alias{GaVar}
 \alias{GaVar<-}
-\alias{McfVar}
 \title{GaVar}
 \usage{
 GaVar(.Object)
 
 GaVar(.Object) <- value
-
-McfVar(.Object)
 }
 \description{
 Gets or Creates an object from the superclass .gaVar
 
 Sets the value of an object or sets its slot belonging to the superclass .gaVar
-
-Gets or Creates an object from the superclass .gaVar
 }
 
