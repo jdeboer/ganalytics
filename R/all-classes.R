@@ -295,7 +295,7 @@ setClass(
       return("operand must be of length 1 unless using a range '<>' or list '[]' operator.")
     } else if (!(length(object@operand) <= 2 | object@operator == "[]")) {
       return("operand may only be greater than length 2 if using a list operator '[]'.")
-    } else if (GaIsRegEx(object@operator)) {
+    } else if (IsRegEx(object@operator)) {
       if (nchar(object@operand) > 128) {
         return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@operand)))
       }

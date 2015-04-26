@@ -61,10 +61,10 @@ setMethod(
   }
 )
 
-# ---- GaIsRegEx ----
+# ---- IsRegEx ----
 
 setMethod(
-  f = "GaIsRegEx",
+  f = "IsRegEx",
   signature = ".dimOperator",
   definition = function(.Object) {
     return(
@@ -74,9 +74,9 @@ setMethod(
 )
 
 setMethod(
-  f = "GaIsRegEx",
+  f = "IsRegEx",
   signature = ".expr",
   definition = function(.Object) {
-    GaIsRegEx(GaOperator(.Object))
+    IsRegEx(GaOperator(.Object))
   }
 )

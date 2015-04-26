@@ -113,14 +113,14 @@ setGeneric(
   }
 )
 
-#' GaIsRegEx
+#' IsRegEx
 #' 
 #' Checks for a regular expression.
 #' 
 #' @export
-#' @rdname GaIsRegEx
+#' @rdname IsRegEx
 setGeneric(
-  name = "GaIsRegEx",
+  name = "IsRegEx",
   def = function(.Object) {},
   valueClass = "logical"
 )
