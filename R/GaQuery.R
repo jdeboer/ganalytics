@@ -117,10 +117,10 @@ modify_query <- function(
     GaEndDate(query) <- end_date
   }
   if (!is.na(metrics)) {
-    GaMetrics(query) <- metrics
+    Metrics(query) <- metrics
   }
   if (!is.na(dimensions)) {
-    GaDimensions(query) <- dimensions
+    Dimensions(query) <- dimensions
   }
   if (!is.na(sort_by)) {
     GaSortBy(query) <- sort_by

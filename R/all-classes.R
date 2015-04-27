@@ -784,9 +784,7 @@ setClass(
   Class = ".dimensions",
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object, is, "gaDimVar"))) {
-      "Must be a list containing objects of class gaDimVar"
-    } else if (length(object) > kGaMax$dimensions) {
+    if (length(object) > kGaMax$dimensions) {
       paste("Maximum of", kGaMax$dimensions, "dimensions allowed.", sep = " ")
     } else TRUE
   }

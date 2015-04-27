@@ -901,6 +901,92 @@ setGeneric(
   }
 )
 
+
+
+#' McfMetrics
+#' 
+#' Get the metrics of the object.
+#' 
+#' @export
+#' @rdname McfMetrics
+setGeneric(
+  name = "McfMetrics",
+  def = function(.Object, ...) {},
+  valueClass = "mcfMetrics",
+  useAsDefault = FALSE
+)
+
+#' McfMetrics<-
+#' 
+#' Set the metrics of the object.
+#' 
+#' @export
+#' @rdname McfMetrics
+setGeneric(
+  name = "McfMetrics<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfMetrics<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' McfDimensions
+#' 
+#' Get the dimensions of the object.
+#' 
+#' @export
+#' @rdname McfDimensions
+setGeneric(
+  name = "McfDimensions",
+  def = function(.Object, ...) {},
+  valueClass = "mcfDimensions",
+  useAsDefault = FALSE
+)
+
+#' McfDimensions<-
+#' 
+#' Set the dimensions for the object.
+#' 
+#' @export
+#' @rdname McfDimensions
+setGeneric(
+  name = "McfDimensions<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfDimensions<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' SortBy
+#' 
+#' Get the sortBy order of the query.
+#' 
+#' @export
+#' @rdname SortBy
+setGeneric(
+  name = "SortBy",
+  def = function(.Object, ..., desc = logical(0)) {},
+  valueClass = c(".sortBy", "gaQuery"),
+  useAsDefault = FALSE
+)
+
+#' SortBy<-
+#' 
+#' Set the order of rows returned by Google Analytics.
+#' 
+#' @export
+#' @rdname SortBy
+setGeneric(
+  name = "SortBy<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("SortBy<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
 #' GaSortBy
 #' 
 #' Get the sortBy order of the query.
@@ -924,6 +1010,34 @@ setGeneric(
   name = "GaSortBy<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("GaSortBy<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' McfSortBy
+#' 
+#' Get the sortBy order of the query.
+#' 
+#' @export
+#' @rdname McfSortBy
+setGeneric(
+  name = "McfSortBy",
+  def = function(.Object, ..., desc = logical(0)) {},
+  valueClass = c("mcfSortBy", "gaQuery"),
+  useAsDefault = FALSE
+)
+
+#' McfSortBy<-
+#' 
+#' Set the order of rows returned by Google Analytics.
+#' 
+#' @export
+#' @rdname McfSortBy
+setGeneric(
+  name = "McfSortBy<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfSortBy<-")
     validObject(.Object)
     return(.Object)
   }
