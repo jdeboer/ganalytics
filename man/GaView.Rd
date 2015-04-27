@@ -10,8 +10,8 @@ GaView(.Object)
 GaView(.Object) <- value
 }
 \description{
-Get the profileId of the query
+Get the viewId of the query
 
-Set the profileId for the query.
+Set the viewId for the query.
 }
 

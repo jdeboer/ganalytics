@@ -3,7 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include GaVar.R
-#' @include GaOperator.R
+#' @include Operator.R
 #' @include Operand.R
 #' @include ganalytics-package.R
 #' @include helper-functions.R
@@ -16,7 +16,7 @@ setMethod(
     var <- GaVar(.Object)
     if (class(var) == "gaDimVar") {
       operator <- GaDimOperator(operator)
-      operand <- Operand(as.character(operand))
+      operand <- GaOperand(as.character(operand))
       gaExprClass <- "gaDimExpr"
       new(
         Class = gaExprClass,
@@ -26,7 +26,7 @@ setMethod(
       )
     } else if (class(var) == "gaMetVar") {
       operator <- GaMetOperator(operator)
-      operand <- Operand(as.numeric(operand))
+      operand <- GaOperand(as.numeric(operand))
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
@@ -60,7 +60,7 @@ setMethod(
     var <- McfVar(.Object)
     if (class(var) == "mcfDimVar") {
       operator <- McfDimOperator(operator)
-      operand <- Operand(as.character(operand))
+      operand <- McfOperand(as.character(operand))
       exprClass <- "mcfDimExpr"
       new(
         Class = exprClass,
@@ -70,7 +70,7 @@ setMethod(
       )
     } else if (class(var) == "mcfMetVar") {
       operator <- McfMetOperator(operator)
-      operand <- Operand(as.numeric(operand))
+      operand <- McfOperand(as.numeric(operand))
       exprClass <- "mcfMetExpr"
       new(
         Class = exprClass,
@@ -81,6 +81,39 @@ setMethod(
     } else {
       stop(
         paste("Unsupported .mcfVar class", class(var), sep=": ")
+      )
+    }
+  }
+)
+
+setMethod(
+  f = "RtExpr",
+  signature = c("character", "character", "ANY"),
+  definition = function(.Object, operator, operand) {
+    var <- RtVar(.Object)
+    if (class(var) == "rtDimVar") {
+      operator <- RtDimOperator(operator)
+      operand <- RtOperand(as.character(operand))
+      exprClass <- "rtDimExpr"
+      new(
+        Class = exprClass,
+        var = var,
+        operator = operator,
+        operand = operand
+      )
+    } else if (class(var) == "rtMetVar") {
+      operator <- RtMetOperator(operator)
+      operand <- RtOperand(as.numeric(operand))
+      exprClass <- "rtMetExpr"
+      new(
+        Class = exprClass,
+        var = var,
+        operator = operator,
+        operand = operand
+      )
+    } else {
+      stop(
+        paste("Unsupported .rtVar class", class(var), sep=": ")
       )
     }
   }

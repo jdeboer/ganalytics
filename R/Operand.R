@@ -17,7 +17,7 @@ setMethod(
 )
 
 setMethod(
-  f = "Operand",
+  f = "GaOperand",
   signature = "character",
   definition = function(.Object) {
     as(.Object, "gaDimOperand")
@@ -25,7 +25,7 @@ setMethod(
 )
 
 setMethod(
-  f = "Operand",
+  f = "GaOperand",
   signature = "numeric",
   definition = function(.Object) {
     as(.Object, "gaMetOperand")
@@ -33,8 +33,40 @@ setMethod(
 )
 
 setMethod(
+  f = "McfOperand",
+  signature = "character",
+  definition = function(.Object) {
+    as(.Object, "mcfDimOperand")
+  }
+)
+
+setMethod(
+  f = "McfOperand",
+  signature = "numeric",
+  definition = function(.Object) {
+    as(.Object, "mcfMetOperand")
+  }
+)
+
+setMethod(
+  f = "RtOperand",
+  signature = "character",
+  definition = function(.Object) {
+    as(.Object, "rtDimOperand")
+  }
+)
+
+setMethod(
+  f = "RtOperand",
+  signature = "numeric",
+  definition = function(.Object) {
+    as(.Object, "rtMetOperand")
+  }
+)
+
+setMethod(
   f = "Operand<-",
-  signature = ".gaOperand",
+  signature = ".operand",
   definition = function(.Object, value) {
     to <- class(value)
     as(.Object, to) <- value

@@ -32,7 +32,7 @@ GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
 \item{maxResults}{the maximum number of results to return,
 up to 1,000,000}
 
-\item{profileId}{profile id to use}
+\item{viewId}{profile id to use}
 }
 \description{
 GaQuery

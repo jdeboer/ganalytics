@@ -28,19 +28,7 @@ setAs(
 )
 
 setAs(
-  from = "gaMetVar",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = "gaDimVar",
+  from = ".var",
   to = "character",
   def = function(from) {
     return(from@.Data)
@@ -69,19 +57,7 @@ setAs(
 )
 
 setAs(
-  from = "gaDimOperator",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = "gaMetOperator",
+  from = ".operator",
   to = "character",
   def = function(from) {
     return(from@.Data)
@@ -118,7 +94,7 @@ setAs(
 )
 
 setAs(
-  from = "gaMetOperand",
+  from = ".metOperand",
   to = "character",
   def = function(from) {
     format(from@.Data, scientific = FALSE)
@@ -132,7 +108,7 @@ setAs(
 
 # Coercing to gaOr or gaAnd
 setAs(
-  from = ".gaExpr",
+  from = ".expr",
   to = "gaOr",
   def = function(from) {
     new(to, list(from))
@@ -140,7 +116,7 @@ setAs(
 )
 
 setAs(
-  from = ".gaExpr",
+  from = ".expr",
   to = "gaAnd",
   def = function(from) {
     new(Class = to, list(as(object = from, Class = "gaOr")))
@@ -189,7 +165,7 @@ setAs(
 
 # Coercing GA expressions to and from GA API compatible character strings
 setAs(
-  from = ".gaExpr",
+  from = ".expr",
   to = "character",
   def = function(from) {
     new(
@@ -404,7 +380,7 @@ setAs(
 )
 
 setAs(
-  from = ".gaExpr",
+  from = ".expr",
   to = "gaDynSegment",
   def = function(from) {
     as(
@@ -434,7 +410,7 @@ setAs(
 )
 
 setAs(
-  from = ".gaExpr",
+  from = ".expr",
   to = "gaFilter",
   def = function(from) {
     as(
@@ -462,7 +438,7 @@ setAs(
 
 # Coercing to gaSegmentCondition and gaNonSequenceCondition
 setAs(
-  from = ".gaCompoundExpr",
+  from = ".compoundExpr",
   to = "gaSegmentCondition",
   def = function(from) {
     new(Class = to, list(GaNonSequenceCondition(from)))
@@ -470,7 +446,7 @@ setAs(
 )
 
 setAs(
-  from = ".gaCompoundExpr",
+  from = ".compoundExpr",
   to = "gaNonSequenceCondition",
   def = function(from) {
     new(Class = to, GaAnd(from))
@@ -480,7 +456,7 @@ setAs(
 # Coercing to gaSequenceCondition
 
 setAs(
-  from = ".gaCompoundExpr",
+  from = ".compoundExpr",
   to = "gaSequenceCondition",
   def = function(from) {
     new(Class = to, GaAnd(from))
@@ -634,24 +610,24 @@ setAs(
   from = "gaQuery",
   to = "matrix",
   def = function(from) {
-    profilesDatesSegments <- do.call(
+    viewsDatesSegments <- do.call(
       what = rbind,
       args = lapply(
         X = GaView(from),
-        FUN = function(profileId) {
+        FUN = function(viewId) {
           data.frame(
             startDate = GaStartDate(from),
             endDate = GaEndDate(from),
-            profileId = profileId,
+            viewId = viewId,
             stringsAsFactors = FALSE
           )
         }
       )
     )
     params <- mapply(
-      FUN = function(startDate, endDate, profileId) {
+      FUN = function(startDate, endDate, viewId) {
         c(
-          "ids" = as(GaView(profileId), "character"),
+          "ids" = as(GaView(viewId), "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(GaMetrics(from), "character"),
@@ -670,9 +646,9 @@ setAs(
           "samplingLevel" = as(GaSamplingLevel(from), "character")
         )
       },
-      profilesDatesSegments$startDate,
-      profilesDatesSegments$endDate,
-      profilesDatesSegments$profileId
+      viewsDatesSegments$startDate,
+      viewsDatesSegments$endDate,
+      viewsDatesSegments$viewId
     )
   }
 )

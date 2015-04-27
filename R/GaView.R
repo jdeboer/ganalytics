@@ -67,7 +67,7 @@ setMethod(
   f = "GaView",
   signature = "gaQuery",
   definition = function(.Object) {
-    .Object@profileId
+    .Object@viewId
   }
 )
 
@@ -75,7 +75,7 @@ setMethod(
   f = "GaView<-",
   signature = c("gaQuery", "ANY"),
   definition = function(.Object, value) {
-    .Object@profileId <- GaView(value)
+    .Object@viewId <- GaView(value)
     validObject(.Object)
     return(.Object)
   }

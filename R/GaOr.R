@@ -13,7 +13,7 @@ NULL
 
 setMethod(
   f = "GaOr",
-  signature = ".gaCompoundExpr",
+  signature = ".compoundExpr",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
     exprList <- lapply(
@@ -28,7 +28,7 @@ setMethod(
 
 setMethod(
   f = "|",
-  signature = c(".gaCompoundExpr", ".gaCompoundExpr"),
+  signature = c(".compoundExpr", ".compoundExpr"),
   definition = function(e1, e2) {
     GaOr(e1, e2)
   }

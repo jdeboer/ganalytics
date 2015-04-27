@@ -3,6 +3,31 @@
 #' @include all-classes.R
 NULL
 
+#' Var
+#' 
+#' @export
+setGeneric(
+  name = "Var",
+  def = function(.Object) {},
+  valueClass = ".var",
+  useAsDefault = FALSE
+)
+
+#' Var<-
+#' 
+#' Sets the value of an object or sets its slot belonging to the superclass .mcfVar
+#' 
+#' @export
+#' @rdname McfVar
+setGeneric(
+  name = "Var<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("Var<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
 #' GaVar
 #' 
 #' Gets or Creates an object from the superclass .gaVar
@@ -87,29 +112,29 @@ setGeneric(
   }
 )
 
-#' GaOperator
+#' Operator
 #' 
 #' Get or create an operator used in an expression.
 #' 
 #' @export
-#' @rdname GaOperator
+#' @rdname Operator
 setGeneric(
-  name = "GaOperator",
+  name = "Operator",
   def = function(.Object) {},
   valueClass = ".operator",
   useAsDefault = FALSE
 )
 
-#' GaOperator<-
+#' Operator<-
 #' 
 #' Set the operator used in an expression.
 #' 
 #' @export
-#' @rdname GaOperator
+#' @rdname Operator
 setGeneric(
-  name = "GaOperator<-",
+  name = "Operator<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaOperator<-")
+    .Object <- standardGeneric("Operator<-")
     validObject(.Object)
     return(.Object)
   }
@@ -167,6 +192,32 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' RtDimOperator
+#' 
+#' Get or create an operator used specifically in a dimension type expression.
+#' 
+#' @export
+#' @rdname RtDimOperator
+setGeneric(
+  name = "RtDimOperator",
+  def = function(.Object) {},
+  valueClass = ".dimOperator",
+  useAsDefault = FALSE
+)
+
+#' RtMetOperator
+#' 
+#' Get or create an operator used specifically in a metric type expression.
+#' 
+#' @export
+#' @rdname RtMetOperator
+setGeneric(
+  name = "RtMetOperator",
+  def = function(.Object) {},
+  valueClass = ".metOperator",
+  useAsDefault = FALSE
+)
+
 #' Operand
 #' 
 #' Get the operand of an expression.
@@ -176,7 +227,7 @@ setGeneric(
 setGeneric(
   name = "Operand",
   def = function(.Object) {},
-  valueClass = ".gaOperand",
+  valueClass = ".operand",
   useAsDefault = FALSE
 )
 
@@ -190,6 +241,90 @@ setGeneric(
   name = "Operand<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("Operand<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' GaOperand
+#' 
+#' Get the operand of an expression.
+#' 
+#' @export
+#' @rdname Operand
+setGeneric(
+  name = "GaOperand",
+  def = function(.Object) {},
+  valueClass = ".gaOperand",
+  useAsDefault = FALSE
+)
+
+#' GaOperand<-
+#' 
+#' Set the operand of an expression.
+#' 
+#' @export
+#' @rdname GaOperand
+setGeneric(
+  name = "GaOperand<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("GaOperand<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' McfOperand
+#' 
+#' Get the operand of an expression.
+#' 
+#' @export
+#' @rdname McfOperand
+setGeneric(
+  name = "McfOperand",
+  def = function(.Object) {},
+  valueClass = ".mcfOperand",
+  useAsDefault = FALSE
+)
+
+#' McfOperand<-
+#' 
+#' Set the operand of an expression.
+#' 
+#' @export
+#' @rdname McfOperand
+setGeneric(
+  name = "McfOperand<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfOperand<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' RtOperand
+#' 
+#' Get the operand of an expression.
+#' 
+#' @export
+#' @rdname RtOperand
+setGeneric(
+  name = "RtOperand",
+  def = function(.Object) {},
+  valueClass = ".rtOperand",
+  useAsDefault = FALSE
+)
+
+#' RtOperand<-
+#' 
+#' Set the operand of an expression.
+#' 
+#' @export
+#' @rdname RtOperand
+setGeneric(
+  name = "RtOperand<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("RtOperand<-")
     validObject(.Object)
     return(.Object)
   }
@@ -216,7 +351,16 @@ setGeneric(
 setGeneric(
   name = "GaNot",
   def = function(.Object) {},
-  valueClass = c(".operator", ".gaCompoundExpr", ".gaSimpleOrSequence"),
+  valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
+  useAsDefault = FALSE
+)
+
+#' Expr
+#' 
+setGeneric(
+  name = "Expr",
+  def = function(.Object, operator, operand, metricScope = "") {},
+  valueClass = ".expr",
   useAsDefault = FALSE
 )
 
@@ -449,6 +593,34 @@ setGeneric(
   }
 )
 
+#' TableFilter
+#' 
+#' Get the filter.
+#' 
+#' @export
+#' @rdname TableFilter
+setGeneric(
+  name = "TableFilter",
+  def = function(.Object, ...) {},
+  valueClass = ".filter",
+  useAsDefault = FALSE
+)
+
+#' TableFilter<-
+#' 
+#' Set the filter.
+#' 
+#' @export
+#' @rdname TableFilter
+setGeneric(
+  name = "TableFilter<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("TableFilter<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
 #' GaFilter
 #' 
 #' Get the filter.
@@ -472,6 +644,62 @@ setGeneric(
   name = "GaFilter<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("GaFilter<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' McfFilter
+#' 
+#' Get the filter.
+#' 
+#' @export
+#' @rdname McfFilter
+setGeneric(
+  name = "McfFilter",
+  def = function(.Object, ...) {},
+  valueClass = "mcfFilter",
+  useAsDefault = FALSE
+)
+
+#' McfFilter<-
+#' 
+#' Set the filter.
+#' 
+#' @export
+#' @rdname McfFilter
+setGeneric(
+  name = "McfFilter<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("McfFilter<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' RtFilter
+#' 
+#' Get the filter.
+#' 
+#' @export
+#' @rdname RtFilter
+setGeneric(
+  name = "RtFilter",
+  def = function(.Object, ...) {},
+  valueClass = "RtFilter",
+  useAsDefault = FALSE
+)
+
+#' RtFilter<-
+#' 
+#' Set the filter.
+#' 
+#' @export
+#' @rdname RtFilter
+setGeneric(
+  name = "RtFilter<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("RtFilter<-")
     validObject(.Object)
     return(.Object)
   }
@@ -556,6 +784,62 @@ setGeneric(
   name = "GaEndDate<-",
   def = function(.Object, value) {
     .Object <- standardGeneric("GaEndDate<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' Metrics
+#' 
+#' Get the metrics of the object.
+#' 
+#' @export
+#' @rdname Metrics
+setGeneric(
+  name = "Metrics",
+  def = function(.Object, ...) {},
+  valueClass = ".metrics",
+  useAsDefault = FALSE
+)
+
+#' Metrics<-
+#' 
+#' Set the metrics of the object.
+#' 
+#' @export
+#' @rdname Metrics
+setGeneric(
+  name = "Metrics<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("Metrics<-")
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+#' Dimensions
+#' 
+#' Get the dimensions of the object.
+#' 
+#' @export
+#' @rdname Dimensions
+setGeneric(
+  name = "Dimensions",
+  def = function(.Object, ...) {},
+  valueClass = ".dimensions",
+  useAsDefault = FALSE
+)
+
+#' Dimensions<-
+#' 
+#' Set the dimensions for the object.
+#' 
+#' @export
+#' @rdname Dimensions
+setGeneric(
+  name = "Dimensions<-",
+  def = function(.Object, value) {
+    .Object <- standardGeneric("Dimensions<-")
     validObject(.Object)
     return(.Object)
   }
@@ -647,7 +931,7 @@ setGeneric(
 
 #' GaView
 #' 
-#' Get the profileId of the query
+#' Get the viewId of the query
 #' 
 #' @export
 #' @rdname GaView
@@ -660,7 +944,7 @@ setGeneric(
 
 #' GaView<-
 #' 
-#' Set the profileId for the query.
+#' Set the viewId for the query.
 #' 
 #' @export
 #' @rdname GaView

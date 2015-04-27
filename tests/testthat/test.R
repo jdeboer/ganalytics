@@ -381,3 +381,18 @@ test_that("RT vars can be generated using RtVar", {
     "rt:activeUsers"
   )
 })
+
+test_that("MCF and RT expressions can be created with dimensions or metrics", {
+  expect_equal(
+    as(McfExpr("mcf:totalConversions", ">", 10), "character"),
+    "mcf:totalConversions>10"
+  )
+  expect_equal(
+    as(RtExpr("rt:source", "=", "google"), "character"),
+    "rt:source==google"
+  )
+})
+
+test_that("MCF and RT queries can be constructed", {
+  McfQuery(view = 0)
+})

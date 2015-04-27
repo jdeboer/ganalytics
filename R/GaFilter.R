@@ -15,7 +15,7 @@ setMethod(
 
 setMethod(
   f = "GaFilter",
-  signature = ".gaCompoundExpr",
+  signature = ".compoundExpr",
   definition = function(.Object) {
     as(.Object, "gaFilter")
   }

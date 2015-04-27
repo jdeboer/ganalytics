@@ -12,34 +12,34 @@ setMethod(
   signature = ".operator",
   definition = function(.Object) {
     if (.Object == "==") {
-      GaOperator(.Object) <- "!="
+      Operator(.Object) <- "!="
       return(.Object)
     } else if (.Object == "!=") {
-      GaOperator(.Object) <- "=="
+      Operator(.Object) <- "=="
       return(.Object)
     } else if (.Object == "<") {
-      GaOperator(.Object) <- ">="
+      Operator(.Object) <- ">="
       return(.Object)
     } else if (.Object == ">=") {
-      GaOperator(.Object) <- "<"
+      Operator(.Object) <- "<"
       return(.Object)
     } else if (.Object == ">") {
-      GaOperator(.Object) <- "<="
+      Operator(.Object) <- "<="
       return(.Object)
     } else if (.Object == "<=") {
-      GaOperator(.Object) <- ">"
+      Operator(.Object) <- ">"
       return(.Object)
     } else if (.Object == "!~") {
-      GaOperator(.Object) <- "=~"
+      Operator(.Object) <- "=~"
       return(.Object)
     } else if (.Object == "=~") {
-      GaOperator(.Object) <- "!~"
+      Operator(.Object) <- "!~"
       return(.Object)
     } else if (.Object == "=@") {
-      GaOperator(.Object) <- "!@"
+      Operator(.Object) <- "!@"
       return(.Object)
     } else if (.Object == "!@") {
-      GaOperator(.Object) <- "=@"
+      Operator(.Object) <- "=@"
       return(.Object)
     } else stop(paste(.Object, "cannot be NOTed."))
   }
@@ -57,7 +57,7 @@ setMethod(
   f = "GaNot",
   signature = ".expr",
   definition = function(.Object) {
-    GaOperator(.Object) <- GaNot(GaOperator(.Object))
+    Operator(.Object) <- GaNot(Operator(.Object))
     return(.Object)
   }
 )

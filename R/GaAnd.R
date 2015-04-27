@@ -6,7 +6,7 @@ NULL
 
 setMethod(
   f = "GaAnd",
-  signature = ".gaCompoundExpr",
+  signature = ".compoundExpr",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
     exprList <- lapply(
@@ -44,7 +44,7 @@ setMethod(
 
 setMethod(
   f = "&",
-  signature = c(".gaCompoundExpr", ".gaCompoundExpr"),
+  signature = c(".compoundExpr", ".compoundExpr"),
   definition = function(e1, e2) {
     GaAnd(e1, e2)
   }

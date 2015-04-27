@@ -8,7 +8,7 @@ NULL
 
 #' GaQuery
 #' Create a ganalytics query object
-#' @param profileId profile id to use
+#' @param viewId profile id to use
 #' @param creds authentication credentials object created using GoogleApiCreds()
 #' @param startDate start date
 #' @param endDate end date
@@ -41,7 +41,7 @@ GaQuery <- function(
     creds <- view$creds
   }
   new("gaQuery",
-      profileId = GaView(view),
+      viewId = GaView(view),
       dateRange = GaDateRange(
         as.Date(startDate),
         as.Date(endDate)
@@ -51,6 +51,40 @@ GaQuery <- function(
       sortBy = GaSortBy(sortBy),
       filters = GaFilter(filters),
       segment = GaSegment(segment),
+      samplingLevel = samplingLevel,
+      maxResults = maxResults,
+      creds = creds
+  )
+}
+
+McfQuery <- function(
+  view = NA,
+  creds = GoogleApiCreds(),
+  startDate = Sys.Date() - 8,
+  endDate = Sys.Date() - 1,
+  metrics = "mcf:totalConversions",
+  dimensions = "mcf:nthDay",
+  sortBy = NULL,
+  filters = NULL,
+  samplingLevel = "DEFAULT",
+  maxResults = kGaMaxResults
+) {
+  if(missing(view)) {
+    view <- GaAccounts(creds = creds)$entities[[1]]
+  }
+  if (missing(creds) & is(view, ".gaResource")) {
+    creds <- view$creds
+  }
+  new("mcfQuery",
+      viewId = GaView(view),
+      dateRange = GaDateRange(
+        as.Date(startDate),
+        as.Date(endDate)
+      ),
+      metrics = Metrics(metrics),
+      dimensions = Dimensions(dimensions),
+      sortBy = McfSortBy(sortBy),
+      filters = McfFilter(filters),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds

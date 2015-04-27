@@ -6,10 +6,10 @@
 #' @include helper-functions.R
 NULL
 
-# ---- GaOperator, GaDimOperator, GaMetOperator ----
+# ---- Operator, GaDimOperator, GaMetOperator ----
 
 setMethod(
-  f = "GaOperator",
+  f = "Operator",
   signature = ".operator",
   definition = function(.Object) {
     return(.Object)
@@ -17,7 +17,7 @@ setMethod(
 )
 
 setMethod(
-  f = "GaOperator<-",
+  f = "Operator<-",
   signature = c(".operator", "character"),
   definition = function(.Object, value) {
     as(.Object, "character") <- value
@@ -58,21 +58,37 @@ setMethod(
   }
 )
 
-# ---- GaOperator, GaDimOperator, GaMetOperator ----
-
 setMethod(
-  f = "GaOperator",
-  signature = ".expr",
+  f = "RtDimOperator",
+  signature = "character",
   definition = function(.Object) {
-    GaOperator(.Object@operator)
+    as(.Object, "rtDimOperator")
   }
 )
 
 setMethod(
-  f = "GaOperator<-",
+  f = "RtMetOperator",
+  signature = "character",
+  definition = function(.Object) {
+    as(.Object, "rtMetOperator")
+  }
+)
+
+# ---- Operator, GaDimOperator, GaMetOperator ----
+
+setMethod(
+  f = "Operator",
+  signature = ".expr",
+  definition = function(.Object) {
+    Operator(.Object@operator)
+  }
+)
+
+setMethod(
+  f = "Operator<-",
   signature = ".expr",
   definition = function(.Object, value) {
-    GaOperator(.Object@operator) <- value
+    Operator(.Object@operator) <- value
     return(.Object)
   }
 )
@@ -93,6 +109,6 @@ setMethod(
   f = "IsRegEx",
   signature = ".expr",
   definition = function(.Object) {
-    IsRegEx(GaOperator(.Object))
+    IsRegEx(Operator(.Object))
   }
 )
