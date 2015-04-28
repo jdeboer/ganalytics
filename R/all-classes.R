@@ -11,7 +11,7 @@ NULL
 # ---- GA dimension and metric variables ----
 
 setClass(
-  Class = ".var",
+  ".var",
   contains = "character",
   validity = function(object) {
     validate_that(length(object) == 1)
@@ -19,7 +19,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaMetVar",
+  "gaMetVar",
   prototype = prototype("ga:sessions"),
   contains = ".var",
   validity = function(object) {
@@ -32,7 +32,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaDimVar",
+  "gaDimVar",
   prototype = prototype("ga:date"),
   contains = ".var",
   validity = function(object) {
@@ -45,7 +45,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfMetVar",
+  "mcfMetVar",
   prototype = prototype("mcf:totalConversions"),
   contains = ".var",
   validity = function(object) {
@@ -58,7 +58,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfDimVar",
+  "mcfDimVar",
   prototype = prototype("mcf:nthDay"),
   contains = ".var",
   validity = function(object) {
@@ -71,7 +71,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtMetVar",
+  "rtMetVar",
   prototype = prototype("rt:activeUsers"),
   contains = ".var",
   validity = function(object) {
@@ -84,7 +84,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtDimVar",
+  "rtDimVar",
   prototype = prototype("rt:minutesAgo"),
   contains = ".var",
   validity = function(object) {
@@ -96,35 +96,17 @@ setClass(
   }
 )
 
-setClassUnion(
-  name = ".gaVar",
-  members = c("gaMetVar", "gaDimVar")
-)
+setClassUnion(".gaVar", c("gaMetVar", "gaDimVar"))
+setClassUnion(".mcfVar", c("mcfMetVar", "mcfDimVar"))
+setClassUnion(".rtVar", c("rtMetVar", "rtDimVar"))
 
-setClassUnion(
-  name = ".mcfVar",
-  members = c("mcfMetVar", "mcfDimVar")
-)
-
-setClassUnion(
-  name = ".rtVar",
-  members = c("rtMetVar", "rtDimVar")
-)
-
-setClassUnion(
-  name = ".metVar",
-  members = c("gaMetVar", "mcfMetVar", "rtMetVar")
-)
-
-setClassUnion(
-  name = ".dimVar",
-  members = c("gaDimVar", "mcfDimVar", "rtDimVar")
-)
+setClassUnion(".metVar", c("gaMetVar", "mcfMetVar", "rtMetVar"))
+setClassUnion(".dimVar", c("gaDimVar", "mcfDimVar", "rtDimVar"))
 
 # ---- GA expression operators ----
 
 setClass(
-  Class = ".operator",
+  ".operator",
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
@@ -133,7 +115,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaMetOperator",
+  "gaMetOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$met)
@@ -141,7 +123,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaDimOperator",
+  "gaDimOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$dim)
@@ -149,7 +131,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfMetOperator",
+  "mcfMetOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$met)
@@ -157,7 +139,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfDimOperator",
+  "mcfDimOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$dim)
@@ -165,7 +147,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtMetOperator",
+  "rtMetOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$met)
@@ -173,37 +155,19 @@ setClass(
 )
 
 setClass(
-  Class = "rtDimOperator",
+  "rtDimOperator",
   contains = ".operator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$dim)
   }
 )
 
-setClassUnion(
-  name = ".gaOperator",
-  members = c("gaMetOperator", "gaDimOperator")
-)
+setClassUnion(".gaOperator", c("gaMetOperator", "gaDimOperator"))
+setClassUnion(".mcfOperator", c("mcfMetOperator", "mcfDimOperator"))
+setClassUnion(".rtOperator", c("rtMetOperator", "rtDimOperator"))
 
-setClassUnion(
-  name = ".mcfOperator",
-  members = c("mcfMetOperator", "mcfDimOperator")
-)
-
-setClassUnion(
-  name = ".rtOperator",
-  members = c("rtMetOperator", "rtDimOperator")
-)
-
-setClassUnion(
-  name = ".dimOperator",
-  members = c("gaDimOperator", "mcfDimOperator", "rtDimOperator")
-)
-
-setClassUnion(
-  name = ".metOperator",
-  members = c("gaMetOperator", "mcfMetOperator", "rtMetOperator")
-)
+setClassUnion(".dimOperator", c("gaDimOperator", "mcfDimOperator", "rtDimOperator"))
+setClassUnion(".metOperator", c("gaMetOperator", "mcfMetOperator", "rtMetOperator"))
 
 # ---- GA expression operands ----
 
@@ -222,7 +186,7 @@ setClass(
 
 setClass(
   "gaMetOperand",
-  contains = c(".metOperand"),
+  contains = ".metOperand",
   validity = function(object) {
     if (length(object) == 2) {
       if (object[1] > object[2]) {
@@ -260,24 +224,13 @@ setClass(
   contains = ".dimOperand"
 )
 
-setClassUnion(
-  ".gaOperand",
-  c("gaMetOperand", "gaDimOperand")
-)
-
-setClassUnion(
-  ".mcfOperand",
-  c("mcfMetOperand", "mcfDimOperand")
-)
+setClassUnion(".gaOperand", c("gaMetOperand", "gaDimOperand"))
+setClassUnion(".mcfOperand", c("mcfMetOperand", "mcfDimOperand"))
+setClassUnion(".rtOperand", c("rtMetOperand", "rtDimOperand"))
 
 setValidity(".mcfOperand", function(object) {
   validate_that(length(object) == 1)
 })
-
-setClassUnion(
-  ".rtOperand",
-  c("rtMetOperand", "rtDimOperand")
-)
 
 setValidity(".rtOperand", function(object) {
   validate_that(length(object) == 1)
@@ -296,7 +249,7 @@ setValidity(".operand", function(object){
 # ---- GA simple expressions -------------------------------------------------------
 
 setClass(
-  Class = ".gaExpr",
+  ".gaExpr",
   slots = c(
     var = ".gaVar",
     operator = ".gaOperator",
@@ -305,7 +258,7 @@ setClass(
 )
 
 setClass(
-  Class = ".mcfExpr",
+  ".mcfExpr",
   slots = c(
     var = ".mcfVar",
     operator = ".mcfOperator",
@@ -314,7 +267,7 @@ setClass(
 )
 
 setClass(
-  Class = ".rtExpr",
+  ".rtExpr",
   slots = c(
     var = ".rtVar",
     operator = ".rtOperator",
@@ -323,7 +276,7 @@ setClass(
 )
 
 setClass(
-  Class = ".metExpr",
+  ".metExpr",
   slots = c(
     var = ".metVar",
     operator = ".metOperator",
@@ -332,7 +285,7 @@ setClass(
 )
 
 setClass(
-  Class = ".dimExpr",
+  ".dimExpr",
   slots = c(
     var = ".dimVar",
     operator = ".dimOperator",
@@ -341,7 +294,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaMetExpr",
+  "gaMetExpr",
   slots = c(
     var = "gaMetVar",
     operator = "gaMetOperator",
@@ -365,7 +318,7 @@ setClass(
 ## TO DO - test that filters do not support <> and []
 
 setClass(
-  Class = "gaSegMetExpr",
+  "gaSegMetExpr",
   slots = c(
     metricScope = "character"
   ),
@@ -384,7 +337,7 @@ setClass(
 ## TO DO - similarly to gaSegMetExpr, define a gaSegDimExpr for validating use of <> and [] expressions.
 
 setClass(
-  Class = "gaDimExpr",
+  "gaDimExpr",
   slots = c(
     var = "gaDimVar",
     operator = "gaDimOperator",
@@ -460,7 +413,7 @@ setClassUnion(".expr", c(
 # ---- GA 'AND' and 'OR' compound expressions -------------------------------
 
 setClass(
-  Class = "gaOr",
+  "gaOr",
   contains = "list",
   validity = function(object) {
     if (all(sapply(object@.Data, inherits, ".expr"))) {
@@ -472,7 +425,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaAnd",
+  "gaAnd",
   contains = "list",
   validity = function(object) {
     if (all(sapply(object@.Data, is, "gaOr"))) {
@@ -502,7 +455,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaFilter",
+  "gaFilter",
   contains = ".filter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
@@ -534,7 +487,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfFilter",
+  "mcfFilter",
   contains = ".filter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
@@ -550,7 +503,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtFilter",
+  "rtFilter",
   contains = ".filter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
@@ -570,7 +523,7 @@ setClass(
 ## TO DO - rename these classes to be clear they are segmentation classes.
 
 setClass(
-  Class = "gaDimensionOrMetricCondition",
+  "gaDimensionOrMetricCondition",
   contains = "gaAnd",
   validity = function(object) {
     if (all(sapply(object@.Data, function(gaOr) {
@@ -584,7 +537,6 @@ setClass(
     } else {
       return("The maximum date range for dateOfSession is 31 days.")
     }
-    
     if (all(sapply(object@.Data, function(gaOr) {
       sapply(gaOr, function(expr) {
         if (GaVar(expr) == "dateOfSession") {
@@ -600,7 +552,7 @@ setClass(
 )
 
 setClass(
-  Class = ".gaSimpleOrSequence",
+  ".gaSimpleOrSequence",
   slots = c(
     negation = "logical"
   ),
@@ -616,7 +568,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaSequenceStep",
+  "gaSequenceStep",
   slots = c(
     immediatelyPrecedes = "logical"
   ),
@@ -632,7 +584,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaSequenceCondition",
+  "gaSequenceCondition",
   contains = c("list", ".gaSimpleOrSequence"),
   validity = function(object) {
     if (all(sapply(object@.Data, inherits, "gaSequenceStep"))) {
@@ -644,12 +596,12 @@ setClass(
 )
 
 setClass(
-  Class = "gaNonSequenceCondition",
+  "gaNonSequenceCondition",
   contains = c("gaDimensionOrMetricCondition", ".gaSimpleOrSequence")
 )
 
 setClass(
-  Class = "gaSegmentCondition",
+  "gaSegmentCondition",
   slots = c(
     conditionScope = "character"
   ),
@@ -669,7 +621,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaDynSegment",
+  "gaDynSegment",
   contains = "list",
   validity = function(object) {
     if (!all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
@@ -683,7 +635,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaSegmentId",
+  "gaSegmentId",
   contains = "character",
   validity = function(object) {
     pattern <- "^gaid::\\-?[0-9]+$"
@@ -695,23 +647,16 @@ setClass(
   }
 )
 
-setClassUnion(
-  name = ".gaSegment",
-  members = c("gaDynSegment", "gaSegmentId")
-)
+setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
 # ---- Simple and compound expression class union ----
 
-setClassUnion(
-  name = ".compoundExpr",
-  members = c(".expr", ".gaExpr", ".mcfExpr", "gaOr", "gaAnd", "gaFilter", "gaSequenceStep", "gaNonSequenceCondition")
-  # "gaFilter", "gaSequenceStep" and "gaNonSequenceCondition" already inherit from gaAnd
-)
+setClassUnion(".compoundExpr", c(".expr", "gaOr", "gaAnd"))
 
 # ---- GA query dimensions, metrics, and sortby lists ----
 
 setClass(
-  Class = "gaDateRange",
+  "gaDateRange",
   slots = c(
     startDate = "Date",
     endDate = "Date"
@@ -732,7 +677,7 @@ setClass(
 )
 
 setClass(
-  Class = ".metrics",
+  ".metrics",
   contains = "list",
   validity = function(object) {
     if (length(object) > kGaMax$metrics) {
@@ -742,7 +687,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaMetrics",
+  "gaMetrics",
   contains = ".metrics",
   prototype = prototype(
     list(new("gaMetVar"))
@@ -755,7 +700,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfMetrics",
+  "mcfMetrics",
   contains = ".metrics",
   prototype = prototype(
     list(new("mcfMetVar"))
@@ -768,7 +713,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtMetrics",
+  "rtMetrics",
   contains = ".metrics",
   prototype = prototype(
     list(new("rtMetVar"))
@@ -781,7 +726,7 @@ setClass(
 )
 
 setClass(
-  Class = ".dimensions",
+  ".dimensions",
   contains = "list",
   validity = function(object) {
     if (length(object) > kGaMax$dimensions) {
@@ -791,7 +736,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaDimensions",
+  "gaDimensions",
   prototype = prototype(
     list(new("gaDimVar"))
   ),
@@ -804,7 +749,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfDimensions",
+  "mcfDimensions",
   prototype = prototype(
     list(new("mcfDimVar"))
   ),
@@ -817,7 +762,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtDimensions",
+  "rtDimensions",
   prototype = prototype(
     list(new("rtDimVar"))
   ),
@@ -830,7 +775,7 @@ setClass(
 )
 
 setClass(
-  Class = ".sortBy",
+  ".sortBy",
   slots = c(
     desc = "logical"
   ),
@@ -847,7 +792,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaSortBy",
+  "gaSortBy",
   contains = ".sortBy",
   validity = function(object) {
     if (!all(sapply(object@.Data, is, ".gaVar"))) {
@@ -857,7 +802,7 @@ setClass(
 )
 
 setClass(
-  Class = "mcfSortBy",
+  "mcfSortBy",
   contains = ".sortBy",
   validity = function(object) {
     if (!all(sapply(object@.Data, is, ".mcfVar"))) {
@@ -867,7 +812,7 @@ setClass(
 )
 
 setClass(
-  Class = "rtSortBy",
+  "rtSortBy",
   contains = ".sortBy",
   validity = function(object) {
     if (!all(sapply(object@.Data, is, ".rtVar"))) {
@@ -876,15 +821,12 @@ setClass(
   }
 )
 
-setClassUnion(
-  name = ".gaVarList",
-  members = c(".metrics", ".dimensions", ".sortBy"),
-)
+setClassUnion(".gaVarList", c(".metrics", ".dimensions", ".sortBy"))
 
 # ---- Ga Profile ID ----
 
 setClass(
-  Class = "gaProfileId",
+  "gaProfileId",
   contains = "character",
   validity = function(object) {
     if (all(str_detect(object, "^ga:[0-9]+$"))) {
@@ -898,36 +840,50 @@ setClass(
 # -- GA query construct ----
 
 setClass(
-  Class = ".query",
+  ".query",
   slots = c(
     viewId = "gaProfileId",
-    dateRange = "gaDateRange",
     metrics = ".metrics",
     dimensions = ".dimensions",
     sortBy = ".sortBy",
     filters = ".filter",
-    samplingLevel = "character",
     maxResults = "numeric",
     creds = "list"
   ),
   prototype = prototype(
-    dateRange = new("gaDateRange"),
-    samplingLevel = "DEFAULT",
     maxResults = kGaMaxResults,
     creds = list()
   ),
   validity = function(object) {
     valid <- validate_that(
       length(object@maxResults) == 1,
-      object@maxResults >= 1,
-      length(object@samplingLevel) == 1
+      object@maxResults >= 1
     )
     if (valid == TRUE) {
       if (object@maxResults > kGaMaxRows) {
         "maxResults cannot be greater than 1,000,000"
       } else if (!all(object@sortBy %in% union(object@metrics, object@dimensions))) {
         "sortBy must contain varNames also used as metrics and/or dimensions"
-      } else if (!(object@samplingLevel %in% samplingLevel_levels)) {
+      } else TRUE
+    } else valid
+  }
+)
+
+setClass(
+  ".standardQuery",
+  slots = c(
+    dateRange = "gaDateRange",
+    samplingLevel = "character"
+  ),
+  prototype = prototype(
+    dateRange = new("gaDateRange"),
+    samplingLevel = "DEFAULT"
+  ),
+  contains = ".query",
+  validity = function(object) {
+    valid <- validate_that(length(object@samplingLevel) == 1)
+    if (valid == TRUE) {
+      if (!(object@samplingLevel %in% samplingLevel_levels)) {
         paste("samplingLevel must be one of:", paste(samplingLevel_levels, collapse = ", "))
       } else TRUE
     } else valid
@@ -935,7 +891,7 @@ setClass(
 )
 
 setClass(
-  Class = "gaQuery",
+  "gaQuery",
   slots = c(
     metrics = "gaMetrics",
     dimensions = "gaDimensions",
@@ -948,11 +904,11 @@ setClass(
     dimensions = new("gaDimensions"),
     sortBy = new("gaSortBy")
   ),
-  contains = ".query"
+  contains = ".standardQuery"
 )
 
 setClass(
-  Class = "mcfQuery",
+  "mcfQuery",
   slots = c(
     metrics = "mcfMetrics",
     dimensions = "mcfDimensions",
@@ -960,15 +916,15 @@ setClass(
     filters = "mcfFilter"
   ),
   prototype = prototype(
-    metrics = new("mcfMetrics"), # To be changed to mcfMetrics when class is defined
-    dimensions = new("mcfDimensions"), # To be changed to mcfDimensions when class is defined
+    metrics = new("mcfMetrics"),
+    dimensions = new("mcfDimensions"),
     sortBy = new("mcfSortBy")
   ),
-  contains = ".query"
+  contains = ".standardQuery"
 )
 
 setClass(
-  Class = "rtQuery",
+  "rtQuery",
   slots = c(
     metrics = "rtMetrics",
     dimensions = "rtDimensions",
@@ -976,8 +932,8 @@ setClass(
     filters = "rtFilter"
   ),
   prototype = prototype(
-    metrics = new("rtMetrics"), # To be changed to mcfMetrics when class is defined
-    dimensions = new("rtDimensions"), # To be changed to mcfDimensions when class is defined
+    metrics = new("rtMetrics"),
+    dimensions = new("rtDimensions"),
     sortBy = new("rtSortBy")
   ),
   contains = ".query"

@@ -134,11 +134,7 @@ gtmContainer <- R6Class(
     notes = NA,
     usageContext = NA,
     enabledBuiltInVariable = NA,
-    fingerprint = NA#,
-#     modify = function(field_list) {
-#       browser()
-#       super$modify(field_list)
-#     }
+    fingerprint = NA
   ),
   active = list(
     tags = function() {self$.child_nodes(gtmTags)},

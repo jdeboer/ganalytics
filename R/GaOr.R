@@ -19,10 +19,12 @@ setMethod(
     exprList <- lapply(
       X = exprList,
       FUN = function(expr) {
-        as(object = expr, Class = "gaOr")
+        assert_that(!is(expr, "gaAnd") | length(exprList) == 1)
+        expr <- as(expr, "gaOr")
       }
     )
-    as(new("gaAnd", exprList), "gaOr")
+    exprList <- unlist(exprList, recursive = FALSE)
+    new("gaOr", exprList)    
   }
 )
 

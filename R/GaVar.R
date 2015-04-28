@@ -10,6 +10,38 @@ NULL
 # ---- GaVar ----
 
 setMethod(
+  f = "Var",
+  signature = "character",
+  definition = function(.Object) {
+    var <- tryCatch(
+      GaVar(.Object),
+      error = function(e) {
+        tryCatch(
+          McfVar(.Object),
+          error = function(e) {
+            tryCatch(
+              RtVar(.Object),
+              error = function(e) {
+                stop(e)
+              }
+            )
+          }
+        )
+      }
+    )
+    return (var)
+  }
+)
+
+setMethod(
+  f = "Var",
+  signature = ".var",
+  definition = function(.Object) {
+    return(.Object)
+  }
+)
+
+setMethod(
   f = "GaVar",
   signature = ".gaVar",
   definition = function(.Object) {
