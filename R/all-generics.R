@@ -602,7 +602,7 @@ setGeneric(
 setGeneric(
   name = "TableFilter",
   def = function(.Object, ...) {},
-  valueClass = ".filter",
+  valueClass = ".tableFilter",
   useAsDefault = FALSE
 )
 
@@ -1052,7 +1052,7 @@ setGeneric(
 setGeneric(
   name = "GaView",
   def = function(.Object) {},
-  valueClass = "gaProfileId",
+  valueClass = "viewId",
   useAsDefault = FALSE
 )
 

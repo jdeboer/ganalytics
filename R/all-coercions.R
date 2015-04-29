@@ -593,17 +593,17 @@ setAs(
 
 setAs(
   from = "numeric",
-  to = "gaProfileId",
+  to = "viewId",
   def = function(from) {
-    new("gaProfileId", from@.Data)
+    new("viewId", from@.Data)
   }
 )
 
 setAs(
   from = "character",
-  to = "gaProfileId",
+  to = "viewId",
   def = function(from) {
-    new("gaProfileId", from@.Data)
+    new("viewId", from@.Data)
   }
 )
 

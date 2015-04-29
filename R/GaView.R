@@ -11,7 +11,7 @@ NULL
 
 setMethod(
   f = "GaView",
-  signature = "gaProfileId",
+  signature = "viewId",
   definition = function(.Object) {
     return(.Object)
   }
@@ -48,7 +48,7 @@ setMethod(
   f = "GaView",
   signature = "character",
   definition = function(.Object) {
-    new(Class = "gaProfileId", .Object)
+    new(Class = "viewId", .Object)
   }
 )
 

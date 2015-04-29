@@ -185,11 +185,11 @@ setMethod(
   }
 )
 
-# -- gaProfileId ----
+# -- viewId ----
 
 setMethod(
   f = "initialize",
-  signature = "gaProfileId",
+  signature = "viewId",
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- sub(kGaPrefix, "ga:", value)

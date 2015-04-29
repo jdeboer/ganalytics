@@ -246,7 +246,7 @@ setValidity(".operand", function(object){
   validate_that(length(object) >= 1)
 })
 
-# ---- GA simple expressions -------------------------------------------------------
+# ---- simple expressions -------------------------------------------------------
 
 setClass(
   ".gaExpr",
@@ -431,10 +431,10 @@ setClass(
   }
 )
 
-# ---- GA filter ----
+# ---- table filter ----
 
 setClass(
-  ".filter",
+  ".tableFilter",
   contains = "andExpr",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
@@ -458,7 +458,7 @@ setClass(
 
 setClass(
   "gaFilter",
-  contains = ".filter",
+  contains = ".tableFilter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .gaExpr class
@@ -482,7 +482,7 @@ setClass(
 
 setClass(
   "mcfFilter",
-  contains = ".filter",
+  contains = ".tableFilter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
@@ -496,7 +496,7 @@ setClass(
 
 setClass(
   "rtFilter",
-  contains = ".filter",
+  contains = ".tableFilter",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
@@ -508,7 +508,7 @@ setClass(
   }
 )
 
-# ---- GA dynamic and pre-defined segments ----
+# ---- dynamic and pre-defined segments ----
 
 ## TO DO - rename these classes to be clear they are segmentation classes.
 
@@ -639,7 +639,7 @@ setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
 setClassUnion(".compoundExpr", c(".expr", "orExpr", "andExpr"))
 
-# ---- GA query dimensions, metrics, and sortby lists ----
+# ---- query dimensions, metrics, and sortby lists ----
 
 setClass(
   "dateRange",
@@ -809,16 +809,16 @@ setClass(
 
 setClassUnion(".gaVarList", c(".metrics", ".dimensions", ".sortBy"))
 
-# ---- Ga Profile ID ----
+# ---- Profile ID ----
 
 setClass(
-  "gaProfileId",
+  "viewId",
   contains = "character",
   validity = function(object) {
     if (all(str_detect(object, "^ga:[0-9]+$"))) {
       TRUE
     } else {
-      "gaProfileId must be an string of digits preceeded by 'ga:'"
+      "viewId must be an string of digits preceeded by 'ga:'"
     }
   }
 )
@@ -828,11 +828,11 @@ setClass(
 setClass(
   ".query",
   slots = c(
-    viewId = "gaProfileId",
+    viewId = "viewId",
     metrics = ".metrics",
     dimensions = ".dimensions",
     sortBy = ".sortBy",
-    filters = ".filter",
+    filters = ".tableFilter",
     maxResults = "numeric",
     creds = "list"
   ),
