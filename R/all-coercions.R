@@ -10,88 +10,37 @@ NULL
 # Methods for coercion between classes
 # ------------------------------------
 
+simpleCoerce <- function(from, to) {new(to, from)}
+simpleCoerceData <- function(from, to) {new(to, from@.Data)}
+simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
+simpleReplace <- function(from, value) {initialize(from, value)}
+
 # Coercing to and from gaDim or gaMet and character
-setAs(
-  from = "character",
-  to = "gaMetVar",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "character",
-  to = "gaDimVar",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = ".var",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
+setAs(from = "character", to = "gaDimVar", def = simpleCoerce)
+setAs(from = "character", to = "gaMetVar", def = simpleCoerce)
+setAs(from = "character", to = "mcfDimVar", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetVar", def = simpleCoerce)
+setAs(from = "character", to = "rtDimVar", def = simpleCoerce)
+setAs(from = "character", to = "rtMetVar", def = simpleCoerce)
 
 # Coercing to and from gaDimOperator or gaMetOperator and character
-setAs(
-  from = "character",
-  to = "gaDimOperator",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "character",
-  to = "gaMetOperator",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = ".operator",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
+setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "gaMetOperator", def = simpleCoerce)
+setAs(from = "character", to = "mcfDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetOperator", def = simpleCoerce)
+setAs(from = "character", to = "rtDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "rtMetOperator", def = simpleCoerce)
 
 # Coercing to and from gaDimOperand and character or gaMetOperand and numeric or character
-setAs(
-  from = "character",
-  to = "gaDimOperand",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "numeric",
-  to = "gaMetOperand",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "character",
-  to = "gaMetOperand",
-  def = function(from) {
-    new(to, as.numeric(from))
-  }
-)
+setAs(from = "character", to = "gaDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "gaMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "gaMetOperand", def = simpleCoerceToNumeric)
+setAs(from = "character", to = "mcfDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "mcfMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetOperand", def = simpleCoerceToNumeric)
+setAs(from = "character", to = "rtDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "rtMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
 
 setAs(
   from = ".metOperand",
@@ -405,9 +354,7 @@ setAs(
 setAs(
   from = "andExpr",
   to = "gaFilter",
-  def = function(from) {
-    new(to, from)
-  }
+  def = simpleCoerce
 )
 
 setAs(
@@ -424,17 +371,13 @@ setAs(
 setAs(
   from = "gaDynSegment",
   to = "gaFilter",
-  def = function(from) {
-    new(Class=to, from@.Data)
-  }
+  def = simpleCoerceData
 )
 
 setAs(
   from = "gaFilter",
   to = "gaDynSegment",
-  def = function(from) {
-    new(Class=to, from@.Data)
-  }
+  def = simpleCoerceData
 )
 
 # Coercing to gaSegmentCondition and gaNonSequenceCondition
@@ -494,9 +437,7 @@ setAs(
 setAs(
   from = "character",
   to = "gaSegmentId",
-  def = function(from) {
-    new(to, from)
-  }
+  def = simpleCoerce
 )
 
 setAs(
@@ -594,17 +535,13 @@ setAs(
 setAs(
   from = "numeric",
   to = "viewId",
-  def = function(from) {
-    new("viewId", from@.Data)
-  }
+  def = simpleCoerceData
 )
 
 setAs(
   from = "character",
   to = "viewId",
-  def = function(from) {
-    new("viewId", from@.Data)
-  }
+  def = simpleCoerceData
 )
 
 setAs(
