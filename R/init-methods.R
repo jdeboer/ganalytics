@@ -210,7 +210,7 @@ setMethod(
 
 setMethod(
   f = "initialize",
-  signature = "gaDateRange",
+  signature = "dateRange",
   definition = function(.Object, startDate, endDate) {
     # If startDate and endDate are provided then
     # bind every combination of startDate and endDate

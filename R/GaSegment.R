@@ -12,7 +12,7 @@ setMethod(
   f = "GaPrecedes",
   signature = ".compoundExpr",
   definition = function(.Object) {
-    new("gaSequenceStep", as(.Object, "gaAnd"), immediatelyPrecedes = FALSE)
+    new("gaSequenceStep", as(.Object, "andExpr"), immediatelyPrecedes = FALSE)
   }
 )
 
@@ -20,7 +20,7 @@ setMethod(
   f = "GaImmediatelyPrecedes",
   signature = ".compoundExpr",
   definition = function(.Object) {
-    new("gaSequenceStep", as(.Object, "gaAnd"), immediatelyPrecedes = TRUE)
+    new("gaSequenceStep", as(.Object, "andExpr"), immediatelyPrecedes = TRUE)
   }
 )
 
@@ -59,7 +59,7 @@ setMethod(
   signature = ".compoundExpr",
   definition = function(.Object, ..., negation) {
     exprList <- list(.Object, ...)
-    exprList <- do.call("GaAnd", lapply(exprList, function(expr){as(expr, "gaAnd")}))
+    exprList <- do.call("GaAnd", lapply(exprList, function(expr){as(expr, "andExpr")}))
     new("gaNonSequenceCondition", exprList, negation = negation)
   }
 )
@@ -207,9 +207,9 @@ setMethod(
 
 setMethod(
   f = "GaSegment<-",
-  signature = c("gaDynSegment", "gaAnd"),
+  signature = c("gaDynSegment", "andExpr"),
   definition = function(.Object, value) {
-    as(.Object, "gaAnd") <- value
+    as(.Object, "andExpr") <- value
     return(.Object)
   }
 )

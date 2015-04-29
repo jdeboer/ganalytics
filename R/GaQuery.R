@@ -57,6 +57,7 @@ GaQuery <- function(
   )
 }
 
+#' @export
 McfQuery <- function(
   view = NA,
   creds = GoogleApiCreds(),

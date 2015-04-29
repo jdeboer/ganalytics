@@ -8,7 +8,7 @@ NULL
 # Class definitions for ganalytics
 # --------------------------------
 
-# ---- GA dimension and metric variables ----
+# ---- dimension and metric variables ----
 
 setClass(
   ".var",
@@ -103,7 +103,7 @@ setClassUnion(".rtVar", c("rtMetVar", "rtDimVar"))
 setClassUnion(".metVar", c("gaMetVar", "mcfMetVar", "rtMetVar"))
 setClassUnion(".dimVar", c("gaDimVar", "mcfDimVar", "rtDimVar"))
 
-# ---- GA expression operators ----
+# ---- expression operators ----
 
 setClass(
   ".operator",
@@ -134,7 +134,7 @@ setClass(
   "mcfMetOperator",
   contains = ".operator",
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$met)
+    validate_that(object@.Data %in% kMcfOps$met)
   }
 )
 
@@ -142,7 +142,7 @@ setClass(
   "mcfDimOperator",
   contains = ".operator",
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$dim)
+    validate_that(object@.Data %in% kMcfOps$dim)
   }
 )
 
@@ -150,7 +150,7 @@ setClass(
   "rtMetOperator",
   contains = ".operator",
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$met)
+    validate_that(object@.Data %in% kRtOps$met)
   }
 )
 
@@ -158,24 +158,24 @@ setClass(
   "rtDimOperator",
   contains = ".operator",
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$dim)
+    validate_that(object@.Data %in% kRtOps$dim)
   }
 )
 
-setClassUnion(".gaOperator", c("gaMetOperator", "gaDimOperator"))
+setClassUnion(".gaOperator" , c("gaMetOperator" , "gaDimOperator"))
 setClassUnion(".mcfOperator", c("mcfMetOperator", "mcfDimOperator"))
-setClassUnion(".rtOperator", c("rtMetOperator", "rtDimOperator"))
+setClassUnion(".rtOperator" , c("rtMetOperator" , "rtDimOperator"))
 
 setClassUnion(".dimOperator", c("gaDimOperator", "mcfDimOperator", "rtDimOperator"))
 setClassUnion(".metOperator", c("gaMetOperator", "mcfMetOperator", "rtMetOperator"))
 
-# ---- GA expression operands ----
+# ---- expression operands ----
 
 setClass(
   ".metOperand",
   contains = "numeric",
   validity = function(object) {
-    validate_that(any(is.na(object)) == FALSE)
+    validate_that(all(is.na(object) == FALSE))
   }
 )
 
@@ -314,9 +314,6 @@ setClass(
   }
 )
 
-## TO DO move validation of <> expressions to gaSegMetExpr, as filters do not support this
-## TO DO - test that filters do not support <> and []
-
 setClass(
   "gaSegMetExpr",
   slots = c(
@@ -333,8 +330,6 @@ setClass(
     )
   }
 )
-
-## TO DO - similarly to gaSegMetExpr, define a gaSegDimExpr for validating use of <> and [] expressions.
 
 setClass(
   "gaDimExpr",
@@ -410,28 +405,28 @@ setClassUnion(".expr", c(
   "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
 ))
 
-# ---- GA 'AND' and 'OR' compound expressions -------------------------------
+# ---- 'AND' and 'OR' compound expressions -------------------------------
 
 setClass(
-  "gaOr",
+  "orExpr",
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, inherits, ".expr"))) {
+    if (all_inherit(object@.Data, ".expr")) {
       TRUE
     } else {
-      "gaOr must be a list containing objects that all inherit from the class .expr"
+      "An orExpr must be a list containing objects that all inherit from the class .expr"
     }
   }
 )
 
 setClass(
-  "gaAnd",
+  "andExpr",
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, is, "gaOr"))) {
+    if (all_inherit(object@.Data, "orExpr")) {
       TRUE
     } else {
-      "gaAnd must be a list containing objects all of the class gaOr"
+      "An andExpr must be a list containing objects all of the class orExpr"
     }
   }
 )
@@ -440,17 +435,24 @@ setClass(
 
 setClass(
   ".filter",
-  contains = "gaAnd",
+  contains = "andExpr",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
-    if (all(sapply(object@.Data, function(gaOr) {
-      length(unique(sapply(gaOr, class))) == 1
+    if (all(sapply(object@.Data, function(orExpr) {
+      length(unique(sapply(orExpr, class))) == 1
     }))) {
       TRUE
     } else {
       return("An OR expression within a filter cannot mix metrics and dimensions.")
     }
+    if (all(sapply(unlist(object@.Data), function(expr){
+      !any(Operator(expr) %in% c("[]", "<>"))
+    }))) {
+      TRUE
+    } else {
+      return("Filter expressions do not support '[]' or '<>' operators.")
+    }    
   }
 )
 
@@ -460,24 +462,24 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .gaExpr class
-    if (all(sapply(object@.Data, function(gaOr) {
-      all(sapply(gaOr, is, ".gaExpr"))
+    if (all(sapply(object@.Data, function(orExpr) {
+      all_inherit(orExpr, ".gaExpr")
     }))) {
       TRUE
     } else {
       return("All expressions within a gaFilter must be of superclass .gaExpr")
     }
     
-    if (all(sapply(object@.Data, function(gaOr) {
-      sapply(gaOr, function(expr) {GaVar(expr) != "dateOfSession"})
+    if (all(sapply(object@.Data, function(orExpr) {
+      sapply(orExpr, function(expr) {GaVar(expr) != "dateOfSession"})
     }))) {
       TRUE
     } else {
       return("Filters do not support the 'dateOfSession' dimension. Use 'ga:date' instead.")
     }
     
-    if (all(sapply(object@.Data, function(gaOr) {
-      sapply(gaOr, function(expr) {!(Operator(expr) %in% c("<>", "[]"))})
+    if (all(sapply(object@.Data, function(orExpr) {
+      sapply(orExpr, function(expr) {!(Operator(expr) %in% c("<>", "[]"))})
     }))) {
       TRUE
     } else {
@@ -492,8 +494,8 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
-    if (all(sapply(object@.Data, function(gaOr) {
-      all(sapply(gaOr, is, ".mcfExpr"))
+    if (all(sapply(object@.Data, function(orExpr) {
+      all_inherit(orExpr, ".mcfExpr")
     }))) {
       TRUE
     } else {
@@ -508,8 +510,8 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
-    if (all(sapply(object@.Data, function(gaOr) {
-      all(sapply(gaOr, is, ".rtExpr"))
+    if (all(sapply(object@.Data, function(orExpr) {
+      all_inherit(orExpr, ".rtExpr")
     }))) {
       TRUE
     } else {
@@ -524,10 +526,10 @@ setClass(
 
 setClass(
   "gaDimensionOrMetricCondition",
-  contains = "gaAnd",
+  contains = "andExpr",
   validity = function(object) {
-    if (all(sapply(object@.Data, function(gaOr) {
-      sapply(gaOr, function(expr) {
+    if (all(sapply(object@.Data, function(orExpr) {
+      sapply(orExpr, function(expr) {
         if (Operator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
           (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
         } else TRUE
@@ -537,8 +539,8 @@ setClass(
     } else {
       return("The maximum date range for dateOfSession is 31 days.")
     }
-    if (all(sapply(object@.Data, function(gaOr) {
-      sapply(gaOr, function(expr) {
+    if (all(sapply(object@.Data, function(orExpr) {
+      sapply(orExpr, function(expr) {
         if (GaVar(expr) == "dateOfSession") {
           Operator(expr) == "<>"
         } else TRUE
@@ -587,7 +589,7 @@ setClass(
   "gaSequenceCondition",
   contains = c("list", ".gaSimpleOrSequence"),
   validity = function(object) {
-    if (all(sapply(object@.Data, inherits, "gaSequenceStep"))) {
+    if (all_inherit(object@.Data, "gaSequenceStep")) {
       TRUE
     } else {
       "All conditions within a sequence list must belong to the superclass 'gaSequenceStep'."
@@ -610,7 +612,7 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, inherits, ".gaSimpleOrSequence"))) {
+    if (!all_inherit(object@.Data, ".gaSimpleOrSequence")) {
       "All conditions within a gaSegmentCondition list must belong to the superclass '.gaSimpleOrSequence'."
     } else if (length(object@conditionScope) != 1) {
       "Slot 'conditionScope' must be of length 1."
@@ -624,7 +626,7 @@ setClass(
   "gaDynSegment",
   contains = "list",
   validity = function(object) {
-    if (!all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
+    if (!all_inherit(object@.Data, "gaSegmentCondition")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentCondition'."
     } else if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
       "The maximum expression length for dimension conditions is 1024 characters."
@@ -651,12 +653,12 @@ setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
 # ---- Simple and compound expression class union ----
 
-setClassUnion(".compoundExpr", c(".expr", "gaOr", "gaAnd"))
+setClassUnion(".compoundExpr", c(".expr", "orExpr", "andExpr"))
 
 # ---- GA query dimensions, metrics, and sortby lists ----
 
 setClass(
-  "gaDateRange",
+  "dateRange",
   slots = c(
     startDate = "Date",
     endDate = "Date"
@@ -693,7 +695,7 @@ setClass(
     list(new("gaMetVar"))
   ),
   validity = function(object) {
-    if (!all(sapply(object, is, "gaMetVar"))) {
+    if (!all_inherit(object, "gaMetVar")) {
       "Must be a list containing objects of class gaMetVar"
     } else TRUE
   }
@@ -706,7 +708,7 @@ setClass(
     list(new("mcfMetVar"))
   ),
   validity = function(object) {
-    if (!all(sapply(object, is, "mcfMetVar"))) {
+    if (!all_inherit(object, "mcfMetVar")) {
       "Must be a list containing objects of class mcfMetVar"
     } else TRUE
   }
@@ -719,7 +721,7 @@ setClass(
     list(new("rtMetVar"))
   ),
   validity = function(object) {
-    if (!all(sapply(object, is, "rtMetVar"))) {
+    if (!all_inherit(object, "rtMetVar")) {
       "Must be a list containing objects of class rtMetVar"
     } else TRUE
   }
@@ -742,7 +744,7 @@ setClass(
   ),
   contains = ".dimensions",
   validity = function(object) {
-    if (!all(sapply(object, is, "gaDimVar"))) {
+    if (!all_inherit(object, "gaDimVar")) {
       "Must be a list containing objects of class gaDimVar"
     } else TRUE
   }
@@ -755,7 +757,7 @@ setClass(
   ),
   contains = ".dimensions",
   validity = function(object) {
-    if (!all(sapply(object, is, "mcfDimVar"))) {
+    if (!all_inherit(object, "mcfDimVar")) {
       "Must be a list containing objects of class mcfDimVar"
     } else TRUE
   }
@@ -768,7 +770,7 @@ setClass(
   ),
   contains = ".dimensions",
   validity = function(object) {
-    if (!all(sapply(object, is, "rtDimVar"))) {
+    if (!all_inherit(object, "rtDimVar")) {
       "Must be a list containing objects of class rtDimVar"
     } else TRUE
   }
@@ -795,7 +797,7 @@ setClass(
   "gaSortBy",
   contains = ".sortBy",
   validity = function(object) {
-    if (!all(sapply(object@.Data, is, ".gaVar"))) {
+    if (!all_inherit(object@.Data, ".gaVar")) {
       "Must be a list containing objects of class .gaVar"
     } else TRUE
   }
@@ -805,7 +807,7 @@ setClass(
   "mcfSortBy",
   contains = ".sortBy",
   validity = function(object) {
-    if (!all(sapply(object@.Data, is, ".mcfVar"))) {
+    if (!all_inherit(object@.Data, ".mcfVar")) {
       "Must be a list containing objects of class .mcfVar"
     } else TRUE
   }
@@ -815,7 +817,7 @@ setClass(
   "rtSortBy",
   contains = ".sortBy",
   validity = function(object) {
-    if (!all(sapply(object@.Data, is, ".rtVar"))) {
+    if (!all_inherit(object@.Data, ".rtVar")) {
       "Must be a list containing objects of class .rtVar"
     } else TRUE
   }
@@ -872,11 +874,11 @@ setClass(
 setClass(
   ".standardQuery",
   slots = c(
-    dateRange = "gaDateRange",
+    dateRange = "dateRange",
     samplingLevel = "character"
   ),
   prototype = prototype(
-    dateRange = new("gaDateRange"),
+    dateRange = new("dateRange"),
     samplingLevel = "DEFAULT"
   ),
   contains = ".query",

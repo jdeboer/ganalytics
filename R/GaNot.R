@@ -72,7 +72,7 @@ setMethod(
 
 setMethod(
   f = "GaNot",
-  signature = "gaOr",
+  signature = "orExpr",
   definition = function(.Object) {
     .Object <- lapply(
       X = .Object,
@@ -84,7 +84,7 @@ setMethod(
 
 setMethod(
   f = "!",
-  signature = "gaOr",
+  signature = "orExpr",
   definition = function(x) {
     GaNot(x)
   }

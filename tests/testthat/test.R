@@ -192,6 +192,17 @@ test_that("ANDed (but not ORed) filter expressions may mix dimensions with metri
   )
 })
 
+test_that("Filter expressions cannot use '[]' or '<>' operators", {
+  expect_error(
+    GaFilter(GaExpr("medium", "[]", c("organic", "cpc"))),
+    "\\[\\]"
+  )
+  expect_error(
+    GaFilter(GaExpr("pageviews", "<>", c(10, 100))),
+    "<>"
+  )
+})
+
 context("Correct formatting of operators and operands used in API queries")
 
 test_that("expressions for each type of operator are correctly formatted when coerced to character", {

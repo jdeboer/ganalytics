@@ -104,6 +104,16 @@ kGaOps <- list(
   dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
 )
 
+kMcfOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">="),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@")
+)
+
+kRtOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">="),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@")
+)
+
 # ganalytics tolerated dimension and metric prefixes
 kPrefixDelim <- paste0("[", paste0(c(
   ";", "\\-", "\\.", "_"),

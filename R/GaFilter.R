@@ -39,9 +39,9 @@ setMethod(
 
 setMethod(
   f = "GaFilter<-",
-  signature = c("gaFilter", "gaAnd"),
+  signature = c("gaFilter", "andExpr"),
   definition = function(.Object, value) {
-    as(.Object, "gaAnd") <- value
+    as(.Object, "andExpr") <- value
     return(.Object)
   }
 )

@@ -12,23 +12,23 @@ setMethod(
     exprList <- lapply(
       X = exprList,
       FUN = function(expr) {
-        if (is(expr, "gaAnd")) {
+        if (is(expr, "andExpr")) {
           expr <- unlist(expr, recursive = FALSE)
           expr <- lapply(
             X = expr,
             FUN = function(exprB) {
-              as(exprB, "gaOr")
+              as(exprB, "orExpr")
             }
           )
         } else {
-          as(object = expr, Class = "gaOr")
+          as(object = expr, Class = "orExpr")
         }
       }
     )
     x <- sapply(
       X = exprList,
       FUN = function(expr) {
-        !is(expr, "gaOr")
+        !is(expr, "orExpr")
       }
     )
     exprList <- c(
@@ -38,7 +38,7 @@ setMethod(
         recursive = FALSE
       )
     )
-    new("gaAnd", exprList)
+    new("andExpr", exprList)
   }
 )
 

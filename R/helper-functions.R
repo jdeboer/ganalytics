@@ -1,5 +1,9 @@
 #' @importFrom lubridate ymd
 
+all_inherit <- function(list_object, class_names) {
+  all(sapply(list_object, is, class_names))
+}
+
 parse_date <- function(date, output_format = kGaDateInFormat) {
   format(ymd(date), format = output_format)
 }

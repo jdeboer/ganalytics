@@ -436,7 +436,7 @@ setGeneric(
 setGeneric(
   name = "GaOr",
   def = function(.Object, ...) {},
-  valueClass = "gaOr",
+  valueClass = "orExpr",
   useAsDefault = FALSE
 )
 
@@ -453,7 +453,7 @@ setGeneric(
 setGeneric(
   name = "GaAnd",
   def = function(.Object, ...) {},
-  valueClass = "gaAnd",
+  valueClass = "andExpr",
   useAsDefault = FALSE
 )
 
@@ -714,7 +714,7 @@ setGeneric(
 setGeneric(
   name = "GaDateRange",
   def =  function(.Object, endDate) {},
-  valueClass = "gaDateRange",
+  valueClass = "dateRange",
   useAsDefault = FALSE
 )
 

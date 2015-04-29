@@ -109,7 +109,7 @@ setAs(
 # Coercing to gaOr or gaAnd
 setAs(
   from = ".expr",
-  to = "gaOr",
+  to = "orExpr",
   def = function(from) {
     new(to, list(from))
   }
@@ -117,15 +117,15 @@ setAs(
 
 setAs(
   from = ".expr",
-  to = "gaAnd",
+  to = "andExpr",
   def = function(from) {
-    new(Class = to, list(as(object = from, Class = "gaOr")))
+    new(Class = to, list(as(object = from, Class = "orExpr")))
   }
 )
 
 setAs(
-  from = "gaAnd",
-  to = "gaOr",
+  from = "andExpr",
+  to = "orExpr",
   def = function(from) {
     # This is currently only legal if the gaAnd object does not contain any gaOr
     # object of length greater than 1 OR if there is only one gaOr. Otherwise,
@@ -143,6 +143,7 @@ setAs(
     # expressions. Concatenate the single expressions
     # back up the chain. Then convert array into a list of
     # expressions to use for a new OR expression.
+    
     new(
       to, as.list(
         do.call(
@@ -156,8 +157,8 @@ setAs(
 )
 
 setAs(
-  from = "gaOr",
-  to = "gaAnd",
+  from = "orExpr",
+  to = "andExpr",
   def = function(from) {
     new(to, list(from))
   }
@@ -223,7 +224,7 @@ parseOperand <- function(operand, operator) {
 }
 
 setAs(
-  from = "gaOr",
+  from = "orExpr",
   to = "character",
   def = function(from) {
     do.call(
@@ -242,7 +243,7 @@ setAs(
 )
 
 setAs(
-  from = "gaAnd",
+  from = "andExpr",
   to = "character",
   def = function(from) {
     if(length(from) >= 1) {
@@ -304,7 +305,7 @@ setAs(
     paste0(
       "condition::",
       if(from@negation) {"!"} else {""},
-      as(as(from, "gaAnd"), "character")
+      as(as(from, "andExpr"), "character")
     )
   }
 )
@@ -361,18 +362,18 @@ setAs(
 
 # Coercing to gaDynSegment and gaFilter
 setAs(
-  from = "gaOr",
+  from = "orExpr",
   to = "gaDynSegment",
   def = function(from) {
     as(
-      object = as(from, "gaAnd"),
+      object = as(from, "andExpr"),
       Class = to
     )
   }
 )
 
 setAs(
-  from = "gaAnd",
+  from = "andExpr",
   to = "gaDynSegment",
   def = function(from) {
     new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
@@ -384,25 +385,25 @@ setAs(
   to = "gaDynSegment",
   def = function(from) {
     as(
-      object = as(from, "gaAnd"),
+      object = as(from, "andExpr"),
       Class = to
     )
   }
 )
 
 setAs(
-  from = "gaOr",
+  from = "orExpr",
   to = "gaFilter",
   def = function(from) {
     as(
-      object = as(from, "gaAnd"),
+      object = as(from, "andExpr"),
       Class = to
     )
   }
 )
 
 setAs(
-  from = "gaAnd",
+  from = "andExpr",
   to = "gaFilter",
   def = function(from) {
     new(to, from)
@@ -414,7 +415,7 @@ setAs(
   to = "gaFilter",
   def = function(from) {
     as(
-      object = as(from, "gaAnd"),
+      object = as(from, "andExpr"),
       Class = to
     )
   }
