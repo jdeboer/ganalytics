@@ -13,6 +13,7 @@ NULL
 simpleCoerce <- function(from, to) {new(to, from)}
 simpleCoerceData <- function(from, to) {new(to, from@.Data)}
 simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
+simpleCoerceToList <- function(from, to) {new(to, list(from))}
 simpleReplace <- function(from, value) {initialize(from, value)}
 
 # Coercing to and from gaDim or gaMet and character
@@ -59,23 +60,23 @@ setAs(
 setAs(
   from = ".expr",
   to = "orExpr",
-  def = function(from) {
-    new(to, list(from))
-  }
+  def = simpleCoerceToList
 )
 
 setAs(
   from = ".expr",
   to = "andExpr",
-  def = function(from) {
-    new(Class = to, list(as(object = from, Class = "orExpr")))
+  def = function(from, to) {
+    new(to, list(
+      as(from, "orExpr")
+    ))
   }
 )
 
 setAs(
   from = "andExpr",
   to = "orExpr",
-  def = function(from) {
+  def = function(from, to) {
     # This is currently only legal if the gaAnd object does not contain any gaOr
     # object of length greater than 1 OR if there is only one gaOr. Otherwise,
     # in a future implementation if any gaOr objects have a length greater than
@@ -108,9 +109,7 @@ setAs(
 setAs(
   from = "orExpr",
   to = "andExpr",
-  def = function(from) {
-    new(to, list(from))
-  }
+  def = simpleCoerceToList
 )
 
 # Coercing GA expressions to and from GA API compatible character strings
@@ -176,18 +175,7 @@ setAs(
   from = "orExpr",
   to = "character",
   def = function(from) {
-    do.call(
-      paste,
-      c(
-        lapply(
-          X = from,
-          FUN = function(gaExpr) {
-            as(gaExpr, to)
-          }
-        ),
-        sep = ","
-      )
-    )
+    do.call(paste, c(lapply(from, as, to), sep = ","))
   }
 )
 
@@ -196,18 +184,7 @@ setAs(
   to = "character",
   def = function(from) {
     if(length(from) >= 1) {
-      do.call(
-        paste,
-        c(
-          lapply(
-            X = from,
-            FUN = function(gaOr) {
-              as(gaOr, to)
-            }
-          ),
-          sep = ";"
-        )
-      )
+      do.call(paste, c(lapply(from, as, to), sep = ";"))
     } else {
       character(0)
     }
@@ -313,11 +290,8 @@ setAs(
 setAs(
   from = "orExpr",
   to = "gaDynSegment",
-  def = function(from) {
-    as(
-      object = as(from, "andExpr"),
-      Class = to
-    )
+  def = function(from, to) {
+    as(as(from, "andExpr"), to)
   }
 )
 
@@ -333,10 +307,7 @@ setAs(
   from = ".expr",
   to = "gaDynSegment",
   def = function(from) {
-    as(
-      object = as(from, "andExpr"),
-      Class = to
-    )
+    as(as(from, "andExpr"), to)
   }
 )
 
@@ -344,10 +315,7 @@ setAs(
   from = "orExpr",
   to = "gaFilter",
   def = function(from) {
-    as(
-      object = as(from, "andExpr"),
-      Class = to
-    )
+    as(as(from, "andExpr"), to)
   }
 )
 
@@ -361,10 +329,7 @@ setAs(
   from = ".expr",
   to = "gaFilter",
   def = function(from) {
-    as(
-      object = as(from, "andExpr"),
-      Class = to
-    )
+    as(as(from, "andExpr"), to)
   }
 )
 
@@ -380,30 +345,31 @@ setAs(
   def = simpleCoerceData
 )
 
-# Coercing to gaSegmentCondition and gaNonSequenceCondition
-setAs(
-  from = ".compoundExpr",
-  to = "gaSegmentCondition",
-  def = function(from) {
-    new(Class = to, list(GaNonSequenceCondition(from)))
-  }
-)
-
-setAs(
-  from = ".compoundExpr",
-  to = "gaNonSequenceCondition",
-  def = function(from) {
-    new(Class = to, GaAnd(from))
-  }
-)
-
 # Coercing to gaSequenceCondition
 
 setAs(
   from = ".compoundExpr",
   to = "gaSequenceCondition",
   def = function(from) {
-    new(Class = to, GaAnd(from))
+    new(to, as("andExpr", from))
+  }
+)
+
+# Coercing to gaNonSequenceCondition
+setAs(
+  from = ".compoundExpr",
+  to = "gaNonSequenceCondition",
+  def = function(from) {
+    new(to, as(from, "andExpr"))
+  }
+)
+
+# Coercing to gaSegmentCondition
+setAs(
+  from = ".compoundExpr",
+  to = "gaSegmentCondition",
+  def = function(from) {
+    new(to, list(as("gaNonSequenceCondition", from)))
   }
 )
 
@@ -429,8 +395,7 @@ setAs(
     )
   },
   replace = function(from, value) {
-    from <- initialize(from, as.character(value))
-    return(from)
+    initialize(from, as.character(value))
   }
 )
 
@@ -455,8 +420,7 @@ setAs(
     as.character(from@.Data)
   },
   replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
+    initialize(from, value)
   }
 )
 
@@ -468,16 +432,7 @@ setAs(
     paste(from@.Data, collapse = ",")
   },
   replace = function(from, value) {
-    from <- initialize(
-      .Object = from,
-      unlist(
-        strsplit(
-          x = value,
-          split = ","
-        )
-      )
-    )
-    return(from)
+    initialize(from, unlist(strsplit(value, split = ",")))
   }
 )
 
@@ -501,7 +456,7 @@ setAs(
     )
   },
   replace = function(from, value) {
-    from <- as(value, "gaSortBy")
+    as(value, "gaSortBy")
   }
 )
 
