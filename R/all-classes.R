@@ -462,25 +462,17 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .gaExpr class
-    if (all(sapply(object@.Data, function(orExpr) {
-      all_inherit(orExpr, ".gaExpr")
-    }))) {
+    if (all_inherit(unlist(object@.Data), ".gaExpr")) {
       TRUE
     } else {
       return("All expressions within a gaFilter must be of superclass .gaExpr")
     }
-    
-    if (all(sapply(object@.Data, function(orExpr) {
-      sapply(orExpr, function(expr) {GaVar(expr) != "dateOfSession"})
-    }))) {
+    if (all(sapply(unlist(object@.Data), GaVar) != "dateOfSession")) {
       TRUE
     } else {
       return("Filters do not support the 'dateOfSession' dimension. Use 'ga:date' instead.")
     }
-    
-    if (all(sapply(object@.Data, function(orExpr) {
-      sapply(orExpr, function(expr) {!(Operator(expr) %in% c("<>", "[]"))})
-    }))) {
+    if (!any(sapply(unlist(object@.Data), GaVar) %in% c("<>", "[]"))) {
       TRUE
     } else {
       return("Filters do not support <> and [] operators.")
@@ -494,9 +486,7 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
-    if (all(sapply(object@.Data, function(orExpr) {
-      all_inherit(orExpr, ".mcfExpr")
-    }))) {
+    if (all_inherit(unlist(object@.Data), ".mcfExpr")) {
       TRUE
     } else {
       return("All expressions within a mcfFilter must be of superclass .mcfExpr")
@@ -510,9 +500,7 @@ setClass(
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to .mcfExpr class
-    if (all(sapply(object@.Data, function(orExpr) {
-      all_inherit(orExpr, ".rtExpr")
-    }))) {
+    if (all_inherit(unlist(object@.Data), ".rtExpr")) {
       TRUE
     } else {
       return("All expressions within a rtFilter must be of superclass .rtExpr")
@@ -528,23 +516,19 @@ setClass(
   "gaDimensionOrMetricCondition",
   contains = "andExpr",
   validity = function(object) {
-    if (all(sapply(object@.Data, function(orExpr) {
-      sapply(orExpr, function(expr) {
-        if (Operator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
-          (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
-        } else TRUE
-      })
+    if (all(sapply(unlist(object@.Data), function(expr) {
+      if (Operator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
+        (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
+      } else TRUE
     }))) {
       TRUE
     } else {
       return("The maximum date range for dateOfSession is 31 days.")
     }
-    if (all(sapply(object@.Data, function(orExpr) {
-      sapply(orExpr, function(expr) {
-        if (GaVar(expr) == "dateOfSession") {
-          Operator(expr) == "<>"
-        } else TRUE
-      })
+    if (all(sapply(unlist(object@.Data), function(expr) {
+      if (GaVar(expr) == "dateOfSession") {
+        Operator(expr) == "<>"
+      } else TRUE
     }))) {
       TRUE
     } else {
