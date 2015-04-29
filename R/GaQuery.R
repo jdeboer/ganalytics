@@ -42,7 +42,7 @@ GaQuery <- function(
   }
   new("gaQuery",
       viewId = GaView(view),
-      dateRange = GaDateRange(
+      dateRange = DateRange(
         as.Date(startDate),
         as.Date(endDate)
       ),
@@ -78,7 +78,7 @@ McfQuery <- function(
   }
   new("mcfQuery",
       viewId = GaView(view),
-      dateRange = GaDateRange(
+      dateRange = DateRange(
         as.Date(startDate),
         as.Date(endDate)
       ),
@@ -112,10 +112,10 @@ modify_query <- function(
     GaView(query) <- ids
   }
   if (!is.na(start_date)) {
-    GaStartDate(query) <- start_date
+    StartDate(query) <- start_date
   }
   if (!is.na(end_date)) {
-    GaEndDate(query) <- end_date
+    EndDate(query) <- end_date
   }
   if (!is.na(metrics)) {
     Metrics(query) <- metrics

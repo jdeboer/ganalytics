@@ -617,8 +617,8 @@ setAs(
         X = GaView(from),
         FUN = function(viewId) {
           data.frame(
-            startDate = GaStartDate(from),
-            endDate = GaEndDate(from),
+            startDate = StartDate(from),
+            endDate = EndDate(from),
             viewId = viewId,
             stringsAsFactors = FALSE
           )

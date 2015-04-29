@@ -511,6 +511,8 @@ setClass(
 # ---- dynamic and pre-defined segments ----
 
 ## TO DO - rename these classes to be clear they are segmentation classes.
+## or consider how these classes can extend to MCF paths, which are a form of sequences.
+
 
 setClass(
   "gaDimensionOrMetricCondition",

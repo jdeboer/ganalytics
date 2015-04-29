@@ -705,85 +705,85 @@ setGeneric(
   }
 )
 
-#' GaDateRange
+#' DateRange
 #' 
 #' Get the date range.
 #' 
 #' @export
-#' @rdname GaDateRange
+#' @rdname DateRange
 setGeneric(
-  name = "GaDateRange",
+  name = "DateRange",
   def =  function(.Object, endDate) {},
   valueClass = "dateRange",
   useAsDefault = FALSE
 )
 
-#' GaDateRange<-
+#' DateRange<-
 #' 
 #' Set the date range.
 #' 
 #' @export
-#' @rdname GaDateRange
+#' @rdname DateRange
 setGeneric(
-  name = "GaDateRange<-",
+  name = "DateRange<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaDateRange<-")
+    .Object <- standardGeneric("DateRange<-")
     validObject(.Object)
     return(.Object)
   }
 )
 
-#' GaStartDate
+#' StartDate
 #' 
 #' Get the start date.
 #' 
 #' @export
-#' @rdname GaStartDate
+#' @rdname StartDate
 setGeneric(
-  name = "GaStartDate",
+  name = "StartDate",
   def = function(.Object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
 
-#' GaStartDate<-
+#' StartDate<-
 #' 
 #' Set the start date.
 #' 
 #' @export
-#' @rdname GaStartDate
+#' @rdname StartDate
 setGeneric(
-  name = "GaStartDate<-",
+  name = "StartDate<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaStartDate<-")
+    .Object <- standardGeneric("StartDate<-")
     validObject(.Object)
     return(.Object)
   }
 )
 
-#' GaEndDate
+#' EndDate
 #' 
 #' Get the end date of the date range.
 #' 
 #' @export
-#' @rdname GaEndDate
+#' @rdname EndDate
 setGeneric(
-  name = "GaEndDate",
+  name = "EndDate",
   def = function(.Object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
 
-#' GaEndDate<-
+#' EndDate<-
 #' 
 #' Set the endDate of the date range.
 #' 
 #' @export
-#' @rdname GaEndDate
+#' @rdname EndDate
 setGeneric(
-  name = "GaEndDate<-",
+  name = "EndDate<-",
   def = function(.Object, value) {
-    .Object <- standardGeneric("GaEndDate<-")
+    .Object <- standardGeneric("EndDate<-")
     validObject(.Object)
     return(.Object)
   }
