@@ -33,19 +33,14 @@ setMethod(
       operator <- GaDimOperator(operator)
       operand <- GaOperand(as.character(operand))
       gaExprClass <- "gaDimExpr"
-      new(
-        Class = gaExprClass,
-        var = var,
-        operator = operator,
-        operand = operand
-      )
+      new(gaExprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "gaMetVar") {
       operator <- GaMetOperator(operator)
       operand <- GaOperand(as.numeric(operand))
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
-          Class = gaExprClass,
+          gaExprClass,
           var = var,
           operator = operator,
           operand = operand,
@@ -53,17 +48,10 @@ setMethod(
         )
       } else {
         gaExprClass <- "gaMetExpr"
-        new(
-          Class = gaExprClass,
-          var = var,
-          operator = operator,
-          operand = operand
-        )
+        new(gaExprClass, var = var, operator = operator, operand = operand)
       }
     } else {
-      stop(
-        paste("Unsupported .gaVar class", class(var), sep=": ")
-      )
+      stop(paste("Unsupported .gaVar class", class(var), sep=": "))
     }
   }
 )
@@ -77,26 +65,14 @@ setMethod(
       operator <- McfDimOperator(operator)
       operand <- McfOperand(as.character(operand))
       exprClass <- "mcfDimExpr"
-      new(
-        Class = exprClass,
-        var = var,
-        operator = operator,
-        operand = operand
-      )
+      new(exprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "mcfMetVar") {
       operator <- McfMetOperator(operator)
       operand <- McfOperand(as.numeric(operand))
       exprClass <- "mcfMetExpr"
-      new(
-        Class = exprClass,
-        var = var,
-        operator = operator,
-        operand = operand
-      )
+      new(exprClass, var = var, operator = operator, operand = operand)
     } else {
-      stop(
-        paste("Unsupported .mcfVar class", class(var), sep=": ")
-      )
+      stop(paste("Unsupported .mcfVar class", class(var), sep=": "))
     }
   }
 )
@@ -110,26 +86,14 @@ setMethod(
       operator <- RtDimOperator(operator)
       operand <- RtOperand(as.character(operand))
       exprClass <- "rtDimExpr"
-      new(
-        Class = exprClass,
-        var = var,
-        operator = operator,
-        operand = operand
-      )
+      new(exprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "rtMetVar") {
       operator <- RtMetOperator(operator)
       operand <- RtOperand(as.numeric(operand))
       exprClass <- "rtMetExpr"
-      new(
-        Class = exprClass,
-        var = var,
-        operator = operator,
-        operand = operand
-      )
+      new(exprClass, var = var, operator = operator, operand = operand)
     } else {
-      stop(
-        paste("Unsupported .rtVar class", class(var), sep=": ")
-      )
+      stop(paste("Unsupported .rtVar class", class(var), sep=": "))
     }
   }
 )
