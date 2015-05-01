@@ -110,3 +110,88 @@ setMethod(
 # Backwards compatibility
 #'@export GaNot
 GaNot <- Not
+
+# Create an Or from one or more metric or dimension expressions
+# Takes one or more Metric or Dimension expressions
+# as separate arguments or as a list.
+# Returns an object of gaOr.
+
+setMethod(
+  f = "Or",
+  signature = ".compoundExpr",
+  definition = function(.Object, ...) {
+    exprList <- list(.Object, ...)
+    exprList <- lapply(
+      X = exprList,
+      FUN = function(expr) {
+        assert_that(!is(expr, "andExpr") | length(exprList) == 1)
+        expr <- as(expr, "orExpr")
+      }
+    )
+    exprList <- unlist(exprList, recursive = FALSE)
+    new("orExpr", exprList)    
+  }
+)
+
+setMethod(
+  f = "|",
+  signature = c(".compoundExpr", ".compoundExpr"),
+  definition = function(e1, e2) {
+    Or(e1, e2)
+  }
+)
+
+# Backwards compatibility
+#' @export GaOr
+GaOr <- Or
+
+setMethod(
+  f = "And",
+  signature = ".compoundExpr",
+  definition = function(.Object, ...) {
+    exprList <- list(.Object, ...)
+    exprList <- lapply(
+      X = exprList,
+      FUN = function(expr) {
+        if (is(expr, "andExpr")) {
+          expr <- unlist(expr, recursive = FALSE)
+          expr <- lapply(
+            X = expr,
+            FUN = function(exprB) {
+              as(exprB, "orExpr")
+            }
+          )
+        } else {
+          as(object = expr, Class = "orExpr")
+        }
+      }
+    )
+    x <- sapply(
+      X = exprList,
+      FUN = function(expr) {
+        !is(expr, "orExpr")
+      }
+    )
+    exprList <- c(
+      exprList[!x],
+      unlist(
+        exprList[x],
+        recursive = FALSE
+      )
+    )
+    new("andExpr", exprList)
+  }
+)
+
+setMethod(
+  f = "&",
+  signature = c(".compoundExpr", ".compoundExpr"),
+  definition = function(e1, e2) {
+    And(e1, e2)
+  }
+)
+
+# Backwards compatibility
+#' @export GaAnd
+GaAnd <- And
+

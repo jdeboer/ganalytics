@@ -455,3 +455,4 @@ test_that("Expr function can used to create GA, MCF and RT expressions", {
   Expr("mcf:source", "==", "google")
   Expr("rt:source", "==", "google")
 })
+
