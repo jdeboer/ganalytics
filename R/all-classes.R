@@ -519,7 +519,7 @@ setClass(
   contains = "andExpr",
   validity = function(object) {
     if (all(sapply(unlist(object@.Data), function(expr) {
-      if (Operator(expr) == "<>" & GaVar(expr) == "dateOfSession") {
+      if (Operator(expr) == "<>" & Var(expr) == "dateOfSession") {
         (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
       } else TRUE
     }))) {
@@ -528,7 +528,7 @@ setClass(
       return("The maximum date range for dateOfSession is 31 days.")
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
-      if (GaVar(expr) == "dateOfSession") {
+      if (Var(expr) == "dateOfSession") {
         Operator(expr) == "<>"
       } else TRUE
     }))) {
@@ -664,41 +664,58 @@ setClass(
   }
 )
 
+# ---- query dimensions, metrics, and sortby lists ----
+
 setClass(
   ".metrics",
   contains = "list",
   validity = function(object) {
+    if (!all_inherit(object, ".metVar")) {
+      return("Must be a list containing objects of class .metVar")
+    } else TRUE
     if (length(object) > kGaMax$metrics) {
-      paste("Maximum of", kGaMax$metrics, "metrics allowed.", sep = " ")
+      return(paste("Maximum of", kGaMax$metrics, "metrics allowed."))
     } else TRUE
   }
 )
 
 setClass(
-  "gaMetrics",
-  contains = ".metrics",
-  prototype = prototype(
-    list(new("gaMetVar"))
-  ),
+  ".dimensions",
+  contains = "list",
   validity = function(object) {
-    if (!all_inherit(object, "gaMetVar")) {
-      "Must be a list containing objects of class gaMetVar"
+    if (!all_inherit(object, ".dimVar")) {
+      return("Must be a list containing objects of class .dimVar")
+    } else TRUE
+    if (length(object) > kGaMax$dimensions) {
+      return(paste("Maximum of", kGaMax$dimensions, "dimensions allowed."))
     } else TRUE
   }
 )
 
 setClass(
-  "mcfMetrics",
-  contains = ".metrics",
-  prototype = prototype(
-    list(new("mcfMetVar"))
+  ".sortBy",
+  slots = c(
+    desc = "logical"
   ),
+  prototype = prototype(
+    list(),
+    desc = logical()
+  ),
+  contains = "list",
   validity = function(object) {
-    if (!all_inherit(object, "mcfMetVar")) {
-      "Must be a list containing objects of class mcfMetVar"
+    if (length(object@.Data) != length(object@desc)) {
+      "List vector and desc vector must be of equal lengths"
     } else TRUE
   }
 )
+
+setClassUnion(".varList", c(".metrics", ".dimensions", ".sortBy"))
+
+setValidity(".varList", function(object) {
+  if (!all_inherit(object, ".var")) {
+    "Must be a list containing objects of class .var"
+  } else TRUE
+})
 
 setClass(
   "rtMetrics",
@@ -728,12 +745,7 @@ setClass(
   prototype = prototype(
     list(new("gaDimVar"))
   ),
-  contains = ".dimensions",
-  validity = function(object) {
-    if (!all_inherit(object, "gaDimVar")) {
-      "Must be a list containing objects of class gaDimVar"
-    } else TRUE
-  }
+  contains = ".dimensions"
 )
 
 setClass(
@@ -741,12 +753,7 @@ setClass(
   prototype = prototype(
     list(new("mcfDimVar"))
   ),
-  contains = ".dimensions",
-  validity = function(object) {
-    if (!all_inherit(object, "mcfDimVar")) {
-      "Must be a list containing objects of class mcfDimVar"
-    } else TRUE
-  }
+  contains = ".dimensions"
 )
 
 setClass(
@@ -754,40 +761,14 @@ setClass(
   prototype = prototype(
     list(new("rtDimVar"))
   ),
-  contains = ".dimensions",
-  validity = function(object) {
-    if (!all_inherit(object, "rtDimVar")) {
-      "Must be a list containing objects of class rtDimVar"
-    } else TRUE
-  }
+  contains = ".dimensions"
 )
 
-setClass(
-  ".sortBy",
-  slots = c(
-    desc = "logical"
-  ),
-  prototype = prototype(
-    list(),
-    desc = logical()
-  ),
-  contains = "list",
-  validity = function(object) {
-    if (length(object@.Data) != length(object@desc)) {
-      "List vector and desc vector must be of equal lengths"
-    } else TRUE
-  }
-)
+setClass("gaSortBy", contains = ".sortBy")
+setClass("mcfSortBy", contains = ".sortBy")
+setClass("rtSortBy", contains = ".sortBy")
 
-setClass(
-  "gaSortBy",
-  contains = ".sortBy",
-  validity = function(object) {
-    if (!all_inherit(object@.Data, ".gaVar")) {
-      "Must be a list containing objects of class .gaVar"
-    } else TRUE
-  }
-)
+setClassUnion(".gaVarList", c("gaMetrics", "gaDimensions", "gaSortBy"))
 
 setClass(
   "mcfSortBy",
