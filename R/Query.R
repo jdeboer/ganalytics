@@ -82,11 +82,38 @@ McfQuery <- function(
         as.Date(startDate),
         as.Date(endDate)
       ),
-      metrics = Metrics(metrics),
-      dimensions = Dimensions(dimensions),
+      metrics = McfMetrics(metrics),
+      dimensions = McfDimensions(dimensions),
       sortBy = McfSortBy(sortBy),
       filters = McfFilter(filters),
       samplingLevel = samplingLevel,
+      maxResults = maxResults,
+      creds = creds
+  )
+}
+
+#' @export
+RtQuery <- function(
+  view = NA,
+  creds = GoogleApiCreds(),
+  metrics = "rt:activeUsers",
+  dimensions = "rt:minutesAgo",
+  sortBy = NULL,
+  filters = NULL,
+  maxResults = kGaMaxResults
+) {
+  if(missing(view)) {
+    view <- GaAccounts(creds = creds)$entities[[1]]
+  }
+  if (missing(creds) & is(view, ".gaResource")) {
+    creds <- view$creds
+  }
+  new("rtQuery",
+      viewId = GaView(view),
+      metrics = RtMetrics(metrics),
+      dimensions = RtDimensions(dimensions),
+      sortBy = RtSortBy(sortBy),
+      filters = RtFilter(filters),
       maxResults = maxResults,
       creds = creds
   )
