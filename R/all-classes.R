@@ -770,27 +770,27 @@ setClass("rtSortBy", contains = ".sortBy")
 
 setClassUnion(".gaVarList", c("gaMetrics", "gaDimensions", "gaSortBy"))
 
-setClass(
-  "mcfSortBy",
-  contains = ".sortBy",
-  validity = function(object) {
-    if (!all_inherit(object@.Data, ".mcfVar")) {
-      "Must be a list containing objects of class .mcfVar"
-    } else TRUE
-  }
-)
+setValidity(".gaVarList", function(object) {
+  if (!all_inherit(object, ".gaVar")) {
+    "Must be a list containing objects of class .gaVar"
+  } else TRUE
+})
 
-setClass(
-  "rtSortBy",
-  contains = ".sortBy",
-  validity = function(object) {
-    if (!all_inherit(object@.Data, ".rtVar")) {
-      "Must be a list containing objects of class .rtVar"
-    } else TRUE
-  }
-)
+setClassUnion(".mcfVarList", c("mcfMetrics", "mcfDimensions", "mcfSortBy"))
 
-setClassUnion(".gaVarList", c(".metrics", ".dimensions", ".sortBy"))
+setValidity(".mcfVarList", function(object) {
+  if (!all_inherit(object, ".mcfVar")) {
+    "Must be a list containing objects of class .mcfVar"
+  } else TRUE
+})
+
+setClassUnion(".rtVarList", c("rtMetrics", "rtDimensions", "rtSortBy"))
+
+setValidity(".rtVarList", function(object) {
+  if (!all_inherit(object, ".rtVar")) {
+    "Must be a list containing objects of class .rtVar"
+  } else TRUE
+})
 
 # ---- Profile ID ----
 
