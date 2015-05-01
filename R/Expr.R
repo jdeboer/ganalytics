@@ -2,7 +2,7 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include GaVar.R
+#' @include Var.R
 #' @include Operator.R
 #' @include Operand.R
 #' @include ganalytics-package.R

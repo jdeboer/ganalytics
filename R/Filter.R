@@ -38,6 +38,22 @@ setMethod(
 )
 
 setMethod(
+  f = "McfFilter",
+  signature = "NULL",
+  definition = function(.Object) {
+    new("mcfFilter", list())
+  }
+)
+
+setMethod(
+  f = "RtFilter",
+  signature = "NULL",
+  definition = function(.Object) {
+    new("rtFilter", list())
+  }
+)
+
+setMethod(
   f = "GaFilter<-",
   signature = c("gaFilter", "andExpr"),
   definition = function(.Object, value) {
