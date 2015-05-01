@@ -960,6 +960,62 @@ setGeneric(
   }
 )
 
+#' RtMetrics
+#' 
+#' Get the metrics of the object.
+#' 
+#' @export
+#' @rdname RtMetrics
+setGeneric(
+  "RtMetrics",
+  function(.Object, ...) {},
+  valueClass = "rtMetrics",
+  useAsDefault = FALSE
+)
+
+#' RtMetrics<-
+#' 
+#' Set the metrics of the object.
+#' 
+#' @export
+#' @rdname RtMetrics
+setGeneric(
+  "RtMetrics<-",
+  function(.Object, value) {
+    .Object <- standardGeneric("RtMetrics<-")
+    validObject(.Object)
+    .Object
+  }
+)
+
+#' RtDimensions
+#' 
+#' Get the dimensions of the object.
+#' 
+#' @export
+#' @rdname RtDimensions
+setGeneric(
+  "RtDimensions",
+  function(.Object, ...) {},
+  valueClass = "rtDimensions",
+  useAsDefault = FALSE
+)
+
+#' RtDimensions<-
+#' 
+#' Set the dimensions for the object.
+#' 
+#' @export
+#' @rdname RtDimensions
+setGeneric(
+  "RtDimensions<-",
+  function(.Object, value) {
+    .Object <- standardGeneric("RtDimensions<-")
+    validObject(.Object)
+    .Object
+  }
+)
+
 #' SortBy
 #' 
 #' Get the sortBy order of the query.
@@ -967,9 +1023,9 @@ setGeneric(
 #' @export
 #' @rdname SortBy
 setGeneric(
-  name = "SortBy",
-  def = function(.Object, ..., desc = logical(0)) {},
-  valueClass = c(".sortBy", "gaQuery"),
+  "SortBy",
+  function(.Object, ..., desc = logical(0)) {},
+  valueClass = c(".sortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )
 
@@ -980,67 +1036,59 @@ setGeneric(
 #' @export
 #' @rdname SortBy
 setGeneric(
-  name = "SortBy<-",
-  def = function(.Object, value) {
+  "SortBy<-",
+  function(.Object, value) {
     .Object <- standardGeneric("SortBy<-")
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 
-#' GaSortBy
-#' 
-#' Get the sortBy order of the query.
-#' 
-#' @export
-#' @rdname GaSortBy
 setGeneric(
-  name = "GaSortBy",
-  def = function(.Object, ..., desc = logical(0)) {},
-  valueClass = c("gaSortBy", "gaQuery"),
+  "GaSortBy",
+  function(.Object, ..., desc = logical(0)) {},
+  valueClass = c("gaSortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )
 
-#' GaSortBy<-
-#' 
-#' Set the order of rows returned by Google Analytics.
-#' 
-#' @export
-#' @rdname GaSortBy
 setGeneric(
-  name = "GaSortBy<-",
-  def = function(.Object, value) {
+  "GaSortBy<-",
+  function(.Object, value) {
     .Object <- standardGeneric("GaSortBy<-")
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 
-#' McfSortBy
-#' 
-#' Get the sortBy order of the query.
-#' 
-#' @export
-#' @rdname McfSortBy
 setGeneric(
-  name = "McfSortBy",
-  def = function(.Object, ..., desc = logical(0)) {},
-  valueClass = c("mcfSortBy", "gaQuery"),
+  "McfSortBy",
+  function(.Object, ..., desc = logical(0)) {},
+  valueClass = c("mcfSortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )
 
-#' McfSortBy<-
-#' 
-#' Set the order of rows returned by Google Analytics.
-#' 
-#' @export
-#' @rdname McfSortBy
 setGeneric(
-  name = "McfSortBy<-",
-  def = function(.Object, value) {
+  "McfSortBy<-",
+  function(.Object, value) {
     .Object <- standardGeneric("McfSortBy<-")
     validObject(.Object)
-    return(.Object)
+    .Object
+  }
+)
+
+setGeneric(
+  "RtSortBy",
+  function(.Object, ..., desc = logical(0)) {},
+  valueClass = c("rtSortBy", ".query", "NULL"),
+  useAsDefault = FALSE
+)
+
+setGeneric(
+  "RtSortBy<-",
+  function(.Object, value) {
+    .Object <- standardGeneric("RtSortBy<-")
+    validObject(.Object)
+    .Object
   }
 )
 
@@ -1051,8 +1099,8 @@ setGeneric(
 #' @export
 #' @rdname GaView
 setGeneric(
-  name = "GaView",
-  def = function(.Object) {},
+  "GaView",
+  function(.Object) {},
   valueClass = "viewId",
   useAsDefault = FALSE
 )

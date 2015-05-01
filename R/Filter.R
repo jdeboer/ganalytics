@@ -45,6 +45,14 @@ setMethod(
   }
 )
 
+# setMethod(
+#   f = "TableFilter<-",
+#   signature = c(".tableFilter", "ANY"),
+#   definition = function(.Object, value) {
+#     as(value, ".tableFilter")
+#   }
+# )
+
 setMethod(
   f = "RtFilter",
   signature = "NULL",

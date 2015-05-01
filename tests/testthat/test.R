@@ -444,8 +444,8 @@ test_that("MCF and RT expressions can be created with dimensions or metrics", {
 })
 
 test_that("MCF and RT queries can be constructed", {
-  #as(McfQuery(view = 0), "matrix")
-  #RtQuery(view = 0)
+  as(McfQuery(view = 0), "matrix")
+  RtQuery(view = 0)
 })
 
 context("Generalised functions can be used across all types of queries")

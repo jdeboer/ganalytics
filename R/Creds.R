@@ -4,14 +4,14 @@
 NULL
 
 #'@export
-setMethod("GaCreds", signature = c("gaQuery", "list"),
+setMethod("GaCreds", signature = c(".query", "list"),
           definition = function(object, creds) {
             object@creds <- creds
             validObject(object)
             object
           })
 
-setMethod("GaCreds", signature = c("gaQuery"),
+setMethod("GaCreds", signature = c(".query"),
           definition = function(object) {
             object@creds
           })
@@ -26,7 +26,7 @@ setMethod("GaCreds", signature = c("missing"),
             GoogleApiCreds(appname = object, ...)
           })
 
-setMethod("GaCreds<-", signature = c("gaQuery", "list"),
+setMethod("GaCreds<-", signature = c(".query", "list"),
           definition = function(object, value) {
             object@creds <- value
             validObject(object)

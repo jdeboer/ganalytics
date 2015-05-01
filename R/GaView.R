@@ -65,7 +65,7 @@ setMethod(
 
 setMethod(
   f = "GaView",
-  signature = "gaQuery",
+  signature = ".query",
   definition = function(.Object) {
     .Object@viewId
   }
@@ -73,7 +73,7 @@ setMethod(
 
 setMethod(
   f = "GaView<-",
-  signature = c("gaQuery", "ANY"),
+  signature = c(".query", "ANY"),
   definition = function(.Object, value) {
     .Object@viewId <- GaView(value)
     validObject(.Object)
