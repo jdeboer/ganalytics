@@ -157,7 +157,7 @@ setAs(from = "gaSegmentId", to = "character",
 )
 
 # Coercing from gaMetrics, gaDimensions, and gaSortBy to character
-setAs(from = ".gaVarList", to = "character",
+setAs(from = ".varList", to = "character",
   def = function(from) {
     paste(from@.Data, collapse = ",")
   },
@@ -166,7 +166,7 @@ setAs(from = ".gaVarList", to = "character",
   }
 )
 
-setAs(from = "gaSortBy", to = "character",
+setAs(from = ".sortBy", to = "character",
   def = function(from) {
     varNames <- sapply(from@.Data, FUN = function(varName) {
       as(varName, "character")
@@ -179,7 +179,7 @@ setAs(from = "gaSortBy", to = "character",
     paste0(descChar, varNames, collapse = ",")
   },
   replace = function(from, value) {
-    as(value, "gaSortBy")
+    as(value, class(from))
   }
 )
 
@@ -222,16 +222,15 @@ setAs(from = ".expr", to = "andExpr", def = function(from, to) {
 })
 
 # Coercing to .gaExpr
-setAs(from = "character", to = ".gaExpr", def = function(from) {
+setAs(from = "character", to = ".expr", def = function(from) {
   ops <- union(kGaOps$met, kGaOps$dim)
   ops <- str_replace_all(ops, "(\\[|\\])", "\\\\\\1")
   ops <- paste(ops, collapse = "|")
   operator <- str_match(from, ops)[1,1]
   x <- str_split_fixed(from, ops, 2)
-  var <- x[1,1]
+  var <- Var(x[1,1])
   operand <- x[1,2]
-  expr <- GaExpr(var, operator, parseOperand(operand, operator))
-  expr
+  Expr(var, operator, parseOperand(operand, operator))
 })
 
 compileOperand <- function(from) {

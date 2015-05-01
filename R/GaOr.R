@@ -6,13 +6,13 @@
 #' @include helper-functions.R
 NULL
 
-# Create a GaOr from one or more metric or dimension expressions
+# Create an Or from one or more metric or dimension expressions
 # Takes one or more Metric or Dimension expressions
 # as separate arguments or as a list.
 # Returns an object of gaOr.
 
 setMethod(
-  f = "GaOr",
+  f = "Or",
   signature = ".compoundExpr",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
@@ -32,6 +32,10 @@ setMethod(
   f = "|",
   signature = c(".compoundExpr", ".compoundExpr"),
   definition = function(e1, e2) {
-    GaOr(e1, e2)
+    Or(e1, e2)
   }
 )
+
+# Backwards compatibility
+#' @export GaOr
+GaOr <- Or

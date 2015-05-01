@@ -94,7 +94,19 @@ setMethod(
       .Object@.Data <- tmp
       validObject(.Object)
     }
-    return(.Object)
+    .Object
+  }
+)
+
+# ---- SortBy ----
+
+setMethod(
+  f = "initialize",
+  signature = ".sortBy",
+  definition = function(.Object, value = list(), desc = logical(length(value))) {
+    .Object@.Data <- value
+    .Object@desc <- desc
+    .Object
   }
 )
 

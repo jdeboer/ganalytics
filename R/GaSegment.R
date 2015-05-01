@@ -59,7 +59,7 @@ setMethod(
   signature = ".compoundExpr",
   definition = function(.Object, ..., negation) {
     exprList <- list(.Object, ...)
-    exprList <- do.call("GaAnd", lapply(exprList, function(expr){as(expr, "andExpr")}))
+    exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
     new("gaNonSequenceCondition", exprList, negation = negation)
   }
 )

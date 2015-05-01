@@ -416,6 +416,8 @@ test_that("providing multiple view IDs, date ranges and multiple segments coerce
   )
 })
 
+context("MCF and RT expressions, filters, and queries are also supported")
+
 test_that("MCF vars can be generated using McfVar", {
   expect_equal(
     as(McfVar("mcf:totalConversions"), "character"),
@@ -442,5 +444,14 @@ test_that("MCF and RT expressions can be created with dimensions or metrics", {
 })
 
 test_that("MCF and RT queries can be constructed", {
-  McfQuery(view = 0)
+  #as(McfQuery(view = 0), "matrix")
+  #RtQuery(view = 0)
+})
+
+context("Generalised functions can be used across all types of queries")
+
+test_that("Expr function can used to create GA, MCF and RT expressions", {
+  Expr("ga:source", "==", "google")
+  Expr("mcf:source", "==", "google")
+  Expr("rt:source", "==", "google")
 })

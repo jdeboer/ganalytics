@@ -641,7 +641,7 @@ setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
 setClassUnion(".compoundExpr", c(".expr", "orExpr", "andExpr"))
 
-# ---- query dimensions, metrics, and sortby lists ----
+# ---- dateRange ----
 
 setClass(
   "dateRange",

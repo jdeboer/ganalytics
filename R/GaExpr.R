@@ -10,6 +10,21 @@
 NULL
 
 setMethod(
+  f = "Expr",
+  signature = c("character", "character", "character"),
+  definition = function(.Object, operator, operand, metricScope) {
+    var <- Var(.Object)
+    if (is(var, ".gaVar")) {
+      GaExpr(.Object, operator, operand, metricScope)
+    } else if (is(var, ".mcfVar")) {
+      McfExpr(.Object, operator, operand)
+    } else if (is(var, ".rtVar")) {
+      RtExpr(.Object, operator, operand)
+    }
+  }
+)
+
+setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
   definition = function(.Object, operator, operand, metricScope) {
@@ -164,3 +179,4 @@ setMethod(
     .Object
   }
 )
+

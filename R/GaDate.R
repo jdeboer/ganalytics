@@ -264,7 +264,17 @@ setMethod(
 )
 
 # For backwards compatibility
+#'@export GaStartDate
 GaStartDate <- StartDate
+#'@export GaEndDate
 GaEndDate <- EndDate
+#'@export GaDateRange
 GaDateRange <- DateRange
+
+#'@export GaStartDate<-
+`GaStartDate<-` <- `StartDate<-`
+#'@export GaEndDate<-
+`GaEndDate<-` <- `EndDate<-`
+#'@export GaDateRange<-
+`GaDateRange<-` <- `DateRange<-`
 

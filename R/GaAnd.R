@@ -5,7 +5,7 @@
 NULL
 
 setMethod(
-  f = "GaAnd",
+  f = "And",
   signature = ".compoundExpr",
   definition = function(.Object, ...) {
     exprList <- list(.Object, ...)
@@ -46,7 +46,11 @@ setMethod(
   f = "&",
   signature = c(".compoundExpr", ".compoundExpr"),
   definition = function(e1, e2) {
-    GaAnd(e1, e2)
+    And(e1, e2)
   }
 )
+
+# Backwards compatibility
+#' @export GaAnd
+GaAnd <- And
 

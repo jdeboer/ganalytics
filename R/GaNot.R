@@ -5,10 +5,10 @@
 #' @include helper-functions.R
 NULL
 
-# ---- GaNot ----
+# ---- Not ----
 
 setMethod(
-  f = "GaNot",
+  f = "Not",
   signature = ".operator",
   definition = function(.Object) {
     if (.Object == "==") {
@@ -49,15 +49,15 @@ setMethod(
   f = "!",
   signature = ".operator",
   definition = function(x) {
-    GaNot(x)
+    Not(x)
   }
 )
 
 setMethod(
-  f = "GaNot",
+  f = "Not",
   signature = ".expr",
   definition = function(.Object) {
-    Operator(.Object) <- GaNot(Operator(.Object))
+    Operator(.Object) <- Not(Operator(.Object))
     return(.Object)
   }
 )
@@ -66,19 +66,19 @@ setMethod(
   f = "!",
   signature = ".expr",
   definition = function(x) {
-    GaNot(x)
+    Not(x)
   }
 )
 
 setMethod(
-  f = "GaNot",
+  f = "Not",
   signature = "orExpr",
   definition = function(.Object) {
     .Object <- lapply(
       X = .Object,
-      FUN = GaNot
+      FUN = Not
     )
-    .Object <- do.call(GaAnd, .Object)
+    .Object <- do.call(And, .Object)
   }
 )
 
@@ -86,12 +86,12 @@ setMethod(
   f = "!",
   signature = "orExpr",
   definition = function(x) {
-    GaNot(x)
+    Not(x)
   }
 )
 
 setMethod(
-  f = "GaNot",
+  f = "Not",
   signature = ".gaSimpleOrSequence",
   definition = function(.Object) {
     .Object@negation <- !.Object@negation
@@ -103,6 +103,10 @@ setMethod(
   f = "!",
   signature = ".gaSimpleOrSequence",
   definition = function(x) {
-    GaNot(x)
+    Not(x)
   }
 )
+
+# Backwards compatibility
+#'@export GaNot
+GaNot <- Not
