@@ -35,7 +35,7 @@ setMethod("GetGaData", "gaQuery", function(
     .data = queryParams,
     .margins = 2,
     .fun = GaPaginate,
-    maxRequestedRows = GaMaxResults(object),
+    maxRequestedRows = MaxResults(object),
     creds = creds,
     .progress = .progress
   )

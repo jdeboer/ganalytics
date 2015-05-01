@@ -952,11 +952,11 @@ setGeneric(
 #' @export
 #' @rdname McfDimensions
 setGeneric(
-  name = "McfDimensions<-",
-  def = function(.Object, value) {
+  "McfDimensions<-",
+  function(.Object, value) {
     .Object <- standardGeneric("McfDimensions<-")
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 
@@ -1072,57 +1072,57 @@ setGeneric(
   }
 )
 
-#' GaMaxResults
+#' MaxResults
 #' 
 #' Get the value set for MaxResults.
 #' 
 #' @export
-#' @rdname GaMaxResults
+#' @rdname MaxResults
 setGeneric(
-  "GaMaxResults",
+  "MaxResults",
   function(.Object) {},
   valueClass = "numeric",
   useAsDefault = FALSE
 )
 
-#' GaMaxResults<-
+#' MaxResults<-
 #' 
 #' Set the maximum rows returned by a ganalytics query.
 #' 
 #' @export
-#' @rdname GaMaxResults
+#' @rdname MaxResults
 setGeneric(
-  "GaMaxResults<-",
+  "MaxResults<-",
   function(.Object, value) {
-    .Object <- standardGeneric("GaMaxResults<-")
+    .Object <- standardGeneric("MaxResults<-")
     validObject(.Object)
     .Object
   }
 )
 
-#' GaSamplingLevel
+#' SamplingLevel
 #' 
 #' Get the sampling level.
 #' 
 #' @export
-#' @rdname GaSamplingLevel
+#' @rdname SamplingLevel
 setGeneric(
-  "GaSamplingLevel",
+  "SamplingLevel",
   function(.Object) {},
   valueClass = c("character", "list"),
   useAsDefault = FALSE
 )
 
-#' GaSamplingLevel<-
+#' SamplingLevel<-
 #' 
 #' Set the sampling level for a ganalytics query.
 #' 
 #' @export
-#' @rdname GaSamplingLevel
+#' @rdname SamplingLevel
 setGeneric(
-  "GaSamplingLevel<-",
+  "SamplingLevel<-",
   function(.Object, value) {
-    .Object <- standardGeneric("GaSamplingLevel<-")
+    .Object <- standardGeneric("SamplingLevel<-")
     validObject(.Object)
     .Object
   }

@@ -47,10 +47,10 @@ Collate:
     'Expr.R'
     'Filter.R'
     'GaGetCoreReport.R'
-    'GaQuery.R'
     'GaSegment.R'
     'GaView.R'
     'GetGa.R'
+    'Query.R'
     'SortBy.R'
 Suggests:
     testthat

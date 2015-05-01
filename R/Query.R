@@ -160,10 +160,10 @@ modify_query <- function(
     GaSegment(query) <- segment
   }
   if (!is.na(sampling_level)) {
-    GaSamplingLevel(query) <- sampling_level
+    SamplingLevel(query) <- sampling_level
   }
   if (!is.na(max_results)) {
-    GaMaxResults(query) <- max_results
+    MaxResults(query) <- max_results
   }
   # The following are yet to be implemented
   # periods
@@ -172,16 +172,16 @@ modify_query <- function(
 }
 
 setMethod(
-  f = "GaMaxResults",
-  signature = "gaQuery",
+  f = "MaxResults",
+  signature = ".query",
   definition = function(.Object) {
     .Object@maxResults
   }
 )
 
 setMethod(
-  f = "GaMaxResults<-",
-  signature = c("gaQuery", "ANY"),
+  f = "MaxResults<-",
+  signature = c(".query", "ANY"),
   definition = function(.Object, value) {
     .Object@maxResults <- as.numeric(value)
     validObject(.Object)
@@ -190,16 +190,16 @@ setMethod(
 )
 
 setMethod(
-  f = "GaSamplingLevel",
-  signature = "gaQuery",
+  f = "SamplingLevel",
+  signature = ".standardQuery",
   definition = function(.Object) {
     .Object@samplingLevel
   }
 )
 
 setMethod(
-  f = "GaSamplingLevel<-",
-  signature = c("gaQuery", "ANY"),
+  f = "SamplingLevel<-",
+  signature = c(".standardQuery", "ANY"),
   definition = function(.Object, value) {
     .Object@samplingLevel <- as.character(value)
     validObject(.Object)
@@ -208,7 +208,7 @@ setMethod(
 )
 
 setMethod(
-  f = "GaSamplingLevel",
+  f = "SamplingLevel",
   signature = "data.frame",
   definition = function(.Object) {
     sample_params <- attributes(.Object)[c("sampleSize", "sampleSpace")]
@@ -216,3 +216,13 @@ setMethod(
     sample_params
   }
 )
+
+# Backwards compatibility
+#'@export GaSamplingLevel
+GaSamplingLevel <- SamplingLevel
+#'@export GaSamplingLevel<-
+`GaSamplingLevel<-` <- `SamplingLevel<-`
+#'@export MaxResults
+GaMaxResults <- MaxResults
+#'@export MaxResults<-
+`MaxResults<-` <- `MaxResults<-`

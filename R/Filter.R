@@ -6,18 +6,18 @@
 NULL
 
 setMethod(
-  f = "GaFilter",
-  signature = "gaFilter",
+  f = "TableFilter",
+  signature = ".tableFilter",
   definition = function(.Object) {
     return(.Object)
   }
 )
 
 setMethod(
-  f = "GaFilter",
+  f = "TableFilter",
   signature = ".compoundExpr",
   definition = function(.Object) {
-    as(.Object, "gaFilter")
+    as(.Object, ".tableFilter")
   }
 )
 
@@ -25,7 +25,7 @@ setMethod(
   f = "GaFilter",
   signature = "gaDynSegment",
   definition = function(.Object) {
-    as(object = .Object, Class = "gaFilter")
+    as(.Object, ".tableFilter")
   }
 )
 
@@ -61,6 +61,11 @@ setMethod(
     return(.Object)
   }
 )
+
+# Backwards compatibility
+#' @export GaFilter
+GaFilter <- TableFilter
+`GaFilter<-` <- `TableFilter<-`
 
 setMethod(
   f = "GaFilter<-",
