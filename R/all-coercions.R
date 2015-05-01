@@ -14,6 +14,7 @@ simpleCoerce <- function(from, to) {new(to, from)}
 simpleCoerceData <- function(from, to) {new(to, from@.Data)}
 simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
 simpleCoerceToList <- function(from, to) {new(to, list(from))}
+coerceViaList <- function(from, to) {new(to, as.list(from))}
 simpleReplace <- function(from, value) {initialize(from, value)}
 
 # Coercing to .var subclasses
@@ -260,6 +261,8 @@ parseOperand <- function(operand, operator) {
 # Coercion to .filter subclasses
 
 setAs(from = "andExpr", to = "gaFilter", def = simpleCoerce)
+setAs(from = "andExpr", to = "mcfFilter", def = simpleCoerce)
+setAs(from = "andExpr", to = "rtFilter", def = simpleCoerce)
 
 setAs(from = "orExpr", to = "gaFilter", def = function(from, to) {
   as(as(from, "andExpr"), to)
@@ -268,6 +271,12 @@ setAs(from = "orExpr", to = "gaFilter", def = function(from, to) {
 setAs(from = ".expr", to = "gaFilter", def = function(from, to) {
   as(as(from, "andExpr"), to)
 })
+setAs(from = "orExpr", to = "gaFilter", def = coerceToAndFirst)
+setAs(from = "orExpr", to = "mcfFilter", def = coerceToAndFirst)
+setAs(from = "orExpr", to = "rtFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "gaFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "mcfFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "rtFilter", def = coerceToAndFirst)
 
 setAs(from = "gaDynSegment", to = "gaFilter", def = simpleCoerceData)
 
@@ -359,16 +368,16 @@ charToSortBy <- function(from, to, varFun) {
   new(to, varNames, desc = desc)
 }
 
-setAs(from = "character", to = "gaSortBy", def = function(from, to) {
-  charToSortBy(from, to, GaVar)
+setAs(from = "character", to = "gaSortBy", def = function(from) {
+  as(from, ".sortBy")
 })
 
 setAs(from = "character", to = "mcfSortBy", def = function(from, to) {
-  charToSortBy(from, to, McfVar)
+  as(from, ".sortBy")
 })
 
 setAs(from = "character", to = "rtSortBy", def = function(from, to) {
-  charToSortBy(from, to, RtVar)
+  as(from, ".sortBy")
 })
 
 # Coercion to viewId
