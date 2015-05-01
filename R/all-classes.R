@@ -718,26 +718,27 @@ setValidity(".varList", function(object) {
 })
 
 setClass(
-  "rtMetrics",
-  contains = ".metrics",
+  "gaMetrics",
   prototype = prototype(
-    list(new("rtMetVar"))
+    list(new("gaMetVar"))
   ),
-  validity = function(object) {
-    if (!all_inherit(object, "rtMetVar")) {
-      "Must be a list containing objects of class rtMetVar"
-    } else TRUE
-  }
+  contains = ".metrics"
 )
 
 setClass(
-  ".dimensions",
-  contains = "list",
-  validity = function(object) {
-    if (length(object) > kGaMax$dimensions) {
-      paste("Maximum of", kGaMax$dimensions, "dimensions allowed.", sep = " ")
-    } else TRUE
-  }
+  "mcfMetrics",
+  prototype = prototype(
+    list(new("mcfMetVar"))
+  ),
+  contains = ".metrics"
+)
+
+setClass(
+  "rtMetrics",
+  prototype = prototype(
+    list(new("rtMetVar"))
+  ),
+  contains = ".metrics"
 )
 
 setClass(
