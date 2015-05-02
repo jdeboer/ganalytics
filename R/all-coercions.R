@@ -706,14 +706,18 @@ setAs(
   from = "gaQuery",
   to = "matrix",
   def = function(from) {
+    views <- as(from, "viewId")
+    dateRange <- as(from, "dateRange")
+    startDates <- dateRange@startDate
+    endDates <- dateRange@endDate
     viewsDatesSegments <- do.call(
       what = rbind,
       args = lapply(
-        X = GaView(from),
+        X = views,
         FUN = function(viewId) {
           data.frame(
-            startDate = startDate,
-            endDate = endDate,
+            startDate = startDates,
+            endDate = endDates,
             viewId = viewId,
             stringsAsFactors = FALSE
           )
@@ -722,15 +726,16 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId) {
+        metrics <- as(from, ".metrics")
         dimensions <- as(from, ".dimensions")
         sortBy <- as(from, ".sortBy")
         tableFilter <- as(from, ".tableFilter")
         segment <- as(from, ".gaSegment")
         c(
-          "ids" = as(GaView(viewId), "character"),
+          "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
-          "metrics" = as(as(from, ".metrics"), "character"),
+          "metrics" = as(metrics, "character"),
           "dimensions" = if(length(dimensions) >= 1) {
             as(dimensions, "character")
           },
@@ -757,14 +762,18 @@ setAs(
   from = "mcfQuery",
   to = "matrix",
   def = function(from) {
+    views <- as(from, "viewId")
+    dateRange <- as(from, "dateRange")
+    startDates <- dateRange@startDate
+    endDates <- dateRange@endDate
     viewsDates <- do.call(
       what = rbind,
       args = lapply(
-        X = GaView(from),
+        X = views,
         FUN = function(viewId) {
           data.frame(
-            startDate = StartDate(from),
-            endDate = EndDate(from),
+            startDate = startDates,
+            endDate = endDates,
             viewId = viewId,
             stringsAsFactors = FALSE
           )
@@ -773,14 +782,15 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId) {
-        dimensions <- Dimensions(from)
-        sortBy <- SortBy(from)
-        tableFilter <- TableFilter(from)
+        metrics <- as(from, ".metrics")
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
         c(
-          "ids" = as(GaView(viewId), "character"),
+          "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
-          "metrics" = as(Metrics(from), "character"),
+          "metrics" = as(metrics, "character"),
           "dimensions" = if(length(dimensions) >= 1) {
             as(dimensions, "character")
           },
@@ -790,7 +800,7 @@ setAs(
           "filters" = if(length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
-          "samplingLevel" = as(SamplingLevel(from), "character")
+          "samplingLevel" = as(from@samplingLevel, "character")
         )
       },
       viewsDates$startDate,

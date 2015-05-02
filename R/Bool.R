@@ -45,6 +45,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "!",
   signature = ".operator",
@@ -62,6 +63,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "!",
   signature = ".expr",
@@ -82,6 +84,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "!",
   signature = "orExpr",
@@ -99,6 +102,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "!",
   signature = ".gaSimpleOrSequence",
@@ -133,6 +137,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "|",
   signature = c(".compoundExpr", ".compoundExpr"),
@@ -183,6 +188,7 @@ setMethod(
   }
 )
 
+#' @export
 setMethod(
   f = "&",
   signature = c(".compoundExpr", ".compoundExpr"),

@@ -8,7 +8,7 @@ NULL
 
 setMethod(
   f = "GetGaQueries",
-  signature = signature("gaQuery"),
+  signature = signature(".query"),
   definition = function(.Object) {
     as(.Object, "matrix")
   }
@@ -19,7 +19,7 @@ setMethod(
 #' @param query the query to execute.
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
-setMethod("GetGaData", "gaQuery", function(
+setMethod("GetGaData", ".query", function(
   object,
   creds = NULL,
   .progress = "time",
