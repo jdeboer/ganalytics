@@ -125,6 +125,40 @@ setAs(from = "character", to = "mcfMetVar", def = simpleCoerce)
 setAs(from = "character", to = "rtDimVar", def = simpleCoerce)
 setAs(from = "character", to = "rtMetVar", def = simpleCoerce)
 
+setAs(from = ".mcfVar", to = ".gaVar", def = function(from, to) {
+  as(sub("mcf:", "ga:", from), to)
+})
+
+setAs(from = ".rtVar", to = ".gaVar", def = function(from, to) {
+  as(sub("rt:", "ga:", from), to)
+})
+
+setAs(from = ".gaVar", to = ".mcfVar", def = function(from, to) {
+  as(sub("ga:", "mcf:", from), to)
+})
+
+setAs(from = ".rtVar", to = ".mcfVar", def = function(from, to) {
+  as(sub("rt:", "mcf:", from), to)
+})
+
+setAs(from = ".gaVar", to = ".rtVar", def = function(from, to) {
+  as(sub("ga:", "rt:", from), to)
+})
+
+setAs(from = ".mcfVar", to = ".rtVar", def = function(from, to) {
+  as(sub("mcf:", "rt:", from), to)
+})
+
+setAs(from = ".expr", to = ".var",
+  def = function(from, to) {
+    from@var
+  },
+  replace = function(from, value) {
+    from@var <- value
+    validObject(from)
+    from
+  })
+
 # Coercing to .operator subclasses
 setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
 setAs(from = "character", to = "gaMetOperator", def = simpleCoerce)
@@ -132,6 +166,16 @@ setAs(from = "character", to = "mcfDimOperator", def = simpleCoerce)
 setAs(from = "character", to = "mcfMetOperator", def = simpleCoerce)
 setAs(from = "character", to = "rtDimOperator", def = simpleCoerce)
 setAs(from = "character", to = "rtMetOperator", def = simpleCoerce)
+
+setAs(from = ".expr", to = ".operator",
+      def = function(from, to) {
+        from@operator
+      },
+      replace = function(from, value) {
+        from@operator <- value
+        validObject(from)
+        from
+      })
 
 # Coercing to .operand subclasses
 setAs(from = "character", to = "gaDimOperand", def = simpleCoerce)
@@ -143,6 +187,16 @@ setAs(from = "character", to = "mcfMetOperand", def = simpleCoerceToNumeric)
 setAs(from = "character", to = "rtDimOperand", def = simpleCoerce)
 setAs(from = "numeric", to = "rtMetOperand", def = simpleCoerce)
 setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
+
+setAs(from = ".expr", to = ".operand",
+      def = function(from, to) {
+        from@operand
+      },
+      replace = function(from, value) {
+        from@operand <- value
+        validObject(from)
+        from
+      })
 
 # Coercing to character
 setAs(from = ".metOperand", to = "character",
@@ -168,12 +222,24 @@ setAs(from = ".expr", to = "character", def = function(from, to) {
   )
 })
 
+setAs(from = "orExpr", to = "character", def = function(from, to) {
+  do.call(paste, c(lapply(from, as, to), sep = ","))
+})
+
 setAs(from = "andExpr", to = "character", def = function(from, to) {
   if(length(from) >= 1) {
     do.call(paste, c(lapply(from, as, to), sep = ";"))
   } else {
     character(0)
   }
+})
+
+setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
+  paste0(
+    "condition::",
+    if(from@negation) {"!"} else {""},
+    as(as(from, "andExpr"), "character")
+  )
 })
 
 setAs(from = "gaSequenceCondition", to = "character", def = function(from, to) {
@@ -200,14 +266,6 @@ setAs(from = "gaSequenceCondition", to = "character", def = function(from, to) {
   } else {
     character(0)
   }
-})
-
-setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
-  paste0(
-    "condition::",
-    if(from@negation) {"!"} else {""},
-    as(as(from, "andExpr"), "character")
-  )
 })
 
 setAs(from = "gaSegmentCondition", to = "character", def = function(from, to) {
@@ -272,55 +330,13 @@ setAs(from = ".sortBy", to = "character",
     varNames <- sapply(from@.Data, FUN = function(varName) {
       as(varName, "character")
     })
-    descChar <- ifelse(
-      test = from@desc,
-      yes = "-",
-      no = ""
-    )
+    descChar <- ifelse(from@desc, "-", "")
     paste0(descChar, varNames, collapse = ",")
   },
   replace = function(from, value) {
     as(value, class(from))
   }
 )
-
-setAs(from = "orExpr", to = "character", def = function(from, to) {
-  do.call(paste, c(lapply(from, as, to), sep = ","))
-})
-
-# Coercing to orExpr
-setAs(from = ".expr", to = "orExpr", def = simpleCoerceToList)
-
-setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
-    # This is currently only legal if the gaAnd object does not contain any gaOr
-    # object of length greater than 1 OR if there is only one gaOr. Otherwise,
-    # in a future implementation if any gaOr objects have a length greater than
-    # 1, then they will need to be shortened to length 1 which is only possible
-    # if each expression within that gaOr shares the same dimension and the
-    # expression operators and operands can be combined either as a match regex
-    # or a match list.
-    
-    # Check that all contained gaOr objects in the list have a length of 1
-    assert_that(all(sapply(from, length) == 1) | length(from) == 1)
-    
-    # Break apart the AND expression into OR expressions
-    # then break apart each OR expression into single
-    # expressions. Concatenate the single expressions
-    # back up the chain. Then convert array into a list of
-    # expressions to use for a new OR expression.
-    
-    new(to, as.list(do.call(c, do.call(c, from@.Data))))
-  }
-)
-
-# Coercing to andExpr
-setAs(from = "orExpr", to = "andExpr", def = simpleCoerceToList)
-
-setAs(from = ".expr", to = "andExpr", def = function(from, to) {
-  new(to, list(
-    as(from, "orExpr")
-  ))
-})
 
 # Coercing to .gaExpr
 setAs(from = "character", to = ".expr", def = function(from) {
@@ -358,6 +374,40 @@ parseOperand <- function(operand, operator) {
   operand <- gsub("\\\\", "\\", operand)
 }
 
+# Coercing to orExpr
+setAs(from = ".expr", to = "orExpr", def = simpleCoerceToList)
+
+setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
+    # This is currently only legal if the gaAnd object does not contain any gaOr
+    # object of length greater than 1 OR if there is only one gaOr. Otherwise,
+    # in a future implementation if any gaOr objects have a length greater than
+    # 1, then they will need to be shortened to length 1 which is only possible
+    # if each expression within that gaOr shares the same dimension and the
+    # expression operators and operands can be combined either as a match regex
+    # or a match list.
+    
+    # Check that all contained gaOr objects in the list have a length of 1
+    assert_that(all(sapply(from, length) == 1) | length(from) == 1)
+    
+    # Break apart the AND expression into OR expressions
+    # then break apart each OR expression into single
+    # expressions. Concatenate the single expressions
+    # back up the chain. Then convert array into a list of
+    # expressions to use for a new OR expression.
+    
+    new(to, as.list(do.call(c, do.call(c, from@.Data))))
+  }
+)
+
+# Coercing to andExpr
+setAs(from = "orExpr", to = "andExpr", def = simpleCoerceToList)
+
+setAs(from = ".expr", to = "andExpr", def = function(from, to) {
+  new(to, list(
+    as(from, "orExpr")
+  ))
+})
+
 # Coercion to .filter subclasses
 
 setAs(from = "andExpr", to = ".tableFilter", def = function(from) {
@@ -388,22 +438,7 @@ setAs(from = ".expr", to = "rtFilter", def = coerceToAndFirst)
 setAs(from = ".expr", to = ".tableFilter", def = coerceToAndFirst)
 
 setAs(from = "gaDynSegment", to = "gaFilter", def = simpleCoerceData)
-
-# Coercing to gaDynSegment
-
-setAs(from = "gaFilter", to = "gaDynSegment", def = simpleCoerceData)
-
-setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
-  as(as(from, "andExpr"), to)
-})
-
-setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
-  new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
-})
-
-setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
-  as(as(from, "andExpr"), to)
-})
+setAs(from = "gaDynSegment", to = ".tableFilter", def = simpleCoerceData)
 
 # Coercion to custom segment classes
 
@@ -431,6 +466,22 @@ setAs(from = "numeric", to = "gaSegmentId", def = function(from, to) {
 
 setAs(from = "gaUserSegment", to = "gaSegmentId", def = function(from, to) {
   new(to, GaSegment(from))
+})
+
+# Coercing to gaDynSegment
+
+setAs(from = "gaFilter", to = "gaDynSegment", def = simpleCoerceData)
+
+setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
+  as(as(from, "andExpr"), to)
+})
+
+setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
+  new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
+})
+
+setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
+  as(as(from, "andExpr"), to)
 })
 
 # Coercion to numeric
