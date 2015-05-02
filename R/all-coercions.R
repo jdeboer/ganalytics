@@ -193,10 +193,37 @@ setAs(from = ".expr", to = ".operand",
         from@operand
       },
       replace = function(from, value) {
-        from@operand <- value
+        from@operand <- as(value, ".operand")
         validObject(from)
         from
       })
+
+
+compileOperand <- function(from) {
+  unEscapedOperand <- as(as(from, ".operand"), "character")
+  operator <- as(as(from, ".operator"), "character")
+  compiledOperand <- gsub(
+    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
+    replacement = "\\\\\\1",
+    x = unEscapedOperand
+  )
+  if (operator == "[]") {
+    compiledOperand <- paste0(compiledOperand, collapse = "|")
+  } else if (from@operator == "<>") {
+    compiledOperand <- paste0(compiledOperand, collapse = "_")
+  }
+  compiledOperand
+}
+
+# Need to consider escaping of the following characters in the operand:\|,;_
+parseOperand <- function(operand, operator) {
+  if (operator == "[]") {
+    operand <- str_split(operand, "\\|")[[1]]
+  } else if (operator == "<>") {
+    operand <- str_split_fixed(operand, "_", 2)[1,]
+  }
+  operand <- gsub("\\\\", "\\", operand)
+}
 
 # Coercing to character
 setAs(from = ".metOperand", to = "character",
@@ -350,30 +377,6 @@ setAs(from = "character", to = ".expr", def = function(from) {
   Expr(var, operator, parseOperand(operand, operator))
 })
 
-compileOperand <- function(from) {
-  operand <- gsub(
-    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
-    replacement = "\\\\\\1",
-    x = from@operand
-  )
-  if (from@operator == "[]") {
-    operand <- paste0(operand, collapse = "|")
-  } else if (from@operator == "<>") {
-    operand <- paste0(operand, collapse = "_")
-  }
-  operand
-}
-
-# Need to consider escaping of the following characters in the operand:\|,;_
-parseOperand <- function(operand, operator) {
-  if (operator == "[]") {
-    operand <- str_split(operand, "\\|")[[1]]
-  } else if (operator == "<>") {
-    operand <- str_split_fixed(operand, "_", 2)[1,]
-  }
-  operand <- gsub("\\\\", "\\", operand)
-}
-
 # Coercing to orExpr
 setAs(from = ".expr", to = "orExpr", def = simpleCoerceToList)
 
@@ -440,6 +443,17 @@ setAs(from = ".expr", to = ".tableFilter", def = coerceToAndFirst)
 setAs(from = "gaDynSegment", to = "gaFilter", def = simpleCoerceData)
 setAs(from = "gaDynSegment", to = ".tableFilter", def = simpleCoerceData)
 
+setAs(from = ".query", to = ".tableFilter",
+  def = function(from, to){
+    from@filters
+  },
+  replace = function(from, value) {
+    from@filters <- as(value, ".tableFilter")
+    validObject(from)
+    from
+  }
+)
+
 # Coercion to custom segment classes
 
 setAs(from = ".compoundExpr", to = "gaSequenceCondition", def = function(from, to) {
@@ -501,6 +515,49 @@ setAs(
   replace = function(from, value) {
     initialize(from, as.character(value))
   }
+)
+
+setAs(from = "gaQuery", to = ".gaSegment",
+  def = function(from) {
+    from@segment
+  },
+  replace = function(from, value) {
+    from@segment <- as(value, ".gaSegment") # Need to define coercions to .gaSegment from char and numeric
+    validObject(from)
+    from
+  }
+)
+setAs(from = ".query", to = ".dimensions",
+  def = function(from, to) {
+    from@dimensions
+  },
+  replace = function(from, value) {
+    from@dimensions <- as(value, ".dimensions")
+    validObject(from)
+    from
+  }
+)
+
+setAs(from = ".query", to = ".metrics",
+      def = function(from, to) {
+        from@metrics
+      },
+      replace = function(from, value) {
+        from@metrics <- as(value, ".metrics")
+        validObject(from)
+        from
+      }
+)
+
+setAs(from = ".query", to = ".sortBy",
+      def = function(from, to) {
+        from@sortBy
+      },
+      replace = function(from, value) {
+        from@sortBy <- as(value, ".sortBy")
+        validObject(from)
+        from
+      }
 )
 
 setAs(from = "list", to = ".gaVarList", def = function(from) {
@@ -621,6 +678,28 @@ setAs(from = "character", to = "rtSortBy", def = function(from, to) {
 # Coercion to viewId
 setAs(from = "numeric", to = "viewId", def = simpleCoerceData)
 setAs(from = "character", to = "viewId", def = simpleCoerceData)
+setAs(from = ".query", to = "viewId",
+  def = function(from, to) {
+    from@viewId
+  },
+  replace = function(from, value) {
+    from@viewId <- as(value, "viewId")
+    validObject(from)
+    from
+  }
+)
+
+# Coercion to dateRange
+setAs(from = ".query", to = "dateRange",
+  def = function(from, to) {
+    from@dateRange
+  },
+  replace = function(from, value) {
+    from@dateRange <- as(value, "dateRange")
+    validObject(from)
+    from
+  }
+)
 
 # Coercion to matrix
 setAs(
@@ -633,8 +712,8 @@ setAs(
         X = GaView(from),
         FUN = function(viewId) {
           data.frame(
-            startDate = StartDate(from),
-            endDate = EndDate(from),
+            startDate = startDate,
+            endDate = endDate,
             viewId = viewId,
             stringsAsFactors = FALSE
           )
@@ -643,24 +722,28 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId) {
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
+        segment <- as(from, ".gaSegment")
         c(
           "ids" = as(GaView(viewId), "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
-          "metrics" = as(GaMetrics(from), "character"),
-          "dimensions" = if(length(GaDimensions(from)) >= 1) {
-            as(GaDimensions(from), "character")
+          "metrics" = as(as(from, ".metrics"), "character"),
+          "dimensions" = if(length(dimensions) >= 1) {
+            as(dimensions, "character")
           },
-          "sort" = if(length(GaSortBy(from)) >= 1) {
-            as(GaSortBy(from), "character")
+          "sort" = if(length(sortBy) >= 1) {
+            as(sortBy, "character")
           },
-          "filters" = if(length(GaFilter(from)) >= 1) {
-            as(GaFilter(from), "character")
+          "filters" = if(length(tableFilter) >= 1) {
+            as(tableFilter, "character")
           },
-          "segment" = if(length(GaSegment(from)) >= 1) {
-            as(GaSegment(from), "character")
+          "segment" = if(length(segment) >= 1) {
+            as(segment, "character")
           },
-          "samplingLevel" = as(SamplingLevel(from), "character")
+          "samplingLevel" = as(from@samplingLevel, "character")
         )
       },
       viewsDatesSegments$startDate,
@@ -697,7 +780,7 @@ setAs(
           "ids" = as(GaView(viewId), "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
-          "metrics" = as(McfMetrics(from), "character"),
+          "metrics" = as(Metrics(from), "character"),
           "dimensions" = if(length(dimensions) >= 1) {
             as(dimensions, "character")
           },

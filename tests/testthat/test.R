@@ -445,14 +445,23 @@ test_that("MCF and RT expressions can be created with dimensions or metrics", {
 
 test_that("MCF and RT queries can be constructed", {
   as(McfQuery(view = 0), "matrix")
-  RtQuery(view = 0)
+  as(RtQuery(view = 0), "matrix")
 })
 
 context("Generalised functions can be used across all types of queries")
 
 test_that("Expr function can used to create GA, MCF and RT expressions", {
-  Expr("ga:source", "==", "google")
-  Expr("mcf:source", "==", "google")
-  Expr("rt:source", "==", "google")
+  expect_equal(
+    as(Expr("ga:source", "==", "google"), "character"),
+    "ga:source==google"
+  )
+  expect_equal(
+    as(Expr("mcf:source", "==", "google"), "character"),
+    "mcf:source==google"
+  )
+  expect_equal(
+    as(Expr("rt:source", "==", "google"), "character"),
+    "rt:source==google"
+  )
 })
 
