@@ -49,7 +49,7 @@ GaQuery <- function(
       metrics = as(metrics, "gaMetrics"),
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
-      filters = GaFilter(filters),
+      filters = as(filters, "gaFilter"),
       segment = GaSegment(segment),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
@@ -85,7 +85,7 @@ McfQuery <- function(
       metrics = as(metrics, "mcfMetrics"),
       dimensions = as(dimensions, "mcfDimensions"),
       sortBy = as(sortBy, "mcfSortBy"),
-      filters = McfFilter(filters),
+      filters = as(filters, "mcfFilter"),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds
@@ -113,7 +113,7 @@ RtQuery <- function(
       metrics = as(metrics, "rtMetrics"),
       dimensions = as(dimensions, "rtDimensions"),
       sortBy = as(sortBy, "rtSortBy"),
-      filters = RtFilter(filters),
+      filters = as(filters, "rtFilter"),
       maxResults = maxResults,
       creds = creds
   )
@@ -154,7 +154,7 @@ modify_query <- function(
     SortBy(query) <- sort_by
   }
   if (!is.na(filters)) {
-    GaFilter(query) <- filters
+    TableFilter(query) <- filters
   }
   if (!is.na(segment)) {
     GaSegment(query) <- segment

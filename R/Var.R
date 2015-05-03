@@ -139,6 +139,15 @@ setMethod(
 
 setMethod(
   f = "Metrics",
+  signature = "NULL",
+  definition = function(.Object) {
+    vars <- ArgList(.Object, ...)
+    new(".metrics", vars)
+  }
+)
+
+setMethod(
+  f = "Metrics",
   signature = ".metrics",
   definition = function(.Object, ...) {
     vars <- ArgList(.Object, ...)
@@ -164,66 +173,6 @@ setMethod(
   }
 )
 
-
-setMethod(
-  f = "GaMetrics",
-  signature = "character",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
-    as(vars, "gaMetrics")
-  }
-)
-
-
-setMethod(
-  f = "McfMetrics",
-  signature = "character",
-  definition = function(.Object, ...) {
-    vars <- unique(
-      lapply(
-        X = ArgList(.Object, ...),
-        FUN = function(x) {
-          McfVar(x)
-        }
-      )
-    )
-    new(Class = "mcfMetrics", vars)
-  }
-)
-
-setMethod(
-  f = "McfMetrics",
-  signature = "list",
-  definition = function(.Object) {
-    McfMetrics(as.character(.Object))
-  }
-)
-
-
-setMethod(
-  f = "RtMetrics",
-  signature = "character",
-  definition = function(.Object, ...) {
-    vars <- unique(
-      lapply(
-        X = ArgList(.Object, ...),
-        FUN = function(x) {
-          RtVar(x)
-        }
-      )
-    )
-    new(Class = "rtMetrics", vars)
-  }
-)
-
-setMethod(
-  f = "RtMetrics",
-  signature = "list",
-  definition = function(.Object) {
-    RtMetrics(as.character(.Object))
-  }
-)
-
 setMethod(
   f = "Metrics",
   signature = ".query",
@@ -236,47 +185,19 @@ setMethod(
 
 setMethod(
   f = "Dimensions",
-  signature = ".dimensions",
+  signature = "NULL",
   definition = function(.Object) {
-    return(.Object)
+    vars <- ArgList(.Object, ...)
+    as(vars, ".dimensions")
   }
 )
 
 setMethod(
   f = "Dimensions",
-  signature = "character",
-  definition = function(.Object, ...) {
-    vars <- unique(
-      lapply(
-        X = ArgList(.Object, ...),
-        FUN = function(x) {
-          Var(x)
-        }
-      )
-    )
-    if (is(vars[[1]], ".gaVar")) {
-      new(Class = "gaDimensions", vars)
-    } else if (is(vars[[1]], ".mcfVar")) {
-      new(Class = "mcfDimensions", vars)
-    } else if (is(vars[[1]], ".rtVar")) {
-      new(Class = "rtDimensions", vars)
-    }
-  }
-)
-
-setMethod(
-  f = "Dimensions",
-  signature = "list",
-  definition = function(.Object, ...) {
-    Dimensions(as.character(.Object), ...)
-  }
-)
-
-setMethod(
-  f = "GaDimensions",
   signature = ".dimensions",
   definition = function(.Object) {
-    return(.Object)
+    vars <- ArgList(.Object, ...)
+    as(vars, ".dimensions")
   }
 )
 
@@ -290,41 +211,11 @@ setMethod(
 )
 
 setMethod(
-  f = "GaDimensions",
+  f = "Dimensions",
   signature = "list",
   definition = function(.Object, ...) {
-    GaDimensions(as.character(.Object), ...)
-  }
-)
-
-
-setMethod(
-  f = "Metrics",
-  signature = ".query",
-  definition = function(.Object) {
-    .Object@metrics
-  }
-)
-
-
-setMethod(
-  f = "GaMetrics<-",
-  signature = c("gaQuery", "ANY"),
-  definition = function(.Object, value) {
-    .Object@metrics <- GaMetrics(value)
-    queryVars <- union(GaDimensions(.Object), GaMetrics(.Object))
-    curSort <- GaSortBy(.Object)
-    newSortVars <- intersect(curSort, GaSortBy(queryVars))
-    GaSortBy(.Object) <- GaSortBy(
-      newSortVars,
-      desc = if(!is.null(curSort)) {
-        curSort@desc[as.character(curSort) == as.character(newSortVars)]
-      } else {
-        logical(0)
-      }
-    )
-    validObject(.Object)
-    return(.Object)
+    vars <- ArgList(.Object, ...)
+    as(vars, ".dimensions")
   }
 )
 
@@ -346,12 +237,3 @@ GaMetrics <- Metrics
 #'@export GaMetrics<-
 `GaMetrics<-` <- Metrics
 
-
-
-setMethod(
-  f = "RtDimensions",
-  signature = "rtQuery",
-  definition = function(.Object) {
-    .Object@dimensions
-  }
-)

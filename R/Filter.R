@@ -22,7 +22,15 @@ setMethod(
 )
 
 setMethod(
-  f = "GaFilter",
+  f = "TableFilter",
+  signature = ".expr",
+  definition = function(.Object) {
+    as(.Object, ".tableFilter")
+  }
+)
+
+setMethod(
+  f = "TableFilter",
   signature = "gaDynSegment",
   definition = function(.Object) {
     as(.Object, ".tableFilter")
@@ -30,18 +38,11 @@ setMethod(
 )
 
 setMethod(
-  f = "GaFilter",
-  signature = "NULL",
-  definition = function(.Object) {
-    new("gaFilter", list())
-  }
-)
-
-setMethod(
-  f = "McfFilter",
-  signature = "NULL",
-  definition = function(.Object) {
-    new("mcfFilter", list())
+  f = "TableFilter<-",
+  signature = c(".tableFilter", "andExpr"),
+  definition = function(.Object, value) {
+    as(.Object, "andExpr") <- value
+    .Object
   }
 )
 
@@ -54,18 +55,19 @@ setMethod(
 # )
 
 setMethod(
-  f = "RtFilter",
-  signature = "NULL",
+  f = "TableFilter",
+  signature = ".query",
   definition = function(.Object) {
-    new("rtFilter", list())
+    .Object@filters
   }
 )
 
 setMethod(
-  f = "GaFilter<-",
-  signature = c("gaFilter", "andExpr"),
+  f = "TableFilter<-",
+  signature = c(".query", "ANY"),
   definition = function(.Object, value) {
-    as(.Object, "andExpr") <- value
+    .Object@filters <- TableFilter(value)
+    validObject(.Object)
     return(.Object)
   }
 )
@@ -74,31 +76,3 @@ setMethod(
 #' @export GaFilter
 GaFilter <- TableFilter
 `GaFilter<-` <- `TableFilter<-`
-
-setMethod(
-  f = "GaFilter<-",
-  signature = c("gaFilter", "ANY"),
-  definition = function(.Object, value) {
-    as(value, "gaFilter")
-  }
-)
-
-
-setMethod(
-  f = "GaFilter",
-  signature = "gaQuery",
-  definition = function(.Object) {
-    .Object@filters
-  }
-)
-
-setMethod(
-  f = "GaFilter<-",
-  signature = c("gaQuery", "ANY"),
-  definition = function(.Object, value) {
-    .Object@filters <- GaFilter(value)
-    validObject(.Object)
-    return(.Object)
-  }
-)
-
