@@ -154,7 +154,7 @@ modify_query <- function(
     GaSortBy(query) <- sort_by
   }
   if (!is.na(filters)) {
-    GaFilters(query) <- filters
+    GaFilter(query) <- filters
   }
   if (!is.na(segment)) {
     GaSegment(query) <- segment
