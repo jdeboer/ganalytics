@@ -30,7 +30,7 @@ setMethod(
   f = "Var",
   signature = ".expr",
   definition = function(.Object) {
-    GaVar(.Object@var)
+    as(.Object, ".var")
   }
 )
 

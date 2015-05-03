@@ -11,7 +11,7 @@ NULL
 
 setMethod(
   f = "Expr",
-  signature = c("character", "character", "character"),
+  signature = c("character", "character", "ANY"),
   definition = function(.Object, operator, operand, metricScope) {
     var <- Var(.Object)
     if (is(var, ".gaVar")) {

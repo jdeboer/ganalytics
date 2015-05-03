@@ -470,11 +470,52 @@ test_that("Expr function can used to create GA, MCF and RT expressions", {
     "rt:source==google"
   )
   expect_equal(
-    as(TableFilter(
+    as(
       Expr("mcf:source", "!=", "facebook.com") &
-        Expr("mcf:medium", "==", "referral")
-    ), "character"),
-    "mcf:source!=facebook.com;mcf:medium==referral"
+        (
+          Expr("mcf:medium", "==", "referral") |
+            Expr("mcf:campaignName", "=@", "promo")
+          ),
+      "character"),
+    "mcf:source!=facebook.com;mcf:medium==referral,mcf:campaignName=@promo"
+  )
+  expect_is(
+    Metrics("ga:sessions", "ga:pageviews", "totalevents"),
+    "gaMetrics"
+  )
+  expect_is(
+    Dimensions("mcf:source", "mcf:campaignName", "mcf:medium"),
+    "mcfDimensions"
+  )
+  expect_error(
+    Metrics("ga:pageviews", "mcf:totalConversions", "rt:activeUsers")
+  )
+  expect_is(
+    SortBy("rt:activeUsers", "rt:totalEvents", "rt:city"),
+    "rtSortBy"
+  )
+  expect_error(
+    SortBy("rt:activeUsers", "ga:totalEvents", "mcf:medium")
+  )
+  expect_equal(
+    !Expr("rt:activeUsers", "<=", 10),
+    Expr("rt:activeUsers", ">", 10)
+  )
+  expect_is(
+    TableFilter(Expr("mcf:totalConversions", ">", 10)),
+    "mcfFilter"
+  )
+  expect_equal(
+    as(Operand(Expr("rt:pagePath", "=~", "^/products/")), "character"),
+    "^/products/"
+  )
+  expect_equal(
+    as(Var(Expr("mcf:source", "=~", "\\.au$")), "character"),
+    "mcf:source"
+  )
+  expect_equal(
+    as(Operator(Expr("rt:totalEvents", ">", "10")), "character"),
+    ">"
   )
 })
 
