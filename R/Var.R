@@ -13,7 +13,7 @@ setMethod(
   f = "Var",
   signature = "character",
   definition = function(.Object) {
-    as(.Object, ".var")
+    as(.Object, ".var", strict = FALSE)
   }
 )
 
@@ -38,7 +38,7 @@ setMethod(
   f = "Var<-",
   signature = c(".expr", "character"),
   definition = function(.Object, value) {
-    GaVar(.Object@var) <- value
+    as(.Object, ".var") <- value
     .Object
   }
 )
@@ -140,7 +140,7 @@ setMethod(
 setMethod(
   f = "Metrics",
   signature = "NULL",
-  definition = function(.Object) {
+  definition = function(.Object, ...) {
     vars <- ArgList(.Object, ...)
     new(".metrics", vars)
   }
@@ -181,12 +181,21 @@ setMethod(
   }
 )
 
+setMethod(
+  f = "Metrics<-",
+  signature = c(".query", "ANY"),
+  definition = function(.Object, value) {
+    as(.Object, ".metrics") <- value
+    .Object
+  }
+)
+
 # -- GaDimensions ----
 
 setMethod(
   f = "Dimensions",
   signature = "NULL",
-  definition = function(.Object) {
+  definition = function(.Object, ...) {
     vars <- ArgList(.Object, ...)
     as(vars, ".dimensions")
   }
@@ -195,7 +204,7 @@ setMethod(
 setMethod(
   f = "Dimensions",
   signature = ".dimensions",
-  definition = function(.Object) {
+  definition = function(.Object, ...) {
     vars <- ArgList(.Object, ...)
     as(vars, ".dimensions")
   }
@@ -224,6 +233,15 @@ setMethod(
   signature = ".query",
   definition = function(.Object) {
     as(.Object, ".dimensions")
+  }
+)
+
+setMethod(
+  f = "Dimensions<-",
+  signature = c(".query", "ANY"),
+  definition = function(.Object, value) {
+    as(.Object, ".dimensions") <- value
+    .Object
   }
 )
 

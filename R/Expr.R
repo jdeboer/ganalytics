@@ -20,7 +20,7 @@ setMethod(
       McfExpr(.Object, operator, operand)
     } else if (is(var, ".rtVar")) {
       RtExpr(.Object, operator, operand)
-    }
+    } else stop("Variable type not recognised for expressions.")
   }
 )
 

@@ -7,6 +7,22 @@ NULL
 
 setMethod(
   f = "TableFilter",
+  signature = ".query",
+  definition = function(.Object) {
+    as(.Object, ".tableFilter")
+  }
+)
+
+setMethod(
+  f = "TableFilter",
+  signature = "NULL",
+  definition = function(.Object) {
+    as(.Object, ".tableFilter")
+  }
+)
+
+setMethod(
+  f = "TableFilter",
   signature = ".tableFilter",
   definition = function(.Object) {
     return(.Object)
@@ -21,13 +37,13 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "TableFilter",
-  signature = ".expr",
-  definition = function(.Object) {
-    as(.Object, ".tableFilter")
-  }
-)
+# setMethod(
+#   f = "TableFilter",
+#   signature = ".expr",
+#   definition = function(.Object) {
+#     as(.Object, ".tableFilter")
+#   }
+# )
 
 setMethod(
   f = "TableFilter",
@@ -46,29 +62,13 @@ setMethod(
   }
 )
 
-# setMethod(
-#   f = "TableFilter<-",
-#   signature = c(".tableFilter", "ANY"),
-#   definition = function(.Object, value) {
-#     as(value, ".tableFilter")
-#   }
-# )
-
-setMethod(
-  f = "TableFilter",
-  signature = ".query",
-  definition = function(.Object) {
-    .Object@filters
-  }
-)
-
 setMethod(
   f = "TableFilter<-",
   signature = c(".query", "ANY"),
   definition = function(.Object, value) {
-    .Object@filters <- TableFilter(value)
+    as(.Object, ".tableFilter") <- value
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 

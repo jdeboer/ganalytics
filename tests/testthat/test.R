@@ -475,6 +475,20 @@ test_that("MCF and RT queries can be constructed", {
 
 context("Generalised functions can be used across all types of queries")
 
+test_that("! can be used instead of Not", {
+  expect_equal(
+    !Expr("rt:activeUsers", "<=", 10),
+    Expr("rt:activeUsers", ">", 10)
+  )
+})
+
+test_that("TableFilter can be used instead of deprecated GaFilter function", {
+  expect_is(
+    TableFilter(Expr("mcf:totalConversions", ">", 10)),
+    "mcfFilter"
+  )
+})
+
 test_that("Expr function can used to create GA, MCF and RT expressions", {
   expect_equal(
     as(Expr("ga:source", "==", "google"), "character"),
@@ -498,6 +512,26 @@ test_that("Expr function can used to create GA, MCF and RT expressions", {
       "character"),
     "mcf:source!=facebook.com;mcf:medium==referral,mcf:campaignName=@promo"
   )
+})
+
+test_that("Variable, Operator and Operand compoents of an expression can be extracted" , {
+  expect_equal(
+    as(Operand(Expr("rt:pagePath", "=~", "^/products/")), "character"),
+    "^/products/"
+  )
+  expect_equal(
+    as(Var(Expr("mcf:source", "=~", "\\.au$")), "character"),
+    "mcf:source"
+  )
+  expect_equal(
+    as(Operator(Expr("rt:totalEvents", ">", "10")), "character"),
+    ">"
+  )
+})
+
+context("New varList methods work as expected")
+
+test_that("Only valid variable lists can be defined.", {
   expect_is(
     Metrics("ga:sessions", "ga:pageviews", "totalevents"),
     "gaMetrics"
@@ -516,25 +550,60 @@ test_that("Expr function can used to create GA, MCF and RT expressions", {
   expect_error(
     SortBy("rt:activeUsers", "ga:totalEvents", "mcf:medium")
   )
-  expect_equal(
-    !Expr("rt:activeUsers", "<=", 10),
-    Expr("rt:activeUsers", ">", 10)
+})
+
+context("Replace methods work as expected.")
+
+test_that("Operator<- replaces the operator of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Operator(expr) <- "=@"
+  expect_identical(expr, Expr("ga:source", "=@", "google.com"))
+})
+
+test_that("Operand<- replaces the operand of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Operand(expr) <- "google.com.au"
+  expect_identical(expr, Expr("ga:source", "==", "google.com.au"))
+})
+
+test_that("Var<- replaces the variable of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Var(expr) <- "rt:source"
+  expect_identical(expr, Expr("rt:source", "==", "google.com"))
+})
+
+test_that("TableFilter<- replaces the table filter of a query", {
+  query <- GaQuery(view = 0)
+  table_filter <- TableFilter(
+    Expr("ga:source", "=", "google.com") &
+    Expr("ga:deviceCategory", "=", "mobile")
   )
-  expect_is(
-    TableFilter(Expr("mcf:totalConversions", ">", 10)),
-    "mcfFilter"
-  )
-  expect_equal(
-    as(Operand(Expr("rt:pagePath", "=~", "^/products/")), "character"),
-    "^/products/"
-  )
-  expect_equal(
-    as(Var(Expr("mcf:source", "=~", "\\.au$")), "character"),
-    "mcf:source"
-  )
-  expect_equal(
-    as(Operator(Expr("rt:totalEvents", ">", "10")), "character"),
-    ">"
-  )
+  TableFilter(query) <- table_filter
+  expect_identical(TableFilter(query), table_filter)
+  TableFilter(query) <- NULL
+  expect_equivalent(TableFilter(query), TableFilter(NULL))
+})
+
+test_that("GaSegment<- replaces the segment of a query", {
+  query <- GaQuery(view = 0)
+  segment <- 
+    Expr("ga:source", "=", "google.com") &
+      Expr("ga:deviceCategory", "=", "mobile")
+  GaSegment(query) <- segment
+  expect_identical(GaSegment(query), GaSegment(segment))
+})
+
+test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {
+  query <- GaQuery(view = 0)
+  Dimensions(query) <- NULL
+  expect_equivalent(Dimensions(query), Dimensions(NULL))
+  Dimensions(query) <- c("source", "medium")
+  expect_identical(Dimensions(query), Dimensions(c("source", "medium")))
+  Metrics(query) <- c("pageviews", "sessions")
+  expect_equivalent(Metrics(query), Metrics(c("pageviews", "sessions")))
+  SortBy(query) <- c("source", "sessions")
+  expect_equivalent(SortBy(query), SortBy(c("source", "sessions")))
+  SortBy(query) <- NULL
+  expect_is(SortBy(query), ".sortBy")
 })
 

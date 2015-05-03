@@ -159,10 +159,9 @@ setAs(from = ".expr", to = ".var",
     from@var
   },
   replace = function(from, value) {
-    from@var <- value
-    validObject(from)
-    from
-  })
+    Expr(value, from@operator, from@operand)
+  }
+)
 
 # Coercing to .operator subclasses
 setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
@@ -173,14 +172,15 @@ setAs(from = "character", to = "rtDimOperator", def = simpleCoerce)
 setAs(from = "character", to = "rtMetOperator", def = simpleCoerce)
 
 setAs(from = ".expr", to = ".operator",
-      def = function(from, to) {
-        from@operator
-      },
-      replace = function(from, value) {
-        from@operator <- value
-        validObject(from)
-        from
-      })
+  def = function(from, to) {
+    from@operator
+  },
+  replace = function(from, value) {
+    use_class <- class(from@operator)
+    from@operator <- as(value, use_class)
+    validObject(from)
+    from
+  })
 
 # Coercing to .operand subclasses
 setAs(from = "character", to = "gaDimOperand", def = simpleCoerce)
@@ -205,16 +205,27 @@ setAs(from = "logical", to = "rtDimOperand", def = coerceLogicalOperand)
 setAs(from = "numeric", to = "rtMetOperand", def = simpleCoerce)
 setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
 
+setAs(from = "character", to = ".dimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = ".metOperand", def = simpleCoerce)
+
+setAs(from = "character", to = ".operand", def = function(from){
+  as(from, ".dimOperand")
+})
+
+setAs(from = "numeric", to = ".operand", def = function(from){
+  as(from, ".metOperand")
+})
+
 setAs(from = ".expr", to = ".operand",
   def = function(from, to) {
     from@operand
   },
   replace = function(from, value) {
-    from@operand <- as(value, ".operand")
+    use_class <- class(from@operand)
+    from@operand <- as(value, use_class)
     validObject(from)
     from
   })
-
 
 compileOperand <- function(from) {
   unEscapedOperand <- as(as(from, ".operand"), "character")
@@ -453,6 +464,8 @@ setAs(from = "NULL", to = "gaFilter", def = coerceViaList)
 setAs(from = "NULL", to = "mcfFilter", def = coerceViaList)
 setAs(from = "NULL", to = "rtFilter", def = coerceViaList)
 
+setAs(from = "NULL", to = ".tableFilter", def = coerceViaList)
+
 setAs(from = "andExpr", to = "gaFilter", def = simpleCoerce)
 setAs(from = "andExpr", to = "mcfFilter", def = simpleCoerce)
 setAs(from = "andExpr", to = "rtFilter", def = simpleCoerce)
@@ -478,7 +491,8 @@ setAs(from = ".query", to = ".tableFilter",
     from@filters
   },
   replace = function(from, value) {
-    from@filters <- as(value, ".tableFilter")
+    use_class <- class(from@filters)
+    from@filters <- as(value, use_class)
     validObject(from)
     from
   }
@@ -561,24 +575,32 @@ setAs(from = "gaQuery", to = ".gaSegment",
 # Coercion to .varList
 setAs(from = "list", to = ".varList", def = function(from) {
   vars <- unique(lapply(from, as, Class = ".var"))
-  if (is(vars[[1]], ".gaVar")) {
-    as(vars, ".gaVarList")
-  } else if (is(vars[[1]], ".mcfVar")) {
-    as(vars, ".mcfVarList")
-  } else if (is(vars[[1]], ".rtVar")) {
-    as(vars, ".rtVarList")
-  } else stop("Cannot determine type of vars in list")
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, ".gaVarList")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, ".mcfVarList")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, ".rtVarList")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
 })
 
-setAs(from = "list", to = ".dimensions", def = function(from) {
+setAs(from = "list", to = ".dimensions", def = function(from, to) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".dimVar")}))
-  if (is(vars[[1]], ".gaVar")) {
-    as(vars, "gaDimensions")
-  } else if (is(vars[[1]], ".mcfVar")) {
-    as(vars, "mcfDimensions")
-  } else if (is(vars[[1]], ".rtVar")) {
-    as(vars, "rtDimensions")
-  } else stop("Cannot determine type of vars in list")
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaDimensions")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfDimensions")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtDimensions")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
 })
 
 setAs(from = ".query", to = ".dimensions",
@@ -586,7 +608,8 @@ setAs(from = ".query", to = ".dimensions",
     from@dimensions
   },
   replace = function(from, value) {
-    from@dimensions <- as(value, ".dimensions")
+    use_class <- class(from@dimensions)
+    from@dimensions <- as(value, use_class)
     validObject(from)
     from
   }
@@ -594,46 +617,56 @@ setAs(from = ".query", to = ".dimensions",
 
 setAs(from = "list", to = ".metrics", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".metVar")}))
-  if (is(vars[[1]], ".gaVar")) {
-    as(vars, "gaMetrics")
-  } else if (is(vars[[1]], ".mcfVar")) {
-    as(vars, "mcfMetrics")
-  } else if (is(vars[[1]], ".rtVar")) {
-    as(vars, "rtMetrics")
-  } else stop("Cannot determine type of vars in list")
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaMetrics")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfMetrics")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtMetrics")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
 })
 
 setAs(from = ".query", to = ".metrics",
-      def = function(from, to) {
-        from@metrics
-      },
-      replace = function(from, value) {
-        from@metrics <- as(value, ".metrics")
-        validObject(from)
-        from
-      }
+  def = function(from, to) {
+    from@metrics
+  },
+  replace = function(from, value) {
+    use_class <- class(from@metrics)
+    from@metrics <- as(value, use_class)
+    validObject(from)
+    from
+  }
 )
 
 setAs(from = "list", to = ".sortBy", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".var")}))
-  if (is(vars[[1]], ".gaVar")) {
-    as(vars, "gaSortBy")
-  } else if (is(vars[[1]], ".mcfVar")) {
-    as(vars, "mcfSortBy")
-  } else if (is(vars[[1]], ".rtVar")) {
-    as(vars, "rtSortBy")
-  } else stop("Cannot determine type of vars in list")
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaSortBy")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfSortBy")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtSortBy")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
 })
 
 setAs(from = ".query", to = ".sortBy",
-      def = function(from, to) {
-        from@sortBy
-      },
-      replace = function(from, value) {
-        from@sortBy <- as(value, ".sortBy")
-        validObject(from)
-        from
-      }
+  def = function(from, to) {
+    from@sortBy
+  },
+  replace = function(from, value) {
+    use_class <- class(from@sortBy)
+    from@sortBy <- as(value, use_class)
+    validObject(from)
+    from
+  }
 )
 
 setAs(from = "list", to = ".gaVarList", def = function(from) {
@@ -724,6 +757,12 @@ setAs(from = "character", to = "rtDimensions", def = coerceViaList)
 setAs(from = "character", to = "rtMetrics", def = coerceViaList)
 setAs(from = "character", to = "rtSortBy", def = coerceViaList)
 
+setAs(from = "character", to = ".dimensions", def = coerceViaList)
+setAs(from = "character", to = ".metrics", def = coerceViaList)
+
+setAs(from = "NULL", to = ".dimensions", def = coerceViaList)
+setAs(from = "NULL", to = ".metrics", def = coerceViaList)
+setAs(from = "NULL", to = ".sortBy", def = coerceViaList)
 setAs(from = "NULL", to = "gaDimensions", def = coerceViaList)
 setAs(from = "NULL", to = "gaMetrics", def = coerceViaList)
 setAs(from = "NULL", to = "gaSortBy", def = coerceViaList)

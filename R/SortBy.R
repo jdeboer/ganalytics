@@ -76,12 +76,8 @@ setMethod(
   f = "SortBy<-",
   signature = c(".query", "ANY"),
   definition = function(.Object, value) {
-    if(length(value) < 1) {
-      value <- NULL
-    }
-    .Object@sortBy <- SortBy(value)
-    validObject(.Object)
-    return(.Object)
+    as(.Object, ".sortBy") <- value
+    .Object
   }
 )
 
