@@ -185,7 +185,7 @@ setMethod(
   definition = function(.Object, value) {
     .Object@maxResults <- as.numeric(value)
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 
@@ -203,7 +203,7 @@ setMethod(
   definition = function(.Object, value) {
     .Object@samplingLevel <- as.character(value)
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 

@@ -12,7 +12,7 @@ setMethod(
   f = "SortBy",
   signature = ".sortBy",
   definition = function(.Object) {
-    return(.Object)
+    .Object
   }
 )
 
@@ -60,14 +60,14 @@ setMethod(
   signature = c(".query", "ANY"),
   definition = function(.Object, value) {
     if (missing(value)) {
-      .Object@sortBy
+      as(.Object, ".sortBy")
     } else {
       if(length(value) < 1) {
         value <- NULL
       }
-      .Object@sortBy <- SortBy(value)
+      as(.Object, ".sortBy") <- value
       validObject(.Object)
-      return(.Object)
+      .Object
     }
   }
 )
