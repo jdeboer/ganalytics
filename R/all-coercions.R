@@ -557,6 +557,30 @@ setAs(from = "gaQuery", to = ".gaSegment",
     from
   }
 )
+
+# Coercion to .varList
+setAs(from = "list", to = ".varList", def = function(from) {
+  vars <- unique(lapply(from, as, Class = ".var"))
+  if (is(vars[[1]], ".gaVar")) {
+    as(vars, ".gaVarList")
+  } else if (is(vars[[1]], ".mcfVar")) {
+    as(vars, ".mcfVarList")
+  } else if (is(vars[[1]], ".rtVar")) {
+    as(vars, ".rtVarList")
+  } else stop("Cannot determine type of vars in list")
+})
+
+setAs(from = "list", to = ".dimensions", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".dimVar")}))
+  if (is(vars[[1]], ".gaVar")) {
+    as(vars, "gaDimensions")
+  } else if (is(vars[[1]], ".mcfVar")) {
+    as(vars, "mcfDimensions")
+  } else if (is(vars[[1]], ".rtVar")) {
+    as(vars, "rtDimensions")
+  } else stop("Cannot determine type of vars in list")
+})
+
 setAs(from = ".query", to = ".dimensions",
   def = function(from, to) {
     from@dimensions
@@ -568,6 +592,17 @@ setAs(from = ".query", to = ".dimensions",
   }
 )
 
+setAs(from = "list", to = ".metrics", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".metVar")}))
+  if (is(vars[[1]], ".gaVar")) {
+    as(vars, "gaMetrics")
+  } else if (is(vars[[1]], ".mcfVar")) {
+    as(vars, "mcfMetrics")
+  } else if (is(vars[[1]], ".rtVar")) {
+    as(vars, "rtMetrics")
+  } else stop("Cannot determine type of vars in list")
+})
+
 setAs(from = ".query", to = ".metrics",
       def = function(from, to) {
         from@metrics
@@ -578,6 +613,17 @@ setAs(from = ".query", to = ".metrics",
         from
       }
 )
+
+setAs(from = "list", to = ".sortBy", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".var")}))
+  if (is(vars[[1]], ".gaVar")) {
+    as(vars, "gaSortBy")
+  } else if (is(vars[[1]], ".mcfVar")) {
+    as(vars, "mcfSortBy")
+  } else if (is(vars[[1]], ".rtVar")) {
+    as(vars, "rtSortBy")
+  } else stop("Cannot determine type of vars in list")
+})
 
 setAs(from = ".query", to = ".sortBy",
       def = function(from, to) {
@@ -876,6 +922,47 @@ setAs(
       viewsDates$startDate,
       viewsDates$endDate,
       viewsDates$viewId
+    )
+  }
+)
+
+setAs(
+  from = "rtQuery",
+  to = "matrix",
+  def = function(from) {
+    views <- do.call(
+      what = rbind,
+      args = lapply(
+        X = as(from, "viewId"),
+        FUN = function(viewId) {
+          data.frame(
+            viewId = viewId,
+            stringsAsFactors = FALSE
+          )
+        }
+      )
+    )
+    params <- mapply(
+      FUN = function(viewId) {
+        metrics <- as(from, ".metrics")
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
+        c(
+          "ids" = as(viewId, "character"),
+          "metrics" = as(metrics, "character"),
+          "dimensions" = if(length(dimensions) >= 1) {
+            as(dimensions, "character")
+          },
+          "sort" = if(length(sortBy) >= 1) {
+            as(sortBy, "character")
+          },
+          "filters" = if(length(tableFilter) >= 1) {
+            as(tableFilter, "character")
+          }
+        )
+      },
+      views$viewId
     )
   }
 )

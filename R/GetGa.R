@@ -37,6 +37,7 @@ setMethod("GetGaData", ".query", function(
     .fun = GaPaginate,
     maxRequestedRows = MaxResults(object),
     creds = creds,
+    queryClass = class(object),
     .progress = .progress
   )
   data <- ldply(
