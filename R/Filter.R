@@ -25,7 +25,7 @@ setMethod(
   f = "TableFilter",
   signature = ".tableFilter",
   definition = function(.Object) {
-    return(.Object)
+    .Object
   }
 )
 
@@ -36,14 +36,6 @@ setMethod(
     as(.Object, ".tableFilter")
   }
 )
-
-# setMethod(
-#   f = "TableFilter",
-#   signature = ".expr",
-#   definition = function(.Object) {
-#     as(.Object, ".tableFilter")
-#   }
-# )
 
 setMethod(
   f = "TableFilter",
@@ -67,7 +59,6 @@ setMethod(
   signature = c(".query", "ANY"),
   definition = function(.Object, value) {
     as(.Object, ".tableFilter") <- value
-    validObject(.Object)
     .Object
   }
 )

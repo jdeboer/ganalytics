@@ -795,6 +795,7 @@ setAs(from = "character", to = ".sortBy", def = function(from) {
   desc[grep("^\\+", varChars)] <- FALSE
   desc[grep("^\\-", varChars)] <- TRUE
   vars@desc <- desc
+  validObject(vars)
   vars
 })
 
