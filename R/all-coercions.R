@@ -791,7 +791,7 @@ setAs(from = "character", to = ".sortBy", def = function(from) {
     as(sub("^(\\+|\\-)","",x), ".var")
   })
   vars <- as(vars, ".sortBy")
-  desc <- logical()
+  desc <- logical(length(vars))
   desc[grep("^\\+", varChars)] <- FALSE
   desc[grep("^\\-", varChars)] <- TRUE
   vars@desc <- desc
