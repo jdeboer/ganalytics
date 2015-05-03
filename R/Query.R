@@ -46,9 +46,9 @@ GaQuery <- function(
         as.Date(startDate),
         as.Date(endDate)
       ),
-      metrics = GaMetrics(metrics),
-      dimensions = GaDimensions(dimensions),
-      sortBy = GaSortBy(sortBy),
+      metrics = as(metrics, "gaMetrics"),
+      dimensions = as(dimensions, "gaDimensions"),
+      sortBy = as(sortBy, "gaSortBy"),
       filters = GaFilter(filters),
       segment = GaSegment(segment),
       samplingLevel = samplingLevel,
@@ -82,9 +82,9 @@ McfQuery <- function(
         as.Date(startDate),
         as.Date(endDate)
       ),
-      metrics = McfMetrics(metrics),
-      dimensions = McfDimensions(dimensions),
-      sortBy = McfSortBy(sortBy),
+      metrics = as(metrics, "mcfMetrics"),
+      dimensions = as(dimensions, "mcfDimensions"),
+      sortBy = as(sortBy, "mcfSortBy"),
       filters = McfFilter(filters),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
@@ -110,9 +110,9 @@ RtQuery <- function(
   }
   new("rtQuery",
       viewId = GaView(view),
-      metrics = RtMetrics(metrics),
-      dimensions = RtDimensions(dimensions),
-      sortBy = RtSortBy(sortBy),
+      metrics = as(metrics, "rtMetrics"),
+      dimensions = as(dimensions, "rtDimensions"),
+      sortBy = as(sortBy, "rtSortBy"),
       filters = RtFilter(filters),
       maxResults = maxResults,
       creds = creds
@@ -151,7 +151,7 @@ modify_query <- function(
     Dimensions(query) <- dimensions
   }
   if (!is.na(sort_by)) {
-    GaSortBy(query) <- sort_by
+    SortBy(query) <- sort_by
   }
   if (!is.na(filters)) {
     GaFilter(query) <- filters

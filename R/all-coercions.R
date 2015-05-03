@@ -14,7 +14,7 @@ simpleCoerce <- function(from, to) {new(to, from)}
 simpleCoerceData <- function(from, to) {new(to, from@.Data)}
 simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
 simpleCoerceToList <- function(from, to) {new(to, list(from))}
-coerceViaList <- function(from, to) {new(to, as.list(from))}
+coerceViaList <- function(from, to) {as(as.list(from), to)}
 simpleReplace <- function(from, value) {initialize(from, value)}
 coerceLogicalOperand <- function(from, to){
   operand <- ifelse(from, yes = "Yes", no = "No")
@@ -650,7 +650,7 @@ setAs(from = "list", to = "mcfSortBy", def = function(from, to) {
 })
 
 setAs(from = "list", to = "rtDimensions", def = function(from, to) {
-  vars <- unique(lapply(from, function(var) {as(as.character(var), ".rtDimVar")}))
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "rtDimVar")}))
   new(to, vars)
 })
 
@@ -673,6 +673,16 @@ setAs(from = "character", to = "mcfSortBy", def = coerceViaList)
 setAs(from = "character", to = "rtDimensions", def = coerceViaList)
 setAs(from = "character", to = "rtMetrics", def = coerceViaList)
 setAs(from = "character", to = "rtSortBy", def = coerceViaList)
+
+setAs(from = "NULL", to = "gaDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "gaMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "gaSortBy", def = coerceViaList)
+setAs(from = "NULL", to = "mcfDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "mcfMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "mcfSortBy", def = coerceViaList)
+setAs(from = "NULL", to = "rtDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "rtMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "rtSortBy", def = coerceViaList)
 
 # Coercion to .sortBy subclasses
 

@@ -92,27 +92,3 @@ GaSortBy <- SortBy
 
 #'@export GaSortBy<-
 `GaSortBy<-` <- `SortBy<-`
-
-setMethod(
-  f = "GaSortBy",
-  signature = "NULL",
-  definition = function(.Object, ..., desc = logical(0)) {
-    new("gaSortBy", list(...), desc = desc)
-  }
-)
-
-setMethod(
-  f = "McfSortBy",
-  signature = "NULL",
-  definition = function(.Object, ..., desc = logical(0)) {
-    new("mcfSortBy", list(...), desc = desc)
-  }
-)
-
-setMethod(
-  f = "RtSortBy",
-  signature = "NULL",
-  definition = function(.Object, ..., desc = logical(0)) {
-    new("rtSortBy", list(...), desc = desc)
-  }
-)

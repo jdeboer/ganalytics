@@ -712,7 +712,7 @@ setClass(
 setClassUnion(".varList", c(".metrics", ".dimensions", ".sortBy"))
 
 setValidity(".varList", function(object) {
-  if (!all_inherit(object, ".var")) {
+  if (!all_inherit(object, ".var") & length(object@.Data) > 0) {
     "Must be a list containing objects of class .var"
   } else TRUE
 })
@@ -827,7 +827,8 @@ setClass(
   validity = function(object) {
     valid <- validate_that(
       length(object@maxResults) == 1,
-      object@maxResults >= 1
+      object@maxResults >= 1,
+      length(object@metrics) >= 1
     )
     if (valid == TRUE) {
       if (object@maxResults > kGaMaxRows) {
