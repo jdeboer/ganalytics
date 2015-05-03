@@ -156,42 +156,31 @@ setMethod(
 
 setMethod(
   f = "initialize",
-  signature = "gaDimExpr",
+  signature = ".dimExpr",
   definition = function(.Object, var, operator, operand) {
     .Object@var <- var
     .Object@operator <- operator
     if(operator %in% c("!=", "==", "[]", "<>")) {
       if(var %in% kGaDimTypes$bools) {
-        yesNo <- c("No" = FALSE, "Yes" = TRUE)
-        index <- pmatch(x = tolower(operand), table = tolower(names(yesNo)))
-        if (is.na(index)) {
-          index <- which(operand == yesNo)
-          if (length(index) == 1) {
-            operand <- GaOperand(names(yesNo)[index])
-          } else {
-            stop(paste(var, "Invalid operand", operand, sep = ": "))
-          }
-        } else {
-          operand <- GaOperand(names(yesNo)[index])
-        }
+        operand <- as(as(operand, "logical"), class(operand))
       } else if(var %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
         index <- pmatch(x = tolower(operand), table = tolower(visitorType))
         if (is.na(index)) {
           stop(paste(var, "Invalid operand", operand, sep = ": "))
         } else {
-          operand <- GaOperand(visitorType[index])
+          operand <- as(visitorType[index], class(operand))
         }
       } else if(var == "ga:date") {
-        operand <- GaOperand(format(ymd(operand), format = "%Y%m%d"))
+        operand <- as(format(ymd(operand), format = "%Y%m%d"), class(operand))
       } else if(var == "dateOfSession") {
-        operand <- GaOperand(format(ymd(operand), format = "%Y-%m-%d"))
+        operand <- as(format(ymd(operand), format = "%Y-%m-%d"), class(operand))
       }
     }
-    .Object@operand <- operand
     if(IsRegEx(.Object)) {
-      Operand(.Object) <- tolower(Operand(.Object))
+      operand <- tolower(operand)
     }
+    as(.Object, ".operand") <- operand
     validObject(.Object)
     .Object
   }

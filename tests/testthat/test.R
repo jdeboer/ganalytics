@@ -50,6 +50,7 @@ test_that("GaNot can be used to invert an expression", {
     !(GaExpr("pageviews", ">", 10)),
     GaExpr("pageviews", "<=", 10)
   )
+  expect_error(!Expr("eventCategory", "[]", c("video", "download")), "cannot be NOTed")
 })
 
 context("Combining basic condition expressions with AND and OR")
@@ -127,7 +128,8 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
         GaExpr("keyword", "@", "contact")
       ),
       GaExpr("deviceCategory", "=", "mobile")
-    )
+    ),
+    "ANDed expressions cannot be ORed"
   )
   expect_error(
     GaExpr("eventValue", "<", 50) &
@@ -142,6 +144,22 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
       )
     ),
   "character"), "ga:eventValue<50,ga:keyword=@contact")
+  expect_equal(as(
+    GaAnd(
+      GaOr(
+        GaExpr("eventValue", "<", 50),
+        GaExpr("keyword", "@", "contact")
+      ),
+      GaAnd(
+        GaExpr("deviceCategory", "=", "mobile"),
+        GaAnd(
+          GaExpr("pageviews", ">", 100),
+          GaExpr("timeOnPage", "<", 2000),
+          GaExpr("bounceRate", "=", 100)
+        )
+      )
+    ),
+    "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile;ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
 })
 
 test_that("ORed expressions can be NOTed", {
@@ -236,6 +254,7 @@ test_that("expressions operands are corrected depending on the type of dimension
   expect_equal(as(
     GaExpr("istablet", "=", "no"),
     "character"), "ga:isTablet==No")
+  expect_error(Expr("istablet", "==", "maybe"), "invalid .* operand")
   expect_equal(as(
     GaExpr("usertype", "=", "returning"),
     "character"), "ga:userType==Returning Visitor")

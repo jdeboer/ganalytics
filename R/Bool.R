@@ -11,109 +11,62 @@ setMethod(
   f = "Not",
   signature = ".operator",
   definition = function(.Object) {
-    if (.Object == "==") {
-      Operator(.Object) <- "!="
-      return(.Object)
-    } else if (.Object == "!=") {
-      Operator(.Object) <- "=="
-      return(.Object)
-    } else if (.Object == "<") {
-      Operator(.Object) <- ">="
-      return(.Object)
-    } else if (.Object == ">=") {
-      Operator(.Object) <- "<"
-      return(.Object)
-    } else if (.Object == ">") {
-      Operator(.Object) <- "<="
-      return(.Object)
-    } else if (.Object == "<=") {
-      Operator(.Object) <- ">"
-      return(.Object)
-    } else if (.Object == "!~") {
-      Operator(.Object) <- "=~"
-      return(.Object)
-    } else if (.Object == "=~") {
-      Operator(.Object) <- "!~"
-      return(.Object)
-    } else if (.Object == "=@") {
-      Operator(.Object) <- "!@"
-      return(.Object)
-    } else if (.Object == "!@") {
-      Operator(.Object) <- "=@"
-      return(.Object)
-    } else stop(paste(.Object, "cannot be NOTed."))
-  }
-)
-
-#' @export
-setMethod(
-  f = "!",
-  signature = ".operator",
-  definition = function(x) {
-    Not(x)
-  }
-)
-
-setMethod(
-  f = "Not",
-  signature = ".expr",
-  definition = function(.Object) {
-    Operator(.Object) <- Not(Operator(.Object))
-    return(.Object)
-  }
-)
-
-#' @export
-setMethod(
-  f = "!",
-  signature = ".expr",
-  definition = function(x) {
-    Not(x)
-  }
-)
-
-setMethod(
-  f = "Not",
-  signature = "orExpr",
-  definition = function(.Object) {
-    .Object <- lapply(
-      X = .Object,
-      FUN = Not
+    as(.Object, "character") <- switch(
+      .Object,
+      "==" = "!=",
+      "!=" = "==",
+      "<"  = ">=",
+      ">=" = "<",
+      ">" = "<=",
+      "<=" = ">",
+      "!~" = "=~",
+      "=~" = "!~",
+      "=@" = "!@",
+      "!@" = "=@",
+      stop(paste(.Object, "cannot be NOTed."))
     )
-    .Object <- do.call(And, .Object)
+    .Object
   }
 )
 
 #' @export
+setMethod("!", ".operator", function(x) {Not(x)})
+
 setMethod(
-  f = "!",
-  signature = "orExpr",
-  definition = function(x) {
-    Not(x)
+  f = "Not",
+  signature = ".expr",
+  definition = function(.Object) {
+    operator <- as(.Object, ".operator")
+    as(.Object, ".operator") <- Not(operator)
+    .Object
   }
 )
+
+#' @export
+setMethod("!", ".expr", function(x) {Not(x)})
+
+setMethod(
+  f = "Not",
+  signature = "orExpr",
+  definition = function(.Object) {
+    do.call(And, lapply(.Object, Not))
+  }
+)
+
+#' @export
+setMethod("!", "orExpr", function(x) {Not(x)})
 
 setMethod(
   f = "Not",
   signature = ".gaSimpleOrSequence",
   definition = function(.Object) {
     .Object@negation <- !.Object@negation
-    return(.Object)
+    .Object
   }
 )
 
 #' @export
-setMethod(
-  f = "!",
-  signature = ".gaSimpleOrSequence",
-  definition = function(x) {
-    Not(x)
-  }
-)
-
-# Backwards compatibility
-#'@export GaNot
-GaNot <- Not
+setMethod("!", ".gaSimpleOrSequence", function(x) {Not(x)})
 
 # Create an Or from one or more metric or dimension expressions
 # Takes one or more Metric or Dimension expressions
@@ -128,7 +81,12 @@ setMethod(
     exprList <- lapply(
       X = exprList,
       FUN = function(expr) {
-        assert_that(!is(expr, "andExpr") | length(exprList) == 1)
+        tryCatch(
+          assert_that(!is(expr, "andExpr") | length(exprList) == 1),
+          error = function(e) {
+            stop("ANDed expressions cannot be ORed.\n", e)
+          }
+        )
         expr <- as(expr, "orExpr")
       }
     )
@@ -138,17 +96,7 @@ setMethod(
 )
 
 #' @export
-setMethod(
-  f = "|",
-  signature = c(".compoundExpr", ".compoundExpr"),
-  definition = function(e1, e2) {
-    Or(e1, e2)
-  }
-)
-
-# Backwards compatibility
-#' @export GaOr
-GaOr <- Or
+setMethod("|", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {Or(e1, e2)})
 
 setMethod(
   f = "And",
@@ -160,27 +108,17 @@ setMethod(
       FUN = function(expr) {
         if (is(expr, "andExpr")) {
           expr <- unlist(expr, recursive = FALSE)
-          expr <- lapply(
-            X = expr,
-            FUN = function(exprB) {
-              as(exprB, "orExpr")
-            }
-          )
+          expr <- lapply(expr, as, "orExpr")
         } else {
-          as(object = expr, Class = "orExpr")
+          as(expr, "orExpr")
         }
       }
     )
-    x <- sapply(
-      X = exprList,
-      FUN = function(expr) {
-        !is(expr, "orExpr")
-      }
-    )
+    nested <- !sapply(exprList, is, "orExpr")
     exprList <- c(
-      exprList[!x],
+      exprList[!nested],
       unlist(
-        exprList[x],
+        exprList[nested],
         recursive = FALSE
       )
     )
@@ -189,15 +127,12 @@ setMethod(
 )
 
 #' @export
-setMethod(
-  f = "&",
-  signature = c(".compoundExpr", ".compoundExpr"),
-  definition = function(e1, e2) {
-    And(e1, e2)
-  }
-)
+setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2)})
 
 # Backwards compatibility
+#'@export GaNot
+GaNot <- Not
+#' @export GaOr
+GaOr <- Or
 #' @export GaAnd
 GaAnd <- And
-

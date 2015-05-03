@@ -270,7 +270,6 @@ GaStartDate <- StartDate
 GaEndDate <- EndDate
 #'@export GaDateRange
 GaDateRange <- DateRange
-
 #'@export GaStartDate<-
 `GaStartDate<-` <- `StartDate<-`
 #'@export GaEndDate<-

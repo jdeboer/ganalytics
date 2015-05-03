@@ -16,6 +16,11 @@ simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
 simpleCoerceToList <- function(from, to) {new(to, list(from))}
 coerceViaList <- function(from, to) {new(to, as.list(from))}
 simpleReplace <- function(from, value) {initialize(from, value)}
+coerceLogicalOperand <- function(from, to){
+  operand <- ifelse(from, yes = "Yes", no = "No")
+  if (is.na(operand)) operand <- from
+  new(to, operand)
+}
 
 # Coercing to .var classes
 
@@ -179,24 +184,36 @@ setAs(from = ".expr", to = ".operator",
 
 # Coercing to .operand subclasses
 setAs(from = "character", to = "gaDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "gaDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "gaDimOperand", def = coerceLogicalOperand)
 setAs(from = "numeric", to = "gaMetOperand", def = simpleCoerce)
 setAs(from = "character", to = "gaMetOperand", def = simpleCoerceToNumeric)
 setAs(from = "character", to = "mcfDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "mcfDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "mcfDimOperand", def = coerceLogicalOperand)
 setAs(from = "numeric", to = "mcfMetOperand", def = simpleCoerce)
 setAs(from = "character", to = "mcfMetOperand", def = simpleCoerceToNumeric)
 setAs(from = "character", to = "rtDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "rtDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "rtDimOperand", def = coerceLogicalOperand)
 setAs(from = "numeric", to = "rtMetOperand", def = simpleCoerce)
 setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
 
 setAs(from = ".expr", to = ".operand",
-      def = function(from, to) {
-        from@operand
-      },
-      replace = function(from, value) {
-        from@operand <- as(value, ".operand")
-        validObject(from)
-        from
-      })
+  def = function(from, to) {
+    from@operand
+  },
+  replace = function(from, value) {
+    from@operand <- as(value, ".operand")
+    validObject(from)
+    from
+  })
 
 
 compileOperand <- function(from) {
@@ -224,6 +241,15 @@ parseOperand <- function(operand, operator) {
   }
   operand <- gsub("\\\\", "\\", operand)
 }
+
+# Coercing to logical
+setAs(from = ".dimOperand", to = "logical",
+  def = function(from, to) {
+    YesNo <- c("Yes" = TRUE, "No" = FALSE)
+    index <- pmatch(tolower(from), tolower(names(YesNo)))
+    YesNo[index]
+  }
+)
 
 # Coercing to character
 setAs(from = ".metOperand", to = "character",
@@ -686,6 +712,36 @@ setAs(from = ".query", to = "viewId",
     from@viewId <- as(value, "viewId")
     validObject(from)
     from
+  }
+)
+
+setAs(from = "gaView", to = "viewId",
+  def = function(from, to) {
+    as(from$id, "viewId")
+  },
+  replace = function(from, value) {
+    from$id <- as(value, "viewId")
+  }
+)
+
+# Select the default view of the property
+setAs(from = "gaProperty", to = "viewId",
+  def = function(from, to) {
+    as(from$defaultView, "viewId")
+  },
+  replace = function(from, value) {
+    as(from$defaultView, "viewId") <- as(value, "viewId")
+  }
+)
+
+# Sselect the first property of the account, which is then
+# used to select a view (as above).
+setAs(from = "gaAccount", to = "viewId",
+  def = function(from, to) {
+    as(from$properties$entities[[1]], "viewId")
+  },
+  replace = function(from, value) {
+    as(from$properties$entities[[1]], "viewId") <- as(value, "viewId")
   }
 )
 

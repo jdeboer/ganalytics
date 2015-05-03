@@ -26,57 +26,6 @@ setMethod(
 )
 
 setMethod(
-  f = "GaDimOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "gaDimOperator")
-  }
-)
-
-setMethod(
-  f = "GaMetOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "gaMetOperator")
-  }
-)
-
-
-setMethod(
-  f = "McfDimOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "mcfDimOperator")
-  }
-)
-
-setMethod(
-  f = "McfMetOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "mcfMetOperator")
-  }
-)
-
-setMethod(
-  f = "RtDimOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "rtDimOperator")
-  }
-)
-
-setMethod(
-  f = "RtMetOperator",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, "rtMetOperator")
-  }
-)
-
-# ---- Operator, GaDimOperator, GaMetOperator ----
-
-setMethod(
   f = "Operator",
   signature = ".expr",
   definition = function(.Object) {
