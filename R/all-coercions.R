@@ -449,6 +449,10 @@ setAs(from = "andExpr", to = ".tableFilter", def = function(from) {
   } else stop("Cannot determine type of filter.")
 })
 
+setAs(from = "NULL", to = "gaFilter", def = coerceViaList)
+setAs(from = "NULL", to = "mcfFilter", def = coerceViaList)
+setAs(from = "NULL", to = "rtFilter", def = coerceViaList)
+
 setAs(from = "andExpr", to = "gaFilter", def = simpleCoerce)
 setAs(from = "andExpr", to = "mcfFilter", def = simpleCoerce)
 setAs(from = "andExpr", to = "rtFilter", def = simpleCoerce)

@@ -74,31 +74,3 @@ setMethod(
 #' @export GaFilter
 GaFilter <- TableFilter
 `GaFilter<-` <- `TableFilter<-`
-
-setMethod(
-  f = "GaFilter<-",
-  signature = c("gaFilter", "ANY"),
-  definition = function(.Object, value) {
-    as(value, "gaFilter")
-  }
-)
-
-
-setMethod(
-  f = "GaFilter",
-  signature = "gaQuery",
-  definition = function(.Object) {
-    .Object@filters
-  }
-)
-
-setMethod(
-  f = "GaFilter<-",
-  signature = c("gaQuery", "ANY"),
-  definition = function(.Object, value) {
-    .Object@filters <- GaFilter(value)
-    validObject(.Object)
-    return(.Object)
-  }
-)
-
