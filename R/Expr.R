@@ -30,13 +30,13 @@ setMethod(
   definition = function(.Object, operator, operand, metricScope) {
     var <- GaVar(.Object)
     if (class(var) == "gaDimVar") {
-      operator <- GaDimOperator(operator)
-      operand <- GaOperand(as.character(operand))
+      operator <- as(operator, "gaDimOperator")
+      operand <- as(operand, "gaDimOperand")
       gaExprClass <- "gaDimExpr"
       new(gaExprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "gaMetVar") {
-      operator <- GaMetOperator(operator)
-      operand <- GaOperand(as.numeric(operand))
+      operator <- as(operator, "gaMetOperator")
+      operand <- as(operand, "gaMetOperand")
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
@@ -51,7 +51,7 @@ setMethod(
         new(gaExprClass, var = var, operator = operator, operand = operand)
       }
     } else {
-      stop(paste("Unsupported .gaVar class", class(var), sep=": "))
+      stop(paste("Unsupported .gaVar class", class(var), sep = ": "))
     }
   }
 )
@@ -62,17 +62,17 @@ setMethod(
   definition = function(.Object, operator, operand) {
     var <- McfVar(.Object)
     if (class(var) == "mcfDimVar") {
-      operator <- McfDimOperator(operator)
-      operand <- McfOperand(as.character(operand))
+      operator <- as(operator, "mcfDimOperator")
+      operand <- as(operand, "mcfDimOperand")
       exprClass <- "mcfDimExpr"
       new(exprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "mcfMetVar") {
-      operator <- McfMetOperator(operator)
-      operand <- McfOperand(as.numeric(operand))
+      operator <- as(operator, "mcfMetOperator")
+      operand <- as(operand, "mcfMetOperand")
       exprClass <- "mcfMetExpr"
       new(exprClass, var = var, operator = operator, operand = operand)
     } else {
-      stop(paste("Unsupported .mcfVar class", class(var), sep=": "))
+      stop(paste("Unsupported .mcfVar class", class(var), sep = ": "))
     }
   }
 )
@@ -83,17 +83,17 @@ setMethod(
   definition = function(.Object, operator, operand) {
     var <- RtVar(.Object)
     if (class(var) == "rtDimVar") {
-      operator <- RtDimOperator(operator)
-      operand <- RtOperand(as.character(operand))
+      operator <- as(operator, "rtDimOperator")
+      operand <- as(operand, "rtDimOperand")
       exprClass <- "rtDimExpr"
       new(exprClass, var = var, operator = operator, operand = operand)
     } else if (class(var) == "rtMetVar") {
-      operator <- RtMetOperator(operator)
-      operand <- RtOperand(as.numeric(operand))
+      operator <- as(operator, "rtMetOperator")
+      operand <- as(operand, "rtMetOperand")
       exprClass <- "rtMetExpr"
       new(exprClass, var = var, operator = operator, operand = operand)
     } else {
-      stop(paste("Unsupported .rtVar class", class(var), sep=": "))
+      stop(paste("Unsupported .rtVar class", class(var), sep = ": "))
     }
   }
 )
@@ -113,6 +113,7 @@ setMethod(
   signature = c("gaSegMetExpr", "character"),
   definition = function(.Object, value) {
     .Object@metricScope <- value
+    validObject(.Object)
     .Object
   }
 )
@@ -140,6 +141,7 @@ setMethod(
   signature = c("gaSegmentCondition", "character"),
   definition = function(.Object, value) {
     .Object@conditionScope <- value
+    validObject(.Object)
     .Object
   }
 )
