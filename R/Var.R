@@ -47,7 +47,7 @@ setMethod(
   f = "Var",
   signature = ".gaVarList",
   definition = function(.Object) {
-    .Object@.Data
+    .Object
   }
 )
 
@@ -74,7 +74,7 @@ setMethod(
   f = "GaVar",
   signature = ".expr",
   definition = function(.Object) {
-    GaVar(.Object@var)
+    as(.Object, ".gaVar")
   }
 )
 
@@ -82,7 +82,7 @@ setMethod(
   f = "GaVar<-",
   signature = c(".expr", "character"),
   definition = function(.Object, value) {
-    GaVar(.Object@var) <- value
+    as(.Object, ".gaVar") <- value
     .Object
   }
 )
@@ -91,7 +91,7 @@ setMethod(
   f = "GaVar",
   signature = ".gaVarList",
   definition = function(.Object) {
-    .Object@.Data
+    .Object
   }
 )
 
@@ -142,7 +142,7 @@ setMethod(
   signature = "NULL",
   definition = function(.Object, ...) {
     vars <- ArgList(.Object, ...)
-    new(".metrics", vars)
+    as(vars, ".metrics")
   }
 )
 

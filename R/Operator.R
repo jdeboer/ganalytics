@@ -29,7 +29,7 @@ setMethod(
   f = "Operator",
   signature = ".expr",
   definition = function(.Object) {
-    Operator(.Object@operator)
+    as(.Object, ".operator")
   }
 )
 
@@ -37,8 +37,8 @@ setMethod(
   f = "Operator<-",
   signature = ".expr",
   definition = function(.Object, value) {
-    Operator(.Object@operator) <- value
-    return(.Object)
+    as(.Object, ".operator") <- value
+    .Object
   }
 )
 
@@ -48,9 +48,7 @@ setMethod(
   f = "IsRegEx",
   signature = ".dimOperator",
   definition = function(.Object) {
-    return(
-      .Object %in% c("=~", "!~")
-    )
+    .Object %in% c("=~", "!~")
   }
 )
 
