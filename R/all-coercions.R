@@ -163,6 +163,16 @@ setAs(from = ".expr", to = ".var",
   }
 )
 
+setAs(from = ".expr", to = ".gaVar",
+  def = function(from, to) {
+    as(as(from, ".var"), to)
+  },
+  replace = function(from, value) {
+    as(from, ".var") <- value
+    from
+  }
+)
+
 # Coercing to .operator subclasses
 setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
 setAs(from = "character", to = "gaMetOperator", def = simpleCoerce)
