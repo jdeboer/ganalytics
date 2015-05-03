@@ -10,25 +10,22 @@ NULL
 
 setMethod(
   f = "SortBy",
-  signature = ".sortBy",
-  definition = function(.Object) {
-    .Object
+  signature = ".varList",
+  definition = function(.Object, desc = logical(0)) {
+    vars <- as(.Object, ".sortBy")
+    vars@desc <- desc
+    validObject(vars)
+    vars
   }
 )
 
-setMethod(
-  f = "SortBy",
-  signature = "NULL",
-  definition = function(.Object, ..., desc = logical(0)) {
-    new(".sortBy", list(...), desc = desc)
-  }
-)
+setMethod("SortBy", "NULL", function(.Object) {new(".sortBy")})
 
 setMethod(
   f = "SortBy",
   signature = "character",
   definition = function(.Object, ..., desc = logical(0)) {
-    varsChar <- as.character(ArgList(.Object, ...))
+    varsChar <- sapply(ArgList(.Object, ...), as.character)
     vars <- as(varsChar, ".sortBy")
     # For any var prefixed with "-", remove the prefix and set the desc flag to TRUE
     # For any var prefixed with "+", remove the prefix and set the desc flag to FALSE
@@ -43,6 +40,7 @@ setMethod(
     tempMetDesc <- sapply(vars, is, ".metVar")
     desc[is.na(desc)] <- tempMetDesc[is.na(desc)]
     vars@desc <- desc
+    validObject(vars)
     vars
   }
 )
@@ -51,7 +49,7 @@ setMethod(
   f = "SortBy",
   signature = "list",
   definition = function(.Object, ..., desc = logical(0)) {
-    SortBy(as.character(.Object), ..., desc = desc)
+    SortBy(as(ArgList(.Object, ...), ".sortBy"), desc = desc)
   }
 )
 
@@ -66,7 +64,6 @@ setMethod(
         value <- NULL
       }
       as(.Object, ".sortBy") <- value
-      validObject(.Object)
       .Object
     }
   }

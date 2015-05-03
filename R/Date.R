@@ -51,13 +51,7 @@ GetDataByDateRange <- function(query, dates) {
 }
 
 # DateRange
-setMethod(
-  f = "DateRange",
-  signature = "dateRange",
-  definition = function(.Object) {
-    return(.Object)
-  }
-)
+setMethod("DateRange", "dateRange", function(.Object) {.Object})
 
 setMethod(
   f = "DateRange",
@@ -94,21 +88,9 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "StartDate",
-  signature = "dateRange",
-  definition = function(.Object) {
-    .Object@startDate
-  }
-)
+setMethod("StartDate", "dateRange", function(.Object) {.Object@startDate})
 
-setMethod(
-  f = "EndDate",
-  signature = "dateRange",
-  definition = function(.Object) {
-    .Object@endDate
-  }
-)
+setMethod("EndDate", "dateRange", function(.Object) {.Object@endDate})
 
 setMethod(
   f = "StartDate<-",
@@ -165,13 +147,7 @@ setMethod(
 )
 
 
-setMethod(
-  f = "DateRange",
-  signature = ".standardQuery",
-  definition = function(.Object) {
-    return(.Object@dateRange)
-  }
-)
+setMethod("DateRange", ".standardQuery", function(.Object) {.Object@dateRange})
 
 setMethod(
   f = "DateRange<-",
@@ -179,7 +155,7 @@ setMethod(
   definition = function(.Object, value) {
     .Object@dateRange <- value
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 
@@ -194,7 +170,7 @@ setMethod(
       endDate <- as.Date(parse_date(value[2], output_format = kGaDateInFormat), format = kGaDateInFormat)
       newDateRange <- new("dateRange", startDate, endDate)
       DateRange(.Object) <- newDateRange
-      return(.Object)
+      .Object
     }
   }
 )
@@ -203,21 +179,9 @@ setMethod("DateRange<-", c(".standardQuery", "Date"), function(.Object, value) {
   DateRange(.Object, as.character(value))
 })
 
-setMethod(
-  f = "StartDate",
-  signature = ".standardQuery",
-  definition = function(.Object) {
-    StartDate(.Object@dateRange)
-  }
-)
+setMethod("StartDate", ".standardQuery", function(.Object) {StartDate(.Object@dateRange)})
 
-setMethod(
-  f = "EndDate",
-  signature = ".standardQuery",
-  definition = function(.Object) {
-    EndDate(.Object@dateRange)
-  }
-)
+setMethod("EndDate", ".standardQuery", function(.Object) {EndDate(.Object@dateRange)})
 
 setMethod(
   f = "StartDate<-",
@@ -226,7 +190,7 @@ setMethod(
     dateRange <- DateRange(.Object)
     StartDate(dateRange) <- value
     DateRange(.Object) <- dateRange
-    return(.Object)
+    .Object
   }
 )
 
@@ -237,7 +201,7 @@ setMethod(
     dateRange <- DateRange(.Object)
     EndDate(dateRange) <- value
     DateRange(.Object) <- dateRange
-    return(.Object)
+    .Object
   }
 )
 
@@ -248,7 +212,7 @@ setMethod(
     dateRange <- DateRange(.Object)
     StartDate(dateRange) <- value
     DateRange(.Object) <- dateRange
-    return(.Object)
+    .Object
   }
 )
 
@@ -259,7 +223,7 @@ setMethod(
     dateRange <- DateRange(.Object)
     EndDate(dateRange) <- value
     DateRange(.Object) <- dateRange
-    return(.Object)
+    .Object
   }
 )
 

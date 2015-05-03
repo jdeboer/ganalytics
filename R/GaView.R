@@ -20,8 +20,7 @@ setMethod(
   signature = c(".query", "ANY"),
   definition = function(.Object, value) {
     as(.Object, "viewId") <- value
-    validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 

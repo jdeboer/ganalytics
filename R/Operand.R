@@ -14,7 +14,7 @@ setMethod("Operand", ".expr", function(.Object) {as(.Object, ".operand")})
 
 setMethod(
   f = "Operand<-",
-  signature = ".expr",
+  signature = c(".expr", "ANY"),
   definition = function(.Object, value) {
     as(.Object, ".operand") <- value
     .Object

@@ -105,7 +105,7 @@ setMethod(
   signature = c("gaSegmentCondition", "character"),
   definition = function(.Object, value) {
     .Object@conditionScope <- value
-    return(.Object)
+    .Object
   }
 )
 
@@ -115,7 +115,7 @@ setMethod(
   f = "GaSegment",
   signature = "gaSegmentId",
   definition = function(.Object) {
-    return(.Object)
+    .Object
   }
 )
 
@@ -210,7 +210,7 @@ setMethod(
   signature = c("gaDynSegment", "andExpr"),
   definition = function(.Object, value) {
     as(.Object, "andExpr") <- value
-    return(.Object)
+    .Object
   }
 )
 
@@ -228,7 +228,7 @@ setMethod(
   definition = function(.Object, value) {
     to <- class(value)
     as(.Object, to) <- value
-    return(.Object)
+    .Object
   }
 )
 
@@ -246,7 +246,7 @@ setMethod(
   definition = function(.Object, value) {
     .Object@segment <- GaSegment(value)
     validObject(.Object)
-    return(.Object)
+    .Object
   }
 )
 

@@ -5,45 +5,15 @@
 #' @include helper-functions.R
 NULL
 
-setMethod(
-  f = "TableFilter",
-  signature = ".query",
-  definition = function(.Object) {
-    as(.Object, ".tableFilter")
-  }
-)
+setMethod("TableFilter", ".query", function(.Object) {as(.Object, ".tableFilter")})
 
-setMethod(
-  f = "TableFilter",
-  signature = "NULL",
-  definition = function(.Object) {
-    as(.Object, ".tableFilter")
-  }
-)
+setMethod("TableFilter", "NULL", function(.Object) {as(.Object, ".tableFilter")})
 
-setMethod(
-  f = "TableFilter",
-  signature = ".tableFilter",
-  definition = function(.Object) {
-    .Object
-  }
-)
+setMethod("TableFilter", ".tableFilter", function(.Object) {.Object})
 
-setMethod(
-  f = "TableFilter",
-  signature = ".compoundExpr",
-  definition = function(.Object) {
-    as(.Object, ".tableFilter")
-  }
-)
+setMethod("TableFilter", ".compoundExpr", function(.Object) {as(.Object, ".tableFilter")})
 
-setMethod(
-  f = "TableFilter",
-  signature = "gaDynSegment",
-  definition = function(.Object) {
-    as(.Object, ".tableFilter")
-  }
-)
+setMethod("TableFilter", "gaDynSegment", function(.Object) {as(.Object, ".tableFilter")})
 
 setMethod(
   f = "TableFilter<-",

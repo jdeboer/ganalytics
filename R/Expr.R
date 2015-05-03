@@ -9,6 +9,8 @@
 #' @include helper-functions.R
 NULL
 
+setMethod("Expr", ".expr", function(.Object) {.Object})
+
 setMethod(
   f = "Expr",
   signature = c("character", "character", "ANY"),
@@ -100,13 +102,7 @@ setMethod(
 
 # ---- GaScopeLevel, GaScopeLevel<- ----
 
-setMethod(
-  f = "GaScopeLevel",
-  signature = "gaSegMetExpr",
-  definition = function(.Object) {
-    .Object@metricScope
-  }
-)
+setMethod("GaScopeLevel", "gaSegMetExpr", function(.Object) {.Object@metricScope})
 
 setMethod(
   f = "GaScopeLevel<-",
@@ -124,6 +120,7 @@ setMethod(
   definition = function(.Object, value) {
     .Object <- as(.Object, "gaSegMetScope")
     .Object@metricScope <- value
+    validObject(.Object)
     .Object
   }
 )

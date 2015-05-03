@@ -26,13 +26,7 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "Var",
-  signature = ".expr",
-  definition = function(.Object) {
-    as(.Object, ".var")
-  }
-)
+setMethod("Var", ".expr", function(.Object) {as(.Object, ".var")})
 
 setMethod(
   f = "Var<-",
@@ -43,23 +37,11 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "Var",
-  signature = ".gaVarList",
-  definition = function(.Object) {
-    .Object
-  }
-)
+setMethod("Var", ".gaVarList", function(.Object) {.Object})
 
 ## Create a gaMet or gaDim object
 ## GaVar takes a GA variable and determines whether to return a Dimension or Metric object
-setMethod(
-  f = "GaVar",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, ".gaVar")
-  }
-)
+setMethod("GaVar", "character", function(.Object) {as(.Object, ".gaVar")})
 
 setMethod(
   f = "GaVar<-",
@@ -70,13 +52,7 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "GaVar",
-  signature = ".expr",
-  definition = function(.Object) {
-    as(.Object, ".gaVar")
-  }
-)
+setMethod("GaVar", ".expr", function(.Object) {as(.Object, ".gaVar")})
 
 setMethod(
   f = "GaVar<-",
@@ -87,53 +63,23 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "GaVar",
-  signature = ".gaVarList",
-  definition = function(.Object) {
-    .Object
-  }
-)
+setMethod("GaVar", ".gaVarList", function(.Object) {.Object})
 
 # ---- McfVar ----
 
-setMethod(
-  f = "McfVar",
-  signature = ".mcfVar",
-  definition = function(.Object) {
-    .Object
-  }
-)
+setMethod("McfVar", ".mcfVar", function(.Object) {.Object})
 
 ## Create a mcfMet or mcfDim object
 ## McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
-setMethod(
-  f = "McfVar",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, ".mcfVar")
-  }
-)
+setMethod("McfVar", "character", function(.Object) {as(.Object, ".mcfVar")})
 
 # ---- RtVar ----
 
-setMethod(
-  f = "RtVar",
-  signature = ".rtVar",
-  definition = function(.Object) {
-    .Object
-  }
-)
+setMethod("RtVar", ".rtVar", function(.Object) {.Object})
 
 ## Create a rtMet or rtDim object
 ## McfVar takes a RT variable and determines whether to return a Dimension or Metric object
-setMethod(
-  f = "RtVar",
-  signature = "character",
-  definition = function(.Object) {
-    as(.Object, ".rtVar")
-  }
-)
+setMethod("RtVar", "character", function(.Object) {as(.Object, ".rtVar")})
 
 # -- GaMetrics ----
 
@@ -173,13 +119,7 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "Metrics",
-  signature = ".query",
-  definition = function(.Object) {
-    as(.Object, ".metrics")
-  }
-)
+setMethod("Metrics", ".query", function(.Object) {as(.Object, ".metrics")})
 
 setMethod(
   f = "Metrics<-",
@@ -228,13 +168,7 @@ setMethod(
   }
 )
 
-setMethod(
-  f = "Dimensions",
-  signature = ".query",
-  definition = function(.Object) {
-    as(.Object, ".dimensions")
-  }
-)
+setMethod("Dimensions", ".query", function(.Object) {as(.Object, ".dimensions")})
 
 setMethod(
   f = "Dimensions<-",
