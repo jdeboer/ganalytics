@@ -112,11 +112,7 @@ GaListToDataframe <- function(gaData, queryClass) {
         conversionPathValues <- which(!is.null(row[['conversionPathValue']]))
         output <- list()
         output[primitiveValues] <- row[['primitiveValue']][primitiveValues]
-<<<<<<< HEAD
         output[conversionPathValues] <- row[['conversionPathValue']][conversionPathValues]
-=======
-        output[conversionPathValues] <- list(row[['conversionPathValue']][conversionPathValues])
->>>>>>> 565003c19ca8cca6712c4e387939ec3323b4fdf0
         output
       })
       gaData$rows <- do.call(rbind, gaData$rows)
