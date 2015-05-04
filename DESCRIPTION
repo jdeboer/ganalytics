@@ -16,7 +16,7 @@ Imports:
     methods,
     httr,
     plyr,
-    stringr,
+    stringr (>= 1.0),
     jsonlite,
     XML,
     selectr,
