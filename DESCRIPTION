@@ -1,29 +1,31 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.4
+Version: 0.4.99
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
     role = c("aut", "cre"),
     email = "johanndeboer@gmail.com")
 Description: S4 classes and methods for interacting with Google Analytics.
-    Supports OAuth 2.0 user authentication. R6 classes with methods for
-    accessing the Google Analytics Management and Google Tag Manager APIs too.
-License: MIT
+    Supports OAuth 2.0 user authentication. Also includes R6 classes with
+    methods for accessing the Google Analytics Management and Google Tag
+    Manager APIs.
+License: MIT + file LICENCE
 Depends:
     R(>= 3.0.0)
 Imports:
     methods,
     httr,
     plyr,
-    stringr,
-    httpuv,
+    stringr (>= 1.0),
     jsonlite,
     XML,
     selectr,
     lubridate,
     R6,
-    assertthat
+    assertthat,
+    devtools,
+    rvest
 Collate:
     'helper-functions.R'
     'globaldata.R'
@@ -35,22 +37,20 @@ Collate:
     'management-api-classes.R'
     'gtm-api-classes.R'
     'all-coercions.R'
-    'GaAnd.R'
-    'GaCreds.R'
-    'GaDate.R'
+    'Bool.R'
+    'Creds.R'
+    'Date.R'
     'meta.R'
-    'GaVar.R'
-    'GaOperator.R'
-    'GaOperand.R'
-    'GaExpr.R'
-    'GaFilter.R'
+    'Var.R'
+    'Operator.R'
+    'Operand.R'
+    'Expr.R'
+    'Filter.R'
     'GaGetCoreReport.R'
-    'GaNot.R'
-    'GaOr.R'
-    'GaQuery.R'
     'GaSegment.R'
-    'GaSortBy.R'
     'GaView.R'
     'GetGa.R'
+    'Query.R'
+    'SortBy.R'
 Suggests:
     testthat

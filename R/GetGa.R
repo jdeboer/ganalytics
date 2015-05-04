@@ -8,7 +8,7 @@ NULL
 
 setMethod(
   f = "GetGaQueries",
-  signature = signature("gaQuery"),
+  signature = signature(".query"),
   definition = function(.Object) {
     as(.Object, "matrix")
   }
@@ -19,7 +19,7 @@ setMethod(
 #' @param query the query to execute.
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
-setMethod("GetGaData", "gaQuery", function(
+setMethod("GetGaData", ".query", function(
   object,
   creds = NULL,
   .progress = "time",
@@ -30,12 +30,14 @@ setMethod("GetGaData", "gaQuery", function(
     creds <- object@creds
   }
   queryParams <- GetGaQueries(object)
+  # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(
     .data = queryParams,
     .margins = 2,
     .fun = GaPaginate,
-    maxRequestedRows = GaMaxResults(object),
+    maxRequestedRows = MaxResults(object),
     creds = creds,
+    queryClass = class(object),
     .progress = .progress
   )
   data <- ldply(

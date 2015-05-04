@@ -26,7 +26,7 @@ test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
   expect_is(GaExpr("hostname", "!", "google.com"), "gaDimExpr")
   expect_is(GaExpr("totalevents", "=>", 5), "gaMetExpr")
   expect_error(GaExpr("entrances", "=@", "23"))
-  expect_error(GaExpr("pageviews", "+", 2), "Invalid metric operator")
+  expect_error(GaExpr("pageviews", "+", 2))
 })
 
 test_that(".gaExpr objects coerce to character", {
@@ -46,6 +46,11 @@ test_that("GaNot can be used to invert an expression", {
     GaNot(GaExpr("pageviews", ">", 10)),
     GaExpr("pageviews", "<=", 10)
   )
+  expect_identical(
+    !(GaExpr("pageviews", ">", 10)),
+    GaExpr("pageviews", "<=", 10)
+  )
+  expect_error(!Expr("eventCategory", "[]", c("video", "download")), "cannot be NOTed")
 })
 
 context("Combining basic condition expressions with AND and OR")
@@ -64,6 +69,15 @@ test_that("Expressions can be ORed to give the correct character output", {
       GaExpr("bounceRate", "=", 100)
     ),
     "character"), "ga:pageviews>100,ga:timeOnPage<2000,ga:bounceRate==100")
+  expect_equal(as(
+    GaExpr("pageviews", ">", 100) |
+    GaExpr("timeOnPage", "<", 2000),
+    "character"), "ga:pageviews>100,ga:timeOnPage<2000")
+  expect_equal(as(
+    GaExpr("pageviews", ">", 100) |
+    (GaExpr("timeOnPage", "<", 2000) |
+    GaExpr("bounceRate", "=", 100)),
+    "character"), "ga:pageviews>100,ga:timeOnPage<2000,ga:bounceRate==100")
 })
 
 test_that("Expressions can be ANDed to give the correct character output", {
@@ -80,6 +94,15 @@ test_that("Expressions can be ANDed to give the correct character output", {
       GaExpr("bounceRate", "=", 100)
     ),
     "character"), "ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
+  expect_equal(as(
+    GaExpr("pageviews", ">", 100) &
+    GaExpr("timeOnPage", "<", 2000),
+    "character"), "ga:pageviews>100;ga:timeOnPage<2000")
+  expect_equal(as(
+    GaExpr("pageviews", ">", 100) &
+    (GaExpr("timeOnPage", "<", 2000) &
+    GaExpr("bounceRate", "=", 100)),
+    "character"), "ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
 })
 
 test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed", {
@@ -92,6 +115,12 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
       GaExpr("deviceCategory", "=", "mobile")
     ),
     "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile")
+  expect_equal(as(
+    (
+      GaExpr("eventValue", "<", 50) |
+      GaExpr("keyword", "@", "contact")
+    ) & GaExpr("deviceCategory", "=", "mobile"),
+    "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile")
   expect_error(
     GaOr(
       GaAnd(
@@ -99,7 +128,13 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
         GaExpr("keyword", "@", "contact")
       ),
       GaExpr("deviceCategory", "=", "mobile")
-    )
+    ),
+    "ANDed expressions cannot be ORed"
+  )
+  expect_error(
+    GaExpr("eventValue", "<", 50) &
+    GaExpr("keyword", "@", "contact") |
+    GaExpr("deviceCategory", "=", "mobile")
   )
   expect_equal(as(
     GaOr(
@@ -109,12 +144,32 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
       )
     ),
   "character"), "ga:eventValue<50,ga:keyword=@contact")
+  expect_equal(as(
+    GaAnd(
+      GaOr(
+        GaExpr("eventValue", "<", 50),
+        GaExpr("keyword", "@", "contact")
+      ),
+      GaAnd(
+        GaExpr("deviceCategory", "=", "mobile"),
+        GaAnd(
+          GaExpr("pageviews", ">", 100),
+          GaExpr("timeOnPage", "<", 2000),
+          GaExpr("bounceRate", "=", 100)
+        )
+      )
+    ),
+    "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile;ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
 })
 
 test_that("ORed expressions can be NOTed", {
   expect_identical(
     GaNot(GaOr(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
     GaAnd(GaExpr("source", "!=", "google"), GaExpr("medium", "!=", "organic"))
+  )
+  expect_identical(
+    !(GaExpr("source", "=", "google") | GaExpr("medium", "=", "organic")),
+    GaExpr("source", "!=", "google") & GaExpr("medium", "!=", "organic")
   )
 })
 
@@ -155,6 +210,17 @@ test_that("ANDed (but not ORed) filter expressions may mix dimensions with metri
   )
 })
 
+test_that("Filter expressions cannot use '[]' or '<>' operators", {
+  expect_error(
+    GaFilter(GaExpr("medium", "[]", c("organic", "cpc"))),
+    "\\[\\]"
+  )
+  expect_error(
+    GaFilter(GaExpr("pageviews", "<>", c(10, 100))),
+    "<>"
+  )
+})
+
 context("Correct formatting of operators and operands used in API queries")
 
 test_that("expressions for each type of operator are correctly formatted when coerced to character", {
@@ -188,6 +254,7 @@ test_that("expressions operands are corrected depending on the type of dimension
   expect_equal(as(
     GaExpr("istablet", "=", "no"),
     "character"), "ga:isTablet==No")
+  expect_error(Expr("istablet", "==", "maybe"), "invalid .* operand")
   expect_equal(as(
     GaExpr("usertype", "=", "returning"),
     "character"), "ga:userType==Returning Visitor")
@@ -367,3 +434,212 @@ test_that("providing multiple view IDs, date ranges and multiple segments coerce
     ), c(9, 6)
   )
 })
+
+context("MCF and RT expressions, filters, and queries are also supported")
+
+test_that("MCF vars can be generated using McfVar", {
+  expect_equal(
+    as(McfVar("mcf:totalConversions"), "character"),
+    "mcf:totalConversions"
+  )
+})
+
+test_that("RT vars can be generated using RtVar", {
+  expect_equal(
+    as(RtVar("rt:activeUsers"), "character"),
+    "rt:activeUsers"
+  )
+})
+
+test_that("MCF and RT expressions can be created with dimensions or metrics", {
+  expect_equal(
+    as(McfExpr("mcf:totalConversions", ">", 10), "character"),
+    "mcf:totalConversions>10"
+  )
+  expect_equal(
+    as(RtExpr("rt:source", "=", "google"), "character"),
+    "rt:source==google"
+  )
+})
+
+test_that("MCF and RT queries can be constructed", {
+  expect_equal(
+    dim(as(McfQuery(view = 0), "matrix")),
+    c(6, 1)
+  )
+  expect_equal(
+    dim(as(RtQuery(view = 0), "matrix")),
+    c(3, 1)
+  )
+})
+
+context("Generalised functions can be used across all types of queries")
+
+test_that("! can be used instead of Not", {
+  expect_equal(
+    !Expr("rt:activeUsers", "<=", 10),
+    Expr("rt:activeUsers", ">", 10)
+  )
+})
+
+test_that("TableFilter can be used instead of deprecated GaFilter function", {
+  expect_is(
+    TableFilter(Expr("mcf:totalConversions", ">", 10)),
+    "mcfFilter"
+  )
+})
+
+test_that("Expr function can used to create GA, MCF and RT expressions", {
+  expect_equal(
+    as(Expr("ga:source", "==", "google"), "character"),
+    "ga:source==google"
+  )
+  expect_equal(
+    as(Expr("mcf:source", "==", "google"), "character"),
+    "mcf:source==google"
+  )
+  expect_equal(
+    as(Expr("rt:source", "==", "google"), "character"),
+    "rt:source==google"
+  )
+  expect_equal(
+    as(
+      Expr("mcf:source", "!=", "facebook.com") &
+        (
+          Expr("mcf:medium", "==", "referral") |
+            Expr("mcf:campaignName", "=@", "promo")
+          ),
+      "character"),
+    "mcf:source!=facebook.com;mcf:medium==referral,mcf:campaignName=@promo"
+  )
+})
+
+test_that("Variable, Operator and Operand compoents of an expression can be extracted" , {
+  expect_equal(
+    as(Operand(Expr("rt:pagePath", "=~", "^/products/")), "character"),
+    "^/products/"
+  )
+  expect_equal(
+    as(Var(Expr("mcf:source", "=~", "\\.au$")), "character"),
+    "mcf:source"
+  )
+  expect_equal(
+    as(Operator(Expr("rt:totalEvents", ">", "10")), "character"),
+    ">"
+  )
+})
+
+context("New varList methods work as expected")
+
+test_that("Only valid variable lists can be defined.", {
+  expect_is(
+    Metrics("ga:sessions", "ga:pageviews", "totalevents"),
+    "gaMetrics"
+  )
+  expect_is(
+    Dimensions("mcf:source", "mcf:campaignName", "mcf:medium"),
+    "mcfDimensions"
+  )
+  expect_error(
+    Metrics("ga:pageviews", "mcf:totalConversions", "rt:activeUsers")
+  )
+  expect_is(
+    SortBy("rt:activeUsers", "rt:totalEvents", "rt:city"),
+    "rtSortBy"
+  )
+  expect_error(
+    SortBy("rt:activeUsers", "ga:totalEvents", "mcf:medium")
+  )
+})
+
+context("Replace methods work as expected.")
+
+test_that("Operator<- replaces the operator of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Operator(expr) <- "=@"
+  expect_identical(expr, Expr("ga:source", "=@", "google.com"))
+})
+
+test_that("Operand<- replaces the operand of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Operand(expr) <- "google.com.au"
+  expect_identical(expr, Expr("ga:source", "==", "google.com.au"))
+})
+
+test_that("Var<- replaces the variable of an expression", {
+  expr <- Expr("ga:source", "=", "google.com")
+  Var(expr) <- "rt:source"
+  expect_identical(expr, Expr("rt:source", "==", "google.com"))
+})
+
+test_that("TableFilter<- replaces the table filter of a query", {
+  query <- GaQuery(view = 0)
+  table_filter <- TableFilter(
+    Expr("ga:source", "=", "google.com") &
+    Expr("ga:deviceCategory", "=", "mobile")
+  )
+  TableFilter(query) <- table_filter
+  expect_identical(TableFilter(query), table_filter)
+  TableFilter(query) <- NULL
+  expect_equivalent(TableFilter(query), TableFilter(NULL))
+})
+
+test_that("GaSegment<- replaces the segment of a query", {
+  query <- GaQuery(view = 0)
+  segment <- 
+    Expr("ga:source", "=", "google.com") &
+      Expr("ga:deviceCategory", "=", "mobile")
+  GaSegment(query) <- segment
+  expect_identical(GaSegment(query), GaSegment(segment))
+})
+
+test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {
+  query <- GaQuery(view = 0)
+  Dimensions(query) <- NULL
+  expect_equivalent(Dimensions(query), Dimensions(NULL))
+  Dimensions(query) <- c("source", "medium")
+  expect_identical(Dimensions(query), Dimensions(c("source", "medium")))
+  Metrics(query) <- c("pageviews", "sessions")
+  expect_equivalent(Metrics(query), Metrics(c("pageviews", "sessions")))
+  SortBy(query) <- c("source", "sessions")
+  expect_equivalent(SortBy(query), SortBy(c("source", "sessions")))
+  SortBy(query) <- NULL
+  expect_is(SortBy(query), ".sortBy")
+})
+
+test_that("Dimensions or metrics removed from a query are reflected in its sortBy", {
+  query <- GaQuery(view = 0)
+  Dimensions(query) <- c("eventCategory", "eventAction", "eventLabel")
+  Metrics(query) <- c("totalEvents", "uniqueEvents", "eventValue")
+  SortBy(query) <- c("totalEvents", "eventValue")
+  expect_equivalent(SortBy(query), SortBy("totalEvents", "eventValue"))
+  Metrics(query) <- "totalEvents"
+  expect_equivalent(SortBy(query), SortBy("totalEvents"))
+})
+
+test_that("functions DateRange, StartDate, EndDate, and their replacement versions work across all required signatures", {
+  # character dateRange date query
+  expect_equivalent(StartDate("2010-01-31"), as.Date("2010-01-31"))
+  expect_equivalent(EndDate("20100131"), as.Date("2010-01-31"))
+  date_range <- DateRange("2010-01-01", "2010-01-31")
+  expect_equivalent(StartDate(date_range), as.Date("2010-01-01"))
+  expect_equivalent(EndDate(date_range), as.Date("2010-01-31"))
+  EndDate(date_range) <- "2011-01-31"
+  expect_equivalent(EndDate(date_range), as.Date("2011-01-31"))
+  expect_error(StartDate(date_range) <- "20110201", "cannot be before")
+  StartDate(date_range) <- as.Date("2011-01-01")
+  expect_equivalent(StartDate(date_range), as.Date("2011-01-01"))
+  query <- GaQuery(view = 0)
+  DateRange(query) <- date_range
+  expect_equivalent(DateRange(query), date_range)
+  expect_equivalent(DateRange(date_range), date_range)
+  date_range1 <- DateRange(as.Date("2012-01-01"), as.Date("2012-01-31"))
+  date_range2 <- DateRange("2012-01-01", as.Date("2012-01-31"))
+  #date_range3 <- DateRange(as.Date("2012-01-01"), "2012-01-31")
+})
+
+test_that("SplitDateRange correctly splits a dateRange object, including that of a .query object", {
+  # dateRange
+  # query
+})
+

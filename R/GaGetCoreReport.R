@@ -6,13 +6,14 @@
 #' @include GaApiRequest.R
 NULL
 
-GaPaginate <- function(query, maxRequestedRows, creds) {
+GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery") {
   # Get the first page to determine the total number of rows available.
   gaPage <- GaGetCoreReport(
     query = query,
     creds = creds,
     startIndex = 1,
-    maxResults = min(maxRequestedRows, kGaMaxResults)
+    maxResults = min(maxRequestedRows, kGaMaxResults),
+    queryClass = queryClass
   )
   data <- gaPage$data
   viewId <- gaPage$viewId
@@ -37,7 +38,8 @@ GaPaginate <- function(query, maxRequestedRows, creds) {
         query,
         creds,
         startIndex,
-        maxResults
+        maxResults,
+        queryClass
       )
       # append the rows to the data.frame.
       data <- rbind(data, gaPage$data)
@@ -55,8 +57,13 @@ GaPaginate <- function(query, maxRequestedRows, creds) {
   )
 }
 
-GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000) {
-  request <- "data/ga"
+GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, queryClass = "gaQuery") {
+  request <- switch(
+    queryClass,
+    "gaQuery" = "data/ga",
+    "mcfQuery" = "data/mcf",
+    "rtQuery" = "data/realtime"
+  )
   scope <- ga_scopes['read_only']
   query <- c(
     query,
