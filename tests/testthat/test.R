@@ -633,8 +633,8 @@ test_that("functions DateRange, StartDate, EndDate, and their replacement versio
   DateRange(query) <- date_range
   expect_equivalent(DateRange(query), date_range)
   expect_equivalent(DateRange(date_range), date_range)
-  date_range1 <- DateRange(as.Date("2012-01-01"), as.Date("2012-01-31"))
-  date_range2 <- DateRange("2012-01-01", as.Date("2012-01-31"))
+  #date_range1 <- DateRange(as.Date("2012-01-01"), as.Date("2012-01-31"))
+  #date_range2 <- DateRange("2012-01-01", as.Date("2012-01-31"))
   #date_range3 <- DateRange(as.Date("2012-01-01"), "2012-01-31")
 })
 

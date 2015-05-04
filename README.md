@@ -1,3 +1,4 @@
+[![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
 ganalytics
 ==========
 
