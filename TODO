@@ -1,5 +1,1 @@
 Check response status codes from Google Analytics
-
-Clean up all-coercions.R:
- - group coercions methods - need to decide how to group them.
- - by ability to replace?, by from class?, by to class?, by complexity?, by usage?, by most needed?
