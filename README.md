@@ -3,10 +3,16 @@ ganalytics
 
 Interact with **Google Analytics** using **R**
 
-Classes and methods for interactive use of the Google Analytics core reporting and management APIs using R.
+Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.
 
 Updates
 -------
+
+Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.
+
+Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.
+
+Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), & (And), and ! (Not) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and & operators. Therefore, remember to use parentheses () to force the order of operation given to your Boolean expressions.
 
 There is now support for user and session level condition based segments as well as sequential segmentation.
 
@@ -150,15 +156,15 @@ As demonstrated in the installation steps above, before executing any of the fol
 
 ```r
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
-GaDateRange(myQuery) <- c("2013-01-01", "2013-05-31")
+DateRange(myQuery) <- c("2013-01-01", "2013-05-31")
 
 myData <- GetGaData(myQuery)
 summary(myData)
 
 # Adjust the start date to 1 March 2013:
-GaStartDate(myQuery) <- "2013-03-01"
+StartDate(myQuery) <- "2013-03-01"
 # Adjust the end date to 31 March 2013:
-GaEndDate(myQuery) <- "2013-03-31"
+EndDate(myQuery) <- "2013-03-31"
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -169,15 +175,15 @@ summary(myData)
 
 ```r
 # Report number of page views instead
-GaMetrics(myQuery) <- "pageviews"
+Metrics(myQuery) <- "pageviews"
 
 myData <- GetGaData(myQuery)
 summary(myData)
 
 # Report both pageviews and sessions
-GaMetrics(myQuery) <- c("pageviews", "sessions")
+Metrics(myQuery) <- c("pageviews", "sessions")
 # These variations are also acceptable
-GaMetrics(myQuery) <- c("ga:pageviews", "ga.sessions")
+Metrics(myQuery) <- c("ga:pageviews", "ga.sessions")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -187,11 +193,11 @@ summary(myData)
 ### Example 3 - Selecting what dimensions to split your metrics by
 
 ```r
-# Similar to metrics, but for dimensions
-GaDimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
+# Similar to metrics, but for dimensions
+Dimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
 
 # Lets set a wider date range
-GaDateRange(myQuery) <- c("2012-10-01", "2013-03-31")
+DateRange(myQuery) <- c("2012-10-01", "2013-03-31")
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -203,7 +209,7 @@ tail(myData)
 
 ```r
 # Sort by descending number of pageviews
-GaSortBy(myQuery) <- "-pageviews"
+SortBy(myQuery) <- "-pageviews"
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -215,14 +221,14 @@ tail(myData)
 
 ```r
 # Filter for Sunday sessions only
-sundayExpr <- GaExpr("dayofweek", "=", "0")
-GaFilter(myQuery) <- sundayExpr
+sundayExpr <- Expr("dayofweek", "=", "0")
+Filter(myQuery) <- sundayExpr
 
 myData <- GetGaData(myQuery)
 head(myData)
 
 # Remove the filter
-GaFilter(myQuery) <- NULL
+Filter(myQuery) <- NULL
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -233,18 +239,18 @@ head(myData)
 
 ```r
 # Expression to define Sunday sessions
-sundayExpr <- GaExpr("dayofweek", "=", "0")
+sundayExpr <- Expr("dayofweek", "=", "0")
 # Expression to define organic search sessions
-organicExpr <- GaExpr("medium", "=", "organic")
+organicExpr <- Expr("medium", "=", "organic")
 # Expression to define organic search sessions made on a Sunday
-sundayOrganic <- GaAnd(sundayExpr, organicExpr)
-GaFilter(myQuery) <- sundayOrganic
+sundayOrganic <- sundayExpr & organicExpr
+Filter(myQuery) <- sundayOrganic
 
 myData <- GetGaData(myQuery)
 head(myData)
 
 # Let's concatenate medium to the dimensions for our query
-GaDimensions(myQuery) <- c(GaDimensions(myQuery), "medium")
+Dimensions(myQuery) <- c(Dimensions(myQuery), "medium")
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -255,10 +261,10 @@ head(myData)
 
 ```r
 # In a similar way to AND
-loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
-loyalOrRecent <- GaOr(loyalExpr, recentExpr)
-GaFilter(myQuery) <- loyalOrRecent
+loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalOrRecent <- loyalExpr | recentExpr
+Filter(myQuery) <- loyalOrRecent
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -268,18 +274,18 @@ summary(myData)
 ### Example 8 - Filters that combine ORs with ANDs
 
 ```r
-loyalExpr <- GaExpr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- GaExpr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
-loyalOrRecent <- GaOr(loyalExpr, recentExpr)
-sundayExpr <- GaExpr("dayOfWeek", "=", "0")
-loyalOrRecent_Sunday <- GaAnd(loyalOrRecent, sundayExpr)
-GaFilter(myQuery) <- loyalOrRecent_Sunday
+loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalOrRecent <- loyalExpr | recentExpr
+sundayExpr <- Expr("dayOfWeek", "=", "0")
+loyalOrRecent_Sunday <- loyalOrRecent & sundayExpr
+Filter(myQuery) <- loyalOrRecent_Sunday
 
 myData <- GetGaData(myQuery)
 summary(myData)
 
 # Perform the same query but change which dimensions to view
-GaDimensions(myQuery) <- c("sessionCount", "daysSinceLastSession", "dayOfWeek")
+Dimensions(myQuery) <- c("sessionCount", "daysSinceLastSession", "dayOfWeek")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -292,11 +298,11 @@ summary(myData)
 # Continuing from example 8...
 
 # Change filter to loyal session AND recent sessions AND visited on Sunday
-loyalAndRecent_Sunday <- GaAnd(loyalExpr, recentExpr, sundayExpr)
-GaFilter(myQuery) <- loyalAndRecent_Sunday
+loyalAndRecent_Sunday <- loyalExpr & recentExpr & sundayExpr
+Filter(myQuery) <- loyalAndRecent_Sunday
 
 # Sort by decending visit count and ascending days since last visit.
-GaSortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
+SortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
 myData <- GetGaData(myQuery)
 head(myData)
 
@@ -314,17 +320,17 @@ tail(myData)
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
-thankyouExpr <- GaExpr("pagePath", "~", "thank\\-?you|success")
-GaSegment(myQuery) <- thankyouExpr
+thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
+Segment(myQuery) <- thankyouExpr
 
 # Reset the filter
-GaFilter(myQuery) <- NULL
+Filter(myQuery) <- NULL
 
 # Split by traffic source and medium
-GaDimensions(myQuery) <- c("source", "medium")
+Dimensions(myQuery) <- c("source", "medium")
 
 # Sort by decending number of sessions
-GaSortBy(myQuery) <- "-sessions"
+SortBy(myQuery) <- "-sessions"
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -336,15 +342,15 @@ head(myData)
 ```r
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
-GaFilter(myQuery) <- NULL
-GaSegment(myQuery) <- NULL
+Filter(myQuery) <- NULL
+Segment(myQuery) <- NULL
 # Define our date range
-GaDateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
-GaMetrics(myQuery) <- "sessions"
-GaDimensions(myQuery) <- c("date", "dayOfWeek", "hour")
+Metrics(myQuery) <- "sessions"
+Dimensions(myQuery) <- c("date", "dayOfWeek", "hour")
 # Let's allow a maximum of 17544 rows (default is 10000)
-GaMaxResults(myQuery) <- 17544
+MaxResults(myQuery) <- 17544
 
 myData <- GetGaData(myQuery)
 nrow(myData)
@@ -377,15 +383,15 @@ library(plyr)
 
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
-GaFilter(myQuery) <- NULL
-GaSegment(myQuery) <- NULL
+Filter(myQuery) <- NULL
+Segment(myQuery) <- NULL
 # Define our date range
-GaDateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
-GaMetrics(myQuery) <- "sessions"
-GaDimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
+Metrics(myQuery) <- "sessions"
+Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
 # Let's allow a maximum of 40000 rows (default is 10000)
-GaMaxResults(myQuery) <- 40000
+MaxResults(myQuery) <- 40000
 
 myData <- GetGaData(myQuery)
 

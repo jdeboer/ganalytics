@@ -257,3 +257,9 @@ setMethod(
     GaSegment(.Object$segmentId)
   }
 )
+
+# Forwards compatibility
+#'@export Segment
+Segment <- GaSegment
+#'@export Segment<-
+`Segment<-` <- `GaSegment<-`
