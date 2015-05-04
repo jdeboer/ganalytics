@@ -77,7 +77,7 @@ GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, qu
         paste("Google Analytics error", code, message, sep = " : ")
     ))
   }
-  data.ga <- GaListToDataframe(data.ga)
+  data.ga <- GaListToDataframe(data.ga, queryClass = queryClass)
   return(data.ga)
 }
 
@@ -104,8 +104,19 @@ FactorInt <- function(x) {
   factor(as.numeric(x), ordered = TRUE)
 }
 
-GaListToDataframe <- function(gaData) {
+GaListToDataframe <- function(gaData, queryClass) {
   if (gaData$totalResults > 0) {
+    if(queryClass == "mcfQuery") {
+      gaData$rows <- llply(gaData$rows, function(row) {
+        primitiveValues <- which(!is.na(row[['primitiveValue']]))
+        conversionPathValues <- which(!is.null(row[['conversionPathValue']]))
+        output <- list()
+        output[primitiveValues] <- row[['primitiveValue']][primitiveValues]
+        output[conversionPathValues] <- list(row[['conversionPathValue']][conversionPathValues])
+        output
+      })
+      gaData$rows <- do.call(rbind, gaData$rows)
+    }
     gaData$rows <- as.data.frame(
       gaData$rows,
       stringsAsFactors = FALSE
@@ -127,7 +138,7 @@ GaListToDataframe <- function(gaData) {
     gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0,]
     names(gaData$rows) <- gaData$columnHeaders$name
   }
-  names(gaData$rows) <- sub("^ga[:\\.]", "", names(gaData$rows))
+  names(gaData$rows) <- sub("^(ga|rt|mcf)[:\\.]", "", names(gaData$rows))
   return(
     list(
       data = gaData$rows,
