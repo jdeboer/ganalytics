@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.httr-oauth$
+^\.travis\.yml$
+^\.logo\.png$
+^\.logo\.xcf$
+^\.app_oauth_creds\.json$

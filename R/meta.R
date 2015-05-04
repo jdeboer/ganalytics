@@ -14,6 +14,7 @@ NULL
 #' Update the metadata file
 #' Update the package system file containing metadata about valid dimensions and metrics, etc.
 #' This function should be used prior to package build.
+#' 
 #' @return a data.frame
 GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   scope <- ga_scopes['read_only']

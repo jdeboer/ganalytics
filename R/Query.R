@@ -160,8 +160,8 @@ modify_query <- function(
   if (!is.na(filters)) {
     TableFilter(query) <- filters
   }
-  if (!is.na(segment)) {
-    GaSegment(query) <- segment
+  if (!is.na(segments)) {
+    GaSegment(query) <- segments
   }
   if (!is.na(sampling_level)) {
     SamplingLevel(query) <- sampling_level
