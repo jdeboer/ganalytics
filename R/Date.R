@@ -50,27 +50,7 @@ GetDataByDateRange <- function(query, dates) {
   })
 }
 
-# DateRange
-setMethod("DateRange", "dateRange", function(.Object) {.Object})
-
-setMethod(
-  f = "DateRange",
-  signature = c("character", "character"),
-  definition = function(.Object, endDate) {
-    startDate <- as.Date(parse_date(.Object, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    endDate <- as.Date(parse_date(endDate, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    new("dateRange", startDate, endDate)
-  }
-)
-
-setMethod(
-  f = "DateRange",
-  signature = c("Date", "Date"),
-  definition = function(.Object, endDate) {
-    startDate <- .Object
-    new("dateRange", startDate, endDate)
-  }
-)
+# StartDate and EndDate
 
 setMethod(
   f = "StartDate",
@@ -92,6 +72,10 @@ setMethod("StartDate", "dateRange", function(.Object) {.Object@startDate})
 
 setMethod("EndDate", "dateRange", function(.Object) {.Object@endDate})
 
+setMethod("StartDate", ".standardQuery", function(.Object) {StartDate(.Object@dateRange)})
+
+setMethod("EndDate", ".standardQuery", function(.Object) {EndDate(.Object@dateRange)})
+
 setMethod(
   f = "StartDate<-",
   signature = c("dateRange", "character"),
@@ -131,6 +115,75 @@ setMethod(
     DateRange(startDate, endDate)
   }
 )
+
+setMethod(
+  f = "StartDate<-",
+  signature = c(".standardQuery", "character"),
+  definition = function(.Object, value) {
+    dateRange <- DateRange(.Object)
+    StartDate(dateRange) <- value
+    DateRange(.Object) <- dateRange
+    .Object
+  }
+)
+
+setMethod(
+  f = "EndDate<-",
+  signature = c(".standardQuery", "character"),
+  definition = function(.Object, value) {
+    dateRange <- DateRange(.Object)
+    EndDate(dateRange) <- value
+    DateRange(.Object) <- dateRange
+    .Object
+  }
+)
+
+setMethod(
+  f = "StartDate<-",
+  signature = c(".standardQuery", "Date"),
+  definition = function(.Object, value) {
+    dateRange <- DateRange(.Object)
+    StartDate(dateRange) <- value
+    DateRange(.Object) <- dateRange
+    .Object
+  }
+)
+
+setMethod(
+  f = "EndDate<-",
+  signature = c(".standardQuery", "Date"),
+  definition = function(.Object, value) {
+    dateRange <- DateRange(.Object)
+    EndDate(dateRange) <- value
+    DateRange(.Object) <- dateRange
+    .Object
+  }
+)
+
+# DateRange
+
+setMethod("DateRange", "dateRange", function(.Object) {.Object})
+
+setMethod(
+  f = "DateRange",
+  signature = c("character", "character"),
+  definition = function(.Object, endDate) {
+    startDate <- as.Date(parse_date(.Object, output_format = kGaDateInFormat), format = kGaDateInFormat)
+    endDate <- as.Date(parse_date(endDate, output_format = kGaDateInFormat), format = kGaDateInFormat)
+    new("dateRange", startDate, endDate)
+  }
+)
+
+setMethod(
+  f = "DateRange",
+  signature = c("Date", "Date"),
+  definition = function(.Object, endDate) {
+    startDate <- .Object
+    new("dateRange", startDate, endDate)
+  }
+)
+
+setMethod("DateRange", ".standardQuery", function(.Object) {.Object@dateRange})
 
 setMethod(
   f = "DateRange<-",
@@ -145,9 +198,6 @@ setMethod(
     }
   }
 )
-
-
-setMethod("DateRange", ".standardQuery", function(.Object) {.Object@dateRange})
 
 setMethod(
   f = "DateRange<-",
@@ -204,54 +254,6 @@ setMethod(
 setMethod("DateRange<-", c(".standardQuery", "Date"), function(.Object, value) {
   DateRange(.Object, as.character(value))
 })
-
-setMethod("StartDate", ".standardQuery", function(.Object) {StartDate(.Object@dateRange)})
-
-setMethod("EndDate", ".standardQuery", function(.Object) {EndDate(.Object@dateRange)})
-
-setMethod(
-  f = "StartDate<-",
-  signature = c(".standardQuery", "character"),
-  definition = function(.Object, value) {
-    dateRange <- DateRange(.Object)
-    StartDate(dateRange) <- value
-    DateRange(.Object) <- dateRange
-    .Object
-  }
-)
-
-setMethod(
-  f = "EndDate<-",
-  signature = c(".standardQuery", "character"),
-  definition = function(.Object, value) {
-    dateRange <- DateRange(.Object)
-    EndDate(dateRange) <- value
-    DateRange(.Object) <- dateRange
-    .Object
-  }
-)
-
-setMethod(
-  f = "StartDate<-",
-  signature = c(".standardQuery", "Date"),
-  definition = function(.Object, value) {
-    dateRange <- DateRange(.Object)
-    StartDate(dateRange) <- value
-    DateRange(.Object) <- dateRange
-    .Object
-  }
-)
-
-setMethod(
-  f = "EndDate<-",
-  signature = c(".standardQuery", "Date"),
-  definition = function(.Object, value) {
-    dateRange <- DateRange(.Object)
-    EndDate(dateRange) <- value
-    DateRange(.Object) <- dateRange
-    .Object
-  }
-)
 
 # For backwards compatibility
 #'@export GaStartDate
