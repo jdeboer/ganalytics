@@ -1,4 +1,5 @@
 #' @importFrom lubridate ymd
+#' @importFrom stringr regex
 
 all_inherit <- function(list_object, class_names) {
   all(sapply(list_object, is, class_names))
@@ -13,8 +14,8 @@ parse_date <- function(date, output_format = kGaDateInFormat) {
 #' names, such as with custom dimensions, metrics and various goal related variables.
 IsVarMatch <- function(thisVar, inVars) {
   inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
-  inVars <- paste0("^", inVars, "$")
-  any(str_detect(thisVar, ignore.case(inVars)))
+  inVars <- regex(paste0("^", inVars, "$"), ignore_case = TRUE)
+  any(str_detect(thisVar, inVars))
 }
 
 #' ValidGaOperand

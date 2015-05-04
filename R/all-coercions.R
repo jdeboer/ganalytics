@@ -613,6 +613,16 @@ setAs(from = "list", to = ".dimensions", def = function(from, to) {
   }
 })
 
+updateSortBy <- function(object) {
+  queryVars <- union(object@dimensions, object@metrics)
+  curSortVars <- object@sortBy
+  newSortVars <- intersect(curSortVars, queryVars)
+  desc <- as.logical(curSortVars@desc[curSortVars %in% newSortVars])
+  use_class <- class(object@sortBy)
+  object@sortBy <- new(use_class, newSortVars, desc = desc)
+  object
+}
+
 setAs(from = ".query", to = ".dimensions",
   def = function(from, to) {
     from@dimensions
@@ -620,6 +630,7 @@ setAs(from = ".query", to = ".dimensions",
   replace = function(from, value) {
     use_class <- class(from@dimensions)
     from@dimensions <- as(value, use_class)
+    from <- ganalytics:::updateSortBy(from)
     validObject(from)
     from
   }
@@ -647,6 +658,7 @@ setAs(from = ".query", to = ".metrics",
   replace = function(from, value) {
     use_class <- class(from@metrics)
     from@metrics <- as(value, use_class)
+    from <- ganalytics:::updateSortBy(from)
     validObject(from)
     from
   }

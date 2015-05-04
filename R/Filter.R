@@ -36,4 +36,5 @@ setMethod(
 # Backwards compatibility
 #' @export GaFilter
 GaFilter <- TableFilter
+#' @export GaFilter<-
 `GaFilter<-` <- `TableFilter<-`

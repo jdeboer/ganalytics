@@ -1,5 +1,5 @@
 #' @importFrom methods setClass setClassUnion setValidity prototype
-#' @importFrom stringr str_replace str_detect ignore.case
+#' @importFrom stringr str_replace str_detect
 #' @importFrom assertthat validate_that
 #' @include ganalytics-package.R
 #' @include helper-functions.R
@@ -639,7 +639,10 @@ setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
 # ---- Simple and compound expression class union ----
 
-setClassUnion(".compoundExpr", c(".expr", "orExpr", "andExpr"))
+setClassUnion(".compoundExpr", c(
+  ".expr", "orExpr", "andExpr",
+  "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
+))
 
 # ---- dateRange ----
 

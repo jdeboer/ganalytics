@@ -23,7 +23,7 @@ setMethod("GaCreds", signature = c("character"),
 
 setMethod("GaCreds", signature = c("missing"),
           definition = function(object, ...) {
-            GoogleApiCreds(appname = object, ...)
+            GoogleApiCreds()
           })
 
 setMethod("GaCreds<-", signature = c(".query", "list"),

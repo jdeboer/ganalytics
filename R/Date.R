@@ -153,8 +153,34 @@ setMethod(
   f = "DateRange<-",
   signature = c(".standardQuery", "dateRange"),
   definition = function(.Object, value) {
-    .Object@dateRange <- value
-    validObject(.Object)
+    as(.Object, "dateRange") <- value
+    .Object
+  }
+)
+
+setMethod(
+  f = "DateRange<-",
+  signature = c(".standardQuery", ".standardQuery"),
+  definition = function(.Object, value) {
+    as(.Object, "dateRange") <- value
+    .Object
+  }
+)
+
+setMethod(
+  f = "DateRange<-",
+  signature = c("dateRange", "dateRange"),
+  definition = function(.Object, value) {
+    as(.Object, "dateRange") <- value
+    .Object
+  }
+)
+
+setMethod(
+  f = "DateRange<-",
+  signature = c("dateRange", ".standardQuery"),
+  definition = function(.Object, value) {
+    as(.Object, "dateRange") <- value
     .Object
   }
 )
@@ -240,4 +266,5 @@ GaDateRange <- DateRange
 `GaEndDate<-` <- `EndDate<-`
 #'@export GaDateRange<-
 `GaDateRange<-` <- `DateRange<-`
-
+#'@export GaSplitDateRange
+GaSplitDateRange <- SplitDateRange

@@ -8,7 +8,7 @@ Create a ganalytics query object}
 GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL, segment = NULL,
-  samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
+  samplingLevel = "DEFAULT", maxResults = kGaMaxResults, profileId = NA)
 }
 \arguments{
 \item{creds}{authentication credentials object created using GoogleApiCreds()}

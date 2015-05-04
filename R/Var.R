@@ -185,7 +185,7 @@ GaDimensions <- Dimensions
 #'@export GaMetrics
 GaMetrics <- Metrics
 #'@export GaDimensions<-
-`GaDimensions<-` <- Dimensions
+`GaDimensions<-` <- `Dimensions<-`
 #'@export GaMetrics<-
-`GaMetrics<-` <- Metrics
+`GaMetrics<-` <- `Metrics<-`
 

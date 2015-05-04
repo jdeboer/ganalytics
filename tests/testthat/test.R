@@ -607,3 +607,12 @@ test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", 
   expect_is(SortBy(query), ".sortBy")
 })
 
+test_that("Dimensions or metrics removed from a query are reflected in its sortBy", {
+  query <- GaQuery(view = 0)
+  Dimensions(query) <- c("eventCategory", "eventAction", "eventLabel")
+  Metrics(query) <- c("totalEvents", "uniqueEvents", "eventValue")
+  SortBy(query) <- c("totalEvents", "eventValue")
+  expect_equivalent(SortBy(query), SortBy("totalEvents", "eventValue"))
+  Metrics(query) <- "totalEvents"
+  expect_equivalent(SortBy(query), SortBy("totalEvents"))
+})

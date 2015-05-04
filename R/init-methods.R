@@ -1,5 +1,5 @@
 #' @include all-classes.R
-#' @importFrom stringr str_match
+#' @importFrom stringr str_match regex
 #' @importFrom lubridate ymd
 NULL
 
@@ -19,7 +19,7 @@ setMethod(
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
       tmp <- sub("^(ga:)?([a-z0-9]+)$", "ga:\\2", tmp)
-      if(str_detect(value, ignore.case("dateofsession"))) {
+      if(str_detect(value, regex("dateofsession", ignore_case = TRUE))) {
         tmp <- "dateOfSession"
       }
       ## Replace GA Var with correct casing of valid Var Name
@@ -31,10 +31,10 @@ setMethod(
       if (identical(any(varIndex == 0), TRUE)) {
         stop(paste0(
           "Ambiguous var name: ", paste0(value[varIndex == 0], collapse = ", "), ". Did you mean any of these?:\n",
-          paste(allVars_short[str_detect(allVars_short, ignore.case(paste0("^", tmp[varIndex == 0])))], collapse = ", ")
+          paste(allVars_short[str_detect(allVars_short, regex(paste0("^", tmp[varIndex == 0]), ignore_case = TRUE))], collapse = ", ")
         ))
       } else if (any(is.na(varIndex))) {
-        possible_matches <- allVars_short[str_detect(allVars_short, ignore.case(value[is.na(varIndex)]))]
+        possible_matches <- allVars_short[str_detect(allVars_short, regex(value[is.na(varIndex)], ignore_case = TRUE))]
         if (length(possible_matches) == 1) {
           matches <- possible_matches
         } else {

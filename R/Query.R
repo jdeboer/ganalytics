@@ -32,14 +32,18 @@ GaQuery <- function(
   filters = NULL,
   segment = NULL,
   samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults
+  maxResults = kGaMaxResults,
+  profileId = NA
 ) {
-  if(missing(view)) {
-    view <- GaAccounts(creds = creds)$entities[[1]]
-  }
+  if(missing(profileId)) {
+    if(missing(view)) {
+      view <- GaAccounts(creds = creds)$entities[[1]]
+    }
+  } else view <- profileId
   if (missing(creds) & is(view, ".gaResource")) {
     creds <- view$creds
   }
+  if (is(creds, "character")) {creds <- GaCreds(cache = creds)}
   new("gaQuery",
       viewId = GaView(view),
       dateRange = DateRange(
@@ -222,7 +226,7 @@ setMethod(
 GaSamplingLevel <- SamplingLevel
 #'@export GaSamplingLevel<-
 `GaSamplingLevel<-` <- `SamplingLevel<-`
-#'@export MaxResults
+#'@export GaMaxResults
 GaMaxResults <- MaxResults
-#'@export MaxResults<-
-`MaxResults<-` <- `MaxResults<-`
+#'@export GaMaxResults<-
+`GaMaxResults<-` <- `MaxResults<-`
