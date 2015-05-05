@@ -223,13 +223,13 @@ tail(myData)
 ```r
 # Filter for Sunday sessions only
 sundayExpr <- Expr("dayofweek", "=", "0")
-Filter(myQuery) <- sundayExpr
+TableFilter(myQuery) <- sundayExpr
 
 myData <- GetGaData(myQuery)
 head(myData)
 
 # Remove the filter
-Filter(myQuery) <- NULL
+TableFilter(myQuery) <- NULL
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -245,7 +245,7 @@ sundayExpr <- Expr("dayofweek", "=", "0")
 organicExpr <- Expr("medium", "=", "organic")
 # Expression to define organic search sessions made on a Sunday
 sundayOrganic <- sundayExpr & organicExpr
-Filter(myQuery) <- sundayOrganic
+TableFilter(myQuery) <- sundayOrganic
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -265,7 +265,7 @@ head(myData)
 loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
 recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- loyalExpr | recentExpr
-Filter(myQuery) <- loyalOrRecent
+TableFilter(myQuery) <- loyalOrRecent
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -280,7 +280,7 @@ recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime wi
 loyalOrRecent <- loyalExpr | recentExpr
 sundayExpr <- Expr("dayOfWeek", "=", "0")
 loyalOrRecent_Sunday <- loyalOrRecent & sundayExpr
-Filter(myQuery) <- loyalOrRecent_Sunday
+TableFilter(myQuery) <- loyalOrRecent_Sunday
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -300,7 +300,7 @@ summary(myData)
 
 # Change filter to loyal session AND recent sessions AND visited on Sunday
 loyalAndRecent_Sunday <- loyalExpr & recentExpr & sundayExpr
-Filter(myQuery) <- loyalAndRecent_Sunday
+TableFilter(myQuery) <- loyalAndRecent_Sunday
 
 # Sort by decending visit count and ascending days since last visit.
 SortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
@@ -325,7 +325,7 @@ thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
 Segment(myQuery) <- thankyouExpr
 
 # Reset the filter
-Filter(myQuery) <- NULL
+TableFilter(myQuery) <- NULL
 
 # Split by traffic source and medium
 Dimensions(myQuery) <- c("source", "medium")
@@ -343,7 +343,7 @@ head(myData)
 ```r
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
-Filter(myQuery) <- NULL
+TableFilter(myQuery) <- NULL
 Segment(myQuery) <- NULL
 # Define our date range
 DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
@@ -384,7 +384,7 @@ library(plyr)
 
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
-Filter(myQuery) <- NULL
+TableFilter(myQuery) <- NULL
 Segment(myQuery) <- NULL
 # Define our date range
 DateRange(myQuery) <- c("2011-01-01", "2012-12-31")

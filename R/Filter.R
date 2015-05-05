@@ -38,9 +38,3 @@ setMethod(
 GaFilter <- TableFilter
 #' @export GaFilter<-
 `GaFilter<-` <- `TableFilter<-`
-
-# Forwards compatibility
-#' @export Filter
-Filter <- TableFilter
-#' @export Filter<-
-`Filter<-` <- `TableFilter<-`

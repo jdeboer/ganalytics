@@ -13,7 +13,7 @@ Create an expression.
 \donttest{
   myQuery <- McfQuery(view = 123456789)
   source_matches_google <- McfExpr("mcf:source", "~", "google")
-  Filter(myQuery) <- source_matches_google
+  TableFilter(myQuery) <- source_matches_google
   GetData(myQuery)
 }
 }

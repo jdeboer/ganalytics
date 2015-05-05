@@ -2,6 +2,7 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @importFrom plyr adply
 NULL
 
 #'SplitDateRange

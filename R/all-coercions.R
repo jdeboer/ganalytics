@@ -5,6 +5,7 @@
 #' @include gtm-api-classes.R
 #' @include management-api-classes.R
 #' @importFrom assertthat assert_that
+#' @importFrom stringr str_split str_split_fixed
 NULL
 
 # Methods for coercion between classes

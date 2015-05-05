@@ -24,11 +24,11 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   attributes <- meta_data$items$attributes
   attributes <- mutate(
     attributes,
-    allowedInSegments = as.logical(match(allowedInSegments, table = c("false", "true")) - 1),
-    minTemplateIndex = as.numeric(minTemplateIndex),
-    maxTemplateIndex = as.numeric(maxTemplateIndex),
-    premiumMinTemplateIndex = as.numeric(premiumMinTemplateIndex),
-    premiumMaxTemplateIndex = as.numeric(premiumMaxTemplateIndex)
+    allowedInSegments = as.logical(match(attributes$allowedInSegments, table = c("false", "true")) - 1),
+    minTemplateIndex = as.numeric(attributes$minTemplateIndex),
+    maxTemplateIndex = as.numeric(attributes$maxTemplateIndex),
+    premiumMinTemplateIndex = as.numeric(attributes$premiumMinTemplateIndex),
+    premiumMaxTemplateIndex = as.numeric(attributes$premiumMaxTemplateIndex)
   )
   df <- cbind(vars, attributes)
   kGaVars <- dlply(df, "type", function(vars) {vars$id})
