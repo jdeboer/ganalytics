@@ -8,7 +8,7 @@ NULL
 
 setMethod(
   f = "GetGaQueries",
-  signature = signature(".gaUrlClasses"),
+  signature = signature(".query"),
   definition = function(.Object) {
     as(.Object, "matrix")
   }
@@ -19,7 +19,7 @@ setMethod(
 #' @param query the query to execute.
 #' @param .progress progress bar to display. use .progress = "none" to turn off.
 #' @return a dataframe
-setMethod("GetGaData", "gaQuery", function(
+setMethod("GetGaData", ".query", function(
   object,
   creds = NULL,
   .progress = "time",
@@ -27,24 +27,17 @@ setMethod("GetGaData", "gaQuery", function(
   addViewId = FALSE
 ) {
   if (is.null(creds)) {
-    if (length(object@creds) > 0) {
-      creds <- object@creds
-    } else {
-      creds <- GaCreds(
-        userName = object@userName,
-        appCreds = object@appCreds,
-        cache = object@authFile,
-        use_oob = use_oob
-      )
-    }
+    creds <- object@creds
   }
   queryParams <- GetGaQueries(object)
+  # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(
     .data = queryParams,
     .margins = 2,
     .fun = GaPaginate,
-    maxRequestedRows = GaMaxResults(object),
+    maxRequestedRows = MaxResults(object),
     creds = creds,
+    queryClass = class(object),
     .progress = .progress
   )
   data <- ldply(
@@ -54,11 +47,11 @@ setMethod("GetGaData", "gaQuery", function(
       if(addViewId & nrow(df) >= 1) {
         df <- mutate(df, viewId = response$viewId)
       }
-      attr(df, "sampleSize") <- response$sampleSize
-      attr(df, "sampleSpace") <- response$sampleSpace
       return(df)
     }
   )[-1]
+  attr(data, "sampleSize") <- sum(laply(responses, function(response){as.numeric(response$sampleSize)}))
+  attr(data, "sampleSpace") <- sum(laply(responses, function(response){as.numeric(response$sampleSpace)}))
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
   if (sampled) {
     warning("Contains sampled data.")

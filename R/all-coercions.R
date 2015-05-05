@@ -2,587 +2,558 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include helper-functions.R
+#' @include gtm-api-classes.R
+#' @include management-api-classes.R
+#' @importFrom assertthat assert_that
+#' @importFrom stringr str_split str_split_fixed
 NULL
 
-# Methods for coercision between classes
-# --------------------------------------
+# Methods for coercion between classes
+# ------------------------------------
 
-# Coercing to and from gaDim or gaMet and character
-setAs(
-  from = "character",
-  to = "gaMetVar",
-  def = function(from) {
-    new(to, from)
-  }
-)
+simpleCoerce <- function(from, to) {new(to, from)}
+simpleCoerceData <- function(from, to) {new(to, from@.Data)}
+simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
+simpleCoerceToList <- function(from, to) {new(to, list(from))}
+coerceViaList <- function(from, to) {as(as.list(from), to)}
+simpleReplace <- function(from, value) {initialize(from, value)}
+coerceLogicalOperand <- function(from, to){
+  operand <- ifelse(from, yes = "Yes", no = "No")
+  if (is.na(operand)) operand <- from
+  new(to, operand)
+}
 
-setAs(
-  from = "character",
-  to = "gaDimVar",
-  def = function(from) {
-    new(to, from)
-  }
-)
+# Coercing to .var classes
 
-setAs(
-  from = "gaMetVar",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = "gaDimVar",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = ".gaVar",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = "utf8",
-      URLencode(
-        URL = as.character(from@.Data),
-        reserved = TRUE
+setAs(from = "character", to = ".gaVar", def = function(from) {
+  tryCatch(
+    as(from, "gaMetVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, "gaDimVar"),
+        error = function(e2) {
+          stop(e1, e2)
+        }
       )
-    )
-  },
-  replace = function(from, value) {
-    from <- initialize(from, URLdecode(value))
-    return(from)
-  }
-)
+    }
+  )
+})
 
-# Coercing to and from gaDimOperator or gaMetOperator and character
-setAs(
-  from = "character",
-  to = "gaDimOperator",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "character",
-  to = "gaMetOperator",
-  def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "gaDimOperator",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = "gaMetOperator",
-  to = "character",
-  def = function(from) {
-    return(from@.Data)
-  },
-  replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
-  }
-)
-
-setAs(
-  from = ".gaOperator",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class="utf8",
-      URLencode(
-        URL = as.character(from@.Data),
-        reserved = TRUE
+setAs(from = "character", to = ".mcfVar", def = function(from) {
+  tryCatch(
+    as(from, "mcfMetVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, "mcfDimVar"),
+        error = function(e2) {
+          stop(e1, e2)
+        }
       )
-    )
+    }
+  )
+})
+
+setAs(from = "character", to = ".rtVar", def = function(from) {
+  tryCatch(
+    as(from, "rtMetVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, "rtDimVar"),
+        error = function(e2) {
+          stop(e1, e2)
+        }
+      )
+    }
+  )
+})
+
+setAs(from = "character", to = ".metVar", def = function(from) {
+  tryCatch(
+    as(from, "gaMetVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, "mcfMetVar"),
+        error = function(e2) {
+          tryCatch(
+            as(from, "rtMetVar"),
+            error = function(e3) {
+              stop(e1, e2, e3)
+            }
+          )
+        }
+      )
+    }
+  )
+})
+
+setAs(from = "character", to = ".dimVar", def = function(from) {
+  tryCatch(
+    as(from, "gaDimVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, "mcfDimVar"),
+        error = function(e2) {
+          tryCatch(
+            as(from, "rtDimVar"),
+            error = function(e3) {
+              stop(e1, e2, e3)
+            }
+          )
+        }
+      )
+    }
+  )
+})
+
+setAs(from = "character", to = ".var", def = function(from) {
+  tryCatch(
+    as(from, ".gaVar"),
+    error = function(e1) {
+      tryCatch(
+        as(from, ".mcfVar"),
+        error = function(e2) {
+          tryCatch(
+            as(from, ".rtVar"),
+            error = function(e3) {
+              stop(e1, e2, e3)
+            }
+          )
+        }
+      )
+    }
+  )
+})
+
+setAs(from = "character", to = "gaDimVar", def = simpleCoerce)
+setAs(from = "character", to = "gaMetVar", def = simpleCoerce)
+setAs(from = "character", to = "mcfDimVar", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetVar", def = simpleCoerce)
+setAs(from = "character", to = "rtDimVar", def = simpleCoerce)
+setAs(from = "character", to = "rtMetVar", def = simpleCoerce)
+
+setAs(from = ".mcfVar", to = ".gaVar", def = function(from, to) {
+  as(sub("mcf:", "ga:", from), to)
+})
+
+setAs(from = ".rtVar", to = ".gaVar", def = function(from, to) {
+  as(sub("rt:", "ga:", from), to)
+})
+
+setAs(from = ".gaVar", to = ".mcfVar", def = function(from, to) {
+  as(sub("ga:", "mcf:", from), to)
+})
+
+setAs(from = ".rtVar", to = ".mcfVar", def = function(from, to) {
+  as(sub("rt:", "mcf:", from), to)
+})
+
+setAs(from = ".gaVar", to = ".rtVar", def = function(from, to) {
+  as(sub("ga:", "rt:", from), to)
+})
+
+setAs(from = ".mcfVar", to = ".rtVar", def = function(from, to) {
+  as(sub("mcf:", "rt:", from), to)
+})
+
+setAs(from = ".expr", to = ".var",
+  def = function(from, to) {
+    from@var
   },
   replace = function(from, value) {
-    from <- initialize(from, URLdecode(value))
-    return(from)
+    Expr(value, from@operator, from@operand)
   }
 )
 
-# Coercing to and from gaDimOperand and character or gaMetOperand and numeric or character
-setAs(
-  from = "character",
-  to = "gaDimOperand",
-  def = function(from) {
-    new(to, from)
+setAs(from = ".expr", to = ".gaVar",
+  def = function(from, to) {
+    as(as(from, ".var"), to)
+  },
+  replace = function(from, value) {
+    as(from, ".var") <- value
+    from
   }
 )
 
-setAs(
-  from = "numeric",
-  to = "gaMetOperand",
-  def = function(from) {
-    new(to, from)
+# Coercing to .operator subclasses
+setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "gaMetOperator", def = simpleCoerce)
+setAs(from = "character", to = "mcfDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetOperator", def = simpleCoerce)
+setAs(from = "character", to = "rtDimOperator", def = simpleCoerce)
+setAs(from = "character", to = "rtMetOperator", def = simpleCoerce)
+
+setAs(from = ".expr", to = ".operator",
+  def = function(from, to) {
+    from@operator
+  },
+  replace = function(from, value) {
+    use_class <- class(from@operator)
+    from@operator <- as(value, use_class)
+    validObject(from)
+    from
+  })
+
+# Coercing to .operand subclasses
+setAs(from = "character", to = "gaDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "gaDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "gaDimOperand", def = coerceLogicalOperand)
+setAs(from = "numeric", to = "gaMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "gaMetOperand", def = simpleCoerceToNumeric)
+setAs(from = "character", to = "mcfDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "mcfDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "mcfDimOperand", def = coerceLogicalOperand)
+setAs(from = "numeric", to = "mcfMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetOperand", def = simpleCoerceToNumeric)
+setAs(from = "character", to = "rtDimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = "rtDimOperand", def = function(from, to){
+  as(as(from, "character"), to)
+})
+setAs(from = "logical", to = "rtDimOperand", def = coerceLogicalOperand)
+setAs(from = "numeric", to = "rtMetOperand", def = simpleCoerce)
+setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
+
+setAs(from = "character", to = ".dimOperand", def = simpleCoerce)
+setAs(from = "numeric", to = ".metOperand", def = simpleCoerce)
+
+setAs(from = "character", to = ".operand", def = function(from){
+  as(from, ".dimOperand")
+})
+
+setAs(from = "numeric", to = ".operand", def = function(from){
+  as(from, ".metOperand")
+})
+
+setAs(from = ".expr", to = ".operand",
+  def = function(from, to) {
+    from@operand
+  },
+  replace = function(from, value) {
+    use_class <- class(from@operand)
+    from@operand <- as(value, use_class)
+    validObject(from)
+    from
+  })
+
+compileOperand <- function(from) {
+  unEscapedOperand <- as(as(from, ".operand"), "character")
+  operator <- as(as(from, ".operator"), "character")
+  compiledOperand <- gsub(
+    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
+    replacement = "\\\\\\1",
+    x = unEscapedOperand
+  )
+  if (operator == "[]") {
+    compiledOperand <- paste0(compiledOperand, collapse = "|")
+  } else if (from@operator == "<>") {
+    compiledOperand <- paste0(compiledOperand, collapse = "_")
+  }
+  compiledOperand
+}
+
+# Need to consider escaping of the following characters in the operand:\|,;_
+parseOperand <- function(operand, operator) {
+  if (operator == "[]") {
+    operand <- str_split(operand, "\\|")[[1]]
+  } else if (operator == "<>") {
+    operand <- str_split_fixed(operand, "_", 2)[1,]
+  }
+  operand <- gsub("\\\\", "\\", operand)
+}
+
+# Coercing to logical
+setAs(from = ".dimOperand", to = "logical",
+  def = function(from, to) {
+    YesNo <- c("Yes" = TRUE, "No" = FALSE)
+    index <- pmatch(tolower(from), tolower(names(YesNo)))
+    YesNo[index]
   }
 )
 
-setAs(
-  from = "character",
-  to = "gaMetOperand",
-  def = function(from) {
-    new(to, as.numeric(from))
-  }
-)
-
-setAs(
-  from = "gaMetOperand",
-  to = "character",
+# Coercing to character
+setAs(from = ".metOperand", to = "character",
   def = function(from) {
     format(from@.Data, scientific = FALSE)
   },
   replace = function(from, value) {
     from@.Data <- as.numeric(value)
     validObject(from)
-    return(from)
+    from
   }
 )
 
-setAs(
-  from = "gaMetOperand",
-  to = "utf8",
-  def = function(from) {
-    new(Class = to, as(from, "character"))
-  }
-)
+# Coercing GA expressions to GA API compatible character strings
+setAs(from = ".expr", to = "character", def = function(from, to) {
+  paste0(
+    if(class(from) == "gaSegMetExpr") {
+      if(from@metricScope != "") paste0(from@metricScope, "::")
+    },
+    as(from@var, to),
+    as(from@operator, to),
+    as(compileOperand(from), to)
+  )
+})
 
-setAs(
-  from = "gaDimOperand",
-  to = "utf8",
-  def = function(from) {
-    URLencode(
-      URL = as.character(from@.Data),
-      reserved = TRUE
-    )
-  },
-  replace = function(from, value) {
-    from@.Data <- gsub(
-      pattern = "\\\\",
-      replacement = "\\",
-      x = URLdecode(URL = value)
-    )
-    validObject(from)
-    return(from)
-  }
-)
+setAs(from = "orExpr", to = "character", def = function(from, to) {
+  do.call(paste, c(lapply(from, as, to), sep = ","))
+})
 
-# Coercing to gaOr or gaAnd
-setAs(
-  from = ".gaExpr",
-  to = "gaOr",
-  def = function(from) {
-    new(to, list(from))
+setAs(from = "andExpr", to = "character", def = function(from, to) {
+  if(length(from) >= 1) {
+    do.call(paste, c(lapply(from, as, to), sep = ";"))
+  } else {
+    character(0)
   }
-)
+})
 
-setAs(
-  from = ".gaExpr",
-  to = "gaAnd",
-  def = function(from) {
-    new(
-      Class = to,
-      list(
-        as(
-          object = from,
-          Class = "gaOr"
+setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
+  paste0(
+    "condition::",
+    if(from@negation) {"!"} else {""},
+    as(as(from, "andExpr"), "character")
+  )
+})
+
+setAs(from = "gaSequenceCondition", to = "character", def = function(from, to) {
+  if(length(from) >= 1) {
+    paste0(
+      "sequence::",
+      if(from@negation) {"!"} else {""},
+      do.call(
+        paste0,
+        lapply(seq_along(from),
+          FUN = function(sequenceStep) {
+            paste0(
+              if(sequenceStep > 1) {
+                if(from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
+              } else {
+                if(from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
+              },
+              as(from[[sequenceStep]], to)
+            )
+          }
         )
       )
     )
+  } else {
+    character(0)
+  }
+})
+
+setAs(from = "gaSegmentCondition", to = "character", def = function(from, to) {
+  if(length(from) >= 1) {
+    paste(
+      from@conditionScope,
+      do.call(
+        paste,
+        c(
+          lapply(from, FUN = function(dimOrMetCondition) {
+              as(dimOrMetCondition, to)
+          }),
+          sep = ";"
+        )
+      ),
+      sep = "::"
+    )
+  } else {
+    character(0)
+  }
+})
+
+setAs(from = "gaDynSegment", to = "character",
+  def = function(from, to) {
+    if(length(from) >= 1) {
+      do.call(
+        paste,
+        c(
+          lapply(from, FUN = function(segmentCondition) {
+            as(segmentCondition, to)
+          }),
+          sep = ";"
+        )
+      )
+    } else {
+      character(0)
+    }
   }
 )
 
-setAs(
-  from = "gaAnd",
-  to = "gaOr",
+setAs(from = "gaSegmentId", to = "character",
   def = function(from) {
+    as.character(from@.Data)
+  },
+  replace = function(from, value) {
+    initialize(from, value)
+  }
+)
+
+# Coercing from gaMetrics, gaDimensions, and gaSortBy to character
+setAs(from = ".varList", to = "character",
+  def = function(from) {
+    paste(from@.Data, collapse = ",")
+  },
+  replace = function(from, value) {
+    initialize(from, unlist(strsplit(value, split = ",")))
+  }
+)
+
+setAs(from = ".sortBy", to = "character",
+  def = function(from) {
+    varNames <- sapply(from@.Data, FUN = function(varName) {
+      as(varName, "character")
+    })
+    descChar <- ifelse(from@desc, "-", "")
+    paste0(descChar, varNames, collapse = ",")
+  },
+  replace = function(from, value) {
+    as(value, class(from))
+  }
+)
+
+# Coercing to .gaExpr
+setAs(from = "character", to = ".expr", def = function(from) {
+  ops <- union(kGaOps$met, kGaOps$dim)
+  ops <- str_replace_all(ops, "(\\[|\\])", "\\\\\\1")
+  ops <- paste(ops, collapse = "|")
+  operator <- str_match(from, ops)[1,1]
+  x <- str_split_fixed(from, ops, 2)
+  var <- Var(x[1,1])
+  operand <- x[1,2]
+  Expr(var, operator, parseOperand(operand, operator))
+})
+
+# Coercing to orExpr
+setAs(from = ".expr", to = "orExpr", def = simpleCoerceToList)
+
+setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
+    # This is currently only legal if the gaAnd object does not contain any gaOr
+    # object of length greater than 1 OR if there is only one gaOr. Otherwise,
+    # in a future implementation if any gaOr objects have a length greater than
+    # 1, then they will need to be shortened to length 1 which is only possible
+    # if each expression within that gaOr shares the same dimension and the
+    # expression operators and operands can be combined either as a match regex
+    # or a match list.
+    
+    # Check that all contained gaOr objects in the list have a length of 1
+    assert_that(all(sapply(from, length) == 1) | length(from) == 1)
+    
     # Break apart the AND expression into OR expressions
     # then break apart each OR expression into single
     # expressions. Concatenate the single expressions
     # back up the chain. Then convert array into a list of
-    # expressions to use for a new AND expression.
-    new(
-      to, as.list(
-        do.call(
-          c, do.call(
-            c, from@.Data
-          )
-        )
-      )
-    )
+    # expressions to use for a new OR expression.
+    
+    new(to, as.list(do.call(c, do.call(c, from@.Data))))
   }
 )
 
-setAs(
-  from = "gaOr",
-  to = "gaAnd",
-  def = function(from) {
-    new(to, list(from))
+# Coercing to andExpr
+setAs(from = "orExpr", to = "andExpr", def = simpleCoerceToList)
+
+setAs(from = ".expr", to = "andExpr", def = function(from, to) {
+  new(to, list(
+    as(from, "orExpr")
+  ))
+})
+
+# Coercion to .filter subclasses
+
+setAs(from = "andExpr", to = ".tableFilter", def = function(from) {
+  if(all_inherit(unlist(from), ".gaExpr")) {
+    as(from, "gaFilter")
+  } else if(all_inherit(unlist(from), ".mcfExpr")) {
+    as(from, "mcfFilter")
+  } else if(all_inherit(unlist(from), ".rtExpr")) {
+    as(from, "rtFilter")
+  } else stop("Cannot determine type of filter.")
+})
+
+setAs(from = "NULL", to = "gaFilter", def = coerceViaList)
+setAs(from = "NULL", to = "mcfFilter", def = coerceViaList)
+setAs(from = "NULL", to = "rtFilter", def = coerceViaList)
+
+setAs(from = "NULL", to = ".tableFilter", def = coerceViaList)
+
+setAs(from = "andExpr", to = "gaFilter", def = simpleCoerce)
+setAs(from = "andExpr", to = "mcfFilter", def = simpleCoerce)
+setAs(from = "andExpr", to = "rtFilter", def = simpleCoerce)
+
+coerceToAndFirst <- function(from, to) {
+  as(as(from, "andExpr"), to)
+}
+
+setAs(from = "orExpr", to = "gaFilter", def = coerceToAndFirst)
+setAs(from = "orExpr", to = "mcfFilter", def = coerceToAndFirst)
+setAs(from = "orExpr", to = "rtFilter", def = coerceToAndFirst)
+setAs(from = "orExpr", to = ".tableFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "gaFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "mcfFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = "rtFilter", def = coerceToAndFirst)
+setAs(from = ".expr", to = ".tableFilter", def = coerceToAndFirst)
+
+setAs(from = "gaDynSegment", to = "gaFilter", def = simpleCoerceData)
+setAs(from = "gaDynSegment", to = ".tableFilter", def = simpleCoerceData)
+
+setAs(from = ".query", to = ".tableFilter",
+  def = function(from, to){
+    from@filters
+  },
+  replace = function(from, value) {
+    use_class <- class(from@filters)
+    from@filters <- as(value, use_class)
+    validObject(from)
+    from
   }
 )
 
-# Coercing GA expressions into GA API compatible character strings
-setAs(
-  from = ".gaExpr",
-  to = "character",
-  def = function(from) {
-    new(
-      to,
-      .Data <- paste(
-        if(class(from) == "gaSegMetExpr") {
-          if(from@metricScope != "") paste0(from@metricScope, "::")
-        },
-        as(from@gaVar, to),
-        as(from@gaOperator, to),
-        as(
-          object = gsub(
-            pattern = "([,;])",
-            replacement = "\\\\\\1",
-            x = from@gaOperand
-          ),
-          Class = to
-        ),
-        sep = ""
-      )
-    )
-  }
-)
+# Coercion to custom segment classes
 
-setAs(
-  from = "gaOr",
-  to = "character",
-  def = function(from) {
-    do.call(
-      paste,
-      c(
-        lapply(
-          X = from,
-          FUN = function(gaExpr) {
-            as(gaExpr, to)
-          }
-        ),
-        sep = ","
-      )
-    )
-  }
-)
+setAs(from = ".compoundExpr", to = "gaSequenceCondition", def = function(from, to) {
+  new(to, as("andExpr", from))
+})
 
-setAs(
-  from = "gaAnd",
-  to = "character",
-  def = function(from) {
-    if(length(from) >= 1) {
-      do.call(
-        paste,
-        c(
-          lapply(
-            X = from,
-            FUN = function(gaOr) {
-              as(gaOr, to)
-            }
-          ),
-          sep = ";"
-        )
-      )
-    } else {
-      character(0)
-    }
-  }
-)
+# Coercing to gaNonSequenceCondition
+setAs(from = ".compoundExpr", to = "gaNonSequenceCondition", def = function(from, to) {
+  new(to, as(from, "andExpr"))
+})
 
-setAs(
-  from = "gaSequenceCondition",
-  to = "character",
-  def = function(from) {
-    if(length(from) >= 1) {
-      paste0(
-        "sequence::",
-        if(from@negation) {"!"} else {""},
-        do.call(
-          paste0,
-          c(
-            lapply(
-              X = seq_along(from),
-              FUN = function(sequenceStep) {
-                paste0(
-                  if(sequenceStep > 1) {
-                    if(from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
-                  } else {
-                    if(from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
-                  },
-                  as(from[[sequenceStep]], to)
-                )
-              }
-            )
-          )
-        )
-      )
-    } else {
-      character(0)
-    }
-  }
-)
+# Coercing to gaSegmentCondition
+setAs(from = ".compoundExpr", to = "gaSegmentCondition", def = function(from, to) {
+  new(to, list(as("gaNonSequenceCondition", from)))
+})
 
-setAs(
-  from = "gaNonSequenceCondition",
-  to = "character",
-  def = function(from) {
-    paste0(
-      "condition::",
-      if(from@negation) {"!"} else {""},
-      as(as(from, "gaAnd"), "character")
-    )
-  }
-)
+# Coercion to gaSegmentId
 
-setAs(
-  from = "gaSegmentCondition",
-  to = "character",
-  def = function(from) {
-    if(length(from) >= 1) {
-      paste(
-        from@conditionScope,
-        do.call(
-          paste,
-          c(
-            lapply(
-              X = from,
-              FUN = function(dimOrMetCondition) {
-                as(dimOrMetCondition, to)
-              }
-            ),
-            sep = ";"
-          )
-        ),
-        sep = "::"
-      )
-    } else {
-      character(0)
-    }
-  }
-)
+setAs(from = "character", to = "gaSegmentId", def = simpleCoerce)
 
-setAs(
-  from = "gaDynSegment",
-  to = "character",
-  def = function(from) {
-    if(length(from) >= 1) {
-      do.call(
-        paste,
-        c(
-          lapply(
-            X = from,
-            FUN = function(segmentCondition) {
-              as(segmentCondition, to)
-            }
-          ),
-          sep = ";"
-        )
-      )
-    } else {
-      character(0)
-    }
-  }
-)
+setAs(from = "numeric", to = "gaSegmentId", def = function(from, to) {
+  new(to, as.character(from))
+})
 
-setAs(
-  from = ".gaExpr",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        URL = as(from, "character"),
-        reserved = TRUE
-      )
-    )
-  }
-)
+setAs(from = "gaUserSegment", to = "gaSegmentId", def = function(from, to) {
+  new(to, GaSegment(from))
+})
 
-setAs(
-  from = "gaOr",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        URL = as(from, "character"),
-        reserved = TRUE
-      )
-    )
-  }
-)
+# Coercing to gaDynSegment
 
-setAs(
-  from = "gaAnd",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        URL = as(from, "character"),
-        reserved = TRUE
-      )
-    )
-  }
-)
+setAs(from = "gaFilter", to = "gaDynSegment", def = simpleCoerceData)
 
-setAs(
-  from = "gaDynSegment",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        URL = as(from, "character"),
-        reserved = TRUE
-      )
-    )
-  }
-)
+setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
+  as(as(from, "andExpr"), to)
+})
 
-setAs(
-  from = "gaSegmentId",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        URL = as(from, "character"),
-        reserved = TRUE
-      )
-    )
-  }
-)
+setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
+  new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
+})
 
-# Coercing to gaDynSegment and gaFilter
-setAs(
-  from = "gaOr",
-  to = "gaDynSegment",
-  def = function(from) {
-    as(
-      object = as(from, "gaAnd"),
-      Class = to
-    )
-  }
-)
+setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
+  as(as(from, "andExpr"), to)
+})
 
-setAs(
-  from = "gaAnd",
-  to = "gaDynSegment",
-  def = function(from) {
-    new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
-  }
-)
-
-setAs(
-  from = ".gaExpr",
-  to = "gaDynSegment",
-  def = function(from) {
-    as(
-      object = as(from, "gaAnd"),
-      Class = to
-    )
-  }
-)
-
-setAs(
-  from = "gaOr",
-  to = "gaFilter",
-  def = function(from) {
-    as(
-      object = as(from, "gaAnd"),
-      Class = to
-    )
-  }
-)
-
-setAs(
-  from = ".gaExpr",
-  to = "gaFilter",
-  def = function(from) {
-    as(
-      object = as(from, "gaAnd"),
-      Class = to
-    )
-  }
-)
-
-setAs(
-  from = "gaDynSegment",
-  to = "gaFilter",
-  def = function(from) {
-    new(Class=to, from@.Data)
-  }
-)
-
-setAs(
-  from = "gaFilter",
-  to = "gaDynSegment",
-  def = function(from) {
-    new(Class=to, from@.Data)
-  }
-)
-
-# Coercing to gaSegmentCondition and gaNonSequenceCondition
-setAs(
-  from = ".gaCompoundExpr",
-  to = "gaSegmentCondition",
-  def = function(from) {
-    new(Class = to, list(GaNonSequenceCondition(from)))
-  }
-)
-
-setAs(
-  from = ".gaCompoundExpr",
-  to = "gaNonSequenceCondition",
-  def = function(from) {
-    new(Class = to, GaAnd(from))
-  }
-)
-
-# Coercing to gaSequenceCondition
-
-setAs(
-  from = ".gaCompoundExpr",
-  to = "gaSequenceCondition",
-  def = function(from) {
-    new(Class = to, GaAnd(from))
-  }
-)
-
-# Coercing to and from gaSegmentId
-setAs(
-  from = "numeric",
-  to = "gaSegmentId",
-  def = function(from) {
-    new(to, as.character(from))
-  }
-)
+# Coercion to numeric
 
 setAs(
   from = "gaSegmentId",
@@ -597,353 +568,464 @@ setAs(
     )
   },
   replace = function(from, value) {
-    from <- initialize(from, as.character(value))
-    return(from)
+    initialize(from, as.character(value))
   }
 )
 
-setAs(
-  from = "character",
-  to = "gaSegmentId",
+setAs(from = "gaQuery", to = ".gaSegment",
   def = function(from) {
-    new(to, from)
-  }
-)
-
-setAs(
-  from = "gaUserSegment",
-  to = "gaSegmentId",
-  def = function(from) {
-    new(to, GaSegment(from))
-  }
-)
-
-setAs(
-  from = "gaSegmentId",
-  to = "character",
-  def = function(from) {
-    as.character(from@.Data)
+    from@segment
   },
   replace = function(from, value) {
-    from <- initialize(from, value)
-    return(from)
+    from@segment <- as(value, ".gaSegment") # Need to define coercions to .gaSegment from char and numeric
+    validObject(from)
+    from
   }
 )
 
-# Coercing from gaMetrics, gaDimensions, and gaSortBy to character
-setAs(
-  from = ".gaVarList",
-  to = "character",
-  def = function(from) {
-    paste(from@.Data, collapse = ",")
+# Coercion to .varList
+setAs(from = "list", to = ".varList", def = function(from) {
+  vars <- unique(lapply(from, as, Class = ".var"))
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, ".gaVarList")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, ".mcfVarList")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, ".rtVarList")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
+})
+
+setAs(from = "list", to = ".dimensions", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".dimVar")}))
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaDimensions")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfDimensions")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtDimensions")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
+})
+
+updateSortBy <- function(object) {
+  queryVars <- union(object@dimensions, object@metrics)
+  curSortVars <- object@sortBy
+  newSortVars <- intersect(curSortVars, queryVars)
+  desc <- as.logical(curSortVars@desc[curSortVars %in% newSortVars])
+  use_class <- class(object@sortBy)
+  object@sortBy <- new(use_class, newSortVars, desc = desc)
+  object
+}
+
+setAs(from = ".query", to = ".dimensions",
+  def = function(from, to) {
+    from@dimensions
   },
   replace = function(from, value) {
-    from <- initialize(
-      .Object = from,
-      unlist(
-        strsplit(
-          x = value,
-          split = ","
-        )
-      )
-    )
-    return(from)
+    use_class <- class(from@dimensions)
+    from@dimensions <- as(value, use_class)
+    from <- ganalytics:::updateSortBy(from)
+    validObject(from)
+    from
   }
 )
 
-setAs(
-  from = "gaSortBy",
-  to = "character",
-  def = function(from) {
-    varNames <- sapply(
-      X = from@.Data,
-      FUN = function(varName) {
-        as(varName, "character")
-      }
-    )
-    descChar <- ifelse(
-      test = from@desc,
-      yes = "-",
-      no = ""
-    )
-    return(
-      paste(descChar, varNames, sep = "", collapse = ",")
-    )
+setAs(from = "list", to = ".metrics", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".metVar")}))
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaMetrics")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfMetrics")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtMetrics")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
+})
+
+setAs(from = ".query", to = ".metrics",
+  def = function(from, to) {
+    from@metrics
   },
   replace = function(from, value) {
-    from <- as(value, "gaSortBy")
+    use_class <- class(from@metrics)
+    from@metrics <- as(value, use_class)
+    from <- ganalytics:::updateSortBy(from)
+    validObject(from)
+    from
   }
 )
 
-setAs(
-  from = ".gaVarList",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = "utf8",
-      URLencode(
-        as(from, "character"),
-        reserved = TRUE
-      )
-    )
+setAs(from = "list", to = ".sortBy", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".var")}))
+  if (length(vars) >= 1) {
+    if (is(vars[[1]], ".gaVar")) {
+      as(vars, "gaSortBy")
+    } else if (is(vars[[1]], ".mcfVar")) {
+      as(vars, "mcfSortBy")
+    } else if (is(vars[[1]], ".rtVar")) {
+      as(vars, "rtSortBy")
+    } else stop("Cannot determine type of vars in list")
+  } else {
+    new(to, vars)
+  }
+})
+
+setAs(from = ".query", to = ".sortBy",
+  def = function(from, to) {
+    from@sortBy
   },
   replace = function(from, value) {
-    as(from, "character") <- URLdecode(value)
-    return(from)
+    use_class <- class(from@sortBy)
+    from@sortBy <- as(value, use_class)
+    validObject(from)
+    from
   }
 )
 
-setAs(
-  from = "gaSortBy",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = to,
-      URLencode(
-        as(from, "character"),
-        reserved = TRUE
-      )
-    )
+setAs(from = "list", to = ".gaVarList", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".gaVar")}))
+  if (all_inherit(vars, ".metVar")) {
+    as(vars, "gaMetrics")
+  } else if(all_inherit(vars, ".dimVar")) {
+    as(vars, "gaDimensions")
+  } else {
+    as(vars, "gaSortBy")
+  }
+})
+
+setAs(from = "list", to = ".mcfVarList", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".mcfVar")}))
+  if (all_inherit(vars, ".metVar")) {
+    as(vars, "mcfMetrics")
+  } else if(all_inherit(vars, ".dimVar")) {
+    as(vars, "mcfDimensions")
+  } else {
+    as(vars, "mcfSortBy")
+  }
+})
+
+setAs(from = "list", to = ".rtVarList", def = function(from) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".rtVar")}))
+  if (all_inherit(vars, ".metVar")) {
+    as(vars, "rtMetrics")
+  } else if(all_inherit(vars, ".dimVar")) {
+    as(vars, "rtDimensions")
+  } else {
+    as(vars, "rtSortBy")
+  }
+})
+
+setAs(from = "list", to = "gaDimensions", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "gaDimVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "gaMetrics", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "gaMetVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "gaSortBy", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".gaVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "mcfDimensions", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "mcfDimVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "mcfMetrics", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "mcfMetVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "mcfSortBy", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".mcfVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "rtDimensions", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "rtDimVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "rtMetrics", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), "rtMetVar")}))
+  new(to, vars)
+})
+
+setAs(from = "list", to = "rtSortBy", def = function(from, to) {
+  vars <- unique(lapply(from, function(var) {as(as.character(var), ".rtVar")}))
+  new(to, vars)
+})
+
+setAs(from = "character", to = "gaDimensions", def = coerceViaList)
+setAs(from = "character", to = "gaMetrics", def = coerceViaList)
+setAs(from = "character", to = "gaSortBy", def = coerceViaList)
+setAs(from = "character", to = "mcfDimensions", def = coerceViaList)
+setAs(from = "character", to = "mcfMetrics", def = coerceViaList)
+setAs(from = "character", to = "mcfSortBy", def = coerceViaList)
+setAs(from = "character", to = "rtDimensions", def = coerceViaList)
+setAs(from = "character", to = "rtMetrics", def = coerceViaList)
+setAs(from = "character", to = "rtSortBy", def = coerceViaList)
+
+setAs(from = "character", to = ".dimensions", def = coerceViaList)
+setAs(from = "character", to = ".metrics", def = coerceViaList)
+
+setAs(from = "NULL", to = ".dimensions", def = coerceViaList)
+setAs(from = "NULL", to = ".metrics", def = coerceViaList)
+setAs(from = "NULL", to = ".sortBy", def = coerceViaList)
+setAs(from = "NULL", to = "gaDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "gaMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "gaSortBy", def = coerceViaList)
+setAs(from = "NULL", to = "mcfDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "mcfMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "mcfSortBy", def = coerceViaList)
+setAs(from = "NULL", to = "rtDimensions", def = coerceViaList)
+setAs(from = "NULL", to = "rtMetrics", def = coerceViaList)
+setAs(from = "NULL", to = "rtSortBy", def = coerceViaList)
+
+# Coercion to .sortBy subclasses
+
+setAs(from = "character", to = ".sortBy", def = function(from) {
+  varChars <- unlist(strsplit(from, ","))
+  vars <- lapply(varChars, function(x) {
+    as(sub("^(\\+|\\-)","",x), ".var")
+  })
+  vars <- as(vars, ".sortBy")
+  desc <- logical(length(vars))
+  desc[grep("^\\+", varChars)] <- FALSE
+  desc[grep("^\\-", varChars)] <- TRUE
+  vars@desc <- desc
+  validObject(vars)
+  vars
+})
+
+setAs(from = "character", to = "gaSortBy", def = function(from) {
+  as(from, ".sortBy")
+})
+
+setAs(from = "character", to = "mcfSortBy", def = function(from, to) {
+  as(from, ".sortBy")
+})
+
+setAs(from = "character", to = "rtSortBy", def = function(from, to) {
+  as(from, ".sortBy")
+})
+
+# Coercion to viewId
+setAs(from = "numeric", to = "viewId", def = simpleCoerceData)
+setAs(from = "character", to = "viewId", def = simpleCoerceData)
+setAs(from = ".query", to = "viewId",
+  def = function(from, to) {
+    from@viewId
   },
   replace = function(from, value) {
-    as(from, "character") <- URLdecode(value)
-    return(from)
+    from@viewId <- as(value, "viewId")
+    validObject(from)
+    from
   }
 )
 
-setAs(
-  from = "character",
-  to = "gaSortBy",
-  def = function(from) {
-    varNames <- unlist(
-      strsplit(
-        x = from@.Data,
-        split = ","
-      )
-    )
-    desc <- grepl(
-      pattern = "^\\-",
-      x = varNames
-    )
-    varNames <- sub(
-      pattern = "^\\-",
-      replacement = "",
-      x = varNames
-    )
-    varNames <- lapply(
-      X = varNames,
-      FUN = GaVar
-    )
-    new(to, varNames, desc = desc)
-  }
-)
-
-setAs(
-  from = "utf8",
-  to = "gaSortBy",
-  def = function(from) {
-    as(URLdecode(from@.Data), to)
-  }
-)
-
-setAs(
-  from = "gaProfileId",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = "utf8",
-      URLencode(from@.Data, reserved = TRUE)
-    )
+setAs(from = "gaView", to = "viewId",
+  def = function(from, to) {
+    as(from$id, "viewId")
   },
   replace = function(from, value) {
-    from <- initialize(from, URLdecode(value))
-    return(from)
+    from$id <- as(value, "viewId")
   }
 )
 
-setAs(
-  from = "numeric",
-  to = "gaProfileId",
-  def = function(from) {
-    new("gaProfileId", from@.Data)
-  }
-)
-
-setAs(
-  from = "character",
-  to = "gaProfileId",
-  def = function(from) {
-    new("gaProfileId", from@.Data)
-  }
-)
-
-setAs(
-  from = "Date",
-  to = "utf8",
-  def = function(from) {
-    new(
-      Class = "utf8",
-      URLencode(
-        as.character(from, format = kGaDateInFormat),
-        reserved = TRUE
-      )
-    )
+# Select the default view of the property
+setAs(from = "gaProperty", to = "viewId",
+  def = function(from, to) {
+    as(from$defaultView, "viewId")
   },
   replace = function(from, value) {
-    from <- as.Date(
-      URLdecode(value),
-      format = kGaDateInFormat
-    )
+    as(from$defaultView, "viewId") <- as(value, "viewId")
   }
 )
 
-setAs(
-  from = "utf8",
-  to = "Date",
-  def = function(from) {
-    as.Date(
-      URLdecode(from),
-      format = kGaDateInFormat
-    )
+# Sselect the first property of the account, which is then
+# used to select a view (as above).
+setAs(from = "gaAccount", to = "viewId",
+  def = function(from, to) {
+    as(from$properties$entities[[1]], "viewId")
+  },
+  replace = function(from, value) {
+    as(from$properties$entities[[1]], "viewId") <- as(value, "viewId")
   }
 )
 
-setAs(
-  from = "gaQuery",
-  to = "utf8",
-  def = function(from) {
-    profilesDatesSegments <- do.call(
-      what = rbind,
-      args = lapply(
-        X = GaProfileId(from),
-        FUN = function(profileId) {
-          data.frame(
-            startDate = GaStartDate(from),
-            endDate = GaEndDate(from),
-            profileId = profileId,
-            stringsAsFactors = FALSE
-          )
-        }
-      )
-    )
-    new(
-      Class = "utf8",
-      mapply(
-        FUN = function(startDate, endDate, profileId) {
-          params <- c(
-            paste(
-              "ids",
-              GetGaUrl(GaProfileId(profileId)),
-              sep = "="
-            ),
-            paste(
-              "start-date",
-              GetGaUrl(startDate),
-              sep = "="
-            ),
-            paste(
-              "end-date",
-              GetGaUrl(endDate),
-              sep = "="
-            ),
-            paste(
-              "metrics",
-              GetGaUrl(GaMetrics(from)),
-              sep = "="
-            ),
-            if(length(GaDimensions(from)) >= 1) {
-              paste(
-                "dimensions",
-                GetGaUrl(GaDimensions(from)),
-                sep = "="
-              )
-            },
-            if(length(GaSortBy(from)) >= 1) {
-              paste(
-                "sort",
-                GetGaUrl(GaSortBy(from)),
-                sep = "="
-              )
-            },
-            if(length(GaFilter(from)) >= 1) {
-              paste(
-                "filters",
-                GetGaUrl(GaFilter(from)),
-                sep = "="
-              )
-            },
-            if(length(GaSegment(from)) >= 1) {
-              paste(
-                "segment",
-                GetGaUrl(GaSegment(from)),
-                sep = "="
-              )
-            },
-            paste(
-              "samplingLevel",
-              as(GaSamplingLevel(from), "character"),
-              sep = "="
-            )
-          )
-          return(
-            new(
-              Class = "utf8",
-              paste(params, collapse = "&")
-            )
-          )
-        },
-        profilesDatesSegments$startDate,
-        profilesDatesSegments$endDate,
-        profilesDatesSegments$profileId,
-        SIMPLIFY = FALSE
-      )
-    )
+# Coercion to dateRange
+setAs(from = ".query", to = "dateRange",
+  def = function(from, to) {
+    from@dateRange
+  },
+  replace = function(from, value) {
+    from@dateRange <- as(value, "dateRange")
+    validObject(from)
+    from
   }
 )
 
+# Coercion to matrix
 setAs(
   from = "gaQuery",
   to = "matrix",
   def = function(from) {
-    profilesDatesSegments <- do.call(
+    views <- as(from, "viewId")
+    dateRange <- as(from, "dateRange")
+    startDates <- dateRange@startDate
+    endDates <- dateRange@endDate
+    viewsDatesSegments <- do.call(
       what = rbind,
       args = lapply(
-        X = GaProfileId(from),
-        FUN = function(profileId) {
+        X = views,
+        FUN = function(viewId) {
           data.frame(
-            startDate = GaStartDate(from),
-            endDate = GaEndDate(from),
-            profileId = profileId,
+            startDate = startDates,
+            endDate = endDates,
+            viewId = viewId,
             stringsAsFactors = FALSE
           )
         }
       )
     )
     params <- mapply(
-      FUN = function(startDate, endDate, profileId) {
+      FUN = function(startDate, endDate, viewId) {
+        metrics <- as(from, ".metrics")
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
+        segment <- as(from, ".gaSegment")
         c(
-          "ids" = GetGaQueries(GaProfileId(profileId)),
+          "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
-          "metrics" = as(GaMetrics(from), "character"),
-          "dimensions" = if(length(GaDimensions(from)) >= 1) {
-            as(GaDimensions(from), "character")
+          "metrics" = as(metrics, "character"),
+          "dimensions" = if(length(dimensions) >= 1) {
+            as(dimensions, "character")
           },
-          "sort" = if(length(GaSortBy(from)) >= 1) {
-            as(GaSortBy(from), "character")
+          "sort" = if(length(sortBy) >= 1) {
+            as(sortBy, "character")
           },
-          "filters" = if(length(GaFilter(from)) >= 1) {
-            as(GaFilter(from), "character")
+          "filters" = if(length(tableFilter) >= 1) {
+            as(tableFilter, "character")
           },
-          "segment" = if(length(GaSegment(from)) >= 1) {
-            as(GaSegment(from), "character")
+          "segment" = if(length(segment) >= 1) {
+            as(segment, "character")
           },
-          "samplingLevel" = as(GaSamplingLevel(from), "character")
+          "samplingLevel" = as(from@samplingLevel, "character")
         )
       },
-      profilesDatesSegments$startDate,
-      profilesDatesSegments$endDate,
-      profilesDatesSegments$profileId
+      viewsDatesSegments$startDate,
+      viewsDatesSegments$endDate,
+      viewsDatesSegments$viewId
+    )
+  }
+)
+
+setAs(
+  from = "mcfQuery",
+  to = "matrix",
+  def = function(from) {
+    views <- as(from, "viewId")
+    dateRange <- as(from, "dateRange")
+    startDates <- dateRange@startDate
+    endDates <- dateRange@endDate
+    viewsDates <- do.call(
+      what = rbind,
+      args = lapply(
+        X = views,
+        FUN = function(viewId) {
+          data.frame(
+            startDate = startDates,
+            endDate = endDates,
+            viewId = viewId,
+            stringsAsFactors = FALSE
+          )
+        }
+      )
+    )
+    params <- mapply(
+      FUN = function(startDate, endDate, viewId) {
+        metrics <- as(from, ".metrics")
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
+        c(
+          "ids" = as(viewId, "character"),
+          "start-date" = as.character(startDate),
+          "end-date" = as.character(endDate),
+          "metrics" = as(metrics, "character"),
+          "dimensions" = if(length(dimensions) >= 1) {
+            as(dimensions, "character")
+          },
+          "sort" = if(length(sortBy) >= 1) {
+            as(sortBy, "character")
+          },
+          "filters" = if(length(tableFilter) >= 1) {
+            as(tableFilter, "character")
+          },
+          "samplingLevel" = as(from@samplingLevel, "character")
+        )
+      },
+      viewsDates$startDate,
+      viewsDates$endDate,
+      viewsDates$viewId
+    )
+  }
+)
+
+setAs(
+  from = "rtQuery",
+  to = "matrix",
+  def = function(from) {
+    views <- do.call(
+      what = rbind,
+      args = lapply(
+        X = as(from, "viewId"),
+        FUN = function(viewId) {
+          data.frame(
+            viewId = viewId,
+            stringsAsFactors = FALSE
+          )
+        }
+      )
+    )
+    params <- mapply(
+      FUN = function(viewId) {
+        metrics <- as(from, ".metrics")
+        dimensions <- as(from, ".dimensions")
+        sortBy <- as(from, ".sortBy")
+        tableFilter <- as(from, ".tableFilter")
+        c(
+          "ids" = as(viewId, "character"),
+          "metrics" = as(metrics, "character"),
+          "dimensions" = if(length(dimensions) >= 1) {
+            as(dimensions, "character")
+          },
+          "sort" = if(length(sortBy) >= 1) {
+            as(sortBy, "character")
+          },
+          "filters" = if(length(tableFilter) >= 1) {
+            as(tableFilter, "character")
+          }
+        )
+      },
+      views$viewId
     )
   }
 )

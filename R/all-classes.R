@@ -1,3 +1,6 @@
+#' @importFrom methods setClass setClassUnion setValidity prototype
+#' @importFrom stringr str_replace str_detect
+#' @importFrom assertthat validate_that
 #' @include ganalytics-package.R
 #' @include helper-functions.R
 NULL
@@ -5,378 +8,540 @@ NULL
 # Class definitions for ganalytics
 # --------------------------------
 
-# ---- GA dimension and metric variables ----
-
-setOldClass(c("gaUserSegment", "R6"))
-setOldClass(c("gaAccount", "R6"))
-setOldClass(c("gaProperty", "R6"))
-setOldClass(c("gaView", "R6"))
+# ---- dimension and metric variables ----
 
 setClass(
-  Class = "gaMetVar",
+  ".var",
+  contains = "character",
+  validity = function(object) {
+    validate_that(length(object) == 1)
+  }
+)
+
+setClass(
+  "gaMetVar",
   prototype = prototype("ga:sessions"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
-    if (!IsVarMatch(object@.Data, kGaVars$mets)) {
-      return(
-        paste("Invalid GA metric name", object@.Data, sep = ": ")
-      )  
+    if (IsVarMatch(object@.Data, kGaVars$mets)) {
+      TRUE
+    } else {
+      paste("Invalid GA metric name", object@.Data, sep = ": ")
     }
-    return(TRUE)
   }
 )
 
-
 setClass(
-  Class = "gaDimVar",
+  "gaDimVar",
   prototype = prototype("ga:date"),
-  contains = "character",
+  contains = ".var",
   validity = function(object) {
-    if (!IsVarMatch(object@.Data, kGaVars$dims)) {
-      return(
-        paste("Invalid GA dimension name", object@.Data, sep = ": ")
-      )  
+    if (IsVarMatch(object@.Data, kGaVars$dims)) {
+      TRUE
+    } else {
+      paste("Invalid GA dimension name", object@.Data, sep = ": ")
     }
-    return(TRUE)
   }
 )
-
-setClassUnion(
-  name = ".gaVar",
-  members = c("gaMetVar", "gaDimVar")
-)
-
-setValidity(
-  Class=".gaVar",
-  method=function(object) {
-    if(length(object) != 1) {
-      return("gaVar's must be a character vector of length 1")
-    }
-    return(TRUE)
-  }
-)
-
-IsVarMatch <- function(thisVar, inVars) {
-  # The following method is a temporary workaround to support XX placeholders in dimension and metric
-  # names, such as with custom dimensions, metrics and various goal related variables.
-  inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
-  inVars <- paste0("^", inVars, "$")
-  any(str_detect(thisVar, ignore.case(inVars)))
-}
-
-# ---- GA expression operators ----
-
 
 setClass(
-  Class = "gaMetOperator",
+  "mcfMetVar",
+  prototype = prototype("mcf:totalConversions"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kMcfVars$mets)) {
+      TRUE
+    } else {
+      paste("Invalid MCF metric name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClass(
+  "mcfDimVar",
+  prototype = prototype("mcf:nthDay"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kMcfVars$dims)) {
+      TRUE
+    } else {
+      paste("Invalid MCF dimension name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClass(
+  "rtMetVar",
+  prototype = prototype("rt:activeUsers"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kRtVars$mets)) {
+      TRUE
+    } else {
+      paste("Invalid RT metric name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClass(
+  "rtDimVar",
+  prototype = prototype("rt:minutesAgo"),
+  contains = ".var",
+  validity = function(object) {
+    if (IsVarMatch(object@.Data, kRtVars$dims)) {
+      TRUE
+    } else {
+      paste("Invalid RT dimension name", object@.Data, sep = ": ")
+    }
+  }
+)
+
+setClassUnion(".gaVar", c("gaMetVar", "gaDimVar"))
+setClassUnion(".mcfVar", c("mcfMetVar", "mcfDimVar"))
+setClassUnion(".rtVar", c("rtMetVar", "rtDimVar"))
+
+setClassUnion(".metVar", c("gaMetVar", "mcfMetVar", "rtMetVar"))
+setClassUnion(".dimVar", c("gaDimVar", "mcfDimVar", "rtDimVar"))
+
+# ---- expression operators ----
+
+setClass(
+  ".operator",
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
-    if (!(object@.Data %in% kGaOps$met)) {
-      return(
-        paste("Invalid metric operator", object@.Data, sep = ": ")
-      )
-    }
-    return(TRUE)
+    validate_that(length(object) == 1)
   }
 )
 
-
 setClass(
-  Class = "gaDimOperator",
-  contains = "character",
-  prototype = prototype("=="),
+  "gaMetOperator",
+  contains = ".operator",
   validity = function(object) {
-    if (!(object@.Data %in% kGaOps$dim)) {
-      return(
-        paste("Invalid dimension operator", object@.Data, sep = ": ")
-      )
-    }
-    return(TRUE)
+    validate_that(object@.Data %in% kGaOps$met)
   }
 )
 
-# export
-# setClass(
-#   #{dimensionOrMetricName}<>{minValue}_{maxValue} #For metrics or numerical dimensions, also dates
-#   #{dimensionName}[]{value1}|{value2}|...
-#   #A maximum of 10 values per in-list dimension condition is allowed. Only for dimensions
-#   contains = ".gaOperator"
-#   #dateOfSession<>2014-05-20_2014-05-30
-#   dateOfSession is a special dimension
-# )
-
-setClassUnion(
-  name = ".gaOperator",
-  members = c("gaMetOperator", "gaDimOperator")
-)
-
-setValidity(
-  Class = ".gaOperator",
-  method = function(object) {
-    if(length(object) != 1) {
-      return("gaOperator's must be character vector of length 1")
-    }
-    return(TRUE)
+setClass(
+  "gaDimOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kGaOps$dim)
   }
 )
 
-# ---- GA expression operands ----
-
-
 setClass(
-  Class = "gaMetOperand",
-  contains = "numeric"
+  "mcfMetOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kMcfOps$met)
+  }
 )
 
+setClass(
+  "mcfDimOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kMcfOps$dim)
+  }
+)
 
 setClass(
-  Class = "gaDimOperand",
+  "rtMetOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kRtOps$met)
+  }
+)
+
+setClass(
+  "rtDimOperator",
+  contains = ".operator",
+  validity = function(object) {
+    validate_that(object@.Data %in% kRtOps$dim)
+  }
+)
+
+setClassUnion(".gaOperator" , c("gaMetOperator" , "gaDimOperator"))
+setClassUnion(".mcfOperator", c("mcfMetOperator", "mcfDimOperator"))
+setClassUnion(".rtOperator" , c("rtMetOperator" , "rtDimOperator"))
+
+setClassUnion(".dimOperator", c("gaDimOperator", "mcfDimOperator", "rtDimOperator"))
+setClassUnion(".metOperator", c("gaMetOperator", "mcfMetOperator", "rtMetOperator"))
+
+# ---- expression operands ----
+
+setClass(
+  ".metOperand",
+  contains = "numeric",
+  validity = function(object) {
+    validate_that(all(is.na(object) == FALSE))
+  }
+)
+
+setClass(
+  ".dimOperand",
   contains = "character"
 )
 
-
 setClass(
-  "gaDimOperandList",
-  contains = "list",
+  "gaMetOperand",
+  contains = ".metOperand",
   validity = function(object) {
-    if (length(object) < 1) {
-      return(
-        "A gaDimOperandList must be of at least length 1"
-      )
-    }
-    if (any(lapply(object, class) != "gaDimOperand")) {
-      return(
-        "All items within a gaDimOperandList must be of class gaDimOperand"
-      )
-    }
-    return(TRUE)
+    if (length(object) == 2) {
+      if (object[1] > object[2]) {
+        "The first value in a range must not be greater than the second"
+      } else TRUE
+    } else validate_that(length(object) <= 2)
   }
 )
-
-setClassUnion(
-  name = ".gaOperandScalar",
-  members = c("gaMetOperand", "gaDimOperand")
-)
-
-setValidity(
-  Class = ".gaOperandScalar",
-  method = function(object) {
-    if(length(object) != 1) {
-      return(".gaOperand must be a vector of length 1")
-    }
-    return(TRUE)
-  }
-)
-
-setClassUnion(
-  name = ".gaOperand",
-  members = c(".gaOperandScalar", "gaDimOperandList")
-)
-
-# ---- GA simple expressions -------------------------------------------------------
 
 setClass(
-  Class = ".gaExpr",
-  representation = representation(
-    gaVar = ".gaVar",
-    gaOperator = ".gaOperator",
-    gaOperand = ".gaOperand"
+  "gaDimOperand",
+  contains = ".dimOperand",
+  validity = function(object) {
+    validate_that(length(object) <= 10)
+  }
+)
+
+setClass(
+  "mcfMetOperand",
+  contains = ".metOperand"
+)
+
+setClass(
+  "mcfDimOperand",
+  contains = ".dimOperand"
+)
+
+setClass(
+  "rtMetOperand",
+  contains = ".metOperand"
+)
+
+setClass(
+  "rtDimOperand",
+  contains = ".dimOperand"
+)
+
+setClassUnion(".gaOperand", c("gaMetOperand", "gaDimOperand"))
+setClassUnion(".mcfOperand", c("mcfMetOperand", "mcfDimOperand"))
+setClassUnion(".rtOperand", c("rtMetOperand", "rtDimOperand"))
+
+setValidity(".mcfOperand", function(object) {
+  validate_that(length(object) == 1)
+})
+
+setValidity(".rtOperand", function(object) {
+  validate_that(length(object) == 1)
+})
+
+setClassUnion(".operand", c(
+  "gaMetOperand", "gaDimOperand",
+  "mcfMetOperand", "mcfDimOperand",
+  "rtMetOperand", "rtDimOperand"
+))
+
+setValidity(".operand", function(object){
+  validate_that(length(object) >= 1)
+})
+
+# ---- simple expressions -------------------------------------------------------
+
+setClass(
+  ".gaExpr",
+  slots = c(
+    var = ".gaVar",
+    operator = ".gaOperator",
+    operand = ".gaOperand"
+  )
+)
+
+setClass(
+  ".mcfExpr",
+  slots = c(
+    var = ".mcfVar",
+    operator = ".mcfOperator",
+    operand = ".mcfOperand"
+  )
+)
+
+setClass(
+  ".rtExpr",
+  slots = c(
+    var = ".rtVar",
+    operator = ".rtOperator",
+    operand = ".rtOperand"
+  )
+)
+
+setClass(
+  ".metExpr",
+  slots = c(
+    var = ".metVar",
+    operator = ".metOperator",
+    operand = ".metOperand"
+  )
+)
+
+setClass(
+  ".dimExpr",
+  slots = c(
+    var = ".dimVar",
+    operator = ".dimOperator",
+    operand = ".dimOperand"
+  )
+)
+
+setClass(
+  "gaMetExpr",
+  slots = c(
+    var = "gaMetVar",
+    operator = "gaMetOperator",
+    operand = "gaMetOperand"
   ),
-  contains = "VIRTUAL"
-)
-
-
-setClass(
-  Class = "gaMetExpr",
-  contains = ".gaExpr",
+  contains = c(".gaExpr", ".metExpr"),
   validity = function(object) {
-    if (!class(object@gaVar)=="gaMetVar") {
-      return("gaVar must be of class gaMetVar")
-    } else if (!class(object@gaOperator)=="gaMetOperator") {
-      return("gaOperator must be of class gaMetOperator")
-    } else if (!class(object@gaOperand)=="gaMetOperand") {
-      return("gaOperand must be of class gaMetOperand")
+    if (object@operator == "<>") {
+      if (length(object@operand) != 2) {
+        "operand must be of length 2 when using a range operator '<>'."
+      } else TRUE
     } else {
-      return(TRUE)
+      if (length(object@operand) != 1) {
+        "operand must be of length 1 unless using a range operator '<>'."
+      } else TRUE
     }
   }
 )
 
-
 setClass(
-  Class = "gaSegMetExpr",
-  representation = representation(
+  "gaSegMetExpr",
+  slots = c(
     metricScope = "character"
   ),
   prototype = prototype(
     metricScope = "perSession"
   ),
   contains = "gaMetExpr",
-  validity =  function(object) {
-    if (!length(object@metricScope) == 1) {
-      return("metricScope must be of length 1.")
-    } else if (!(object@metricScope %in% c("", "perUser", "perSession", "perHit"))) {
-      return("metricScope must be one of '', 'perUser', 'perSession' or 'perHit'.")
-    } else {
-      return(TRUE)
-    }
-  }
-)
-
-
-setClass(
-  Class = "gaDimExpr",
-  contains = ".gaExpr",
   validity = function(object) {
-    if (!class(object@gaVar)=="gaDimVar") {
-      return("gaVar must be of class gaDimVar")
-    } else if (!class(object@gaOperator)=="gaDimOperator") {
-      return("gaOperator must be of class gaDimOperator")
-    } else if (!class(object@gaOperand)=="gaDimOperand") {
-      return("gaOperand must be of class gaDimOperand")
-    } else if (GaIsRegEx(object@gaOperator) & nchar(object@gaOperand) > 128) {
-      return(
-        paste("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length", nchar(object@gaOperand), sep = " = ")
-      )
-    } else if (object@gaOperator %in% c("!=", "==")) {
-      return(
-        ValidGaOperand(object@gaVar, object@gaOperand)
-      )
-    } else {
-      return(TRUE)
-    }
+    validate_that(
+      length(object@metricScope) == 1,
+      object@metricScope %in% c("perUser", "perSession", "perHit")
+    )
   }
 )
 
-#' ValidGaOperand
-#' 
-#' Checks whether an operand value is valid for a selected dimension.
-#' 
-#' @param gaVar selected dimension to check operand against
-#' @param gaOperand the operand value to check
-#' 
-ValidGaOperand <- function(gaVar, gaOperand) {
-  test <- switch(
-    gaVar,
-    "ga:date" = grepl(pattern = "^[0-9]{8}$", x = gaOperand) &&
-      (as.Date(x = gaOperand, format = kGaDateOutFormat) >= kGaDateOrigin),
-    "ga:year" = grepl(pattern = "^[0-9]{4}$", x = gaOperand) &&
-      (as.Date(x = gaOperand, format = "%Y") >= kGaDateOrigin),
-    "ga:month" = grepl(pattern = "^(0[1-9]|1[0-2])$", x = gaOperand),
-    "ga:week" = grepl(pattern = "^([0-4][1-9]|5[0-3])$", x = gaOperand),
-    "ga:day" = grepl(pattern = "^([0-2][0-9][1-9]|3[0-5][0-9]|36[0-6])$", x = gaOperand),
-    "ga:hour" = grepl(pattern = "^([01][0-9]|2[0-3])$", x = gaOperand),
-    "ga:dayOfWeek" = grepl(pattern = "^[0-6]$", x = gaOperand),
-    "ga:visitorType" = gaOperand %in% c("New Visitor", "Returning Visitor"),
-    TRUE
-  )
-  if (gaVar %in% c("ga:nthMonth", "ga:nthWeek", "ga:nthDay", "ga:pageDepth", "ga:visitLength", "ga:visitCount", "ga:daysSinceLastVisit")) {
-    test <- as.numeric(gaOperand) > 0
-  } else if (gaVar %in% c("ga:searchUsed", "ga:javaEnabled", "ga:isMobile", "ga:isTablet", "ga:hasSocialSourceReferral")) {
-    test <- gaOperand %in% c("Yes", "No")
-  }
-  if (test) {
-    return(TRUE)
-  } else {
-    return(paste("Invalid", gaVar, "operand:", gaOperand))
-  }
-}
-
-# ---- GA 'AND' and 'OR' compound expressions -------------------------------
-
-
 setClass(
-  Class = "gaOr",
-  contains = "list",
-  # A object of class gaOr must be a list containing
-  # objects from the superclass .gaExpr
-  # i.e. it must contain gaDimExprs or gaMetExprs, or both
+  "gaDimExpr",
+  slots = c(
+    var = "gaDimVar",
+    operator = "gaDimOperator",
+    operand = "gaDimOperand"
+  ),
+  contains = c(".gaExpr", ".dimExpr"),
   validity = function(object) {
-    if (
-      !all(
-        sapply(
-          X = object@.Data,
-          FUN = function(x) {
-            inherits(x, ".gaExpr")
-          }
-        )
-      )
-    ) {
-      return("gaOr must be a list containing objects that all inherit from the class .gaExpr")
-    } else {
-      return(TRUE)
+    if (object@operator == "<>") {
+      rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
+      if (!(object@var %in% rangeDimVars)) {
+        return("A range operator only supports numerical dimensions or metrics")
+      }
     }
+    if (!(length(object@operand) == 1 | object@operator %in% c("<>", "[]"))) {
+      return("operand must be of length 1 unless using a range '<>' or list '[]' operator.")
+    } else if (!(length(object@operand) <= 2 | object@operator == "[]")) {
+      return("operand may only be greater than length 2 if using a list operator '[]'.")
+    } else if (IsRegEx(object@operator)) {
+      if (nchar(object@operand) > 128) {
+        return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@operand)))
+      }
+    }
+    if (object@operator %in% c("!=", "==", "<>", "[]")) {
+      ValidGaOperand(object@var, object@operand)
+    } else TRUE
   }
 )
 
+setClass(
+  "mcfMetExpr",
+  slots = c(
+    var = "mcfMetVar",
+    operator = "mcfMetOperator",
+    operand = "mcfMetOperand"
+  ),
+  contains = c(".mcfExpr", ".metExpr")
+)
 
 setClass(
-  Class = "gaAnd",
+  "mcfDimExpr",
+  slots = c(
+    var = "mcfDimVar",
+    operator = "mcfDimOperator",
+    operand = "mcfDimOperand"
+  ),
+  contains = c(".mcfExpr", ".dimExpr")
+)
+
+setClass(
+  "rtMetExpr",
+  slots = c(
+    var = "rtMetVar",
+    operator = "rtMetOperator",
+    operand = "rtMetOperand"
+  ),
+  contains = c(".rtExpr", ".metExpr")
+)
+
+setClass(
+  "rtDimExpr",
+  slots = c(
+    var = "rtDimVar",
+    operator = "rtDimOperator",
+    operand = "rtDimOperand"
+  ),
+  contains = c(".rtExpr", ".dimExpr")
+)
+
+setClassUnion(".expr", c(
+  "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
+))
+
+# ---- 'AND' and 'OR' compound expressions -------------------------------
+
+setClass(
+  "orExpr",
   contains = "list",
   validity = function(object) {
-    if (
-      all(
-        sapply(
-          X = object@.Data,
-          FUN = function(x) {
-            class(x) == "gaOr"
-          }
-        )
-      )
-    ) {
-      return(TRUE)
+    if (all_inherit(object@.Data, ".expr")) {
+      TRUE
     } else {
-      return("gaAnd must be a list containing objects all of the class gaOr")
+      "An orExpr must be a list containing objects that all inherit from the class .expr"
     }
   }
 )
 
-# ---- Simple and compound expression class union ----
-
-setClassUnion(
-  name = ".gaCompoundExpr",
-  members = c(".gaExpr", "gaOr", "gaAnd")
+setClass(
+  "andExpr",
+  contains = "list",
+  validity = function(object) {
+    if (all_inherit(object@.Data, "orExpr")) {
+      TRUE
+    } else {
+      "An andExpr must be a list containing objects all of the class orExpr"
+    }
+  }
 )
 
-# ---- GA filter ----
-
+# ---- table filter ----
 
 setClass(
-  Class = "gaFilter",
-  contains = "gaAnd",
+  ".tableFilter",
+  contains = "andExpr",
   validity = function(object) {
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
-    if (
-      all(
-        sapply(
-          X = object@.Data,
-          FUN = function(gaOr) {
-            length(
-              unique(
-                sapply(
-                  X = gaOr,
-                  FUN = class
-                )
-              )
-            ) == 1
-          }
-        )
-      )
-    ) {
-      return(TRUE)
+    if (all(sapply(object@.Data, function(orExpr) {
+      length(unique(sapply(orExpr, class))) == 1
+    }))) {
+      TRUE
     } else {
-      return("An OR expression in a filter cannot mix metrics and dimensions.")
+      return("An OR expression within a filter cannot mix metrics and dimensions.")
+    }
+    if (all(sapply(unlist(object@.Data), function(expr){
+      !any(Operator(expr) %in% c("[]", "<>"))
+    }))) {
+      TRUE
+    } else {
+      return("Filter expressions do not support '[]' or '<>' operators.")
+    }    
+  }
+)
+
+setClass(
+  "gaFilter",
+  contains = ".tableFilter",
+  validity = function(object) {
+    ## Check that single expressions within each OR expression exclusively
+    ## belong to .gaExpr class
+    if (all_inherit(unlist(object@.Data), ".gaExpr")) {
+      TRUE
+    } else {
+      return("All expressions within a gaFilter must be of superclass .gaExpr")
+    }
+    if (all(sapply(unlist(object@.Data), GaVar) != "dateOfSession")) {
+      TRUE
+    } else {
+      return("Filters do not support the 'dateOfSession' dimension. Use 'ga:date' instead.")
+    }
+    if (!any(sapply(unlist(object@.Data), GaVar) %in% c("<>", "[]"))) {
+      TRUE
+    } else {
+      return("Filters do not support <> and [] operators.")
     }
   }
 )
 
-# ---- GA Dynamic and pre-defined segments ----
+setClass(
+  "mcfFilter",
+  contains = ".tableFilter",
+  validity = function(object) {
+    ## Check that single expressions within each OR expression exclusively
+    ## belong to .mcfExpr class
+    if (all_inherit(unlist(object@.Data), ".mcfExpr")) {
+      TRUE
+    } else {
+      return("All expressions within a mcfFilter must be of superclass .mcfExpr")
+    }
+  }
+)
 
 setClass(
-  Class = ".gaDimensionOrMetricConditions",
-  representation = representation(
+  "rtFilter",
+  contains = ".tableFilter",
+  validity = function(object) {
+    ## Check that single expressions within each OR expression exclusively
+    ## belong to .mcfExpr class
+    if (all_inherit(unlist(object@.Data), ".rtExpr")) {
+      TRUE
+    } else {
+      return("All expressions within a rtFilter must be of superclass .rtExpr")
+    }
+  }
+)
+
+# ---- dynamic and pre-defined segments ----
+
+## TO DO - rename these classes to be clear they are segmentation classes.
+## or consider how these classes can extend to MCF paths, which are a form of sequences.
+
+
+setClass(
+  "gaDimensionOrMetricCondition",
+  contains = "andExpr",
+  validity = function(object) {
+    if (all(sapply(unlist(object@.Data), function(expr) {
+      if (Operator(expr) == "<>" & Var(expr) == "dateOfSession") {
+        (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
+      } else TRUE
+    }))) {
+      TRUE
+    } else {
+      return("The maximum date range for dateOfSession is 31 days.")
+    }
+    if (all(sapply(unlist(object@.Data), function(expr) {
+      if (Var(expr) == "dateOfSession") {
+        Operator(expr) == "<>"
+      } else TRUE
+    }))) {
+      TRUE
+    } else {
+      return("The dateOfSession dimension can only be used with a <> operator.")
+    }
+  }
+)
+
+setClass(
+  ".gaSimpleOrSequence",
+  slots = c(
     negation = "logical"
   ),
   prototype = prototype(
@@ -384,58 +549,48 @@ setClass(
   ),
   contains = "VIRTUAL",
   validity = function(object) {
-    if (length(object@negation) == 1) {
-      TRUE
-    } else {
-      "Slot negation must be of length 1."
-    }
+    validate_that(
+      length(object@negation) == 1
+    )
   }
 )
 
-
 setClass(
-  Class = "gaSequenceStep",
-  representation = representation(
+  "gaSequenceStep",
+  slots = c(
     immediatelyPrecedes = "logical"
   ),
   prototype = prototype(
     immediatelyPrecedes = FALSE
   ),
-  contains = "gaAnd",
+  contains = "gaDimensionOrMetricCondition",
   validity = function(object) {
-    if (length(object@immediatelyPrecedes) == 1) {
-      return(TRUE)
-    } else {
-      return("immediatelyPrecedes must be of length 1.")
-    }
+    validate_that(
+      length(object@immediatelyPrecedes) == 1
+    )
   }
 )
 
-
 setClass(
-  Class = "gaSequenceCondition",
-  contains = c("list", ".gaDimensionOrMetricConditions"),
+  "gaSequenceCondition",
+  contains = c("list", ".gaSimpleOrSequence"),
   validity = function(object) {
-    if (all(sapply(object@.Data, function(x) {
-      inherits(x, "gaSequenceStep")
-    }))) {
+    if (all_inherit(object@.Data, "gaSequenceStep")) {
       TRUE
     } else {
-      "All conditions within a sequence list must belong to the superclass gaSequenceStep."
+      "All conditions within a sequence list must belong to the superclass 'gaSequenceStep'."
     }
   }
 )
 
-
 setClass(
-  Class = "gaNonSequenceCondition",
-  contains = c("gaAnd", ".gaDimensionOrMetricConditions")
+  "gaNonSequenceCondition",
+  contains = c("gaDimensionOrMetricCondition", ".gaSimpleOrSequence")
 )
 
-
 setClass(
-  Class = "gaSegmentCondition",
-  representation = representation(
+  "gaSegmentCondition",
+  slots = c(
     conditionScope = "character"
   ),
   prototype = prototype(
@@ -443,73 +598,57 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, function(x) {
-      inherits(x, ".gaDimensionOrMetricConditions")
-    }))) {
-      if (length(object@conditionScope) == 1) {
-        if (object@conditionScope %in% c("users", "sessions")) {
-          TRUE
-        } else {
-          "Slot 'conditionScope' must be either 'users' or 'sessions'."
-        }
-      } else {
-        "Slot 'conditionScope' must be of length 1."
-      }
-    } else {
-      "All conditions within a gaSegmentCondition list must belong to the superclass .gaDimensionOrMetricConditions."
-    }
+    if (!all_inherit(object@.Data, ".gaSimpleOrSequence")) {
+      "All conditions within a gaSegmentCondition list must belong to the superclass '.gaSimpleOrSequence'."
+    } else if (length(object@conditionScope) != 1) {
+      "Slot 'conditionScope' must be of length 1."
+    } else if (!(object@conditionScope %in% c("users", "sessions"))) {
+      "Slot 'conditionScope' must be either 'users' or 'sessions'."
+    } else TRUE
   }
 )
 
-
 setClass(
-  Class = "gaDynSegment",
+  "gaDynSegment",
   contains = "list",
   validity = function(object) {
-    if (all(sapply(object@.Data, function(x) {inherits(x, "gaSegmentCondition")}))) {
-      TRUE
-    } else {
-      "All objects with a gaDynSegment list must belong to the class gaSegmentCondition."
-    } 
+    if (!all_inherit(object@.Data, "gaSegmentCondition")) {
+      "All objects with a gaDynSegment list must belong to the class 'gaSegmentCondition'."
+    } else if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
+      "The maximum expression length for dimension conditions is 1024 characters."
+    } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
+      "A maximum of 10 dimension or metric conditions per segment."
+    } else TRUE
   }
 )
 
-
 setClass(
-  Class = "gaSegmentId",
+  "gaSegmentId",
   contains = "character",
   validity = function(object) {
     pattern <- "^gaid::\\-?[0-9]+$"
     if (length(object) != 1) {
-      return("gaSegmentId must be a character vector of length 1")
-    }
-    if (!grepl(pattern = pattern, x = object@.Data)) {
-      return(
-        paste("gaSegmentId must match the regular expression ", pattern, sep = "")
-      )
-    }
-    TRUE
+      "gaSegmentId must be a character vector of length 1"
+    } else if (!grepl(pattern = pattern, x = object@.Data)) {
+      paste("gaSegmentId must match the regular expression ", pattern, sep = "")
+    } else TRUE
   }
 )
 
-setClassUnion(
-  name = ".gaSegment",
-  members = c("gaDynSegment", "gaSegmentId")
-)
+setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
-# setClassUnion(
-#   name = ".gaLogical",
-#   members = c(".gaOperator",".gaCompoundExpr")
-# )
+# ---- Simple and compound expression class union ----
 
-# ---- GA query dimensions, metrics, and sortby lists ----
+setClassUnion(".compoundExpr", c(
+  ".expr", "orExpr", "andExpr",
+  "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
+))
 
-
-# Validity check to implement: Ensure date does not preceed Google Analytics launch date 2005-01-01
+# ---- dateRange ----
 
 setClass(
-  Class = "gaDateRange",
-  representation = representation(
+  "dateRange",
+  slots = c(
     startDate = "Date",
     endDate = "Date"
   ),
@@ -518,80 +657,47 @@ setClass(
     endDate = Sys.Date() - 1
   ),
   validity = function(object) {
-    if (length(object@startDate) == length(object@endDate)) {
-      if (all(object@endDate >= object@startDate)) {
-        return(TRUE)
-      } else {
-        return("endDate cannot be before startDate")
-      }
-    } else {
-      return("startDate and endDate must be the same length")
-    }
+    if (length(object@startDate) != length(object@endDate)) {
+      "startDate and endDate must be the same length"
+    } else if (all(object@startDate > object@endDate)) {
+      "endDate cannot be before startDate"
+    } else if (all(object@startDate < kGaDateOrigin)) {
+      paste("Start date cannot preceed Google Analytics launch date:", kGaDateOrigin)
+    } else TRUE
   }
 )
 
+# ---- query dimensions, metrics, and sortby lists ----
 
 setClass(
-  Class = "gaMetrics",
-  prototype = prototype(
-    list(new("gaMetVar"))
-  ),
+  ".metrics",
   contains = "list",
   validity = function(object) {
-    if (
-      all(
-        sapply(
-          X = object,
-          FUN = function(gaVar) {
-            class(gaVar) == "gaMetVar"
-          }
-        )
-      )
-    ) {
-      if (length(object) <= kGaMax$metrics) {
-        return(TRUE)
-      } else {
-        paste("Maximum of", kGaMax$metrics, "metrics allowed.", sep = " ")
-      }
-    } else {
-      return("Must be a list containing objects of class gaMetVar")
-    }
+    if (!all_inherit(object, ".metVar")) {
+      return("Must be a list containing objects of class .metVar")
+    } else TRUE
+    if (length(object) > kGaMax$metrics) {
+      return(paste("Maximum of", kGaMax$metrics, "metrics allowed."))
+    } else TRUE
   }
 )
 
-
 setClass(
-  Class = "gaDimensions",
-  prototype = prototype(
-    list(new("gaDimVar"))
-  ),
+  ".dimensions",
   contains = "list",
   validity = function(object) {
-    if (
-      all(
-        sapply(
-          X = object,
-          FUN = function(.gaVar) {
-            class(.gaVar) == "gaDimVar"
-          }
-        )
-      )
-    ) {
-      if (length(object) <= kGaMax$dimensions) {
-        return(TRUE)
-      } else {
-        paste("Maximum of", kGaMax$dimensions, "dimensions allowed.", sep = " ")
-      }
-    } else {
-      return("Must be a list containing objects of class gaDimVar")
-    }
+    if (!all_inherit(object, ".dimVar")) {
+      return("Must be a list containing objects of class .dimVar")
+    } else TRUE
+    if (length(object) > kGaMax$dimensions) {
+      return(paste("Maximum of", kGaMax$dimensions, "dimensions allowed."))
+    } else TRUE
   }
 )
 
-
 setClass(
-  Class = "gaSortBy",
-  representation = representation(
+  ".sortBy",
+  slots = c(
     desc = "logical"
   ),
   prototype = prototype(
@@ -600,146 +706,209 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (
-      all(
-        sapply(
-          X = object@.Data,
-          FUN = function(gaVar) {
-            inherits(gaVar, ".gaVar")
-          }
-        )
-      )
-    ) {
-      if (length(object@.Data) == length(object@desc)) {
-        return(TRUE)
-      } else {
-        return("List vector and desc vector must be of equal lengths")
-      }
-    } else {
-      return("Must be a list containing objects of class .gaVar")
-    }
+    if (length(object@.Data) != length(object@desc)) {
+      "List vector and desc vector must be of equal lengths"
+    } else TRUE
   }
 )
 
-setClassUnion(
-  name = ".gaVarList",
-  members = c("gaMetrics", "gaDimensions", "gaSortBy"),
-)
+setClassUnion(".varList", c(".metrics", ".dimensions", ".sortBy"))
 
-# ---- Ga Profile ID ----
-
+setValidity(".varList", function(object) {
+  if (!all_inherit(object, ".var") & length(object@.Data) > 0) {
+    "Must be a list containing objects of class .var"
+  } else TRUE
+})
 
 setClass(
-  Class = "gaProfileId",
+  "gaMetrics",
+  prototype = prototype(
+    list(new("gaMetVar"))
+  ),
+  contains = ".metrics"
+)
+
+setClass(
+  "mcfMetrics",
+  prototype = prototype(
+    list(new("mcfMetVar"))
+  ),
+  contains = ".metrics"
+)
+
+setClass(
+  "rtMetrics",
+  prototype = prototype(
+    list(new("rtMetVar"))
+  ),
+  contains = ".metrics"
+)
+
+setClass(
+  "gaDimensions",
+  prototype = prototype(
+    list(new("gaDimVar"))
+  ),
+  contains = ".dimensions"
+)
+
+setClass(
+  "mcfDimensions",
+  prototype = prototype(
+    list(new("mcfDimVar"))
+  ),
+  contains = ".dimensions"
+)
+
+setClass(
+  "rtDimensions",
+  prototype = prototype(
+    list(new("rtDimVar"))
+  ),
+  contains = ".dimensions"
+)
+
+setClass("gaSortBy", contains = ".sortBy")
+setClass("mcfSortBy", contains = ".sortBy")
+setClass("rtSortBy", contains = ".sortBy")
+
+setClassUnion(".gaVarList", c("gaMetrics", "gaDimensions", "gaSortBy"))
+
+setValidity(".gaVarList", function(object) {
+  if (!all_inherit(object, ".gaVar")) {
+    "Must be a list containing objects of class .gaVar"
+  } else TRUE
+})
+
+setClassUnion(".mcfVarList", c("mcfMetrics", "mcfDimensions", "mcfSortBy"))
+
+setValidity(".mcfVarList", function(object) {
+  if (!all_inherit(object, ".mcfVar")) {
+    "Must be a list containing objects of class .mcfVar"
+  } else TRUE
+})
+
+setClassUnion(".rtVarList", c("rtMetrics", "rtDimensions", "rtSortBy"))
+
+setValidity(".rtVarList", function(object) {
+  if (!all_inherit(object, ".rtVar")) {
+    "Must be a list containing objects of class .rtVar"
+  } else TRUE
+})
+
+# ---- Profile ID ----
+
+setClass(
+  "viewId",
   contains = "character",
   validity = function(object) {
-    if (
-      all(
-        sapply(
-          X = object,
-          FUN = function(profileId) {
-            grepl(pattern = "^ga:[0-9]+$",  x = profileId)
-          }
-        )
-      )
-    ) {
-      return(TRUE)
+    if (all(str_detect(object, "^ga:[0-9]+$"))) {
+      TRUE
     } else {
-      return("gaProfileId must be an string of digits preceeded by 'ga:'")
+      "viewId must be an string of digits preceeded by 'ga:'"
     }
   }
 )
 
 # -- GA query construct ----
 
-samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
-
-setClassUnion("characterOrList", c("character", "list"))
+setClass(
+  ".query",
+  slots = c(
+    viewId = "viewId",
+    metrics = ".metrics",
+    dimensions = ".dimensions",
+    sortBy = ".sortBy",
+    filters = ".tableFilter",
+    maxResults = "numeric",
+    creds = "list"
+  ),
+  prototype = prototype(
+    maxResults = kGaMaxResults,
+    creds = list()
+  ),
+  validity = function(object) {
+    valid <- validate_that(
+      length(object@maxResults) == 1,
+      object@maxResults >= 1,
+      length(object@metrics) >= 1
+    )
+    if (valid == TRUE) {
+      if (object@maxResults > kGaMaxRows) {
+        "maxResults cannot be greater than 1,000,000"
+      } else if (!all(object@sortBy %in% union(object@metrics, object@dimensions))) {
+        "sortBy must contain varNames also used as metrics and/or dimensions"
+      } else TRUE
+    } else valid
+  }
+)
 
 setClass(
-  Class = "gaQuery",
-  representation = representation(
-    profileId = "gaProfileId",
-    dateRange = "gaDateRange",
+  ".standardQuery",
+  slots = c(
+    dateRange = "dateRange",
+    samplingLevel = "character"
+  ),
+  prototype = prototype(
+    dateRange = new("dateRange"),
+    samplingLevel = "DEFAULT"
+  ),
+  contains = ".query",
+  validity = function(object) {
+    valid <- validate_that(length(object@samplingLevel) == 1)
+    if (valid == TRUE) {
+      if (!(object@samplingLevel %in% samplingLevel_levels)) {
+        paste("samplingLevel must be one of:", paste(samplingLevel_levels, collapse = ", "))
+      } else TRUE
+    } else valid
+  }
+)
+
+setClass(
+  "gaQuery",
+  slots = c(
     metrics = "gaMetrics",
     dimensions = "gaDimensions",
     sortBy = "gaSortBy",
     filters = "gaFilter",
-    segment = ".gaSegment",
-    samplingLevel = "character",
-    maxResults = "numeric",
-    authFile = "character",
-    userName = "character",
-    appCreds = "characterOrList",
-    creds = "list"
+    segment = ".gaSegment"
   ),
   prototype = prototype(
-    dateRange = new("gaDateRange"),
     metrics = new("gaMetrics"),
     dimensions = new("gaDimensions"),
-    sortBy = new("gaSortBy"),
-    samplingLevel = "DEFAULT",
-    maxResults = kGaMaxResults
+    sortBy = new("gaSortBy")
   ),
-  validity = function(object) {
-    if (length(object@maxResults) == 1) {
-      if (object@maxResults >= 1) {
-        if (object@maxResults <= kGaMaxRows) {
-          if (!is.null(object@sortBy)) {
-            if (
-              all(
-                !is.na(
-                  match(
-                    x = object@sortBy,
-                    table = union(object@metrics, object@dimensions)
-                  )
-                )
-              )
-            ) {
-              if ((length(object@samplingLevel) != 1) | !(object@samplingLevel %in% samplingLevel_levels)) {
-                return(paste("samplingLevel must be one of:", samplingLevel_levels))
-              } else {
-                return(TRUE)
-              }
-            } else {
-              return("sortBy must contain varNames also used as metrics and/or dimensions")
-            }
-          } else {
-            return(TRUE)
-          }
-        } else {
-          return("maxResults cannot be greater than 1,000,000")
-        }
-      } else {
-        return("maxResults must be at least 1")
-      }
-    } else {
-      return("maxResults must be of length 1")
-    }
-  }
-)
-
-setClassUnion(
-  name = ".gaUrlClasses",
-  members = c(
-    #".gaCompoundExpr",
-    ".gaExpr", "gaOr", "gaAnd", "gaDynSegment",
-    
-    #".gaVarList",
-    "gaMetrics", "gaDimensions", "gaSortBy",
-    
-    ".gaVar",
-    ".gaOperator",
-    ".gaOperand",
-    ".gaSegment",
-    "gaFilter",
-    "gaProfileId",
-    "Date",
-    "gaQuery"
-  )
+  contains = ".standardQuery"
 )
 
 setClass(
-  Class = "utf8",
-  contains = "character"
+  "mcfQuery",
+  slots = c(
+    metrics = "mcfMetrics",
+    dimensions = "mcfDimensions",
+    sortBy = "mcfSortBy",
+    filters = "mcfFilter"
+  ),
+  prototype = prototype(
+    metrics = new("mcfMetrics"),
+    dimensions = new("mcfDimensions"),
+    sortBy = new("mcfSortBy")
+  ),
+  contains = ".standardQuery"
+)
+
+setClass(
+  "rtQuery",
+  slots = c(
+    metrics = "rtMetrics",
+    dimensions = "rtDimensions",
+    sortBy = "rtSortBy",
+    filters = "rtFilter"
+  ),
+  prototype = prototype(
+    metrics = new("rtMetrics"),
+    dimensions = new("rtDimensions"),
+    sortBy = new("rtSortBy")
+  ),
+  contains = ".query"
 )

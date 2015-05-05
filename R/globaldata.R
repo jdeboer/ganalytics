@@ -1,5 +1,3 @@
-# Google Analytics dimension types
-
 ga_scopes <- c(
   default = "https://www.googleapis.com/auth/analytics",
   edit = "https://www.googleapis.com/auth/analytics.edit",
@@ -27,33 +25,68 @@ kGaDayOfWeek <- c(
   "Sat"
 )
 
+# Google Analytics dimension types
 kGaDimTypes <- list(
-  dates = "ga:date",
-  orderedFactors = c(
-    "ga:dayOfWeek",
-    "ga:hour",
+  dates = c(
+    "dateOfSession",
+    "ga:date",
+    "ga:dateHour",
+    "ga:socialActivityTimestamp"
+  ),
+  orderedIntFactors = c(
     "ga:year",
+    "ga:isoYear",
     "ga:month",
     "ga:week",
+    "ga:isoWeek",
     "ga:day",
-    "ga:visitLength",
-    "ga:daysSinceLastVisit",
-    "ga:visitCount",
-    "ga:nthDay",
-    "ga:nthWeek",
-    "ga:nthMonth"
+    "ga:dayOfWeek",
+    "ga:hour",
+    "ga:minute",
+    "ga:yearMonth",
+    "ga:yearWeek",
+    "ga:isoYearIsoWeek"
+  ),
+  orderedOtherFactors = c(
+    "ga:screenColors",
+    "ga:screenResolution",
+    "ga:userAgeBracket",
+    "ga:visitorAgeBracket",
+    "ga:dayOfWeekName"
   ),
   nums = c(
     "ga:latitude",
-    "ga:longitude"
+    "ga:longitude",
+    "ga:visitLength",
+    "ga:pageDepth",
+    "ga:screenDepth",
+    "ga:sessionDurationBucket",
+    "ga:daysSinceLastVisit",
+    "ga:daysSinceLastSession",
+    "ga:sessionsToTransaction",
+    "ga:visitsToTransaction",
+    "ga:daysToTransaction",
+    "ga:internalPromotionPosition",
+    "ga:productListPosition",
+    "ga:visitCount",
+    "ga:sessionCount",
+    "ga:nthMinute",
+    "ga:nthHour",
+    "ga:nthDay",
+    "ga:nthWeek",
+    "ga:nthMonth"
   ),
   bools = c(
     "ga:isMobile",
     "ga:isTablet",
     "ga:javaEnabled",
-    "ga:searchUsed"
+    "ga:searchUsed",
+    "ga:isTrueViewVideoAd",
+    "ga:hasSocialSourceReferral"
   )
 )
+
+samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
 
 # Constants
 # ---------
@@ -67,12 +100,27 @@ kGaDateOrigin <- as.Date("2005-01-01")
 
 # Google Analytics expression operators
 kGaOps <- list(
-  met = c("==","!=","<",">","<=",">="),
-  dim = c("==","!=","=~","!~","=@","!@")
+  met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
+)
+
+kMcfOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">="),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@")
+)
+
+kRtOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">="),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@")
 )
 
 # ganalytics tolerated dimension and metric prefixes
-kGaPrefix <- "^ga[;\\-\\._]"
+kPrefixDelim <- paste0("[", paste0(c(
+  ";", "\\-", "\\.", "_"),
+collapse = ""), "]")
+kGaPrefix <- paste0("^ga", kPrefixDelim)
+kMcfPrefix <- paste0("^mcf", kPrefixDelim)
+kRtPrefix <- paste0("^rt", kPrefixDelim)
 
 # Maximum dimensions and metrics allowed by Google Analytics Core Reporting API
 kGaMax <- list(

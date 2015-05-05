@@ -1,176 +1,56 @@
-#'@include ganalytics-package.R
-#'@include all-generics.R
-#'@include GaApiRequest.R
-#'@include GaCreds.R
-NULL
+#' @include GaApiRequest.R
+
+gtm_api_request <- function(
+  creds,
+  request,
+  scope = gtm_scopes["read_only"],
+  base_url = "https://www.googleapis.com/tagmanager/v1",
+  req_type = "GET",
+  body_list = NULL,
+  fields = NULL,
+  max_results = NULL
+) {
+  stopifnot(scope %in% gtm_scopes)
+  google_api_request(
+    creds = creds,
+    scope = scope,
+    request = request,
+    base_url = base_url,
+    req_type = req_type,
+    body_list = body_list,
+    fields = fields
+  )
+}
 
 .gtmManagementApi <- R6Class(
   ".gtmManagementApi",
-  public = list(
-    creds = GaCreds(),
-    get = function(max_results = NULL) {
-      req_type <- "GET"
-      gtm_api_request(
-        creds = self$creds,
-        request = self$.req_path,
-        scope = private$scope,
-        req_type = req_type,
-        max_results = max_results
-      )
-    },
-    initialize = function(creds = GaCreds()) {
-      self$creds = creds
-    }
-  ),
+  inherit = .googleApi,
   private = list(
-    request = NULL,
     scope = gtm_scopes['read_only'],
-    parent_class_name = "NULL",
-    resource_name = NULL,
-    field_corrections = function(field_list) {
-      if(is.data.frame(field_list)) {
-        if(exists("created", field_list)) {
-          field_list$created <- ymd_hms(field_list$created)
-        }
-        if(exists("updated", field_list)) {
-          field_list$updated <- ymd_hms(field_list$updated)
-        }
-      }
-	  field_list[!(names(field_list) %in% c("kind", "selfLink", "childLink", "parentLink"))]
-    }
+    write_scope = gtm_scopes["edit_containers"],
+    api_req_func = gtm_api_request,
+    base_url = "https://www.googleapis.com/tagmanager/v1"
   )
 )
 
 .gtmResource <- R6Class(
   ".gtmResource",
-  inherit = .gtmManagementApi,
-  public = list(
-    id = NA,
-    name = NA,
-    created = NA,
-    updated = NA,
-    parent = NULL,
-    modify = function(field_list) {
-      l_ply(names(field_list), function(field_name) {
-        if (exists(field_name, self)) {
-          self[[field_name]] <- field_list[[field_name]]
-        }
-      })
-      self
-    },
-    initialize = function(creds = GaCreds(), parent = NULL, id = NA) {
-      super$initialize(creds = creds)
-      stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
-      self$parent <- parent
-      self$id <- id
-      if(!is.na(id)) {
-        self$get()
-      }
-      self
-    },
-    get = function() {
-      if (!is.null(self$.req_path)) {
-        response <- super$get()
-        updated_fields <- private$field_corrections(response)
-        self$modify(updated_fields)
-      }
-      self
-    },
-    .child_nodes = function(class_generator) {
-      class_name <- class_generator$classname
-      if (is(private$cache[[class_name]], class_name)) {
-        private$cache[[class_name]]
-      } else {
-        private$cache[[class_name]] <- class_generator$new(parent = self, creds = self$creds)
-      }
-    }
-  ),
-  active = list(
-    .req_path = function() {
-      if (is.na(self$id)) {
-        NULL
-      } else {
-        c(self$parent$.req_path, private$request, self$id)
-      }
-    }
-  ),
-  private = list(
-    cache = list()
+  inherit = .googleApiResource,
+  private = c(
+    get_privates(.gtmManagementApi),
+    list(field_corrections = function(field_list) {
+      names(field_list)[names(field_list) == paste0(private$resource_name, 'Id')] <- "id"
+      super$field_corrections(field_list)
+    })
   )
 )
 
 .gtmCollection <- R6Class(
   ".gtmCollection",
-  inherit = .gtmManagementApi,
-  public = list(
-    summary = data.frame(),
-    parent = NULL,
-    get_entity = function(id) {
-      entity <- private$entity_class$new(parent = self$parent, id = id, creds = self$creds)
-      private$entities_cache[[id]] <- entity
-      entity
-    },
-    get = function() {
-      if (!is.null(self$.req_path)) {
-        response <- super$get()
-        self$summary <- private$field_corrections(response[[private$collection_name]])
-      }
-      self
-    },
-    initialize = function(creds = GaCreds(), parent = NULL) {
-      super$initialize(creds = creds)
-      entity_class_private <- with(private$entity_class, c(private_fields, private_methods))
-      private$request <- entity_class_private$request
-      private$parent_class_name <- entity_class_private$parent_class_name
-      stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
-      if(is.null(private$collection_name)) {
-        private$collection_name <- private$request
-      }
-      private$resource_name <- entity_class_private$resource_name
-      self$parent <- parent
-      self$get()
-    }
-  ),
-  active = list(
-    entities = function() {
-      if (is.data.frame(self$summary)) {
-        ret <- alply(self$summary, 1, function(summary_row) {
-          field_list <- as.list(summary_row)
-          names(field_list)[names(field_list) == paste0(private$resource_name, 'Id')] <- "id"
-          id <- field_list$id
-          entity <- private$entities_cache[[id]]
-          if (!is(entity, private$entity_class$classname)) {
-            entity <- private$entity_class$new(parent = self$parent, creds = self$creds)
-            entity$modify(field_list = field_list)
-            private$entities_cache[[id]] <- entity
-          }
-          entity
-        })
-        attributes(ret) <- NULL
-        names(ret) <- self$summary$id
-        ret
-      } else {
-        NULL
-      }
-    },
-    .req_path = function() {
-      # if this is top most level, e.g. 'Accounts' or "UserSegments", then there
-      # is no parent and therefore there will not exist a parent request path,
-      # i.e. it will be NULL. Otherwise, if there is a parent, but it has no
-      # request path, then this should also not have a request path.
-      if (!is.null(self$parent) & is.null(self$parent$.req_path)) {
-        NULL
-      } else if (is(self$parent, private$parent_class_name)) {
-        c(self$parent$.req_path, private$request)
-      } else {
-        NULL
-      }
-    }
-  ),
-  private = list(
-    entity_class = .gtmResource,
-    entities_cache = list(),
-    collection_name = NULL
+  inherit = .googleApiCollection,
+  private = c(
+    get_privates(.gtmResource),
+    list(collection_name = NULL)
   )
 )
 
@@ -200,7 +80,7 @@ gtmAccount <- R6Class(
 )
 
 #' @export
-GtmAccount <- function(id = NULL, creds = GaCreds()){
+GtmAccount <- function(id = NULL, creds = GoogleApiCreds()){
   gtmAccount$new(id = id, creds = creds)
 }
 
@@ -213,7 +93,7 @@ gtmAccounts <- R6Class(
 )
 
 #' @export
-GtmAccounts <- function(creds = GaCreds()){
+GtmAccounts <- function(creds = GoogleApiCreds()){
   gtmAccounts$new(creds = creds)
 }
 
@@ -254,11 +134,7 @@ gtmContainer <- R6Class(
     notes = NA,
     usageContext = NA,
     enabledBuiltInVariable = NA,
-    fingerprint = NA#,
-#     modify = function(field_list) {
-#       browser()
-#       super$modify(field_list)
-#     }
+    fingerprint = NA
   ),
   active = list(
     tags = function() {self$.child_nodes(gtmTags)},

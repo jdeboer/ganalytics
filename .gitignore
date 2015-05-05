@@ -1,11 +1,11 @@
 .Rproj.user
 .Rhistory
 .RData
-.Rbuildignore
 Read-and-delete-me
 *-Ex.R
 ganalytics.Rproj
 .httr-oauth
-.app_oauth_creds.json
+app_oauth_creds.json
 logo.png
 logo.xcf
+.app_oauth_creds.json
