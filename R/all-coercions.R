@@ -131,29 +131,26 @@ setAs(from = "character", to = "mcfMetVar", def = simpleCoerce)
 setAs(from = "character", to = "rtDimVar", def = simpleCoerce)
 setAs(from = "character", to = "rtMetVar", def = simpleCoerce)
 
-setAs(from = ".mcfVar", to = ".gaVar", def = function(from, to) {
-  as(sub("mcf:", "ga:", from), to)
-})
+coerceVarNS <- function(from, to) {
+  fromClass <- class(from)
+  toClass <- to
+  if(extends(fromClass, ".gaVar")) fromNS <- "ga"
+  if(extends(toClass, ".gaVar")) toNS <- "ga"
+  if(extends(fromClass, ".mcfVar")) fromNS <- "mcf"
+  if(extends(toClass, ".mcfVar")) toNS <- "mcf"
+  if(extends(fromClass, ".rtVar")) fromNS <- "rt"
+  if(extends(toClass, ".rtVar")) toNS <- "rt"
+  fromNS <- paste0(fromNS, ":")
+  toNS <- paste0(toNS, ":")
+  as(as(sub(fromNS, toNS, from), "character"), to)
+}
 
-setAs(from = ".rtVar", to = ".gaVar", def = function(from, to) {
-  as(sub("rt:", "ga:", from), to)
-})
-
-setAs(from = ".gaVar", to = ".mcfVar", def = function(from, to) {
-  as(sub("ga:", "mcf:", from), to)
-})
-
-setAs(from = ".rtVar", to = ".mcfVar", def = function(from, to) {
-  as(sub("rt:", "mcf:", from), to)
-})
-
-setAs(from = ".gaVar", to = ".rtVar", def = function(from, to) {
-  as(sub("ga:", "rt:", from), to)
-})
-
-setAs(from = ".mcfVar", to = ".rtVar", def = function(from, to) {
-  as(sub("mcf:", "rt:", from), to)
-})
+setAs(from = ".mcfVar", to = ".gaVar", def = coerceVarNS)
+setAs(from = ".rtVar", to = ".gaVar", def = coerceVarNS)
+setAs(from = ".gaVar", to = ".mcfVar", def = coerceVarNS)
+setAs(from = ".rtVar", to = ".mcfVar", def = coerceVarNS)
+setAs(from = ".gaVar", to = ".rtVar", def = coerceVarNS)
+setAs(from = ".mcfVar", to = ".rtVar", def = coerceVarNS)
 
 setAs(from = ".expr", to = ".var",
   def = function(from, to) {
