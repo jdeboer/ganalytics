@@ -5,9 +5,9 @@
 \alias{StartDate<-}
 \title{StartDate}
 \usage{
-StartDate(.Object)
+StartDate(object)
 
-StartDate(.Object) <- value
+StartDate(object) <- value
 }
 \description{
 Get the start date.

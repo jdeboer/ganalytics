@@ -5,9 +5,9 @@
 \alias{SortBy<-}
 \title{SortBy}
 \usage{
-SortBy(.Object, ..., desc = logical(0))
+SortBy(object, ..., desc = logical(0))
 
-SortBy(.Object) <- value
+SortBy(object) <- value
 }
 \description{
 Get the sortBy order of the query.

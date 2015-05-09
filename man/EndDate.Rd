@@ -5,9 +5,9 @@
 \alias{EndDate<-}
 \title{EndDate}
 \usage{
-EndDate(.Object)
+EndDate(object)
 
-EndDate(.Object) <- value
+EndDate(object) <- value
 }
 \description{
 Get the end date of the date range.

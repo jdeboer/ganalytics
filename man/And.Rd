@@ -4,7 +4,7 @@
 \alias{And}
 \title{And}
 \usage{
-And(.Object, ...)
+And(object, ...)
 }
 \description{
 AND two or more ganalytics expressions together.

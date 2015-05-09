@@ -128,7 +128,7 @@ setGeneric(
 #' @rdname Operator
 setGeneric(
   "Operator",
-  function(.Object) {},
+  function(object) {},
   valueClass = ".operator",
   useAsDefault = FALSE
 )
@@ -141,10 +141,10 @@ setGeneric(
 #' @rdname Operator
 setGeneric(
   "Operator<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("Operator<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("Operator<-")
+    validObject(object)
+    object
   }
 )
 
@@ -156,7 +156,7 @@ setGeneric(
 #' @rdname Operand
 setGeneric(
   "Operand",
-  function(.Object) {},
+  function(object) {},
   valueClass = ".operand",
   useAsDefault = FALSE
 )
@@ -169,10 +169,10 @@ setGeneric(
 #' @rdname Operand
 setGeneric(
   "Operand<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("Operand<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("Operand<-")
+    validObject(object)
+    object
   }
 )
 
@@ -184,7 +184,7 @@ setGeneric(
 #' @rdname IsRegEx
 setGeneric(
   "IsRegEx",
-  function(.Object) {},
+  function(object) {},
   valueClass = "logical",
   useAsDefault = FALSE
 )
@@ -197,7 +197,7 @@ setGeneric(
 #' @rdname Not
 setGeneric(
   "Not",
-  function(.Object) {},
+  function(object) {},
   valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
   useAsDefault = FALSE
 )
@@ -208,7 +208,7 @@ setGeneric(
 #' @rdname GaExpr
 setGeneric(
   "Expr",
-  function(.Object, operator, operand, metricScope = "") {},
+  function(object, operator, operand, metricScope = "") {},
   valueClass = ".expr",
   useAsDefault = FALSE
 )
@@ -229,7 +229,7 @@ setGeneric(
 #' @rdname GaExpr
 setGeneric(
   "GaExpr",
-  function(.Object, operator, operand, metricScope = "") {},
+  function(object, operator, operand, metricScope = "") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -250,7 +250,7 @@ setGeneric(
 #' @rdname McfExpr
 setGeneric(
   "McfExpr",
-  function(.Object, operator, operand) {},
+  function(object, operator, operand) {},
   valueClass = ".mcfExpr",
   useAsDefault = FALSE
 )
@@ -271,7 +271,7 @@ setGeneric(
 #' @rdname RtExpr
 setGeneric(
   "RtExpr",
-  function(.Object, operator, operand) {},
+  function(object, operator, operand) {},
   valueClass = ".rtExpr",
   useAsDefault = FALSE
 )
@@ -284,7 +284,7 @@ setGeneric(
 #' @rdname Or
 setGeneric(
   "Or",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = "orExpr",
   useAsDefault = FALSE
 )
@@ -301,7 +301,7 @@ setGeneric(
 #' @rdname And
 setGeneric(
   "And",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = "andExpr",
   useAsDefault = FALSE
 )
@@ -317,7 +317,7 @@ setGeneric("xor")
 #' @rdname GaPrecedes
 setGeneric(
   "GaPrecedes",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = "gaSequenceStep",
   useAsDefault = FALSE
 )
@@ -330,7 +330,7 @@ setGeneric(
 #' @rdname GaImmediatelyPrecedes
 setGeneric(
   "GaImmediatelyPrecedes",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = "gaSequenceStep",
   useAsDefault = FALSE
 )
@@ -343,7 +343,7 @@ setGeneric(
 #' @rdname GaStartsWith
 setGeneric(
   "GaStartsWith",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = "gaSequenceStep",
   useAsDefault = FALSE
 )
@@ -356,7 +356,7 @@ setGeneric(
 #' @rdname GaSequenceCondition
 setGeneric(
   "GaSequenceCondition",
-  function(.Object, ..., negation = FALSE) {},
+  function(object, ..., negation = FALSE) {},
   valueClass = "gaSequenceCondition",
   useAsDefault = FALSE
 )
@@ -369,7 +369,7 @@ setGeneric(
 #' @rdname GaNonSequenceCondition
 setGeneric(
   "GaNonSequenceCondition",
-  function(.Object, ..., negation = FALSE) {},
+  function(object, ..., negation = FALSE) {},
   valueClass = "gaNonSequenceCondition",
   useAsDefault = FALSE
 )
@@ -382,7 +382,7 @@ setGeneric(
 #' @rdname GaSegmentCondition
 setGeneric(
   "GaSegmentCondition",
-  function(.Object, ..., scope = "sessions") {},
+  function(object, ..., scope = "sessions") {},
   valueClass = "gaSegmentCondition",
   useAsDefault = FALSE
 )
@@ -395,7 +395,7 @@ setGeneric(
 #' @rdname GaScopeLevel
 setGeneric(
   "GaScopeLevel",
-  function(.Object) {},
+  function(object) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
@@ -410,10 +410,10 @@ setGeneric(
 #' @rdname GaScopeLevel
 setGeneric(
   "GaScopeLevel<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("GaScopeLevel<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("GaScopeLevel<-")
+    validObject(object)
+    object
   }
 )
 
@@ -425,7 +425,7 @@ setGeneric(
 #' @rdname GaSegment
 setGeneric(
   "GaSegment",
-  function(.Object, ..., scope = "sessions") {},
+  function(object, ..., scope = "sessions") {},
   valueClass = ".gaSegment",
   useAsDefault = FALSE
 )
@@ -438,10 +438,10 @@ setGeneric(
 #' @rdname GaSegment
 setGeneric(
   "GaSegment<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("GaSegment<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("GaSegment<-")
+    validObject(object)
+    object
   }
 )
 
@@ -453,7 +453,7 @@ setGeneric(
 #' @rdname TableFilter
 setGeneric(
   "TableFilter",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = ".tableFilter",
   useAsDefault = FALSE
 )
@@ -466,10 +466,10 @@ setGeneric(
 #' @rdname TableFilter
 setGeneric(
   "TableFilter<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("TableFilter<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("TableFilter<-")
+    validObject(object)
+    object
   }
 )
 
@@ -481,7 +481,7 @@ setGeneric(
 #' @rdname DateRange
 setGeneric(
   "DateRange",
-  function(.Object, endDate) {},
+  function(object, endDate) {},
   valueClass = "dateRange",
   useAsDefault = FALSE
 )
@@ -494,10 +494,10 @@ setGeneric(
 #' @rdname DateRange
 setGeneric(
   "DateRange<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("DateRange<-")
-    validObject(.Object)
-    return(.Object)
+  function(object, value) {
+    object <- standardGeneric("DateRange<-")
+    validObject(object)
+    return(object)
   }
 )
 
@@ -509,7 +509,7 @@ setGeneric(
 #' @rdname StartDate
 setGeneric(
   "StartDate",
-  function(.Object) {},
+  function(object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -522,10 +522,10 @@ setGeneric(
 #' @rdname StartDate
 setGeneric(
   "StartDate<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("StartDate<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("StartDate<-")
+    validObject(object)
+    object
   }
 )
 
@@ -537,7 +537,7 @@ setGeneric(
 #' @rdname EndDate
 setGeneric(
   "EndDate",
-  function(.Object) {},
+  function(object) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -550,10 +550,10 @@ setGeneric(
 #' @rdname EndDate
 setGeneric(
   "EndDate<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("EndDate<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("EndDate<-")
+    validObject(object)
+    object
   }
 )
 
@@ -565,7 +565,7 @@ setGeneric(
 #' @rdname Metrics
 setGeneric(
   "Metrics",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = ".metrics",
   useAsDefault = FALSE
 )
@@ -578,10 +578,10 @@ setGeneric(
 #' @rdname Metrics
 setGeneric(
   "Metrics<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("Metrics<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("Metrics<-")
+    validObject(object)
+    object
   }
 )
 
@@ -593,7 +593,7 @@ setGeneric(
 #' @rdname Dimensions
 setGeneric(
   "Dimensions",
-  function(.Object, ...) {},
+  function(object, ...) {},
   valueClass = ".dimensions",
   useAsDefault = FALSE
 )
@@ -606,10 +606,10 @@ setGeneric(
 #' @rdname Dimensions
 setGeneric(
   "Dimensions<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("Dimensions<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("Dimensions<-")
+    validObject(object)
+    object
   }
 )
 
@@ -621,7 +621,7 @@ setGeneric(
 #' @rdname SortBy
 setGeneric(
   "SortBy",
-  function(.Object, ..., desc = logical(0)) {},
+  function(object, ..., desc = logical(0)) {},
   valueClass = c(".sortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )
@@ -634,10 +634,10 @@ setGeneric(
 #' @rdname SortBy
 setGeneric(
   "SortBy<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("SortBy<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("SortBy<-")
+    validObject(object)
+    object
   }
 )
 
@@ -649,7 +649,7 @@ setGeneric(
 #' @rdname GaView
 setGeneric(
   "GaView",
-  function(.Object) {},
+  function(object) {},
   valueClass = "viewId",
   useAsDefault = FALSE
 )
@@ -662,10 +662,10 @@ setGeneric(
 #' @rdname GaView
 setGeneric(
   "GaView<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("GaView<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("GaView<-")
+    validObject(object)
+    object
   }
 )
 
@@ -677,7 +677,7 @@ setGeneric(
 #' @rdname MaxResults
 setGeneric(
   "MaxResults",
-  function(.Object) {},
+  function(object) {},
   valueClass = "numeric",
   useAsDefault = FALSE
 )
@@ -690,10 +690,10 @@ setGeneric(
 #' @rdname MaxResults
 setGeneric(
   "MaxResults<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("MaxResults<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("MaxResults<-")
+    validObject(object)
+    object
   }
 )
 
@@ -705,7 +705,7 @@ setGeneric(
 #' @rdname SamplingLevel
 setGeneric(
   "SamplingLevel",
-  function(.Object) {},
+  function(object) {},
   valueClass = c("character", "list"),
   useAsDefault = FALSE
 )
@@ -718,10 +718,10 @@ setGeneric(
 #' @rdname SamplingLevel
 setGeneric(
   "SamplingLevel<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("SamplingLevel<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("SamplingLevel<-")
+    validObject(object)
+    object
   }
 )
 
@@ -732,7 +732,7 @@ setGeneric(
 #' @rdname GetGaUrl
 setGeneric(
   "GetGaQueries",
-  function(.Object) {},
+  function(object) {},
   valueClass = "matrix",
   useAsDefault = FALSE
 )

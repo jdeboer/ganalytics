@@ -5,9 +5,9 @@
 \alias{SamplingLevel<-}
 \title{SamplingLevel}
 \usage{
-SamplingLevel(.Object)
+SamplingLevel(object)
 
-SamplingLevel(.Object) <- value
+SamplingLevel(object) <- value
 }
 \description{
 Get the sampling level.

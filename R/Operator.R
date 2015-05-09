@@ -8,30 +8,30 @@ NULL
 
 # ---- Operator, GaDimOperator, GaMetOperator ----
 
-setMethod("Operator", ".operator", function(.Object) {.Object})
+setMethod("Operator", ".operator", function(object) {object})
 
 setMethod(
   f = "Operator<-",
   signature = c(".operator", "character"),
-  definition = function(.Object, value) {
-    as(.Object, "character") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, "character") <- value
+    object
   }
 )
 
-setMethod("Operator", ".expr", function(.Object) {as(.Object, ".operator")})
+setMethod("Operator", ".expr", function(object) {as(object, ".operator")})
 
 setMethod(
   f = "Operator<-",
   signature = ".expr",
-  definition = function(.Object, value) {
-    as(.Object, ".operator") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".operator") <- value
+    object
   }
 )
 
 # ---- IsRegEx ----
 
-setMethod("IsRegEx", ".dimOperator", function(.Object) {.Object %in% c("=~", "!~")})
+setMethod("IsRegEx", ".dimOperator", function(object) {object %in% c("=~", "!~")})
 
-setMethod("IsRegEx", ".expr", function(.Object) {IsRegEx(Operator(.Object))})
+setMethod("IsRegEx", ".expr", function(object) {IsRegEx(Operator(object))})

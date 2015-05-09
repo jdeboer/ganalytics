@@ -5,9 +5,9 @@
 \alias{Metrics<-}
 \title{Metrics}
 \usage{
-Metrics(.Object, ...)
+Metrics(object, ...)
 
-Metrics(.Object) <- value
+Metrics(object) <- value
 }
 \description{
 Get the metrics of the object.

@@ -5,9 +5,9 @@
 \alias{Operator<-}
 \title{Operator}
 \usage{
-Operator(.Object)
+Operator(object)
 
-Operator(.Object) <- value
+Operator(object) <- value
 }
 \description{
 Get or create an operator used in an expression.

@@ -5,31 +5,31 @@
 #' @include helper-functions.R
 NULL
 
-setMethod("TableFilter", ".query", function(.Object) {as(.Object, ".tableFilter")})
+setMethod("TableFilter", ".query", function(object) {as(object, ".tableFilter")})
 
-setMethod("TableFilter", "NULL", function(.Object) {as(.Object, ".tableFilter")})
+setMethod("TableFilter", "NULL", function(object) {as(object, ".tableFilter")})
 
-setMethod("TableFilter", ".tableFilter", function(.Object) {.Object})
+setMethod("TableFilter", ".tableFilter", function(object) {object})
 
-setMethod("TableFilter", ".compoundExpr", function(.Object) {as(.Object, ".tableFilter")})
+setMethod("TableFilter", ".compoundExpr", function(object) {as(object, ".tableFilter")})
 
-setMethod("TableFilter", "gaDynSegment", function(.Object) {as(.Object, ".tableFilter")})
+setMethod("TableFilter", "gaDynSegment", function(object) {as(object, ".tableFilter")})
 
 setMethod(
   f = "TableFilter<-",
   signature = c(".tableFilter", "andExpr"),
-  definition = function(.Object, value) {
-    as(.Object, "andExpr") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, "andExpr") <- value
+    object
   }
 )
 
 setMethod(
   f = "TableFilter<-",
   signature = c(".query", "ANY"),
-  definition = function(.Object, value) {
-    as(.Object, ".tableFilter") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".tableFilter") <- value
+    object
   }
 )
 

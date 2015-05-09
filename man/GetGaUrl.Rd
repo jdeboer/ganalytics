@@ -4,7 +4,7 @@
 \alias{GetGaQueries}
 \title{GetGaQueries}
 \usage{
-GetGaQueries(.Object)
+GetGaQueries(object)
 }
 \description{
 Get the chracter string query compoents for the given ganalytics object.

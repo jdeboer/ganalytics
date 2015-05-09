@@ -4,7 +4,7 @@
 \alias{Or}
 \title{Or}
 \usage{
-Or(.Object, ...)
+Or(object, ...)
 }
 \description{
 OR two or more expressions.

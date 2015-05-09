@@ -10,9 +10,9 @@ NULL
 setMethod(
   f = "Not",
   signature = ".operator",
-  definition = function(.Object) {
-    as(.Object, "character") <- switch(
-      .Object,
+  definition = function(object) {
+    as(object, "character") <- switch(
+      object,
       "==" = "!=",
       "!=" = "==",
       "<"  = ">=",
@@ -23,9 +23,9 @@ setMethod(
       "=~" = "!~",
       "=@" = "!@",
       "!@" = "=@",
-      stop(paste(.Object, "cannot be NOTed."))
+      stop(paste(object, "cannot be NOTed."))
     )
-    .Object
+    object
   }
 )
 
@@ -35,10 +35,10 @@ setMethod("!", ".operator", function(x) {Not(x)})
 setMethod(
   f = "Not",
   signature = ".expr",
-  definition = function(.Object) {
-    operator <- as(.Object, ".operator")
-    as(.Object, ".operator") <- Not(operator)
-    .Object
+  definition = function(object) {
+    operator <- as(object, ".operator")
+    as(object, ".operator") <- Not(operator)
+    object
   }
 )
 
@@ -48,8 +48,8 @@ setMethod("!", ".expr", function(x) {Not(x)})
 setMethod(
   f = "Not",
   signature = "orExpr",
-  definition = function(.Object) {
-    do.call(And, lapply(.Object, Not))
+  definition = function(object) {
+    do.call(And, lapply(object, Not))
   }
 )
 
@@ -59,9 +59,9 @@ setMethod("!", "orExpr", function(x) {Not(x)})
 setMethod(
   f = "Not",
   signature = ".gaSimpleOrSequence",
-  definition = function(.Object) {
-    .Object@negation <- !.Object@negation
-    .Object
+  definition = function(object) {
+    object@negation <- !object@negation
+    object
   }
 )
 
@@ -76,8 +76,8 @@ setMethod("!", ".gaSimpleOrSequence", function(x) {Not(x)})
 setMethod(
   f = "Or",
   signature = ".compoundExpr",
-  definition = function(.Object, ...) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ...) {
+    exprList <- list(object, ...)
     exprList <- lapply(
       X = exprList,
       FUN = function(expr) {
@@ -101,8 +101,8 @@ setMethod("|", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {Or(e1, e2)
 setMethod(
   f = "And",
   signature = ".compoundExpr",
-  definition = function(.Object, ...) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ...) {
+    exprList <- list(object, ...)
     exprList <- lapply(
       X = exprList,
       FUN = function(expr) {

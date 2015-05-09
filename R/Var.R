@@ -86,8 +86,8 @@ setMethod("RtVar", "character", function(object) {as(object, ".rtVar")})
 setMethod(
   f = "Metrics",
   signature = "NULL",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".metrics")
   }
 )
@@ -95,8 +95,8 @@ setMethod(
 setMethod(
   f = "Metrics",
   signature = ".metrics",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".metrics")
   }
 )
@@ -104,8 +104,8 @@ setMethod(
 setMethod(
   f = "Metrics",
   signature = "character",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".metrics")
   }
 )
@@ -113,20 +113,20 @@ setMethod(
 setMethod(
   f = "Metrics",
   signature = "list",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".metrics")
   }
 )
 
-setMethod("Metrics", ".query", function(.Object) {as(.Object, ".metrics")})
+setMethod("Metrics", ".query", function(object) {as(object, ".metrics")})
 
 setMethod(
   f = "Metrics<-",
   signature = c(".query", "ANY"),
-  definition = function(.Object, value) {
-    as(.Object, ".metrics") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".metrics") <- value
+    object
   }
 )
 
@@ -135,8 +135,8 @@ setMethod(
 setMethod(
   f = "Dimensions",
   signature = "NULL",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".dimensions")
   }
 )
@@ -144,8 +144,8 @@ setMethod(
 setMethod(
   f = "Dimensions",
   signature = ".dimensions",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".dimensions")
   }
 )
@@ -153,8 +153,8 @@ setMethod(
 setMethod(
   f = "Dimensions",
   signature = "character",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".dimensions")
   }
 )
@@ -162,20 +162,20 @@ setMethod(
 setMethod(
   f = "Dimensions",
   signature = "list",
-  definition = function(.Object, ...) {
-    vars <- ArgList(.Object, ...)
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
     as(vars, ".dimensions")
   }
 )
 
-setMethod("Dimensions", ".query", function(.Object) {as(.Object, ".dimensions")})
+setMethod("Dimensions", ".query", function(object) {as(object, ".dimensions")})
 
 setMethod(
   f = "Dimensions<-",
   signature = c(".query", "ANY"),
-  definition = function(.Object, value) {
-    as(.Object, ".dimensions") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".dimensions") <- value
+    object
   }
 )
 

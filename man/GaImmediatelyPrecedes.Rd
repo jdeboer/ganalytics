@@ -4,7 +4,7 @@
 \alias{GaImmediatelyPrecedes}
 \title{GaImmediatelyPrecedes}
 \usage{
-GaImmediatelyPrecedes(.Object, ...)
+GaImmediatelyPrecedes(object, ...)
 }
 \description{
 Create a gaSequenceStep object

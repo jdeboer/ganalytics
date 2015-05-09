@@ -5,9 +5,9 @@
 \alias{GaExpr}
 \title{Expr}
 \usage{
-Expr(.Object, operator, operand, metricScope = "")
+Expr(object, operator, operand, metricScope = "")
 
-GaExpr(.Object, operator, operand, metricScope = "")
+GaExpr(object, operator, operand, metricScope = "")
 }
 \description{
 Expr

@@ -5,9 +5,9 @@
 \alias{DateRange<-}
 \title{DateRange}
 \usage{
-DateRange(.Object, endDate)
+DateRange(object, endDate)
 
-DateRange(.Object) <- value
+DateRange(object) <- value
 }
 \description{
 Get the date range.

@@ -8,15 +8,15 @@ NULL
 
 # ---- Operand ----
 
-setMethod("Operand", ".operand", function(.Object) {.Object})
+setMethod("Operand", ".operand", function(object) {object})
 
-setMethod("Operand", ".expr", function(.Object) {as(.Object, ".operand")})
+setMethod("Operand", ".expr", function(object) {as(object, ".operand")})
 
 setMethod(
   f = "Operand<-",
   signature = c(".expr", "ANY"),
-  definition = function(.Object, value) {
-    as(.Object, ".operand") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".operand") <- value
+    object
   }
 )

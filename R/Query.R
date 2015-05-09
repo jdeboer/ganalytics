@@ -178,44 +178,44 @@ modify_query <- function(
 setMethod(
   f = "MaxResults",
   signature = ".query",
-  definition = function(.Object) {
-    .Object@maxResults
+  definition = function(object) {
+    object@maxResults
   }
 )
 
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
-  definition = function(.Object, value) {
-    .Object@maxResults <- as.numeric(value)
-    validObject(.Object)
-    .Object
+  definition = function(object, value) {
+    object@maxResults <- as.numeric(value)
+    validObject(object)
+    object
   }
 )
 
 setMethod(
   f = "SamplingLevel",
   signature = ".standardQuery",
-  definition = function(.Object) {
-    .Object@samplingLevel
+  definition = function(object) {
+    object@samplingLevel
   }
 )
 
 setMethod(
   f = "SamplingLevel<-",
   signature = c(".standardQuery", "ANY"),
-  definition = function(.Object, value) {
-    .Object@samplingLevel <- as.character(value)
-    validObject(.Object)
-    .Object
+  definition = function(object, value) {
+    object@samplingLevel <- as.character(value)
+    validObject(object)
+    object
   }
 )
 
 setMethod(
   f = "SamplingLevel",
   signature = "data.frame",
-  definition = function(.Object) {
-    sample_params <- attributes(.Object)[c("sampleSize", "sampleSpace")]
+  definition = function(object) {
+    sample_params <- attributes(object)[c("sampleSize", "sampleSpace")]
     sample_params$sampleRate <- sample_params$sampleSize / sample_params$sampleSpace
     sample_params
   }

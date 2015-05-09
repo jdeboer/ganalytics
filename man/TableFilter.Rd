@@ -5,9 +5,9 @@
 \alias{TableFilter<-}
 \title{TableFilter}
 \usage{
-TableFilter(.Object, ...)
+TableFilter(object, ...)
 
-TableFilter(.Object) <- value
+TableFilter(object) <- value
 }
 \description{
 Get the filter.

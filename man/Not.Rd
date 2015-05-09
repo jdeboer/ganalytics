@@ -4,7 +4,7 @@
 \alias{Not}
 \title{Not}
 \usage{
-Not(.Object)
+Not(object)
 }
 \description{
 NOT an expression.

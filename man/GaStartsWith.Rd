@@ -4,7 +4,7 @@
 \alias{GaStartsWith}
 \title{GaStartsWith}
 \usage{
-GaStartsWith(.Object, ...)
+GaStartsWith(object, ...)
 }
 \description{
 Create a gaSequenceStep object

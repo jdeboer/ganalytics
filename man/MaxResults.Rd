@@ -5,9 +5,9 @@
 \alias{MaxResults<-}
 \title{MaxResults}
 \usage{
-MaxResults(.Object)
+MaxResults(object)
 
-MaxResults(.Object) <- value
+MaxResults(object) <- value
 }
 \description{
 Get the value set for MaxResults.

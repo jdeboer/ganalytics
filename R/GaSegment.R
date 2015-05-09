@@ -11,32 +11,32 @@ NULL
 setMethod(
   f = "GaPrecedes",
   signature = ".compoundExpr",
-  definition = function(.Object) {
-    new("gaSequenceStep", as(.Object, "andExpr"), immediatelyPrecedes = FALSE)
+  definition = function(object) {
+    new("gaSequenceStep", as(object, "andExpr"), immediatelyPrecedes = FALSE)
   }
 )
 
 setMethod(
   f = "GaImmediatelyPrecedes",
   signature = ".compoundExpr",
-  definition = function(.Object) {
-    new("gaSequenceStep", as(.Object, "andExpr"), immediatelyPrecedes = TRUE)
+  definition = function(object) {
+    new("gaSequenceStep", as(object, "andExpr"), immediatelyPrecedes = TRUE)
   }
 )
 
 setMethod(
   f = "GaStartsWith",
   signature = ".compoundExpr",
-  definition = function(.Object) {
-    GaImmediatelyPrecedes(.Object)
+  definition = function(object) {
+    GaImmediatelyPrecedes(object)
   }
 )
 
 setMethod(
   f = "GaSequenceCondition",
   signature = ".compoundExpr",
-  definition = function(.Object, ..., negation) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., negation) {
+    exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
     new("gaSequenceCondition", exprList, negation = negation)
   }
@@ -45,8 +45,8 @@ setMethod(
 setMethod(
   f = "GaSequenceCondition",
   signature = "gaSequenceStep",
-  definition = function(.Object, ..., negation) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., negation) {
+    exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
     new("gaSequenceCondition", exprList, negation = negation)
   }
@@ -57,8 +57,8 @@ setMethod(
 setMethod(
   f = "GaNonSequenceCondition",
   signature = ".compoundExpr",
-  definition = function(.Object, ..., negation) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., negation) {
+    exprList <- list(object, ...)
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
     new("gaNonSequenceCondition", exprList, negation = negation)
   }
@@ -67,8 +67,8 @@ setMethod(
 setMethod(
   f = "GaSegmentCondition",
   signature = ".compoundExpr",
-  definition = function(.Object, ..., scope) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
     GaSegmentCondition(do.call(GaNonSequenceCondition, exprList), scope = scope)
   }
 )
@@ -76,8 +76,8 @@ setMethod(
 setMethod(
   f = "GaSegmentCondition",
   signature = ".gaSimpleOrSequence",
-  definition = function(.Object, ..., scope) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
     new("gaSegmentCondition", exprList, conditionScope = scope)
   }
 )
@@ -85,8 +85,8 @@ setMethod(
 setMethod(
   f = "GaSegmentCondition",
   signature = "gaSegmentCondition",
-  definition = function(.Object) {
-    .Object
+  definition = function(object) {
+    object
   }
 )
 
@@ -95,17 +95,17 @@ setMethod(
 setMethod(
   f = "GaScopeLevel",
   signature = "gaSegmentCondition",
-  definition = function(.Object) {
-    .Object@conditionScope
+  definition = function(object) {
+    object@conditionScope
   }
 )
 
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaSegmentCondition", "character"),
-  definition = function(.Object, value) {
-    .Object@conditionScope <- value
-    .Object
+  definition = function(object, value) {
+    object@conditionScope <- value
+    object
   }
 )
 
@@ -114,40 +114,40 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = "gaSegmentId",
-  definition = function(.Object) {
-    .Object
+  definition = function(object) {
+    object
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = "character",
-  definition = function(.Object) {
-    as(.Object, "gaSegmentId")
+  definition = function(object) {
+    as(object, "gaSegmentId")
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = "numeric",
-  definition = function(.Object) {
-    as(.Object, "gaSegmentId")
+  definition = function(object) {
+    as(object, "gaSegmentId")
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = "gaDynSegment",
-  definition = function(.Object) {
-    .Object
+  definition = function(object) {
+    object
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = ".compoundExpr",
-  definition = function(.Object, ..., scope) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
       GaSegmentCondition(
         GaNonSequenceCondition(expr),
@@ -161,8 +161,8 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = "gaSegmentCondition",
-  definition = function(.Object, ...) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ...) {
+    exprList <- list(object, ...)
     new("gaDynSegment", exprList)
   }
 )
@@ -170,8 +170,8 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = ".gaSimpleOrSequence",
-  definition = function(.Object, ..., scope) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
       GaSegmentCondition(
         expr,
@@ -185,8 +185,8 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = "gaFilter",
-  definition = function(.Object, ..., scope) {
-    exprList <- list(.Object, ...)
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
       GaSegmentCondition(
         GaNonSequenceCondition(expr),
@@ -200,7 +200,7 @@ setMethod(
 setMethod(
   f = "GaSegment",
   signature = "NULL",
-  definition = function(.Object) {
+  definition = function(object) {
     new("gaDynSegment", list())
   }
 )
@@ -208,16 +208,16 @@ setMethod(
 setMethod(
   f = "GaSegment<-",
   signature = c("gaDynSegment", "andExpr"),
-  definition = function(.Object, value) {
-    as(.Object, "andExpr") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, "andExpr") <- value
+    object
   }
 )
 
 setMethod(
   f = "GaSegment<-",
   signature = c("gaDynSegment", "ANY"),
-  definition = function(.Object, value) {
+  definition = function(object, value) {
     as(value, "gaDynSegment")
   }
 )
@@ -225,36 +225,36 @@ setMethod(
 setMethod(
   f = "GaSegment<-",
   signature = "gaSegmentId",
-  definition = function(.Object, value) {
+  definition = function(object, value) {
     to <- class(value)
-    as(.Object, to) <- value
-    .Object
+    as(object, to) <- value
+    object
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = "gaQuery",
-  definition = function(.Object) {
-    .Object@segment
+  definition = function(object) {
+    object@segment
   }
 )
 
 setMethod(
   f = "GaSegment<-",
   signature = c("gaQuery", "ANY"),
-  definition = function(.Object, value) {
-    .Object@segment <- GaSegment(value)
-    validObject(.Object)
-    .Object
+  definition = function(object, value) {
+    object@segment <- GaSegment(value)
+    validObject(object)
+    object
   }
 )
 
 setMethod(
   f = "GaSegment",
   signature = "gaUserSegment",
-  definition = function(.Object) {
-    GaSegment(.Object$segmentId)
+  definition = function(object) {
+    GaSegment(object$segmentId)
   }
 )
 

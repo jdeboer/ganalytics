@@ -5,9 +5,9 @@
 \alias{GaView<-}
 \title{GaView}
 \usage{
-GaView(.Object)
+GaView(object)
 
-GaView(.Object) <- value
+GaView(object) <- value
 }
 \description{
 Get the viewId of the query

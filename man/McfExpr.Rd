@@ -4,7 +4,7 @@
 \alias{McfExpr}
 \title{McfExpr}
 \usage{
-McfExpr(.Object, operator, operand)
+McfExpr(object, operator, operand)
 }
 \description{
 Create an expression.

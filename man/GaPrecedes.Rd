@@ -4,7 +4,7 @@
 \alias{GaPrecedes}
 \title{GaPrecedes}
 \usage{
-GaPrecedes(.Object, ...)
+GaPrecedes(object, ...)
 }
 \description{
 Create a gaSequenceStep object

@@ -5,9 +5,9 @@
 \alias{Operand<-}
 \title{Operand}
 \usage{
-Operand(.Object)
+Operand(object)
 
-Operand(.Object) <- value
+Operand(object) <- value
 }
 \description{
 Get the operand of an expression.

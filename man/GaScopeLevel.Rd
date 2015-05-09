@@ -5,9 +5,9 @@
 \alias{GaScopeLevel<-}
 \title{GaScopeLevel}
 \usage{
-GaScopeLevel(.Object)
+GaScopeLevel(object)
 
-GaScopeLevel(.Object) <- value
+GaScopeLevel(object) <- value
 }
 \description{
 Get the scope level of a gaDynSegment or gaMetExpr

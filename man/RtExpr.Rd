@@ -4,7 +4,7 @@
 \alias{RtExpr}
 \title{RtExpr}
 \usage{
-RtExpr(.Object, operator, operand)
+RtExpr(object, operator, operand)
 }
 \description{
 Create an expression.

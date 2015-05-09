@@ -4,7 +4,7 @@
 \alias{IsRegEx}
 \title{IsRegEx}
 \usage{
-IsRegEx(.Object)
+IsRegEx(object)
 }
 \description{
 Checks for a regular expression.

@@ -9,8 +9,8 @@ NULL
 setMethod(
   f = "GetGaQueries",
   signature = signature(".query"),
-  definition = function(.Object) {
-    as(.Object, "matrix")
+  definition = function(object) {
+    as(object, "matrix")
   }
 )
 

@@ -5,9 +5,9 @@
 \alias{GaSegment<-}
 \title{GaSegment}
 \usage{
-GaSegment(.Object, ..., scope = "sessions")
+GaSegment(object, ..., scope = "sessions")
 
-GaSegment(.Object) <- value
+GaSegment(object) <- value
 }
 \description{
 Get the segment.

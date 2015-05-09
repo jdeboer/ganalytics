@@ -5,9 +5,9 @@
 \alias{Dimensions<-}
 \title{Dimensions}
 \usage{
-Dimensions(.Object, ...)
+Dimensions(object, ...)
 
-Dimensions(.Object) <- value
+Dimensions(object) <- value
 }
 \description{
 Get the dimensions of the object.
