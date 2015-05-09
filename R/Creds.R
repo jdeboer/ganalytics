@@ -3,7 +3,6 @@
 #'@include GaApiRequest.R
 NULL
 
-#'@export
 setMethod("GaCreds", signature = c(".query", "list"),
           definition = function(object, creds) {
             object@creds <- creds

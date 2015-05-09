@@ -298,6 +298,9 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' @export
+setGeneric("xor")
+
 #' GaPrecedes
 #' 
 #' Create a gaSequenceStep object
