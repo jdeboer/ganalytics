@@ -5,9 +5,9 @@
 \alias{GaVar<-}
 \title{GaVar}
 \usage{
-GaVar(.Object)
+GaVar(object)
 
-GaVar(.Object) <- value
+GaVar(object) <- value
 }
 \description{
 Gets or Creates an object from the superclass .gaVar

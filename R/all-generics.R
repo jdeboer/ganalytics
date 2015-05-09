@@ -4,118 +4,126 @@
 NULL
 
 #' Var
-#' 
+#'
+#' Create, set or get an object of class '.var'.
+#'
+#' Use Var to lookup a dimension or metric from the Google Analytics core
+#' reporting, multi-channel funnel reporting, or real-time reporting APIs, for
+#' use in defining expressions (of superclass .expr) or variable lists (of
+#' superclass .varList) such as query dimensions, metrics or sortBy parameters.
 #' @export
+#' @rdname Var
 setGeneric(
   "Var",
-  function(.Object) {},
+  function(object, ...) {},
   valueClass = ".var",
   useAsDefault = FALSE
 )
 
 #' Var<-
-#' 
-#' Sets the value of an object or sets its slot belonging to the superclass .mcfVar
-#' 
+#'
+#' Sets the value of an object belonging to the superclass '.var' or sets the
+#' var slot of an expression object belonging to class '.expr'
+#'
 #' @export
-#' @rdname McfVar
+#' @rdname Var
 setGeneric(
   "Var<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("Var<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("Var<-")
+    validObject(object)
+    object
   }
 )
 
 #' GaVar
-#' 
+#'
 #' Gets or Creates an object from the superclass .gaVar
-#' 
+#'
 #' @export
 #' @rdname GaVar
 setGeneric(
   "GaVar",
-  function(.Object) {},
+  function(object) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
 
 #' GaVar<-
-#' 
+#'
 #' Sets the value of an object or sets its slot belonging to the superclass .gaVar
-#' 
+#'
 #' @export
 #' @rdname GaVar
 setGeneric(
   "GaVar<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("GaVar<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("GaVar<-")
+    validObject(object)
+    object
   }
 )
 
 #' McfVar
-#' 
+#'
 #' Gets or Creates an object from the superclass .mcfVar
-#' 
+#'
 #' @export
 #' @rdname McfVar
 setGeneric(
   "McfVar",
-  function(.Object) {},
+  function(object) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
 
 #' McfVar<-
-#' 
+#'
 #' Sets the value of an object or sets its slot belonging to the superclass .mcfVar
-#' 
+#'
 #' @export
 #' @rdname McfVar
 setGeneric(
   "McfVar<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("McfVar<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("McfVar<-")
+    validObject(object)
+    object
   }
 )
 
 #' RtVar
-#' 
+#'
 #' Gets or Creates an object from the superclass .rtVar
-#' 
+#'
 #' @export
 #' @rdname RtVar
 setGeneric(
   "RtVar",
-  function(.Object) {},
+  function(object) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
 
 #' RtVar<-
-#' 
+#'
 #' Sets the value of an object or sets its slot belonging to the superclass .rtVar
-#' 
+#'
 #' @export
 #' @rdname RtVar
 setGeneric(
   "RtVar<-",
-  function(.Object, value) {
-    .Object <- standardGeneric("RtVar<-")
-    validObject(.Object)
-    .Object
+  function(object, value) {
+    object <- standardGeneric("RtVar<-")
+    validObject(object)
+    object
   }
 )
 
 #' Operator
-#' 
+#'
 #' Get or create an operator used in an expression.
-#' 
+#'
 #' @export
 #' @rdname Operator
 setGeneric(
@@ -126,9 +134,9 @@ setGeneric(
 )
 
 #' Operator<-
-#' 
+#'
 #' Set the operator used in an expression.
-#' 
+#'
 #' @export
 #' @rdname Operator
 setGeneric(
@@ -141,9 +149,9 @@ setGeneric(
 )
 
 #' Operand
-#' 
+#'
 #' Get the operand of an expression.
-#' 
+#'
 #' @export
 #' @rdname Operand
 setGeneric(
@@ -154,9 +162,9 @@ setGeneric(
 )
 
 #' Operand<-
-#' 
+#'
 #' Set the operand of an expression.
-#' 
+#'
 #' @export
 #' @rdname Operand
 setGeneric(
@@ -169,9 +177,9 @@ setGeneric(
 )
 
 #' IsRegEx
-#' 
+#'
 #' Checks for a regular expression.
-#' 
+#'
 #' @export
 #' @rdname IsRegEx
 setGeneric(
@@ -182,9 +190,9 @@ setGeneric(
 )
 
 #' Not
-#' 
+#'
 #' NOT an expression.
-#' 
+#'
 #' @export
 #' @rdname Not
 setGeneric(
@@ -195,7 +203,7 @@ setGeneric(
 )
 
 #' Expr
-#' 
+#'
 #' @export
 #' @rdname GaExpr
 setGeneric(
@@ -206,9 +214,9 @@ setGeneric(
 )
 
 #' GaExpr
-#' 
+#'
 #' Create an expression.
-#' 
+#'
 #' @examples
 #' \donttest{
 #'   myQuery <- GaQuery(view = 123456789)
@@ -216,7 +224,7 @@ setGeneric(
 #'   GaFilter(myQuery) <- source_matches_google
 #'   GetGaData(myQuery)
 #' }
-#' 
+#'
 #' @export
 #' @rdname GaExpr
 setGeneric(
@@ -227,9 +235,9 @@ setGeneric(
 )
 
 #' McfExpr
-#' 
+#'
 #' Create an expression.
-#' 
+#'
 #' @examples
 #' \donttest{
 #'   myQuery <- McfQuery(view = 123456789)
@@ -237,7 +245,7 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
-#' 
+#'
 #' @export
 #' @rdname McfExpr
 setGeneric(
@@ -248,9 +256,9 @@ setGeneric(
 )
 
 #' RtExpr
-#' 
+#'
 #' Create an expression.
-#' 
+#'
 #' @examples
 #' \donttest{
 #'   myQuery <- RtQuery(view = 123456789)
@@ -258,7 +266,7 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
-#' 
+#'
 #' @export
 #' @rdname RtExpr
 setGeneric(
@@ -269,9 +277,9 @@ setGeneric(
 )
 
 #' Or
-#' 
+#'
 #' OR two or more expressions.
-#' 
+#'
 #' @export
 #' @rdname Or
 setGeneric(
@@ -282,13 +290,13 @@ setGeneric(
 )
 
 #' And
-#' 
+#'
 #' AND two or more ganalytics expressions together.
-#' 
+#'
 #' Create a new AND expression from one or more arguments
 #' Valid types are either AND, OR, or single expressions.
 #' A single list of objects is also accepted.
-#' 
+#'
 #' @export
 #' @rdname And
 setGeneric(
@@ -302,9 +310,9 @@ setGeneric(
 setGeneric("xor")
 
 #' GaPrecedes
-#' 
+#'
 #' Create a gaSequenceStep object
-#' 
+#'
 #' @export
 #' @rdname GaPrecedes
 setGeneric(
@@ -315,9 +323,9 @@ setGeneric(
 )
 
 #' GaImmediatelyPrecedes
-#' 
+#'
 #' Create a gaSequenceStep object
-#' 
+#'
 #' @export
 #' @rdname GaImmediatelyPrecedes
 setGeneric(
@@ -328,9 +336,9 @@ setGeneric(
 )
 
 #' GaStartsWith
-#' 
+#'
 #' Create a gaSequenceStep object
-#' 
+#'
 #' @export
 #' @rdname GaStartsWith
 setGeneric(
@@ -341,9 +349,9 @@ setGeneric(
 )
 
 #' GaSequenceCondition
-#' 
+#'
 #' Create a new gaSequenceCondition object
-#' 
+#'
 #' @export
 #' @rdname GaSequenceCondition
 setGeneric(
@@ -354,9 +362,9 @@ setGeneric(
 )
 
 #' GaNonSequenceCondition
-#' 
+#'
 #' Create a new gaNonSequenceCondition object
-#' 
+#'
 #' @export
 #' @rdname GaNonSequenceCondition
 setGeneric(
@@ -367,9 +375,9 @@ setGeneric(
 )
 
 #' GaSegmentCondition
-#' 
+#'
 #' Create a new gaSegmentCondition object
-#' 
+#'
 #' @export
 #' @rdname GaSegmentCondition
 setGeneric(
@@ -380,9 +388,9 @@ setGeneric(
 )
 
 #' GaScopeLevel
-#' 
+#'
 #' Get the scope level of a gaDynSegment or gaMetExpr
-#' 
+#'
 #' @export
 #' @rdname GaScopeLevel
 setGeneric(
@@ -393,11 +401,11 @@ setGeneric(
 )
 
 #' GaScopeLevel<-
-#' 
+#'
 #' Set the scope level of a gaDynSegment or a gaMetExpr
 #' For segments, one of 'users' or 'sessions'
 #' For metric expressions one of 'perUser', 'perSession' or 'perHit'
-#' 
+#'
 #' @export
 #' @rdname GaScopeLevel
 setGeneric(
@@ -410,9 +418,9 @@ setGeneric(
 )
 
 #' GaSegment
-#' 
+#'
 #' Get the segment.
-#' 
+#'
 #' @export
 #' @rdname GaSegment
 setGeneric(
@@ -423,9 +431,9 @@ setGeneric(
 )
 
 #' GaSegment<-
-#' 
+#'
 #' Set the segment
-#' 
+#'
 #' @export
 #' @rdname GaSegment
 setGeneric(
@@ -438,9 +446,9 @@ setGeneric(
 )
 
 #' TableFilter
-#' 
+#'
 #' Get the filter.
-#' 
+#'
 #' @export
 #' @rdname TableFilter
 setGeneric(
@@ -451,9 +459,9 @@ setGeneric(
 )
 
 #' TableFilter<-
-#' 
+#'
 #' Set the filter.
-#' 
+#'
 #' @export
 #' @rdname TableFilter
 setGeneric(
@@ -466,9 +474,9 @@ setGeneric(
 )
 
 #' DateRange
-#' 
+#'
 #' Get the date range.
-#' 
+#'
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -479,9 +487,9 @@ setGeneric(
 )
 
 #' DateRange<-
-#' 
+#'
 #' Set the date range.
-#' 
+#'
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -494,9 +502,9 @@ setGeneric(
 )
 
 #' StartDate
-#' 
+#'
 #' Get the start date.
-#' 
+#'
 #' @export
 #' @rdname StartDate
 setGeneric(
@@ -507,9 +515,9 @@ setGeneric(
 )
 
 #' StartDate<-
-#' 
+#'
 #' Set the start date.
-#' 
+#'
 #' @export
 #' @rdname StartDate
 setGeneric(
@@ -522,9 +530,9 @@ setGeneric(
 )
 
 #' EndDate
-#' 
+#'
 #' Get the end date of the date range.
-#' 
+#'
 #' @export
 #' @rdname EndDate
 setGeneric(
@@ -535,9 +543,9 @@ setGeneric(
 )
 
 #' EndDate<-
-#' 
+#'
 #' Set the endDate of the date range.
-#' 
+#'
 #' @export
 #' @rdname EndDate
 setGeneric(
@@ -550,9 +558,9 @@ setGeneric(
 )
 
 #' Metrics
-#' 
+#'
 #' Get the metrics of the object.
-#' 
+#'
 #' @export
 #' @rdname Metrics
 setGeneric(
@@ -563,9 +571,9 @@ setGeneric(
 )
 
 #' Metrics<-
-#' 
+#'
 #' Set the metrics of the object.
-#' 
+#'
 #' @export
 #' @rdname Metrics
 setGeneric(
@@ -578,9 +586,9 @@ setGeneric(
 )
 
 #' Dimensions
-#' 
+#'
 #' Get the dimensions of the object.
-#' 
+#'
 #' @export
 #' @rdname Dimensions
 setGeneric(
@@ -591,9 +599,9 @@ setGeneric(
 )
 
 #' Dimensions<-
-#' 
+#'
 #' Set the dimensions for the object.
-#' 
+#'
 #' @export
 #' @rdname Dimensions
 setGeneric(
@@ -606,9 +614,9 @@ setGeneric(
 )
 
 #' SortBy
-#' 
+#'
 #' Get the sortBy order of the query.
-#' 
+#'
 #' @export
 #' @rdname SortBy
 setGeneric(
@@ -619,9 +627,9 @@ setGeneric(
 )
 
 #' SortBy<-
-#' 
+#'
 #' Set the order of rows returned by Google Analytics.
-#' 
+#'
 #' @export
 #' @rdname SortBy
 setGeneric(
@@ -634,9 +642,9 @@ setGeneric(
 )
 
 #' GaView
-#' 
+#'
 #' Get the viewId of the query
-#' 
+#'
 #' @export
 #' @rdname GaView
 setGeneric(
@@ -647,9 +655,9 @@ setGeneric(
 )
 
 #' GaView<-
-#' 
+#'
 #' Set the viewId for the query.
-#' 
+#'
 #' @export
 #' @rdname GaView
 setGeneric(
@@ -662,9 +670,9 @@ setGeneric(
 )
 
 #' MaxResults
-#' 
+#'
 #' Get the value set for MaxResults.
-#' 
+#'
 #' @export
 #' @rdname MaxResults
 setGeneric(
@@ -675,9 +683,9 @@ setGeneric(
 )
 
 #' MaxResults<-
-#' 
+#'
 #' Set the maximum rows returned by a ganalytics query.
-#' 
+#'
 #' @export
 #' @rdname MaxResults
 setGeneric(
@@ -690,9 +698,9 @@ setGeneric(
 )
 
 #' SamplingLevel
-#' 
+#'
 #' Get the sampling level.
-#' 
+#'
 #' @export
 #' @rdname SamplingLevel
 setGeneric(
@@ -703,9 +711,9 @@ setGeneric(
 )
 
 #' SamplingLevel<-
-#' 
+#'
 #' Set the sampling level for a ganalytics query.
-#' 
+#'
 #' @export
 #' @rdname SamplingLevel
 setGeneric(
@@ -718,9 +726,9 @@ setGeneric(
 )
 
 #' GetGaQueries
-#' 
+#'
 #' Get the chracter string query compoents for the given ganalytics object.
-#' 
+#'
 #' @rdname GetGaUrl
 setGeneric(
   "GetGaQueries",
@@ -730,13 +738,13 @@ setGeneric(
 )
 
 #' GetGaData
-#' 
+#'
 #' Fetch the data for the query or object from the Google Analytics API.
-#' 
+#'
 #' @export
 #' @rdname GetGaData
 setGeneric("GetGaData", function(
-  object, 
+  object,
   creds = NULL,
   ...
 ) {
@@ -744,9 +752,9 @@ setGeneric("GetGaData", function(
 })
 
 #' GaCreds
-#' 
+#'
 #' Get or set the authentication credentials for a Google Analytics query object.
-#' 
+#'
 #' @export
 #' @rdname GaCreds
 setGeneric("GaCreds", function(object = "GANALYTICS", creds = NULL, ...) {
@@ -754,9 +762,9 @@ setGeneric("GaCreds", function(object = "GANALYTICS", creds = NULL, ...) {
 })
 
 #' GaCreds<-
-#' 
+#'
 #' Set the authentication credentials for a Google Analytics query object.
-#' 
+#'
 #' @export
 #' @rdname GaCreds
 setGeneric(

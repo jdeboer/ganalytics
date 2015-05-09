@@ -12,74 +12,74 @@ NULL
 setMethod(
   f = "Var",
   signature = "character",
-  definition = function(.Object) {
-    as(.Object, ".var", strict = FALSE)
+  definition = function(object) {
+    as(object, ".var", strict = FALSE)
   }
 )
 
 setMethod(
   f = "Var<-",
   signature = c(".var", "character"),
-  definition = function(.Object, value) {
-    as(.Object, "character") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, "character") <- value
+    object
   }
 )
 
-setMethod("Var", ".expr", function(.Object) {as(.Object, ".var")})
+setMethod("Var", ".expr", function(object) {as(object, ".var")})
 
 setMethod(
   f = "Var<-",
   signature = c(".expr", "character"),
-  definition = function(.Object, value) {
-    as(.Object, ".var") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".var") <- value
+    object
   }
 )
 
-setMethod("Var", ".gaVarList", function(.Object) {.Object})
+setMethod("Var", ".gaVarList", function(object) {object})
 
 ## Create a gaMet or gaDim object
 ## GaVar takes a GA variable and determines whether to return a Dimension or Metric object
-setMethod("GaVar", "character", function(.Object) {as(.Object, ".gaVar")})
+setMethod("GaVar", "character", function(object) {as(object, ".gaVar")})
 
 setMethod(
   f = "GaVar<-",
   signature = c(".gaVar", "character"),
-  definition = function(.Object, value) {
-    as(.Object, "character") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, "character") <- value
+    object
   }
 )
 
-setMethod("GaVar", ".expr", function(.Object) {as(.Object, ".gaVar")})
+setMethod("GaVar", ".expr", function(object) {as(object, ".gaVar")})
 
 setMethod(
   f = "GaVar<-",
   signature = c(".expr", "character"),
-  definition = function(.Object, value) {
-    as(.Object, ".gaVar") <- value
-    .Object
+  definition = function(object, value) {
+    as(object, ".gaVar") <- value
+    object
   }
 )
 
-setMethod("GaVar", ".gaVarList", function(.Object) {.Object})
+setMethod("GaVar", ".gaVarList", function(object) {object})
 
 # ---- McfVar ----
 
-setMethod("McfVar", ".mcfVar", function(.Object) {.Object})
+setMethod("McfVar", ".mcfVar", function(object) {object})
 
 ## Create a mcfMet or mcfDim object
 ## McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
-setMethod("McfVar", "character", function(.Object) {as(.Object, ".mcfVar")})
+setMethod("McfVar", "character", function(object) {as(object, ".mcfVar")})
 
 # ---- RtVar ----
 
-setMethod("RtVar", ".rtVar", function(.Object) {.Object})
+setMethod("RtVar", ".rtVar", function(object) {object})
 
 ## Create a rtMet or rtDim object
 ## McfVar takes a RT variable and determines whether to return a Dimension or Metric object
-setMethod("RtVar", "character", function(.Object) {as(.Object, ".rtVar")})
+setMethod("RtVar", "character", function(object) {as(object, ".rtVar")})
 
 # -- GaMetrics ----
 

@@ -5,9 +5,9 @@
 \alias{RtVar<-}
 \title{RtVar}
 \usage{
-RtVar(.Object)
+RtVar(object)
 
-RtVar(.Object) <- value
+RtVar(object) <- value
 }
 \description{
 Gets or Creates an object from the superclass .rtVar

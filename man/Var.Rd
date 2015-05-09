@@ -2,11 +2,23 @@
 % Please edit documentation in R/all-generics.R
 \name{Var}
 \alias{Var}
+\alias{Var<-}
 \title{Var}
 \usage{
-Var(.Object)
+Var(object, ...)
+
+Var(object) <- value
 }
 \description{
-Var
+Create, set or get an object of class '.var'.
+
+Sets the value of an object belonging to the superclass '.var' or sets the
+var slot of an expression object belonging to class '.expr'
+}
+\details{
+Use Var to lookup a dimension or metric from the Google Analytics core
+reporting, multi-channel funnel reporting, or real-time reporting APIs, for
+use in defining expressions (of superclass .expr) or variable lists (of
+superclass .varList) such as query dimensions, metrics or sortBy parameters.
 }
 
