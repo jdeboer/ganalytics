@@ -6,11 +6,14 @@
 NULL
 
 #'SplitDateRange
+#'
 #'Splits a gaDateRange object into N pieces. Useful for splitting a query into
 #'smaller chunks in order to overcome sampling.
+#'
 #'@param dateRange the gaDateRange object to be split
 #'@param N the number of the separate date ranges to be split into; use 0 for
 #'  single days.
+#'
 #'@export
 SplitDateRange <- function(dateRange, N) {
   # TO DO
@@ -53,6 +56,7 @@ GetDataByDateRange <- function(query, dates) {
 
 # StartDate and EndDate
 
+#' @describeIn DateRange
 setMethod(
   f = "StartDate",
   signature = "character",
@@ -61,6 +65,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "EndDate",
   signature = "character",
@@ -69,14 +74,19 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod("StartDate", "dateRange", function(object) {object@startDate})
 
+#' @describeIn DateRange
 setMethod("EndDate", "dateRange", function(object) {object@endDate})
 
+#' @describeIn DateRange
 setMethod("StartDate", ".standardQuery", function(object) {StartDate(object@dateRange)})
 
+#' @describeIn DateRange
 setMethod("EndDate", ".standardQuery", function(object) {EndDate(object@dateRange)})
 
+#' @describeIn DateRange
 setMethod(
   f = "StartDate<-",
   signature = c("dateRange", "character"),
@@ -87,6 +97,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "EndDate<-",
   signature = c("dateRange", "character"),
@@ -97,6 +108,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "StartDate<-",
   signature = c("dateRange", "Date"),
@@ -107,6 +119,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "EndDate<-",
   signature = c("dateRange", "Date"),
@@ -117,6 +130,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "StartDate<-",
   signature = c(".standardQuery", "character"),
@@ -128,6 +142,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "EndDate<-",
   signature = c(".standardQuery", "character"),
@@ -139,6 +154,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "StartDate<-",
   signature = c(".standardQuery", "Date"),
@@ -150,6 +166,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "EndDate<-",
   signature = c(".standardQuery", "Date"),
@@ -163,8 +180,10 @@ setMethod(
 
 # DateRange
 
+#' @describeIn DateRange
 setMethod("DateRange", "dateRange", function(object) {object})
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange",
   signature = c("character", "character"),
@@ -175,6 +194,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange",
   signature = c("Date", "Date"),
@@ -184,8 +204,10 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod("DateRange", ".standardQuery", function(object) {object@dateRange})
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c("dateRange", "character"),
@@ -200,6 +222,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c(".standardQuery", "dateRange"),
@@ -209,6 +232,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c(".standardQuery", ".standardQuery"),
@@ -218,6 +242,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c("dateRange", "dateRange"),
@@ -227,6 +252,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c("dateRange", ".standardQuery"),
@@ -236,6 +262,7 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c(".standardQuery", "character"),
@@ -252,22 +279,36 @@ setMethod(
   }
 )
 
+#' @describeIn DateRange
 setMethod("DateRange<-", c(".standardQuery", "Date"), function(object, value) {
   DateRange(object, as.character(value))
 })
 
 # For backwards compatibility
-#'@export GaStartDate
+#' @export GaStartDate
+#' @rdname deprecate
 GaStartDate <- StartDate
-#'@export GaEndDate
+
+#' @export GaEndDate
+#' @rdname deprecate
 GaEndDate <- EndDate
-#'@export GaDateRange
+
+#' @export GaDateRange
+#' @rdname deprecate
 GaDateRange <- DateRange
-#'@export GaStartDate<-
+
+#' @export GaStartDate<-
+#' @rdname deprecate
 `GaStartDate<-` <- `StartDate<-`
-#'@export GaEndDate<-
+
+#' @export GaEndDate<-
+#' @rdname deprecate
 `GaEndDate<-` <- `EndDate<-`
-#'@export GaDateRange<-
+
+#' @export GaDateRange<-
+#' @rdname deprecate
 `GaDateRange<-` <- `DateRange<-`
-#'@export GaSplitDateRange
+
+#' @export GaSplitDateRange
+#' @rdname deprecate
 GaSplitDateRange <- SplitDateRange

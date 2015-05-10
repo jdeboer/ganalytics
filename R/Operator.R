@@ -8,8 +8,10 @@ NULL
 
 # ---- Operator, GaDimOperator, GaMetOperator ----
 
+#' @describeIn Expr
 setMethod("Operator", ".operator", function(object) {object})
 
+#' @describeIn Expr
 setMethod(
   f = "Operator<-",
   signature = c(".operator", "character"),
@@ -19,8 +21,10 @@ setMethod(
   }
 )
 
+#' @describeIn Expr
 setMethod("Operator", ".expr", function(object) {as(object, ".operator")})
 
+#' @describeIn Expr
 setMethod(
   f = "Operator<-",
   signature = ".expr",
@@ -31,7 +35,8 @@ setMethod(
 )
 
 # ---- IsRegEx ----
-
+#' @describeIn Expr
 setMethod("IsRegEx", ".dimOperator", function(object) {object %in% c("=~", "!~")})
 
+#' @describeIn Expr
 setMethod("IsRegEx", ".expr", function(object) {IsRegEx(Operator(object))})

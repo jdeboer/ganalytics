@@ -98,6 +98,14 @@ gaUserSegment <- R6Class(
   )
 )
 
+#' User Segment
+#'
+#' Get a user or system defined segment.
+#'
+#' @param id ID of the user or system segment to get
+#' @param definition The definition to use if an ID is not provided.
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaUserSegment <- function(id = NULL, definition = NA, creds = GoogleApiCreds()){
   id <- sub("^gaid::", "", id)
@@ -121,6 +129,13 @@ gaUserSegments <- R6Class(
   )
 )
 
+#' Get a collection of user and system defined segments.
+#'
+#' Returns a collection object of user and system defined segments available
+#' under the supplied user credentials.
+#'
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaUserSegments <- function(creds = GoogleApiCreds()){
   gaUserSegments$new(creds = creds)
@@ -148,6 +163,13 @@ gaAccountSummary <- R6Class(
   )
 )
 
+#' GA Account Summary
+#'
+#' Get a Google Analytics account summary resource.
+#'
+#' @param id ID of the GA account to get a summary of.
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaAccountSummary <- function(id = NULL, creds = GoogleApiCreds()){
   gaAccountSummary$new(id = id, creds = creds)
@@ -165,6 +187,12 @@ gaAccountSummaries <- R6Class(
   )
 )
 
+#' GTM Account Summaries
+#'
+#' Get a collection of Google Analytics account summaries.
+#'
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaAccountSummaries <- function(creds = GoogleApiCreds()){
   gaAccountSummaries$new(creds = creds)
@@ -215,6 +243,13 @@ gaAccount <- R6Class(
   )
 )
 
+#' GA Account
+#'
+#' Get a GA account.
+#'
+#' @param id ID of the GA account to get
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaAccount <- function(id = NULL, creds = GoogleApiCreds()){
   gaAccount$new(id = id, creds = creds)
@@ -233,6 +268,13 @@ gaAccounts <- R6Class(
   )
 )
 
+#' GTM Accounts
+#'
+#' Get the collection of GA accounts accessible to the user with the credentials
+#' supplied by \code{creds}..
+#'
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GaAccounts <- function(creds = GoogleApiCreds()){
   gaAccounts$new(creds = creds)
@@ -257,7 +299,7 @@ gaViewFilter <- R6Class(
         SEARCH_AND_REPLACE = list(searchAndReplaceDetails = details),
         UPPERCASE = list(uppercaseDetails = details)
       )
-      c(super$api_list, list(type = type), details) 
+      c(super$api_list, list(type = type), details)
     }
   ),
   private = list(
@@ -266,7 +308,7 @@ gaViewFilter <- R6Class(
     field_corrections = function(field_list){
       field_list <- super$field_corrections(field_list)
       detailsFunction <- function(row) {
-        details <- switch(as.character(row$type), 
+        details <- switch(as.character(row$type),
                 ADVANCED = row$advancedDetails,
                 EXCLUDE = row$excludeDetails,
                 INCLUDE = row$includeDetails,

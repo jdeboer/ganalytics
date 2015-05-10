@@ -3,14 +3,47 @@
 #' @include all-classes.R
 NULL
 
-#' Var
+#' Google Analytics dimension and metric variables.
 #'
-#' Create, set or get an object of class '.var'.
+#' \code{Var} returns a '.var' object which is valid Google Analytics dimension
+#' or metric for use with the core reporting, multi-channel-funnel reporting or
+#' real-time reporting API.
 #'
-#' Use Var to lookup a dimension or metric from the Google Analytics core
-#' reporting, multi-channel funnel reporting, or real-time reporting APIs, for
-#' use in defining expressions (of superclass .expr) or variable lists (of
-#' superclass .varList) such as query dimensions, metrics or sortBy parameters.
+#' Use \code{Var} to lookup a dimension or metric from the Google Analytics core
+#' reporting, multi-channel-funnel reporting, or real-time reporting APIs, for
+#' use in defining expressions (of superclass '.expr') or (to be implemented)
+#' variable lists (of superclass '.varList') such as query dimensions, metrics
+#' or sortBy parameters.
+#'
+#' \code{Var} accepts either a character, '.var', or '.expr' object. A character
+#' object will be coerced to a '.var' object by looking for a matching dimension
+#' or metric from the Core Reporting, Multi-Channel Funnel Reporting, and
+#' Real-Time Reporting APIs. Providing an '.expr' object will return the
+#' dimension or metric used within that Google Analytics expression.
+#'
+#' @param object an object that inherits from or extends the class '.var',
+#'   including 'gaDimVar', 'gaMetVar', 'mcfDimVar', 'mcfMetVar', 'rtDimVar',
+#'   'rtMetVar', 'gaExpr', 'mcfExpr', 'rtExpr', 'gaDimensions', 'gaMetrics',
+#'   'mcfDimensions', 'mcfMetrics', 'rtDimensions' and 'rtMetrics'.
+#' @param ... A replacement value for \code{object} coerced to class '.var'.
+#'
+#' @return An object inheriting from the superclass '.var'
+#'
+#' @examples
+#' Var("source")
+#' dim <- Var("ga:medium")
+#' Var(dim)
+#' paid_traffic <- Expr(dim, "==", "cpc")
+#' Var(paid_traffic)
+#'
+#' @seealso \itemize{ \item
+#'   \href{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}{Core
+#'    Reporting API dimensions and metrics} \item
+#'   \href{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}{Multi-Channel-Funnel
+#'    Reporting API dimensions and metrics} \item
+#'   \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
+#'    Reporting API dimensions and metrics} }
+#'
 #' @export
 #' @rdname Var
 setGeneric(
@@ -20,10 +53,16 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Var<-
+#' Var<-.
 #'
-#' Sets the value of an object belonging to the superclass '.var' or sets the
-#' var slot of an expression object belonging to class '.expr'
+#' \code{Var<-} sets the value of an object belonging to the superclass '.var'
+#' or sets the var slot of an expression object belonging to class '.expr'
+#'
+#' @param value any object that can be coerced to a valid \code{object} class.
+#'
+#' @examples
+#' expr1 <- Expr("pageviews", '>', 10)
+#' Var(expr1) <- "uniquePageviews"
 #'
 #' @export
 #' @rdname Var
@@ -36,25 +75,23 @@ setGeneric(
   }
 )
 
-#' GaVar
-#'
-#' Gets or Creates an object from the superclass .gaVar
+#' \code{GaVar} Gets or creates an object from the superclass .gaVar
 #'
 #' @export
-#' @rdname GaVar
+#' @rdname Var
 setGeneric(
   "GaVar",
-  function(object) {},
-  valueClass = "character",
+  function(object, ...) {},
+  valueClass = ".gaVar",
   useAsDefault = FALSE
 )
 
-#' GaVar<-
-#'
-#' Sets the value of an object or sets its slot belonging to the superclass .gaVar
+#' \code{GaVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' object to a Google Analytics Core Reporting API dimension or metric
+#' that inherits from the class '.gaVar'.
 #'
 #' @export
-#' @rdname GaVar
+#' @rdname Var
 setGeneric(
   "GaVar<-",
   function(object, value) {
@@ -64,25 +101,23 @@ setGeneric(
   }
 )
 
-#' McfVar
-#'
-#' Gets or Creates an object from the superclass .mcfVar
+#' \code{McfVar} Gets or creates an object from the superclass .mcfVar
 #'
 #' @export
-#' @rdname McfVar
+#' @rdname Var
 setGeneric(
   "McfVar",
-  function(object) {},
-  valueClass = "character",
+  function(object, ...) {},
+  valueClass = ".mcfVar",
   useAsDefault = FALSE
 )
 
-#' McfVar<-
-#'
-#' Sets the value of an object or sets its slot belonging to the superclass .mcfVar
+#' \code{McfVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' object to a Multi Channel Funnel Reporting API dimension or metric
+#' that inherits from the class '.mcfVar'.
 #'
 #' @export
-#' @rdname McfVar
+#' @rdname Var
 setGeneric(
   "McfVar<-",
   function(object, value) {
@@ -92,25 +127,23 @@ setGeneric(
   }
 )
 
-#' RtVar
-#'
-#' Gets or Creates an object from the superclass .rtVar
+#' \code{RtVar} Gets or creates an object from the superclass .rtVar
 #'
 #' @export
-#' @rdname RtVar
+#' @rdname Var
 setGeneric(
   "RtVar",
-  function(object) {},
-  valueClass = "character",
+  function(object, ...) {},
+  valueClass = ".rtVar",
   useAsDefault = FALSE
 )
 
-#' RtVar<-
-#'
-#' Sets the value of an object or sets its slot belonging to the superclass .rtVar
+#' \code{RtVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' object to a Google Analytics Real Time Reporting API dimension or metric
+#' that inherits from the class '.rtVar'.
 #'
 #' @export
-#' @rdname RtVar
+#' @rdname Var
 setGeneric(
   "RtVar<-",
   function(object, value) {
@@ -120,25 +153,32 @@ setGeneric(
   }
 )
 
-#' Operator
+#' Operator.
 #'
 #' Get or create an operator used in an expression.
 #'
+#' @param object The object to be coerced to a '.Operator' class or to get the
+#'   operator from.
+#' @param ... Used by certain methods.
+#'
 #' @export
-#' @rdname Operator
+#' @rdname Expr
 setGeneric(
   "Operator",
-  function(object) {},
+  function(object, ...) {},
   valueClass = ".operator",
   useAsDefault = FALSE
 )
 
-#' Operator<-
+#' Operator<-.
 #'
 #' Set the operator used in an expression.
 #'
+#' @param object The object for which to set the operator of.
+#' @param value The value to set the operator to.
+#'
 #' @export
-#' @rdname Operator
+#' @rdname Expr
 setGeneric(
   "Operator<-",
   function(object, value) {
@@ -148,25 +188,31 @@ setGeneric(
   }
 )
 
-#' Operand
+#' Operand.
 #'
 #' Get the operand of an expression.
 #'
+#' @param object The object for which to set the operand of.
+#' @param value The value to set the operand to.
+#'
 #' @export
-#' @rdname Operand
+#' @rdname Expr
 setGeneric(
   "Operand",
-  function(object) {},
+  function(object, ...) {},
   valueClass = ".operand",
   useAsDefault = FALSE
 )
 
-#' Operand<-
+#' Operand<-.
 #'
 #' Set the operand of an expression.
 #'
+#' @param object An object to set the operand of.
+#' @param value The value to set the operand to.
+#'
 #' @export
-#' @rdname Operand
+#' @rdname Expr
 setGeneric(
   "Operand<-",
   function(object, value) {
@@ -176,12 +222,16 @@ setGeneric(
   }
 )
 
-#' IsRegEx
+#' IsRegEx.
 #'
 #' Checks for a regular expression.
 #'
+#' @param object An object to check if whether a regular expression.
+#'
+#' @return TRUE or FALSE
+#'
 #' @export
-#' @rdname IsRegEx
+#' @rdname Expr
 setGeneric(
   "IsRegEx",
   function(object) {},
@@ -189,23 +239,15 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Not
+#' Expr.
 #'
-#' NOT an expression.
+#' Define a Google Analytics expression.
 #'
-#' @export
-#' @rdname Not
-setGeneric(
-  "Not",
-  function(object) {},
-  valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
-  useAsDefault = FALSE
-)
-
-#' Expr
+#' @param object A dimension or metric variable, or another object to be coerced
+#'   to an .expr object.
 #'
 #' @export
-#' @rdname GaExpr
+#' @rdname Expr
 setGeneric(
   "Expr",
   function(object, operator, operand, metricScope = "") {},
@@ -213,9 +255,9 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaExpr
+#' GaExpr.
 #'
-#' Create an expression.
+#' Create a Core Reporting API expression.
 #'
 #' @examples
 #' \donttest{
@@ -226,7 +268,7 @@ setGeneric(
 #' }
 #'
 #' @export
-#' @rdname GaExpr
+#' @rdname Expr
 setGeneric(
   "GaExpr",
   function(object, operator, operand, metricScope = "") {},
@@ -234,9 +276,9 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' McfExpr
+#' McfExpr.
 #'
-#' Create an expression.
+#' Create a Multi-Chanel Funnel Reporting API expression.
 #'
 #' @examples
 #' \donttest{
@@ -247,7 +289,7 @@ setGeneric(
 #' }
 #'
 #' @export
-#' @rdname McfExpr
+#' @rdname Expr
 setGeneric(
   "McfExpr",
   function(object, operator, operand) {},
@@ -255,9 +297,9 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' RtExpr
+#' RtExpr.
 #'
-#' Create an expression.
+#' Create a Real-Time Reporting API expression.
 #'
 #' @examples
 #' \donttest{
@@ -268,7 +310,7 @@ setGeneric(
 #' }
 #'
 #' @export
-#' @rdname RtExpr
+#' @rdname Expr
 setGeneric(
   "RtExpr",
   function(object, operator, operand) {},
@@ -276,9 +318,27 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Or
+#' Not.
+#'
+#' Invert an expression, i.e. NOT.
+#'
+#' @param object An object to get the logical inverse of.
+#'
+#' @export
+#' @rdname Not
+setGeneric(
+  "Not",
+  function(object) {},
+  valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
+  useAsDefault = FALSE
+)
+
+#' Or.
 #'
 #' OR two or more expressions.
+#'
+#' @param object The first object to include within the OR expression.
+#' @param ... Additional objects to include within the OR expression.
 #'
 #' @export
 #' @rdname Or
@@ -289,13 +349,16 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' And
+#' And.
 #'
 #' AND two or more ganalytics expressions together.
 #'
 #' Create a new AND expression from one or more arguments
 #' Valid types are either AND, OR, or single expressions.
 #' A single list of objects is also accepted.
+#'
+#' @param object The first object within the AND expression
+#' @param ... Additional objects to include within the AND expression.
 #'
 #' @export
 #' @rdname And
@@ -306,15 +369,21 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' Generate an expression that gives the exclusive or of two expressions.
+#'
+#' @param x The first expression
+#' @param y The second expression.
+#'
 #' @export
+#' @rdname Or
 setGeneric("xor")
 
-#' GaPrecedes
+#' GaPrecedes.
 #'
 #' Create a gaSequenceStep object
 #'
 #' @export
-#' @rdname GaPrecedes
+#' @rdname GaSequenceCondition
 setGeneric(
   "GaPrecedes",
   function(object, ...) {},
@@ -322,12 +391,12 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaImmediatelyPrecedes
+#' GaImmediatelyPrecedes.
 #'
 #' Create a gaSequenceStep object
 #'
 #' @export
-#' @rdname GaImmediatelyPrecedes
+#' @rdname GaSequenceCondition
 setGeneric(
   "GaImmediatelyPrecedes",
   function(object, ...) {},
@@ -335,12 +404,12 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaStartsWith
+#' GaStartsWith.
 #'
 #' Create a gaSequenceStep object
 #'
 #' @export
-#' @rdname GaStartsWith
+#' @rdname GaSequenceCondition
 setGeneric(
   "GaStartsWith",
   function(object, ...) {},
@@ -348,7 +417,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaSequenceCondition
+#' GaSequenceCondition.
 #'
 #' Create a new gaSequenceCondition object
 #'
@@ -361,12 +430,12 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaNonSequenceCondition
+#' GaNonSequenceCondition.
 #'
 #' Create a new gaNonSequenceCondition object
 #'
 #' @export
-#' @rdname GaNonSequenceCondition
+#' @rdname Segment
 setGeneric(
   "GaNonSequenceCondition",
   function(object, ..., negation = FALSE) {},
@@ -374,12 +443,12 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaSegmentCondition
+#' GaSegmentCondition.
 #'
 #' Create a new gaSegmentCondition object
 #'
 #' @export
-#' @rdname GaSegmentCondition
+#' @rdname Segment
 setGeneric(
   "GaSegmentCondition",
   function(object, ..., scope = "sessions") {},
@@ -387,27 +456,27 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaScopeLevel
+#' GaScopeLevel.
 #'
 #' Get the scope level of a gaDynSegment or gaMetExpr
 #'
 #' @export
-#' @rdname GaScopeLevel
+#' @rdname Segment
 setGeneric(
   "GaScopeLevel",
-  function(object) {},
+  function(object, ...) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
 
-#' GaScopeLevel<-
+#' GaScopeLevel<-.
 #'
 #' Set the scope level of a gaDynSegment or a gaMetExpr
 #' For segments, one of 'users' or 'sessions'
 #' For metric expressions one of 'perUser', 'perSession' or 'perHit'
 #'
 #' @export
-#' @rdname GaScopeLevel
+#' @rdname Segment
 setGeneric(
   "GaScopeLevel<-",
   function(object, value) {
@@ -417,35 +486,35 @@ setGeneric(
   }
 )
 
-#' GaSegment
+#' GaSegment.
 #'
 #' Get the segment.
 #'
 #' @export
-#' @rdname GaSegment
+#' @rdname Segment
 setGeneric(
-  "GaSegment",
+  "Segment",
   function(object, ..., scope = "sessions") {},
   valueClass = ".gaSegment",
   useAsDefault = FALSE
 )
 
-#' GaSegment<-
+#' Segment<-.
 #'
 #' Set the segment
 #'
 #' @export
-#' @rdname GaSegment
+#' @rdname Segment
 setGeneric(
-  "GaSegment<-",
+  "Segment<-",
   function(object, value) {
-    object <- standardGeneric("GaSegment<-")
+    object <- standardGeneric("Segment<-")
     validObject(object)
     object
   }
 )
 
-#' TableFilter
+#' TableFilter.
 #'
 #' Get the filter.
 #'
@@ -458,7 +527,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' TableFilter<-
+#' TableFilter<-.
 #'
 #' Set the filter.
 #'
@@ -473,7 +542,7 @@ setGeneric(
   }
 )
 
-#' DateRange
+#' DateRange.
 #'
 #' Get the date range.
 #'
@@ -486,7 +555,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' DateRange<-
+#' DateRange<-.
 #'
 #' Set the date range.
 #'
@@ -501,25 +570,25 @@ setGeneric(
   }
 )
 
-#' StartDate
+#' StartDate.
 #'
 #' Get the start date.
 #'
 #' @export
-#' @rdname StartDate
+#' @rdname DateRange
 setGeneric(
   "StartDate",
-  function(object) {},
+  function(object, ...) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
 
-#' StartDate<-
+#' StartDate<-.
 #'
 #' Set the start date.
 #'
 #' @export
-#' @rdname StartDate
+#' @rdname DateRange
 setGeneric(
   "StartDate<-",
   function(object, value) {
@@ -529,25 +598,25 @@ setGeneric(
   }
 )
 
-#' EndDate
+#' EndDate.
 #'
 #' Get the end date of the date range.
 #'
 #' @export
-#' @rdname EndDate
+#' @rdname DateRange
 setGeneric(
   "EndDate",
-  function(object) {},
+  function(object, ...) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
 
-#' EndDate<-
+#' EndDate<-.
 #'
 #' Set the endDate of the date range.
 #'
 #' @export
-#' @rdname EndDate
+#' @rdname DateRange
 setGeneric(
   "EndDate<-",
   function(object, value) {
@@ -557,7 +626,7 @@ setGeneric(
   }
 )
 
-#' Metrics
+#' Metrics.
 #'
 #' Get the metrics of the object.
 #'
@@ -570,12 +639,12 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Metrics<-
+#' Metrics<-.
 #'
 #' Set the metrics of the object.
 #'
-#' @export
 #' @rdname Metrics
+#' @export
 setGeneric(
   "Metrics<-",
   function(object, value) {
@@ -585,7 +654,7 @@ setGeneric(
   }
 )
 
-#' Dimensions
+#' Dimensions.
 #'
 #' Get the dimensions of the object.
 #'
@@ -598,7 +667,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Dimensions<-
+#' Dimensions<-.
 #'
 #' Set the dimensions for the object.
 #'
@@ -613,7 +682,7 @@ setGeneric(
   }
 )
 
-#' SortBy
+#' SortBy.
 #'
 #' Get the sortBy order of the query.
 #'
@@ -626,7 +695,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' SortBy<-
+#' SortBy<-.
 #'
 #' Set the order of rows returned by Google Analytics.
 #'
@@ -641,7 +710,7 @@ setGeneric(
   }
 )
 
-#' GaView
+#' GaView.
 #'
 #' Get the viewId of the query
 #'
@@ -649,12 +718,12 @@ setGeneric(
 #' @rdname GaView
 setGeneric(
   "GaView",
-  function(object) {},
+  function(object, ...) {},
   valueClass = "viewId",
   useAsDefault = FALSE
 )
 
-#' GaView<-
+#' GaView<-.
 #'
 #' Set the viewId for the query.
 #'
@@ -669,7 +738,7 @@ setGeneric(
   }
 )
 
-#' MaxResults
+#' MaxResults.
 #'
 #' Get the value set for MaxResults.
 #'
@@ -677,14 +746,17 @@ setGeneric(
 #' @rdname MaxResults
 setGeneric(
   "MaxResults",
-  function(object) {},
+  function(object, ...) {},
   valueClass = "numeric",
   useAsDefault = FALSE
 )
 
-#' MaxResults<-
+#' MaxResults<-.
 #'
 #' Set the maximum rows returned by a ganalytics query.
+#'
+#' @param object the object to set the maximum response rows of.
+#' @param value the value to set the maximum response rows to.
 #'
 #' @export
 #' @rdname MaxResults
@@ -697,22 +769,29 @@ setGeneric(
   }
 )
 
-#' SamplingLevel
+#' SamplingLevel.
 #'
 #' Get the sampling level.
+#'
+#' @param object the query or response to check the sampling level of.
+#' @param value if \code{object} is a query, then use  value to set the sampling
+#'   level to of that query.
 #'
 #' @export
 #' @rdname SamplingLevel
 setGeneric(
   "SamplingLevel",
-  function(object) {},
+  function(object, value) {},
   valueClass = c("character", "list"),
   useAsDefault = FALSE
 )
 
-#' SamplingLevel<-
+#' SamplingLevel<-.
 #'
 #' Set the sampling level for a ganalytics query.
+#'
+#' @param object the query to set the sampling level of.
+#' @param value the sampling level to set to.
 #'
 #' @export
 #' @rdname SamplingLevel
@@ -725,11 +804,9 @@ setGeneric(
   }
 )
 
-#' GetGaQueries
+#' GetGaQueries.
 #'
 #' Get the chracter string query compoents for the given ganalytics object.
-#'
-#' @rdname GetGaUrl
 setGeneric(
   "GetGaQueries",
   function(object) {},
@@ -737,32 +814,31 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GetGaData
+#' GetGaData.
 #'
-#' Fetch the data for the query or object from the Google Analytics API.
+#' Fetch the data for the Google Analytics API query.
 #'
 #' @export
-#' @rdname GetGaData
-setGeneric("GetGaData", function(
-  object,
-  creds = NULL,
-  ...
-) {
-  standardGeneric("GetGaData")
-})
+#' @rdname Query
+setGeneric(
+  "GetGaData", function(query, creds = NULL, ...) {
+    standardGeneric("GetGaData")
+  }
+)
 
-#' GaCreds
+#' Authentication credentials for Google Analytics API queries.
 #'
 #' Get or set the authentication credentials for a Google Analytics query object.
 #'
 #' @export
 #' @rdname GaCreds
-setGeneric("GaCreds", function(object = "GANALYTICS", creds = NULL, ...) {
-  standardGenericric("GaCreds")
-})
+setGeneric(
+  "GaCreds",
+  function(object = "GANALYTICS", creds = NULL, ...) {
+    standardGenericric("GaCreds")
+  }
+)
 
-#' GaCreds<-
-#'
 #' Set the authentication credentials for a Google Analytics query object.
 #'
 #' @export

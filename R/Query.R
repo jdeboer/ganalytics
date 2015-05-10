@@ -6,9 +6,11 @@
 #' @include ganalytics-package.R
 NULL
 
-#' GaQuery
+#' GaQuery.
+#'
 #' Create a ganalytics query object
-#' @param viewId profile id to use
+#'
+#' @param view view id to use
 #' @param creds authentication credentials object created using GoogleApiCreds()
 #' @param startDate start date
 #' @param endDate end date
@@ -20,6 +22,7 @@ NULL
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
+#'
 #' @export
 GaQuery <- function(
   view = NA,
@@ -61,6 +64,22 @@ GaQuery <- function(
   )
 }
 
+#' McfQuery.
+#'
+#' Create a Multi-Channel Funnel Reporting API query object
+#'
+#' @param view view id to use
+#' @param creds authentication credentials object created using GoogleApiCreds()
+#' @param startDate start date
+#' @param endDate end date
+#' @param metrics character vector of metrics
+#' @param dimensions character vector of dimensions
+#' @param sortBy a sort by object
+#' @param filters a filters object
+#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
+#' @param maxResults the maximum number of results to return,
+#'  up to 1,000,000
+#'
 #' @export
 McfQuery <- function(
   view = NA,
@@ -96,6 +115,20 @@ McfQuery <- function(
   )
 }
 
+#' RtQuery.
+#'
+#' Create a Real-Time reporting API query object
+#'
+#' @param view view id to use
+#' @param creds authentication credentials object created using GoogleApiCreds()
+#' @param metrics character vector of metrics
+#' @param dimensions character vector of dimensions
+#' @param sortBy a sort by object
+#' @param filters a filters object
+#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
+#' @param maxResults the maximum number of results to return,
+#'  up to 1,000,000
+#'
 #' @export
 RtQuery <- function(
   view = NA,
@@ -175,6 +208,7 @@ modify_query <- function(
   # creds
 }
 
+#' @describeIn MaxResults
 setMethod(
   f = "MaxResults",
   signature = ".query",
@@ -183,6 +217,7 @@ setMethod(
   }
 )
 
+#' @describeIn MaxResults
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
@@ -193,6 +228,7 @@ setMethod(
   }
 )
 
+#' @describeIn SamplingLevel
 setMethod(
   f = "SamplingLevel",
   signature = ".standardQuery",
@@ -201,6 +237,7 @@ setMethod(
   }
 )
 
+#' @describeIn SamplingLevel
 setMethod(
   f = "SamplingLevel<-",
   signature = c(".standardQuery", "ANY"),
@@ -211,6 +248,7 @@ setMethod(
   }
 )
 
+#' @describeIn SamplingLevel
 setMethod(
   f = "SamplingLevel",
   signature = "data.frame",
@@ -222,11 +260,18 @@ setMethod(
 )
 
 # Backwards compatibility
-#'@export GaSamplingLevel
+#' @export GaSamplingLevel
+#' @rdname SamplingLevel
 GaSamplingLevel <- SamplingLevel
-#'@export GaSamplingLevel<-
+
+#' @export GaSamplingLevel<-
+#' @rdname SamplingLevel
 `GaSamplingLevel<-` <- `SamplingLevel<-`
-#'@export GaMaxResults
+
+#' @export GaMaxResults
+#' @rdname MaxResults
 GaMaxResults <- MaxResults
-#'@export GaMaxResults<-
+
+#' @export GaMaxResults<-
+#' @rdname MaxResults
 `GaMaxResults<-` <- `MaxResults<-`

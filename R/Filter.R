@@ -5,16 +5,22 @@
 #' @include helper-functions.R
 NULL
 
+#' @describeIn TableFilter
 setMethod("TableFilter", ".query", function(object) {as(object, ".tableFilter")})
 
+#' @describeIn TableFilter
 setMethod("TableFilter", "NULL", function(object) {as(object, ".tableFilter")})
 
+#' @describeIn TableFilter
 setMethod("TableFilter", ".tableFilter", function(object) {object})
 
+#' @describeIn TableFilter
 setMethod("TableFilter", ".compoundExpr", function(object) {as(object, ".tableFilter")})
 
+#' @describeIn TableFilter
 setMethod("TableFilter", "gaDynSegment", function(object) {as(object, ".tableFilter")})
 
+#' @describeIn TableFilter
 setMethod(
   f = "TableFilter<-",
   signature = c(".tableFilter", "andExpr"),
@@ -24,6 +30,7 @@ setMethod(
   }
 )
 
+#' @describeIn TableFilter
 setMethod(
   f = "TableFilter<-",
   signature = c(".query", "ANY"),
@@ -35,6 +42,9 @@ setMethod(
 
 # Backwards compatibility
 #' @export GaFilter
+#' @rdname TableFilter
 GaFilter <- TableFilter
+
 #' @export GaFilter<-
+#' @rdname TableFilter
 `GaFilter<-` <- `TableFilter<-`

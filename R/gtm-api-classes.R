@@ -79,6 +79,13 @@ gtmAccount <- R6Class(
   )
 )
 
+#' GTM Account
+#'
+#' Get a GTM account.
+#'
+#' @param id ID of the GTM account to get
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GtmAccount <- function(id = NULL, creds = GoogleApiCreds()){
   gtmAccount$new(id = id, creds = creds)
@@ -92,6 +99,12 @@ gtmAccounts <- R6Class(
   )
 )
 
+#' GTM Accounts
+#'
+#' Get a collection of GTM accounts.
+#'
+#' @param creds The Google APIs credentials to use.
+#'
 #' @export
 GtmAccounts <- function(creds = GoogleApiCreds()){
   gtmAccounts$new(creds = creds)

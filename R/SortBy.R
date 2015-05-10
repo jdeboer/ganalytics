@@ -8,6 +8,7 @@ NULL
 
 # -- GaSortBy ----
 
+#' @describeIn SortBy
 setMethod(
   f = "SortBy",
   signature = ".varList",
@@ -19,8 +20,10 @@ setMethod(
   }
 )
 
+#' @describeIn SortBy
 setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 
+#' @describeIn SortBy
 setMethod(
   f = "SortBy",
   signature = "character",
@@ -45,6 +48,7 @@ setMethod(
   }
 )
 
+#' @describeIn SortBy
 setMethod(
   f = "SortBy",
   signature = "list",
@@ -53,6 +57,7 @@ setMethod(
   }
 )
 
+#' @describeIn SortBy
 setMethod(
   f = "SortBy",
   signature = c(".query", "ANY"),
@@ -69,6 +74,7 @@ setMethod(
   }
 )
 
+#' @describeIn SortBy
 setMethod(
   f = "SortBy<-",
   signature = c(".query", "ANY"),
@@ -80,8 +86,10 @@ setMethod(
 
 # Backwards compatibility
 
-#'@export GaSortBy
+#' @rdname SortBy
+#' @export GaSortBy
 GaSortBy <- SortBy
 
-#'@export GaSortBy<-
+#' @rdname SortBy
+#' @export GaSortBy<-
 `GaSortBy<-` <- `SortBy<-`

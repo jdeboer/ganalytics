@@ -8,6 +8,7 @@ NULL
 
 # ---- GaPrecedes, GaImmediatelyPrecedes, GaStartsWith, GaSequenceCondition ----
 
+#' @describeIn GaSequenceCondition
 setMethod(
   f = "GaPrecedes",
   signature = ".compoundExpr",
@@ -16,6 +17,7 @@ setMethod(
   }
 )
 
+#' @describeIn GaSequenceCondition
 setMethod(
   f = "GaImmediatelyPrecedes",
   signature = ".compoundExpr",
@@ -24,6 +26,7 @@ setMethod(
   }
 )
 
+#' @describeIn GaSequenceCondition
 setMethod(
   f = "GaStartsWith",
   signature = ".compoundExpr",
@@ -32,6 +35,7 @@ setMethod(
   }
 )
 
+#' @describeIn GaSequenceCondition
 setMethod(
   f = "GaSequenceCondition",
   signature = ".compoundExpr",
@@ -42,6 +46,7 @@ setMethod(
   }
 )
 
+#' @describeIn GaSequenceCondition
 setMethod(
   f = "GaSequenceCondition",
   signature = "gaSequenceStep",
@@ -54,6 +59,7 @@ setMethod(
 
 # ---- GaNonSequenceCondition, GaSegmentCondition ----
 
+#' @describeIn Segment
 setMethod(
   f = "GaNonSequenceCondition",
   signature = ".compoundExpr",
@@ -64,6 +70,7 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
   f = "GaSegmentCondition",
   signature = ".compoundExpr",
@@ -73,6 +80,7 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
   f = "GaSegmentCondition",
   signature = ".gaSimpleOrSequence",
@@ -82,6 +90,7 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
   f = "GaSegmentCondition",
   signature = "gaSegmentCondition",
@@ -92,6 +101,7 @@ setMethod(
 
 # ---- GaScopeLevel, GaScopeLevel<- ----
 
+#' @describeIn Segment
 setMethod(
   f = "GaScopeLevel",
   signature = "gaSegmentCondition",
@@ -100,6 +110,7 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaSegmentCondition", "character"),
@@ -109,42 +120,47 @@ setMethod(
   }
 )
 
-# ---- GaSegment, GaSegment<- ----
+# ---- Segment, Segment<- ----
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaSegmentId",
   definition = function(object) {
     object
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "character",
   definition = function(object) {
     as(object, "gaSegmentId")
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "numeric",
   definition = function(object) {
     as(object, "gaSegmentId")
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaDynSegment",
   definition = function(object) {
     object
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = ".compoundExpr",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
@@ -158,8 +174,9 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaSegmentCondition",
   definition = function(object, ...) {
     exprList <- list(object, ...)
@@ -167,8 +184,9 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = ".gaSimpleOrSequence",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
@@ -182,8 +200,9 @@ setMethod(
   }
 )
 
+#' @describeIn Segment Coerce a Table Filter into a Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
@@ -197,16 +216,18 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "NULL",
   definition = function(object) {
     new("gaDynSegment", list())
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment<-",
+  f = "Segment<-",
   signature = c("gaDynSegment", "andExpr"),
   definition = function(object, value) {
     as(object, "andExpr") <- value
@@ -214,16 +235,18 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment<-",
+  f = "Segment<-",
   signature = c("gaDynSegment", "ANY"),
   definition = function(object, value) {
     as(value, "gaDynSegment")
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment<-",
+  f = "Segment<-",
   signature = "gaSegmentId",
   definition = function(object, value) {
     to <- class(value)
@@ -232,16 +255,18 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaQuery",
   definition = function(object) {
     object@segment
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment<-",
+  f = "Segment<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
     object@segment <- GaSegment(value)
@@ -250,16 +275,19 @@ setMethod(
   }
 )
 
+#' @describeIn Segment
 setMethod(
-  f = "GaSegment",
+  f = "Segment",
   signature = "gaUserSegment",
   definition = function(object) {
     GaSegment(object$segmentId)
   }
 )
 
-# Forwards compatibility
-#'@export Segment
-Segment <- GaSegment
-#'@export Segment<-
-`Segment<-` <- `GaSegment<-`
+# Backwards compatibility
+#' @export GaSegment
+#' @rdname deprecate
+GaSegment <- Segment
+#' @export GaSegment<-
+#' @rdname deprecate
+`GaSegment<-` <- `Segment<-`

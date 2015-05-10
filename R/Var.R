@@ -7,8 +7,7 @@
 #' @include meta.R
 NULL
 
-# ---- GaVar ----
-
+#' @describeIn Var Coerce a character to '.var'.
 setMethod(
   f = "Var",
   signature = "character",
@@ -17,6 +16,7 @@ setMethod(
   }
 )
 
+#' @describeIn Var Set a '.var' object to a new value coerced from character.
 setMethod(
   f = "Var<-",
   signature = c(".var", "character"),
@@ -26,8 +26,10 @@ setMethod(
   }
 )
 
+#' @describeIn Var Get the variable of an expression object.
 setMethod("Var", ".expr", function(object) {as(object, ".var")})
 
+#' @describeIn Var Set the variable of an expression object using a character value to be coerced to '.var'.
 setMethod(
   f = "Var<-",
   signature = c(".expr", "character"),
@@ -37,12 +39,15 @@ setMethod(
   }
 )
 
+#' @describeIn Var Get the variables within a variable list object, such as sortBy, dimensions or metrics.
 setMethod("Var", ".gaVarList", function(object) {object})
 
-## Create a gaMet or gaDim object
-## GaVar takes a GA variable and determines whether to return a Dimension or Metric object
+# Create a gaMet or gaDim object.
+
+#' @describeIn Var GaVar takes a GA variable name and determines whether to return a Dimension or Metric object
 setMethod("GaVar", "character", function(object) {as(object, ".gaVar")})
 
+#' @describeIn Var
 setMethod(
   f = "GaVar<-",
   signature = c(".gaVar", "character"),
@@ -52,8 +57,10 @@ setMethod(
   }
 )
 
+#' @describeIn Var Get the variable from expression object coerced to '.garVar'.
 setMethod("GaVar", ".expr", function(object) {as(object, ".gaVar")})
 
+#' @describeIn Var Set the variable of an expression to a .gaVar as named by a character value.
 setMethod(
   f = "GaVar<-",
   signature = c(".expr", "character"),
@@ -63,26 +70,32 @@ setMethod(
   }
 )
 
+#' @describeIn Var Get the variables of a .gaVarList.
 setMethod("GaVar", ".gaVarList", function(object) {object})
 
 # ---- McfVar ----
 
+#' @describeIn Var Get the value of a .mcfVar object.
 setMethod("McfVar", ".mcfVar", function(object) {object})
 
-## Create a mcfMet or mcfDim object
-## McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
+# Create a mcfMet or mcfDim object
+
+#' @describeIn Var McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
 setMethod("McfVar", "character", function(object) {as(object, ".mcfVar")})
 
 # ---- RtVar ----
 
+#' @describeIn Var Get the value of a .rtVar object.
 setMethod("RtVar", ".rtVar", function(object) {object})
 
-## Create a rtMet or rtDim object
-## McfVar takes a RT variable and determines whether to return a Dimension or Metric object
+# Create a rtMet or rtDim object
+
+#' @describeIn Var McfVar takes a RT variable and determines whether to return a Dimension or Metric object
 setMethod("RtVar", "character", function(object) {as(object, ".rtVar")})
 
 # -- GaMetrics ----
 
+#' @describeIn Metrics Return an empty .metrics object
 setMethod(
   f = "Metrics",
   signature = "NULL",
@@ -92,6 +105,7 @@ setMethod(
   }
 )
 
+#' @describeIn Metrics Return the value of a .metrics object or concatenated .metrics objects
 setMethod(
   f = "Metrics",
   signature = ".metrics",
@@ -101,6 +115,7 @@ setMethod(
   }
 )
 
+#' @describeIn Metrics Coerce one or more supplied character values to .metrics.
 setMethod(
   f = "Metrics",
   signature = "character",
@@ -110,6 +125,7 @@ setMethod(
   }
 )
 
+#' @describeIn Metrics Coerce one or more supplied lists to .metrics
 setMethod(
   f = "Metrics",
   signature = "list",
@@ -119,8 +135,10 @@ setMethod(
   }
 )
 
+#' @describeIn Metrics Get the list of metrics for a '.query'.
 setMethod("Metrics", ".query", function(object) {as(object, ".metrics")})
 
+#' @describeIn Metrics Set the metrics for a '.query' object.
 setMethod(
   f = "Metrics<-",
   signature = c(".query", "ANY"),
@@ -132,6 +150,8 @@ setMethod(
 
 # -- GaDimensions ----
 
+#' @describeIn Dimensions
+#' @export
 setMethod(
   f = "Dimensions",
   signature = "NULL",
@@ -141,6 +161,8 @@ setMethod(
   }
 )
 
+#' @describeIn Dimensions
+#' @export
 setMethod(
   f = "Dimensions",
   signature = ".dimensions",
@@ -150,6 +172,8 @@ setMethod(
   }
 )
 
+#' @describeIn Dimensions
+#' @export
 setMethod(
   f = "Dimensions",
   signature = "character",
@@ -159,6 +183,8 @@ setMethod(
   }
 )
 
+#' @describeIn Dimensions
+#' @export
 setMethod(
   f = "Dimensions",
   signature = "list",
@@ -168,8 +194,12 @@ setMethod(
   }
 )
 
+#' @describeIn Dimensions
+#' @export
 setMethod("Dimensions", ".query", function(object) {as(object, ".dimensions")})
 
+#' @describeIn Dimensions
+#' @export
 setMethod(
   f = "Dimensions<-",
   signature = c(".query", "ANY"),
@@ -179,13 +209,24 @@ setMethod(
   }
 )
 
-# Backwards compatibility
-#'@export GaDimensions
+#' Backwards compatibility.
+#'
+#' Use \code{Dimensions} instead of \code{GaDimensions}
+#' @rdname deprecate
+#' @export GaDimensions
 GaDimensions <- Dimensions
-#'@export GaMetrics
-GaMetrics <- Metrics
-#'@export GaDimensions<-
-`GaDimensions<-` <- `Dimensions<-`
-#'@export GaMetrics<-
-`GaMetrics<-` <- `Metrics<-`
 
+#' Use \code{Metrics} instead of \code{GaMetrics}
+#' @rdname deprecate
+#' @export GaMetrics
+GaMetrics <- Metrics
+
+#' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
+#' @rdname deprecate
+#' @export GaDimensions<-
+`GaDimensions<-` <- `Dimensions<-`
+
+#' Use \code{Metrics<-} instead of \code{GaMetrics<-}
+#' @rdname deprecate
+#' @export GaMetrics<-
+`GaMetrics<-` <- `Metrics<-`

@@ -1,3 +1,13 @@
+#' Google APIs OAuth 2.0 Credentials
+#'
+#' Create a Google APIs OAuth2.0 credentials object
+#'
+#' @param userName Google username email address hint
+#' @param appCreds Filename or named vector for client_id and client_secret.
+#' @param cache httr OAuth2.0 cache
+#' @param use_oob as per httr
+#' @param appname prefix of environment variables that hold the client ID and client secret.
+#'
 #' @export
 #' @include ganalytics-package.R
 GoogleApiCreds <- function(
@@ -157,7 +167,7 @@ api_request <- function(api_name, app, base_url,
     )
     args <- c(args, list(body = body))
   }
-  
+
   attempts <- 0
   succeeded <- FALSE
   while (attempts <= 5 & !succeeded) {
@@ -222,7 +232,7 @@ response_to_list <- function(response) {
 
 # This function accepts a recursive list of list elements, each named to represent a field,
 # and converts this into a field
-# e.g. 
+# e.g.
 # field_list <- list(
 #   "a" = list(),
 #   "b" = list(

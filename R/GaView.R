@@ -6,15 +6,28 @@
 NULL
 
 # -- GaView ----
-
+#' @describeIn GaView
 setMethod("GaView", "viewId", function(object) {object})
+
+#' @describeIn GaView
 setMethod("GaView", "gaView", function(object) {as(object, "viewId")})
+
+#' @describeIn GaView
 setMethod("GaView", "gaProperty", function(object) {as(object, "viewId")})
+
+#' @describeIn GaView
 setMethod("GaView", "gaAccount", function(object) {as(object, "viewId")})
+
+#' @describeIn GaView
 setMethod("GaView", "character", function(object) {as(object, "viewId")})
+
+#' @describeIn GaView
 setMethod("GaView", "numeric", function(object) {as(object, "viewId")})
+
+#' @describeIn GaView
 setMethod("GaView", ".query", function(object) {as(object, "viewId")})
 
+#' @describeIn GaView
 setMethod(
   f = "GaView<-",
   signature = c(".query", "ANY"),
@@ -25,7 +38,10 @@ setMethod(
 )
 
 # Backwards compatibility
-#'@export GaProfileId
+#' @rdname GaView
+#' @export GaProfileId
 GaProfileId <- GaView
-#'@export GaProfileId<-
+
+#' @rdname GaView
+#' @export GaProfileId<-
 `GaProfileId<-` <- `GaView<-`
