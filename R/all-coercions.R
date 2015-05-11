@@ -433,16 +433,16 @@ setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
     # if each expression within that gaOr shares the same dimension and the
     # expression operators and operands can be combined either as a match regex
     # or a match list.
-    
+
     # Check that all contained gaOr objects in the list have a length of 1
     assert_that(all(sapply(from, length) == 1) | length(from) == 1)
-    
+
     # Break apart the AND expression into OR expressions
     # then break apart each OR expression into single
     # expressions. Concatenate the single expressions
     # back up the chain. Then convert array into a list of
     # expressions to use for a new OR expression.
-    
+
     orExpr <- as.list(do.call(c, do.call(c, from@.Data)))
     as(orExpr, to)
   }
