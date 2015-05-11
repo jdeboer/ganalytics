@@ -4,8 +4,6 @@
 \name{Or,.compoundExpr-method}
 \alias{Or}
 \alias{Or,.compoundExpr-method}
-\alias{xor}
-\alias{xor,.compoundExpr,.compoundExpr-method}
 \alias{|,.compoundExpr,.compoundExpr-method}
 \title{Or.}
 \usage{
@@ -13,11 +11,7 @@
 
 \S4method{|}{.compoundExpr,.compoundExpr}(e1, e2)
 
-\S4method{xor}{.compoundExpr,.compoundExpr}(x, y)
-
 Or(object, ...)
-
-xor(x, y)
 }
 \arguments{
 \item{object}{The first object to include within the OR expression.}
@@ -27,22 +21,14 @@ xor(x, y)
 \item{e1}{first expression}
 
 \item{e2}{second expression}
-
-\item{x}{The first expression}
-
-\item{y}{The second expression.}
 }
 \description{
 OR two or more expressions.
-
-Generate an expression that gives the exclusive or of two expressions.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{.compoundExpr}: 
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: 
-
-\item \code{x = .compoundExpr,y = .compoundExpr}: 
 }}
 

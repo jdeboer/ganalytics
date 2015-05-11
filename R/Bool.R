@@ -146,6 +146,7 @@ setMethod(
 #' @export
 setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2)})
 
+#' @describeIn xor
 #' @export
 setMethod("xor", c(".compoundExpr", ".compoundExpr"), function(x, y) {(x | y) & (!x | !y)})
 

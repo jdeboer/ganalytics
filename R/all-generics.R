@@ -370,7 +370,7 @@ setGeneric(
 #' @param y The second expression.
 #'
 #' @export
-#' @rdname Or
+#' @rdname xor
 setGeneric("xor")
 
 #' GaPrecedes.
