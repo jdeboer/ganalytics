@@ -857,6 +857,10 @@ setAs(from = "gaView", to = "viewId",
 # Select the default view of the property
 setAs(from = "gaProperty", to = "viewId",
   def = function(from, to) {
+    defaultView <- from$defaultView
+    if (length(defaultView) == 0) {
+      defaultView <- from@views[[1]]
+    }
     as(from$defaultView, "viewId")
   },
   replace = function(from, value) {
