@@ -861,7 +861,7 @@ setAs(from = "gaProperty", to = "viewId",
     if (length(defaultView) == 0) {
       defaultView <- from$views$entities[[1]]
     }
-    as(from$defaultView, "viewId")
+    as(defaultView, "viewId")
   },
   replace = function(from, value) {
     as(from$defaultView, "viewId") <- as(value, "viewId")
