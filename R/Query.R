@@ -94,7 +94,7 @@ McfQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if(missing(view)) {
+  if(is.na(view)) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
@@ -139,7 +139,7 @@ RtQuery <- function(
   filters = NULL,
   maxResults = kGaMaxResults
 ) {
-  if(missing(view)) {
+  if(is.na(view)) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
