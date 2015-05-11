@@ -14,8 +14,9 @@ NULL
 #' Update the metadata file
 #' Update the package system file containing metadata about valid dimensions and metrics, etc.
 #' This function should be used prior to package build.
-#' 
+#'
 #' @return a data.frame
+#' @param creds Google Analytics OAuth 2.0 credentials object.
 GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   scope <- ga_scopes['read_only']
   request <- c("metadata", "ga", "columns")
@@ -34,7 +35,7 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
   kGaVars <- dlply(df, "type", function(vars) {vars$id})
   kGaVars <- rename(kGaVars, replace = c("DIMENSION" = "dims", "METRIC" = "mets"))
   kGaVars_df <- df
-  
+
   kGaVars_df <- mutate(
     kGaVars_df,
     lower_bounds = do.call(pmin, c(kGaVars_df[12:15], na.rm = TRUE)),
@@ -48,12 +49,12 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
     }
     ret
   }, .expand = FALSE), use.names = FALSE)
-  
+
   kGaVars$dims <- c(kGaVars$dims, "dateOfSession")
   kGaVars$allVars <- c(kGaVars$allVars, "dateOfSession")
-  
+
   kGaVars_df$allowedInFilters <- TRUE
-  
+
   kGaVars_df <- rbind.fill(kGaVars_df, data.frame(
     id = "dateOfSession",
     type = "DIMENSION",
@@ -65,21 +66,21 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
     allowedInSegments = TRUE,
     allowedInFilters = FALSE
   ))
-  
+
   mcf_var_ref <- "http://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
   mcf_ref_html <- html(mcf_var_ref)
   kMcfVars <- list(
     dims = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
-  
+
   rt_var_ref <- "http://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
   rt_ref_html <- html(rt_var_ref)
   kRtVars <- list(
     dims = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
-  
+
   use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
-  
+
 }

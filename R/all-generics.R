@@ -162,7 +162,7 @@ setGeneric(
 #' @param ... Used by certain methods.
 #'
 #' @export
-#' @rdname Expr
+#' @rdname Operator
 setGeneric(
   "Operator",
   function(object, ...) {},
@@ -174,11 +174,10 @@ setGeneric(
 #'
 #' Set the operator used in an expression.
 #'
-#' @param object The object for which to set the operator of.
 #' @param value The value to set the operator to.
 #'
 #' @export
-#' @rdname Expr
+#' @rdname Operator
 setGeneric(
   "Operator<-",
   function(object, value) {
@@ -196,10 +195,10 @@ setGeneric(
 #' @param value The value to set the operand to.
 #'
 #' @export
-#' @rdname Expr
+#' @rdname Operand
 setGeneric(
   "Operand",
-  function(object, ...) {},
+  function(object, value) {},
   valueClass = ".operand",
   useAsDefault = FALSE
 )
@@ -208,11 +207,8 @@ setGeneric(
 #'
 #' Set the operand of an expression.
 #'
-#' @param object An object to set the operand of.
-#' @param value The value to set the operand to.
-#'
 #' @export
-#' @rdname Expr
+#' @rdname Operand
 setGeneric(
   "Operand<-",
   function(object, value) {
@@ -231,7 +227,6 @@ setGeneric(
 #' @return TRUE or FALSE
 #'
 #' @export
-#' @rdname Expr
 setGeneric(
   "IsRegEx",
   function(object) {},
@@ -245,9 +240,12 @@ setGeneric(
 #'
 #' @param object A dimension or metric variable, or another object to be coerced
 #'   to an .expr object.
+#' @param operator The operator to use for the expression.
+#' @param operand The operand to use for the expression.
+#' @param metricScope The scope to use for segmentation if using a metric.
+#'   Possible values include "perUser" or "perSession".
 #'
 #' @export
-#' @rdname Expr
 setGeneric(
   "Expr",
   function(object, operator, operand, metricScope = "") {},
@@ -266,9 +264,8 @@ setGeneric(
 #'   GaFilter(myQuery) <- source_matches_google
 #'   GetGaData(myQuery)
 #' }
-#'
+#' @inheritParams Expr
 #' @export
-#' @rdname Expr
 setGeneric(
   "GaExpr",
   function(object, operator, operand, metricScope = "") {},
@@ -287,9 +284,8 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
-#'
+#' @inheritParams Expr
 #' @export
-#' @rdname Expr
 setGeneric(
   "McfExpr",
   function(object, operator, operand) {},
@@ -308,9 +304,8 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
-#'
+#' @inheritParams Expr
 #' @export
-#' @rdname Expr
 setGeneric(
   "RtExpr",
   function(object, operator, operand) {},
@@ -382,8 +377,13 @@ setGeneric("xor")
 #'
 #' Create a gaSequenceStep object
 #'
+#' @param object The expression that should preceed others in the sequence.
+#' @param ... Any other expressions that should follow the first one but before
+#'   any others in the sequence.
+#'
+#' @seealso GaSequenceCondition
+#'
 #' @export
-#' @rdname GaSequenceCondition
 setGeneric(
   "GaPrecedes",
   function(object, ...) {},
@@ -395,8 +395,13 @@ setGeneric(
 #'
 #' Create a gaSequenceStep object
 #'
+#' @param object The expression that should \bold{immediately} preceed others in
+#'   the sequence.
+#' @param ... Any other expressions that should \bold{immediately} follow the
+#'   first one but before any others in the sequence.
+#'
 #' @export
-#' @rdname GaSequenceCondition
+#' @seealso GaSequenceCondition
 setGeneric(
   "GaImmediatelyPrecedes",
   function(object, ...) {},
@@ -408,8 +413,12 @@ setGeneric(
 #'
 #' Create a gaSequenceStep object
 #'
+#' @param object An expression that should be at the start of a sequence
+#'   expression.
+#' @param ... Any other expressions that should follow the first expression.
+#'
 #' @export
-#' @rdname GaSequenceCondition
+#' @seealso GaSequenceCondition
 setGeneric(
   "GaStartsWith",
   function(object, ...) {},
@@ -421,8 +430,14 @@ setGeneric(
 #'
 #' Create a new gaSequenceCondition object
 #'
+#' @param object A sequence step or another expression that should be coerced to
+#'   a sequence condition.
+#' @param ... Other steps within the sequence condition, in the order in which
+#'   they should be applied.
+#' @param negation Logical TRUE or FALSE to match segments where this sequence
+#'   has not occured.
+#'
 #' @export
-#' @rdname GaSequenceCondition
 setGeneric(
   "GaSequenceCondition",
   function(object, ..., negation = FALSE) {},
@@ -434,8 +449,12 @@ setGeneric(
 #'
 #' Create a new gaNonSequenceCondition object
 #'
+#' @param object An expression to be used as a non-sequential segment condition.
+#' @param ... Other expressions to be ANDed to the first expression provided.
+#' @param negation Logical TRUE or FALSE to match segments where this conditon
+#'   has not been met.
+#'
 #' @export
-#' @rdname Segment
 setGeneric(
   "GaNonSequenceCondition",
   function(object, ..., negation = FALSE) {},
@@ -447,8 +466,14 @@ setGeneric(
 #'
 #' Create a new gaSegmentCondition object
 #'
+#' A segment condition is either sequential or non-sequential. Sequential and
+#' non-sequential conditoins can be combined using this function.
+#'
+#' @param object The first condition to be included in the segments definition.
+#' @param ... Other conditions to be included in the segment definition.
+#' @param scope The scope of this condition, either 'user' or 'session' level.
+#'
 #' @export
-#' @rdname Segment
 setGeneric(
   "GaSegmentCondition",
   function(object, ..., scope = "sessions") {},
@@ -460,11 +485,16 @@ setGeneric(
 #'
 #' Get the scope level of a gaDynSegment or gaMetExpr
 #'
+#' @param object Segment condition or combined segment conditions or metric
+#'   expression.
+#' @param value If a new scope level is supplied, then this function will return
+#'   an updated copy of the supplied object with the new scope applied.
+#'
 #' @export
-#' @rdname Segment
+#' @rdname GaScopeLevel
 setGeneric(
   "GaScopeLevel",
-  function(object, ...) {},
+  function(object, value) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
@@ -476,7 +506,7 @@ setGeneric(
 #' For metric expressions one of 'perUser', 'perSession' or 'perHit'
 #'
 #' @export
-#' @rdname Segment
+#' @rdname GaScopeLevel
 setGeneric(
   "GaScopeLevel<-",
   function(object, value) {
@@ -486,9 +516,14 @@ setGeneric(
   }
 )
 
-#' GaSegment.
+#' Segment.
 #'
 #' Get the segment.
+#'
+#' @param object An expression to coerce to a segment definition or segment ID
+#' @param ... Other expressions to combine with the first expression, if
+#'   appropriate.
+#' @param scope The scope level to apply to the resulting segment definition.
 #'
 #' @export
 #' @rdname Segment
@@ -502,6 +537,8 @@ setGeneric(
 #' Segment<-.
 #'
 #' Set the segment
+#'
+#' @param value The segment definition or ID to set the segment parameter to.
 #'
 #' @export
 #' @rdname Segment
@@ -518,12 +555,16 @@ setGeneric(
 #'
 #' Get the filter.
 #'
+#' @param object The object to be coerced to a TableFilter or the query object
+#'   to apply a table filter to.
+#' @param value The replacement table filter where \code{object} is a query.
+#'
 #' @export
 #' @rdname TableFilter
 setGeneric(
   "TableFilter",
-  function(object, ...) {},
-  valueClass = ".tableFilter",
+  function(object, value) {},
+  valueClass = c(".tableFilter", ".query"),
   useAsDefault = FALSE
 )
 
@@ -546,6 +587,11 @@ setGeneric(
 #'
 #' Get the date range.
 #'
+#' @param object The start date of the date range or a object to coerce to a
+#'   date range. Alternatively, a query object to replace the date range of.
+#' @param endDate The end date of the date range. Alternatively, if
+#'   \code{object} is a '.query' object, then endDate is the replacement date
+#'   range.
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -558,6 +604,8 @@ setGeneric(
 #' DateRange<-.
 #'
 #' Set the date range.
+#'
+#' @param value The replacement date range.
 #'
 #' @export
 #' @rdname DateRange
@@ -578,7 +626,7 @@ setGeneric(
 #' @rdname DateRange
 setGeneric(
   "StartDate",
-  function(object, ...) {},
+  function(object, value) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -606,7 +654,7 @@ setGeneric(
 #' @rdname DateRange
 setGeneric(
   "EndDate",
-  function(object, ...) {},
+  function(object, value) {},
   valueClass = "Date",
   useAsDefault = FALSE
 )
@@ -630,6 +678,11 @@ setGeneric(
 #'
 #' Get the metrics of the object.
 #'
+#' @param object An object to coerce to a list of metrics, or a query object to
+#'   replace the metrics of.
+#' @param ... Further metrics to add to the resulting list or the replacement
+#'   value for the metrics of the query object (if supplied).
+#'
 #' @export
 #' @rdname Metrics
 setGeneric(
@@ -642,6 +695,8 @@ setGeneric(
 #' Metrics<-.
 #'
 #' Set the metrics of the object.
+#'
+#' @param value The replacement dimensions for the supplied object.
 #'
 #' @rdname Metrics
 #' @export
@@ -658,6 +713,10 @@ setGeneric(
 #'
 #' Get the dimensions of the object.
 #'
+#' @param object An object to be coerced to a list of dimensions.
+#' @param ... Other dimensions to add to the returned list, or if \code{object}
+#'   is a query object, the replacement dimensions.
+#'
 #' @export
 #' @rdname Dimensions
 setGeneric(
@@ -670,6 +729,8 @@ setGeneric(
 #' Dimensions<-.
 #'
 #' Set the dimensions for the object.
+#'
+#' @param value The replacement dimensions for the supplied object.
 #'
 #' @export
 #' @rdname Dimensions
@@ -686,6 +747,18 @@ setGeneric(
 #'
 #' Get the sortBy order of the query.
 #'
+#' @param object A character vector or list of dimensions or metrics to sort by.
+#'   If character, then prefixing the dimension name with a "+" means ascending
+#'   order or "-" for decending order. By default metrics are sorted in
+#'   descending order, while dimensions are by default in ascending order.
+#'   Alternatively, supply a query object and replacement dimensions and metrics
+#'   or sort by.
+#' @param ... further dimensions or metrics to sort by, or if \code{object} is a
+#'   query then the replacement list of dimensions or metrics to sort by.
+#' @param desc A logical vector, same length as the resulting list of dimension
+#'   or metric variables, indicating which columns of the resulting query
+#'   response should be sorted in decending order.
+#'
 #' @export
 #' @rdname SortBy
 setGeneric(
@@ -698,6 +771,8 @@ setGeneric(
 #' SortBy<-.
 #'
 #' Set the order of rows returned by Google Analytics.
+#'
+#' @param value The replacement dimensions and metrics for the supplied object.
 #'
 #' @export
 #' @rdname SortBy
@@ -714,12 +789,18 @@ setGeneric(
 #'
 #' Get the viewId of the query
 #'
+#' @param object An object to coerce to a gaView class object or to get the
+#'   gaView of, such as a query, default view of a web property, or the default
+#'   view of the first web property in a Google Analytics account.
+#' @param value The optional replacement view if the object supplied is a query,
+#'   in which case GaView will return the modified query.
+#'
 #' @export
 #' @rdname GaView
 setGeneric(
   "GaView",
-  function(object, ...) {},
-  valueClass = "viewId",
+  function(object, value) {},
+  valueClass = c("viewId", "gaView", ".query"),
   useAsDefault = FALSE
 )
 
@@ -742,11 +823,14 @@ setGeneric(
 #'
 #' Get the value set for MaxResults.
 #'
+#' @param object a query object.
+#' @param value replacement value for the max-results parameter of the query.
+#'
 #' @export
 #' @rdname MaxResults
 setGeneric(
   "MaxResults",
-  function(object, ...) {},
+  function(object, value) {},
   valueClass = "numeric",
   useAsDefault = FALSE
 )
@@ -754,9 +838,6 @@ setGeneric(
 #' MaxResults<-.
 #'
 #' Set the maximum rows returned by a ganalytics query.
-#'
-#' @param object the object to set the maximum response rows of.
-#' @param value the value to set the maximum response rows to.
 #'
 #' @export
 #' @rdname MaxResults
@@ -790,9 +871,6 @@ setGeneric(
 #'
 #' Set the sampling level for a ganalytics query.
 #'
-#' @param object the query to set the sampling level of.
-#' @param value the sampling level to set to.
-#'
 #' @export
 #' @rdname SamplingLevel
 setGeneric(
@@ -807,6 +885,8 @@ setGeneric(
 #' GetGaQueries.
 #'
 #' Get the chracter string query compoents for the given ganalytics object.
+#'
+#' @param object a query object to coerce to matrix.
 setGeneric(
   "GetGaQueries",
   function(object) {},
@@ -817,6 +897,10 @@ setGeneric(
 #' GetGaData.
 #'
 #' Fetch the data for the Google Analytics API query.
+#'
+#' @param query The query execute and returned the processed response for.
+#' @param creds The OAuth2.0 credentials to use for the request.
+#' @param ... Other arguments to pass on to lower-level API functions.
 #'
 #' @export
 #' @rdname Query
@@ -830,11 +914,15 @@ setGeneric(
 #'
 #' Get or set the authentication credentials for a Google Analytics query object.
 #'
+#' @param object The object to get the credentials from.
+#' @param value The replacement credentials for the supplied query object.
+#' @param ... other arguments pass to \code{GoogleApiCreds}.
+#'
 #' @export
 #' @rdname GaCreds
 setGeneric(
   "GaCreds",
-  function(object = "GANALYTICS", creds = NULL, ...) {
+  function(object = "GANALYTICS", value = NULL, ...) {
     standardGenericric("GaCreds")
   }
 )

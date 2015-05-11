@@ -284,31 +284,44 @@ setMethod("DateRange<-", c(".standardQuery", "Date"), function(object, value) {
   DateRange(object, as.character(value))
 })
 
-# For backwards compatibility
+#' GaStartDate (Deprecated)
+#' For backwards compatibility
 #' @export GaStartDate
-#' @rdname deprecate
-GaStartDate <- StartDate
+#' @rdname GaStartDate
+#' @param ... arguments passed onto \code{StartDate}
+GaStartDate <- function(...){StartDate(...)}
 
+#' GaEndDate (Deprecated)
 #' @export GaEndDate
-#' @rdname deprecate
-GaEndDate <- EndDate
+#' @rdname GaEndDate
+#' @param ... arguments passed onto \code{EndDate}
+GaEndDate <- function(...){EndDate(...)}
 
+#' GaDateRange (Deprecated)
 #' @export GaDateRange
-#' @rdname deprecate
-GaDateRange <- DateRange
+#' @rdname GaDateRange
+#' @param ... arguments passed onto \code{DateRange}
+GaDateRange <- function(...){DateRange(...)}
 
+#' GaStartDate<- (Deprecated)
 #' @export GaStartDate<-
-#' @rdname deprecate
-`GaStartDate<-` <- `StartDate<-`
+#' @rdname GaStartDate
+#' @param value passed onto \code{StartDate}
+`GaStartDate<-` <- function(..., value){`StartDate<-`(..., value)}
 
+#' GaEndDate<- (Deprecated)
 #' @export GaEndDate<-
-#' @rdname deprecate
-`GaEndDate<-` <- `EndDate<-`
+#' @rdname GaEndDate
+#' @param value passed onto \code{EndDate}
+`GaEndDate<-` <- function(..., value){`EndDate<-`(..., value)}
 
+#' GaDateRange<- (Deprecated)
 #' @export GaDateRange<-
-#' @rdname deprecate
-`GaDateRange<-` <- `DateRange<-`
+#' @rdname GaDateRange
+#' @param value passed onto \code{DateRange}
+`GaDateRange<-` <- function(..., value){`DateRange<-`(..., value)}
 
+#' GaSplitDateRange (Deprecated)
 #' @export GaSplitDateRange
-#' @rdname deprecate
-GaSplitDateRange <- SplitDateRange
+#' @param ... arguments passed onto \code{SplitDateRange}
+GaSplitDateRange <- function(...){SplitDateRange(...)}

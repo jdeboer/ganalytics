@@ -7,6 +7,7 @@ NULL
 
 # ---- Not ----
 
+#' @describeIn Not
 setMethod(
   f = "Not",
   signature = ".operator",
@@ -29,9 +30,12 @@ setMethod(
   }
 )
 
+#' @describeIn Not
+#' @param x the object to return the logical inverse of.
 #' @export
 setMethod("!", ".operator", function(x) {Not(x)})
 
+#' @describeIn Not
 setMethod(
   f = "Not",
   signature = ".expr",
@@ -42,9 +46,11 @@ setMethod(
   }
 )
 
+#' @describeIn Not
 #' @export
 setMethod("!", ".expr", function(x) {Not(x)})
 
+#' @describeIn Not
 setMethod(
   f = "Not",
   signature = "orExpr",
@@ -53,9 +59,11 @@ setMethod(
   }
 )
 
+#' @describeIn Not
 #' @export
 setMethod("!", "orExpr", function(x) {Not(x)})
 
+#' @describeIn Not
 setMethod(
   f = "Not",
   signature = ".gaSimpleOrSequence",
@@ -65,6 +73,7 @@ setMethod(
   }
 )
 
+#' @describeIn Not
 #' @export
 setMethod("!", ".gaSimpleOrSequence", function(x) {Not(x)})
 
@@ -73,6 +82,7 @@ setMethod("!", ".gaSimpleOrSequence", function(x) {Not(x)})
 # as separate arguments or as a list.
 # Returns an object of gaOr.
 
+#' @describeIn Or
 setMethod(
   f = "Or",
   signature = ".compoundExpr",
@@ -95,9 +105,13 @@ setMethod(
   }
 )
 
+#' @describeIn Or
+#' @param e1 first expression
+#' @param e2 second expression
 #' @export
 setMethod("|", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {Or(e1, e2)})
 
+#' @describeIn And
 setMethod(
   f = "And",
   signature = ".compoundExpr",
@@ -126,6 +140,9 @@ setMethod(
   }
 )
 
+#' @describeIn And
+#' @param e1 first expression
+#' @param e2 second expression
 #' @export
 setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2)})
 
@@ -133,9 +150,21 @@ setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2
 setMethod("xor", c(".compoundExpr", ".compoundExpr"), function(x, y) {(x | y) & (!x | !y)})
 
 # Backwards compatibility
-#'@export GaNot
-GaNot <- Not
+#' GaNot (Deprecated, use Not or ! instead).
+#'
+#' @export GaNot
+#' @param ... arguments passed to \code{Not}
+#' @rdname GaNot
+GaNot <- function(...){Not(...)}
+
+#' GaOr (Deprecated, use Or or | instead).
 #' @export GaOr
-GaOr <- Or
+#' @param ... arguments passed to \code{Or}
+#' @rdname GaOr
+GaOr <- function(...){Or(...)}
+
+#' GaAnd (Deprecated, use And or & instead).
 #' @export GaAnd
-GaAnd <- And
+#' @param ... arguments passed to \code{And}
+#' @rdname GaAnd
+GaAnd <- function(...){And(...)}

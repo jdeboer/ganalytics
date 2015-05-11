@@ -9,9 +9,13 @@ parse_date <- function(date, output_format = kGaDateInFormat) {
   format(ymd(date), format = output_format)
 }
 
-#' IsVarMatch
+#' IsVarMatch.
+#'
 #' The following method is a temporary workaround to support XX placeholders in dimension and metric
 #' names, such as with custom dimensions, metrics and various goal related variables.
+#'
+#' @param thisVar var to compare against inVars.
+#' @param inVars vector of vars to check var against.
 IsVarMatch <- function(thisVar, inVars) {
   inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
   inVars <- regex(paste0("^", inVars, "$"), ignore_case = TRUE)
@@ -19,12 +23,12 @@ IsVarMatch <- function(thisVar, inVars) {
 }
 
 #' ValidGaOperand
-#' 
+#'
 #' Checks whether an operand value is valid for a selected dimension.
-#' 
+#'
 #' @param var selected dimension to check operand against
 #' @param operand the operand value to check
-#' 
+#'
 ValidGaOperand <- function(var, operand) {
   test <- switch(
     var,

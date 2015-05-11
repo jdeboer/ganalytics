@@ -59,7 +59,7 @@ setMethod(
 
 # ---- GaNonSequenceCondition, GaSegmentCondition ----
 
-#' @describeIn Segment
+#' @describeIn GaNonSequenceCondition
 setMethod(
   f = "GaNonSequenceCondition",
   signature = ".compoundExpr",
@@ -70,7 +70,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
   signature = ".compoundExpr",
@@ -80,7 +80,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
   signature = ".gaSimpleOrSequence",
@@ -90,7 +90,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
   signature = "gaSegmentCondition",
@@ -101,7 +101,7 @@ setMethod(
 
 # ---- GaScopeLevel, GaScopeLevel<- ----
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel",
   signature = "gaSegmentCondition",
@@ -110,7 +110,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaSegmentCondition", "character"),
@@ -285,9 +285,16 @@ setMethod(
 )
 
 # Backwards compatibility
+#' GaSegment (Deprecated).
+#'
+#' @param ... arguments passed onto \code{Segment}
 #' @export GaSegment
-#' @rdname deprecate
-GaSegment <- Segment
+#' @rdname GaSegment
+GaSegment <- function(...){Segment(...)}
+
+#' GaSegment<- (Deprecated).
+#'
+#' @param value passed onto \code{Segment}
 #' @export GaSegment<-
-#' @rdname deprecate
-`GaSegment<-` <- `Segment<-`
+#' @rdname GaSegment
+`GaSegment<-` <- function(..., value){`Segment<-`(..., value)}

@@ -8,13 +8,13 @@ NULL
 
 # ---- Operand ----
 
-#' @describeIn Expr
+#' @describeIn Operand
 setMethod("Operand", ".operand", function(object) {object})
 
-#' @describeIn Expr
+#' @describeIn Operand
 setMethod("Operand", ".expr", function(object) {as(object, ".operand")})
 
-#' @describeIn Expr
+#' @describeIn Operand
 setMethod(
   f = "Operand<-",
   signature = c(".expr", "ANY"),

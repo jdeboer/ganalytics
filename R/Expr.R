@@ -28,7 +28,7 @@ setMethod(
   }
 )
 
-#' @describeIn Expr
+#' @describeIn GaExpr
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
@@ -61,7 +61,7 @@ setMethod(
   }
 )
 
-#' @describeIn Expr
+#' @describeIn McfExpr
 setMethod(
   f = "McfExpr",
   signature = c("character", "character", "ANY"),
@@ -83,7 +83,7 @@ setMethod(
   }
 )
 
-#' @describeIn Expr
+#' @describeIn RtExpr
 setMethod(
   f = "RtExpr",
   signature = c("character", "character", "ANY"),
@@ -107,10 +107,10 @@ setMethod(
 
 # ---- GaScopeLevel, GaScopeLevel<- ----
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod("GaScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaSegMetExpr", "character"),
@@ -121,7 +121,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaMetExpr", "character"),
@@ -133,7 +133,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel",
   signature = "gaSegmentCondition",
@@ -142,7 +142,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
   signature = c("gaSegmentCondition", "character"),

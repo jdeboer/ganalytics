@@ -148,7 +148,7 @@ setMethod(
   }
 )
 
-# -- GaDimensions ----
+# -- Dimensions ----
 
 #' @describeIn Dimensions
 #' @export
@@ -209,24 +209,30 @@ setMethod(
   }
 )
 
-#' Backwards compatibility.
+#' GaDimensions (Deprecated).
 #'
 #' Use \code{Dimensions} instead of \code{GaDimensions}
-#' @rdname deprecate
+#' @rdname GaDimensions
+#' @param ... arguments passed onto \code{Dimensions}
 #' @export GaDimensions
-GaDimensions <- Dimensions
+GaDimensions <- function(...){Dimensions(...)}
 
+#' GaMetrics (Deprecated).
+#'
 #' Use \code{Metrics} instead of \code{GaMetrics}
-#' @rdname deprecate
+#' @rdname GaMetrics
+#' @param ... arguments passed onto \code{Metrics}
 #' @export GaMetrics
-GaMetrics <- Metrics
+GaMetrics <- function(...){Metrics(...)}
 
 #' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
-#' @rdname deprecate
+#' @rdname GaDimensions
+#' @param value passed onto \code{Dimensions}
 #' @export GaDimensions<-
-`GaDimensions<-` <- `Dimensions<-`
+`GaDimensions<-` <- function(..., value){`Dimensions<-`(..., value)}
 
 #' Use \code{Metrics<-} instead of \code{GaMetrics<-}
-#' @rdname deprecate
+#' @rdname GaMetrics
+#' @param value passed onto \code{Metrics}
 #' @export GaMetrics<-
-`GaMetrics<-` <- `Metrics<-`
+`GaMetrics<-` <- function(..., value){`Metrics<-`(..., value)}

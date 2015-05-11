@@ -90,8 +90,9 @@ YesNoToLogical <- function(char) {
   return(char)
 }
 
-#' This function applies asFun to the selected columns from the data.frame, df,
-#' matched by colNames (case insensitive).
+# This function applies asFun to the selected columns from the data.frame, df,
+# matched by colNames (case insensitive).
+#
 ColTypes <- function(df, colNames, asFun, ...) {
   cols <- tolower(names(df)) %in% tolower(colNames)
   if(TRUE %in% cols) df[cols] <- lapply(X = df[cols], FUN = asFun, ...)
