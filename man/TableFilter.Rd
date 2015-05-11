@@ -29,13 +29,19 @@
 
 \S4method{TableFilter}{.query,ANY}(object) <- value
 
-TableFilter(object, ...)
+TableFilter(object, value)
 
 TableFilter(object) <- value
 
-TableFilter(object, ...)
+TableFilter(object, value)
 
 TableFilter(object) <- value
+}
+\arguments{
+\item{object}{The object to be coerced to a TableFilter or the query object
+to apply a table filter to.}
+
+\item{value}{The replacement table filter where \code{object} is a query.}
 }
 \description{
 Get the filter.

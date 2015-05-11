@@ -2,14 +2,16 @@
 % Please edit documentation in R/helper-functions.R
 \name{IsVarMatch}
 \alias{IsVarMatch}
-\title{IsVarMatch
-The following method is a temporary workaround to support XX placeholders in dimension and metric
-names, such as with custom dimensions, metrics and various goal related variables.}
+\title{IsVarMatch.}
 \usage{
 IsVarMatch(thisVar, inVars)
 }
+\arguments{
+\item{thisVar}{var to compare against inVars.}
+
+\item{inVars}{vector of vars to check var against.}
+}
 \description{
-IsVarMatch
 The following method is a temporary workaround to support XX placeholders in dimension and metric
 names, such as with custom dimensions, metrics and various goal related variables.
 }

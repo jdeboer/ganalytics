@@ -2,9 +2,12 @@
 % Please edit documentation in R/all-generics.R
 \name{GetGaQueries}
 \alias{GetGaQueries}
-\title{GetGaQueries}
+\title{GetGaQueries.}
 \usage{
 GetGaQueries(object)
+}
+\arguments{
+\item{object}{a query object to coerce to matrix.}
 }
 \description{
 Get the chracter string query compoents for the given ganalytics object.

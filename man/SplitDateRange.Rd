@@ -2,9 +2,7 @@
 % Please edit documentation in R/Date.R
 \name{SplitDateRange}
 \alias{SplitDateRange}
-\title{SplitDateRange
-Splits a gaDateRange object into N pieces. Useful for splitting a query into
-smaller chunks in order to overcome sampling.}
+\title{SplitDateRange}
 \usage{
 SplitDateRange(dateRange, N)
 }
@@ -12,10 +10,9 @@ SplitDateRange(dateRange, N)
 \item{dateRange}{the gaDateRange object to be split}
 
 \item{N}{the number of the separate date ranges to be split into; use 0 for
-single days.}
+ single days.}
 }
 \description{
-SplitDateRange
 Splits a gaDateRange object into N pieces. Useful for splitting a query into
 smaller chunks in order to overcome sampling.
 }

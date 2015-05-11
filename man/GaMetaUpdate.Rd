@@ -9,6 +9,9 @@ This function should be used prior to package build.}
 \usage{
 GaMetaUpdate(creds = GoogleApiCreds())
 }
+\arguments{
+\item{creds}{Google Analytics OAuth 2.0 credentials object.}
+}
 \value{
 a data.frame
 }

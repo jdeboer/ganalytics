@@ -30,10 +30,6 @@ SamplingLevel(object) <- value
 
 \item{value}{if \code{object} is a query, then use  value to set the sampling
   level to of that query.}
-
-\item{object}{the query to set the sampling level of.}
-
-\item{value}{the sampling level to set to.}
 }
 \description{
 Get the sampling level.

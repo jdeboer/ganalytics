@@ -3,22 +3,27 @@
 \docType{methods}
 \name{GetGaData,.query-method}
 \alias{GetGaData,.query-method}
-\title{GetGaData
-Execute a ganalytics query.}
+\title{GetGaData Execute a ganalytics query.}
 \usage{
-\S4method{GetGaData}{.query}(object, creds = NULL, .progress = "time",
+\S4method{GetGaData}{.query}(query, creds = NULL, .progress = "time",
   use_oob = FALSE, addViewId = FALSE)
 }
 \arguments{
+\item{query}{the query to execute.}
+
+\item{creds}{the Google APIs Project OAuth 2.0 credentials to use.}
+
 \item{.progress}{progress bar to display. use .progress = "none" to turn off.}
 
-\item{query}{the query to execute.}
+\item{use_oob}{httr argument}
+
+\item{addViewId}{logical value indicating whether to add a viewID column for
+when more than one view has been provided.}
 }
 \value{
 a dataframe
 }
 \description{
-GetGaData
-Execute a ganalytics query.
+GetGaData Execute a ganalytics query.
 }
 

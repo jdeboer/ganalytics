@@ -89,13 +89,23 @@ DateRange(object, endDate)
 
 DateRange(object) <- value
 
-StartDate(object, ...)
+StartDate(object, value)
 
 StartDate(object) <- value
 
-EndDate(object, ...)
+EndDate(object, value)
 
 EndDate(object) <- value
+}
+\arguments{
+\item{object}{The start date of the date range or a object to coerce to a
+date range. Alternatively, a query object to replace the date range of.}
+
+\item{value}{The replacement date range.}
+
+\item{endDate}{The end date of the date range. Alternatively, if
+\code{object} is a '.query' object, then endDate is the replacement date
+range.}
 }
 \description{
 Get the date range.

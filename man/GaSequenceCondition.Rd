@@ -2,16 +2,13 @@
 % Please edit documentation in R/GaSegment.R, R/all-generics.R
 \docType{methods}
 \name{GaPrecedes,.compoundExpr-method}
-\alias{GaImmediatelyPrecedes}
 \alias{GaImmediatelyPrecedes,.compoundExpr-method}
-\alias{GaPrecedes}
 \alias{GaPrecedes,.compoundExpr-method}
 \alias{GaSequenceCondition}
 \alias{GaSequenceCondition,.compoundExpr-method}
 \alias{GaSequenceCondition,gaSequenceStep-method}
-\alias{GaStartsWith}
 \alias{GaStartsWith,.compoundExpr-method}
-\title{GaPrecedes.}
+\title{GaSequenceCondition.}
 \usage{
 \S4method{GaPrecedes}{.compoundExpr}(object)
 
@@ -23,21 +20,19 @@
 
 \S4method{GaSequenceCondition}{gaSequenceStep}(object, ..., negation = FALSE)
 
-GaPrecedes(object, ...)
-
-GaImmediatelyPrecedes(object, ...)
-
-GaStartsWith(object, ...)
-
 GaSequenceCondition(object, ..., negation = FALSE)
 }
+\arguments{
+\item{object}{A sequence step or another expression that should be coerced to
+a sequence condition.}
+
+\item{...}{Other steps within the sequence condition, in the order in which
+they should be applied.}
+
+\item{negation}{Logical TRUE or FALSE to match segments where this sequence
+  has not occured.}
+}
 \description{
-Create a gaSequenceStep object
-
-Create a gaSequenceStep object
-
-Create a gaSequenceStep object
-
 Create a new gaSequenceCondition object
 }
 \section{Methods (by class)}{

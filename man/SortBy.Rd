@@ -34,6 +34,23 @@ SortBy(object, ..., desc = logical(0))
 
 SortBy(object) <- value
 }
+\arguments{
+\item{object}{A character vector or list of dimensions or metrics to sort by.
+If character, then prefixing the dimension name with a "+" means ascending
+order or "-" for decending order. By default metrics are sorted in
+descending order, while dimensions are by default in ascending order.
+Alternatively, supply a query object and replacement dimensions and metrics
+or sort by.}
+
+\item{desc}{A logical vector, same length as the resulting list of dimension
+  or metric variables, indicating which columns of the resulting query
+  response should be sorted in decending order.}
+
+\item{...}{further dimensions or metrics to sort by, or if \code{object} is a
+query then the replacement list of dimensions or metrics to sort by.}
+
+\item{value}{The replacement dimensions and metrics for the supplied object.}
+}
 \description{
 Get the sortBy order of the query.
 

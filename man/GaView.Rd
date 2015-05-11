@@ -32,13 +32,21 @@
 
 \S4method{GaView}{.query}(object) <- value
 
-GaView(object, ...)
+GaView(object, value)
 
 GaView(object) <- value
 
-GaView(object, ...)
+GaView(object, value)
 
 GaView(object) <- value
+}
+\arguments{
+\item{object}{An object to coerce to a gaView class object or to get the
+gaView of, such as a query, default view of a web property, or the default
+view of the first web property in a Google Analytics account.}
+
+\item{value}{The optional replacement view if the object supplied is a query,
+  in which case GaView will return the modified query.}
 }
 \description{
 Get the viewId of the query
