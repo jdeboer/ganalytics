@@ -12,7 +12,8 @@ Description: S4 classes and methods for interacting with Google Analytics.
     Manager APIs.
 License: MIT + file LICENCE
 Depends:
-    R(>= 3.0.0)
+    R(>= 3.0.0),
+    httpuv
 Imports:
     methods,
     httr,
