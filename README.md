@@ -38,7 +38,7 @@ Installation
 
 ```r
 # Install the latest version of devtools via CRAN
-install.packages("devtools", dependencies = TRUE)
+install.packages("devtools")
 # Install ganalytics via the GitHub repository.
 devtools::install_github("jdeboer/ganalytics")
 # End
