@@ -145,13 +145,7 @@ gaAccountSummary <- R6Class(
   "gaAccountSummary",
   inherit = .gaResource,
   public = list(
-    propertyId = NULL,
-    propertyName = NULL,
-    level = NULL,
-    websiteUrl = NULL,
-    viewId = NULL,
-    viewName = NULL,
-    viewType = NULL,
+    webProperties = NULL,
     get = function() {
       if (!is.null(self$.req_path)) {
         account_summary_fields <- subset(
@@ -164,35 +158,34 @@ gaAccountSummary <- R6Class(
     },
     UPDATE = NULL
   ),
+  active = list(
+    summary = function() {
+      webProperties <- self$webProperties
+      if (is.null(webProperties)) return(data.frame())
+      if (!is.data.frame(webProperties)) webProperties <- webProperties[[1]]
+      adply(webProperties, 1, function(webPropertySummary) {
+        property_df <- data.frame(
+          propertyId = webPropertySummary$id,
+          propertyName = webPropertySummary$name,
+          level = webPropertySummary$level,
+          websiteUrl = webPropertySummary$websiteUrl
+        )
+        adply(webPropertySummary$profiles, 1, function(viewSummary) {
+          view_df <- data.frame(
+            viewId = viewSummary$id,
+            viewName = viewSummary$name,
+            viewType = viewSummary$type
+          )
+          cbind(property_df, view_df)
+        }, .expand = FALSE, .id = NULL)
+      }, .expand = FALSE, .id = NULL)
+    }
+  ),
   private = list(
     parent_class_name = "NULL",
     request = "accountSummaries",
     field_corrections = function(field_list) {
       field_list <- super$field_corrections(field_list)
-      summary_df <- adply(field_list, 1, function(accountSummary) {
-        account_df <- data.frame(
-          id = accountSummary$id,
-          name = accountSummary$name
-        )
-        webProperties <- accountSummary$webProperties
-        if (!is.data.frame(webProperties)) webProperties <- webProperties[[1]]
-        adply(webProperties, 1, function(webPropertySummary) {
-          property_df <- data.frame(
-            propertyId = webPropertySummary$id,
-            propertyName = webPropertySummary$name,
-            level = webPropertySummary$level,
-            websiteUrl = webPropertySummary$websiteUrl
-          )
-          adply(webPropertySummary$profiles, 1, function(viewSummary) {
-            view_df <- data.frame(
-              viewId = viewSummary$id,
-              viewName = viewSummary$name,
-              viewType = viewSummary$type
-            )
-            cbind(account_df, property_df, view_df)
-          }, .expand = FALSE, .id = NULL)
-        }, .expand = FALSE, .id = NULL)
-      }, .expand = FALSE, .id = NULL)
     }
   )
 )
@@ -215,6 +208,13 @@ gaAccountSummaries <- R6Class(
   public = list(
     INSERT = NULL,
     DELETE = NULL
+  ),
+  active = list(
+    flatSummary = function() {
+      ldply(seq_along(self$entities), function(entity_i){
+        data.frame(self$summary[entity_i, c('id', 'name')], self$entities[[entity_i]]$summary, row.names = NULL)
+      }, .id = NULL)
+    }
   ),
   private = list(
     entity_class = gaAccountSummary,
