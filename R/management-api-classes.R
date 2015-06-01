@@ -145,6 +145,13 @@ gaAccountSummary <- R6Class(
   "gaAccountSummary",
   inherit = .gaResource,
   public = list(
+    propertyId = NULL,
+    propertyName = NULL,
+    level = NULL,
+    websiteUrl = NULL,
+    viewId = NULL,
+    viewName = NULL,
+    viewType = NULL,
     get = function() {
       if (!is.null(self$.req_path)) {
         account_summary_fields <- subset(
@@ -159,7 +166,34 @@ gaAccountSummary <- R6Class(
   ),
   private = list(
     parent_class_name = "NULL",
-    request = "accountSummaries"
+    request = "accountSummaries",
+    field_corrections = function(field_list) {
+      field_list <- super$field_corrections(field_list)
+      summary_df <- adply(field_list, 1, function(accountSummary) {
+        account_df <- data.frame(
+          id = accountSummary$id,
+          name = accountSummary$name
+        )
+        webProperties <- accountSummary$webProperties
+        if (!is.data.frame(webProperties)) webProperties <- webProperties[[1]]
+        adply(webProperties, 1, function(webPropertySummary) {
+          property_df <- data.frame(
+            propertyId = webPropertySummary$id,
+            propertyName = webPropertySummary$name,
+            level = webPropertySummary$level,
+            websiteUrl = webPropertySummary$websiteUrl
+          )
+          adply(webPropertySummary$profiles, 1, function(viewSummary) {
+            view_df <- data.frame(
+              viewId = viewSummary$id,
+              viewName = viewSummary$name,
+              viewType = viewSummary$type
+            )
+            cbind(account_df, property_df, view_df)
+          }, .expand = FALSE, .id = NULL)
+        }, .expand = FALSE, .id = NULL)
+      }, .expand = FALSE, .id = NULL)
+    }
   )
 )
 
@@ -183,7 +217,8 @@ gaAccountSummaries <- R6Class(
     DELETE = NULL
   ),
   private = list(
-    entity_class = gaAccountSummary
+    entity_class = gaAccountSummary,
+    field_corrections = gaAccountSummary$private_methods$field_corrections
   )
 )
 
