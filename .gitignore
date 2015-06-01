@@ -3,7 +3,6 @@
 .RData
 Read-and-delete-me
 *-Ex.R
-ganalytics.Rproj
 .httr-oauth
 app_oauth_creds.json
 logo.png
