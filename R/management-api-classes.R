@@ -212,7 +212,11 @@ gaAccountSummaries <- R6Class(
   active = list(
     flatSummary = function() {
       ldply(seq_along(self$entities), function(entity_i){
-        data.frame(self$summary[entity_i, c('id', 'name')], self$entities[[entity_i]]$summary, row.names = NULL)
+        data.frame(
+          self$summary[entity_i, c('id', 'name')],
+          self$entities[[entity_i]]$summary,
+          row.names = NULL
+        )
       }, .id = NULL)
     }
   ),

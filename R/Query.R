@@ -40,7 +40,7 @@ GaQuery <- function(
   profileId = NA
 ) {
   if (missing(profileId)) {
-    if (is.na(view[[1]])) {
+    if (any(is.na(view))) {
       view <- GaAccounts(creds = creds)$entities[[1]]
     }
   } else view <- profileId
