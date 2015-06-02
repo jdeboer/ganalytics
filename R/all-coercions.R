@@ -883,6 +883,15 @@ setAs(from = "gaAccount", to = "viewId",
 #############\/ Transform to method of DateRange and DateRange<- generic functions
 
 # Coercion to dateRange
+setAs(from = "Date", to = "dateRange",
+  def = function(from, to) {
+    assert_that(length(from) == 2)
+    startDate = from[1]
+    endDate = from[2]
+    new("dateRange", startDate, endDate)
+  }
+)
+
 setAs(from = ".query", to = "dateRange",
   def = function(from, to) {
     from@dateRange

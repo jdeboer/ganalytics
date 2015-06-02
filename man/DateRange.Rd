@@ -13,6 +13,7 @@
 \alias{DateRange<-,.standardQuery,character-method}
 \alias{DateRange<-,.standardQuery,dateRange-method}
 \alias{DateRange<-,dateRange,.standardQuery-method}
+\alias{DateRange<-,dateRange,Date-method}
 \alias{DateRange<-,dateRange,character-method}
 \alias{DateRange<-,dateRange,dateRange-method}
 \alias{EndDate}
@@ -73,9 +74,7 @@
 
 \S4method{DateRange}{dateRange,character}(object) <- value
 
-\S4method{DateRange}{.standardQuery,dateRange}(object) <- value
-
-\S4method{DateRange}{.standardQuery,.standardQuery}(object) <- value
+\S4method{DateRange}{dateRange,Date}(object) <- value
 
 \S4method{DateRange}{dateRange,dateRange}(object) <- value
 
@@ -84,6 +83,10 @@
 \S4method{DateRange}{.standardQuery,character}(object) <- value
 
 \S4method{DateRange}{.standardQuery,Date}(object) <- value
+
+\S4method{DateRange}{.standardQuery,dateRange}(object) <- value
+
+\S4method{DateRange}{.standardQuery,.standardQuery}(object) <- value
 
 DateRange(object, endDate)
 
@@ -160,9 +163,7 @@ Set the endDate of the date range.
 
 \item \code{object = dateRange,value = character}: 
 
-\item \code{object = .standardQuery,value = dateRange}: 
-
-\item \code{object = .standardQuery,value = .standardQuery}: 
+\item \code{object = dateRange,value = Date}: 
 
 \item \code{object = dateRange,value = dateRange}: 
 
@@ -171,5 +172,9 @@ Set the endDate of the date range.
 \item \code{object = .standardQuery,value = character}: 
 
 \item \code{object = .standardQuery,value = Date}: 
+
+\item \code{object = .standardQuery,value = dateRange}: 
+
+\item \code{object = .standardQuery,value = .standardQuery}: 
 }}
 

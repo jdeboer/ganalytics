@@ -225,17 +225,7 @@ setMethod(
 #' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
-  signature = c(".standardQuery", "dateRange"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange
-setMethod(
-  f = "DateRange<-",
-  signature = c(".standardQuery", ".standardQuery"),
+  signature = c("dateRange", "Date"),
   definition = function(object, value) {
     as(object, "dateRange") <- value
     object
@@ -281,8 +271,29 @@ setMethod(
 
 #' @describeIn DateRange
 setMethod("DateRange<-", c(".standardQuery", "Date"), function(object, value) {
-  DateRange(object, as.character(value))
+  as(object, "dateRange") <- as(value, "dateRange")
+  object
 })
+
+#' @describeIn DateRange
+setMethod(
+  f = "DateRange<-",
+  signature = c(".standardQuery", "dateRange"),
+  definition = function(object, value) {
+    as(object, "dateRange") <- value
+    object
+  }
+)
+
+#' @describeIn DateRange
+setMethod(
+  f = "DateRange<-",
+  signature = c(".standardQuery", ".standardQuery"),
+  definition = function(object, value) {
+    as(object, "dateRange") <- value
+    object
+  }
+)
 
 #' GaStartDate (Deprecated)
 #' For backwards compatibility
