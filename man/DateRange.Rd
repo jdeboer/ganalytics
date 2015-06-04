@@ -5,6 +5,7 @@
 \alias{DateRange}
 \alias{DateRange,.standardQuery,ANY-method}
 \alias{DateRange,Date,Date-method}
+\alias{DateRange,Interval,ANY-method}
 \alias{DateRange,character,character-method}
 \alias{DateRange,dateRange,ANY-method}
 \alias{DateRange<-}
@@ -71,6 +72,8 @@
 \S4method{DateRange}{Date,Date}(object, endDate)
 
 \S4method{DateRange}{.standardQuery,ANY}(object)
+
+\S4method{DateRange}{Interval,ANY}(object)
 
 \S4method{DateRange}{dateRange,character}(object) <- value
 
@@ -160,6 +163,8 @@ Set the endDate of the date range.
 \item \code{object = Date,endDate = Date}: 
 
 \item \code{object = .standardQuery,endDate = ANY}: 
+
+\item \code{object = Interval,endDate = ANY}: 
 
 \item \code{object = dateRange,value = character}: 
 

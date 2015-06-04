@@ -892,6 +892,19 @@ setAs(from = "Date", to = "dateRange",
   }
 )
 
+setAs(from = "Interval", to = "dateRange",
+  def = function(from, to) {
+    date_range_char <- str_split_fixed(as.character(from), "--", 2)
+    start_date <- as.Date(date_range_char[, 1])
+    end_date <- as.Date(date_range_char[, 2])
+    if (start_date <= end_date) {
+      new(to, start_date, end_date)
+    } else {
+      new(to, end_date, start_date)
+    }
+  }
+)
+
 setAs(from = ".query", to = "dateRange",
   def = function(from, to) {
     from@dateRange

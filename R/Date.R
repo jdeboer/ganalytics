@@ -3,6 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @importFrom plyr adply
+#' @importFrom stringr str_split_fixed
 NULL
 
 #'SplitDateRange
@@ -206,6 +207,11 @@ setMethod(
 
 #' @describeIn DateRange
 setMethod("DateRange", ".standardQuery", function(object) {object@dateRange})
+
+#' @describeIn DateRange
+setMethod("DateRange", "Interval", function(object) {
+  as(object, "dateRange")
+})
 
 #' @describeIn DateRange
 setMethod(
