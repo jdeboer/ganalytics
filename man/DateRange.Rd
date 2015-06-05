@@ -8,19 +8,24 @@
 \alias{DateRange,Interval,ANY-method}
 \alias{DateRange,character,character-method}
 \alias{DateRange,dateRange,ANY-method}
+\alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-}
 \alias{DateRange<-,.standardQuery,.standardQuery-method}
 \alias{DateRange<-,.standardQuery,Date-method}
+\alias{DateRange<-,.standardQuery,Interval-method}
 \alias{DateRange<-,.standardQuery,character-method}
 \alias{DateRange<-,.standardQuery,dateRange-method}
 \alias{DateRange<-,dateRange,.standardQuery-method}
 \alias{DateRange<-,dateRange,Date-method}
+\alias{DateRange<-,dateRange,Interval-method}
 \alias{DateRange<-,dateRange,character-method}
 \alias{DateRange<-,dateRange,dateRange-method}
 \alias{EndDate}
 \alias{EndDate,.standardQuery-method}
+\alias{EndDate,Interval-method}
 \alias{EndDate,character-method}
 \alias{EndDate,dateRange-method}
+\alias{EndDate,gaView-method}
 \alias{EndDate<-}
 \alias{EndDate<-,.standardQuery,Date-method}
 \alias{EndDate<-,.standardQuery,character-method}
@@ -28,8 +33,10 @@
 \alias{EndDate<-,dateRange,character-method}
 \alias{StartDate}
 \alias{StartDate,.standardQuery-method}
+\alias{StartDate,Interval-method}
 \alias{StartDate,character-method}
 \alias{StartDate,dateRange-method}
+\alias{StartDate,gaView-method}
 \alias{StartDate<-}
 \alias{StartDate<-,.standardQuery,Date-method}
 \alias{StartDate<-,.standardQuery,character-method}
@@ -45,9 +52,17 @@
 
 \S4method{EndDate}{dateRange}(object)
 
+\S4method{StartDate}{Interval}(object)
+
+\S4method{EndDate}{Interval}(object)
+
 \S4method{StartDate}{.standardQuery}(object)
 
 \S4method{EndDate}{.standardQuery}(object)
+
+\S4method{StartDate}{gaView}(object)
+
+\S4method{EndDate}{gaView}(object)
 
 \S4method{StartDate}{dateRange,character}(object) <- value
 
@@ -75,6 +90,8 @@
 
 \S4method{DateRange}{Interval,ANY}(object)
 
+\S4method{DateRange}{gaView,ANY}(object)
+
 \S4method{DateRange}{dateRange,character}(object) <- value
 
 \S4method{DateRange}{dateRange,Date}(object) <- value
@@ -83,11 +100,15 @@
 
 \S4method{DateRange}{dateRange,.standardQuery}(object) <- value
 
+\S4method{DateRange}{dateRange,Interval}(object) <- value
+
 \S4method{DateRange}{.standardQuery,character}(object) <- value
 
 \S4method{DateRange}{.standardQuery,Date}(object) <- value
 
 \S4method{DateRange}{.standardQuery,dateRange}(object) <- value
+
+\S4method{DateRange}{.standardQuery,Interval}(object) <- value
 
 \S4method{DateRange}{.standardQuery,.standardQuery}(object) <- value
 
@@ -136,9 +157,17 @@ Set the endDate of the date range.
 
 \item \code{dateRange}: 
 
+\item \code{Interval}: 
+
+\item \code{Interval}: 
+
 \item \code{.standardQuery}: 
 
 \item \code{.standardQuery}: 
+
+\item \code{gaView}: 
+
+\item \code{gaView}: 
 
 \item \code{object = dateRange,value = character}: 
 
@@ -166,6 +195,8 @@ Set the endDate of the date range.
 
 \item \code{object = Interval,endDate = ANY}: 
 
+\item \code{object = gaView,endDate = ANY}: 
+
 \item \code{object = dateRange,value = character}: 
 
 \item \code{object = dateRange,value = Date}: 
@@ -174,11 +205,15 @@ Set the endDate of the date range.
 
 \item \code{object = dateRange,value = .standardQuery}: 
 
+\item \code{object = dateRange,value = Interval}: 
+
 \item \code{object = .standardQuery,value = character}: 
 
 \item \code{object = .standardQuery,value = Date}: 
 
 \item \code{object = .standardQuery,value = dateRange}: 
+
+\item \code{object = .standardQuery,value = Interval}: 
 
 \item \code{object = .standardQuery,value = .standardQuery}: 
 }}

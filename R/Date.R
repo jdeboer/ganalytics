@@ -4,6 +4,7 @@
 #' @include all-coercions.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
+#' @importFrom lubridate today
 NULL
 
 #'SplitDateRange
@@ -82,10 +83,46 @@ setMethod("StartDate", "dateRange", function(object) {object@startDate})
 setMethod("EndDate", "dateRange", function(object) {object@endDate})
 
 #' @describeIn DateRange
+setMethod("StartDate", "Interval", function(object) {StartDate(DateRange(object))})
+
+#' @describeIn DateRange
+setMethod("EndDate", "Interval", function(object) {EndDate(DateRange(object))})
+
+#' @describeIn DateRange
 setMethod("StartDate", ".standardQuery", function(object) {StartDate(object@dateRange)})
 
 #' @describeIn DateRange
 setMethod("EndDate", ".standardQuery", function(object) {EndDate(object@dateRange)})
+
+#' @describeIn DateRange
+setMethod("StartDate", "gaView", function(object) {
+  start_date <- as.Date(object$created)
+  end_date <- today()
+  query <- GaQuery(object)
+  StartDate(query) <- start_date
+  EndDate(query) <- end_date
+  Metrics(query) <- "hits"
+  Dimensions(query) <- "date"
+  MaxResults(query) <- 1
+  TableFilter(query) <- Expr("hits", ">", 0)
+  SortBy(query) <- "+date"
+  GetGaData(query)$date
+})
+
+#' @describeIn DateRange
+setMethod("EndDate", "gaView", function(object) {
+  start_date <- as.Date(object$created)
+  end_date <- today()
+  query <- GaQuery(object)
+  StartDate(query) <- start_date
+  EndDate(query) <- end_date
+  Metrics(query) <- "hits"
+  Dimensions(query) <- "date"
+  MaxResults(query) <- 1
+  TableFilter(query) <- Expr("hits", ">", 0)
+  SortBy(query) <- "-date"
+  GetGaData(query)$date
+})
 
 #' @describeIn DateRange
 setMethod(
@@ -214,6 +251,25 @@ setMethod("DateRange", "Interval", function(object) {
 })
 
 #' @describeIn DateRange
+setMethod("DateRange", "gaView", function(object) {
+  start_date <- as.Date(object$created)
+  end_date <- today()
+  query <- GaQuery(object)
+  StartDate(query) <- start_date
+  EndDate(query) <- end_date
+  Metrics(query) <- "hits"
+  Dimensions(query) <- "date"
+  MaxResults(query) <- 1
+  TableFilter(query) <- Expr("hits", ">", 0)
+  SortBy(query) <- "+date"
+  start_date <- GetGaData(query)$date
+  StartDate(query) <- start_date
+  SortBy(query) <- "-date"
+  end_date <- GetGaData(query)$date
+  DateRange(start_date, end_date)
+})
+
+#' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
   signature = c("dateRange", "character"),
@@ -261,6 +317,15 @@ setMethod(
 #' @describeIn DateRange
 setMethod(
   f = "DateRange<-",
+  signature = c("dateRange", "Interval"),
+  definition = function(object, value) {
+    object <- as(value, "dateRange")
+  }
+)
+
+#' @describeIn DateRange
+setMethod(
+  f = "DateRange<-",
   signature = c(".standardQuery", "character"),
   definition = function(object, value) {
     if (length(value) != 2) {
@@ -285,6 +350,16 @@ setMethod("DateRange<-", c(".standardQuery", "Date"), function(object, value) {
 setMethod(
   f = "DateRange<-",
   signature = c(".standardQuery", "dateRange"),
+  definition = function(object, value) {
+    as(object, "dateRange") <- value
+    object
+  }
+)
+
+#' @describeIn DateRange
+setMethod(
+  f = "DateRange<-",
+  signature = c(".standardQuery", "Interval"),
   definition = function(object, value) {
     as(object, "dateRange") <- value
     object

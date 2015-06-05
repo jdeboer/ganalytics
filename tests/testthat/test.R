@@ -608,6 +608,8 @@ test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", 
   expect_is(SortBy(query), ".sortBy")
 })
 
+context("Query variable lists - metrics, dimensions and sort-by")
+
 test_that("Dimensions or metrics removed from a query are reflected in its sortBy", {
   query <- GaQuery(view = 0)
   Dimensions(query) <- c("eventCategory", "eventAction", "eventLabel")
@@ -617,6 +619,8 @@ test_that("Dimensions or metrics removed from a query are reflected in its sortB
   Metrics(query) <- "totalEvents"
   expect_equivalent(SortBy(query), SortBy("totalEvents"))
 })
+
+context("Date functions")
 
 test_that("functions DateRange, StartDate, EndDate, and their replacement versions work across all required signatures", {
   # character dateRange date query
@@ -647,6 +651,13 @@ test_that("lubridate date Interval objects can be used with DateRange", {
   expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
   date_range <- interval(as.Date("2010-01-31"), as.Date("2010-01-01"))
   expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
+  query <- GaQuery(view = 0)
+  DateRange(query) <- date_range
+  expect_equal(StartDate(query), StartDate(date_range))
+  expect_equal(EndDate(query), EndDate(date_range))
+  date_range2 <- DateRange("2012-01-01", "2012-01-01")
+  DateRange(date_range2) <- date_range
+  expect_equal(DateRange(date_range), date_range2)
 })
 
 test_that("SplitDateRange correctly splits a dateRange object, including that of a .query object", {
