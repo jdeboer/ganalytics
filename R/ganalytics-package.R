@@ -1,11 +1,17 @@
 #' ganalytics
 #'
-#' A Google Analytics client for R
+#' A Google Analytics and Google Tag Manager client for R
 #'
-#' S4 classes and methods for interacting with Google Analytics data in R.
+#' Classes and methods for interacting with Google Analytics and Google Tag Manager in R.
 #'
 #' @references Google Analytics dimensions and metrics reference:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
+#' @references Google Analytics Table Filter expressions
+#' @references Google Analytics Custom Segmentation expressions
+#' @references Google Analytics Real-time Reporting API dimensions and metrics
+#' @references Google Analytics Multi-Channel Funnel conversions Reporting API
+#' @references Google Management API collections and resources
+#' @references Google Tag Manager API collection and resources
 #'
 #' @keywords package
 #' @import httpuv
