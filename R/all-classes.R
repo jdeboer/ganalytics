@@ -452,7 +452,7 @@ setClass(
       TRUE
     } else {
       return("Filter expressions do not support '[]' or '<>' operators.")
-    }    
+    }
   }
 )
 
@@ -626,7 +626,7 @@ setClass(
   "gaSegmentId",
   contains = "character",
   validity = function(object) {
-    pattern <- "^gaid::\\-?[0-9A-Z]+$"
+    pattern <- "^gaid::\\-?[0-9A-Za-z]+$"
     if (length(object) != 1) {
       "gaSegmentId must be a character vector of length 1"
     } else if (!grepl(pattern = pattern, x = object@.Data)) {
