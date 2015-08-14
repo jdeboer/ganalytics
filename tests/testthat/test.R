@@ -403,7 +403,7 @@ test_that("Queries are constructed correctly for API requests", {
     as(
       GaQuery(view = 0, startDate = "2015-01-01", endDate = "2015-01-28",
               metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
-              filters = GaExpr("source", "=", "google"), segment = GaExpr("country", "=", "Australia"),
+              filters = GaExpr("source", "=", "google"), segments = GaExpr("country", "=", "Australia"),
               maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
       "matrix")[,1],
     c(
@@ -414,7 +414,7 @@ test_that("Queries are constructed correctly for API requests", {
       dimensions = "ga:deviceCategory",
       sort = "ga:deviceCategory",
       filters = "ga:source==google",
-      segment = "sessions::condition::ga:country==Australia",
+      segments = "sessions::condition::ga:country==Australia",
       samplingLevel = "HIGHER_PRECISION"
     )
   )
@@ -429,7 +429,7 @@ test_that("providing multiple view IDs, date ranges and multiple segments coerce
                 endDate = c("2015-01-01", "2015-01-28"),
                 metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
                 filters = GaExpr("source", "=", "google"),
-                segment = GaExpr("country", "=", "Australia"),
+                segments = GaExpr("country", "=", "Australia"),
                 maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
         "matrix")
     ), c(9, 6)

@@ -34,7 +34,7 @@ GaQuery <- function(
   dimensions = "ga:date",
   sortBy = NULL,
   filters = NULL,
-  segment = NULL,
+  segments = NULL,
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults,
   profileId = NA
@@ -60,7 +60,7 @@ GaQuery <- function(
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
       filters = as(filters, "gaFilter"),
-      segment = GaSegment(segment),
+      segments = GaSegment(segments),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds

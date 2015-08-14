@@ -637,6 +637,14 @@ setClass(
 
 setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
+setClass(
+  "gaSegmentList",
+  contains = "list",
+  validity = function(object) {
+    validate_that(all_inherit(object, ".gaSegment"))
+  }
+)
+
 # ---- Simple and compound expression class union ----
 
 setClassUnion(".compoundExpr", c(
@@ -871,7 +879,8 @@ setClass(
     dimensions = "gaDimensions",
     sortBy = "gaSortBy",
     filters = "gaFilter",
-    segment = ".gaSegment"
+    segments = ".gaSegment",
+    buckets = "numeric"
   ),
   prototype = prototype(
     metrics = new("gaMetrics"),

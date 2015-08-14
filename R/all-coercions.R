@@ -575,10 +575,10 @@ setAs(
 #############\/ Transform to method of Segment and Segment<- generic functions
 setAs(from = "gaQuery", to = ".gaSegment",
   def = function(from) {
-    from@segment
+    from@segments
   },
   replace = function(from, value) {
-    from@segment <- as(value, ".gaSegment") # Need to define coercions to .gaSegment from char and numeric
+    from@segments <- as(value, ".gaSegment") # Need to define coercions to .gaSegment from char and numeric
     validObject(from)
     from
   }
@@ -945,7 +945,7 @@ setAs(
         dimensions <- as(from, ".dimensions")
         sortBy <- as(from, ".sortBy")
         tableFilter <- as(from, ".tableFilter")
-        segment <- as(from, ".gaSegment")
+        segments <- as(from, ".gaSegment")
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -960,8 +960,8 @@ setAs(
           "filters" = if(length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
-          "segment" = if(length(segment) >= 1) {
-            as(segment, "character")
+          "segments" = if(length(segments) >= 1) {
+            as(segments, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
         )

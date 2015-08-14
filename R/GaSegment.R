@@ -260,7 +260,7 @@ setMethod(
   f = "Segment",
   signature = "gaQuery",
   definition = function(object) {
-    object@segment
+    object@segments
   }
 )
 
@@ -269,7 +269,7 @@ setMethod(
   f = "Segment<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
-    object@segment <- GaSegment(value)
+    object@segments <- GaSegment(value)
     validObject(object)
     object
   }
