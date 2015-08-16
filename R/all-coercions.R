@@ -154,8 +154,6 @@ setAs(from = ".rtVar", to = ".mcfVar", def = coerceVarNS)
 setAs(from = ".gaVar", to = ".rtVar", def = coerceVarNS)
 setAs(from = ".mcfVar", to = ".rtVar", def = coerceVarNS)
 
-#############\/ Transform to method of Var and Var<- generic functions
-
 setAs(from = ".expr", to = ".var",
   def = function(from, to) {
     from@var
@@ -165,14 +163,12 @@ setAs(from = ".expr", to = ".var",
   }
 )
 
-#############\/ Is this used or needed?
-
 setAs(from = ".expr", to = ".gaVar",
   def = function(from, to) {
     as(as(from, ".var"), to)
   },
   replace = function(from, value) {
-    as(from, ".var") <- value
+    as(from, ".var") <- as(value, ".gaVar")
     from
   }
 )
