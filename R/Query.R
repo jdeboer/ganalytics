@@ -18,7 +18,7 @@ NULL
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param segment a segment object
+#' @param segments a segment object
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #' @param profileId Deprecated, use view instead.
