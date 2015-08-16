@@ -4,7 +4,7 @@
 \name{Segment,gaSegmentId-method}
 \alias{Segment}
 \alias{Segment,.compoundExpr-method}
-\alias{Segment,.gaSimpleOrSequence-method}
+\alias{Segment,.gaNegation-method}
 \alias{Segment,NULL-method}
 \alias{Segment,character-method}
 \alias{Segment,gaDynSegment-method}
@@ -33,7 +33,7 @@
 
 \S4method{Segment}{gaSegmentCondition}(object, ..., scope = "sessions")
 
-\S4method{Segment}{.gaSimpleOrSequence}(object, ..., scope = "sessions")
+\S4method{Segment}{.gaNegation}(object, ..., scope = "sessions")
 
 \S4method{Segment}{gaFilter}(object, ..., scope = "sessions")
 
@@ -84,7 +84,7 @@ Set the segment
 
 \item \code{gaSegmentCondition}: 
 
-\item \code{.gaSimpleOrSequence}: 
+\item \code{.gaNegation}: 
 
 \item \code{gaFilter}: Coerce a Table Filter into a Segment
 

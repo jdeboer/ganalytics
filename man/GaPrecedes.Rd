@@ -16,6 +16,6 @@ GaPrecedes(object, ...)
 Create a gaSequenceStep object
 }
 \seealso{
-GaSequenceCondition
+GaSequence
 }
 

@@ -4,14 +4,13 @@
 \name{GaSegmentCondition,.compoundExpr-method}
 \alias{GaSegmentCondition}
 \alias{GaSegmentCondition,.compoundExpr-method}
-\alias{GaSegmentCondition,.gaSimpleOrSequence-method}
+\alias{GaSegmentCondition,.gaNegation-method}
 \alias{GaSegmentCondition,gaSegmentCondition-method}
 \title{GaSegmentCondition.}
 \usage{
 \S4method{GaSegmentCondition}{.compoundExpr}(object, ..., scope = "sessions")
 
-\S4method{GaSegmentCondition}{.gaSimpleOrSequence}(object, ...,
-  scope = "sessions")
+\S4method{GaSegmentCondition}{.gaNegation}(object, ..., scope = "sessions")
 
 \S4method{GaSegmentCondition}{gaSegmentCondition}(object)
 
@@ -35,7 +34,7 @@ non-sequential conditoins can be combined using this function.
 \itemize{
 \item \code{.compoundExpr}: 
 
-\item \code{.gaSimpleOrSequence}: 
+\item \code{.gaNegation}: 
 
 \item \code{gaSegmentCondition}: 
 }}

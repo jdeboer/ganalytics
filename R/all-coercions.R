@@ -317,7 +317,7 @@ setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
   )
 })
 
-setAs(from = "gaSequenceCondition", to = "character", def = function(from, to) {
+setAs(from = "gaSequence", to = "character", def = function(from, to) {
   if(length(from) >= 1) {
     paste0(
       "sequence::",
@@ -510,7 +510,7 @@ setAs(from = ".query", to = ".tableFilter",
 ### Review the following coercions using "new"
 # Coercion to custom segment classes
 
-setAs(from = ".compoundExpr", to = "gaSequenceCondition", def = function(from, to) {
+setAs(from = ".compoundExpr", to = "gaSequence", def = function(from, to) {
   new(to, as(from, "andExpr"))
 })
 

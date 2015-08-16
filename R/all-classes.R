@@ -540,7 +540,7 @@ setClass(
 )
 
 setClass(
-  ".gaSimpleOrSequence",
+  ".gaNegation",
   slots = c(
     negation = "logical"
   ),
@@ -572,8 +572,8 @@ setClass(
 )
 
 setClass(
-  "gaSequenceCondition",
-  contains = c("list", ".gaSimpleOrSequence"),
+  "gaSequence",
+  contains = c("list", ".gaNegation"),
   validity = function(object) {
     if (all_inherit(object@.Data, "gaSequenceStep")) {
       TRUE
@@ -585,7 +585,7 @@ setClass(
 
 setClass(
   "gaNonSequenceCondition",
-  contains = c("gaDimensionOrMetricCondition", ".gaSimpleOrSequence")
+  contains = c("gaDimensionOrMetricCondition", ".gaNegation")
 )
 
 setClass(
@@ -598,8 +598,8 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all_inherit(object@.Data, ".gaSimpleOrSequence")) {
-      "All conditions within a gaSegmentCondition list must belong to the superclass '.gaSimpleOrSequence'."
+    if (!all_inherit(object@.Data, ".gaNegation")) {
+      "All conditions within a gaSegmentCondition list must belong to the superclass '.gaNegation'."
     } else if (length(object@conditionScope) != 1) {
       "Slot 'conditionScope' must be of length 1."
     } else if (!(object@conditionScope %in% c("users", "sessions"))) {

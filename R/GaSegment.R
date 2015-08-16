@@ -6,9 +6,9 @@
 #' @include management-api-classes.R
 NULL
 
-# ---- GaPrecedes, GaImmediatelyPrecedes, GaStartsWith, GaSequenceCondition ----
+# ---- GaPrecedes, GaImmediatelyPrecedes, GaStartsWith, GaSequence ----
 
-#' @describeIn GaSequenceCondition
+#' @describeIn GaSequence
 setMethod(
   f = "GaPrecedes",
   signature = ".compoundExpr",
@@ -17,7 +17,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequenceCondition
+#' @describeIn GaSequence
 setMethod(
   f = "GaImmediatelyPrecedes",
   signature = ".compoundExpr",
@@ -26,7 +26,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequenceCondition
+#' @describeIn GaSequence
 setMethod(
   f = "GaStartsWith",
   signature = ".compoundExpr",
@@ -35,25 +35,25 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequenceCondition
+#' @describeIn GaSequence
 setMethod(
-  f = "GaSequenceCondition",
+  f = "GaSequence",
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequenceCondition", exprList, negation = negation)
+    new("gaSequence", exprList, negation = negation)
   }
 )
 
-#' @describeIn GaSequenceCondition
+#' @describeIn GaSequence
 setMethod(
-  f = "GaSequenceCondition",
+  f = "GaSequence",
   signature = "gaSequenceStep",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequenceCondition", exprList, negation = negation)
+    new("gaSequence", exprList, negation = negation)
   }
 )
 
@@ -83,7 +83,7 @@ setMethod(
 #' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
-  signature = ".gaSimpleOrSequence",
+  signature = ".gaNegation",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     new("gaSegmentCondition", exprList, conditionScope = scope)
@@ -187,7 +187,7 @@ setMethod(
 #' @describeIn Segment
 setMethod(
   f = "Segment",
-  signature = ".gaSimpleOrSequence",
+  signature = ".gaNegation",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {

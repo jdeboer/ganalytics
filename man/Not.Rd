@@ -3,12 +3,12 @@
 \docType{methods}
 \name{Not,.operator-method}
 \alias{!,.expr-method}
-\alias{!,.gaSimpleOrSequence-method}
+\alias{!,.gaNegation-method}
 \alias{!,.operator-method}
 \alias{!,orExpr-method}
 \alias{Not}
 \alias{Not,.expr-method}
-\alias{Not,.gaSimpleOrSequence-method}
+\alias{Not,.gaNegation-method}
 \alias{Not,.operator-method}
 \alias{Not,orExpr-method}
 \title{Not.}
@@ -25,9 +25,9 @@
 
 \S4method{!}{orExpr}(x)
 
-\S4method{Not}{.gaSimpleOrSequence}(object)
+\S4method{Not}{.gaNegation}(object)
 
-\S4method{!}{.gaSimpleOrSequence}(x)
+\S4method{!}{.gaNegation}(x)
 
 Not(object)
 }
@@ -53,8 +53,8 @@ Invert an expression, i.e. NOT.
 
 \item \code{orExpr}: 
 
-\item \code{.gaSimpleOrSequence}: 
+\item \code{.gaNegation}: 
 
-\item \code{.gaSimpleOrSequence}: 
+\item \code{.gaNegation}: 
 }}
 

@@ -269,7 +269,7 @@ test_that("segment expressions are correctly coerced to character string", {
       GaSegment(
         GaSegmentCondition(
           GaNonSequenceCondition(GaExpr("source", "=", "google")),
-          GaSequenceCondition(
+          GaSequence(
             GaStartsWith(GaExpr("pagepath", "=", "/")),
             GaImmediatelyPrecedes(GaExpr("pagepath", "=", "/products/")),
             GaPrecedes(GaExpr("exitPage", "=", "/"))

@@ -17,6 +17,6 @@ the sequence.}
 Create a gaSequenceStep object
 }
 \seealso{
-GaSequenceCondition
+GaSequence
 }
 

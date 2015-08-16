@@ -4,11 +4,11 @@
 \name{GaPrecedes,.compoundExpr-method}
 \alias{GaImmediatelyPrecedes,.compoundExpr-method}
 \alias{GaPrecedes,.compoundExpr-method}
-\alias{GaSequenceCondition}
-\alias{GaSequenceCondition,.compoundExpr-method}
-\alias{GaSequenceCondition,gaSequenceStep-method}
+\alias{GaSequence}
+\alias{GaSequence,.compoundExpr-method}
+\alias{GaSequence,gaSequenceStep-method}
 \alias{GaStartsWith,.compoundExpr-method}
-\title{GaSequenceCondition.}
+\title{GaSequence.}
 \usage{
 \S4method{GaPrecedes}{.compoundExpr}(object)
 
@@ -16,11 +16,11 @@
 
 \S4method{GaStartsWith}{.compoundExpr}(object)
 
-\S4method{GaSequenceCondition}{.compoundExpr}(object, ..., negation = FALSE)
+\S4method{GaSequence}{.compoundExpr}(object, ..., negation = FALSE)
 
-\S4method{GaSequenceCondition}{gaSequenceStep}(object, ..., negation = FALSE)
+\S4method{GaSequence}{gaSequenceStep}(object, ..., negation = FALSE)
 
-GaSequenceCondition(object, ..., negation = FALSE)
+GaSequence(object, ..., negation = FALSE)
 }
 \arguments{
 \item{object}{A sequence step or another expression that should be coerced to
@@ -33,7 +33,7 @@ they should be applied.}
   has not occured.}
 }
 \description{
-Create a new gaSequenceCondition object
+Create a new gaSequence object
 }
 \section{Methods (by class)}{
 \itemize{

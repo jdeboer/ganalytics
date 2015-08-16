@@ -324,7 +324,7 @@ setGeneric(
 setGeneric(
   "Not",
   function(object) {},
-  valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
+  valueClass = c(".operator", ".compoundExpr", ".gaNegation"),
   useAsDefault = FALSE
 )
 
@@ -381,7 +381,7 @@ setGeneric("xor")
 #' @param ... Any other expressions that should follow the first one but before
 #'   any others in the sequence.
 #'
-#' @seealso GaSequenceCondition
+#' @seealso GaSequence
 #'
 #' @export
 setGeneric(
@@ -401,7 +401,7 @@ setGeneric(
 #'   first one but before any others in the sequence.
 #'
 #' @export
-#' @seealso GaSequenceCondition
+#' @seealso GaSequence
 setGeneric(
   "GaImmediatelyPrecedes",
   function(object, ...) {},
@@ -418,7 +418,7 @@ setGeneric(
 #' @param ... Any other expressions that should follow the first expression.
 #'
 #' @export
-#' @seealso GaSequenceCondition
+#' @seealso GaSequence
 setGeneric(
   "GaStartsWith",
   function(object, ...) {},
@@ -426,9 +426,9 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaSequenceCondition.
+#' GaSequence.
 #'
-#' Create a new gaSequenceCondition object
+#' Create a new gaSequence object
 #'
 #' @param object A sequence step or another expression that should be coerced to
 #'   a sequence condition.
@@ -439,9 +439,9 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaSequenceCondition",
+  "GaSequence",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaSequenceCondition",
+  valueClass = "gaSequence",
   useAsDefault = FALSE
 )
 
