@@ -2,7 +2,8 @@ ga_scopes <- c(
   default = "https://www.googleapis.com/auth/analytics",
   edit = "https://www.googleapis.com/auth/analytics.edit",
   read_only = "https://www.googleapis.com/auth/analytics.readonly",
-  manage_users = "https://www.googleapis.com/auth/analytics.manage.users"
+  manage_users = "https://www.googleapis.com/auth/analytics.manage.users",
+  read_only_users = "https://www.googleapis.com/auth/analytics.manage.users.readonly"
 )
 
 gtm_scopes <- c(
