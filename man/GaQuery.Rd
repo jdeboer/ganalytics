@@ -27,14 +27,14 @@ GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
 
 \item{filters}{a filters object}
 
+\item{segments}{a segment object}
+
 \item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
 
 \item{maxResults}{the maximum number of results to return,}
 
 \item{profileId}{Deprecated, use view instead.
  up to 1,000,000}
-
-\item{segment}{a segment object}
 }
 \description{
 Create a ganalytics query object
