@@ -135,7 +135,7 @@ McfQuery <- function(
 RtQuery <- function(
   view = NA,
   creds = GoogleApiCreds(),
-  metrics = "rt:activeUsers",
+  metrics = "rt:pageviews",
   dimensions = "rt:minutesAgo",
   sortBy = NULL,
   filters = NULL,

@@ -72,7 +72,7 @@ setClass(
 
 setClass(
   "rtMetVar",
-  prototype = prototype("rt:activeUsers"),
+  prototype = prototype("rt:pageviews"),
   contains = ".var",
   validity = function(object) {
     if (IsVarMatch(object@.Data, kRtVars$mets)) {
