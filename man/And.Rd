@@ -22,6 +22,9 @@ And(object, ...)
 
 \item{e2}{second expression}
 }
+\value{
+an object of class \code{andExpr}
+}
 \description{
 AND two or more ganalytics expressions together.
 }

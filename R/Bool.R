@@ -66,7 +66,7 @@ setMethod("!", "orExpr", function(x) {Not(x)})
 #' @describeIn Not
 setMethod(
   f = "Not",
-  signature = ".gaNegation",
+  signature = ".gaSegmentFilter",
   definition = function(object) {
     object@negation <- !object@negation
     object
@@ -75,12 +75,7 @@ setMethod(
 
 #' @describeIn Not
 #' @export
-setMethod("!", ".gaNegation", function(x) {Not(x)})
-
-# Create an Or from one or more metric or dimension expressions
-# Takes one or more Metric or Dimension expressions
-# as separate arguments or as a list.
-# Returns an object of gaOr.
+setMethod("!", ".gaSegmentFilter", function(x) {Not(x)})
 
 #' @describeIn Or
 setMethod(

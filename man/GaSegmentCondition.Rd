@@ -4,15 +4,16 @@
 \name{GaSegmentCondition,.compoundExpr-method}
 \alias{GaSegmentCondition}
 \alias{GaSegmentCondition,.compoundExpr-method}
-\alias{GaSegmentCondition,.gaNegation-method}
-\alias{GaSegmentCondition,gaSegmentCondition-method}
+\alias{GaSegmentCondition,.gaSegmentFilter-method}
+\alias{GaSegmentCondition,gaSegmentFilterList-method}
 \title{GaSegmentCondition.}
 \usage{
 \S4method{GaSegmentCondition}{.compoundExpr}(object, ..., scope = "sessions")
 
-\S4method{GaSegmentCondition}{.gaNegation}(object, ..., scope = "sessions")
+\S4method{GaSegmentCondition}{.gaSegmentFilter}(object, ...,
+  scope = "sessions")
 
-\S4method{GaSegmentCondition}{gaSegmentCondition}(object)
+\S4method{GaSegmentCondition}{gaSegmentFilterList}(object)
 
 GaSegmentCondition(object, ..., scope = "sessions")
 }
@@ -24,7 +25,7 @@ GaSegmentCondition(object, ..., scope = "sessions")
 \item{scope}{The scope of this condition, either 'user' or 'session' level.}
 }
 \description{
-Create a new gaSegmentCondition object
+Create a new gaSegmentFilterList object
 }
 \details{
 A segment condition is either sequential or non-sequential. Sequential and
@@ -34,8 +35,8 @@ non-sequential conditoins can be combined using this function.
 \itemize{
 \item \code{.compoundExpr}: 
 
-\item \code{.gaNegation}: 
+\item \code{.gaSegmentFilter}: 
 
-\item \code{gaSegmentCondition}: 
+\item \code{gaSegmentFilterList}: 
 }}
 

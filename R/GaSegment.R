@@ -42,7 +42,7 @@ setMethod(
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequence", exprList, negation = negation)
+    new("gaSequenceFilter", exprList, negation = negation)
   }
 )
 
@@ -53,7 +53,7 @@ setMethod(
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequence", exprList, negation = negation)
+    new("gaSequenceFilter", exprList, negation = negation)
   }
 )
 
@@ -66,7 +66,7 @@ setMethod(
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
-    new("gaNonSequenceCondition", exprList, negation = negation)
+    new("gaConditionFilter", exprList, negation = negation)
   }
 )
 
@@ -83,17 +83,17 @@ setMethod(
 #' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
-  signature = ".gaNegation",
+  signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
-    new("gaSegmentCondition", exprList, conditionScope = scope)
+    new("gaSegmentFilterList", exprList, conditionScope = scope)
   }
 )
 
 #' @describeIn GaSegmentCondition
 setMethod(
   f = "GaSegmentCondition",
-  signature = "gaSegmentCondition",
+  signature = "gaSegmentFilterList",
   definition = function(object) {
     object
   }
@@ -104,7 +104,7 @@ setMethod(
 #' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel",
-  signature = "gaSegmentCondition",
+  signature = "gaSegmentFilterList",
   definition = function(object) {
     object@conditionScope
   }
@@ -113,7 +113,7 @@ setMethod(
 #' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
-  signature = c("gaSegmentCondition", "character"),
+  signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@conditionScope <- value
     object
@@ -177,7 +177,7 @@ setMethod(
 #' @describeIn Segment
 setMethod(
   f = "Segment",
-  signature = "gaSegmentCondition",
+  signature = "gaSegmentFilterList",
   definition = function(object, ...) {
     exprList <- list(object, ...)
     new("gaDynSegment", exprList)
@@ -187,7 +187,7 @@ setMethod(
 #' @describeIn Segment
 setMethod(
   f = "Segment",
-  signature = ".gaNegation",
+  signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {

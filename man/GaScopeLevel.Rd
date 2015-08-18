@@ -4,11 +4,11 @@
 \name{GaScopeLevel,gaSegMetExpr-method}
 \alias{GaScopeLevel}
 \alias{GaScopeLevel,gaSegMetExpr-method}
-\alias{GaScopeLevel,gaSegmentCondition-method}
+\alias{GaScopeLevel,gaSegmentFilterList-method}
 \alias{GaScopeLevel<-}
 \alias{GaScopeLevel<-,gaMetExpr,character-method}
 \alias{GaScopeLevel<-,gaSegMetExpr,character-method}
-\alias{GaScopeLevel<-,gaSegmentCondition,character-method}
+\alias{GaScopeLevel<-,gaSegmentFilterList,character-method}
 \title{GaScopeLevel.}
 \usage{
 \S4method{GaScopeLevel}{gaSegMetExpr}(object)
@@ -17,13 +17,13 @@
 
 \S4method{GaScopeLevel}{gaMetExpr,character}(object) <- value
 
-\S4method{GaScopeLevel}{gaSegmentCondition}(object)
+\S4method{GaScopeLevel}{gaSegmentFilterList}(object)
 
-\S4method{GaScopeLevel}{gaSegmentCondition,character}(object) <- value
+\S4method{GaScopeLevel}{gaSegmentFilterList,character}(object) <- value
 
-\S4method{GaScopeLevel}{gaSegmentCondition}(object)
+\S4method{GaScopeLevel}{gaSegmentFilterList}(object)
 
-\S4method{GaScopeLevel}{gaSegmentCondition,character}(object) <- value
+\S4method{GaScopeLevel}{gaSegmentFilterList,character}(object) <- value
 
 GaScopeLevel(object, value)
 
@@ -51,12 +51,12 @@ For metric expressions one of 'perUser', 'perSession' or 'perHit'
 
 \item \code{object = gaMetExpr,value = character}: 
 
-\item \code{gaSegmentCondition}: 
+\item \code{gaSegmentFilterList}: 
 
-\item \code{object = gaSegmentCondition,value = character}: 
+\item \code{object = gaSegmentFilterList,value = character}: 
 
-\item \code{gaSegmentCondition}: 
+\item \code{gaSegmentFilterList}: 
 
-\item \code{object = gaSegmentCondition,value = character}: 
+\item \code{object = gaSegmentFilterList,value = character}: 
 }}
 

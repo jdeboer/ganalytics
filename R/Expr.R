@@ -136,7 +136,7 @@ setMethod(
 #' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel",
-  signature = "gaSegmentCondition",
+  signature = "gaSegmentFilterList",
   definition = function(object) {
     object@conditionScope
   }
@@ -145,7 +145,7 @@ setMethod(
 #' @describeIn GaScopeLevel
 setMethod(
   f = "GaScopeLevel<-",
-  signature = c("gaSegmentCondition", "character"),
+  signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@conditionScope <- value
     validObject(object)

@@ -515,7 +515,7 @@ setClass(
 
 
 setClass(
-  "gaDimensionOrMetricCondition",
+  "gaSegmentCondition",
   contains = "andExpr",
   validity = function(object) {
     if (all(sapply(unlist(object@.Data), function(expr) {
@@ -540,7 +540,7 @@ setClass(
 )
 
 setClass(
-  ".gaNegation",
+  ".gaSegmentFilter",
   slots = c(
     negation = "logical"
   ),
@@ -563,7 +563,7 @@ setClass(
   prototype = prototype(
     immediatelyPrecedes = FALSE
   ),
-  contains = "gaDimensionOrMetricCondition",
+  contains = "gaSegmentCondition",
   validity = function(object) {
     validate_that(
       length(object@immediatelyPrecedes) == 1
@@ -572,8 +572,8 @@ setClass(
 )
 
 setClass(
-  "gaSequence",
-  contains = c("list", ".gaNegation"),
+  "gaSequenceFilter",
+  contains = c("list", ".gaSegmentFilter"),
   validity = function(object) {
     if (all_inherit(object@.Data, "gaSequenceStep")) {
       TRUE
@@ -584,12 +584,12 @@ setClass(
 )
 
 setClass(
-  "gaNonSequenceCondition",
-  contains = c("gaDimensionOrMetricCondition", ".gaNegation")
+  "gaConditionFilter",
+  contains = c("gaSegmentCondition", ".gaSegmentFilter")
 )
 
 setClass(
-  "gaSegmentCondition",
+  "gaSegmentFilterList",
   slots = c(
     conditionScope = "character"
   ),
@@ -598,8 +598,8 @@ setClass(
   ),
   contains = "list",
   validity = function(object) {
-    if (!all_inherit(object@.Data, ".gaNegation")) {
-      "All conditions within a gaSegmentCondition list must belong to the superclass '.gaNegation'."
+    if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
+      "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
     } else if (length(object@conditionScope) != 1) {
       "Slot 'conditionScope' must be of length 1."
     } else if (!(object@conditionScope %in% c("users", "sessions"))) {
@@ -612,8 +612,8 @@ setClass(
   "gaDynSegment",
   contains = "list",
   validity = function(object) {
-    if (!all_inherit(object@.Data, "gaSegmentCondition")) {
-      "All objects with a gaDynSegment list must belong to the class 'gaSegmentCondition'."
+    if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
+      "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
     } else if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
       "The maximum expression length for dimension conditions is 1024 characters."
     } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {

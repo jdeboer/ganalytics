@@ -3,12 +3,12 @@
 \docType{methods}
 \name{Not,.operator-method}
 \alias{!,.expr-method}
-\alias{!,.gaNegation-method}
+\alias{!,.gaSegmentFilter-method}
 \alias{!,.operator-method}
 \alias{!,orExpr-method}
 \alias{Not}
 \alias{Not,.expr-method}
-\alias{Not,.gaNegation-method}
+\alias{Not,.gaSegmentFilter-method}
 \alias{Not,.operator-method}
 \alias{Not,orExpr-method}
 \title{Not.}
@@ -25,9 +25,9 @@
 
 \S4method{!}{orExpr}(x)
 
-\S4method{Not}{.gaNegation}(object)
+\S4method{Not}{.gaSegmentFilter}(object)
 
-\S4method{!}{.gaNegation}(x)
+\S4method{!}{.gaSegmentFilter}(x)
 
 Not(object)
 }
@@ -53,8 +53,8 @@ Invert an expression, i.e. NOT.
 
 \item \code{orExpr}: 
 
-\item \code{.gaNegation}: 
+\item \code{.gaSegmentFilter}: 
 
-\item \code{.gaNegation}: 
+\item \code{.gaSegmentFilter}: 
 }}
 

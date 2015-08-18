@@ -324,7 +324,7 @@ setGeneric(
 setGeneric(
   "Not",
   function(object) {},
-  valueClass = c(".operator", ".compoundExpr", ".gaNegation"),
+  valueClass = c(".operator", ".compoundExpr", ".gaSegmentFilter"),
   useAsDefault = FALSE
 )
 
@@ -334,6 +334,8 @@ setGeneric(
 #'
 #' @param object The first object to include within the OR expression.
 #' @param ... Additional objects to include within the OR expression.
+#'
+#' @return An object of class orExpr.
 #'
 #' @export
 #' @rdname Or
@@ -354,6 +356,8 @@ setGeneric(
 #'
 #' @param object The first object within the AND expression
 #' @param ... Additional objects to include within the AND expression.
+#'
+#' @return an object of class \code{andExpr}
 #'
 #' @export
 #' @rdname And
@@ -441,13 +445,13 @@ setGeneric(
 setGeneric(
   "GaSequence",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaSequence",
+  valueClass = "gaSequenceFilter",
   useAsDefault = FALSE
 )
 
 #' GaNonSequenceCondition.
 #'
-#' Create a new gaNonSequenceCondition object
+#' Create a new gaConditionFilter object
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
@@ -458,13 +462,13 @@ setGeneric(
 setGeneric(
   "GaNonSequenceCondition",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaNonSequenceCondition",
+  valueClass = "gaConditionFilter",
   useAsDefault = FALSE
 )
 
 #' GaSegmentCondition.
 #'
-#' Create a new gaSegmentCondition object
+#' Create a new gaSegmentFilterList object
 #'
 #' A segment condition is either sequential or non-sequential. Sequential and
 #' non-sequential conditoins can be combined using this function.
@@ -477,7 +481,7 @@ setGeneric(
 setGeneric(
   "GaSegmentCondition",
   function(object, ..., scope = "sessions") {},
-  valueClass = "gaSegmentCondition",
+  valueClass = "gaSegmentFilterList",
   useAsDefault = FALSE
 )
 

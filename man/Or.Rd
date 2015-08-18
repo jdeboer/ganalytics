@@ -22,6 +22,9 @@ Or(object, ...)
 
 \item{e2}{second expression}
 }
+\value{
+An object of class orExpr.
+}
 \description{
 OR two or more expressions.
 }

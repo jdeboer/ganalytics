@@ -305,7 +305,7 @@ setAs(from = "andExpr", to = "character", def = function(from, to) {
   do.call(paste, c(lapply(from, as, to), sep = ";"))
 })
 
-setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
+setAs(from = "gaConditionFilter", to = "character", def = function(from) {
   paste0(
     "condition::",
     if(from@negation) {"!"} else {""},
@@ -313,7 +313,7 @@ setAs(from = "gaNonSequenceCondition", to = "character", def = function(from) {
   )
 })
 
-setAs(from = "gaSequence", to = "character", def = function(from, to) {
+setAs(from = "gaSequenceFilter", to = "character", def = function(from, to) {
   if(length(from) >= 1) {
     paste0(
       "sequence::",
@@ -339,7 +339,7 @@ setAs(from = "gaSequence", to = "character", def = function(from, to) {
   }
 })
 
-setAs(from = "gaSegmentCondition", to = "character", def = function(from, to) {
+setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
   if(length(from) >= 1) {
     paste(
       from@conditionScope,
@@ -487,7 +487,7 @@ setAs(from = ".expr", to = "mcfFilter", def = coerceViaAnd)
 setAs(from = ".expr", to = "rtFilter", def = coerceViaAnd)
 setAs(from = ".expr", to = ".tableFilter", def = coerceViaAnd)
 
-setAs(from = "gaDimensionOrMetricCondition", to = ".tableFilter", def = simpleCoerceData)
+setAs(from = "gaSegmentCondition", to = ".tableFilter", def = simpleCoerceData)
 
 #############\/ Transform to method of TableFilter and TableFilter<- generic functions
 
@@ -506,18 +506,18 @@ setAs(from = ".query", to = ".tableFilter",
 ### Review the following coercions using "new"
 # Coercion to custom segment classes
 
-setAs(from = ".compoundExpr", to = "gaSequence", def = function(from, to) {
+setAs(from = ".compoundExpr", to = "gaSequenceFilter", def = function(from, to) {
   new(to, as(from, "andExpr"))
 })
 
-# Coercing to gaNonSequenceCondition
-setAs(from = ".compoundExpr", to = "gaNonSequenceCondition", def = function(from, to) {
+# Coercing to gaConditionFilter
+setAs(from = ".compoundExpr", to = "gaConditionFilter", def = function(from, to) {
   new(to, as(from, "andExpr"))
 })
 
-# Coercing to gaSegmentCondition
-setAs(from = ".compoundExpr", to = "gaSegmentCondition", def = function(from, to) {
-  new(to, list(as(from, "gaNonSequenceCondition")))
+# Coercing to gaSegmentFilterList
+setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, to) {
+  new(to, list(as(from, "gaConditionFilter")))
 })
 
 # Coercion to gaSegmentId
