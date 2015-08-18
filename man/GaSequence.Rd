@@ -6,7 +6,7 @@
 \alias{GaPrecedes,.compoundExpr-method}
 \alias{GaSequence}
 \alias{GaSequence,.compoundExpr-method}
-\alias{GaSequence,gaSequenceStep-method}
+\alias{GaSequence,gaSegmentSequenceStep-method}
 \alias{GaStartsWith,.compoundExpr-method}
 \title{GaSequence.}
 \usage{
@@ -18,7 +18,7 @@
 
 \S4method{GaSequence}{.compoundExpr}(object, ..., negation = FALSE)
 
-\S4method{GaSequence}{gaSequenceStep}(object, ..., negation = FALSE)
+\S4method{GaSequence}{gaSegmentSequenceStep}(object, ..., negation = FALSE)
 
 GaSequence(object, ..., negation = FALSE)
 }
@@ -45,6 +45,6 @@ Create a new gaSequence object
 
 \item \code{.compoundExpr}: 
 
-\item \code{gaSequenceStep}: 
+\item \code{gaSegmentSequenceStep}: 
 }}
 

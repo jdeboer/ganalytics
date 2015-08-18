@@ -13,7 +13,7 @@ setMethod(
   f = "GaPrecedes",
   signature = ".compoundExpr",
   definition = function(object) {
-    new("gaSequenceStep", as(object, "andExpr"), immediatelyPrecedes = FALSE)
+    new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = FALSE)
   }
 )
 
@@ -22,7 +22,7 @@ setMethod(
   f = "GaImmediatelyPrecedes",
   signature = ".compoundExpr",
   definition = function(object) {
-    new("gaSequenceStep", as(object, "andExpr"), immediatelyPrecedes = TRUE)
+    new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = TRUE)
   }
 )
 
@@ -41,19 +41,19 @@ setMethod(
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequenceFilter", exprList, negation = negation)
+    exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
+    new("gaSegmentSequenceFilter", exprList, negation = negation)
   }
 )
 
 #' @describeIn GaSequence
 setMethod(
   f = "GaSequence",
-  signature = "gaSequenceStep",
+  signature = "gaSegmentSequenceStep",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr){as(expr, "gaSequenceStep")})
-    new("gaSequenceFilter", exprList, negation = negation)
+    exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
+    new("gaSegmentSequenceFilter", exprList, negation = negation)
   }
 )
 
@@ -66,7 +66,7 @@ setMethod(
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
-    new("gaConditionFilter", exprList, negation = negation)
+    new("gaSegmentConditionFilter", exprList, negation = negation)
   }
 )
 

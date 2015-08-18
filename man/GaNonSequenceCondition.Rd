@@ -20,7 +20,7 @@ GaNonSequenceCondition(object, ..., negation = FALSE)
   has not been met.}
 }
 \description{
-Create a new gaConditionFilter object
+Create a new gaSegmentConditionFilter object
 }
 \section{Methods (by class)}{
 \itemize{

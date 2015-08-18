@@ -556,7 +556,7 @@ setClass(
 )
 
 setClass(
-  "gaSequenceStep",
+  "gaSegmentSequenceStep",
   slots = c(
     immediatelyPrecedes = "logical"
   ),
@@ -572,19 +572,19 @@ setClass(
 )
 
 setClass(
-  "gaSequenceFilter",
+  "gaSegmentSequenceFilter",
   contains = c("list", ".gaSegmentFilter"),
   validity = function(object) {
-    if (all_inherit(object@.Data, "gaSequenceStep")) {
+    if (all_inherit(object@.Data, "gaSegmentSequenceStep")) {
       TRUE
     } else {
-      "All conditions within a sequence list must belong to the superclass 'gaSequenceStep'."
+      "All conditions within a sequence list must belong to the superclass 'gaSegmentSequenceStep'."
     }
   }
 )
 
 setClass(
-  "gaConditionFilter",
+  "gaSegmentConditionFilter",
   contains = c("gaSegmentCondition", ".gaSegmentFilter")
 )
 

@@ -13,7 +13,7 @@ GaPrecedes(object, ...)
   any others in the sequence.}
 }
 \description{
-Create a gaSequenceStep object
+Create a gaSegmentSequenceStep object
 }
 \seealso{
 GaSequence

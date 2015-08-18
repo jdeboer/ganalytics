@@ -13,7 +13,7 @@ expression.}
 \item{...}{Any other expressions that should follow the first expression.}
 }
 \description{
-Create a gaSequenceStep object
+Create a gaSegmentSequenceStep object
 }
 \seealso{
 GaSequence

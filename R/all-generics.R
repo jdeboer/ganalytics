@@ -379,7 +379,7 @@ setGeneric("xor")
 
 #' GaPrecedes.
 #'
-#' Create a gaSequenceStep object
+#' Create a gaSegmentSequenceStep object
 #'
 #' @param object The expression that should preceed others in the sequence.
 #' @param ... Any other expressions that should follow the first one but before
@@ -391,13 +391,13 @@ setGeneric("xor")
 setGeneric(
   "GaPrecedes",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
 #' GaImmediatelyPrecedes.
 #'
-#' Create a gaSequenceStep object
+#' Create a gaSegmentSequenceStep object
 #'
 #' @param object The expression that should \bold{immediately} preceed others in
 #'   the sequence.
@@ -409,13 +409,13 @@ setGeneric(
 setGeneric(
   "GaImmediatelyPrecedes",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
 #' GaStartsWith.
 #'
-#' Create a gaSequenceStep object
+#' Create a gaSegmentSequenceStep object
 #'
 #' @param object An expression that should be at the start of a sequence
 #'   expression.
@@ -426,7 +426,7 @@ setGeneric(
 setGeneric(
   "GaStartsWith",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
@@ -445,13 +445,13 @@ setGeneric(
 setGeneric(
   "GaSequence",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaSequenceFilter",
+  valueClass = "gaSegmentSequenceFilter",
   useAsDefault = FALSE
 )
 
 #' GaNonSequenceCondition.
 #'
-#' Create a new gaConditionFilter object
+#' Create a new gaSegmentConditionFilter object
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
@@ -462,7 +462,7 @@ setGeneric(
 setGeneric(
   "GaNonSequenceCondition",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaConditionFilter",
+  valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
 )
 
