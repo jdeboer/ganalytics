@@ -6,8 +6,8 @@ test_that("segment expressions are correctly coerced to character string", {
   expect_equal(
     as(
       GaSegment(
-        GaSegmentCondition(
-          GaNonSequenceCondition(GaExpr("source", "=", "google")),
+        GaSegmentFilters(
+          GaCondition(GaExpr("source", "=", "google")),
           GaSequence(
             GaStartsWith(GaExpr("pagepath", "=", "/")),
             GaImmediatelyPrecedes(GaExpr("pagepath", "=", "/products/")),
@@ -15,8 +15,8 @@ test_that("segment expressions are correctly coerced to character string", {
           ),
           scope = "sessions"
         ),
-        GaSegmentCondition(
-          GaNonSequenceCondition(GaExpr("deviceCategory", "=", "mobile")),
+        GaSegmentFilters(
+          GaCondition(GaExpr("deviceCategory", "=", "mobile")),
           scope = "users"
         )
       ),
@@ -26,17 +26,17 @@ test_that("segment expressions are correctly coerced to character string", {
 
 test_that("segment expressions can be negated", {
   expect_equal(as(
-    GaNonSequenceCondition(
+    GaCondition(
       GaExpr("source", "=", "google"),
       negation = TRUE
     ),
     "character"), "condition::!ga:source==google")
   expect_identical(
-    GaNonSequenceCondition(
+    GaCondition(
       GaExpr("source", "=", "google"),
       negation = TRUE
     ),
-    GaNot(GaNonSequenceCondition(
+    GaNot(GaCondition(
       GaExpr("source", "=", "google"),
       negation = FALSE
     ))

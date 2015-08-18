@@ -449,7 +449,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaNonSequenceCondition.
+#' GaCondition
 #'
 #' Create a new gaSegmentConditionFilter object
 #'
@@ -460,13 +460,13 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaNonSequenceCondition",
+  "GaCondition",
   function(object, ..., negation = FALSE) {},
   valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
 )
 
-#' GaSegmentCondition.
+#' GaSegmentFilters
 #'
 #' Create a new gaSegmentFilterList object
 #'
@@ -479,7 +479,7 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaSegmentCondition",
+  "GaSegmentFilters",
   function(object, ..., scope = "sessions") {},
   valueClass = "gaSegmentFilterList",
   useAsDefault = FALSE

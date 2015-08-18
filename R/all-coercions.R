@@ -542,7 +542,7 @@ setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
 
 #Review this coercion method
 setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
-  new(to, list(GaSegmentCondition(GaNonSequenceCondition(from))))
+  new(to, list(GaSegmentFilters(GaCondition(from))))
 })
 
 setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {

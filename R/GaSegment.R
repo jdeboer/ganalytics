@@ -57,11 +57,11 @@ setMethod(
   }
 )
 
-# ---- GaNonSequenceCondition, GaSegmentCondition ----
+# ---- GaCondition, GaSegmentFilters ----
 
-#' @describeIn GaNonSequenceCondition
+#' @describeIn GaCondition
 setMethod(
-  f = "GaNonSequenceCondition",
+  f = "GaCondition",
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
@@ -70,19 +70,19 @@ setMethod(
   }
 )
 
-#' @describeIn GaSegmentCondition
+#' @describeIn GaSegmentFilters
 setMethod(
-  f = "GaSegmentCondition",
+  f = "GaSegmentFilters",
   signature = ".compoundExpr",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
-    GaSegmentCondition(do.call(GaNonSequenceCondition, exprList), scope = scope)
+    GaSegmentFilters(do.call(GaCondition, exprList), scope = scope)
   }
 )
 
-#' @describeIn GaSegmentCondition
+#' @describeIn GaSegmentFilters
 setMethod(
-  f = "GaSegmentCondition",
+  f = "GaSegmentFilters",
   signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
@@ -90,9 +90,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaSegmentCondition
+#' @describeIn GaSegmentFilters
 setMethod(
-  f = "GaSegmentCondition",
+  f = "GaSegmentFilters",
   signature = "gaSegmentFilterList",
   definition = function(object) {
     object
@@ -165,8 +165,8 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentCondition(
-        GaNonSequenceCondition(expr),
+      GaSegmentFilters(
+        GaCondition(expr),
         scope = scope
       )
     })
@@ -191,7 +191,7 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentCondition(
+      GaSegmentFilters(
         expr,
         scope = scope
       )
@@ -207,8 +207,8 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentCondition(
-        GaNonSequenceCondition(expr),
+      GaSegmentFilters(
+        GaCondition(expr),
         scope = scope
       )
     })
