@@ -1,23 +1,6 @@
 library(ganalytics)
 library(lubridate)
 
-context("Selecting a dimension and metric variable")
-
-test_that("GaVar generates a .gaVar object of the appropriate subclass", {
-  expect_is(GaVar("ga:source"), "gaDimVar")
-  expect_is(GaVar("ga:pageviews"), "gaMetVar")
-  expect_is(GaVar("dateOfSession"), "gaDimVar")
-  expect_error(GaVar("NotAVariable"))
-})
-
-test_that("Initialisation of a .gaVar object corrects the variable name", {
-  expect_identical(GaVar("medium"), GaVar("ga:medium"))
-  expect_identical(GaVar("pagepath"), GaVar("ga:pagePath"))
-  expect_identical(GaVar("landingpage"), GaVar("ga:landingPagePath"))
-  expect_identical(GaVar("dateofsess"), GaVar("dateOfSession"))
-  expect_identical(GaVar("completionsall"), GaVar("ga:goalCompletionsAll"))
-})
-
 context("Forming a basic condition expression")
 
 test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
@@ -171,54 +154,6 @@ test_that("ORed expressions can be NOTed", {
   expect_identical(
     !(GaExpr("source", "=", "google") | GaExpr("medium", "=", "organic")),
     GaExpr("source", "!=", "google") & GaExpr("medium", "!=", "organic")
-  )
-})
-
-context("Using expressions to create filters")
-
-test_that("a filter can be a basic expression", {
-  expect_is(
-    GaFilter(GaExpr("dimension1", "!", "yellow")),
-    "gaFilter"
-  )
-  expect_equal(
-    as(GaFilter(GaExpr("dimension1", "!", "yellow")), "character"),
-    "ga:dimension1!=yellow"
-  )
-})
-
-test_that("ANDed (but not ORed) filter expressions may mix dimensions with metrics", {
-  expect_equal(as(
-    GaFilter(GaOr(GaExpr("pageviews", ">", 10), GaExpr("entrances", "<", 5))),
-    "character"), "ga:pageviews>10,ga:entrances<5")
-  expect_error(
-    GaFilter(GaOr(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
-    "cannot mix metrics and dimensions"
-  )
-  expect_equal(as(
-    GaFilter(GaAnd(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
-    "character"), "ga:landingPagePath==/;ga:entrances<5")
-  expect_error(
-    GaFilter(
-      GaAnd(
-        GaOr(
-          GaExpr("eventValue", "<", 50),
-          GaExpr("keyword", "@", "contact")
-        ),
-        GaExpr("deviceCategory", "=", "mobile")
-      )
-    )
-  )
-})
-
-test_that("Filter expressions cannot use '[]' or '<>' operators", {
-  expect_error(
-    GaFilter(GaExpr("medium", "[]", c("organic", "cpc"))),
-    "\\[\\]"
-  )
-  expect_error(
-    GaFilter(GaExpr("pageviews", "<>", c(10, 100))),
-    "<>"
   )
 })
 
@@ -618,50 +553,5 @@ test_that("Dimensions or metrics removed from a query are reflected in its sortB
   expect_equivalent(SortBy(query), SortBy("totalEvents", "eventValue"))
   Metrics(query) <- "totalEvents"
   expect_equivalent(SortBy(query), SortBy("totalEvents"))
-})
-
-context("Date functions")
-
-test_that("functions DateRange, StartDate, EndDate, and their replacement versions work across all required signatures", {
-  # character dateRange date query
-  expect_equivalent(StartDate("2010-01-31"), as.Date("2010-01-31"))
-  expect_equivalent(EndDate("20100131"), as.Date("2010-01-31"))
-  date_range <- DateRange("2010-01-01", "2010-01-31")
-  expect_equivalent(DateRange(date_range), date_range)
-  expect_equivalent(StartDate(date_range), as.Date("2010-01-01"))
-  expect_equivalent(EndDate(date_range), as.Date("2010-01-31"))
-  EndDate(date_range) <- "2011-01-31"
-  expect_equivalent(EndDate(date_range), as.Date("2011-01-31"))
-  expect_error(StartDate(date_range) <- "20110201", "cannot be before")
-  StartDate(date_range) <- as.Date("2011-01-01")
-  expect_equivalent(StartDate(date_range), as.Date("2011-01-01"))
-  query <- GaQuery(view = 0)
-  DateRange(query) <- date_range
-  expect_equivalent(DateRange(query), date_range)
-  date_range <- as.Date(c("2010-01-01", "2010-01-31"))
-  DateRange(query) <- date_range
-  expect_equivalent(DateRange(query), DateRange("2010-01-01", "2010-01-31"))
-  #date_range1 <- DateRange(as.Date("2012-01-01"), as.Date("2012-01-31"))
-  #date_range2 <- DateRange("2012-01-01", as.Date("2012-01-31"))
-  #date_range3 <- DateRange(as.Date("2012-01-01"), "2012-01-31")
-})
-
-test_that("lubridate date Interval objects can be used with DateRange", {
-  date_range <- interval(as.Date("2010-01-01"), as.Date("2010-01-31"))
-  expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
-  date_range <- interval(as.Date("2010-01-31"), as.Date("2010-01-01"))
-  expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
-  query <- GaQuery(view = 0)
-  DateRange(query) <- date_range
-  expect_equal(StartDate(query), StartDate(date_range))
-  expect_equal(EndDate(query), EndDate(date_range))
-  date_range2 <- DateRange("2012-01-01", "2012-01-01")
-  DateRange(date_range2) <- date_range
-  expect_equal(DateRange(date_range), date_range2)
-})
-
-test_that("SplitDateRange correctly splits a dateRange object, including that of a .query object", {
-  # dateRange
-  # query
 })
 
