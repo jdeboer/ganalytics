@@ -99,7 +99,7 @@ kGaDateOutFormat <- "%Y%m%d"
 # The earliest valid date is 20050101. There is no upper limit restriction for a start-date.
 kGaDateOrigin <- as.Date("2005-01-01")
 
-# Google Analytics expression operators
+# Google Analytics expression comparators
 kGaOps <- list(
   met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
   dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")

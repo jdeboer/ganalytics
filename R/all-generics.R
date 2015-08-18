@@ -153,35 +153,35 @@ setGeneric(
   }
 )
 
-#' Operator.
+#' Comparator.
 #'
-#' Get or create an operator used in an expression.
+#' Get or create an comparator used in an expression.
 #'
-#' @param object The object to be coerced to a '.Operator' class or to get the
-#'   operator from.
+#' @param object The object to be coerced to a '.Comparator' class or to get the
+#'   comparator from.
 #' @param ... Used by certain methods.
 #'
 #' @export
-#' @rdname Operator
+#' @rdname Comparator
 setGeneric(
-  "Operator",
+  "Comparator",
   function(object, ...) {},
-  valueClass = ".operator",
+  valueClass = ".comparator",
   useAsDefault = FALSE
 )
 
-#' Operator<-.
+#' Comparator<-.
 #'
-#' Set the operator used in an expression.
+#' Set the comparator used in an expression.
 #'
-#' @param value The value to set the operator to.
+#' @param value The value to set the comparator to.
 #'
 #' @export
-#' @rdname Operator
+#' @rdname Comparator
 setGeneric(
-  "Operator<-",
+  "Comparator<-",
   function(object, value) {
-    object <- standardGeneric("Operator<-")
+    object <- standardGeneric("Comparator<-")
     validObject(object)
     object
   }
@@ -240,7 +240,7 @@ setGeneric(
 #'
 #' @param object A dimension or metric variable, or another object to be coerced
 #'   to an .expr object.
-#' @param operator The operator to use for the expression.
+#' @param comparator The comparator to use for the expression.
 #' @param operand The operand to use for the expression.
 #' @param metricScope The scope to use for segmentation if using a metric.
 #'   Possible values include "perUser" or "perSession".
@@ -248,7 +248,7 @@ setGeneric(
 #' @export
 setGeneric(
   "Expr",
-  function(object, operator, operand, metricScope = "") {},
+  function(object, comparator, operand, metricScope = "") {},
   valueClass = ".expr",
   useAsDefault = FALSE
 )
@@ -268,7 +268,7 @@ setGeneric(
 #' @export
 setGeneric(
   "GaExpr",
-  function(object, operator, operand, metricScope = "") {},
+  function(object, comparator, operand, metricScope = "") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -288,7 +288,7 @@ setGeneric(
 #' @export
 setGeneric(
   "McfExpr",
-  function(object, operator, operand) {},
+  function(object, comparator, operand) {},
   valueClass = ".mcfExpr",
   useAsDefault = FALSE
 )
@@ -308,7 +308,7 @@ setGeneric(
 #' @export
 setGeneric(
   "RtExpr",
-  function(object, operator, operand) {},
+  function(object, comparator, operand) {},
   valueClass = ".rtExpr",
   useAsDefault = FALSE
 )
@@ -324,7 +324,7 @@ setGeneric(
 setGeneric(
   "Not",
   function(object) {},
-  valueClass = c(".operator", ".compoundExpr", ".gaSegmentFilter"),
+  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter"),
   useAsDefault = FALSE
 )
 

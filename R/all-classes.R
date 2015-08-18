@@ -103,10 +103,10 @@ setClassUnion(".rtVar", c("rtMetVar", "rtDimVar"))
 setClassUnion(".metVar", c("gaMetVar", "mcfMetVar", "rtMetVar"))
 setClassUnion(".dimVar", c("gaDimVar", "mcfDimVar", "rtDimVar"))
 
-# ---- expression operators ----
+# ---- expression comparators ----
 
 setClass(
-  ".operator",
+  ".comparator",
   contains = "character",
   prototype = prototype("=="),
   validity = function(object) {
@@ -115,59 +115,59 @@ setClass(
 )
 
 setClass(
-  "gaMetOperator",
-  contains = ".operator",
+  "gaMetComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$met)
   }
 )
 
 setClass(
-  "gaDimOperator",
-  contains = ".operator",
+  "gaDimComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kGaOps$dim)
   }
 )
 
 setClass(
-  "mcfMetOperator",
-  contains = ".operator",
+  "mcfMetComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kMcfOps$met)
   }
 )
 
 setClass(
-  "mcfDimOperator",
-  contains = ".operator",
+  "mcfDimComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kMcfOps$dim)
   }
 )
 
 setClass(
-  "rtMetOperator",
-  contains = ".operator",
+  "rtMetComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kRtOps$met)
   }
 )
 
 setClass(
-  "rtDimOperator",
-  contains = ".operator",
+  "rtDimComparator",
+  contains = ".comparator",
   validity = function(object) {
     validate_that(object@.Data %in% kRtOps$dim)
   }
 )
 
-setClassUnion(".gaOperator" , c("gaMetOperator" , "gaDimOperator"))
-setClassUnion(".mcfOperator", c("mcfMetOperator", "mcfDimOperator"))
-setClassUnion(".rtOperator" , c("rtMetOperator" , "rtDimOperator"))
+setClassUnion(".gaComparator" , c("gaMetComparator" , "gaDimComparator"))
+setClassUnion(".mcfComparator", c("mcfMetComparator", "mcfDimComparator"))
+setClassUnion(".rtComparator" , c("rtMetComparator" , "rtDimComparator"))
 
-setClassUnion(".dimOperator", c("gaDimOperator", "mcfDimOperator", "rtDimOperator"))
-setClassUnion(".metOperator", c("gaMetOperator", "mcfMetOperator", "rtMetOperator"))
+setClassUnion(".dimComparator", c("gaDimComparator", "mcfDimComparator", "rtDimComparator"))
+setClassUnion(".metComparator", c("gaMetComparator", "mcfMetComparator", "rtMetComparator"))
 
 # ---- expression operands ----
 
@@ -252,7 +252,7 @@ setClass(
   ".gaExpr",
   slots = c(
     var = ".gaVar",
-    operator = ".gaOperator",
+    comparator = ".gaComparator",
     operand = ".gaOperand"
   )
 )
@@ -261,7 +261,7 @@ setClass(
   ".mcfExpr",
   slots = c(
     var = ".mcfVar",
-    operator = ".mcfOperator",
+    comparator = ".mcfComparator",
     operand = ".mcfOperand"
   )
 )
@@ -270,7 +270,7 @@ setClass(
   ".rtExpr",
   slots = c(
     var = ".rtVar",
-    operator = ".rtOperator",
+    comparator = ".rtComparator",
     operand = ".rtOperand"
   )
 )
@@ -279,7 +279,7 @@ setClass(
   ".metExpr",
   slots = c(
     var = ".metVar",
-    operator = ".metOperator",
+    comparator = ".metComparator",
     operand = ".metOperand"
   )
 )
@@ -288,7 +288,7 @@ setClass(
   ".dimExpr",
   slots = c(
     var = ".dimVar",
-    operator = ".dimOperator",
+    comparator = ".dimComparator",
     operand = ".dimOperand"
   )
 )
@@ -297,18 +297,18 @@ setClass(
   "gaMetExpr",
   slots = c(
     var = "gaMetVar",
-    operator = "gaMetOperator",
+    comparator = "gaMetComparator",
     operand = "gaMetOperand"
   ),
   contains = c(".gaExpr", ".metExpr"),
   validity = function(object) {
-    if (object@operator == "<>") {
+    if (object@comparator == "<>") {
       if (length(object@operand) != 2) {
-        "operand must be of length 2 when using a range operator '<>'."
+        "operand must be of length 2 when using a range comparator '<>'."
       } else TRUE
     } else {
       if (length(object@operand) != 1) {
-        "operand must be of length 1 unless using a range operator '<>'."
+        "operand must be of length 1 unless using a range comparator '<>'."
       } else TRUE
     }
   }
@@ -335,27 +335,27 @@ setClass(
   "gaDimExpr",
   slots = c(
     var = "gaDimVar",
-    operator = "gaDimOperator",
+    comparator = "gaDimComparator",
     operand = "gaDimOperand"
   ),
   contains = c(".gaExpr", ".dimExpr"),
   validity = function(object) {
-    if (object@operator == "<>") {
+    if (object@comparator == "<>") {
       rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
       if (!(object@var %in% rangeDimVars)) {
-        return("A range operator only supports numerical dimensions or metrics")
+        return("A range comparator only supports numerical dimensions or metrics")
       }
     }
-    if (!(length(object@operand) == 1 | object@operator %in% c("<>", "[]"))) {
-      return("operand must be of length 1 unless using a range '<>' or list '[]' operator.")
-    } else if (!(length(object@operand) <= 2 | object@operator == "[]")) {
-      return("operand may only be greater than length 2 if using a list operator '[]'.")
-    } else if (IsRegEx(object@operator)) {
+    if (!(length(object@operand) == 1 | object@comparator %in% c("<>", "[]"))) {
+      return("operand must be of length 1 unless using a range '<>' or list '[]' comparator.")
+    } else if (!(length(object@operand) <= 2 | object@comparator == "[]")) {
+      return("operand may only be greater than length 2 if using a list comparator '[]'.")
+    } else if (IsRegEx(object@comparator)) {
       if (nchar(object@operand) > 128) {
         return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@operand)))
       }
     }
-    if (object@operator %in% c("!=", "==", "<>", "[]")) {
+    if (object@comparator %in% c("!=", "==", "<>", "[]")) {
       ValidGaOperand(object@var, object@operand)
     } else TRUE
   }
@@ -365,7 +365,7 @@ setClass(
   "mcfMetExpr",
   slots = c(
     var = "mcfMetVar",
-    operator = "mcfMetOperator",
+    comparator = "mcfMetComparator",
     operand = "mcfMetOperand"
   ),
   contains = c(".mcfExpr", ".metExpr")
@@ -375,7 +375,7 @@ setClass(
   "mcfDimExpr",
   slots = c(
     var = "mcfDimVar",
-    operator = "mcfDimOperator",
+    comparator = "mcfDimComparator",
     operand = "mcfDimOperand"
   ),
   contains = c(".mcfExpr", ".dimExpr")
@@ -385,7 +385,7 @@ setClass(
   "rtMetExpr",
   slots = c(
     var = "rtMetVar",
-    operator = "rtMetOperator",
+    comparator = "rtMetComparator",
     operand = "rtMetOperand"
   ),
   contains = c(".rtExpr", ".metExpr")
@@ -395,7 +395,7 @@ setClass(
   "rtDimExpr",
   slots = c(
     var = "rtDimVar",
-    operator = "rtDimOperator",
+    comparator = "rtDimComparator",
     operand = "rtDimOperand"
   ),
   contains = c(".rtExpr", ".dimExpr")
@@ -447,11 +447,11 @@ setClass(
       return("An OR expression within a filter cannot mix metrics and dimensions.")
     }
     if (all(sapply(unlist(object@.Data), function(expr){
-      !any(Operator(expr) %in% c("[]", "<>"))
+      !any(Comparator(expr) %in% c("[]", "<>"))
     }))) {
       TRUE
     } else {
-      return("Filter expressions do not support '[]' or '<>' operators.")
+      return("Filter expressions do not support '[]' or '<>' comparators.")
     }
   }
 )
@@ -475,7 +475,7 @@ setClass(
     if (!any(sapply(unlist(object@.Data), GaVar) %in% c("<>", "[]"))) {
       TRUE
     } else {
-      return("Filters do not support <> and [] operators.")
+      return("Filters do not support <> and [] comparators.")
     }
   }
 )
@@ -519,7 +519,7 @@ setClass(
   contains = "andExpr",
   validity = function(object) {
     if (all(sapply(unlist(object@.Data), function(expr) {
-      if (Operator(expr) == "<>" & Var(expr) == "dateOfSession") {
+      if (Comparator(expr) == "<>" & Var(expr) == "dateOfSession") {
         (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
       } else TRUE
     }))) {
@@ -529,12 +529,12 @@ setClass(
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
       if (Var(expr) == "dateOfSession") {
-        Operator(expr) == "<>"
+        Comparator(expr) == "<>"
       } else TRUE
     }))) {
       TRUE
     } else {
-      return("The dateOfSession dimension can only be used with a <> operator.")
+      return("The dateOfSession dimension can only be used with a <> comparator.")
     }
   }
 )

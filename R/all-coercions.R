@@ -159,7 +159,7 @@ setAs(from = ".expr", to = ".var",
     from@var
   },
   replace = function(from, value) {
-    Expr(value, from@operator, from@operand)
+    Expr(value, from@comparator, from@operand)
   }
 )
 
@@ -173,23 +173,23 @@ setAs(from = ".expr", to = ".gaVar",
   }
 )
 
-# Coercing to .operator subclasses
-setAs(from = "character", to = "gaDimOperator", def = simpleCoerce)
-setAs(from = "character", to = "gaMetOperator", def = simpleCoerce)
-setAs(from = "character", to = "mcfDimOperator", def = simpleCoerce)
-setAs(from = "character", to = "mcfMetOperator", def = simpleCoerce)
-setAs(from = "character", to = "rtDimOperator", def = simpleCoerce)
-setAs(from = "character", to = "rtMetOperator", def = simpleCoerce)
+# Coercing to .comparator subclasses
+setAs(from = "character", to = "gaDimComparator", def = simpleCoerce)
+setAs(from = "character", to = "gaMetComparator", def = simpleCoerce)
+setAs(from = "character", to = "mcfDimComparator", def = simpleCoerce)
+setAs(from = "character", to = "mcfMetComparator", def = simpleCoerce)
+setAs(from = "character", to = "rtDimComparator", def = simpleCoerce)
+setAs(from = "character", to = "rtMetComparator", def = simpleCoerce)
 
-#############\/ Transform to method of Operator and Operator<- generic functions
+#############\/ Transform to method of Comparator and Comparator<- generic functions
 
-setAs(from = ".expr", to = ".operator",
+setAs(from = ".expr", to = ".comparator",
   def = function(from, to) {
-    from@operator
+    from@comparator
   },
   replace = function(from, value) {
-    use_class <- class(from@operator)
-    from@operator <- as(value, use_class)
+    use_class <- class(from@comparator)
+    from@comparator <- as(value, use_class)
     validObject(from)
     from
   })
@@ -239,25 +239,25 @@ setAs(from = ".expr", to = ".operand",
 # the definition, then the following function is likely to throw an error if used with setAs.
 compileOperand <- function(from) {
   unEscapedOperand <- as(as(from, ".operand"), "character")
-  operator <- as(as(from, ".operator"), "character")
+  comparator <- as(as(from, ".comparator"), "character")
   compiledOperand <- gsub(
-    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] operators
+    pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] comparators
     replacement = "\\\\\\1",
     x = unEscapedOperand
   )
-  if (operator == "[]") {
+  if (comparator == "[]") {
     compiledOperand <- paste0(compiledOperand, collapse = "|")
-  } else if (from@operator == "<>") {
+  } else if (from@comparator == "<>") {
     compiledOperand <- paste0(compiledOperand, collapse = "_")
   }
   compiledOperand
 }
 
 # Need to consider escaping of the following characters in the operand:\|,;_
-parseOperand <- function(operand, operator) {
-  if (operator == "[]") {
+parseOperand <- function(operand, comparator) {
+  if (comparator == "[]") {
     operand <- str_split(operand, "\\|")[[1]]
-  } else if (operator == "<>") {
+  } else if (comparator == "<>") {
     operand <- str_split_fixed(operand, "_", 2)[1,]
   }
   operand <- gsub("\\\\", "\\", operand)
@@ -292,7 +292,7 @@ setAs(from = ".expr", to = "character", def = function(from, to) {
       if(from@metricScope != "") paste0(from@metricScope, "::")
     },
     as(from@var, to),
-    as(from@operator, to),
+    as(from@comparator, to),
     as(compileOperand(from), to)
   )
 })
@@ -411,11 +411,11 @@ setAs(from = "character", to = ".expr", def = function(from) {
   ops <- union(kGaOps$met, kGaOps$dim)
   ops <- str_replace_all(ops, "(\\[|\\])", "\\\\\\1")
   ops <- paste(ops, collapse = "|")
-  operator <- str_match(from, ops)[1,1]
+  comparator <- str_match(from, ops)[1,1]
   x <- str_split_fixed(from, ops, 2)
   var <- Var(x[1,1])
   operand <- x[1,2]
-  Expr(var, operator, parseOperand(operand, operator))
+  Expr(var, comparator, parseOperand(operand, comparator))
 })
 
 # Coercing to orExpr
@@ -427,7 +427,7 @@ setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
     # in a future implementation if any gaOr objects have a length greater than
     # 1, then they will need to be shortened to length 1 which is only possible
     # if each expression within that gaOr shares the same dimension and the
-    # expression operators and operands can be combined either as a match regex
+    # expression comparators and operands can be combined either as a match regex
     # or a match list.
 
     # Check that all contained gaOr objects in the list have a length of 1

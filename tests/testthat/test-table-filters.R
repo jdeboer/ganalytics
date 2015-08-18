@@ -37,7 +37,7 @@ test_that("ANDed (but not ORed) filter expressions may mix dimensions with metri
   )
 })
 
-test_that("Filter expressions cannot use '[]' or '<>' operators", {
+test_that("Filter expressions cannot use '[]' or '<>' comparators", {
   expect_error(
     GaFilter(GaExpr("medium", "[]", c("organic", "cpc"))),
     "\\[\\]"

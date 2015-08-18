@@ -6,16 +6,16 @@
 \alias{GaExpr,character,character-method}
 \title{GaExpr.}
 \usage{
-\S4method{GaExpr}{character,character}(object, operator, operand,
+\S4method{GaExpr}{character,character}(object, comparator, operand,
   metricScope = "")
 
-GaExpr(object, operator, operand, metricScope = "")
+GaExpr(object, comparator, operand, metricScope = "")
 }
 \arguments{
 \item{object}{A dimension or metric variable, or another object to be coerced
 to an .expr object.}
 
-\item{operator}{The operator to use for the expression.}
+\item{comparator}{The comparator to use for the expression.}
 
 \item{operand}{The operand to use for the expression.}
 
@@ -27,7 +27,7 @@ Create a Core Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = character,operator = character}: 
+\item \code{object = character,comparator = character}: 
 }}
 \examples{
 \donttest{

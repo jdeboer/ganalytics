@@ -3,7 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include Var.R
-#' @include Operator.R
+#' @include Comparator.R
 #' @include Operand.R
 #' @include ganalytics-package.R
 #' @include helper-functions.R
@@ -16,14 +16,14 @@ setMethod("Expr", ".expr", function(object) {object})
 setMethod(
   f = "Expr",
   signature = c("character", "character", "ANY"),
-  definition = function(object, operator, operand, metricScope) {
+  definition = function(object, comparator, operand, metricScope) {
     var <- Var(object)
     if (is(var, ".gaVar")) {
-      GaExpr(object, operator, operand, metricScope)
+      GaExpr(object, comparator, operand, metricScope)
     } else if (is(var, ".mcfVar")) {
-      McfExpr(object, operator, operand)
+      McfExpr(object, comparator, operand)
     } else if (is(var, ".rtVar")) {
-      RtExpr(object, operator, operand)
+      RtExpr(object, comparator, operand)
     } else stop("Variable type not recognised for expressions.")
   }
 )
@@ -32,28 +32,28 @@ setMethod(
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
-  definition = function(object, operator, operand, metricScope) {
+  definition = function(object, comparator, operand, metricScope) {
     var <- GaVar(object)
     if (class(var) == "gaDimVar") {
-      operator <- as(operator, "gaDimOperator")
+      comparator <- as(comparator, "gaDimComparator")
       operand <- as(operand, "gaDimOperand")
       gaExprClass <- "gaDimExpr"
-      new(gaExprClass, var = var, operator = operator, operand = operand)
+      new(gaExprClass, var = var, comparator = comparator, operand = operand)
     } else if (class(var) == "gaMetVar") {
-      operator <- as(operator, "gaMetOperator")
+      comparator <- as(comparator, "gaMetComparator")
       operand <- as(operand, "gaMetOperand")
       if (metricScope != "") {
         gaExprClass <- "gaSegMetExpr"
         new(
           gaExprClass,
           var = var,
-          operator = operator,
+          comparator = comparator,
           operand = operand,
           metricScope = metricScope
         )
       } else {
         gaExprClass <- "gaMetExpr"
-        new(gaExprClass, var = var, operator = operator, operand = operand)
+        new(gaExprClass, var = var, comparator = comparator, operand = operand)
       }
     } else {
       stop(paste("Unsupported .gaVar class", class(var), sep = ": "))
@@ -65,18 +65,18 @@ setMethod(
 setMethod(
   f = "McfExpr",
   signature = c("character", "character", "ANY"),
-  definition = function(object, operator, operand) {
+  definition = function(object, comparator, operand) {
     var <- McfVar(object)
     if (class(var) == "mcfDimVar") {
-      operator <- as(operator, "mcfDimOperator")
+      comparator <- as(comparator, "mcfDimComparator")
       operand <- as(operand, "mcfDimOperand")
       exprClass <- "mcfDimExpr"
-      new(exprClass, var = var, operator = operator, operand = operand)
+      new(exprClass, var = var, comparator = comparator, operand = operand)
     } else if (class(var) == "mcfMetVar") {
-      operator <- as(operator, "mcfMetOperator")
+      comparator <- as(comparator, "mcfMetComparator")
       operand <- as(operand, "mcfMetOperand")
       exprClass <- "mcfMetExpr"
-      new(exprClass, var = var, operator = operator, operand = operand)
+      new(exprClass, var = var, comparator = comparator, operand = operand)
     } else {
       stop(paste("Unsupported .mcfVar class", class(var), sep = ": "))
     }
@@ -87,18 +87,18 @@ setMethod(
 setMethod(
   f = "RtExpr",
   signature = c("character", "character", "ANY"),
-  definition = function(object, operator, operand) {
+  definition = function(object, comparator, operand) {
     var <- RtVar(object)
     if (class(var) == "rtDimVar") {
-      operator <- as(operator, "rtDimOperator")
+      comparator <- as(comparator, "rtDimComparator")
       operand <- as(operand, "rtDimOperand")
       exprClass <- "rtDimExpr"
-      new(exprClass, var = var, operator = operator, operand = operand)
+      new(exprClass, var = var, comparator = comparator, operand = operand)
     } else if (class(var) == "rtMetVar") {
-      operator <- as(operator, "rtMetOperator")
+      comparator <- as(comparator, "rtMetComparator")
       operand <- as(operand, "rtMetOperand")
       exprClass <- "rtMetExpr"
-      new(exprClass, var = var, operator = operator, operand = operand)
+      new(exprClass, var = var, comparator = comparator, operand = operand)
     } else {
       stop(paste("Unsupported .rtVar class", class(var), sep = ": "))
     }

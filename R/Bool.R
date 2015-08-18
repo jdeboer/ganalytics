@@ -10,7 +10,7 @@ NULL
 #' @describeIn Not
 setMethod(
   f = "Not",
-  signature = ".operator",
+  signature = ".comparator",
   definition = function(object) {
     as(object, "character") <- switch(
       object,
@@ -33,15 +33,15 @@ setMethod(
 #' @describeIn Not
 #' @param x the object to return the logical inverse of.
 #' @export
-setMethod("!", ".operator", function(x) {Not(x)})
+setMethod("!", ".comparator", function(x) {Not(x)})
 
 #' @describeIn Not
 setMethod(
   f = "Not",
   signature = ".expr",
   definition = function(object) {
-    operator <- as(object, ".operator")
-    as(object, ".operator") <- Not(operator)
+    comparator <- as(object, ".comparator")
+    as(object, ".comparator") <- Not(comparator)
     object
   }
 )

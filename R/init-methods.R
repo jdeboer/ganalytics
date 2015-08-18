@@ -110,11 +110,11 @@ setMethod(
   }
 )
 
-# ---- .operator ----
+# ---- .comparator ----
 
 setMethod(
   f = "initialize",
-  signature = ".operator",
+  signature = ".comparator",
   definition = function(.Object, value) {
     if (!missing(value)) {
       if (value == "=") value <- "=="
@@ -157,10 +157,10 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".dimExpr",
-  definition = function(.Object, var, operator, operand) {
+  definition = function(.Object, var, comparator, operand) {
     .Object@var <- var
-    .Object@operator <- operator
-    if(operator %in% c("!=", "==", "[]", "<>")) {
+    .Object@comparator <- comparator
+    if(comparator %in% c("!=", "==", "[]", "<>")) {
       if(var %in% kGaDimTypes$bools) {
         operand <- as(as(operand, "logical"), class(operand))
       } else if(var %in% c("ga:visitorType", "ga:userType")) {

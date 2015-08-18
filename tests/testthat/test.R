@@ -157,9 +157,9 @@ test_that("ORed expressions can be NOTed", {
   )
 })
 
-context("Correct formatting of operators and operands used in API queries")
+context("Correct formatting of comparators and operands used in API queries")
 
-test_that("expressions for each type of operator are correctly formatted when coerced to character", {
+test_that("expressions for each type of comparator are correctly formatted when coerced to character", {
   expect_equal(as(
     GaExpr("dateOfSession", "<>", c("2015-01-01", "2015-01-15")),
     "character"), "dateOfSession<>2015-01-01_2015-01-15")
@@ -177,7 +177,7 @@ test_that("expressions for each type of operator are correctly formatted when co
   expect_error(GaExpr("pageviews", "!=", c(1, 2)))
 })
 
-test_that("expressions operands are corrected depending on the type of dimension and operator", {
+test_that("expressions operands are corrected depending on the type of dimension and comparator", {
   expect_equal(as(
     GaExpr("date", "!=", "2014-01-01"),
     "character"), "ga:date!=20140101")
@@ -194,68 +194,6 @@ test_that("expressions operands are corrected depending on the type of dimension
   expect_equal(as(
     GaExpr("usertype", "=", "returning"),
     "character"), "ga:userType==Returning Visitor")
-})
-
-context("Segmentation queries are correctly formatted for API requests")
-
-test_that("segment expressions are correctly coerced to character string", {
-  expect_equal(
-    as(
-      GaSegment(
-        GaSegmentCondition(
-          GaNonSequenceCondition(GaExpr("source", "=", "google")),
-          GaSequence(
-            GaStartsWith(GaExpr("pagepath", "=", "/")),
-            GaImmediatelyPrecedes(GaExpr("pagepath", "=", "/products/")),
-            GaPrecedes(GaExpr("exitPage", "=", "/"))
-          ),
-          scope = "sessions"
-        ),
-        GaSegmentCondition(
-          GaNonSequenceCondition(GaExpr("deviceCategory", "=", "mobile")),
-          scope = "users"
-        )
-      ),
-      "character"),
-    "sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/;users::condition::ga:deviceCategory==mobile")
-})
-
-test_that("segment expressions can be negated", {
-  expect_equal(as(
-    GaNonSequenceCondition(
-      GaExpr("source", "=", "google"),
-      negation = TRUE
-    ),
-    "character"), "condition::!ga:source==google")
-  expect_identical(
-    GaNonSequenceCondition(
-      GaExpr("source", "=", "google"),
-      negation = TRUE
-    ),
-    GaNot(GaNonSequenceCondition(
-      GaExpr("source", "=", "google"),
-      negation = FALSE
-    ))
-  )
-})
-
-test_that("segments can be selected by ID and parsed", {
-  expect_identical(
-    GaSegment(-1),
-    GaSegment("gaid::-1"),
-  )
-  expect_identical(
-    GaSegment("gaid::1"),
-    GaSegment("1")
-  )
-  expect_equal(
-    as(GaSegment("gaid::-1"), "character"),
-    "gaid::-1"
-  )
-  expect_equal(
-    as(GaSegment("gaid::1"), "character"),
-    "gaid::1"
-  )
 })
 
 context("Constructing Core Reporting API queries")
@@ -450,7 +388,7 @@ test_that("Expr function can used to create GA, MCF and RT expressions", {
   )
 })
 
-test_that("Variable, Operator and Operand compoents of an expression can be extracted" , {
+test_that("Variable, Comparator and Operand compoents of an expression can be extracted" , {
   expect_equal(
     as(Operand(Expr("rt:pagePath", "=~", "^/products/")), "character"),
     "^/products/"
@@ -460,7 +398,7 @@ test_that("Variable, Operator and Operand compoents of an expression can be extr
     "mcf:source"
   )
   expect_equal(
-    as(Operator(Expr("rt:totalEvents", ">", "10")), "character"),
+    as(Comparator(Expr("rt:totalEvents", ">", "10")), "character"),
     ">"
   )
 })
@@ -490,9 +428,9 @@ test_that("Only valid variable lists can be defined.", {
 
 context("Replace methods work as expected.")
 
-test_that("Operator<- replaces the operator of an expression", {
+test_that("Comparator<- replaces the comparator of an expression", {
   expr <- Expr("ga:source", "=", "google.com")
-  Operator(expr) <- "=@"
+  Comparator(expr) <- "=@"
   expect_identical(expr, Expr("ga:source", "=@", "google.com"))
 })
 

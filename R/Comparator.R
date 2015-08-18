@@ -1,0 +1,42 @@
+#' @include all-classes.R
+#' @include init-methods.R
+#' @include all-generics.R
+#' @include all-coercions.R
+#' @include ganalytics-package.R
+#' @include helper-functions.R
+NULL
+
+# ---- Comparator, GaDimComparator, GaMetComparator ----
+
+#' @describeIn Comparator
+setMethod("Comparator", ".comparator", function(object) {object})
+
+#' @describeIn Comparator
+setMethod(
+  f = "Comparator<-",
+  signature = c(".comparator", "character"),
+  definition = function(object, value) {
+    as(object, "character") <- value
+    object
+  }
+)
+
+#' @describeIn Comparator
+setMethod("Comparator", ".expr", function(object) {as(object, ".comparator")})
+
+#' @describeIn Comparator
+setMethod(
+  f = "Comparator<-",
+  signature = ".expr",
+  definition = function(object, value) {
+    as(object, ".comparator") <- value
+    object
+  }
+)
+
+# ---- IsRegEx ----
+#' @describeIn IsRegEx
+setMethod("IsRegEx", ".dimComparator", function(object) {object %in% c("=~", "!~")})
+
+#' @describeIn IsRegEx
+setMethod("IsRegEx", ".expr", function(object) {IsRegEx(Comparator(object))})
