@@ -6,11 +6,11 @@
 #' @include management-api-classes.R
 NULL
 
-# ---- GaPrecedes, GaImmediatelyPrecedes, GaStartsWith, GaSequence ----
+# ---- Later, Then, First, GaSequence ----
 
 #' @describeIn GaSequence
 setMethod(
-  f = "GaPrecedes",
+  f = "Later",
   signature = ".compoundExpr",
   definition = function(object) {
     new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = FALSE)
@@ -19,7 +19,7 @@ setMethod(
 
 #' @describeIn GaSequence
 setMethod(
-  f = "GaImmediatelyPrecedes",
+  f = "Then",
   signature = ".compoundExpr",
   definition = function(object) {
     new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = TRUE)
@@ -28,10 +28,10 @@ setMethod(
 
 #' @describeIn GaSequence
 setMethod(
-  f = "GaStartsWith",
+  f = "First",
   signature = ".compoundExpr",
   definition = function(object) {
-    GaImmediatelyPrecedes(object)
+    Then(object)
   }
 )
 

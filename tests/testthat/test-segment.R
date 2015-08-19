@@ -9,9 +9,9 @@ test_that("segment expressions are correctly coerced to character string", {
         GaSegmentFilters(
           GaCondition(GaExpr("source", "=", "google")),
           GaSequence(
-            GaStartsWith(GaExpr("pagepath", "=", "/")),
-            GaImmediatelyPrecedes(GaExpr("pagepath", "=", "/products/")),
-            GaPrecedes(GaExpr("exitPage", "=", "/"))
+            First(GaExpr("pagepath", "=", "/")),
+            Then(GaExpr("pagepath", "=", "/products/")),
+            Later(GaExpr("exitPage", "=", "/"))
           ),
           scope = "sessions"
         ),
