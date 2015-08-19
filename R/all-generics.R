@@ -485,6 +485,51 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' GaPerHit
+#'
+#' Set the scope of a gaMetExpr object to hit-level.
+#'
+#' @param object a gaMetExpr object to coerce to user-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "GaPerHit",
+  function(object, ...){},
+  valueClass = "gaSegMetExpr",
+  useAsDefault = FALSE
+)
+
+#' GaPerSession
+#'
+#' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
+#'
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to session-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "GaPerSession",
+  function(object, ...){},
+  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  useAsDefault = FALSE
+)
+
+#' GaPerUser
+#'
+#' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
+#'
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to user-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "GaPerUser",
+  function(object, ...){},
+  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  useAsDefault = FALSE
+)
+
 #' GaScopeLevel.
 #'
 #' Get the scope level of a gaDynSegment or gaMetExpr

@@ -120,6 +120,64 @@ setMethod(
   }
 )
 
+# ---- GaPerSession, GaPerUser ----
+
+#' @describeIn GaPerSession
+setMethod(
+  f = "GaPerSession",
+  signature = "gaSegmentFilterList",
+  definition = function(object, ...) {
+    GaScopeLevel(object) <- "sessions"
+    GaSegmentFilters(object, ...)
+  }
+)
+
+#' @describeIn GaPerSession
+setMethod(
+  f = "GaPerSession",
+  signature = "gaMetExpr",
+  definition = function(object, ...) {
+    GaScopeLevel(object) <- "perSession"
+    if (!missing(...)) {
+      GaSegmentFilters(object, ...)
+    }
+  }
+)
+
+#' @describeIn GaPerUser
+setMethod(
+  f = "GaPerUser",
+  signature = "gaSegmentFilterList",
+  definition = function(object, ...) {
+    GaScopeLevel(object) <- "users"
+    GaSegmentFilters(object, ...)
+  }
+)
+
+#' @describeIn GaPerUser
+setMethod(
+  f = "GaPerUser",
+  signature = "gaMetExpr",
+  definition = function(object, ...) {
+    GaScopeLevel(object) <- "perUser"
+    if (!missing(...)) {
+      GaSegmentFilters(object, ...)
+    }
+  }
+)
+
+#' @describeIn GaPerHit
+setMethod(
+  f = "GaPerHit",
+  signature = "gaMetExpr",
+  definition = function(object, ...) {
+    GaScopeLevel(object) <- "perHit"
+    if (!missing(...)) {
+      GaSegmentFilters(object, ...)
+    }
+  }
+)
+
 # ---- Segment, Segment<- ----
 
 #' @describeIn Segment
