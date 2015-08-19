@@ -506,8 +506,12 @@ setAs(from = ".query", to = ".tableFilter",
 ### Review the following coercions using "new"
 # Coercion to custom segment classes
 
-setAs(from = ".compoundExpr", to = "gaSegmentSequenceFilter", def = function(from, to) {
+setAs(from = ".compoundExpr", to = "gaSegmentSequenceStep", def = function(from, to) {
   new(to, as(from, "andExpr"))
+})
+
+setAs(from = ".compoundExpr", to = "gaSegmentSequenceFilter", def = function(from, to) {
+  new(to, as(as(from, "gaSegmentSequenceStep"), "andExpr"))
 })
 
 # Coercing to gaSegmentConditionFilter
