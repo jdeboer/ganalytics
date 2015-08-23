@@ -10,9 +10,11 @@ Description: S4 classes and methods for interacting with Google Analytics.
     Supports OAuth 2.0 user authentication. Also includes R6 classes with
     methods for accessing the Google Analytics Management and Google Tag
     Manager APIs.
+URL: https://github.com/jdeboer/ganalytics
+BugReports: https://github.com/jdeboer/ganalytics/issues
 License: MIT + file LICENCE
 Depends:
-    R(>= 3.0.0),
+    R(>= 3.1.0),
     httpuv
 Imports:
     methods,
@@ -54,4 +56,8 @@ Collate:
     'Query.R'
     'SortBy.R'
 Suggests:
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+LazyData: true

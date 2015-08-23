@@ -61,11 +61,3 @@ test_that("segments can be selected by ID and parsed", {
     "gaid::1"
   )
 })
-
-# test_that("complex custom segment expressions are accepted by the Core Reporting API")
-
-# condition1 <- Expr("pagepath", "=", "/")
-# condition2 <- Expr("source", "=", "google")
-# condition3 <- Expr("userGender", "=", "female")
-#
-# sequence <- Ga

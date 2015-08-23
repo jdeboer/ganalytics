@@ -287,7 +287,7 @@ test_that("Queries are constructed correctly for API requests", {
       dimensions = "ga:deviceCategory",
       sort = "ga:deviceCategory",
       filters = "ga:source==google",
-      segments = "sessions::condition::ga:country==Australia",
+      segment = "sessions::condition::ga:country==Australia",
       samplingLevel = "HIGHER_PRECISION"
     )
   )
