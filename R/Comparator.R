@@ -3,7 +3,7 @@
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include ganalytics-package.R
-#' @include helper-functions.R
+#' @include utils.R
 NULL
 
 # ---- Comparator, GaDimComparator, GaMetComparator ----

@@ -1,7 +1,7 @@
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
-#' @include helper-functions.R
+#' @include utils.R
 #' @include gtm-api-classes.R
 #' @include management-api-classes.R
 #' @importFrom assertthat assert_that

@@ -38,7 +38,7 @@ Suggests:
     knitr,
     rmarkdown
 Collate:
-    'helper-functions.R'
+    'utils.R'
     'globaldata.R'
     'ganalytics-package.R'
     'all-classes.R'
@@ -63,5 +63,6 @@ Collate:
     'GetGa.R'
     'Query.R'
     'SortBy.R'
+    'zzz.R'
 VignetteBuilder: knitr
 LazyData: true

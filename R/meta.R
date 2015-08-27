@@ -2,7 +2,7 @@
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
-#' @include helper-functions.R
+#' @include utils.R
 #' @include GaApiRequest.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim

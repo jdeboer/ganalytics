@@ -2,7 +2,7 @@
 #' @importFrom stringr str_replace str_detect
 #' @importFrom assertthat validate_that
 #' @include ganalytics-package.R
-#' @include helper-functions.R
+#' @include utils.R
 NULL
 
 # Class definitions for ganalytics

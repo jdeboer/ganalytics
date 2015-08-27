@@ -1,13 +1,6 @@
 #' @importFrom lubridate ymd
 #' @importFrom stringr regex
-
-all_inherit <- function(list_object, class_names) {
-  all(sapply(list_object, is, class_names))
-}
-
-parse_date <- function(date, output_format = kGaDateInFormat) {
-  format(ymd(date), format = output_format)
-}
+NULL
 
 #' IsVarMatch.
 #'
@@ -24,7 +17,7 @@ IsVarMatch <- function(thisVar, inVars) {
   any(str_detect(thisVar, inVars))
 }
 
-#' ValidGaOperand
+#' ValidGaOperand.
 #'
 #' Checks whether an operand value is valid for a selected dimension.
 #'
@@ -58,12 +51,29 @@ ValidGaOperand <- function(var, operand) {
   }
 }
 
-#' flatten
+#' ArgList.
+#'
+#' If the only argument passed was already a list, then extract that list.
+#'
+#' @param ... arguments or list of arguments
+#'
+#' @keywords internal
+ArgList <- function(...) {
+  as.list(
+    unlist(x = list(...), recursive = FALSE)
+  )
+}
+
+#' flatten.
+#'
 #' Flatten a nested list while preserving the class of each element
 #' Convert a list type object into a non-nested list, preserving
 #' the original object classes.
+#'
 #' @param x a list type object to flatten.
+#'
 #' @return a list
+#'
 #' @references \url{http://stackoverflow.com/a/8139959/1007029}
 #'
 #' @keywords internal
@@ -71,16 +81,19 @@ flatten <- function(x) {
   len <- sum(rapply(x, function(x) 1L))
   y <- vector('list', len)
   i <- 0L
-  rapply(x, function(x) { i <<- i+1L; y[[i]] <<- x })
+  rapply(x, function(x) { i <<- i + 1L; y[[i]] <<- x })
   y
 }
 
-#'CheckVectorBounds
-#'Check the length of each named slot within object is within the lower and
-#'upper bounds specified.
-#'@param object an object with slots that match the names of slot_vector_bound_list
-#'@param slot_vector_bound_list a named list of vectors specifying the upper
-#'and lower bounds for the length of each slot of object.
+#' CheckVectorBounds
+#'
+#' Check the length of each named slot within object is within the lower and
+#' upper bounds specified.
+#'
+#' @param object an object with slots that match the names of slot_vector_bound_list
+#' @param slot_vector_bound_list a named list of vectors specifying the upper
+#' and lower bounds for the length of each slot of object.
+#'
 #' @keywords internal
 CheckVectorBounds <- function(object, slot_vector_bound_list) {
   slot_vector_bounds <- data.frame(
@@ -91,7 +104,7 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
     slot_length <- length(slot(object, slot_name))
     slot_bounds <- slot_vector_bounds[[slot_name]]
     names(slot_bounds) <- row.names(slot_vector_bounds)
-    if(slot_length < slot_bounds['lower'] | slot_length > slot_bounds['upper']) {
+    if (slot_length < slot_bounds['lower'] | slot_length > slot_bounds['upper']) {
       if (as.numeric(slot_bounds['lower'][1]) == as.numeric(slot_bounds['upper'][1])) {
         slot_bounds <- slot_bounds['lower']
         paste0("Slot '", slot_name, "' must be of length ", slot_bounds)
@@ -112,10 +125,16 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
   return(ret)
 }
 
+#' checkDataFrameClasses
+#'
+#' Test whether the class for each column of a data.frame match a list of
+#' expected classes.
+#'
+#' @keywords internal
 checkDataFrameClasses <- function(object, matchClasses) {
   objectClasses <- lapply(object, class)
   ret <- lapply(names(matchClasses), function(className) {
-    if(!(matchClasses[className] %in% objectClasses[[className]])) {
+    if (!(matchClasses[className] %in% objectClasses[[className]])) {
       return(paste0("<", className, "> must be of class '", matchClasses[className], "'."))
     } else {
       TRUE
@@ -129,29 +148,49 @@ checkDataFrameClasses <- function(object, matchClasses) {
   }
 }
 
-#' ArgList
-#' If the only argument passed was already a list, then extract that list.
-#' @param ... arguments or list of arguments
+#' split_permissions
+#'
+#' Take a list of character vector describing the permissions for each user and
+#' transform into a nested list of users and their list of permissions.
+#'
 #' @keywords internal
-ArgList <- function(...) {
-  exprList <- as.list(
-    unlist(x = list(...), recursive = FALSE)
-  )
-}
-
 split_permissions <- function(permissions) {
   permission_levels <- user_permission_levels
   names(permission_levels) <- permission_levels
-  x <- llply(permissions, function(permission_set) {
+  llply(permissions, function(permission_set) {
     y <- llply(permission_levels, function(level) {
       level %in% permission_set
     })
   })
 }
 
+#' unsplit_permissions
+#'
+#' Take a list of Google Analytics user permissions for a list of one or more users and
+#' transform the into a list of character vector.
+#'
+#' @keywords internal
 unsplit_permissions <- function(permissions) {
-  x <- llply(permissions, function(permission_set) {
+  llply(permissions, function(permission_set) {
     names(permission_set)[unlist(permission_set)]
   })
 }
 
+#' all_inherit
+#'
+#' Test whether all objects within a list all inherit from the same given class.
+#'
+#' @keywords internal
+all_inherit <- function(list_object, class_names) {
+  all(sapply(list_object, is, class_names))
+}
+
+#' parse_date
+#'
+#' Coerce a date into a character string formatted to either the
+#' input or output format of the Google Analytics reporting API.
+#'
+#' @keywords internal
+parse_date <- function(date, output_format = kGaDateInFormat) {
+  format(ymd(date), format = output_format)
+}

@@ -2,7 +2,7 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include helper-functions.R
+#' @include utils.R
 #' @include management-api-classes.R
 NULL
 

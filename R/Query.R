@@ -1,4 +1,4 @@
-#' @include helper-functions.R
+#' @include utils.R
 #' @include all-classes.R
 #' @include init-methods.R
 #' @include all-generics.R

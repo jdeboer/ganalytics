@@ -6,7 +6,7 @@
 #' @include Comparator.R
 #' @include Operand.R
 #' @include ganalytics-package.R
-#' @include helper-functions.R
+#' @include utils.R
 NULL
 
 #' @describeIn Expr
