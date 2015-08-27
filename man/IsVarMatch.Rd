@@ -15,4 +15,5 @@ IsVarMatch(thisVar, inVars)
 The following method is a temporary workaround to support XX placeholders in dimension and metric
 names, such as with custom dimensions, metrics and various goal related variables.
 }
+\keyword{internal}
 

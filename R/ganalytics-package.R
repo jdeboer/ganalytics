@@ -61,6 +61,7 @@
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package
+#' @include globaldata.R
 NULL
 
-#' @include globaldata.R
+

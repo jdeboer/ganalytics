@@ -24,4 +24,5 @@ the original object classes.
 \references{
 \url{http://stackoverflow.com/a/8139959/1007029}
 }
+\keyword{internal}
 

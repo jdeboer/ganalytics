@@ -16,6 +16,8 @@ parse_date <- function(date, output_format = kGaDateInFormat) {
 #'
 #' @param thisVar var to compare against inVars.
 #' @param inVars vector of vars to check var against.
+#'
+#' @keywords internal
 IsVarMatch <- function(thisVar, inVars) {
   inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
   inVars <- regex(paste0("^", inVars, "$"), ignore_case = TRUE)
@@ -63,6 +65,8 @@ ValidGaOperand <- function(var, operand) {
 #' @param x a list type object to flatten.
 #' @return a list
 #' @references \url{http://stackoverflow.com/a/8139959/1007029}
+#'
+#' @keywords internal
 flatten <- function(x) {
   len <- sum(rapply(x, function(x) 1L))
   y <- vector('list', len)
@@ -77,6 +81,7 @@ flatten <- function(x) {
 #'@param object an object with slots that match the names of slot_vector_bound_list
 #'@param slot_vector_bound_list a named list of vectors specifying the upper
 #'and lower bounds for the length of each slot of object.
+#' @keywords internal
 CheckVectorBounds <- function(object, slot_vector_bound_list) {
   slot_vector_bounds <- data.frame(
     slot_vector_bound_list,
@@ -127,6 +132,7 @@ checkDataFrameClasses <- function(object, matchClasses) {
 #' ArgList
 #' If the only argument passed was already a list, then extract that list.
 #' @param ... arguments or list of arguments
+#' @keywords internal
 ArgList <- function(...) {
   exprList <- as.list(
     unlist(x = list(...), recursive = FALSE)
