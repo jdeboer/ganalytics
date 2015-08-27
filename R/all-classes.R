@@ -10,6 +10,14 @@ NULL
 
 # ---- dimension and metric variables ----
 
+#' .var
+#'
+#' An S4 class to represent the name of a single Google Analytics dimension or
+#' metric variable.
+#'
+#' @rdname var
+#'
+#' @export
 setClass(
   ".var",
   contains = "character",
@@ -18,6 +26,14 @@ setClass(
   }
 )
 
+#' gaMetVar
+#'
+#' An S4 class to represent a valid Google Analytics Core Reporting API metric
+#' name.
+#'
+#' Set to "ga:sessions" by default.
+#'
+#' @export
 setClass(
   "gaMetVar",
   prototype = prototype("ga:sessions"),
