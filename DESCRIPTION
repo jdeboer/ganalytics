@@ -63,6 +63,7 @@ Collate:
     'GetGa.R'
     'Query.R'
     'SortBy.R'
+    'backwards-compatibility.R'
     'zzz.R'
 VignetteBuilder: knitr
 LazyData: true

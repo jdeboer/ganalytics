@@ -37,11 +37,3 @@ setMethod(
   }
 )
 
-# Backwards compatibility
-#' @rdname GaView
-#' @export GaProfileId
-GaProfileId <- GaView
-
-#' @rdname GaView
-#' @export GaProfileId<-
-`GaProfileId<-` <- `GaView<-`

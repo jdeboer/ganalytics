@@ -144,23 +144,3 @@ setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2
 #' @describeIn xor
 #' @export
 setMethod("xor", c(".compoundExpr", ".compoundExpr"), function(x, y) {(x | y) & (!x | !y)})
-
-# Backwards compatibility
-#' GaNot (Deprecated, use Not or ! instead).
-#'
-#' @export GaNot
-#' @param ... arguments passed to \code{Not}
-#' @rdname GaNot
-GaNot <- function(...){Not(...)}
-
-#' GaOr (Deprecated, use Or or | instead).
-#' @export GaOr
-#' @param ... arguments passed to \code{Or}
-#' @rdname GaOr
-GaOr <- function(...){Or(...)}
-
-#' GaAnd (Deprecated, use And or & instead).
-#' @export GaAnd
-#' @param ... arguments passed to \code{And}
-#' @rdname GaAnd
-GaAnd <- function(...){And(...)}

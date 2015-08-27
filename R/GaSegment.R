@@ -342,17 +342,3 @@ setMethod(
   }
 )
 
-# Backwards compatibility
-#' GaSegment (Deprecated).
-#'
-#' @param ... arguments passed onto \code{Segment}
-#' @export GaSegment
-#' @rdname GaSegment
-GaSegment <- function(...){Segment(...)}
-
-#' GaSegment<- (Deprecated).
-#'
-#' @param value passed onto \code{Segment}
-#' @export GaSegment<-
-#' @rdname GaSegment
-`GaSegment<-` <- function(..., value){`Segment<-`(..., value)}

@@ -40,11 +40,3 @@ setMethod(
   }
 )
 
-# Backwards compatibility
-#' @export GaFilter
-#' @rdname TableFilter
-GaFilter <- TableFilter
-
-#' @export GaFilter<-
-#' @rdname TableFilter
-`GaFilter<-` <- `TableFilter<-`
