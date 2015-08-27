@@ -1,15 +1,19 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.5.99
+Version: 0.6.0.9000
+Date: 2015-08-27
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
     role = c("aut", "cre"),
     email = "johanndeboer@gmail.com")
-Description: S4 classes and methods for interacting with Google Analytics.
-    Supports OAuth 2.0 user authentication. Also includes R6 classes with
-    methods for accessing the Google Analytics Management and Google Tag
-    Manager APIs.
+Description: Functions for querying the Google Analytics core reporting,
+    real-time, multi-channel funnel and management APIs, as well as the Google
+    Tag Manager API. Write methods are also provided for the management and
+    Google Tag Manager APIs so that you can change tag, property or view
+    settings, for example. Define reporting queries using natural R expressions
+    instead of being concerned as much about API technical intricacies like
+    query syntax, character code escaping, and API limitations.
 URL: https://github.com/jdeboer/ganalytics
 BugReports: https://github.com/jdeboer/ganalytics/issues
 License: MIT + file LICENCE
@@ -18,7 +22,7 @@ Depends:
     httpuv
 Imports:
     methods,
-    httr,
+    httr (>= 1.0.0),
     plyr,
     stringr (>= 1.0),
     jsonlite,
@@ -29,6 +33,10 @@ Imports:
     assertthat,
     devtools,
     rvest
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown
 Collate:
     'helper-functions.R'
     'globaldata.R'
@@ -55,9 +63,5 @@ Collate:
     'GetGa.R'
     'Query.R'
     'SortBy.R'
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown
 VignetteBuilder: knitr
 LazyData: true
