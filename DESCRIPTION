@@ -36,7 +36,8 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2
 Collate:
     'utils.R'
     'globaldata.R'
