@@ -1,4 +1,5 @@
-2015-08-18 Renamed segmentation functions: GaSequenceCondition -> GaSequence; GaNonSequenceCondition -> GaCondition; GaSegmentCondition -> GaSegmentFilters
+2015-08-19 Renamed segmentation functions: GaStartsWith -> First, GaPreceeds -> Later, GaImmediatelyPreceeds -> Then
+2015-08-18 Renamed segmentation functions: GaSequenceCondition -> GaSequence; GaNonSequenceCondition -> GaCondition; GaSegmentCondition -> GaSegmentFilters . Renamed operator to comparator. Added functions to set scope of segment filters and segment metric expressions.
 2015-08-17 Update to latest dimension and metrics metadata and added support for custom dimensions and device category as view filter fields. Changed default metric for real-time queries to rt:pageviews.
 2015-08-14 Added demos. Added support for new alphanumeric segment IDs. Foundations to support multiple segments within a single query.
 2015-06-05 Support the use of a lubridate interval object as a dateRange object for GA Reporting API queries.
