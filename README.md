@@ -443,3 +443,8 @@ Useful references
 5.  [Using OAuth 2.0 for Installed Applications](https://developers.google.com/accounts/docs/OAuth2InstalledApp)
 6.  [EnvPane utility for setting environment variables in OSX](https://github.com/hschmidt/EnvPane)
 7.  [Setting environment variables in Ubuntu Linux](https://help.ubuntu.com/community/EnvironmentVariables)
+
+Notes
+-----
+
+Google Analytics and Google Tag Manager are trademarks of Google.
