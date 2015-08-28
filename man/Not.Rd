@@ -57,4 +57,7 @@ Invert an expression, i.e. NOT.
 
 \item \code{.gaSegmentFilter}: 
 }}
+\seealso{
+\code{link{And}} \code{link{Or}} \code{link{xor}}
+}
 

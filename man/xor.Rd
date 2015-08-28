@@ -4,22 +4,23 @@
 \name{xor,.compoundExpr,.compoundExpr-method}
 \alias{xor}
 \alias{xor,.compoundExpr,.compoundExpr-method}
-\title{Generate an expression that gives the exclusive or of two expressions.}
+\title{Generate an expression that gives the Exclusive-OR of two expressions.}
 \usage{
 \S4method{xor}{.compoundExpr,.compoundExpr}(x, y)
 
 xor(x, y)
 }
 \arguments{
-\item{x}{The first expression}
-
-\item{y}{The second expression.}
+\item{x,y}{Conditions for an exclusive-or expression.}
 }
 \description{
-Generate an expression that gives the exclusive or of two expressions.
+Generate an expression that gives the Exclusive-OR of two expressions.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{x = .compoundExpr,y = .compoundExpr}: 
 }}
+\seealso{
+\code{link{Or}} \code{link{And}} \code{link{Not}}
+}
 

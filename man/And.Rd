@@ -39,4 +39,7 @@ A single list of objects is also accepted.
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: 
 }}
+\seealso{
+\code{link{Or}} \code{link{xor}} \code{link{Not}}
+}
 

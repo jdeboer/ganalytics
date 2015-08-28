@@ -34,4 +34,12 @@ Define a Google Analytics expression.
 
 \item \code{object = character,comparator = character}: 
 }}
+\seealso{
+Other expression generators: \code{\link{GaExpr}},
+  \code{\link{GaExpr,character,character-method}};
+  \code{\link{McfExpr}},
+  \code{\link{McfExpr,character,character-method}};
+  \code{\link{RtExpr}},
+  \code{\link{RtExpr,character,character-method}}
+}
 
