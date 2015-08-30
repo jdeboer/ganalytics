@@ -1,28 +1,10 @@
----
-title: "README"
-author: "Johann de Boer"
-date: "`r Sys.Date()`"
-output:
-  html_vignette:
-    keep_md: yes
-  md_document:
-    variant:
-      markdown_github
-vignette: >
-  %\VignetteIndexEntry{README}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+# README
+Johann de Boer  
+`r Sys.Date()`  
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
+
 
 ganalytics
 ==========
