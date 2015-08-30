@@ -32,7 +32,8 @@ Imports:
     R6,
     assertthat,
     devtools,
-    rvest
+    rvest,
+    lazyeval
 Suggests:
     testthat,
     knitr,
@@ -65,6 +66,7 @@ Collate:
     'Query.R'
     'SortBy.R'
     'backwards-compatibility.R'
+    'condition.R'
     'zzz.R'
 VignetteBuilder: knitr
 LazyData: true
