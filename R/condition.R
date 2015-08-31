@@ -3,7 +3,11 @@ NULL
 
 #' condition
 #'
-#' Define a Google Analytics condition using a domain-specific language familiar to R users and using non-standard evaluation.
+#' Define a Google Analytics condition using a domain-specific language familiar
+#' to R users and using non-standard evaluation.
+#'
+#' @param cond An expression in the form of: \code{<variable> <comparator>
+#'   <operand>} where only \code{<operand>} is evaluated.
 #'
 #' @export
 condition <- function(cond) {

@@ -1,6 +1,6 @@
 library(ganalytics)
 
-readline("press any key to continue").
+readline("press any key to continue")
 
 # Assumes app creds can be found in environment variables (default prefix) or in a JSON file (default filename)
 # Selects default view of first property in first account returned by the Management API.
