@@ -67,6 +67,7 @@ Collate:
     'SortBy.R'
     'backwards-compatibility.R'
     'condition.R'
+    'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr
 LazyData: true

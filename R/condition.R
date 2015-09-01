@@ -1,4 +1,5 @@
 #' @importFrom lazyeval lazy
+#' @importFrom assertthat assert_that
 NULL
 
 #' condition

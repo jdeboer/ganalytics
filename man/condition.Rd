@@ -6,7 +6,12 @@
 \usage{
 condition(cond)
 }
+\arguments{
+\item{cond}{An expression in the form of: \code{<variable> <comparator>
+  <operand>} where only \code{<operand>} is evaluated.}
+}
 \description{
-Define a Google Analytics condition using a domain-specific language familiar to R users and using non-standard evaluation.
+Define a Google Analytics condition using a domain-specific language familiar
+to R users and using non-standard evaluation.
 }
 
