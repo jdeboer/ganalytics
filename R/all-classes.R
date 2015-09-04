@@ -10,12 +10,13 @@ NULL
 
 # ---- dimension and metric variables ----
 
-#' .var
+#' `.var` class.
 #'
 #' An S4 class to represent the name of a single Google Analytics dimension or
 #' metric variable.
 #'
 #' @rdname var-class
+#' @keywords internal
 #'
 #' @export
 setClass(
@@ -26,12 +27,15 @@ setClass(
   }
 )
 
-#' gaMetVar
+#' `gaMetVar` class.
 #'
 #' An S4 class to represent a valid Google Analytics Core Reporting API metric
 #' name.
 #'
 #' Set to "ga:sessions" by default.
+#'
+#' @rdname gaMetVar-class
+#' @keywords internal
 #'
 #' @export
 setClass(
@@ -47,6 +51,17 @@ setClass(
   }
 )
 
+#' `gaDimVar` class.
+#'
+#' An S4 class to represent a valid Google Analytics Core Reporting API dimension
+#' name.
+#'
+#' Set to "ga:date" by default.
+#'
+#' @rdname gaDimVar-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDimVar",
   prototype = prototype("ga:date"),
@@ -60,6 +75,16 @@ setClass(
   }
 )
 
+#' `mcfMetVar` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel metric.
+#'
+#' Set to "mcf:totalConversions" by default.
+#'
+#' @rdname mcfMetVar-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfMetVar",
   prototype = prototype("mcf:totalConversions"),
@@ -73,6 +98,16 @@ setClass(
   }
 )
 
+#' `mcfDimVar` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel dimension.
+#'
+#' Set to "mcf:nthDay" by default.
+#'
+#' @rdname mcfDimVar-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfDimVar",
   prototype = prototype("mcf:nthDay"),
@@ -86,6 +121,16 @@ setClass(
   }
 )
 
+#' `rtMetVar` class.
+#'
+#' An S4 class to represent a Real-Time reporting metric.
+#'
+#' Set to "rt:pageviews" by default.
+#'
+#' @rdname rtMetVar-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtMetVar",
   prototype = prototype("rt:pageviews"),
@@ -99,6 +144,16 @@ setClass(
   }
 )
 
+#' `rtDimVar` class.
+#'
+#' An S4 class to represent a Real-Time reporting dimension.
+#'
+#' Set to "rt:minutesAgo" by default.
+#'
+#' @rdname rtDimVar-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtDimVar",
   prototype = prototype("rt:minutesAgo"),
@@ -112,15 +167,78 @@ setClass(
   }
 )
 
+#' `.gaVar` class.
+#'
+#' An S4 class union to represent a Core Reporting variable.
+#'
+#' @docType class
+#' @name .gaVar-class
+#' @rdname gaVar-class
+#' @keywords internal
+#'
+#' @exportClass .gaVar
 setClassUnion(".gaVar", c("gaMetVar", "gaDimVar"))
+
+#' `.mcfVar` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel variable.
+#'
+#' @docType class
+#' @name .mcfVar-class
+#' @rdname mcfVar-class
+#' @keywords internal
+#'
+#' @exportClass .mcfVar
 setClassUnion(".mcfVar", c("mcfMetVar", "mcfDimVar"))
+
+#' `.rtVar` class.
+#'
+#' An S4 class to represent a Real-Time reporting variable.
+#'
+#' @docType class
+#' @name .rtVar-class
+#' @rdname rtVar-class
+#' @keywords internal
+#'
+#' @exportClass .rtVar
 setClassUnion(".rtVar", c("rtMetVar", "rtDimVar"))
 
+#' `.metVar` class.
+#'
+#' An S4 class to represent a metric.
+#'
+#' @docType class
+#' @name .metVar-class
+#' @rdname metVar-class
+#' @keywords internal
+#'
+#' @exportClass .metVar
 setClassUnion(".metVar", c("gaMetVar", "mcfMetVar", "rtMetVar"))
+
+#' `.dimVar` class.
+#'
+#' An S4 class to represent a dimension.
+#'
+#' @docType class
+#' @name .dimVar-class
+#' @rdname dimVar-class
+#' @keywords internal
+#'
+#' @exportClass .dimVar
 setClassUnion(".dimVar", c("gaDimVar", "mcfDimVar", "rtDimVar"))
 
 # ---- expression comparators ----
 
+#' `.comparator` class.
+#'
+#' An S4 class to represent a condition's comparator operator.
+#'
+#' Set to "==" (exact match) by default.
+#'
+#' @rdname comparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".comparator",
   contains = "character",
@@ -130,6 +248,15 @@ setClass(
   }
 )
 
+#' `gaMetComparator` class.
+#'
+#' An S4 class to represent a comparator operator for a Core Reporting metric
+#' condition.
+#'
+#' @rdname gaMetComparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaMetComparator",
   contains = ".comparator",
@@ -187,6 +314,14 @@ setClassUnion(".metComparator", c("gaMetComparator", "mcfMetComparator", "rtMetC
 
 # ---- expression operands ----
 
+#' `metOperand` class.
+#'
+#' An S4 class to represent the numerical value of a metric condition expression.
+#'
+#' @rdname metOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".metOperand",
   contains = "numeric",
@@ -195,6 +330,14 @@ setClass(
   }
 )
 
+#' `dimOperand` class.
+#'
+#' An S4 class to represent the operand value of a dimension condition expression.
+#'
+#' @rdname dimOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".dimOperand",
   contains = "character"
@@ -264,6 +407,14 @@ setValidity(".operand", function(object){
 
 # ---- simple expressions -------------------------------------------------------
 
+#' `gaExpr` class.
+#'
+#' An S4 class to represent a Core Reporting API condition expression.
+#'
+#' @rdname gaExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".gaExpr",
   slots = c(
@@ -282,6 +433,14 @@ setClass(
   )
 )
 
+#' `rtExpr` class.
+#'
+#' An S4 class to represent a Real-Time API condition expression.
+#'
+#' @rdname rtExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".rtExpr",
   slots = c(
@@ -659,6 +818,16 @@ setClass(
 
 # ---- Simple and compound expression class union ----
 
+#' `.compoundExpr` class.
+#'
+#' An S4 class representing an expression containing one or more conditions.
+#'
+#' @docType class
+#' @name .compoundExpr-class
+#' @rdname compoundExpr-class
+#' @keywords internal
+#'
+#' @exportClass .compoundExpr
 setClassUnion(".compoundExpr", c(
   ".expr", "orExpr", "andExpr",
   "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
@@ -666,6 +835,14 @@ setClassUnion(".compoundExpr", c(
 
 # ---- dateRange ----
 
+#' `dateRange` class.
+#'
+#' An S4 class to represent a date range.
+#'
+#' @rdname dateRange-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "dateRange",
   slots = c(
@@ -689,6 +866,14 @@ setClass(
 
 # ---- query dimensions, metrics, and sortby lists ----
 
+#' `.metrics` class.
+#'
+#' An S4 class to represent a list of metrics.
+#'
+#' @rdname metrics-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".metrics",
   contains = "list",
@@ -702,6 +887,14 @@ setClass(
   }
 )
 
+#' `.dimensions` class.
+#'
+#' An S4 class to represent a list of dimensions.
+#'
+#' @rdname dimensions-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".dimensions",
   contains = "list",
@@ -715,6 +908,14 @@ setClass(
   }
 )
 
+#' `.sortBy` class.
+#'
+#' An S4 class to represent a list of variables to sort by.
+#'
+#' @rdname sortBy-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".sortBy",
   slots = c(
@@ -732,6 +933,16 @@ setClass(
   }
 )
 
+#' `.varList` class.
+#'
+#' An S4 class to represent .
+#'
+#' @docType class
+#' @name .varList-class
+#' @rdname varList-class
+#' @keywords internal
+#'
+#' @exportClass .varList
 setClassUnion(".varList", c(".metrics", ".dimensions", ".sortBy"))
 
 setValidity(".varList", function(object) {
@@ -740,6 +951,14 @@ setValidity(".varList", function(object) {
   } else TRUE
 })
 
+#' `gaMetrics` class.
+#'
+#' An S4 class to represent a list of Core Reporting metrics.
+#'
+#' @rdname gaMetrics-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaMetrics",
   prototype = prototype(
@@ -748,6 +967,14 @@ setClass(
   contains = ".metrics"
 )
 
+#' `mcfMetrics` class.
+#'
+#' An S4 class to represent a list of Multi-channel funnel metrics.
+#'
+#' @rdname mcfMetrics-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfMetrics",
   prototype = prototype(
@@ -756,6 +983,14 @@ setClass(
   contains = ".metrics"
 )
 
+#' `rtMetrics` class.
+#'
+#' An S4 class to represent a list of Real-time metrics.
+#'
+#' @rdname rtMetrics-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtMetrics",
   prototype = prototype(
@@ -764,6 +999,14 @@ setClass(
   contains = ".metrics"
 )
 
+#' `gaDimensions` class.
+#'
+#' An S4 class to represent a list of Core Reporting dimensions.
+#'
+#' @rdname gaDimensions-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDimensions",
   prototype = prototype(
@@ -772,6 +1015,14 @@ setClass(
   contains = ".dimensions"
 )
 
+#' `mcfDimensions` class.
+#'
+#' An S4 class to represent a list of Multi-Channel Funnel dimensions.
+#'
+#' @rdname mcfDimensions-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfDimensions",
   prototype = prototype(
@@ -780,6 +1031,14 @@ setClass(
   contains = ".dimensions"
 )
 
+#' `rtDimensions` class.
+#'
+#' An S4 class to represent a list of Real-Time reporting dimensions.
+#'
+#' @rdname rtDimensions-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtDimensions",
   prototype = prototype(
@@ -788,10 +1047,45 @@ setClass(
   contains = ".dimensions"
 )
 
+#' `gaSortBy` class.
+#'
+#' An S4 class to represent Core Reporting sorting lists.
+#'
+#' @rdname gaSortBy-class
+#' @keywords internal
+#'
+#' @export
 setClass("gaSortBy", contains = ".sortBy")
+
+#' `mcfSortBy` class.
+#'
+#' An S4 class to represent Multi-Channel Funnel sorting lists.
+#'
+#' @rdname mcfSortBy-class
+#' @keywords internal
+#'
+#' @export
 setClass("mcfSortBy", contains = ".sortBy")
+
+#' `rtSortBy` class.
+#'
+#' An S4 class to represent Real-Time variable sorting lists.
+#'
+#' @rdname rtSortBy-class
+#' @keywords internal
+#'
+#' @export
 setClass("rtSortBy", contains = ".sortBy")
 
+#' `.gaVarList` class.
+#'
+#' An S4 class to represent Core Reporting variable lists.
+#'
+#' @docType class
+#' @keywords internal
+#' @name .gaVarList-class
+#' @rdname gaVarList-class
+#' @exportClass .gaVarList
 setClassUnion(".gaVarList", c("gaMetrics", "gaDimensions", "gaSortBy"))
 
 setValidity(".gaVarList", function(object) {
@@ -800,6 +1094,16 @@ setValidity(".gaVarList", function(object) {
   } else TRUE
 })
 
+#' `mcfVarList` class.
+#'
+#' An S4 class to represent Multi-Channel Funnel variable lists.
+#'
+#' @docType class
+#' @name .mcfVarList-class
+#' @rdname mcfVarList-class
+#' @keywords internal
+#'
+#' @exportClass .mcfVarList
 setClassUnion(".mcfVarList", c("mcfMetrics", "mcfDimensions", "mcfSortBy"))
 
 setValidity(".mcfVarList", function(object) {
@@ -808,6 +1112,16 @@ setValidity(".mcfVarList", function(object) {
   } else TRUE
 })
 
+#' `.rtVarList` class.
+#'
+#' An S4 class union of Real-Time variable lists.
+#'
+#' @docType class
+#' @name .rtVarList-class
+#' @rdname rtVarList-class
+#' @keywords internal
+#'
+#' @exportClass .rtVarList
 setClassUnion(".rtVarList", c("rtMetrics", "rtDimensions", "rtSortBy"))
 
 setValidity(".rtVarList", function(object) {
@@ -816,8 +1130,16 @@ setValidity(".rtVarList", function(object) {
   } else TRUE
 })
 
-# ---- Profile ID ----
+# ---- View ID ----
 
+#' `viewId` class.
+#'
+#' An S4 class to represent a Google Analytics view's ID.
+#'
+#' @rdname viewId-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "viewId",
   contains = "character",
@@ -832,6 +1154,14 @@ setClass(
 
 # -- GA query construct ----
 
+#' `.query` class.
+#'
+#' An S4 class to represent a generalised reporting API query.
+#'
+#' @rdname query-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".query",
   slots = c(
@@ -863,6 +1193,14 @@ setClass(
   }
 )
 
+#' `.standardQuery` class.
+#'
+#' An S4 class to represent a standard reporting API query.
+#'
+#' @rdname standardQuery-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".standardQuery",
   slots = c(
@@ -884,6 +1222,14 @@ setClass(
   }
 )
 
+#' `gaQuery` class.
+#'
+#' An S4 class to represent a Core Reporting API query.
+#'
+#' @rdname gaQuery-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaQuery",
   slots = c(
@@ -902,6 +1248,14 @@ setClass(
   contains = ".standardQuery"
 )
 
+#' `mcfQuery` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel Reporting API query.
+#'
+#' @rdname mcfQuery-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfQuery",
   slots = c(
@@ -918,6 +1272,14 @@ setClass(
   contains = ".standardQuery"
 )
 
+#' `rtQuery` class.
+#'
+#' An S4 class to represent a Real-Time Reporting API query.
+#'
+#' @rdname rtQuery-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtQuery",
   slots = c(

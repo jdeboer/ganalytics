@@ -368,10 +368,10 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Generate an expression that gives the exclusive or of two expressions.
+#' Generate an expression that gives the Exclusive-OR of two expressions.
 #'
-#' @param x The first expression
-#' @param y The second expression.
+#' @param x,y Conditions for an exclusive-or expression.
+#'
 #'
 #' @export
 #' @rdname xor

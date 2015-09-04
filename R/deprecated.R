@@ -142,6 +142,10 @@ GaFilter <- function(...){
   TableFilter(...)
 }
 
+#' GaFilter<- (Deprecated).
+#'
+#' @param value passed onto \code{TableFilter<-}
+#'
 #' @rdname GaFilter
 #' @export GaFilter<-
 `GaFilter<-` <- function(..., value){
@@ -155,8 +159,15 @@ GaFilter <- function(...){
 #'
 #' @rdname GaProfileId
 #' @export GaProfileId
-GaProfileId <- GaView
+GaProfileId <- function(...){
+  .Deprecated("GaView")
+  GaView(...)
+}
 
+#' GaProfileId<- (Deprecated).
+#'
+#' @param value passed onto \code{GaView<-}
+#'
 #' @rdname GaProfileId
 #' @export GaProfileId<-
 `GaProfileId<-` <- function(..., value){

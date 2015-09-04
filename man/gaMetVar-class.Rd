@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaMetVar-class}
 \alias{gaMetVar-class}
-\title{gaMetVar}
+\title{`gaMetVar` class.}
 \description{
 An S4 class to represent a valid Google Analytics Core Reporting API metric
 name.
@@ -11,4 +11,5 @@ name.
 \details{
 Set to "ga:sessions" by default.
 }
+\keyword{internal}
 
