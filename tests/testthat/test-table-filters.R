@@ -15,19 +15,19 @@ test_that("a filter can be a basic expression", {
 
 test_that("ANDed (but not ORed) filter expressions may mix dimensions with metrics", {
   expect_equal(as(
-    GaFilter(GaOr(GaExpr("pageviews", ">", 10), GaExpr("entrances", "<", 5))),
+    GaFilter(Or(GaExpr("pageviews", ">", 10), GaExpr("entrances", "<", 5))),
     "character"), "ga:pageviews>10,ga:entrances<5")
   expect_error(
-    GaFilter(GaOr(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
+    GaFilter(Or(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
     "cannot mix metrics and dimensions"
   )
   expect_equal(as(
-    GaFilter(GaAnd(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
+    GaFilter(And(GaExpr("landingPagePath", "=", "/"), GaExpr("entrances", "<", 5))),
     "character"), "ga:landingPagePath==/;ga:entrances<5")
   expect_error(
     GaFilter(
-      GaAnd(
-        GaOr(
+      And(
+        Or(
           GaExpr("eventValue", "<", 50),
           GaExpr("keyword", "@", "contact")
         ),

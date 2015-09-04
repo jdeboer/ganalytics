@@ -65,8 +65,8 @@ Collate:
     'GetGa.R'
     'Query.R'
     'SortBy.R'
-    'backwards-compatibility.R'
     'condition.R'
+    'deprecated.R'
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr

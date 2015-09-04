@@ -5,7 +5,7 @@ context("Segmentation queries are correctly formatted for API requests")
 test_that("segment expressions are correctly coerced to character string", {
   expect_equal(
     as(
-      GaSegment(
+      Segment(
         GaSegmentFilters(
           GaCondition(GaExpr("source", "=", "google")),
           GaSequence(
@@ -45,19 +45,19 @@ test_that("segment expressions can be negated", {
 
 test_that("segments can be selected by ID and parsed", {
   expect_identical(
-    GaSegment(-1),
-    GaSegment("gaid::-1"),
+    Segment(-1),
+    Segment("gaid::-1"),
   )
   expect_identical(
-    GaSegment("gaid::1"),
-    GaSegment("1")
+    Segment("gaid::1"),
+    Segment("1")
   )
   expect_equal(
-    as(GaSegment("gaid::-1"), "character"),
+    as(Segment("gaid::-1"), "character"),
     "gaid::-1"
   )
   expect_equal(
-    as(GaSegment("gaid::1"), "character"),
+    as(Segment("gaid::1"), "character"),
     "gaid::1"
   )
 })

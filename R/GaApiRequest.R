@@ -1,4 +1,4 @@
-#' Google APIs OAuth 2.0 Credentials
+#' Google APIs OAuth 2.0 Credentials.
 #'
 #' Create a Google APIs OAuth2.0 credentials object
 #'

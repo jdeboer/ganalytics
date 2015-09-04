@@ -41,13 +41,13 @@ context("Combining basic condition expressions with AND and OR")
 
 test_that("Expressions can be ORed to give the correct character output", {
   expect_equal(as(
-    GaOr(
+    Or(
       GaExpr("pageviews", ">", 100),
       GaExpr("timeOnPage", "<", 2000)
     ),
     "character"), "ga:pageviews>100,ga:timeOnPage<2000")
   expect_equal(as(
-    GaOr(
+    Or(
       GaExpr("pageviews", ">", 100),
       GaExpr("timeOnPage", "<", 2000),
       GaExpr("bounceRate", "=", 100)
@@ -66,13 +66,13 @@ test_that("Expressions can be ORed to give the correct character output", {
 
 test_that("Expressions can be ANDed to give the correct character output", {
   expect_equal(as(
-    GaAnd(
+    And(
       GaExpr("pageviews", ">", 100),
       GaExpr("timeOnPage", "<", 2000)
     ),
     "character"), "ga:pageviews>100;ga:timeOnPage<2000")
   expect_equal(as(
-    GaAnd(
+    And(
       GaExpr("pageviews", ">", 100),
       GaExpr("timeOnPage", "<", 2000),
       GaExpr("bounceRate", "=", 100)
@@ -91,8 +91,8 @@ test_that("Expressions can be ANDed to give the correct character output", {
 
 test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed", {
   expect_equal(as(
-    GaAnd(
-      GaOr(
+    And(
+      Or(
         GaExpr("eventValue", "<", 50),
         GaExpr("keyword", "@", "contact")
       ),
@@ -106,8 +106,8 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
     ) & GaExpr("deviceCategory", "=", "mobile"),
     "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile")
   expect_error(
-    GaOr(
-      GaAnd(
+    Or(
+      And(
         GaExpr("eventValue", "<", 50),
         GaExpr("keyword", "@", "contact")
       ),
@@ -121,22 +121,22 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
     GaExpr("deviceCategory", "=", "mobile")
   )
   expect_equal(as(
-    GaOr(
-      GaAnd(
+    Or(
+      And(
         GaExpr("eventValue", "<", 50),
         GaExpr("keyword", "@", "contact")
       )
     ),
   "character"), "ga:eventValue<50,ga:keyword=@contact")
   expect_equal(as(
-    GaAnd(
-      GaOr(
+    And(
+      Or(
         GaExpr("eventValue", "<", 50),
         GaExpr("keyword", "@", "contact")
       ),
-      GaAnd(
+      And(
         GaExpr("deviceCategory", "=", "mobile"),
-        GaAnd(
+        And(
           GaExpr("pageviews", ">", 100),
           GaExpr("timeOnPage", "<", 2000),
           GaExpr("bounceRate", "=", 100)
@@ -148,8 +148,8 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
 
 test_that("ORed expressions can be NOTed", {
   expect_identical(
-    GaNot(GaOr(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
-    GaAnd(GaExpr("source", "!=", "google"), GaExpr("medium", "!=", "organic"))
+    GaNot(Or(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
+    And(GaExpr("source", "!=", "google"), GaExpr("medium", "!=", "organic"))
   )
   expect_identical(
     !(GaExpr("source", "=", "google") | GaExpr("medium", "=", "organic")),
@@ -458,13 +458,13 @@ test_that("TableFilter<- replaces the table filter of a query", {
   expect_equivalent(TableFilter(query), TableFilter(NULL))
 })
 
-test_that("GaSegment<- replaces the segment of a query", {
+test_that("Segment<- replaces the segment of a query", {
   query <- GaQuery(view = 0)
   segment <-
     Expr("ga:source", "=", "google.com") &
       Expr("ga:deviceCategory", "=", "mobile")
-  GaSegment(query) <- segment
-  expect_identical(GaSegment(query), GaSegment(segment))
+  Segment(query) <- segment
+  expect_identical(Segment(query), Segment(segment))
 })
 
 test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {

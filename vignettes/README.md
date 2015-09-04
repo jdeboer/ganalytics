@@ -451,4 +451,6 @@ Useful references
 
 Notes
 -----
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
 Google Analytics and Google Tag Manager are trademarks of Google.

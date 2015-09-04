@@ -254,7 +254,7 @@ setMethod(
         scope = scope
       )
     })
-    do.call(GaSegment, exprList)
+    do.call(Segment, exprList)
   }
 )
 
@@ -327,7 +327,7 @@ setMethod(
   f = "Segment<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
-    object@segments <- GaSegment(value)
+    object@segments <- Segment(value)
     validObject(object)
     object
   }
@@ -338,7 +338,7 @@ setMethod(
   f = "Segment",
   signature = "gaUserSegment",
   definition = function(object) {
-    GaSegment(object$segmentId)
+    Segment(object$segmentId)
   }
 )
 

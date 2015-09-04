@@ -2,7 +2,7 @@
 % Please edit documentation in R/GaApiRequest.R
 \name{GoogleApiCreds}
 \alias{GoogleApiCreds}
-\title{Google APIs OAuth 2.0 Credentials}
+\title{Google APIs OAuth 2.0 Credentials.}
 \usage{
 GoogleApiCreds(userName = character(0), appCreds = NULL,
   cache = character(0), use_oob = FALSE, appname = "GOOGLE_APIS")
