@@ -265,6 +265,15 @@ setClass(
   }
 )
 
+#' `gaDimComparator` class.
+#'
+#' An S4 class to represent a Core Reporting comparator operator for a dimension
+#' condition.
+#'
+#' @rdname gaDimComparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDimComparator",
   contains = ".comparator",
@@ -273,6 +282,15 @@ setClass(
   }
 )
 
+#' `mcfMetComparator` class.
+#'
+#' An S4 class representing Multi-Channel Funnel metric condtion comparison
+#' operators.
+#'
+#' @rdname mcfMetComparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfMetComparator",
   contains = ".comparator",
@@ -281,6 +299,15 @@ setClass(
   }
 )
 
+#' `mcfDimComparator` class.
+#'
+#' An S4 class representing Multi-Channel Funnel dimension conditional comparator
+#' operators.
+#'
+#' @rdname -class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfDimComparator",
   contains = ".comparator",
@@ -289,6 +316,14 @@ setClass(
   }
 )
 
+#' `rtMetComparator` class.
+#'
+#' An S4 class representing Real-Time metric condition comparator operators.
+#'
+#' @rdname rtMetComparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtMetComparator",
   contains = ".comparator",
@@ -297,6 +332,14 @@ setClass(
   }
 )
 
+#' `rtDimComparator` class.
+#'
+#' An S4 class to represent Real-Time dimension condition comparator operators.
+#'
+#' @rdname rtDimComparator-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtDimComparator",
   contains = ".comparator",
@@ -305,11 +348,65 @@ setClass(
   }
 )
 
+#' `.gaComparator` class.
+#'
+#' An S4 class union represent conditional comparator operators.
+#'
+#' @docType class
+#' @name .gaComparator-class
+#' @rdname gaComparator-class
+#' @keywords internal
+#'
+#' @exportClass .gaComparator
 setClassUnion(".gaComparator" , c("gaMetComparator" , "gaDimComparator"))
+
+#' `.mcfComparator` class.
+#'
+#' An S4 class union representing Multi-Channel Funnel condition comparator
+#' operators.
+#'
+#' @docType class
+#' @name .mcfComparator-class
+#' @rdname mcfComparator-class
+#' @keywords internal
+#'
+#' @exportClass .mcfComparator
 setClassUnion(".mcfComparator", c("mcfMetComparator", "mcfDimComparator"))
+
+#' `.rtComparator` class.
+#'
+#' An S4 class union representing Real-Time condition comparator operators.
+#'
+#' @docType class
+#' @name .rtComparator-class
+#' @rdname rtComparator-class
+#' @keywords internal
+#'
+#' @exportClass .rtComparator
 setClassUnion(".rtComparator" , c("rtMetComparator" , "rtDimComparator"))
 
+#' `.dimComparator` class.
+#'
+#' An S4 class union representing dimension condition comparator operators.
+#'
+#' @docType class
+#' @name .dimComparator-class
+#' @rdname dimComparator-class
+#' @keywords internal
+#'
+#' @exportClass .dimComparator
 setClassUnion(".dimComparator", c("gaDimComparator", "mcfDimComparator", "rtDimComparator"))
+
+#' `.metComparator` class.
+#'
+#' An S4 class union representing metric condition comparator operators.
+#'
+#' @docType class
+#' @name .metComparator-class
+#' @rdname metComparator-class
+#' @keywords internal
+#'
+#' @exportClass .metComparator
 setClassUnion(".metComparator", c("gaMetComparator", "mcfMetComparator", "rtMetComparator"))
 
 # ---- expression operands ----
@@ -343,6 +440,14 @@ setClass(
   contains = "character"
 )
 
+#' `gaMetOperand` class.
+#'
+#' An S4 class to represent a Core-Reporting metric operand.
+#'
+#' @rdname gaMetOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaMetOperand",
   contains = ".metOperand",
@@ -355,6 +460,14 @@ setClass(
   }
 )
 
+#' `gaDimOperand` class.
+#'
+#' An S4 class to represent a Core-Reporting dimension operand.
+#'
+#' @rdname gaDimOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDimOperand",
   contains = ".dimOperand",
@@ -363,26 +476,68 @@ setClass(
   }
 )
 
+#' `mcfMetOperand` class.
+#'
+#' An S4 class to represent Multi-Channel metric condition operand.
+#'
+#' @rdname mcfMetOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfMetOperand",
   contains = ".metOperand"
 )
 
+#' `mcfDimOperand` class.
+#'
+#' An S4 class to represent a Multi-Channel dimension condition operand.
+#'
+#' @rdname mcfDimOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfDimOperand",
   contains = ".dimOperand"
 )
 
+#' `rtMetOperand` class.
+#'
+#' An S4 class to represent a Real-Time metric condition operand.
+#'
+#' @rdname rtMetOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtMetOperand",
   contains = ".metOperand"
 )
 
+#' `rtDimOperand` class.
+#'
+#' An S4 class to represent a Real-Time dimension condition operand.
+#'
+#' @rdname rtDimOperand-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtDimOperand",
   contains = ".dimOperand"
 )
 
+#' `.gaOperand` class.
+#'
+#' An S4 class union representing Core-reporting condition operands.
+#'
+#' @docType class
+#' @name .gaOperand-class
+#' @rdname gaOperand-class
+#' @keywords internal
+#'
+#' @exportClass .gaOperand
 setClassUnion(".gaOperand", c("gaMetOperand", "gaDimOperand"))
 setClassUnion(".mcfOperand", c("mcfMetOperand", "mcfDimOperand"))
 setClassUnion(".rtOperand", c("rtMetOperand", "rtDimOperand"))
