@@ -304,7 +304,7 @@ setClass(
 #' An S4 class representing Multi-Channel Funnel dimension conditional comparator
 #' operators.
 #'
-#' @rdname -class
+#' @rdname mcfDimComparator-class
 #' @keywords internal
 #'
 #' @export
@@ -539,7 +539,29 @@ setClass(
 #'
 #' @exportClass .gaOperand
 setClassUnion(".gaOperand", c("gaMetOperand", "gaDimOperand"))
+
+#' `.mcfOperand` class.
+#'
+#' An S4 class union representing Multi-Channel Funnel condition operands.
+#'
+#' @docType class
+#' @name .mcfOperand-class
+#' @rdname mcfOperand-class
+#' @keywords internal
+#'
+#' @exportClass .mcfOperand
 setClassUnion(".mcfOperand", c("mcfMetOperand", "mcfDimOperand"))
+
+#' `.rtOperand` class.
+#'
+#' An S4 class union representing Real-Time condition operands.
+#'
+#' @docType class
+#' @name .rtOperand-class
+#' @rdname rtOperand-class
+#' @keywords internal
+#'
+#' @exportClass .rtOperand
 setClassUnion(".rtOperand", c("rtMetOperand", "rtDimOperand"))
 
 setValidity(".mcfOperand", function(object) {
@@ -550,6 +572,16 @@ setValidity(".rtOperand", function(object) {
   validate_that(length(object) == 1)
 })
 
+#' `.operand` class.
+#'
+#' An S4 class union representing condition operands.
+#'
+#' @docType class
+#' @name .operand-class
+#' @rdname operand-class
+#' @keywords internal
+#'
+#' @exportClass .operand
 setClassUnion(".operand", c(
   "gaMetOperand", "gaDimOperand",
   "mcfMetOperand", "mcfDimOperand",
@@ -579,6 +611,14 @@ setClass(
   )
 )
 
+#' `mcfExpr` class.
+#'
+#' An S4 class to represent a Multi-Channel funnel condition expression.
+#'
+#' @rdname mcfExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".mcfExpr",
   slots = c(
@@ -605,6 +645,14 @@ setClass(
   )
 )
 
+#' `.metExpr` class.
+#'
+#' An S4 class to represent a metric condition expression.
+#'
+#' @rdname metExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".metExpr",
   slots = c(
@@ -614,6 +662,14 @@ setClass(
   )
 )
 
+#' `.dimExpr` class.
+#'
+#' An S4 class to represent a dimension condition expression.
+#'
+#' @rdname dimExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".dimExpr",
   slots = c(
