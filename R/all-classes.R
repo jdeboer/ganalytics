@@ -861,6 +861,14 @@ setClassUnion(".expr", c(
 
 # ---- 'AND' and 'OR' compound expressions -------------------------------
 
+#' `orExpr` class.
+#'
+#' An S4 class to represent an expression of ORed conditions.
+#'
+#' @rdname orExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "orExpr",
   contains = "list",
@@ -873,6 +881,14 @@ setClass(
   }
 )
 
+#' `andExpr` class.
+#'
+#' An S4 class to represent an expression of ANDed 'OR' expression.
+#'
+#' @rdname andExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "andExpr",
   contains = "list",
@@ -887,6 +903,14 @@ setClass(
 
 # ---- table filter ----
 
+#' `.tableFilter` class.
+#'
+#' An S4 class to represent a query table filter epxression.
+#'
+#' @rdname tableFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".tableFilter",
   contains = "andExpr",
@@ -910,6 +934,14 @@ setClass(
   }
 )
 
+#' `gaFilter` class.
+#'
+#' An S4 class to represent a Core Reporting query table filter expression.
+#'
+#' @rdname gaFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaFilter",
   contains = ".tableFilter",
@@ -934,6 +966,14 @@ setClass(
   }
 )
 
+#' `mcfFilter` class.
+#'
+#' An S4 class to represent Multi-Channel Funnel query table filter expression.
+#'
+#' @rdname mcfFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfFilter",
   contains = ".tableFilter",
@@ -948,6 +988,14 @@ setClass(
   }
 )
 
+#' `rtFilter` class.
+#'
+#' An S4 class to represent Real-Time query table filter expression.
+#'
+#' @rdname rtFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtFilter",
   contains = ".tableFilter",
@@ -964,6 +1012,14 @@ setClass(
 
 # ---- dynamic and pre-defined segments ----
 
+#' `gaSegmentCondition` class.
+#'
+#' An S4 class to represent an expression for a custom segment.
+#'
+#' @rdname gaSegmentCondition-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentCondition",
   contains = "andExpr",
@@ -989,6 +1045,15 @@ setClass(
   }
 )
 
+#' `.gaSegmentFilter` class.
+#'
+#' An S4 superclass to represent a negatable filter expression for a custom
+#' segment.
+#'
+#' @rdname gaSegmentFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   ".gaSegmentFilter",
   slots = c(
@@ -1005,6 +1070,14 @@ setClass(
   }
 )
 
+#' `gaSegmentSequenceStep` class.
+#'
+#' An S4 class to represent a step within a sequence expression.
+#'
+#' @rdname gaSegmentSequenceStep-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentSequenceStep",
   slots = c(
@@ -1021,6 +1094,14 @@ setClass(
   }
 )
 
+#' `gaSegmentSequenceFilter` class.
+#'
+#' An S4 class to represent a sequence expression as a segment filter.
+#'
+#' @rdname gaSegmentSequenceFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentSequenceFilter",
   contains = c("list", ".gaSegmentFilter"),
@@ -1033,11 +1114,29 @@ setClass(
   }
 )
 
+#' `gaSegmentConditionFilter` class.
+#'
+#' An S4 class to represent a non-sequential condition-based segment filter
+#' expression.
+#'
+#' @rdname gaSegmentConditionFilter-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentConditionFilter",
   contains = c("gaSegmentCondition", ".gaSegmentFilter")
 )
 
+#' `gaSegmentFilterList` class.
+#'
+#' An S4 class to represent a list of segment filter expressions that belong to a
+#' specified scope.
+#'
+#' @rdname gaSegmentFilterList-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentFilterList",
   slots = c(
@@ -1058,6 +1157,14 @@ setClass(
   }
 )
 
+#' `gaDynSegment` class.
+#'
+#' An S4 class to represent a list of scoped segment filter lists.
+#'
+#' @rdname gaDynSegment-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDynSegment",
   contains = "list",
@@ -1072,6 +1179,14 @@ setClass(
   }
 )
 
+#' `gaSegmentId` class.
+#'
+#' An S4 class to represent a pre-defined custom or built-in segment by its ID.
+#'
+#' @rdname gaSegmentId-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentId",
   contains = "character",
@@ -1085,8 +1200,26 @@ setClass(
   }
 )
 
+#' `.gaSegment` class.
+#'
+#' An S4 class union representing dynamic and pre-defined segment expressions.
+#'
+#' @docType class
+#' @name .gaSegment-class
+#' @rdname gaSegment-class
+#' @keywords internal
+#'
+#' @exportClass .gaSegment
 setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
+#' `gaSegmentList` class.
+#'
+#' An S4 class to represent a list of segment expressions to query.
+#'
+#' @rdname gaSegmentList-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegmentList",
   contains = "list",
