@@ -679,6 +679,14 @@ setClass(
   )
 )
 
+#' `gaMetExpr` class.
+#'
+#' An S4 class to represent a Core-Reporting metric condition expression.
+#'
+#' @rdname gaMetExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaMetExpr",
   slots = c(
@@ -700,6 +708,15 @@ setClass(
   }
 )
 
+#' `gaSegMetExpr` class.
+#'
+#' An S4 class to represent a Core-Reporting metric condition for use in segment
+#' expressions.
+#'
+#' @rdname gaSegMetExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaSegMetExpr",
   slots = c(
@@ -717,6 +734,14 @@ setClass(
   }
 )
 
+#' `gaDimExpr` class.
+#'
+#' An S4 class to represent a Core-Reporting dimension condition expression.
+#'
+#' @rdname gaDimExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "gaDimExpr",
   slots = c(
@@ -747,6 +772,14 @@ setClass(
   }
 )
 
+#' `mcfMetExpr` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel metric condition expression.
+#'
+#' @rdname mcfMetExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfMetExpr",
   slots = c(
@@ -757,6 +790,15 @@ setClass(
   contains = c(".mcfExpr", ".metExpr")
 )
 
+#' `mcfDimExpr` class.
+#'
+#' An S4 class to represent a Multi-Channel Funnel dimension condition
+#' expression.
+#'
+#' @rdname mcfDimExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "mcfDimExpr",
   slots = c(
@@ -767,6 +809,14 @@ setClass(
   contains = c(".mcfExpr", ".dimExpr")
 )
 
+#' `rtMetExpr` class.
+#'
+#' An S4 class to represent a Real-Time metric condition expression.
+#'
+#' @rdname rtMetExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtMetExpr",
   slots = c(
@@ -777,6 +827,14 @@ setClass(
   contains = c(".rtExpr", ".metExpr")
 )
 
+#' `rtDimExpr` class.
+#'
+#' An S4 class to represent Real-Time dimension condition expression.
+#'
+#' @rdname rtDimExpr-class
+#' @keywords internal
+#'
+#' @export
 setClass(
   "rtDimExpr",
   slots = c(
@@ -787,6 +845,16 @@ setClass(
   contains = c(".rtExpr", ".dimExpr")
 )
 
+#' `.expr` class.
+#'
+#' An S4 class union representing condition expressions.
+#'
+#' @docType class
+#' @name .expr-class
+#' @rdname expr-class
+#' @keywords internal
+#'
+#' @exportClass .expr
 setClassUnion(".expr", c(
   "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
 ))
