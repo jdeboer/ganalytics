@@ -1,9 +1,9 @@
-#' @include all-classes.R
-#' @include init-methods.R
+#' @include query-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
 #' @include GaGetCoreReport.R
+#' @importFrom methods setMethod as
+#' @importFrom plyr alply ldply mutate
 NULL
 
 setMethod(

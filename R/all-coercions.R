@@ -1,9 +1,7 @@
-#' @include all-classes.R
-#' @include init-methods.R
-#' @include all-generics.R
 #' @include utils.R
-#' @include gtm-api-classes.R
 #' @include management-api-classes.R
+#' @include gtm-api-classes.R
+#' @include init-methods.R
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_split str_split_fixed
 NULL

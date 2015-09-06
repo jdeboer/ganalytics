@@ -1,12 +1,12 @@
-#' @include all-classes.R
+#' @include expression-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
 #' @include Var.R
 #' @include Comparator.R
 #' @include Operand.R
-#' @include ganalytics-package.R
 #' @include utils.R
+#' @importFrom methods setMethod new validObject
 NULL
 
 #' @describeIn Expr

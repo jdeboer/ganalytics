@@ -174,3 +174,56 @@ GaProfileId <- function(...){
   .Deprecated("GaView<-")
   `GaView<-`(..., value)
 }
+
+#' @export GaSamplingLevel
+#' @rdname SamplingLevel
+GaSamplingLevel <- SamplingLevel
+
+#' @export GaSamplingLevel<-
+#' @rdname SamplingLevel
+`GaSamplingLevel<-` <- `SamplingLevel<-`
+
+#' @export GaMaxResults
+#' @rdname MaxResults
+GaMaxResults <- MaxResults
+
+#' @export GaMaxResults<-
+#' @rdname MaxResults
+`GaMaxResults<-` <- `MaxResults<-`
+
+#' @rdname SortBy
+#' @export GaSortBy
+GaSortBy <- SortBy
+
+#' @rdname SortBy
+#' @export GaSortBy<-
+`GaSortBy<-` <- `SortBy<-`
+
+
+#' GaDimensions (Deprecated).
+#'
+#' Use \code{Dimensions} instead of \code{GaDimensions}
+#' @rdname GaDimensions
+#' @param ... arguments passed onto \code{Dimensions}
+#' @export GaDimensions
+GaDimensions <- function(...){Dimensions(...)}
+
+#' GaMetrics (Deprecated).
+#'
+#' Use \code{Metrics} instead of \code{GaMetrics}
+#' @rdname GaMetrics
+#' @param ... arguments passed onto \code{Metrics}
+#' @export GaMetrics
+GaMetrics <- function(...){Metrics(...)}
+
+#' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
+#' @rdname GaDimensions
+#' @param value passed onto \code{Dimensions}
+#' @export GaDimensions<-
+`GaDimensions<-` <- function(..., value){`Dimensions<-`(..., value)}
+
+#' Use \code{Metrics<-} instead of \code{GaMetrics<-}
+#' @rdname GaMetrics
+#' @param value passed onto \code{Metrics}
+#' @export GaMetrics<-
+`GaMetrics<-` <- function(..., value){`Metrics<-`(..., value)}

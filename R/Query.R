@@ -1,9 +1,11 @@
 #' @include utils.R
-#' @include all-classes.R
+#' @include query-classes.R
+#' @include management-api-classes.R
+#' @include GaApiRequest.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
+#' @importFrom methods new as
 NULL
 
 #' GaQuery.
@@ -96,7 +98,7 @@ McfQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if(is.na(view[[1]])) {
+  if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
@@ -141,7 +143,7 @@ RtQuery <- function(
   filters = NULL,
   maxResults = kGaMaxResults
 ) {
-  if(is.na(view[[1]])) {
+  if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
@@ -260,20 +262,3 @@ setMethod(
     sample_params
   }
 )
-
-# Backwards compatibility
-#' @export GaSamplingLevel
-#' @rdname SamplingLevel
-GaSamplingLevel <- SamplingLevel
-
-#' @export GaSamplingLevel<-
-#' @rdname SamplingLevel
-`GaSamplingLevel<-` <- `SamplingLevel<-`
-
-#' @export GaMaxResults
-#' @rdname MaxResults
-GaMaxResults <- MaxResults
-
-#' @export GaMaxResults<-
-#' @rdname MaxResults
-`GaMaxResults<-` <- `MaxResults<-`

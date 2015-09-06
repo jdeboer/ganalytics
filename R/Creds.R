@@ -1,6 +1,6 @@
-#'@include ganalytics-package.R
-#'@include all-generics.R
-#'@include GaApiRequest.R
+#' @include all-generics.R
+#' @include GaApiRequest.R
+#' @importFrom methods setMethod validObject
 NULL
 
 #' @describeIn GaCreds

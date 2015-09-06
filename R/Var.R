@@ -1,10 +1,12 @@
 #' @include all-coercions.R
-#' @include all-classes.R
+#' @include var-classes.R
+#' @include expression-classes.R
+#' @include var-list-classes.R
+#' @include query-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include utils.R
-#' @include ganalytics-package.R
-#' @include meta.R
+#' @importFrom methods new setMethod
 NULL
 
 #' @describeIn Var Coerce a character to '.var'.
@@ -208,31 +210,3 @@ setMethod(
     object
   }
 )
-
-#' GaDimensions (Deprecated).
-#'
-#' Use \code{Dimensions} instead of \code{GaDimensions}
-#' @rdname GaDimensions
-#' @param ... arguments passed onto \code{Dimensions}
-#' @export GaDimensions
-GaDimensions <- function(...){Dimensions(...)}
-
-#' GaMetrics (Deprecated).
-#'
-#' Use \code{Metrics} instead of \code{GaMetrics}
-#' @rdname GaMetrics
-#' @param ... arguments passed onto \code{Metrics}
-#' @export GaMetrics
-GaMetrics <- function(...){Metrics(...)}
-
-#' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
-#' @rdname GaDimensions
-#' @param value passed onto \code{Dimensions}
-#' @export GaDimensions<-
-`GaDimensions<-` <- function(..., value){`Dimensions<-`(..., value)}
-
-#' Use \code{Metrics<-} instead of \code{GaMetrics<-}
-#' @rdname GaMetrics
-#' @param value passed onto \code{Metrics}
-#' @export GaMetrics<-
-`GaMetrics<-` <- function(..., value){`Metrics<-`(..., value)}

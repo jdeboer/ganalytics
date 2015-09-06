@@ -1,8 +1,11 @@
-#' @include all-classes.R
-#' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include comparator-classes.R
+#' @include expression-classes.R
+#' @include segment-classes.R
 #' @include utils.R
+#' @importFrom methods setMethod
+#' @importFrom assertthat assert_that
 NULL
 
 # ---- Not ----

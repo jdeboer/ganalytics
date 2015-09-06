@@ -1,9 +1,8 @@
-#' @include all-classes.R
-#' @include init-methods.R
+#' @include operand-classes.R
+#' @include expression-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
-#' @include utils.R
+#' @importFrom methods setMethod as
 NULL
 
 # ---- Operand ----

@@ -1,7 +1,5 @@
 # Generic functions
 # -----------------
-#' @include all-classes.R
-NULL
 
 #' Google Analytics dimension and metric variables.
 #'

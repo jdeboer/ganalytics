@@ -1,8 +1,7 @@
-#' @include all-classes.R
-#' @include init-methods.R
+#' @include comparator-classes.R
+#' @include expression-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
 #' @include utils.R
 NULL
 

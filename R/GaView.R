@@ -1,8 +1,8 @@
-#' @include all-classes.R
+#' @include query-classes.R
 #' @include management-api-classes.R
 #' @include all-coercions.R
-#' @include init-methods.R
 #' @include all-generics.R
+#' @importFrom methods setMethod as
 NULL
 
 # -- GaView ----

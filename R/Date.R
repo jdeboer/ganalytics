@@ -1,10 +1,11 @@
-#' @include all-classes.R
-#' @include init-methods.R
 #' @include all-generics.R
+#' @include query-classes.R
+#' @include init-methods.R
 #' @include all-coercions.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
+#' @importFrom methods setMethod new
 NULL
 
 #'SplitDateRange
@@ -28,7 +29,7 @@ SplitDateRange <- function(dateRange, N) {
   #
   # Set new start dates
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
-  if(N <= 0 | N > maxN) {
+  if (N <= 0 | N > maxN) {
     N <- maxN
   }
   start <- min(StartDate(dateRange))
@@ -51,7 +52,7 @@ GetDataByDateRange <- function(query, dates) {
   adply(dates, 1, function(dateRange) {
     DateRange(query) <- DateRange(dateRange$start, dateRange$end)
     output <- GetGaData(query)
-    if(nrow(output)==0){output <- NULL}
+    if (nrow(output) == 0){output <- NULL}
     return(output)
   })
 }

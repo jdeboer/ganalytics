@@ -1,8 +1,8 @@
-#' @include all-coercions.R
-#' @include all-classes.R
-#' @include init-methods.R
 #' @include all-generics.R
+#' @include table-filter-classes.R
+#' @include all-coercions.R
 #' @include utils.R
+#' @importFrom methods setMethod
 NULL
 
 #' @describeIn TableFilter

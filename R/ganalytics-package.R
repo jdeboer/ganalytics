@@ -58,6 +58,9 @@
 #' @importFrom plyr aaply mutate alply l_ply ldply laply llply
 #' @importFrom XML xmlParse xmlToList xmlApply
 #' @importFrom jsonlite toJSON fromJSON validate
+#' @importFrom methods setClass setClassUnion setValidity prototype
+#' @importFrom stringr str_replace str_detect
+#' @importFrom assertthat validate_that
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package
