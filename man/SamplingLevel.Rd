@@ -21,20 +21,28 @@ SamplingLevel(object, value)
 
 SamplingLevel(object) <- value
 
-SamplingLevel(object, value)
+GaSamplingLevel(...)
 
-SamplingLevel(object) <- value
+GaSamplingLevel(...) <- value
 }
 \arguments{
 \item{object}{the query or response to check the sampling level of.}
 
 \item{value}{if \code{object} is a query, then use  value to set the sampling
   level to of that query.}
+
+\item{...}{arguments passed onto \code{SamplingLevel}}
+
+\item{value}{passed onto \code{SamplingLevel<-}}
 }
 \description{
 Get the sampling level.
 
 Set the sampling level for a ganalytics query.
+
+GaSamplingLevel (Deprecated).
+
+GaSamplingLevel<- (Deprecated).
 }
 \section{Methods (by class)}{
 \itemize{

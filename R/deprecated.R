@@ -175,30 +175,71 @@ GaProfileId <- function(...){
   `GaView<-`(..., value)
 }
 
+#' GaSamplingLevel (Deprecated).
+#'
+#' @param ... arguments passed onto \code{SamplingLevel}
+#'
 #' @export GaSamplingLevel
 #' @rdname SamplingLevel
-GaSamplingLevel <- SamplingLevel
+GaSamplingLevel <- function(...){
+  .Deprecated("SamplingLevel")
+  SamplingLevel(...)
+}
 
+#' GaSamplingLevel<- (Deprecated).
+#'
+#' @param value passed onto \code{SamplingLevel<-}
+#'
 #' @export GaSamplingLevel<-
 #' @rdname SamplingLevel
-`GaSamplingLevel<-` <- `SamplingLevel<-`
+`GaSamplingLevel<-` <- function(...){
+  .Deprecated("SamplingLevel<-")
+  `SamplingLevel<-`(..., value)
+}
 
+#' GaMaxResults (Deprecated).
+#'
+#' @param ... arguments passed onto \code{MaxResults}
+#'
 #' @export GaMaxResults
 #' @rdname MaxResults
-GaMaxResults <- MaxResults
+GaMaxResults <- function(...){
+  .Deprecated("MaxResults")
+  MaxResults(...)
+}
 
+#' GaMaxResults<- (Deprecated).
+#'
+#' @param value passed onto \code{MaxResults}
+#'
 #' @export GaMaxResults<-
 #' @rdname MaxResults
-`GaMaxResults<-` <- `MaxResults<-`
+`GaMaxResults<-` <- function(...){
+  .Deprecated("MaxResults<-")
+  `MaxResults<-`(..., value)
+}
 
+#' GaSortBy (Deprecated).
+#'
+#' @param ... arguments passed onto \code{SortBy}
+#'
 #' @rdname SortBy
 #' @export GaSortBy
-GaSortBy <- SortBy
+GaSortBy <- function(...){
+  .Deprecated("SortBy")
+  SortBy(...)
+}
 
+#' GaSortBy<- (Deprecated).
+#'
+#' @param value passed onto \code{SortBy<-}
+#'
 #' @rdname SortBy
 #' @export GaSortBy<-
-`GaSortBy<-` <- `SortBy<-`
-
+`GaSortBy<-` <- function(..., value){
+  .Deprecated("SortBy<-")
+  `SortBy<-`(..., value)
+}
 
 #' GaDimensions (Deprecated).
 #'
@@ -206,7 +247,10 @@ GaSortBy <- SortBy
 #' @rdname GaDimensions
 #' @param ... arguments passed onto \code{Dimensions}
 #' @export GaDimensions
-GaDimensions <- function(...){Dimensions(...)}
+GaDimensions <- function(...){
+  .Deprecated("Dimensions")
+  Dimensions(...)
+}
 
 #' GaMetrics (Deprecated).
 #'
@@ -214,16 +258,25 @@ GaDimensions <- function(...){Dimensions(...)}
 #' @rdname GaMetrics
 #' @param ... arguments passed onto \code{Metrics}
 #' @export GaMetrics
-GaMetrics <- function(...){Metrics(...)}
+GaMetrics <- function(...){
+  .Deprecated("Metrics")
+  Metrics(...)
+}
 
 #' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
 #' @rdname GaDimensions
 #' @param value passed onto \code{Dimensions}
 #' @export GaDimensions<-
-`GaDimensions<-` <- function(..., value){`Dimensions<-`(..., value)}
+`GaDimensions<-` <- function(..., value){
+  .Deprecated("Dimensions<-")
+  `Dimensions<-`(..., value)
+}
 
 #' Use \code{Metrics<-} instead of \code{GaMetrics<-}
 #' @rdname GaMetrics
 #' @param value passed onto \code{Metrics}
 #' @export GaMetrics<-
-`GaMetrics<-` <- function(..., value){`Metrics<-`(..., value)}
+`GaMetrics<-` <- function(..., value){
+  .Deprecated("Metrics<-")
+  `Metrics<-`(..., value)
+}

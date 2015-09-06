@@ -30,9 +30,9 @@ SortBy(object, ..., desc = logical(0))
 
 SortBy(object) <- value
 
-SortBy(object, ..., desc = logical(0))
+GaSortBy(...)
 
-SortBy(object) <- value
+GaSortBy(...) <- value
 }
 \arguments{
 \item{object}{A character vector or list of dimensions or metrics to sort by.
@@ -50,11 +50,19 @@ or sort by.}
 query then the replacement list of dimensions or metrics to sort by.}
 
 \item{value}{The replacement dimensions and metrics for the supplied object.}
+
+\item{...}{arguments passed onto \code{SortBy}}
+
+\item{value}{passed onto \code{SortBy<-}}
 }
 \description{
 Get the sortBy order of the query.
 
 Set the order of rows returned by Google Analytics.
+
+GaSortBy (Deprecated).
+
+GaSortBy<- (Deprecated).
 }
 \section{Methods (by class)}{
 \itemize{

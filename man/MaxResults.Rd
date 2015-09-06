@@ -18,19 +18,27 @@ MaxResults(object, value)
 
 MaxResults(object) <- value
 
-MaxResults(object, value)
+GaMaxResults(...)
 
-MaxResults(object) <- value
+GaMaxResults(...) <- value
 }
 \arguments{
 \item{object}{a query object.}
 
 \item{value}{replacement value for the max-results parameter of the query.}
+
+\item{...}{arguments passed onto \code{MaxResults}}
+
+\item{value}{passed onto \code{MaxResults}}
 }
 \description{
 Get the value set for MaxResults.
 
 Set the maximum rows returned by a ganalytics query.
+
+GaMaxResults (Deprecated).
+
+GaMaxResults<- (Deprecated).
 }
 \section{Methods (by class)}{
 \itemize{
