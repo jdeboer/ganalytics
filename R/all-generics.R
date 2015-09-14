@@ -54,7 +54,7 @@ setGeneric(
 #' Var<-.
 #'
 #' \code{Var<-} sets the value of an object belonging to the superclass '.var'
-#' or sets the var slot of an expression object belonging to class '.expr'
+#' or sets the var slot of an expression object belonging to superclass '.expr'
 #'
 #' @param value any object that can be coerced to a valid \code{object} class.
 #'
@@ -940,18 +940,6 @@ setGeneric(
     validObject(object)
     object
   }
-)
-
-#' GetGaQueries.
-#'
-#' Get the chracter string query compoents for the given ganalytics object.
-#'
-#' @param object a query object to coerce to matrix.
-setGeneric(
-  "GetGaQueries",
-  function(object) {},
-  valueClass = "matrix",
-  useAsDefault = FALSE
 )
 
 #' GetGaData.

@@ -6,14 +6,6 @@
 #' @importFrom plyr alply ldply mutate
 NULL
 
-setMethod(
-  f = "GetGaQueries",
-  signature = signature(".query"),
-  definition = function(object) {
-    as(object, "matrix")
-  }
-)
-
 #' GetGaData Execute a ganalytics query.
 #' @param query the query to execute.
 #' @param creds the Google APIs Project OAuth 2.0 credentials to use.
@@ -32,7 +24,7 @@ setMethod("GetGaData", ".query", function(
   if (is.null(creds)) {
     creds <- query@creds
   }
-  queryParams <- GetGaQueries(query)
+  queryParams <- as(query, "matrix")
   # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(
     .data = queryParams,
