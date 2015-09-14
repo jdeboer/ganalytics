@@ -63,7 +63,7 @@ Collate:
     'Var.R'
     'Operand.R'
     'Expr.R'
-    'Filter.R'
+    'TableFilter.R'
     'GaGetCoreReport.R'
     'GaView.R'
     'GetGa.R'

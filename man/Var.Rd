@@ -89,7 +89,7 @@ or metric for use with the core reporting, multi-channel-funnel reporting or
 real-time reporting API.
 
 \code{Var<-} sets the value of an object belonging to the superclass '.var'
-or sets the var slot of an expression object belonging to class '.expr'
+or sets the var slot of an expression object belonging to superclass '.expr'
 
 \code{GaVar} Gets or creates an object from the superclass .gaVar
 
