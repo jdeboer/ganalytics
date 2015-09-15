@@ -180,7 +180,7 @@ GaProfileId <- function(...){
 #' @param ... arguments passed onto \code{SamplingLevel}
 #'
 #' @export GaSamplingLevel
-#' @rdname SamplingLevel
+#' @rdname GaSamplingLevel
 GaSamplingLevel <- function(...){
   .Deprecated("SamplingLevel")
   SamplingLevel(...)
@@ -191,8 +191,8 @@ GaSamplingLevel <- function(...){
 #' @param value passed onto \code{SamplingLevel<-}
 #'
 #' @export GaSamplingLevel<-
-#' @rdname SamplingLevel
-`GaSamplingLevel<-` <- function(...){
+#' @rdname GaSamplingLevel
+`GaSamplingLevel<-` <- function(..., value){
   .Deprecated("SamplingLevel<-")
   `SamplingLevel<-`(..., value)
 }
@@ -202,7 +202,7 @@ GaSamplingLevel <- function(...){
 #' @param ... arguments passed onto \code{MaxResults}
 #'
 #' @export GaMaxResults
-#' @rdname MaxResults
+#' @rdname GaMaxResults
 GaMaxResults <- function(...){
   .Deprecated("MaxResults")
   MaxResults(...)
@@ -213,8 +213,8 @@ GaMaxResults <- function(...){
 #' @param value passed onto \code{MaxResults}
 #'
 #' @export GaMaxResults<-
-#' @rdname MaxResults
-`GaMaxResults<-` <- function(...){
+#' @rdname GaMaxResults
+`GaMaxResults<-` <- function(..., value){
   .Deprecated("MaxResults<-")
   `MaxResults<-`(..., value)
 }
@@ -223,7 +223,7 @@ GaMaxResults <- function(...){
 #'
 #' @param ... arguments passed onto \code{SortBy}
 #'
-#' @rdname SortBy
+#' @rdname GaSortBy
 #' @export GaSortBy
 GaSortBy <- function(...){
   .Deprecated("SortBy")
@@ -234,7 +234,7 @@ GaSortBy <- function(...){
 #'
 #' @param value passed onto \code{SortBy<-}
 #'
-#' @rdname SortBy
+#' @rdname GaSortBy
 #' @export GaSortBy<-
 `GaSortBy<-` <- function(..., value){
   .Deprecated("SortBy<-")
@@ -280,3 +280,31 @@ GaMetrics <- function(...){
   .Deprecated("Metrics<-")
   `Metrics<-`(..., value)
 }
+
+#' Use \code{Sequence} instead of \code{GaSequence}
+#' @rdname GaSequence
+#' @param ... passed onto \code{Sequence}
+#' @export GaSequence
+GaSequence <- function(...) {
+  .Deprecated("Sequence")
+  Sequence(...)
+}
+
+#' Use \code{ScopeLevel} instead of \code{GaScopeLevel}
+#' @rdname GaScopeLevel
+#' @param ... passed onto \code{ScopeLevel}
+#' @export GaScopeLevel
+GaScopeLevel <- function(...) {
+  .Deprecated("ScopeLevel")
+  ScopeLevel(...)
+}
+
+#' Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
+#' @rdname GaScopeLevel
+#' @param value passed onto \code{ScopeLevel<-}
+#' @export GaScopeLevel<-
+`GaScopeLevel<-` <- function(..., value) {
+  .Deprecated("ScopeLevel<-")
+  `ScopeLevel<-`(..., value)
+}
+
