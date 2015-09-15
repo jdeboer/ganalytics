@@ -194,3 +194,21 @@ all_inherit <- function(list_object, class_names) {
 parse_date <- function(date, output_format = kGaDateInFormat) {
   format(ymd(date), format = output_format)
 }
+
+# Helper functions for coercion between classes
+# ---------------------------------------------
+
+simpleCoerce <- function(from, to) {new(to, from)}
+simpleCoerceData <- function(from, to) {new(to, from@.Data)}
+simpleCoerceToNumeric <- function(from, to) {new(to, as.numeric(from))}
+simpleCoerceToList <- function(from, to) {new(to, list(from))}
+coerceViaList <- function(from, to) {as(as.list(from), to)}
+coerceViaChar <- function(from, to){as(as(from, "character"), to)}
+coerceViaAnd <- function(from, to) {as(as(from, "andExpr"), to)}
+simpleReplace <- function(from, value) {initialize(from, value)}
+coerceLogicalOperand <- function(from, to){
+  operand <- ifelse(from, yes = "Yes", no = "No")
+  if (is.na(operand)) operand <- from
+  new(to, operand)
+}
+

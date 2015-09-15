@@ -1,5 +1,6 @@
 #' @include all-coercions.R
 #' @include var-classes.R
+#' @include var-coerce.R
 #' @include expression-classes.R
 #' @include var-list-classes.R
 #' @include query-classes.R

@@ -60,6 +60,7 @@ Collate:
     'Comparator.R'
     'Creds.R'
     'Date.R'
+    'var-coerce.R'
     'Var.R'
     'Operand.R'
     'Expr.R'
