@@ -99,23 +99,24 @@ setMethod(
   }
 )
 
-# ---- GaScopeLevel, GaScopeLevel<- ----
+# ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn GaScopeLevel
+#' @describeIn ScopeLevel
 setMethod(
-  f = "GaScopeLevel",
+  f = "ScopeLevel",
   signature = "gaSegmentFilterList",
   definition = function(object) {
     object@conditionScope
   }
 )
 
-#' @describeIn GaScopeLevel
+#' @describeIn ScopeLevel
 setMethod(
-  f = "GaScopeLevel<-",
+  f = "ScopeLevel<-",
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@conditionScope <- value
+    validObject(object)
     object
   }
 )
@@ -127,7 +128,7 @@ setMethod(
   f = "PerSession",
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
-    GaScopeLevel(object) <- "sessions"
+    ScopeLevel(object) <- "sessions"
     GaSegmentFilters(object, ...)
   }
 )
@@ -137,7 +138,7 @@ setMethod(
   f = "PerSession",
   signature = "gaMetExpr",
   definition = function(object, ...) {
-    GaScopeLevel(object) <- "perSession"
+    ScopeLevel(object) <- "perSession"
     if (!missing(...)) {
       GaSegmentFilters(object, ...)
     }
@@ -149,7 +150,7 @@ setMethod(
   f = "PerUser",
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
-    GaScopeLevel(object) <- "users"
+    ScopeLevel(object) <- "users"
     GaSegmentFilters(object, ...)
   }
 )
@@ -159,7 +160,7 @@ setMethod(
   f = "PerUser",
   signature = "gaMetExpr",
   definition = function(object, ...) {
-    GaScopeLevel(object) <- "perUser"
+    ScopeLevel(object) <- "perUser"
     if (!missing(...)) {
       GaSegmentFilters(object, ...)
     }
@@ -171,7 +172,7 @@ setMethod(
   f = "PerHit",
   signature = "gaMetExpr",
   definition = function(object, ...) {
-    GaScopeLevel(object) <- "perHit"
+    ScopeLevel(object) <- "perHit"
     if (!missing(...)) {
       GaSegmentFilters(object, ...)
     }

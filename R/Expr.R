@@ -105,14 +105,14 @@ setMethod(
   }
 )
 
-# ---- GaScopeLevel, GaScopeLevel<- ----
+# ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn GaScopeLevel
-setMethod("GaScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
+#' @describeIn ScopeLevel
+setMethod("ScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
 
-#' @describeIn GaScopeLevel
+#' @describeIn ScopeLevel
 setMethod(
-  f = "GaScopeLevel<-",
+  f = "ScopeLevel<-",
   signature = c("gaSegMetExpr", "character"),
   definition = function(object, value) {
     object@metricScope <- value
@@ -121,9 +121,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaScopeLevel
+#' @describeIn ScopeLevel
 setMethod(
-  f = "GaScopeLevel<-",
+  f = "ScopeLevel<-",
   signature = c("gaMetExpr", "character"),
   definition = function(object, value) {
     object <- as(object, "gaSegMetScope")
@@ -132,24 +132,3 @@ setMethod(
     object
   }
 )
-
-#' @describeIn GaScopeLevel
-setMethod(
-  f = "GaScopeLevel",
-  signature = "gaSegmentFilterList",
-  definition = function(object) {
-    object@conditionScope
-  }
-)
-
-#' @describeIn GaScopeLevel
-setMethod(
-  f = "GaScopeLevel<-",
-  signature = c("gaSegmentFilterList", "character"),
-  definition = function(object, value) {
-    object@conditionScope <- value
-    validObject(object)
-    object
-  }
-)
-
