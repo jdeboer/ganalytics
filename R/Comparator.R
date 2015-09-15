@@ -2,6 +2,7 @@
 #' @include expression-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include comparator-coerce.R
 #' @include utils.R
 NULL
 

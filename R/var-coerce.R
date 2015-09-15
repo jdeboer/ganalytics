@@ -1,3 +1,6 @@
+#' @include utils.R
+NULL
+
 # Coercing to .var classes
 
 setAs(from = "character", to = ".gaVar", def = function(from) {
