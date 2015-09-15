@@ -72,6 +72,7 @@ Collate:
     'GaGetCoreReport.R'
     'view-coerce.R'
     'GaView.R'
+    'ga-api-coerce.R'
     'GetGa.R'
     'Query.R'
     'segment-coerce.R'

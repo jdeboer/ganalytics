@@ -4,6 +4,17 @@
 NULL
 
 # Coercing to .expr
+
+# Need to consider escaping of the following characters in the operand:\|,;_
+parseOperand <- function(operand, comparator) {
+  if (comparator == "[]") {
+    operand <- str_split(operand, "\\|")[[1]]
+  } else if (comparator == "<>") {
+    operand <- str_split_fixed(operand, "_", 2)[1,]
+  }
+  operand <- gsub("\\\\", "\\", operand)
+}
+
 # Need to redo this to properly handle escaping with the \ used with GA.
 setAs(from = "character", to = ".expr", def = function(from) {
   ops <- union(kGaOps$met, kGaOps$dim)

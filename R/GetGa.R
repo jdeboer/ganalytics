@@ -1,6 +1,7 @@
 #' @include query-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include ga-api-coerce.R
 #' @include GaGetCoreReport.R
 #' @importFrom methods setMethod as
 #' @importFrom plyr alply ldply mutate
