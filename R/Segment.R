@@ -120,11 +120,11 @@ setMethod(
   }
 )
 
-# ---- GaPerSession, GaPerUser ----
+# ---- PerSession, PerUser ----
 
-#' @describeIn GaPerSession
+#' @describeIn PerSession
 setMethod(
-  f = "GaPerSession",
+  f = "PerSession",
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
     GaScopeLevel(object) <- "sessions"
@@ -132,9 +132,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaPerSession
+#' @describeIn PerSession
 setMethod(
-  f = "GaPerSession",
+  f = "PerSession",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     GaScopeLevel(object) <- "perSession"
@@ -144,9 +144,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaPerUser
+#' @describeIn PerUser
 setMethod(
-  f = "GaPerUser",
+  f = "PerUser",
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
     GaScopeLevel(object) <- "users"
@@ -154,9 +154,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaPerUser
+#' @describeIn PerUser
 setMethod(
-  f = "GaPerUser",
+  f = "PerUser",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     GaScopeLevel(object) <- "perUser"
@@ -166,9 +166,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaPerHit
+#' @describeIn PerHit
 setMethod(
-  f = "GaPerHit",
+  f = "PerHit",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     GaScopeLevel(object) <- "perHit"

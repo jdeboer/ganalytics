@@ -496,7 +496,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaPerHit
+#' PerHit
 #'
 #' Set the scope of a gaMetExpr object to hit-level.
 #'
@@ -505,13 +505,13 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaPerHit",
+  "PerHit",
   function(object, ...){},
   valueClass = "gaSegMetExpr",
   useAsDefault = FALSE
 )
 
-#' GaPerSession
+#' PerSession
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 #'
@@ -520,13 +520,13 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaPerSession",
+  "PerSession",
   function(object, ...){},
   valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
 
-#' GaPerUser
+#' PerUser
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 #'
@@ -535,7 +535,7 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaPerUser",
+  "PerUser",
   function(object, ...){},
   valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
   useAsDefault = FALSE
