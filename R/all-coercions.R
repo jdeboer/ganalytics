@@ -59,8 +59,8 @@ setAs(from = ".metOperand", to = "character",
 # Coercing GA expressions to GA API compatible character strings
 setAs(from = ".expr", to = "character", def = function(from, to) {
   paste0(
-    if(class(from) == "gaSegMetExpr") {
-      if(from@metricScope != "") paste0(from@metricScope, "::")
+    if (class(from) == "gaSegMetExpr") {
+      if (from@metricScope != "") paste0(from@metricScope, "::")
     },
     as(from@var, to),
     as(from@comparator, to),
@@ -79,25 +79,25 @@ setAs(from = "andExpr", to = "character", def = function(from, to) {
 setAs(from = "gaSegmentConditionFilter", to = "character", def = function(from) {
   paste0(
     "condition::",
-    if(from@negation) {"!"} else {""},
+    if (from@negation) {"!"} else {""},
     as(as(from, "andExpr"), "character")
   )
 })
 
 setAs(from = "gaSegmentSequenceFilter", to = "character", def = function(from, to) {
-  if(length(from) >= 1) {
+  if (length(from) >= 1) {
     paste0(
       "sequence::",
-      if(from@negation) {"!"} else {""},
+      if (from@negation) {"!"} else {""},
       do.call(
         paste0,
         lapply(seq_along(from),
           FUN = function(sequenceStep) {
             paste0(
-              if(sequenceStep > 1) {
-                if(from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
+              if (sequenceStep > 1) {
+                if (from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
               } else {
-                if(from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
+                if (from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
               },
               as(from[[sequenceStep]], to)
             )
@@ -111,7 +111,7 @@ setAs(from = "gaSegmentSequenceFilter", to = "character", def = function(from, t
 })
 
 setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
-  if(length(from) >= 1) {
+  if (length(from) >= 1) {
     paste(
       from@conditionScope,
       do.call(
@@ -229,11 +229,11 @@ setAs(from = ".expr", to = "andExpr", def = function(from, to) {
 # class, i.e GA, RT or MCF subclasses.
 
 setAs(from = "andExpr", to = ".tableFilter", def = function(from) {
-  if(all_inherit(unlist(from), ".gaExpr")) {
+  if (all_inherit(unlist(from), ".gaExpr")) {
     as(from, "gaFilter")
-  } else if(all_inherit(unlist(from), ".mcfExpr")) {
+  } else if (all_inherit(unlist(from), ".mcfExpr")) {
     as(from, "mcfFilter")
-  } else if(all_inherit(unlist(from), ".rtExpr")) {
+  } else if (all_inherit(unlist(from), ".rtExpr")) {
     as(from, "rtFilter")
   } else stop("Cannot determine type of filter.")
 })
@@ -471,7 +471,7 @@ setAs(from = "list", to = ".gaVarList", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".gaVar")}))
   if (all_inherit(vars, ".metVar")) {
     as(vars, "gaMetrics")
-  } else if(all_inherit(vars, ".dimVar")) {
+  } else if (all_inherit(vars, ".dimVar")) {
     as(vars, "gaDimensions")
   } else {
     as(vars, "gaSortBy")
@@ -482,7 +482,7 @@ setAs(from = "list", to = ".mcfVarList", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".mcfVar")}))
   if (all_inherit(vars, ".metVar")) {
     as(vars, "mcfMetrics")
-  } else if(all_inherit(vars, ".dimVar")) {
+  } else if (all_inherit(vars, ".dimVar")) {
     as(vars, "mcfDimensions")
   } else {
     as(vars, "mcfSortBy")
@@ -493,7 +493,7 @@ setAs(from = "list", to = ".rtVarList", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".rtVar")}))
   if (all_inherit(vars, ".metVar")) {
     as(vars, "rtMetrics")
-  } else if(all_inherit(vars, ".dimVar")) {
+  } else if (all_inherit(vars, ".dimVar")) {
     as(vars, "rtDimensions")
   } else {
     as(vars, "rtSortBy")
@@ -722,16 +722,16 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if(length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1) {
             as(dimensions, "character")
           },
-          "sort" = if(length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1) {
             as(sortBy, "character")
           },
-          "filters" = if(length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
-          "segment" = if(length(segments) >= 1) {
+          "segment" = if (length(segments) >= 1) {
             as(segments, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
@@ -777,13 +777,13 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if(length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1) {
             as(dimensions, "character")
           },
-          "sort" = if(length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1) {
             as(sortBy, "character")
           },
-          "filters" = if(length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
@@ -821,13 +821,13 @@ setAs(
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if(length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1) {
             as(dimensions, "character")
           },
-          "sort" = if(length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1) {
             as(sortBy, "character")
           },
-          "filters" = if(length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1) {
             as(tableFilter, "character")
           }
         )
