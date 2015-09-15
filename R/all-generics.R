@@ -387,7 +387,7 @@ setGeneric("xor")
 #'
 #' @return a gaSegmentSequenceStep object, with the immediate flag not set.
 #'
-#' @seealso GaSequence
+#' @seealso Sequence
 #'
 #' @export
 setGeneric(
@@ -410,7 +410,7 @@ setGeneric(
 #' @return a gaSegmentSequenceStep object, with the immediate flag set.
 #'
 #' @export
-#' @seealso GaSequence
+#' @seealso Sequence
 setGeneric(
   "Then",
   function(object, ...) {},
@@ -433,7 +433,7 @@ setGeneric(
 #'
 #'
 #' @export
-#' @seealso GaSequence
+#' @seealso Sequence
 setGeneric(
   "First",
   function(object, ...) {},
@@ -441,7 +441,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaSequence.
+#' Sequence.
 #'
 #' Create a new gaSequence object
 #'
@@ -454,7 +454,7 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaSequence",
+  "Sequence",
   function(object, ..., negation = FALSE) {},
   valueClass = "gaSegmentSequenceFilter",
   useAsDefault = FALSE

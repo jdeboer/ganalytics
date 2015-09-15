@@ -2,7 +2,7 @@
 #' @importFrom assertthat assert_that
 NULL
 
-#' Sequence.
+#' sequential_segment.
 #'
 #' Create a sequence using non-standard evaluation.
 #'
@@ -17,10 +17,10 @@ NULL
 #' b <- condition(eventCategory == "Video") &
 #'   condition(eventAction == "Play")
 #' c <- condition(medium == "email")
-#' s <- Sequence(list( ..., a, ..., b, c ))
+#' s <- sequential_segment(list( ..., a, ..., b, c ))
 #'
 #' @export
-Sequence <- function(steps){
+sequential_segment <- function(steps){
   lazy_expr <- lazy(steps)
   assert_that(lazy_expr$expr[[1]] == "list")
   step_exprs <- lazy_expr$expr[-1]

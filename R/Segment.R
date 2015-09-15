@@ -6,9 +6,9 @@
 #' @importFrom methods new setMethod
 NULL
 
-# ---- Later, Then, First, GaSequence ----
+# ---- Later, Then, First, Sequence ----
 
-#' @describeIn GaSequence
+#' @describeIn Sequence
 setMethod(
   f = "Later",
   signature = ".compoundExpr",
@@ -17,7 +17,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequence
+#' @describeIn Sequence
 setMethod(
   f = "Then",
   signature = ".compoundExpr",
@@ -26,7 +26,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequence
+#' @describeIn Sequence
 setMethod(
   f = "First",
   signature = ".compoundExpr",
@@ -35,9 +35,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequence
+#' @describeIn Sequence
 setMethod(
-  f = "GaSequence",
+  f = "Sequence",
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
@@ -46,9 +46,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaSequence
+#' @describeIn Sequence
 setMethod(
-  f = "GaSequence",
+  f = "Sequence",
   signature = "gaSegmentSequenceStep",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)

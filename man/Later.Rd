@@ -21,6 +21,6 @@ steps in the sequence, i.e. 'later'. 'Later' means 'followed by', but not
 necessarily immediately.
 }
 \seealso{
-GaSequence
+Sequence
 }
 

@@ -22,6 +22,6 @@ the first interaction of included sessions and users within the select date
 range. First expressly means 'first interaction' within the date range.
 }
 \seealso{
-GaSequence
+Sequence
 }
 
