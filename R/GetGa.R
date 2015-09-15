@@ -5,6 +5,7 @@
 #' @include GaGetCoreReport.R
 #' @importFrom methods setMethod as
 #' @importFrom plyr alply ldply mutate
+#' @importFrom scales percent
 NULL
 
 #' GetGaData Execute a ganalytics query.
@@ -48,9 +49,11 @@ setMethod("GetGaData", ".query", function(
   )[-1]
   attr(data, "sampleSize") <- sum(laply(responses, function(response){as.numeric(response$sampleSize)}))
   attr(data, "sampleSpace") <- sum(laply(responses, function(response){as.numeric(response$sampleSpace)}))
+  sampleSize <- attr(data, "sampleSize")
+  sampleSpace <- attr(data, "sampleSpace")
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
   if (sampled) {
-    warning("Contains sampled data.")
+    warning(paste("Contains sampled data: ", sampleSize, "/", sampleSpace, "(", percent(sampleSize/sampleSpace), ")."))
   }
   return(data)
 })

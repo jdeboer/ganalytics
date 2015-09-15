@@ -33,7 +33,8 @@ Imports:
     assertthat,
     devtools,
     rvest,
-    lazyeval
+    lazyeval,
+    scales
 Suggests:
     testthat,
     knitr,
