@@ -2,6 +2,7 @@
 #' @include query-classes.R
 #' @include init-methods.R
 #' @include all-coercions.R
+#' @include date-coerce.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
