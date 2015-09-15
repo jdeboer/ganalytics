@@ -4,7 +4,7 @@
 \alias{GtmAccount}
 \title{GTM Account}
 \usage{
-GtmAccount(id = NULL, creds = GoogleApiCreds())
+GtmAccount(id = NULL, creds = .creds)
 }
 \arguments{
 \item{id}{ID of the GTM account to get}

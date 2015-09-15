@@ -4,7 +4,7 @@
 \alias{McfQuery}
 \title{McfQuery.}
 \usage{
-McfQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
+McfQuery(view = NA, creds = .creds, startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1, metrics = "mcf:totalConversions",
   dimensions = "mcf:nthDay", sortBy = NULL, filters = NULL,
   samplingLevel = "DEFAULT", maxResults = kGaMaxResults)

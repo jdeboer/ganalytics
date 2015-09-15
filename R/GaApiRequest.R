@@ -5,6 +5,9 @@
 #' @importFrom R6 R6Class
 NULL
 
+# This will be initialised using GoogleApiCreds() at time of package being loaded.
+.creds <- list()
+
 #' Google APIs OAuth 2.0 Credentials.
 #'
 #' Create a Google APIs OAuth2.0 credentials object
@@ -23,7 +26,7 @@ GoogleApiCreds <- function(
   use_oob = FALSE,
   appname = "GOOGLE_APIS"
 ){
-  cache_generic_file_name <- paste0(tolower(appname), "_auth.RDS")
+  cache_generic_file_name <- paste(tolower(appname), "auth.RDS", sep = "_")
   cache_file_prefix <- "."
   cache_default_dir <- "~"
   if (length(cache) == 0) {
@@ -34,7 +37,7 @@ GoogleApiCreds <- function(
     }
     cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
   }
-  creds <- list(
+  .creds <<- list(
     app = app_oauth_creds(
       appname = appname,
       creds = appCreds
@@ -45,6 +48,7 @@ GoogleApiCreds <- function(
     ),
     use_oob = use_oob
   )
+  .creds
 }
 
 app_oauth_creds <- function(appname, creds = NULL) {
@@ -296,7 +300,7 @@ get_privates <- function(class_gen){
 .googleApi <- R6Class(
   ".googleApi",
   public = list(
-    creds = GoogleApiCreds(),
+    creds = .creds,
     get = function(max_results = NULL) {
       req_type <- "GET"
       private$api_req_func(
@@ -308,7 +312,7 @@ get_privates <- function(class_gen){
         max_results = max_results
       )
     },
-    initialize = function(creds = GoogleApiCreds()) {
+    initialize = function(creds = .creds) {
       self$creds = creds
     }
   ),
@@ -353,7 +357,7 @@ get_privates <- function(class_gen){
       })
       self
     },
-    initialize = function(creds = GoogleApiCreds(), parent = NULL, id = NA) {
+    initialize = function(creds = .creds, parent = NULL, id = NA) {
       super$initialize(creds = creds)
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
@@ -455,7 +459,7 @@ get_privates <- function(class_gen){
       )
       self$get()
     },
-    initialize = function(creds = GoogleApiCreds(), parent = NULL) {
+    initialize = function(creds = .creds, parent = NULL) {
       super$initialize(creds = creds)
       entity_class_private <- get_privates(private$entity_class)
       private$request <- entity_class_private$request

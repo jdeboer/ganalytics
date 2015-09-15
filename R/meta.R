@@ -12,7 +12,7 @@ NULL
 #'
 #' @return a data.frame
 #' @param creds Google Analytics OAuth 2.0 credentials object.
-GaMetaUpdate <- function(creds = GoogleApiCreds()) {
+GaMetaUpdate <- function(creds = .creds) {
   scope <- ga_scopes['read_only']
   request <- c("metadata", "ga", "columns")
   meta_data <- ga_api_request(creds = creds, request = request, scope = scope)

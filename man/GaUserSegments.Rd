@@ -4,7 +4,7 @@
 \alias{GaUserSegments}
 \title{Get a collection of user and system defined segments.}
 \usage{
-GaUserSegments(creds = GoogleApiCreds())
+GaUserSegments(creds = .creds)
 }
 \arguments{
 \item{creds}{The Google APIs credentials to use.}
