@@ -2,6 +2,7 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include segment-coerce.R
 #' @include management-api-classes.R
 #' @importFrom methods new setMethod
 NULL

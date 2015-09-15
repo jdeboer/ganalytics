@@ -3,6 +3,7 @@
 #' @include var-coerce.R
 #' @include expression-classes.R
 #' @include var-list-classes.R
+#' @include var-list-coerce.R
 #' @include query-classes.R
 #' @include init-methods.R
 #' @include all-generics.R

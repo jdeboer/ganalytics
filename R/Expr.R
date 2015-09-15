@@ -2,6 +2,7 @@
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
+#' @include expr-coerce.R
 #' @include Var.R
 #' @include Comparator.R
 #' @include Operand.R
