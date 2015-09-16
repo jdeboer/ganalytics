@@ -58,11 +58,11 @@ setMethod(
   }
 )
 
-# ---- GaCondition, GaSegmentFilters ----
+# ---- SegmentConditionFilter, SegmentFilters ----
 
-#' @describeIn GaCondition
+#' @describeIn SegmentConditionFilter
 setMethod(
-  f = "GaCondition",
+  f = "SegmentConditionFilter",
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
@@ -71,19 +71,19 @@ setMethod(
   }
 )
 
-#' @describeIn GaSegmentFilters
+#' @describeIn SegmentFilters
 setMethod(
-  f = "GaSegmentFilters",
+  f = "SegmentFilters",
   signature = ".compoundExpr",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
-    GaSegmentFilters(do.call(GaCondition, exprList), scope = scope)
+    SegmentFilters(do.call("SegmentConditionFilter", exprList), scope = scope)
   }
 )
 
-#' @describeIn GaSegmentFilters
+#' @describeIn SegmentFilters
 setMethod(
-  f = "GaSegmentFilters",
+  f = "SegmentFilters",
   signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
@@ -91,9 +91,9 @@ setMethod(
   }
 )
 
-#' @describeIn GaSegmentFilters
+#' @describeIn SegmentFilters
 setMethod(
-  f = "GaSegmentFilters",
+  f = "SegmentFilters",
   signature = "gaSegmentFilterList",
   definition = function(object) {
     object
@@ -130,7 +130,7 @@ setMethod(
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
     ScopeLevel(object) <- "sessions"
-    GaSegmentFilters(object, ...)
+    SegmentFilters(object, ...)
   }
 )
 
@@ -141,7 +141,7 @@ setMethod(
   definition = function(object, ...) {
     ScopeLevel(object) <- "perSession"
     if (!missing(...)) {
-      GaSegmentFilters(object, ...)
+      SegmentFilters(object, ...)
     }
   }
 )
@@ -152,7 +152,7 @@ setMethod(
   signature = "gaSegmentFilterList",
   definition = function(object, ...) {
     ScopeLevel(object) <- "users"
-    GaSegmentFilters(object, ...)
+    SegmentFilters(object, ...)
   }
 )
 
@@ -163,7 +163,7 @@ setMethod(
   definition = function(object, ...) {
     ScopeLevel(object) <- "perUser"
     if (!missing(...)) {
-      GaSegmentFilters(object, ...)
+      SegmentFilters(object, ...)
     }
   }
 )
@@ -175,7 +175,7 @@ setMethod(
   definition = function(object, ...) {
     ScopeLevel(object) <- "perHit"
     if (!missing(...)) {
-      GaSegmentFilters(object, ...)
+      SegmentFilters(object, ...)
     }
   }
 )
@@ -225,8 +225,8 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentFilters(
-        GaCondition(expr),
+      SegmentFilters(
+        SegmentConditionFilter(expr),
         scope = scope
       )
     })
@@ -251,7 +251,7 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentFilters(
+      SegmentFilters(
         expr,
         scope = scope
       )
@@ -267,8 +267,8 @@ setMethod(
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr) {
-      GaSegmentFilters(
-        GaCondition(expr),
+      SegmentFilters(
+        SegmentConditionFilter(expr),
         scope = scope
       )
     })

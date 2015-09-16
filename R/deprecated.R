@@ -1,3 +1,6 @@
+#' @importFrom assertthat assert_that
+NULL
+
 # Backwards compatibility for deprecated functions
 
 #' GaNot (Deprecated, use Not or ! instead).
