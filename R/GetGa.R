@@ -26,6 +26,9 @@ setMethod("GetGaData", ".query", function(
   if (is.null(creds)) {
     creds <- query@creds
   }
+  if (!missing(use_oob)) {
+    warning("Argument 'use_oob' is defunct, please use the GaCreds or GoogleApiCreds functions instead to either supply a creds argument or to set the creds of the supplied query object.", call. = FALSE)
+  }
   queryParams <- as(query, "matrix")
   # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(

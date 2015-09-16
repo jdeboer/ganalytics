@@ -41,6 +41,13 @@ GaQuery <- function(
   maxResults = kGaMaxResults,
   profileId = NA
 ) {
+
+#   if (!missing(profileId)) {
+#     warning("argument profileId is deprecated; please use view instead.",
+#             call. = FALSE)
+#     view <- profileId
+#   }
+
   if (missing(profileId)) {
     if (!is(view, ".gaResource")) {
       if (any(is.na(view))) {
