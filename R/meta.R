@@ -76,6 +76,26 @@ GaMetaUpdate <- function(creds = .creds) {
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  metadata_path <- system.file("extdata", "metadata.RDA", package = "ganalytics")
+
+  if (nchar(metadata_path) == 0) {
+    package_path <- system.file(package = "ganalytics")
+    extdata_path <- paste0(package_path, "/extdata")
+    assert_that(dir.exists(extdata_path))
+#     if (!dir.exists(extdata_path)) {
+#       dir.create(extdata_path)
+#     }
+    metadata_path <- paste(extdata_path, "metadata.RDA", sep = "/")
+  }
+
+  prompt <- paste0(
+    "Ready to update ganalytics metadata files, located in: ",
+    metadata_path,
+    "\nPress enter to continue..."
+  )
+  keypress <- readline(prompt)
+  assert_that(nchar(keypress) == 0)
+
+  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, metadata_path)
 
 }
