@@ -72,7 +72,7 @@ setMethod(
   f = "Include",
   signature = "gaSegmentSequenceFilter",
   definition = function(object, ...) {
-
+    SegmentConditionFilter(object, ..., negation = FALSE)
   }
 )
 
@@ -81,7 +81,7 @@ setMethod(
   f = "Exclude",
   signature = "gaSegmentSequenceFilter",
   definition = function(object, ...) {
-
+    SegmentConditionFilter(object, ..., negation = TRUE)
   }
 )
 
