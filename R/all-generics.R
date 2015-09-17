@@ -482,6 +482,40 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' Include.
+#'
+#' One or more segment conditions or sequences to include from the defined user
+#' or session segment.
+#'
+#' @param object a condition or sequence to include
+#' @param ... further conditions or sequences to include, i.e. ANDed.
+#' @return a .gaSegmentFilter object with its negate slot set to FALSE.
+#'
+#' @export
+setGeneric(
+  "Include",
+  function(object, ...) {},
+  valueClass = ".gaSegmentFilter",
+  useAsDefault = FALSE
+)
+
+#' Exclude.
+#'
+#' One or more segment conditions or sequences to exclude from the defined user
+#' or session segment.
+#'
+#' @param object a condition or sequence to exclude
+#' @param ... further conditions or sequences to exclude.
+#' @return a .gaSegmentFilter object with its negate slot set to TRUE.
+#'
+#' @export
+setGeneric(
+  "Exclude",
+  function(object, ...) {},
+  valueClass = ".gaSegmentFilter",
+  useAsDefault = TRUE
+)
+
 #' SegmentFilters.
 #'
 #' Create a new gaSegmentFilterList object
