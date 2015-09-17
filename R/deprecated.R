@@ -394,7 +394,9 @@ GaScopeLevel <- function(...) {
   ScopeLevel(...)
 }
 
-#' Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
+#' GaScopeLevel<-
+#'
+#' Deprecated, use \code{ScopeLevel<-} instead.
 #'
 #' @param value passed onto \code{ScopeLevel<-}
 #'

@@ -17,7 +17,7 @@ GaScopeLevel(...) <- value
 \description{
 Deprecated, use \code{ScopeLevel} instead
 
-Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
+Deprecated, use \code{ScopeLevel<-} instead.
 }
 \keyword{internal}
 
