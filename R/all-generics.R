@@ -482,7 +482,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaSegmentFilters
+#' SegmentFilters.
 #'
 #' Create a new gaSegmentFilterList object
 #'
@@ -495,7 +495,7 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaSegmentFilters",
+  "SegmentFilters",
   function(object, ..., scope = "sessions") {},
   valueClass = "gaSegmentFilterList",
   useAsDefault = FALSE
