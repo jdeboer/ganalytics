@@ -3,10 +3,13 @@
 \docType{methods}
 \name{PerHit,gaMetExpr-method}
 \alias{PerHit}
+\alias{PerHit,.compoundExpr-method}
 \alias{PerHit,gaMetExpr-method}
 \title{PerHit}
 \usage{
 \S4method{PerHit}{gaMetExpr}(object, ...)
+
+\S4method{PerHit}{.compoundExpr}(object, ...)
 
 PerHit(object, ...)
 }
@@ -23,5 +26,7 @@ hit).
 \section{Methods (by class)}{
 \itemize{
 \item \code{gaMetExpr}: 
+
+\item \code{.compoundExpr}: 
 }}
 

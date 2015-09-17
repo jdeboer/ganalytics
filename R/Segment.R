@@ -207,6 +207,15 @@ setMethod(
   }
 )
 
+#' @describeIn PerHit
+setMethod(
+  f = "PerHit",
+  signature = ".compoundExpr",
+  definition = function(object, ...) {
+    Sequence(object, ...)
+  }
+)
+
 # ---- Segment, Segment<- ----
 
 #' @describeIn Segment

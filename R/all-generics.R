@@ -539,7 +539,9 @@ setGeneric(
 
 #' PerHit
 #'
-#' Set the scope of a gaMetExpr object to hit-level.
+#' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
+#' filter to a sequence filter of length one (i.e. conditions to match a single
+#' hit).
 #'
 #' @param object a gaMetExpr object to coerce to user-level.
 #' @param ... Other conditions to be included in the segment definition.
@@ -548,7 +550,7 @@ setGeneric(
 setGeneric(
   "PerHit",
   function(object, ...){},
-  valueClass = "gaSegMetExpr",
+  valueClass = c("gaSegMetExpr", "gaSegmentSequenceFilter"),
   useAsDefault = FALSE
 )
 
