@@ -47,14 +47,7 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence
 setMethod(
-  f = "Sequence",
-  signature = "gaSegmentSequenceStep",
-  definition = function(object, ..., negation) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
-    new("gaSegmentSequenceFilter", exprList, negation = negation)
 
 #' @describeIn Exclude
 setMethod(
