@@ -8,6 +8,7 @@ NULL
 #' @param ... arguments passed to \code{Not}
 #'
 #' @rdname GaNot
+#' @keywords internal
 #' @export GaNot
 GaNot <- function(...){
   .Deprecated("Not")
@@ -19,6 +20,7 @@ GaNot <- function(...){
 #' @param ... arguments passed to \code{Or}
 #'
 #' @rdname GaOr
+#' @keywords internal
 #' @export GaOr
 GaOr <- function(...){
   .Deprecated("Or")
@@ -30,6 +32,7 @@ GaOr <- function(...){
 #' @param ... arguments passed to \code{And}
 #'
 #' @rdname GaAnd
+#' @keywords internal
 #' @export GaAnd
 GaAnd <- function(...){
   .Deprecated("And")
@@ -41,6 +44,7 @@ GaAnd <- function(...){
 #' @param ... arguments passed onto \code{StartDate}
 #'
 #' @rdname GaStartDate
+#' @keywords internal
 #' @export GaStartDate
 GaStartDate <- function(...){
   .Deprecated("StartDate")
@@ -52,6 +56,7 @@ GaStartDate <- function(...){
 #' @param ... arguments passed onto \code{EndDate}
 #'
 #' @rdname GaEndDate
+#' @keywords internal
 #' @export GaEndDate
 GaEndDate <- function(...){
   .Deprecated("EndDate")
@@ -63,6 +68,7 @@ GaEndDate <- function(...){
 #' @param ... arguments passed onto \code{DateRange}
 #'
 #' @rdname GaDateRange
+#' @keywords internal
 #' @export GaDateRange
 GaDateRange <- function(...){
   .Deprecated("DateRange")
@@ -74,6 +80,7 @@ GaDateRange <- function(...){
 #' @param value passed onto \code{StartDate}
 #'
 #' @rdname GaStartDate
+#' @keywords internal
 #' @export GaStartDate<-
 `GaStartDate<-` <- function(..., value){
   .Deprecated("StartDate<-")
@@ -85,6 +92,7 @@ GaDateRange <- function(...){
 #' @param value passed onto \code{EndDate}
 #'
 #' @rdname GaEndDate
+#' @keywords internal
 #' @export GaEndDate<-
 `GaEndDate<-` <- function(..., value){
   .Deprecated("EndDate<-")
@@ -96,6 +104,7 @@ GaDateRange <- function(...){
 #' @param value passed onto \code{DateRange}
 #'
 #' @rdname GaDateRange
+#' @keywords internal
 #' @export GaDateRange<-
 `GaDateRange<-` <- function(..., value){
   .Deprecated("DateRange<-")
@@ -106,6 +115,7 @@ GaDateRange <- function(...){
 #'
 #' @param ... arguments passed onto \code{SplitDateRange}
 #'
+#' @keywords internal
 #' @export GaSplitDateRange
 GaSplitDateRange <- function(...){
   .Deprecated("SplitDateRange")
@@ -117,6 +127,7 @@ GaSplitDateRange <- function(...){
 #' @param ... arguments passed onto \code{Segment}
 #'
 #' @rdname GaSegment
+#' @keywords internal
 #' @export GaSegment
 GaSegment <- function(...){
   .Deprecated("Segment")
@@ -128,6 +139,7 @@ GaSegment <- function(...){
 #' @param value passed onto \code{Segment}
 #'
 #' @rdname GaSegment
+#' @keywords internal
 #' @export GaSegment<-
 `GaSegment<-` <- function(..., value){
   .Deprecated("Segment<-")
@@ -139,6 +151,7 @@ GaSegment <- function(...){
 #' @param ... arguments passed onto \code{TableFilter}
 #'
 #' @rdname GaFilter
+#' @keywords internal
 #' @export GaFilter
 GaFilter <- function(...){
   .Deprecated("TableFilter")
@@ -150,6 +163,7 @@ GaFilter <- function(...){
 #' @param value passed onto \code{TableFilter<-}
 #'
 #' @rdname GaFilter
+#' @keywords internal
 #' @export GaFilter<-
 `GaFilter<-` <- function(..., value){
   .Deprecated("TableFilter<-")
@@ -161,6 +175,7 @@ GaFilter <- function(...){
 #' @param ... arguments passed onto \code{GaView}
 #'
 #' @rdname GaProfileId
+#' @keywords internal
 #' @export GaProfileId
 GaProfileId <- function(...){
   .Deprecated("GaView")
@@ -172,6 +187,7 @@ GaProfileId <- function(...){
 #' @param value passed onto \code{GaView<-}
 #'
 #' @rdname GaProfileId
+#' @keywords internal
 #' @export GaProfileId<-
 `GaProfileId<-` <- function(..., value){
   .Deprecated("GaView<-")
@@ -183,6 +199,7 @@ GaProfileId <- function(...){
 #' @param ... arguments passed onto \code{SamplingLevel}
 #'
 #' @export GaSamplingLevel
+#' @keywords internal
 #' @rdname GaSamplingLevel
 GaSamplingLevel <- function(...){
   .Deprecated("SamplingLevel")
@@ -194,6 +211,7 @@ GaSamplingLevel <- function(...){
 #' @param value passed onto \code{SamplingLevel<-}
 #'
 #' @export GaSamplingLevel<-
+#' @keywords internal
 #' @rdname GaSamplingLevel
 `GaSamplingLevel<-` <- function(..., value){
   .Deprecated("SamplingLevel<-")
@@ -205,6 +223,7 @@ GaSamplingLevel <- function(...){
 #' @param ... arguments passed onto \code{MaxResults}
 #'
 #' @export GaMaxResults
+#' @keywords internal
 #' @rdname GaMaxResults
 GaMaxResults <- function(...){
   .Deprecated("MaxResults")
@@ -216,6 +235,7 @@ GaMaxResults <- function(...){
 #' @param value passed onto \code{MaxResults}
 #'
 #' @export GaMaxResults<-
+#' @keywords internal
 #' @rdname GaMaxResults
 `GaMaxResults<-` <- function(..., value){
   .Deprecated("MaxResults<-")
@@ -227,6 +247,7 @@ GaMaxResults <- function(...){
 #' @param ... arguments passed onto \code{SortBy}
 #'
 #' @rdname GaSortBy
+#' @keywords internal
 #' @export GaSortBy
 GaSortBy <- function(...){
   .Deprecated("SortBy")
@@ -238,6 +259,7 @@ GaSortBy <- function(...){
 #' @param value passed onto \code{SortBy<-}
 #'
 #' @rdname GaSortBy
+#' @keywords internal
 #' @export GaSortBy<-
 `GaSortBy<-` <- function(..., value){
   .Deprecated("SortBy<-")
@@ -247,8 +269,11 @@ GaSortBy <- function(...){
 #' GaDimensions (Deprecated).
 #'
 #' Use \code{Dimensions} instead of \code{GaDimensions}
-#' @rdname GaDimensions
+#'
 #' @param ... arguments passed onto \code{Dimensions}
+#'
+#' @rdname GaDimensions
+#' @keywords internal
 #' @export GaDimensions
 GaDimensions <- function(...){
   .Deprecated("Dimensions")
@@ -258,8 +283,11 @@ GaDimensions <- function(...){
 #' GaMetrics (Deprecated).
 #'
 #' Use \code{Metrics} instead of \code{GaMetrics}
-#' @rdname GaMetrics
+#'
 #' @param ... arguments passed onto \code{Metrics}
+#'
+#' @rdname GaMetrics
+#' @keywords internal
 #' @export GaMetrics
 GaMetrics <- function(...){
   .Deprecated("Metrics")
@@ -267,8 +295,11 @@ GaMetrics <- function(...){
 }
 
 #' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
-#' @rdname GaDimensions
+#'
 #' @param value passed onto \code{Dimensions}
+#'
+#' @rdname GaDimensions
+#' @keywords internal
 #' @export GaDimensions<-
 `GaDimensions<-` <- function(..., value){
   .Deprecated("Dimensions<-")
@@ -276,8 +307,11 @@ GaMetrics <- function(...){
 }
 
 #' Use \code{Metrics<-} instead of \code{GaMetrics<-}
-#' @rdname GaMetrics
+#'
 #' @param value passed onto \code{Metrics}
+#'
+#' @rdname GaMetrics
+#' @keywords internal
 #' @export GaMetrics<-
 `GaMetrics<-` <- function(..., value){
   .Deprecated("Metrics<-")
@@ -285,8 +319,11 @@ GaMetrics <- function(...){
 }
 
 #' Use \code{Sequence} instead of \code{GaSequence}
-#' @rdname GaSequence
+#'
 #' @param ... passed onto \code{Sequence}
+#'
+#' @rdname GaSequence
+#' @keywords internal
 #' @export GaSequence
 GaSequence <- function(...) {
   .Deprecated("Sequence")
@@ -294,8 +331,11 @@ GaSequence <- function(...) {
 }
 
 #' Use \code{ScopeLevel} instead of \code{GaScopeLevel}
-#' @rdname GaScopeLevel
+#'
 #' @param ... passed onto \code{ScopeLevel}
+#'
+#' @rdname GaScopeLevel
+#' @keywords internal
 #' @export GaScopeLevel
 GaScopeLevel <- function(...) {
   .Deprecated("ScopeLevel")
@@ -303,8 +343,11 @@ GaScopeLevel <- function(...) {
 }
 
 #' Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
-#' @rdname GaScopeLevel
+#'
 #' @param value passed onto \code{ScopeLevel<-}
+#'
+#' @rdname GaScopeLevel
+#' @keywords internal
 #' @export GaScopeLevel<-
 `GaScopeLevel<-` <- function(..., value) {
   .Deprecated("ScopeLevel<-")
