@@ -47,7 +47,16 @@ setMethod(
   }
 )
 
+# ---- Include, Exclude ----
+
+#' @describeIn Include
 setMethod(
+  f = "Include",
+  signature = ".compoundExpr",
+  definition = function(object, ...) {
+    SegmentConditionFilter(object, ..., negation = FALSE)
+  }
+)
 
 #' @describeIn Exclude
 setMethod(
