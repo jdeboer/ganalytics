@@ -473,6 +473,7 @@ setGeneric(
 #' @param ... Other expressions to be ANDed to the first expression provided.
 #' @param negation Logical TRUE or FALSE to match segments where this conditon
 #'   has not been met.
+#' @return a gaSegmentConditionFilter object.
 #'
 #' @export
 setGeneric(
@@ -526,6 +527,7 @@ setGeneric(
 #' @param object The first condition to be included in the segments definition.
 #' @param ... Other conditions to be included in the segment definition.
 #' @param scope The scope of this condition, either 'user' or 'session' level.
+#' @return a gaSegmentFilterList object.
 #'
 #' @export
 setGeneric(
