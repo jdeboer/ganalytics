@@ -19,4 +19,5 @@ Use \code{Metrics} instead of \code{GaMetrics}
 
 Use \code{Metrics<-} instead of \code{GaMetrics<-}
 }
+\keyword{internal}
 

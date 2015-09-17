@@ -12,4 +12,5 @@ GaOr(...)
 \description{
 GaOr (Deprecated, use Or or | instead).
 }
+\keyword{internal}
 

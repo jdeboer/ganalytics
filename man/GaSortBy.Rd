@@ -19,4 +19,5 @@ GaSortBy (Deprecated).
 
 GaSortBy<- (Deprecated).
 }
+\keyword{internal}
 

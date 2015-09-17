@@ -19,4 +19,5 @@ GaSamplingLevel (Deprecated).
 
 GaSamplingLevel<- (Deprecated).
 }
+\keyword{internal}
 

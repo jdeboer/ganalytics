@@ -19,4 +19,5 @@ Use \code{ScopeLevel} instead of \code{GaScopeLevel}
 
 Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
 }
+\keyword{internal}
 

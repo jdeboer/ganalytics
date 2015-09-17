@@ -12,4 +12,5 @@ GaSplitDateRange(...)
 \description{
 GaSplitDateRange (Deprecated)
 }
+\keyword{internal}
 

@@ -19,4 +19,5 @@ GaDateRange (Deprecated)
 
 GaDateRange<- (Deprecated)
 }
+\keyword{internal}
 

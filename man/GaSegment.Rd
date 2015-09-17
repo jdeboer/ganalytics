@@ -19,4 +19,5 @@ GaSegment (Deprecated).
 
 GaSegment<- (Deprecated).
 }
+\keyword{internal}
 

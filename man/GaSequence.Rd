@@ -12,4 +12,5 @@ GaSequence(...)
 \description{
 Use \code{Sequence} instead of \code{GaSequence}
 }
+\keyword{internal}
 

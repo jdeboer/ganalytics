@@ -12,4 +12,5 @@ GaNot(...)
 \description{
 GaNot (Deprecated, use Not or ! instead).
 }
+\keyword{internal}
 

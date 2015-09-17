@@ -19,4 +19,5 @@ GaMaxResults (Deprecated).
 
 GaMaxResults<- (Deprecated).
 }
+\keyword{internal}
 

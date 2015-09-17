@@ -19,4 +19,5 @@ Use \code{Dimensions} instead of \code{GaDimensions}
 
 Use \code{Dimensions<-} instead of \code{GaDimensions<-}
 }
+\keyword{internal}
 
