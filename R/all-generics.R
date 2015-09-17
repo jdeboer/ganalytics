@@ -465,7 +465,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' GaCondition
+#' SegmentConditionFilter.
 #'
 #' Create a new gaSegmentConditionFilter object
 #'
@@ -476,7 +476,7 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaCondition",
+  "SegmentConditionFilter",
   function(object, ..., negation = FALSE) {},
   valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
