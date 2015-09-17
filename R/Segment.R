@@ -66,6 +66,22 @@ setMethod(
     SegmentConditionFilter(object, ..., negation = TRUE)
   }
 )
+
+#' @describeIn Include
+setMethod(
+  f = "Include",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+
+  }
+)
+
+#' @describeIn Exclude
+setMethod(
+  f = "Exclude",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+
   }
 )
 
