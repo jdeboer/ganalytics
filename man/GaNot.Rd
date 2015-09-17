@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{GaNot}
 \alias{GaNot}
-\title{GaNot (Deprecated, use Not or ! instead).}
+\title{GaNot}
 \usage{
 GaNot(...)
 }
@@ -10,7 +10,7 @@ GaNot(...)
 \item{...}{arguments passed to \code{Not}}
 }
 \description{
-GaNot (Deprecated, use Not or ! instead).
+Deprecated, use Not or ! instead.
 }
 \keyword{internal}
 

@@ -3,7 +3,7 @@
 \name{GaSamplingLevel}
 \alias{GaSamplingLevel}
 \alias{GaSamplingLevel<-}
-\title{GaSamplingLevel (Deprecated).}
+\title{GaSamplingLevel}
 \usage{
 GaSamplingLevel(...)
 
@@ -15,9 +15,9 @@ GaSamplingLevel(...) <- value
 \item{value}{passed onto \code{SamplingLevel<-}}
 }
 \description{
-GaSamplingLevel (Deprecated).
+Deprecated, use SamplingLevel instead.
 
-GaSamplingLevel<- (Deprecated).
+Deprecated, use SamplingLevel<- instead.
 }
 \keyword{internal}
 

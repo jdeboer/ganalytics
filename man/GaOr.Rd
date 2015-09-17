@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{GaOr}
 \alias{GaOr}
-\title{GaOr (Deprecated, use Or or | instead).}
+\title{GaOr}
 \usage{
 GaOr(...)
 }
@@ -10,7 +10,7 @@ GaOr(...)
 \item{...}{arguments passed to \code{Or}}
 }
 \description{
-GaOr (Deprecated, use Or or | instead).
+Deprecated, use Or or | instead.
 }
 \keyword{internal}
 

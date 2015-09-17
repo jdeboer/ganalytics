@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{GaAnd}
 \alias{GaAnd}
-\title{GaAnd (Deprecated, use And or & instead).}
+\title{GaAnd}
 \usage{
 GaAnd(...)
 }
@@ -10,7 +10,7 @@ GaAnd(...)
 \item{...}{arguments passed to \code{And}}
 }
 \description{
-GaAnd (Deprecated, use And or & instead).
+Deprecated, use And or & instead.
 }
 \keyword{internal}
 

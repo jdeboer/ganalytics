@@ -3,7 +3,7 @@
 \name{GaDimensions}
 \alias{GaDimensions}
 \alias{GaDimensions<-}
-\title{GaDimensions (Deprecated).}
+\title{GaDimensions}
 \usage{
 GaDimensions(...)
 
@@ -15,9 +15,9 @@ GaDimensions(...) <- value
 \item{value}{passed onto \code{Dimensions}}
 }
 \description{
-Use \code{Dimensions} instead of \code{GaDimensions}
+Deprecated, use \code{Dimensions} instead.
 
-Use \code{Dimensions<-} instead of \code{GaDimensions<-}
+Deprecated, use \code{Dimensions<-} instead.
 }
 \keyword{internal}
 

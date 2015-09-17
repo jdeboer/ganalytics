@@ -3,7 +3,9 @@ NULL
 
 # Backwards compatibility for deprecated functions
 
-#' GaNot (Deprecated, use Not or ! instead).
+#' GaNot
+#'
+#' Deprecated, use Not or ! instead.
 #'
 #' @param ... arguments passed to \code{Not}
 #'
@@ -15,7 +17,9 @@ GaNot <- function(...){
   Not(...)
 }
 
-#' GaOr (Deprecated, use Or or | instead).
+#' GaOr
+#'
+#' Deprecated, use Or or | instead.
 #'
 #' @param ... arguments passed to \code{Or}
 #'
@@ -27,7 +31,9 @@ GaOr <- function(...){
   Or(...)
 }
 
-#' GaAnd (Deprecated, use And or & instead).
+#' GaAnd
+#'
+#' Deprecated, use And or & instead.
 #'
 #' @param ... arguments passed to \code{And}
 #'
@@ -39,7 +45,9 @@ GaAnd <- function(...){
   And(...)
 }
 
-#' GaStartDate (Deprecated)
+#' GaStartDate
+#'
+#' Deprecated, use StartDate instead.
 #'
 #' @param ... arguments passed onto \code{StartDate}
 #'
@@ -51,7 +59,9 @@ GaStartDate <- function(...){
   StartDate(...)
 }
 
-#' GaEndDate (Deprecated)
+#' GaEndDate
+#'
+#' Deprecated, use EndDate instead.
 #'
 #' @param ... arguments passed onto \code{EndDate}
 #'
@@ -63,7 +73,9 @@ GaEndDate <- function(...){
   EndDate(...)
 }
 
-#' GaDateRange (Deprecated)
+#' GaDateRange
+#'
+#' Deprecated, use DateRange instead.
 #'
 #' @param ... arguments passed onto \code{DateRange}
 #'
@@ -75,7 +87,9 @@ GaDateRange <- function(...){
   DateRange(...)
 }
 
-#' GaStartDate<- (Deprecated)
+#' GaStartDate<-
+#'
+#' Deprecated, use StartDate<- instead.
 #'
 #' @param value passed onto \code{StartDate}
 #'
@@ -87,7 +101,9 @@ GaDateRange <- function(...){
   `StartDate<-`(..., value)
 }
 
-#' GaEndDate<- (Deprecated)
+#' GaEndDate<-
+#'
+#' Deprecated, use EndDate instead.
 #'
 #' @param value passed onto \code{EndDate}
 #'
@@ -99,7 +115,9 @@ GaDateRange <- function(...){
   `EndDate<-`(..., value)
 }
 
-#' GaDateRange<- (Deprecated)
+#' GaDateRange<-
+#'
+#' Deprecated, use DateRange instead.
 #'
 #' @param value passed onto \code{DateRange}
 #'
@@ -111,7 +129,9 @@ GaDateRange <- function(...){
   `DateRange<-`(..., value)
 }
 
-#' GaSplitDateRange (Deprecated)
+#' GaSplitDateRange
+#'
+#' Deprecated, use SplitDateRange instead.
 #'
 #' @param ... arguments passed onto \code{SplitDateRange}
 #'
@@ -122,7 +142,9 @@ GaSplitDateRange <- function(...){
   SplitDateRange(...)
 }
 
-#' GaSegment (Deprecated).
+#' GaSegment
+#'
+#' Deprecated, use Segment instead.
 #'
 #' @param ... arguments passed onto \code{Segment}
 #'
@@ -134,7 +156,9 @@ GaSegment <- function(...){
   Segment(...)
 }
 
-#' GaSegment<- (Deprecated).
+#' GaSegment<-
+#'
+#' Deprecated, use Segment<- instead.
 #'
 #' @param value passed onto \code{Segment}
 #'
@@ -146,7 +170,9 @@ GaSegment <- function(...){
   `Segment<-`(..., value)
 }
 
-#' GaFilter (Deprecated).
+#' GaFilter
+#'
+#' Deprecated, use TableFilter instead.
 #'
 #' @param ... arguments passed onto \code{TableFilter}
 #'
@@ -158,7 +184,9 @@ GaFilter <- function(...){
   TableFilter(...)
 }
 
-#' GaFilter<- (Deprecated).
+#' GaFilter<-
+#'
+#' Deprecated, use TableFilter<- instead.
 #'
 #' @param value passed onto \code{TableFilter<-}
 #'
@@ -170,7 +198,9 @@ GaFilter <- function(...){
   `TableFilter<-`(..., value)
 }
 
-#' GaProfileId (Deprecated).
+#' GaProfileId
+#'
+#' Deprecated, use GaView instead.
 #'
 #' @param ... arguments passed onto \code{GaView}
 #'
@@ -182,7 +212,9 @@ GaProfileId <- function(...){
   GaView(...)
 }
 
-#' GaProfileId<- (Deprecated).
+#' GaProfileId<-
+#'
+#' Deprecated, use GaView instead.
 #'
 #' @param value passed onto \code{GaView<-}
 #'
@@ -194,7 +226,9 @@ GaProfileId <- function(...){
   `GaView<-`(..., value)
 }
 
-#' GaSamplingLevel (Deprecated).
+#' GaSamplingLevel
+#'
+#' Deprecated, use SamplingLevel instead.
 #'
 #' @param ... arguments passed onto \code{SamplingLevel}
 #'
@@ -206,7 +240,9 @@ GaSamplingLevel <- function(...){
   SamplingLevel(...)
 }
 
-#' GaSamplingLevel<- (Deprecated).
+#' GaSamplingLevel<-
+#'
+#' Deprecated, use SamplingLevel<- instead.
 #'
 #' @param value passed onto \code{SamplingLevel<-}
 #'
@@ -218,7 +254,9 @@ GaSamplingLevel <- function(...){
   `SamplingLevel<-`(..., value)
 }
 
-#' GaMaxResults (Deprecated).
+#' GaMaxResults
+#'
+#' Deprecated, use MaxResults instead.
 #'
 #' @param ... arguments passed onto \code{MaxResults}
 #'
@@ -230,9 +268,11 @@ GaMaxResults <- function(...){
   MaxResults(...)
 }
 
-#' GaMaxResults<- (Deprecated).
+#' GaMaxResults<-
 #'
-#' @param value passed onto \code{MaxResults}
+#' Deprecated, use MaxResults<- instead.
+#'
+#' @param value passed onto \code{MaxResults<-}
 #'
 #' @export GaMaxResults<-
 #' @keywords internal
@@ -242,7 +282,9 @@ GaMaxResults <- function(...){
   `MaxResults<-`(..., value)
 }
 
-#' GaSortBy (Deprecated).
+#' GaSortBy
+#'
+#' Deprecated, use SortBy instead.
 #'
 #' @param ... arguments passed onto \code{SortBy}
 #'
@@ -254,7 +296,9 @@ GaSortBy <- function(...){
   SortBy(...)
 }
 
-#' GaSortBy<- (Deprecated).
+#' GaSortBy<-
+#'
+#' Deprecated, use SortBy<- instead.
 #'
 #' @param value passed onto \code{SortBy<-}
 #'
@@ -266,9 +310,9 @@ GaSortBy <- function(...){
   `SortBy<-`(..., value)
 }
 
-#' GaDimensions (Deprecated).
+#' GaDimensions
 #'
-#' Use \code{Dimensions} instead of \code{GaDimensions}
+#' Deprecated, use \code{Dimensions} instead.
 #'
 #' @param ... arguments passed onto \code{Dimensions}
 #'
@@ -280,9 +324,9 @@ GaDimensions <- function(...){
   Dimensions(...)
 }
 
-#' GaMetrics (Deprecated).
+#' GaMetrics.
 #'
-#' Use \code{Metrics} instead of \code{GaMetrics}
+#' Deprecated, use \code{Metrics} instead.
 #'
 #' @param ... arguments passed onto \code{Metrics}
 #'
@@ -294,7 +338,9 @@ GaMetrics <- function(...){
   Metrics(...)
 }
 
-#' Use \code{Dimensions<-} instead of \code{GaDimensions<-}
+#' GaDimensions<-
+#'
+#' Deprecated, use \code{Dimensions<-} instead.
 #'
 #' @param value passed onto \code{Dimensions}
 #'
@@ -306,7 +352,9 @@ GaMetrics <- function(...){
   `Dimensions<-`(..., value)
 }
 
-#' Use \code{Metrics<-} instead of \code{GaMetrics<-}
+#' GaMetrics<-
+#'
+#' Deprecated, use \code{Metrics<-} instead.
 #'
 #' @param value passed onto \code{Metrics}
 #'
@@ -318,7 +366,9 @@ GaMetrics <- function(...){
   `Metrics<-`(..., value)
 }
 
-#' Use \code{Sequence} instead of \code{GaSequence}
+#' GaSequence
+#'
+#' Deprecated, use \code{Sequence} instead.
 #'
 #' @param ... passed onto \code{Sequence}
 #'
@@ -330,7 +380,9 @@ GaSequence <- function(...) {
   Sequence(...)
 }
 
-#' Use \code{ScopeLevel} instead of \code{GaScopeLevel}
+#' GaScopeLevel
+#'
+#' Deprecated, use \code{ScopeLevel} instead
 #'
 #' @param ... passed onto \code{ScopeLevel}
 #'

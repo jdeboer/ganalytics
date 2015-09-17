@@ -3,7 +3,7 @@
 \name{GaSegment}
 \alias{GaSegment}
 \alias{GaSegment<-}
-\title{GaSegment (Deprecated).}
+\title{GaSegment}
 \usage{
 GaSegment(...)
 
@@ -15,9 +15,9 @@ GaSegment(...) <- value
 \item{value}{passed onto \code{Segment}}
 }
 \description{
-GaSegment (Deprecated).
+Deprecated, use Segment instead.
 
-GaSegment<- (Deprecated).
+Deprecated, use Segment<- instead.
 }
 \keyword{internal}
 

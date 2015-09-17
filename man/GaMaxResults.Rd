@@ -3,7 +3,7 @@
 \name{GaMaxResults}
 \alias{GaMaxResults}
 \alias{GaMaxResults<-}
-\title{GaMaxResults (Deprecated).}
+\title{GaMaxResults}
 \usage{
 GaMaxResults(...)
 
@@ -12,12 +12,12 @@ GaMaxResults(...) <- value
 \arguments{
 \item{...}{arguments passed onto \code{MaxResults}}
 
-\item{value}{passed onto \code{MaxResults}}
+\item{value}{passed onto \code{MaxResults<-}}
 }
 \description{
-GaMaxResults (Deprecated).
+Deprecated, use MaxResults instead.
 
-GaMaxResults<- (Deprecated).
+Deprecated, use MaxResults<- instead.
 }
 \keyword{internal}
 

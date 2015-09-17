@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{GaSequence}
 \alias{GaSequence}
-\title{Use \code{Sequence} instead of \code{GaSequence}}
+\title{GaSequence}
 \usage{
 GaSequence(...)
 }
@@ -10,7 +10,7 @@ GaSequence(...)
 \item{...}{passed onto \code{Sequence}}
 }
 \description{
-Use \code{Sequence} instead of \code{GaSequence}
+Deprecated, use \code{Sequence} instead.
 }
 \keyword{internal}
 

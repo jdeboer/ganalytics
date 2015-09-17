@@ -3,7 +3,7 @@
 \name{GaSortBy}
 \alias{GaSortBy}
 \alias{GaSortBy<-}
-\title{GaSortBy (Deprecated).}
+\title{GaSortBy}
 \usage{
 GaSortBy(...)
 
@@ -15,9 +15,9 @@ GaSortBy(...) <- value
 \item{value}{passed onto \code{SortBy<-}}
 }
 \description{
-GaSortBy (Deprecated).
+Deprecated, use SortBy instead.
 
-GaSortBy<- (Deprecated).
+Deprecated, use SortBy<- instead.
 }
 \keyword{internal}
 

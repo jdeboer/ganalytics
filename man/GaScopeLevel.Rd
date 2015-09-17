@@ -3,7 +3,7 @@
 \name{GaScopeLevel}
 \alias{GaScopeLevel}
 \alias{GaScopeLevel<-}
-\title{Use \code{ScopeLevel} instead of \code{GaScopeLevel}}
+\title{GaScopeLevel}
 \usage{
 GaScopeLevel(...)
 
@@ -15,7 +15,7 @@ GaScopeLevel(...) <- value
 \item{value}{passed onto \code{ScopeLevel<-}}
 }
 \description{
-Use \code{ScopeLevel} instead of \code{GaScopeLevel}
+Deprecated, use \code{ScopeLevel} instead
 
 Use \code{ScopeLevel<-} instead of \code{GaScopeLevel<-}
 }

@@ -3,7 +3,7 @@
 \name{GaDateRange}
 \alias{GaDateRange}
 \alias{GaDateRange<-}
-\title{GaDateRange (Deprecated)}
+\title{GaDateRange}
 \usage{
 GaDateRange(...)
 
@@ -15,9 +15,9 @@ GaDateRange(...) <- value
 \item{value}{passed onto \code{DateRange}}
 }
 \description{
-GaDateRange (Deprecated)
+Deprecated, use DateRange instead.
 
-GaDateRange<- (Deprecated)
+Deprecated, use DateRange instead.
 }
 \keyword{internal}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprecated.R
 \name{GaSplitDateRange}
 \alias{GaSplitDateRange}
-\title{GaSplitDateRange (Deprecated)}
+\title{GaSplitDateRange}
 \usage{
 GaSplitDateRange(...)
 }
@@ -10,7 +10,7 @@ GaSplitDateRange(...)
 \item{...}{arguments passed onto \code{SplitDateRange}}
 }
 \description{
-GaSplitDateRange (Deprecated)
+Deprecated, use SplitDateRange instead.
 }
 \keyword{internal}
 

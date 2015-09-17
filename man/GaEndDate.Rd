@@ -3,7 +3,7 @@
 \name{GaEndDate}
 \alias{GaEndDate}
 \alias{GaEndDate<-}
-\title{GaEndDate (Deprecated)}
+\title{GaEndDate}
 \usage{
 GaEndDate(...)
 
@@ -15,9 +15,9 @@ GaEndDate(...) <- value
 \item{value}{passed onto \code{EndDate}}
 }
 \description{
-GaEndDate (Deprecated)
+Deprecated, use EndDate instead.
 
-GaEndDate<- (Deprecated)
+Deprecated, use EndDate instead.
 }
 \keyword{internal}
 

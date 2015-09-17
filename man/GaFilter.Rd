@@ -3,7 +3,7 @@
 \name{GaFilter}
 \alias{GaFilter}
 \alias{GaFilter<-}
-\title{GaFilter (Deprecated).}
+\title{GaFilter}
 \usage{
 GaFilter(...)
 
@@ -15,9 +15,9 @@ GaFilter(...) <- value
 \item{value}{passed onto \code{TableFilter<-}}
 }
 \description{
-GaFilter (Deprecated).
+Deprecated, use TableFilter instead.
 
-GaFilter<- (Deprecated).
+Deprecated, use TableFilter<- instead.
 }
 \keyword{internal}
 

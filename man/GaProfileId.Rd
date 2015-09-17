@@ -3,7 +3,7 @@
 \name{GaProfileId}
 \alias{GaProfileId}
 \alias{GaProfileId<-}
-\title{GaProfileId (Deprecated).}
+\title{GaProfileId}
 \usage{
 GaProfileId(...)
 
@@ -15,9 +15,9 @@ GaProfileId(...) <- value
 \item{value}{passed onto \code{GaView<-}}
 }
 \description{
-GaProfileId (Deprecated).
+Deprecated, use GaView instead.
 
-GaProfileId<- (Deprecated).
+Deprecated, use GaView instead.
 }
 \keyword{internal}
 

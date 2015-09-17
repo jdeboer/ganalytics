@@ -3,7 +3,7 @@
 \name{GaMetrics}
 \alias{GaMetrics}
 \alias{GaMetrics<-}
-\title{GaMetrics (Deprecated).}
+\title{GaMetrics.}
 \usage{
 GaMetrics(...)
 
@@ -15,9 +15,9 @@ GaMetrics(...) <- value
 \item{value}{passed onto \code{Metrics}}
 }
 \description{
-Use \code{Metrics} instead of \code{GaMetrics}
+Deprecated, use \code{Metrics} instead.
 
-Use \code{Metrics<-} instead of \code{GaMetrics<-}
+Deprecated, use \code{Metrics<-} instead.
 }
 \keyword{internal}
 

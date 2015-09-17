@@ -3,7 +3,7 @@
 \name{GaStartDate}
 \alias{GaStartDate}
 \alias{GaStartDate<-}
-\title{GaStartDate (Deprecated)}
+\title{GaStartDate}
 \usage{
 GaStartDate(...)
 
@@ -15,9 +15,9 @@ GaStartDate(...) <- value
 \item{value}{passed onto \code{StartDate}}
 }
 \description{
-GaStartDate (Deprecated)
+Deprecated, use StartDate instead.
 
-GaStartDate<- (Deprecated)
+Deprecated, use StartDate<- instead.
 }
 \keyword{internal}
 
