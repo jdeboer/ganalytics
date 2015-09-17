@@ -55,6 +55,15 @@ setMethod(
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
     new("gaSegmentSequenceFilter", exprList, negation = negation)
+
+#' @describeIn Exclude
+setMethod(
+  f = "Exclude",
+  signature = ".compoundExpr",
+  definition = function(object, ...) {
+    SegmentConditionFilter(object, ..., negation = TRUE)
+  }
+)
   }
 )
 
