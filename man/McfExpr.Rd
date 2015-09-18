@@ -36,7 +36,8 @@ Create a Multi-Chanel Funnel Reporting API expression.
 \seealso{
 Other expression generators: \code{\link{Expr}},
   \code{\link{Expr,.expr,ANY-method}},
-  \code{\link{Expr,character,character-method}};
+  \code{\link{Expr,character,character-method}},
+  \code{\link{Expr,formula,ANY-method}};
   \code{\link{GaExpr}},
   \code{\link{GaExpr,character,character-method}};
   \code{\link{RtExpr}},

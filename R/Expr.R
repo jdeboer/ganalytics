@@ -8,10 +8,40 @@
 #' @include Operand.R
 #' @include utils.R
 #' @importFrom methods setMethod new validObject
+#' @importFrom lazyeval as.lazy
+#' @importFrom assertthat assert_that
 NULL
 
 #' @describeIn Expr
+#' Accepts a formula in the form of: \code{~ <variable> <comparator>
+#'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod("Expr", ".expr", function(object) {object})
+
+#' @describeIn Expr
+setMethod(
+  f = "Expr",
+  signature = c("formula"),
+  definition = function(object) {
+    lazy_expr <- as.lazy(object)
+    assert_that(length(lazy_expr$expr) == 3)
+    comparator <- as.character(lazy_expr$expr[[1]])
+    comparator <- switch(
+      comparator,
+      `%starts_with%` = "=@",
+      `=@` = "=@",
+      `%matches%` = "=~",
+      `%=~%` = "=~",
+      `%in%` = "[]",
+      `%[]%` = "[]",
+      `%between%` = "<>",
+      `%<>%` = "<>",
+      comparator
+    )
+    var <- as.character(lazy_expr$expr[[2]])
+    operand <- as.expression(lazy_expr$expr[[3]])
+    Expr(var, comparator, eval(operand, envir = lazy_expr$env))
+  }
+)
 
 #' @describeIn Expr
 setMethod(

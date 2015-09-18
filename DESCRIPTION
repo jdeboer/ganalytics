@@ -81,7 +81,6 @@ Collate:
     'SortBy.R'
     'table-filter-coerce.R'
     'TableFilter.R'
-    'condition.R'
     'deprecated.R'
     'ganalytics-package.R'
     'meta.R'

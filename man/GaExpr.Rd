@@ -40,7 +40,8 @@ Create a Core Reporting API expression.
 \seealso{
 Other expression generators: \code{\link{Expr}},
   \code{\link{Expr,.expr,ANY-method}},
-  \code{\link{Expr,character,character-method}};
+  \code{\link{Expr,character,character-method}},
+  \code{\link{Expr,formula,ANY-method}};
   \code{\link{McfExpr}},
   \code{\link{McfExpr,character,character-method}};
   \code{\link{RtExpr}},
