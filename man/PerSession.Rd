@@ -3,11 +3,17 @@
 \docType{methods}
 \name{PerSession,gaSegmentFilterList-method}
 \alias{PerSession}
+\alias{PerSession,.compoundExpr-method}
+\alias{PerSession,.gaSegmentFilter-method}
 \alias{PerSession,gaMetExpr-method}
 \alias{PerSession,gaSegmentFilterList-method}
 \title{PerSession}
 \usage{
 \S4method{PerSession}{gaSegmentFilterList}(object, ...)
+
+\S4method{PerSession}{.gaSegmentFilter}(object, ...)
+
+\S4method{PerSession}{.compoundExpr}(object, ...)
 
 \S4method{PerSession}{gaMetExpr}(object, ...)
 
@@ -24,6 +30,10 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 \section{Methods (by class)}{
 \itemize{
 \item \code{gaSegmentFilterList}: 
+
+\item \code{.gaSegmentFilter}: 
+
+\item \code{.compoundExpr}: 
 
 \item \code{gaMetExpr}: 
 }}

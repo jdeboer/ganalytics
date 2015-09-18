@@ -3,11 +3,17 @@
 \docType{methods}
 \name{PerUser,gaSegmentFilterList-method}
 \alias{PerUser}
+\alias{PerUser,.compoundExpr-method}
+\alias{PerUser,.gaSegmentFilter-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,gaSegmentFilterList-method}
 \title{PerUser}
 \usage{
 \S4method{PerUser}{gaSegmentFilterList}(object, ...)
+
+\S4method{PerUser}{.gaSegmentFilter}(object, ...)
+
+\S4method{PerUser}{.compoundExpr}(object, ...)
 
 \S4method{PerUser}{gaMetExpr}(object, ...)
 
@@ -24,6 +30,10 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 \section{Methods (by class)}{
 \itemize{
 \item \code{gaSegmentFilterList}: 
+
+\item \code{.gaSegmentFilter}: 
+
+\item \code{.compoundExpr}: 
 
 \item \code{gaMetExpr}: 
 }}

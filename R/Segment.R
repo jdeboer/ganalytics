@@ -178,6 +178,24 @@ setMethod(
 #' @describeIn PerSession
 setMethod(
   f = "PerSession",
+  signature = ".gaSegmentFilter",
+  definition = function(object, ...) {
+    SegmentFilters(object, ..., scope = "sessions")
+  }
+)
+
+#' @describeIn PerSession
+setMethod(
+  f = "PerSession",
+  signature = ".compoundExpr",
+  definition = function(object, ...) {
+    SegmentFilters(object, ..., scope = "sessions")
+  }
+)
+
+#' @describeIn PerSession
+setMethod(
+  f = "PerSession",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     ScopeLevel(object) <- "perSession"
@@ -194,6 +212,24 @@ setMethod(
   definition = function(object, ...) {
     ScopeLevel(object) <- "users"
     SegmentFilters(object, ...)
+  }
+)
+
+#' @describeIn PerUser
+setMethod(
+  f = "PerUser",
+  signature = ".gaSegmentFilter",
+  definition = function(object, ...) {
+    SegmentFilters(object, ..., scope = "users")
+  }
+)
+
+#' @describeIn PerUser
+setMethod(
+  f = "PerUser",
+  signature = ".compoundExpr",
+  definition = function(object, ...) {
+    SegmentFilters(object, ..., scope = "users")
   }
 )
 
