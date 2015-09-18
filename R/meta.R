@@ -1,8 +1,3 @@
-#' @include all-coercions.R
-#' @include all-classes.R
-#' @include init-methods.R
-#' @include all-generics.R
-#' @include helper-functions.R
 #' @include GaApiRequest.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
@@ -17,7 +12,7 @@ NULL
 #'
 #' @return a data.frame
 #' @param creds Google Analytics OAuth 2.0 credentials object.
-GaMetaUpdate <- function(creds = GoogleApiCreds()) {
+GaMetaUpdate <- function(creds = .creds) {
   scope <- ga_scopes['read_only']
   request <- c("metadata", "ga", "columns")
   meta_data <- ga_api_request(creds = creds, request = request, scope = scope)
@@ -42,7 +37,7 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
     upper_bounds = do.call(pmax, c(kGaVars_df[12:15], na.rm = TRUE))
   )
   kGaVars$allVars <- unlist(alply(kGaVars_df, 1, function(var_def){
-    ret <- if(!is.na(var_def$upper_bounds)) {
+    ret <- if (!is.na(var_def$upper_bounds)) {
       str_replace(var_def$id, "XX", seq(var_def$lower_bounds, var_def$upper_bounds))
     } else {
       var_def$id
@@ -81,6 +76,26 @@ GaMetaUpdate <- function(creds = GoogleApiCreds()) {
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  metadata_path <- system.file("extdata", "metadata.RDA", package = "ganalytics")
+
+  if (nchar(metadata_path) == 0) {
+    package_path <- system.file(package = "ganalytics")
+    extdata_path <- paste0(package_path, "/extdata")
+    assert_that(dir.exists(extdata_path))
+#     if (!dir.exists(extdata_path)) {
+#       dir.create(extdata_path)
+#     }
+    metadata_path <- paste(extdata_path, "metadata.RDA", sep = "/")
+  }
+
+  prompt <- paste0(
+    "Ready to update ganalytics metadata files, located in: ",
+    metadata_path,
+    "\nPress enter to continue..."
+  )
+  keypress <- readline(prompt)
+  assert_that(nchar(keypress) == 0)
+
+  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, metadata_path)
 
 }

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Johann de Boer" />
+
+<meta name="date" content="2015-09-18" />
+
+<title>README</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">README</h1>
+<h4 class="author"><em>Johann de Boer</em></h4>
+<h4 class="date"><em>2015-09-18</em></h4>
+</div>
+
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<div id="ganalytics" class="section level1">
+<h1>ganalytics</h1>
+<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAUCAYAAAAN+ioeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABQBJREFUWIXdmH1ME2cAxp/76FF6DBhYIESgbHNJFRlMqIAIcWMjbhNs1pj0Dwgmi+jm4j70Dz/mHKvZnBl1cYBLE9YYCJNNggs6s/hFNGBjthCJHyPqFkFCVAKDtZSud+/+YDto7cdJmVSf5E3vvd/d0+d9cndpjzIYDJEcx5kVCoURQDTCQH++c36+I8yNXDQhg/wV+8h4IctxnJll2WpCyHzHkhROWUKSQqCQNpahIlEXWIZhjOG2sHDLE6qoJMcSlhASFo+LmXrSiiacm2LDcVHhmClU0YQQ+BtNTU1+mdwRyGMu/B+XEbBoALMybW5uluUxW///e3QU3J5zz6CPjmDcl4qLi5GcnCzLwxebzXfOpXL3L4A6XzmnnkGvaKPRCKvVCpPJBLVaLbGWlhaPY2fOOzs7fV61arUaJpMJVqsVRqPRgwUaJwoHsF6zHW35fTjwQgcSI1Ie4McL+9GY04Xs2CJpf0H8ajS8eBrHCm7BmnsRpYlGWezStvse3saULfg+7xoO515CztOrJJYUkYqvso6jLb8P6zXbcaJwwO8aghZtt9uh1+ths9lQUVHh97afOfe3XVlZie7ubuj1ejidTtlFA4BjZBKldYvR3XcOGzR7PPiyffHQfZGAPR2bUa2pkfZveXY/PvtpK1aaU/FW0xt4js2Wxbzzi+M0VtctwZendmKD5hOJVWtqcP76KZTWLYZz1B1wPUGLPnr0KHieR1tbG7RabUhFa7VatLe3g+d5tLa2PlTRLdfqEZExiZabX2NpTJ7EsmOL8MPmC+jeOohDhh+xkE+X2LHLzfiwZC92GfdBm/U89p7dIot55z/ca4Zy6d+wuU4iWaWR2JIYHVpvTuVqvnowtKJVKpXH539MFEVQFAVCCBQKhayiA/kFyxGZwAA0QWQCA0Kmz/tgUS0OnvkUheYUrKxNAU0xEmu48jG2tVfhRn8fKtO3wfT6IVnMOzOd6AZoAjZWBE3R04wAyqTpXCEVvWbNGiiVSpSXl6Onp0dig4OD0Ol04DgOZWVlsoru6enx8HuYog2pGxFJ81iX9jZ+7e+SGAclhBg7EnJ4vG/Y7eG54xUzotM5tP/eCPPZj7AsZpUs5p0f1L9Z4LWeOza8mVKNSJqHIW1TaEWLogiLxYKMjAw0NDRIrK6uDlVVVbBYLJiYmJBVdH19PTIzM2GxWOB2B36meecgDhpHVvQi66kimG07JFZ7bidq8hrxbV4XhoeHPTwv3/oFn+d8h5/X/YFdrx5Azcl3ZTF/+b3n5os7kBtTgiMresE5VXC47H7XQOn1er+/pYaGhsDzPBwOB1iWRWxsLBhm6haZnJzE2NgYRFFEVFQUxsfHkZSUJJ3na1sQBIyOjsLtdkOlUsFut0tsprzf3p1++R7yrXGYGBLARlKIWsSCiaCmctwTYb8tABSgTKQxMSAgfjkHAHDeFTExKEB0ETBKCqqFDLg4Oigbtrkkj5nb3nPBSTB+ww3apUBF8UasTH4NW38r89kltXbt2rD7v+td9JmS+3jp1IJ5ShNYZ0ruQyQCbo1ex+6TmzCkvurzuMfiXUemKRrxyxXzlCawMk3RAAWwKgr8MwxYQvk8jiWE/AUg6tHGCyzvouN07AP7wkVxOtZj7isn7WIJS9N0syAI1Y8qmByFa6mzFXs3ppceGRl5j2GYbyiKGpvvQE+aaBdLIu4suEzuiUX/AG3EJVuesFjhAAAAAElFTkSuQmCC" alt="Travis-CI Build Status" /></a></p>
+<p>Interact with <strong>Google Analytics</strong> using <strong>R</strong></p>
+<p>Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.</p>
+<div id="updates" class="section level2">
+<h2>Updates</h2>
+<p>Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.</p>
+<p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.</p>
+<p>Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), &amp; (And), and ! (Not) instead (thanks to <span class="citation">@hadley</span> for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and &amp; operators. Therefore, remember to use parentheses () to force the order of operation applied to your Boolean expressions.</p>
+<p>There is now support for user and session level condition based segments as well as sequential segmentation.</p>
+<p>Also recently added is Google Management API support (still a work in progress) - so now you can get details in R about what goals you have defined, accounts, properties, views, etc. There are <em>write</em> methods in there too, but these have not been fully tested so perhaps try them under a test login if you want, otherwise just avoid using the “INSERT”, “UPDATE” and “DELETE” methods.</p>
+<p>There is also some basic support for the Google Tag Manager API, but again, still work in progress.</p>
+</div>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<div id="install-the-necessary-packages-into-r" class="section level3">
+<h3>1. Install the necessary packages into R</h3>
+<div id="warning" class="section level4">
+<h4>Warning</h4>
+<ul>
+<li>The ganalytics package is currently under development.</li>
+<li>The installation procedure below installs directly from the respective GitHub repositories.</li>
+</ul>
+</div>
+<div id="prerequisites" class="section level4">
+<h4>Prerequisites</h4>
+<ul>
+<li>Ensure you have installed the latest version of <a href="http://cran.r-project.org/">R</a></li>
+<li>If using Windows, you will also need the latest version of <a href="http://cran.r-project.org/bin/windows/Rtools/">RTools</a></li>
+<li>For other operating systems, please refer to <a href="https://github.com/hadley/devtools/blob/master/README.md">installation instructions for devtools</a></li>
+</ul>
+</div>
+<div id="execute-the-following-statements-in-r-to-install-ganalytics" class="section level4">
+<h4>Execute the following statements in R to install ganalytics:</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the latest version of devtools via CRAN</span>
+<span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+<span class="co"># Install ganalytics via the GitHub repository.</span>
+devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/ganalytics&quot;</span>)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="now-restart-r." class="section level4">
+<h4>Now, restart R.</h4>
+<ul>
+<li>This is important to ensure you have a clean workspace to avoid possible errors.</li>
+</ul>
+</div>
+</div>
+<div id="prepare-your-google-api-application-you-only-need-to-do-this-once" class="section level3">
+<h3>2. Prepare your Google API application <em>(you only need to do this once)</em></h3>
+<ul>
+<li>Browse to [<strong>Google API Console</strong>] (<a href="https://code.google.com/apis/console/" class="uri">https://code.google.com/apis/console/</a>)</li>
+<li>Check you are <strong>signed into Google</strong> with the account you wish to use.</li>
+<li>Choose <strong>Create Project</strong> from the Google API Console and give your project a name (or choose an existing project if you have one already).</li>
+<li>From the <strong>APIs</strong> page, enable the <strong>Analytics API</strong>. You may also want to enable the <strong>Tag Manager API</strong> if you wish to try that.</li>
+<li>You will need to <strong>agree</strong> and <strong>accept</strong> the Google APIs and Analytics API Terms of Service to proceed.</li>
+<li>Go to the <strong>Credentials</strong> page and click the blue button <strong>Create New Client ID</strong>.</li>
+<li>Select <strong>Installed Application</strong> as the application type.</li>
+<li>Select <strong>Other</strong> as the Installed Application Type.</li>
+<li>Note your <strong>Client ID</strong> and <strong>Client Secret</strong> and download the JSON file to your R working directory.</li>
+</ul>
+<p><em>Note: For further information about Google APIs please refer to the <a href="https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references">References section</a> at the end of this document.</em></p>
+</div>
+<div id="set-your-system-environment-variables-this-is-optional-but-recommended" class="section level3">
+<h3>3. Set your system environment variables <em>(this is optional but recommended)</em></h3>
+<ul>
+<li>Add the following two user variables:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Variable name</th>
+<th align="left">Variable value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left"><code>GOOGLE_APIS_CONSUMER_ID</code></td>
+<td align="left"><code>&lt;Your client ID&gt;</code></td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left"><code>GOOGLE_APIS_CONSUMER_SECRET</code></td>
+<td align="left"><code>&lt;Your client secret&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>To do this in Windows:</li>
+<li>Search for and select <strong>“Edit Environment Variables For Your Account”</strong> from the Start menu.</li>
+<li>Within the <strong>Environment Variables</strong> window, add the above <strong>User Variables</strong> by selecting <strong>New</strong> and entering the <strong>Variable Name</strong> and <strong>Variable Value</strong>, then click <strong>OK</strong>. Do this for both variables listed in the above table.</li>
+<li>Click <strong>OK</strong>.</li>
+<li><strong>Restart</strong> your computer for the new environment variables to take effect.</li>
+<li>Alternatively you can use <code>Sys.setenv(GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;, GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;)</code>, or create an <code>.Renviron</code> file on Unix-like systems. (Thanks to <span class="citation">@unikum</span> for these suggestions.)</li>
+<li>There is also free open source utility to set environment variables on Mac OS called <a href="https://github.com/hschmidt/EnvPane">EnvPane</a></li>
+</ul>
+<p><em>Note: For other operating systems please refer to the Reference section at the end of this document.</em></p>
+</div>
+<div id="authenticate-and-attempt-your-first-query-with-ganalytics" class="section level3">
+<h3>4. Authenticate and attempt your first query with ganalytics</h3>
+<ul>
+<li>To perform a query you will need to obtain your <strong>Google Analytics view ID</strong>. This can be accessed in a number of ways:</li>
+<li>Using the <a href="http://ga-dev-tools.appspot.com/explorer/">Google Analytics Query Explorer tool</a></li>
+<li>The <strong>Admin page</strong> in Google Analytics under <strong>View Settings</strong>, or</li>
+<li><p>The browser’s address bar when viewing a report in Google Analytics - look for the digits between the letter <strong>‘p’</strong> and trailing <strong>‘/’</strong>, e.g. <code>.../a11111111w22222222p33333333/</code> shows a view ID of <code>33333333</code>.</p></li>
+<li><strong>If you do not provide a view ID then:</strong></li>
+<li>If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.</li>
+<li><p>Otherwise it will select the default view of the first property from the first account it finds in the list of accounts you have access to.</p></li>
+<li><p>Return to R and execute the following to load the ganalytics package:</p></li>
+</ul>
+<p><code>r   library(ganalytics)</code></p>
+<ul>
+<li>If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign-in to Google Analytics:</li>
+</ul>
+<p><code>r   my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;)</code></p>
+<ul>
+<li>Otherwise do one of the following:</li>
+<li><p>If you downloaded the JSON file containing your Google API app credentials, then provide the filename:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(<span class="st">&quot;you@domain.com&quot;</span>, <span class="st">&quot;client_secret.json&quot;</span>)</code></pre></div></li>
+<li><p>Instead of a filename you may supply the <code>client_id</code> and <code>client_secret</code> directly:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(
+  <span class="st">&quot;you@domain.com&quot;</span>,
+  <span class="kw">list</span>(<span class="dt">client_id =</span> <span class="st">&quot;&lt;client id&gt;&quot;</span>, <span class="dt">client_secret =</span> <span class="st">&quot;&lt;client secret&gt;&quot;</span>)
+)</code></pre></div></li>
+<li><p>Now formulate and run your Google Analytics query, remembering to substitute <code>view_id</code> with the view ID you wish to use:</p></li>
+</ul>
+<p><code>r   myQuery &lt;- GaQuery( view_id, my_creds )   GetGaData(myQuery)</code></p>
+<ul>
+<li>You should then be directed to <em>accounts.google.com</em> within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.</li>
+<li>Make sure you are signed into the Google account you wish to use, then grant access by selecting <strong>“Allow access”</strong>. You can then close the page and return back to R.</li>
+</ul>
+<p>If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days, for example:</p>
+<pre><code>        date sessions
+1 2015-03-27     2988
+2 2015-03-28     1594
+3 2015-03-29     1912
+4 2015-03-30     3061
+5 2015-03-31     2609
+6 2015-04-01     2762
+7 2015-04-02     2179
+8 2015-04-03     1552</code></pre>
+<p><em>Note: A small file will be saved to your home directory (‘My Documents’ in Windows) containing your new reusable authentication token.</em></p>
+</div>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<p>As demonstrated in the installation steps above, before executing any of the following examples:</p>
+<ol style="list-style-type: decimal">
+<li>load the ganalytics package</li>
+<li>generate a <code>gaQuery</code> object with a Google Analytics view ID and API app credentials assigned to it.</li>
+</ol>
+<div id="asumptions" class="section level3">
+<h3>Asumptions</h3>
+<p><strong>The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: <code>myQuery</code>.</strong></p>
+</div>
+<div id="example-1---setting-the-date-range" class="section level3">
+<h3>Example 1 - Setting the date range</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format &quot;YYYY-MM-DD&quot;.)</span>
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2013-01-01&quot;</span>, <span class="st">&quot;2013-05-31&quot;</span>)
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+
+<span class="co"># Adjust the start date to 1 March 2013:</span>
+<span class="kw">StartDate</span>(myQuery) &lt;-<span class="st"> &quot;2013-03-01&quot;</span>
+<span class="co"># Adjust the end date to 31 March 2013:</span>
+<span class="kw">EndDate</span>(myQuery) &lt;-<span class="st"> &quot;2013-03-31&quot;</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-2---choosing-what-metrics-to-report" class="section level3">
+<h3>Example 2 - Choosing what metrics to report</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Report number of page views instead</span>
+<span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;pageviews&quot;</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+
+<span class="co"># Report both pageviews and sessions</span>
+<span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pageviews&quot;</span>, <span class="st">&quot;sessions&quot;</span>)
+<span class="co"># These variations are also acceptable</span>
+<span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ga:pageviews&quot;</span>, <span class="st">&quot;ga.sessions&quot;</span>)
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-3---selecting-what-dimensions-to-split-your-metrics-by" class="section level3">
+<h3>Example 3 - Selecting what dimensions to split your metrics by</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Similar to metrics, but for dimensions</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;week&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;hour&quot;</span>)
+
+<span class="co"># Lets set a wider date range</span>
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2012-10-01&quot;</span>, <span class="st">&quot;2013-03-31&quot;</span>)
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+<span class="kw">tail</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-4---sort-by" class="section level3">
+<h3>Example 4 - Sort by</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sort by descending number of pageviews</span>
+<span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> &quot;-pageviews&quot;</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+<span class="kw">tail</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-5---row-filters" class="section level3">
+<h3>Example 5 - Row filters</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter for Sunday sessions only</span>
+sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;dayofweek&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;0&quot;</span>)
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>sundayExpr
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+
+<span class="co"># Remove the filter</span>
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-6---combining-filters-with-and" class="section level3">
+<h3>Example 6 - Combining filters with AND</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Expression to define Sunday sessions</span>
+sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;dayofweek&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;0&quot;</span>)
+<span class="co"># Expression to define organic search sessions</span>
+organicExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;medium&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;organic&quot;</span>)
+<span class="co"># Expression to define organic search sessions made on a Sunday</span>
+sundayOrganic &lt;-<span class="st"> </span>sundayExpr &amp;<span class="st"> </span>organicExpr
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>sundayOrganic
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+
+<span class="co"># Let's concatenate medium to the dimensions for our query</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">Dimensions</span>(myQuery), <span class="st">&quot;medium&quot;</span>)
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-7---combining-filters-with-or" class="section level3">
+<h3>Example 7 - Combining filters with OR</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In a similar way to AND</span>
+loyalExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;!~&quot;</span>, <span class="st">&quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span>
+recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span>
+loyalOrRecent &lt;-<span class="st"> </span>loyalExpr |<span class="st"> </span>recentExpr
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-8---filters-that-combine-ors-with-ands" class="section level3">
+<h3>Example 8 - Filters that combine ORs with ANDs</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loyalExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;!~&quot;</span>, <span class="st">&quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span>
+recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span>
+loyalOrRecent &lt;-<span class="st"> </span>loyalExpr |<span class="st"> </span>recentExpr
+sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;0&quot;</span>)
+loyalOrRecent_Sunday &lt;-<span class="st"> </span>loyalOrRecent &amp;<span class="st"> </span>sundayExpr
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent_Sunday
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+
+<span class="co"># Perform the same query but change which dimensions to view</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>)
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">summary</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-9---sorting-numeric-dimensions-continuing-from-example-8" class="section level3">
+<h3>Example 9 - Sorting ‘numeric’ dimensions (continuing from example 8)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Continuing from example 8...</span>
+
+<span class="co"># Change filter to loyal session AND recent sessions AND visited on Sunday</span>
+loyalAndRecent_Sunday &lt;-<span class="st"> </span>loyalExpr &amp;<span class="st"> </span>recentExpr &amp;<span class="st"> </span>sundayExpr
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalAndRecent_Sunday
+
+<span class="co"># Sort by decending visit count and ascending days since last visit.</span>
+<span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;-sessionCount&quot;</span>, <span class="st">&quot;+daysSinceLastSession&quot;</span>)
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+
+<span class="co"># Notice that Google Analytics' Core Reporting API doesn't recognise 'numerical' dimensions as</span>
+<span class="co"># ordered factors when sorting. We can use R to sort instead, using a plyr::arrange function.</span>
+<span class="kw">library</span>(plyr)
+myData &lt;-<span class="st"> </span><span class="kw">arrange</span>(myData, <span class="kw">desc</span>(sessionCount), daysSinceLastSession)
+<span class="kw">head</span>(myData)
+<span class="kw">tail</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-10---session-segmentation" class="section level3">
+<h3>Example 10 - Session segmentation</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.</span>
+<span class="co"># Define a segment for sessions where a &quot;thank-you&quot;, &quot;thankyou&quot; or &quot;success&quot; page was viewed.</span>
+thankyouExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;pagePath&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;thank</span><span class="ch">\\</span><span class="st">-?you|success&quot;</span>)
+<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span>thankyouExpr
+
+<span class="co"># Reset the filter</span>
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+
+<span class="co"># Split by traffic source and medium</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;source&quot;</span>, <span class="st">&quot;medium&quot;</span>)
+
+<span class="co"># Sort by decending number of sessions</span>
+<span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> &quot;-sessions&quot;</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">head</span>(myData)
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-11---using-automatic-pagination-to-get-more-than-10000-rows-of-data-per-query" class="section level3">
+<h3>Example 11 - Using automatic pagination to get more than 10,000 rows of data per query</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows</span>
+<span class="co"># First let's clear any filters or segments defined previously</span>
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="co"># Define our date range</span>
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2011-01-01&quot;</span>, <span class="st">&quot;2012-12-31&quot;</span>)
+<span class="co"># Define our metrics and dimensions</span>
+<span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;hour&quot;</span>)
+<span class="co"># Let's allow a maximum of 17544 rows (default is 10000)</span>
+<span class="kw">MaxResults</span>(myQuery) &lt;-<span class="st"> </span><span class="dv">17544</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+<span class="kw">nrow</span>(myData)
+
+## Let's use plyr::ddply to analyse the data
+<span class="kw">library</span>(plyr)
+
+<span class="co"># Sessions by day of week</span>
+sessions_by_dayOfWeek &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, ~dayOfWeek, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
+<span class="kw">with</span>(sessions_by_dayOfWeek, <span class="kw">barplot</span>(sessions, <span class="dt">names.arg=</span>dayOfWeek))
+
+<span class="co"># Sessions by hour of day</span>
+sessions_by_hour &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, ~hour, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
+<span class="kw">with</span>(sessions_by_hour, <span class="kw">barplot</span>(sessions, <span class="dt">names.arg=</span>hour))
+<span class="co"># End</span></code></pre></div>
+</div>
+<div id="example-12---using-ggplot2" class="section level3">
+<h3>Example 12 - Using ggplot2</h3>
+<p>To run this example first install ggplot2 if you haven’t already.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</code></pre></div>
+<p>Once installed, then run the following example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(plyr)
+
+<span class="co"># Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows</span>
+<span class="co"># First let's clear any filters or segments defined previously</span>
+<span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="co"># Define our date range</span>
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2011-01-01&quot;</span>, <span class="st">&quot;2012-12-31&quot;</span>)
+<span class="co"># Define our metrics and dimensions</span>
+<span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span>
+<span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;hour&quot;</span>, <span class="st">&quot;isMobile&quot;</span>)
+<span class="co"># Let's allow a maximum of 40000 rows (default is 10000)</span>
+<span class="kw">MaxResults</span>(myQuery) &lt;-<span class="st"> </span><span class="dv">40000</span>
+
+myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
+
+<span class="co"># Sessions by hour of day and day of week</span>
+avg_sessions_by_hour_wday_mobile &lt;-<span class="st"> </span><span class="kw">ddply</span>(
+  myData,
+  ~hour +<span class="st"> </span>dayOfWeek +<span class="st"> </span>isMobile,
+  summarise,
+  <span class="dt">sessions =</span> <span class="kw">mean</span>(sessions)
+)
+
+<span class="co"># Relabel the days of week</span>
+<span class="kw">levels</span>(avg_sessions_by_hour_wday_mobile$dayOfWeek) &lt;-<span class="st"> </span><span class="kw">c</span>(
+  <span class="st">&quot;Sun&quot;</span>, <span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>
+)
+
+<span class="co"># Plot the summary data</span>
+<span class="kw">qplot</span>(
+  <span class="dt">x =</span> hour,
+  <span class="dt">y =</span> sessions,
+  <span class="dt">data =</span> avg_sessions_by_hour_wday_mobile,
+  <span class="dt">facets =</span> ~dayOfWeek,
+  <span class="dt">fill =</span> isMobile,
+  <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>,
+  <span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>,
+  <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>
+)
+
+<span class="co"># End</span></code></pre></div>
+</div>
+</div>
+<div id="thanks-to" class="section level2">
+<h2>Thanks to:</h2>
+<ul>
+<li>Hadley Wickham</li>
+<li>RStudio team</li>
+<li>R Core team</li>
+</ul>
+</div>
+<div id="useful-references" class="section level2">
+<h2>Useful references</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference">Google Analytics Core Reporting API reference guide</a></li>
+<li><a href="https://developers.google.com/analytics/devguides/reporting/core/dimsmets">Google Analytics Dimensions and Metrics reference</a></li>
+<li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Creating a Google API project</a></li>
+<li><a href="https://developers.google.com/console/help/#generatingoauth2">Generating an OAuth 2.0 client ID for Google APIs</a></li>
+<li><a href="https://developers.google.com/accounts/docs/OAuth2InstalledApp">Using OAuth 2.0 for Installed Applications</a></li>
+<li><a href="https://github.com/hschmidt/EnvPane">EnvPane utility for setting environment variables in OSX</a></li>
+<li><a href="https://help.ubuntu.com/community/EnvironmentVariables">Setting environment variables in Ubuntu Linux</a></li>
+</ol>
+</div>
+<div id="notes" class="section level2">
+<h2>Notes</h2>
+<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<p>Google Analytics and Google Tag Manager are trademarks of Google.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

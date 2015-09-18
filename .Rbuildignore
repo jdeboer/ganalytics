@@ -5,3 +5,9 @@
 ^logo\.png$
 ^logo\.xcf$
 ^\.app_oauth_creds\.json$
+^cran-comments\.md$
+^\.gitignore$
+^README\.Rmd$
+^README-.*\.png$
+^revdep$
+^CONDUCT\.md$

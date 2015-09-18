@@ -22,7 +22,7 @@ Operand(object) <- value
 \arguments{
 \item{object}{The object for which to set the operand of.}
 
-\item{value}{The value to set the operand to.}
+\item{value}{Character or numeric. The value to set the operand to.}
 }
 \description{
 Get the operand of an expression.

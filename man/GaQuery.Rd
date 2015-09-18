@@ -4,10 +4,11 @@
 \alias{GaQuery}
 \title{GaQuery.}
 \usage{
-GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
+GaQuery(view = NA, creds = .creds, startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1, metrics = "ga:sessions",
-  dimensions = "ga:date", sortBy = NULL, filters = NULL, segment = NULL,
-  samplingLevel = "DEFAULT", maxResults = kGaMaxResults, profileId = NA)
+  dimensions = "ga:date", sortBy = NULL, filters = NULL,
+  segments = NULL, samplingLevel = "DEFAULT", maxResults = kGaMaxResults,
+  profileId = NA)
 }
 \arguments{
 \item{view}{view id to use}
@@ -26,7 +27,7 @@ GaQuery(view = NA, creds = GoogleApiCreds(), startDate = Sys.Date() - 8,
 
 \item{filters}{a filters object}
 
-\item{segment}{a segment object}
+\item{segments}{a segment object}
 
 \item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
 

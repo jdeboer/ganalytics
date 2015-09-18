@@ -2,8 +2,6 @@
 % Please edit documentation in R/SortBy.R, R/all-generics.R
 \docType{methods}
 \name{SortBy,.varList-method}
-\alias{GaSortBy}
-\alias{GaSortBy<-}
 \alias{SortBy}
 \alias{SortBy,.query-method}
 \alias{SortBy,.varList-method}
@@ -25,10 +23,6 @@
 \S4method{SortBy}{.query}(object, value)
 
 \S4method{SortBy}{.query}(object) <- value
-
-SortBy(object, ..., desc = logical(0))
-
-SortBy(object) <- value
 
 SortBy(object, ..., desc = logical(0))
 

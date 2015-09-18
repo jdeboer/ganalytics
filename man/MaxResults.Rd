@@ -2,8 +2,6 @@
 % Please edit documentation in R/Query.R, R/all-generics.R
 \docType{methods}
 \name{MaxResults,.query-method}
-\alias{GaMaxResults}
-\alias{GaMaxResults<-}
 \alias{MaxResults}
 \alias{MaxResults,.query-method}
 \alias{MaxResults<-}
@@ -13,10 +11,6 @@
 \S4method{MaxResults}{.query}(object)
 
 \S4method{MaxResults}{.query}(object) <- value
-
-MaxResults(object, value)
-
-MaxResults(object) <- value
 
 MaxResults(object, value)
 

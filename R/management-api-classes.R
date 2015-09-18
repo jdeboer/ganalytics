@@ -107,7 +107,7 @@ gaUserSegment <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaUserSegment <- function(id = NULL, definition = NA, creds = GoogleApiCreds()){
+GaUserSegment <- function(id = NULL, definition = NA, creds = .creds){
   id <- sub("^gaid::", "", id)
   userSegment <- gaUserSegment$new(id = id, creds = creds)
   if (is.null(id)) {
@@ -137,7 +137,7 @@ gaUserSegments <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaUserSegments <- function(creds = GoogleApiCreds()){
+GaUserSegments <- function(creds = .creds){
   gaUserSegments$new(creds = creds)
 }
 
@@ -198,7 +198,7 @@ gaAccountSummary <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaAccountSummary <- function(id = NULL, creds = GoogleApiCreds()){
+GaAccountSummary <- function(id = NULL, creds = .creds){
   gaAccountSummary$new(id = id, creds = creds)
 }
 
@@ -233,7 +233,7 @@ gaAccountSummaries <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaAccountSummaries <- function(creds = GoogleApiCreds()){
+GaAccountSummaries <- function(creds = .creds){
   gaAccountSummaries$new(creds = creds)
 }
 
@@ -290,7 +290,7 @@ gaAccount <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaAccount <- function(id = NULL, creds = GoogleApiCreds()){
+GaAccount <- function(id = NULL, creds = .creds){
   gaAccount$new(id = id, creds = creds)
 }
 
@@ -315,7 +315,7 @@ gaAccounts <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GaAccounts <- function(creds = GoogleApiCreds()){
+GaAccounts <- function(creds = .creds){
   gaAccounts$new(creds = creds)
 }
 

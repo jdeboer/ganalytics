@@ -1,6 +1,13 @@
-#' @include all-classes.R
-#' @importFrom stringr str_match regex
+#' @include var-classes.R
+#' @include var-list-classes.R
+#' @include comparator-classes.R
+#' @include expression-classes.R
+#' @include segment-classes.R
+#' @include query-classes.R
+#' @include all-generics.R
+#' @importFrom stringr str_match str_detect regex
 #' @importFrom lubridate ymd
+#' @importFrom methods setMethod validObject
 NULL
 
 # Class initialisation methods
@@ -19,7 +26,7 @@ setMethod(
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
       tmp <- sub("^(ga:)?([a-z0-9]+)$", "ga:\\2", tmp)
-      if(str_detect(value, regex("dateofsession", ignore_case = TRUE))) {
+      if (str_detect(value, regex("dateofsession", ignore_case = TRUE))) {
         tmp <- "dateOfSession"
       }
       ## Replace GA Var with correct casing of valid Var Name
@@ -110,11 +117,11 @@ setMethod(
   }
 )
 
-# ---- .operator ----
+# ---- .comparator ----
 
 setMethod(
   f = "initialize",
-  signature = ".operator",
+  signature = ".comparator",
   definition = function(.Object, value) {
     if (!missing(value)) {
       if (value == "=") value <- "=="
@@ -144,7 +151,7 @@ setMethod(
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- sub(kGaPrefix, "gaid::", value)
-      if (!grepl("^gaid::\\-?[0-9]+$", value)) {
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
         value <- paste("gaid", value, sep = "::")
       }
       .Object@.Data <- value
@@ -157,13 +164,13 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".dimExpr",
-  definition = function(.Object, var, operator, operand) {
+  definition = function(.Object, var, comparator, operand) {
     .Object@var <- var
-    .Object@operator <- operator
-    if(operator %in% c("!=", "==", "[]", "<>")) {
-      if(var %in% kGaDimTypes$bools) {
+    .Object@comparator <- comparator
+    if (comparator %in% c("!=", "==", "[]", "<>")) {
+      if (var %in% kGaDimTypes$bools) {
         operand <- as(as(operand, "logical"), class(operand))
-      } else if(var %in% c("ga:visitorType", "ga:userType")) {
+      } else if (var %in% c("ga:visitorType", "ga:userType")) {
         visitorType <- c("New Visitor", "Returning Visitor")
         index <- pmatch(x = tolower(operand), table = tolower(visitorType))
         if (is.na(index)) {
@@ -171,13 +178,13 @@ setMethod(
         } else {
           operand <- as(visitorType[index], class(operand))
         }
-      } else if(var == "ga:date") {
+      } else if (var == "ga:date") {
         operand <- as(format(ymd(operand), format = "%Y%m%d"), class(operand))
-      } else if(var == "dateOfSession") {
+      } else if (var == "dateOfSession") {
         operand <- as(format(ymd(operand), format = "%Y-%m-%d"), class(operand))
       }
     }
-    if(IsRegEx(.Object)) {
+    if (IsRegEx(.Object)) {
       operand <- tolower(operand)
     }
     as(.Object, ".operand") <- operand
@@ -217,7 +224,7 @@ setMethod(
     # bind every combination of startDate and endDate
     # into a data.frame, keep only the unique rows,
     # and use these start and end dates for this object.
-    if(!(missing(startDate)||missing(endDate))) {
+    if (!(missing(startDate) || missing(endDate))) {
       dates <- do.call(
         what = rbind,
         args = mapply(

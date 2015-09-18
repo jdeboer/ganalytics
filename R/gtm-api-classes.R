@@ -87,7 +87,7 @@ gtmAccount <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GtmAccount <- function(id = NULL, creds = GoogleApiCreds()){
+GtmAccount <- function(id = NULL, creds = .creds){
   gtmAccount$new(id = id, creds = creds)
 }
 
@@ -106,7 +106,7 @@ gtmAccounts <- R6Class(
 #' @param creds The Google APIs credentials to use.
 #'
 #' @export
-GtmAccounts <- function(creds = GoogleApiCreds()){
+GtmAccounts <- function(creds = .creds){
   gtmAccounts$new(creds = creds)
 }
 

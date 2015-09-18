@@ -1,7 +1,5 @@
 # Generic functions
 # -----------------
-#' @include all-classes.R
-NULL
 
 #' Google Analytics dimension and metric variables.
 #'
@@ -56,7 +54,7 @@ setGeneric(
 #' Var<-.
 #'
 #' \code{Var<-} sets the value of an object belonging to the superclass '.var'
-#' or sets the var slot of an expression object belonging to class '.expr'
+#' or sets the var slot of an expression object belonging to superclass '.expr'
 #'
 #' @param value any object that can be coerced to a valid \code{object} class.
 #'
@@ -153,35 +151,35 @@ setGeneric(
   }
 )
 
-#' Operator.
+#' Comparator.
 #'
-#' Get or create an operator used in an expression.
+#' Get or create an comparator used in an expression.
 #'
-#' @param object The object to be coerced to a '.Operator' class or to get the
-#'   operator from.
+#' @param object The object to be coerced to a '.Comparator' class or to get the
+#'   comparator from.
 #' @param ... Used by certain methods.
 #'
 #' @export
-#' @rdname Operator
+#' @rdname Comparator
 setGeneric(
-  "Operator",
+  "Comparator",
   function(object, ...) {},
-  valueClass = ".operator",
+  valueClass = ".comparator",
   useAsDefault = FALSE
 )
 
-#' Operator<-.
+#' Comparator<-.
 #'
-#' Set the operator used in an expression.
+#' Set the comparator used in an expression.
 #'
-#' @param value The value to set the operator to.
+#' @param value The value to set the comparator to.
 #'
 #' @export
-#' @rdname Operator
+#' @rdname Comparator
 setGeneric(
-  "Operator<-",
+  "Comparator<-",
   function(object, value) {
-    object <- standardGeneric("Operator<-")
+    object <- standardGeneric("Comparator<-")
     validObject(object)
     object
   }
@@ -240,7 +238,7 @@ setGeneric(
 #'
 #' @param object A dimension or metric variable, or another object to be coerced
 #'   to an .expr object.
-#' @param operator The operator to use for the expression.
+#' @param comparator The comparator to use for the expression.
 #' @param operand The operand to use for the expression.
 #' @param metricScope The scope to use for segmentation if using a metric.
 #'   Possible values include "perUser" or "perSession".
@@ -248,7 +246,7 @@ setGeneric(
 #' @export
 setGeneric(
   "Expr",
-  function(object, operator, operand, metricScope = "") {},
+  function(object, comparator, operand, metricScope = "") {},
   valueClass = ".expr",
   useAsDefault = FALSE
 )
@@ -268,7 +266,7 @@ setGeneric(
 #' @export
 setGeneric(
   "GaExpr",
-  function(object, operator, operand, metricScope = "") {},
+  function(object, comparator, operand, metricScope = "") {},
   valueClass = ".gaExpr",
   useAsDefault = FALSE
 )
@@ -288,7 +286,7 @@ setGeneric(
 #' @export
 setGeneric(
   "McfExpr",
-  function(object, operator, operand) {},
+  function(object, comparator, operand) {},
   valueClass = ".mcfExpr",
   useAsDefault = FALSE
 )
@@ -308,7 +306,7 @@ setGeneric(
 #' @export
 setGeneric(
   "RtExpr",
-  function(object, operator, operand) {},
+  function(object, comparator, operand) {},
   valueClass = ".rtExpr",
   useAsDefault = FALSE
 )
@@ -324,7 +322,7 @@ setGeneric(
 setGeneric(
   "Not",
   function(object) {},
-  valueClass = c(".operator", ".compoundExpr", ".gaSimpleOrSequence"),
+  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter"),
   useAsDefault = FALSE
 )
 
@@ -334,6 +332,8 @@ setGeneric(
 #'
 #' @param object The first object to include within the OR expression.
 #' @param ... Additional objects to include within the OR expression.
+#'
+#' @return An object of class orExpr.
 #'
 #' @export
 #' @rdname Or
@@ -355,6 +355,8 @@ setGeneric(
 #' @param object The first object within the AND expression
 #' @param ... Additional objects to include within the AND expression.
 #'
+#' @return an object of class \code{andExpr}
+#'
 #' @export
 #' @rdname And
 setGeneric(
@@ -364,71 +366,84 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' Generate an expression that gives the exclusive or of two expressions.
+#' Generate an expression that gives the Exclusive-OR of two expressions.
 #'
-#' @param x The first expression
-#' @param y The second expression.
+#' @param x,y Conditions for an exclusive-or expression.
+#'
 #'
 #' @export
 #' @rdname xor
 setGeneric("xor")
 
-#' GaPrecedes.
+#' Later.
 #'
-#' Create a gaSequenceStep object
+#' Treat a step within a sequence as happening at any point after any preceding
+#' steps in the sequence, i.e. 'later'. 'Later' means 'followed by', but not
+#' necessarily immediately.
 #'
 #' @param object The expression that should preceed others in the sequence.
 #' @param ... Any other expressions that should follow the first one but before
 #'   any others in the sequence.
 #'
-#' @seealso GaSequenceCondition
+#' @return a gaSegmentSequenceStep object, with the immediate flag not set.
+#'
+#' @seealso Sequence
 #'
 #' @export
 setGeneric(
-  "GaPrecedes",
+  "Later",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
-#' GaImmediatelyPrecedes.
+#' Then.
 #'
-#' Create a gaSequenceStep object
+#' Treat a step within a sequence as happening immediately after any preceding
+#' steps in the sequence, i.e. 'immediately following'.
 #'
 #' @param object The expression that should \bold{immediately} preceed others in
 #'   the sequence.
 #' @param ... Any other expressions that should \bold{immediately} follow the
 #'   first one but before any others in the sequence.
 #'
+#' @return a gaSegmentSequenceStep object, with the immediate flag set.
+#'
 #' @export
-#' @seealso GaSequenceCondition
+#' @seealso Sequence
 setGeneric(
-  "GaImmediatelyPrecedes",
+  "Then",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
-#' GaStartsWith.
+#' First.
 #'
-#' Create a gaSequenceStep object
+#' If used at the beginning of a sequence, indicates that this step must match
+#' the first interaction of included sessions and users within the select date
+#' range. First expressly means 'first interaction' within the date range.
 #'
 #' @param object An expression that should be at the start of a sequence
 #'   expression.
-#' @param ... Any other expressions that should follow the first expression.
+#' @param ... Any other expressions that should immediately follow the first
+#'   expression.
+#'
+#' @return a gaSegmentSequenceStep object, with the immediate flag set.
+#'
 #'
 #' @export
-#' @seealso GaSequenceCondition
+#' @seealso Sequence
 setGeneric(
-  "GaStartsWith",
+  "First",
   function(object, ...) {},
-  valueClass = "gaSequenceStep",
+  valueClass = "gaSegmentSequenceStep",
   useAsDefault = FALSE
 )
 
-#' GaSequenceCondition.
+#' Sequence.
 #'
-#' Create a new gaSequenceCondition object
+#' Create a new gaSequence object
 #'
 #' @param object A sequence step or another expression that should be coerced to
 #'   a sequence condition.
@@ -439,32 +454,72 @@ setGeneric(
 #'
 #' @export
 setGeneric(
-  "GaSequenceCondition",
-  function(object, ..., negation = FALSE) {},
-  valueClass = "gaSequenceCondition",
+  "Sequence",
+  function(object, ..., negation = FALSE) {
+    if (!missing(negation)) {
+      warning("Argument 'negation' is deprecated. Instead, please wrap the sequence or condtion within an Include or Exclude call.")
+    }
+    standardGeneric("Sequence")
+  },
+  valueClass = "gaSegmentSequenceFilter",
   useAsDefault = FALSE
 )
 
-#' GaNonSequenceCondition.
+#' SegmentConditionFilter.
 #'
-#' Create a new gaNonSequenceCondition object
+#' Create a new gaSegmentConditionFilter object
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
 #' @param negation Logical TRUE or FALSE to match segments where this conditon
 #'   has not been met.
+#' @return a gaSegmentConditionFilter object.
 #'
 #' @export
 setGeneric(
-  "GaNonSequenceCondition",
+  "SegmentConditionFilter",
   function(object, ..., negation = FALSE) {},
-  valueClass = "gaNonSequenceCondition",
+  valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
 )
 
-#' GaSegmentCondition.
+#' Include.
 #'
-#' Create a new gaSegmentCondition object
+#' One or more segment conditions or sequences to include from the defined user
+#' or session segment.
+#'
+#' @param object a condition or sequence to include
+#' @param ... further conditions or sequences to include, i.e. ANDed.
+#' @return a .gaSegmentFilter object with its negate slot set to FALSE.
+#'
+#' @export
+setGeneric(
+  "Include",
+  function(object, ...) {},
+  valueClass = c(".gaSegmentFilter", "gaSegmentFilterList"),
+  useAsDefault = FALSE
+)
+
+#' Exclude.
+#'
+#' One or more segment conditions or sequences to exclude from the defined user
+#' or session segment.
+#'
+#' @param object a condition or sequence to exclude
+#' @param ... further conditions or sequences to exclude.
+#' @return a .gaSegmentFilter object with its negate slot set to TRUE.
+#'
+#' @export
+setGeneric(
+  "Exclude",
+  function(object, ...) {},
+  valueClass = "gaSegmentFilterList",
+  useAsDefault = TRUE
+)
+
+#' SegmentFilters.
+#'
+#' Create a new gaSegmentFilterList object
 #'
 #' A segment condition is either sequential or non-sequential. Sequential and
 #' non-sequential conditoins can be combined using this function.
@@ -472,16 +527,79 @@ setGeneric(
 #' @param object The first condition to be included in the segments definition.
 #' @param ... Other conditions to be included in the segment definition.
 #' @param scope The scope of this condition, either 'user' or 'session' level.
+#' @return a gaSegmentFilterList object.
 #'
 #' @export
 setGeneric(
-  "GaSegmentCondition",
+  "SegmentFilters",
   function(object, ..., scope = "sessions") {},
-  valueClass = "gaSegmentCondition",
+  valueClass = "gaSegmentFilterList",
   useAsDefault = FALSE
 )
 
-#' GaScopeLevel.
+#' IsNegated
+#'
+#' Tests whether a segment filter is negated.
+#'
+#' @param object an object to test for negation belonging to the superclass
+#'   \code{.gaSegmentFilter}.
+#'
+#' @export
+setGeneric(
+  "IsNegated",
+  function(object) {},
+  valueClass = "logical",
+  useAsDefault = FALSE
+)
+
+#' PerHit
+#'
+#' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
+#' filter to a sequence filter of length one (i.e. conditions to match a single
+#' hit).
+#'
+#' @param object a gaMetExpr object to coerce to user-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "PerHit",
+  function(object, ...){},
+  valueClass = c("gaSegMetExpr", "gaSegmentSequenceFilter"),
+  useAsDefault = FALSE
+)
+
+#' PerSession
+#'
+#' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
+#'
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to session-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "PerSession",
+  function(object, ...){},
+  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  useAsDefault = FALSE
+)
+
+#' PerUser
+#'
+#' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
+#'
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to user-level.
+#' @param ... Other conditions to be included in the segment definition.
+#'
+#' @export
+setGeneric(
+  "PerUser",
+  function(object, ...){},
+  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  useAsDefault = FALSE
+)
+
+#' ScopeLevel.
 #'
 #' Get the scope level of a gaDynSegment or gaMetExpr
 #'
@@ -491,26 +609,26 @@ setGeneric(
 #'   an updated copy of the supplied object with the new scope applied.
 #'
 #' @export
-#' @rdname GaScopeLevel
+#' @rdname ScopeLevel
 setGeneric(
-  "GaScopeLevel",
+  "ScopeLevel",
   function(object, value) {},
   valueClass = "character",
   useAsDefault = FALSE
 )
 
-#' GaScopeLevel<-.
+#' ScopeLevel<-.
 #'
 #' Set the scope level of a gaDynSegment or a gaMetExpr
 #' For segments, one of 'users' or 'sessions'
 #' For metric expressions one of 'perUser', 'perSession' or 'perHit'
 #'
 #' @export
-#' @rdname GaScopeLevel
+#' @rdname ScopeLevel
 setGeneric(
-  "GaScopeLevel<-",
+  "ScopeLevel<-",
   function(object, value) {
-    object <- standardGeneric("GaScopeLevel<-")
+    object <- standardGeneric("ScopeLevel<-")
     validObject(object)
     object
   }
@@ -882,18 +1000,6 @@ setGeneric(
   }
 )
 
-#' GetGaQueries.
-#'
-#' Get the chracter string query compoents for the given ganalytics object.
-#'
-#' @param object a query object to coerce to matrix.
-setGeneric(
-  "GetGaQueries",
-  function(object) {},
-  valueClass = "matrix",
-  useAsDefault = FALSE
-)
-
 #' GetGaData.
 #'
 #' Fetch the data for the Google Analytics API query.
@@ -939,3 +1045,4 @@ setGeneric(
     object
   }
 )
+

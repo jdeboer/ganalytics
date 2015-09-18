@@ -1,10 +1,12 @@
-#' @include all-classes.R
-#' @include init-methods.R
 #' @include all-generics.R
+#' @include query-classes.R
+#' @include init-methods.R
 #' @include all-coercions.R
+#' @include date-coerce.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
+#' @importFrom methods setMethod new
 NULL
 
 #'SplitDateRange
@@ -28,7 +30,7 @@ SplitDateRange <- function(dateRange, N) {
   #
   # Set new start dates
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
-  if(N <= 0 | N > maxN) {
+  if (N <= 0 | N > maxN) {
     N <- maxN
   }
   start <- min(StartDate(dateRange))
@@ -51,7 +53,7 @@ GetDataByDateRange <- function(query, dates) {
   adply(dates, 1, function(dateRange) {
     DateRange(query) <- DateRange(dateRange$start, dateRange$end)
     output <- GetGaData(query)
-    if(nrow(output)==0){output <- NULL}
+    if (nrow(output) == 0){output <- NULL}
     return(output)
   })
 }
@@ -375,45 +377,3 @@ setMethod(
     object
   }
 )
-
-#' GaStartDate (Deprecated)
-#' For backwards compatibility
-#' @export GaStartDate
-#' @rdname GaStartDate
-#' @param ... arguments passed onto \code{StartDate}
-GaStartDate <- function(...){StartDate(...)}
-
-#' GaEndDate (Deprecated)
-#' @export GaEndDate
-#' @rdname GaEndDate
-#' @param ... arguments passed onto \code{EndDate}
-GaEndDate <- function(...){EndDate(...)}
-
-#' GaDateRange (Deprecated)
-#' @export GaDateRange
-#' @rdname GaDateRange
-#' @param ... arguments passed onto \code{DateRange}
-GaDateRange <- function(...){DateRange(...)}
-
-#' GaStartDate<- (Deprecated)
-#' @export GaStartDate<-
-#' @rdname GaStartDate
-#' @param value passed onto \code{StartDate}
-`GaStartDate<-` <- function(..., value){`StartDate<-`(..., value)}
-
-#' GaEndDate<- (Deprecated)
-#' @export GaEndDate<-
-#' @rdname GaEndDate
-#' @param value passed onto \code{EndDate}
-`GaEndDate<-` <- function(..., value){`EndDate<-`(..., value)}
-
-#' GaDateRange<- (Deprecated)
-#' @export GaDateRange<-
-#' @rdname GaDateRange
-#' @param value passed onto \code{DateRange}
-`GaDateRange<-` <- function(..., value){`DateRange<-`(..., value)}
-
-#' GaSplitDateRange (Deprecated)
-#' @export GaSplitDateRange
-#' @param ... arguments passed onto \code{SplitDateRange}
-GaSplitDateRange <- function(...){SplitDateRange(...)}

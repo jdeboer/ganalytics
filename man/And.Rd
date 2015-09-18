@@ -22,6 +22,9 @@ And(object, ...)
 
 \item{e2}{second expression}
 }
+\value{
+an object of class \code{andExpr}
+}
 \description{
 AND two or more ganalytics expressions together.
 }
@@ -36,4 +39,7 @@ A single list of objects is also accepted.
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: 
 }}
+\seealso{
+\code{link{Or}} \code{link{xor}} \code{link{Not}}
+}
 

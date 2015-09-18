@@ -1,4 +1,14 @@
-#' Google APIs OAuth 2.0 Credentials
+#' @include globaldata.R
+#' @importFrom jsonlite validate fromJSON toJSON
+#' @importFrom httr GET POST PUT DELETE oauth_endpoints oauth1.0_token oauth2.0_token config
+#'   stop_for_status content oauth_app modify_url add_headers
+#' @importFrom R6 R6Class
+NULL
+
+# This will be initialised using GoogleApiCreds() at time of package being loaded.
+.creds <- list()
+
+#' Google APIs OAuth 2.0 Credentials.
 #'
 #' Create a Google APIs OAuth2.0 credentials object
 #'
@@ -9,7 +19,6 @@
 #' @param appname prefix of environment variables that hold the client ID and client secret.
 #'
 #' @export
-#' @include ganalytics-package.R
 GoogleApiCreds <- function(
   userName = character(0),
   appCreds = NULL,
@@ -17,7 +26,7 @@ GoogleApiCreds <- function(
   use_oob = FALSE,
   appname = "GOOGLE_APIS"
 ){
-  cache_generic_file_name <- paste0(tolower(appname), "_auth.RDS")
+  cache_generic_file_name <- paste(tolower(appname), "auth.RDS", sep = "_")
   cache_file_prefix <- "."
   cache_default_dir <- "~"
   if (length(cache) == 0) {
@@ -28,7 +37,7 @@ GoogleApiCreds <- function(
     }
     cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
   }
-  creds <- list(
+  .creds <<- list(
     app = app_oauth_creds(
       appname = appname,
       creds = appCreds
@@ -39,18 +48,19 @@ GoogleApiCreds <- function(
     ),
     use_oob = use_oob
   )
+  .creds
 }
 
 app_oauth_creds <- function(appname, creds = NULL) {
   if (typeof(creds) == "character" & length(creds) == 1) {
-    if(validate(creds)) {
+    if (validate(creds)) {
       creds <- fromJSON(creds)
     } else if (file.exists(creds)) {
       creds <- fromJSON(creds)
     } else {
       creds <- NULL
     }
-    if("installed" %in% names(creds)) {
+    if ("installed" %in% names(creds)) {
       creds <- creds$installed
     }
   }
@@ -119,14 +129,14 @@ api_request <- function(api_name, app, base_url,
   )
   url <- form_url(base_url, queries)
   endpoint <- oauth_endpoints(name = api_name)
-  if(length(user$login) != 1) {user$login <- NA}
-  if(!is.na(user$login)) {
+  if (length(user$login) != 1) {user$login <- NA}
+  if (!is.na(user$login)) {
     endpoint$authorize <- modify_url(
       endpoint$authorize,
       query = list(login_hint = user$login)
     )
   }
-  scope <- if(!is.null(scope)) {
+  scope <- if (!is.null(scope)) {
     paste(scope, collapse = " ")
   }
   switch(
@@ -154,7 +164,7 @@ api_request <- function(api_name, app, base_url,
     url = url,
     config = config(token = token)
   )
-  if(!is.null(body_list)) {
+  if (!is.null(body_list)) {
     body <- toJSON(
       body_list,
       pretty = TRUE#, asIs = TRUE #, auto_unbox = TRUE
@@ -189,7 +199,7 @@ form_url <- function(base_url, queries = NULL) {
   paste(
     c(
       base_url,
-      if(length(queries) >= 1) {
+      if (length(queries) >= 1) {
         paste(
           aaply(seq_along(queries), 1, function(query_index){
             query <- queries[query_index]
@@ -219,9 +229,9 @@ response_to_list <- function(response) {
       })
       ret_list <- ret_list[[1]]
       ret_list <- c(
-        ret_list[names(ret_list)!="entry"],
+        ret_list[names(ret_list) != "entry"],
         entries = list(
-          ret_list[names(ret_list)=="entry"]
+          ret_list[names(ret_list) == "entry"]
         )
       )
       return(ret_list)
@@ -248,7 +258,7 @@ response_to_list <- function(response) {
 parse_field_list <- function(field_list) {
   # A list must be provided, and as this function is recursive,
   # all elements within that list must also be lists, and so on.
-  if(length(field_list) == 0) {
+  if (length(field_list) == 0) {
     return(NULL)
   }
   stopifnot(
@@ -269,7 +279,7 @@ parse_field_list <- function(field_list) {
       # otherwise recursively parse each of its sub elements
       sub_fields <- parse_field_list(field_content)
       # if there was more than one sub element, then group those sub elements
-      if(field_length > 1) {
+      if (field_length > 1) {
         sub_fields <- paste0("(", sub_fields, ")")
       }
       # the sub fields are returned with a preceeding "/"
@@ -290,7 +300,7 @@ get_privates <- function(class_gen){
 .googleApi <- R6Class(
   ".googleApi",
   public = list(
-    creds = GoogleApiCreds(),
+    creds = .creds,
     get = function(max_results = NULL) {
       req_type <- "GET"
       private$api_req_func(
@@ -302,7 +312,7 @@ get_privates <- function(class_gen){
         max_results = max_results
       )
     },
-    initialize = function(creds = GoogleApiCreds()) {
+    initialize = function(creds = .creds) {
       self$creds = creds
     }
   ),
@@ -317,11 +327,11 @@ get_privates <- function(class_gen){
     base_url = NULL,
     api_req_func = google_api_request,
     field_corrections = function(field_list) {
-      if(is.data.frame(field_list)) {
-        if(exists("created", field_list)) {
+      if (is.data.frame(field_list)) {
+        if (exists("created", field_list)) {
           field_list$created <- ymd_hms(field_list$created)
         }
-        if(exists("updated", field_list)) {
+        if (exists("updated", field_list)) {
           field_list$updated <- ymd_hms(field_list$updated)
         }
       }
@@ -347,12 +357,12 @@ get_privates <- function(class_gen){
       })
       self
     },
-    initialize = function(creds = GoogleApiCreds(), parent = NULL, id = NA) {
+    initialize = function(creds = .creds, parent = NULL, id = NA) {
       super$initialize(creds = creds)
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
       self$id <- id
-      if(!is.na(id)) {
+      if (!is.na(id)) {
         self$get()
       }
       self
@@ -449,13 +459,13 @@ get_privates <- function(class_gen){
       )
       self$get()
     },
-    initialize = function(creds = GoogleApiCreds(), parent = NULL) {
+    initialize = function(creds = .creds, parent = NULL) {
       super$initialize(creds = creds)
       entity_class_private <- get_privates(private$entity_class)
       private$request <- entity_class_private$request
       private$parent_class_name <- entity_class_private$parent_class_name
       stopifnot(is(parent, private$parent_class_name) | is.null(parent))
-      if(is.null(private$collection_name)) {
+      if (is.null(private$collection_name)) {
         private$collection_name <- private$request
       }
       private$resource_name <- entity_class_private$resource_name

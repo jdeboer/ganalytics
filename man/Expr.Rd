@@ -5,20 +5,23 @@
 \alias{Expr}
 \alias{Expr,.expr,ANY-method}
 \alias{Expr,character,character-method}
+\alias{Expr,formula,ANY-method}
 \title{Expr.}
 \usage{
 \S4method{Expr}{.expr,ANY}(object)
 
-\S4method{Expr}{character,character}(object, operator, operand,
+\S4method{Expr}{formula,ANY}(object)
+
+\S4method{Expr}{character,character}(object, comparator, operand,
   metricScope = "")
 
-Expr(object, operator, operand, metricScope = "")
+Expr(object, comparator, operand, metricScope = "")
 }
 \arguments{
 \item{object}{A dimension or metric variable, or another object to be coerced
 to an .expr object.}
 
-\item{operator}{The operator to use for the expression.}
+\item{comparator}{The comparator to use for the expression.}
 
 \item{operand}{The operand to use for the expression.}
 
@@ -30,8 +33,19 @@ Define a Google Analytics expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = .expr,operator = ANY}: 
+\item \code{object = .expr,comparator = ANY}: Accepts a formula in the form of: \code{~ <variable> <comparator>
+<operand>} where only the \code{<operand>} is evaluated.
 
-\item \code{object = character,operator = character}: 
+\item \code{object = formula,comparator = ANY}: 
+
+\item \code{object = character,comparator = character}: 
 }}
+\seealso{
+Other expression generators: \code{\link{GaExpr}},
+  \code{\link{GaExpr,character,character-method}};
+  \code{\link{McfExpr}},
+  \code{\link{McfExpr,character,character-method}};
+  \code{\link{RtExpr}},
+  \code{\link{RtExpr,character,character-method}}
+}
 

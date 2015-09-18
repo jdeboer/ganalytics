@@ -1,18 +1,12 @@
-#' @include all-classes.R
-#' @include init-methods.R
+#' @include query-classes.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
+#' @include ga-api-coerce.R
 #' @include GaGetCoreReport.R
+#' @importFrom methods setMethod as
+#' @importFrom plyr alply ldply mutate
+#' @importFrom scales percent
 NULL
-
-setMethod(
-  f = "GetGaQueries",
-  signature = signature(".query"),
-  definition = function(object) {
-    as(object, "matrix")
-  }
-)
 
 #' GetGaData Execute a ganalytics query.
 #' @param query the query to execute.
@@ -32,7 +26,10 @@ setMethod("GetGaData", ".query", function(
   if (is.null(creds)) {
     creds <- query@creds
   }
-  queryParams <- GetGaQueries(query)
+  if (!missing(use_oob)) {
+    warning("Argument 'use_oob' is defunct, please use the GaCreds or GoogleApiCreds functions instead to either supply a creds argument or to set the creds of the supplied query object.", call. = FALSE)
+  }
+  queryParams <- as(query, "matrix")
   # Need to determine if the query object is a MCF or GA query and tell GaPaginate
   responses <- alply(
     .data = queryParams,
@@ -55,9 +52,11 @@ setMethod("GetGaData", ".query", function(
   )[-1]
   attr(data, "sampleSize") <- sum(laply(responses, function(response){as.numeric(response$sampleSize)}))
   attr(data, "sampleSpace") <- sum(laply(responses, function(response){as.numeric(response$sampleSpace)}))
+  sampleSize <- attr(data, "sampleSize")
+  sampleSpace <- attr(data, "sampleSpace")
   sampled <- any(laply(responses, function(response) {isTRUE(response$sampled)}))
   if (sampled) {
-    warning("Contains sampled data.")
+    warning(paste("Contains sampled data: ", sampleSize, "/", sampleSpace, "(", percent(sampleSize/sampleSpace), ")."))
   }
   return(data)
 })

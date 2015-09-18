@@ -4,7 +4,7 @@
 \alias{GaUserSegment}
 \title{User Segment}
 \usage{
-GaUserSegment(id = NULL, definition = NA, creds = GoogleApiCreds())
+GaUserSegment(id = NULL, definition = NA, creds = .creds)
 }
 \arguments{
 \item{id}{ID of the user or system segment to get}

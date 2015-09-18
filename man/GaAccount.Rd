@@ -4,7 +4,7 @@
 \alias{GaAccount}
 \title{GA Account}
 \usage{
-GaAccount(id = NULL, creds = GoogleApiCreds())
+GaAccount(id = NULL, creds = .creds)
 }
 \arguments{
 \item{id}{ID of the GA account to get}

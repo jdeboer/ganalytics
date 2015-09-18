@@ -2,8 +2,6 @@
 % Please edit documentation in R/Query.R, R/all-generics.R
 \docType{methods}
 \name{SamplingLevel,.standardQuery-method}
-\alias{GaSamplingLevel}
-\alias{GaSamplingLevel<-}
 \alias{SamplingLevel}
 \alias{SamplingLevel,.standardQuery-method}
 \alias{SamplingLevel,data.frame-method}
@@ -16,10 +14,6 @@
 \S4method{SamplingLevel}{.standardQuery}(object) <- value
 
 \S4method{SamplingLevel}{data.frame}(object)
-
-SamplingLevel(object, value)
-
-SamplingLevel(object) <- value
 
 SamplingLevel(object, value)
 

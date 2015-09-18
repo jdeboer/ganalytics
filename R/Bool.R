@@ -1,8 +1,11 @@
-#' @include all-classes.R
-#' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include helper-functions.R
+#' @include comparator-classes.R
+#' @include expression-classes.R
+#' @include segment-classes.R
+#' @include utils.R
+#' @importFrom methods setMethod
+#' @importFrom assertthat assert_that
 NULL
 
 # ---- Not ----
@@ -10,7 +13,7 @@ NULL
 #' @describeIn Not
 setMethod(
   f = "Not",
-  signature = ".operator",
+  signature = ".comparator",
   definition = function(object) {
     as(object, "character") <- switch(
       object,
@@ -33,15 +36,15 @@ setMethod(
 #' @describeIn Not
 #' @param x the object to return the logical inverse of.
 #' @export
-setMethod("!", ".operator", function(x) {Not(x)})
+setMethod("!", ".comparator", function(x) {Not(x)})
 
 #' @describeIn Not
 setMethod(
   f = "Not",
   signature = ".expr",
   definition = function(object) {
-    operator <- as(object, ".operator")
-    as(object, ".operator") <- Not(operator)
+    comparator <- as(object, ".comparator")
+    as(object, ".comparator") <- Not(comparator)
     object
   }
 )
@@ -66,7 +69,7 @@ setMethod("!", "orExpr", function(x) {Not(x)})
 #' @describeIn Not
 setMethod(
   f = "Not",
-  signature = ".gaSimpleOrSequence",
+  signature = ".gaSegmentFilter",
   definition = function(object) {
     object@negation <- !object@negation
     object
@@ -75,12 +78,7 @@ setMethod(
 
 #' @describeIn Not
 #' @export
-setMethod("!", ".gaSimpleOrSequence", function(x) {Not(x)})
-
-# Create an Or from one or more metric or dimension expressions
-# Takes one or more Metric or Dimension expressions
-# as separate arguments or as a list.
-# Returns an object of gaOr.
+setMethod("!", ".gaSegmentFilter", function(x) {Not(x)})
 
 #' @describeIn Or
 setMethod(
@@ -149,23 +147,3 @@ setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2
 #' @describeIn xor
 #' @export
 setMethod("xor", c(".compoundExpr", ".compoundExpr"), function(x, y) {(x | y) & (!x | !y)})
-
-# Backwards compatibility
-#' GaNot (Deprecated, use Not or ! instead).
-#'
-#' @export GaNot
-#' @param ... arguments passed to \code{Not}
-#' @rdname GaNot
-GaNot <- function(...){Not(...)}
-
-#' GaOr (Deprecated, use Or or | instead).
-#' @export GaOr
-#' @param ... arguments passed to \code{Or}
-#' @rdname GaOr
-GaOr <- function(...){Or(...)}
-
-#' GaAnd (Deprecated, use And or & instead).
-#' @export GaAnd
-#' @param ... arguments passed to \code{And}
-#' @rdname GaAnd
-GaAnd <- function(...){And(...)}

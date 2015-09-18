@@ -2,8 +2,6 @@
 % Please edit documentation in R/GaView.R, R/all-generics.R
 \docType{methods}
 \name{GaView,viewId-method}
-\alias{GaProfileId}
-\alias{GaProfileId<-}
 \alias{GaView}
 \alias{GaView,.query-method}
 \alias{GaView,character-method}
@@ -31,10 +29,6 @@
 \S4method{GaView}{.query}(object)
 
 \S4method{GaView}{.query}(object) <- value
-
-GaView(object, value)
-
-GaView(object) <- value
 
 GaView(object, value)
 

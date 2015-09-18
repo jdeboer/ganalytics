@@ -22,6 +22,9 @@ Or(object, ...)
 
 \item{e2}{second expression}
 }
+\value{
+An object of class orExpr.
+}
 \description{
 OR two or more expressions.
 }
@@ -31,4 +34,7 @@ OR two or more expressions.
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: 
 }}
+\seealso{
+\code{link{And}} \code{link{xor}} \code{link{Not}}
+}
 

@@ -6,15 +6,15 @@
 \alias{RtExpr,character,character-method}
 \title{RtExpr.}
 \usage{
-\S4method{RtExpr}{character,character}(object, operator, operand)
+\S4method{RtExpr}{character,character}(object, comparator, operand)
 
-RtExpr(object, operator, operand)
+RtExpr(object, comparator, operand)
 }
 \arguments{
 \item{object}{A dimension or metric variable, or another object to be coerced
 to an .expr object.}
 
-\item{operator}{The operator to use for the expression.}
+\item{comparator}{The comparator to use for the expression.}
 
 \item{operand}{The operand to use for the expression.}
 }
@@ -23,7 +23,7 @@ Create a Real-Time Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = character,operator = character}: 
+\item \code{object = character,comparator = character}: 
 }}
 \examples{
 \donttest{
@@ -32,5 +32,15 @@ Create a Real-Time Reporting API expression.
   TableFilter(myQuery) <- source_matches_google
   GetData(myQuery)
 }
+}
+\seealso{
+Other expression generators: \code{\link{Expr}},
+  \code{\link{Expr,.expr,ANY-method}},
+  \code{\link{Expr,character,character-method}},
+  \code{\link{Expr,formula,ANY-method}};
+  \code{\link{GaExpr}},
+  \code{\link{GaExpr,character,character-method}};
+  \code{\link{McfExpr}},
+  \code{\link{McfExpr,character,character-method}}
 }
 

@@ -1,9 +1,11 @@
-#' @include helper-functions.R
-#' @include all-classes.R
+#' @include utils.R
+#' @include query-classes.R
+#' @include management-api-classes.R
+#' @include GaApiRequest.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include ganalytics-package.R
+#' @importFrom methods new as
 NULL
 
 #' GaQuery.
@@ -18,7 +20,7 @@ NULL
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param segment a segment object
+#' @param segments a segment object
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #' @param profileId Deprecated, use view instead.
@@ -27,18 +29,25 @@ NULL
 #' @export
 GaQuery <- function(
   view = NA,
-  creds = GoogleApiCreds(),
+  creds = .creds,
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "ga:sessions",
   dimensions = "ga:date",
   sortBy = NULL,
   filters = NULL,
-  segment = NULL,
+  segments = NULL,
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults,
   profileId = NA
 ) {
+
+#   if (!missing(profileId)) {
+#     warning("argument profileId is deprecated; please use view instead.",
+#             call. = FALSE)
+#     view <- profileId
+#   }
+
   if (missing(profileId)) {
     if (!is(view, ".gaResource")) {
       if (any(is.na(view))) {
@@ -60,7 +69,7 @@ GaQuery <- function(
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
       filters = as(filters, "gaFilter"),
-      segment = GaSegment(segment),
+      segments = Segment(segments),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds
@@ -86,7 +95,7 @@ GaQuery <- function(
 #' @export
 McfQuery <- function(
   view = NA,
-  creds = GoogleApiCreds(),
+  creds = .creds,
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "mcf:totalConversions",
@@ -96,7 +105,7 @@ McfQuery <- function(
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults
 ) {
-  if(is.na(view[[1]])) {
+  if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
@@ -134,14 +143,14 @@ McfQuery <- function(
 #' @export
 RtQuery <- function(
   view = NA,
-  creds = GoogleApiCreds(),
-  metrics = "rt:activeUsers",
+  creds = .creds,
+  metrics = "rt:pageviews",
   dimensions = "rt:minutesAgo",
   sortBy = NULL,
   filters = NULL,
   maxResults = kGaMaxResults
 ) {
-  if(is.na(view[[1]])) {
+  if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
   if (missing(creds) & is(view, ".gaResource")) {
@@ -196,7 +205,7 @@ modify_query <- function(
     TableFilter(query) <- filters
   }
   if (!is.na(segments)) {
-    GaSegment(query) <- segments
+    Segment(query) <- segments
   }
   if (!is.na(sampling_level)) {
     SamplingLevel(query) <- sampling_level
@@ -260,20 +269,3 @@ setMethod(
     sample_params
   }
 )
-
-# Backwards compatibility
-#' @export GaSamplingLevel
-#' @rdname SamplingLevel
-GaSamplingLevel <- SamplingLevel
-
-#' @export GaSamplingLevel<-
-#' @rdname SamplingLevel
-`GaSamplingLevel<-` <- `SamplingLevel<-`
-
-#' @export GaMaxResults
-#' @rdname MaxResults
-GaMaxResults <- MaxResults
-
-#' @export GaMaxResults<-
-#' @rdname MaxResults
-`GaMaxResults<-` <- `MaxResults<-`

@@ -1,9 +1,10 @@
-#' @include all-classes.R
+#' @include var-list-classes.R
+#' @include query-classes.R
 #' @include init-methods.R
 #' @include all-generics.R
 #' @include all-coercions.R
-#' @include helper-functions.R
-#' @include ganalytics-package.R
+#' @include utils.R
+#' @importFrom methods setMethod as validObject new
 NULL
 
 # -- GaSortBy ----
@@ -35,7 +36,7 @@ setMethod(
     desc[grep("^\\+", varsChar)] <- FALSE
     desc[grep("^\\-", varsChar)] <- TRUE
     # Set the length of the desc flags to the same length as the vector of GA variables to sort by.
-    if(!is.null(vars)) {
+    if (!is.null(vars)) {
       length(desc) <- length(vars)
     }
     desc[is.na(desc)] <- vars@desc[is.na(desc)]
@@ -65,7 +66,7 @@ setMethod(
     if (missing(value)) {
       as(object, ".sortBy")
     } else {
-      if(length(value) < 1) {
+      if (length(value) < 1) {
         value <- NULL
       }
       as(object, ".sortBy") <- value
@@ -83,13 +84,3 @@ setMethod(
     object
   }
 )
-
-# Backwards compatibility
-
-#' @rdname SortBy
-#' @export GaSortBy
-GaSortBy <- SortBy
-
-#' @rdname SortBy
-#' @export GaSortBy<-
-`GaSortBy<-` <- `SortBy<-`
