@@ -428,3 +428,26 @@ GaCondition <- function(..., negation = FALSE) {
     Include(...)
   }
 }
+
+#' GaSegmentFilters
+#'
+#' Deprecated, use \code{PerSession} or \code{PerUser} instead.
+#'
+#' @param ... passed onto \code{PerSession} or \code{PerUser}
+#' @param scope used to select either PerUser or PerSession.
+#'
+#' @rdname GaSegmentFilters
+#' @keywords internal
+#' @export GaSegmentFilters
+GaSegmentFilters <- function(..., scope = "sessions") {
+  assert_that(length(scope) == 1)
+  assert_that(scope %in% c("sessions", "users"))
+  if (scope == "sessions") {
+    .Deprecated("PerSession")
+    PerSession(...)
+  } else {
+    .Deprecated("PerUser")
+    PerUser(...)
+  }
+}
+
