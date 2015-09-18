@@ -226,7 +226,7 @@ setMethod(
   f = "PerHit",
   signature = ".compoundExpr",
   definition = function(object, ...) {
-    Sequence(object, ...)
+    Sequence(And(object, ...))
   }
 )
 
