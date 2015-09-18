@@ -26,7 +26,8 @@ sequential_segment <- function(steps){
   assert_that(lazy_expr$expr[[1]] == "list")
   step_exprs <- as.list(lazy_expr$expr[-1])
   dots <- sapply(step_exprs, function(expr) {any(as.character(expr) == "...")})
-  laters <- c(TRUE, dots[-length(dots)])
+  laters <- c(FALSE, dots[-length(dots)])
+  if (!dots[1]) {laters[1] <- TRUE}
   thens <- !(dots | laters)
   step_exprs[laters] <- lapply(step_exprs[laters], function(expr) {Later(eval(expr, envir = lazy_expr$env))})
   step_exprs[thens] <- lapply(step_exprs[thens], function(expr) {Then(eval(expr, envir = lazy_expr$env))})
