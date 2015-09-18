@@ -408,3 +408,23 @@ GaScopeLevel <- function(...) {
   `ScopeLevel<-`(..., value)
 }
 
+#' GaCondition
+#'
+#' Deprecated, use \code{Include} or \code{Exclude} instead.
+#'
+#' @param ... passed onto \code{Include} or \code{Exclude}
+#' @param negation used to select either Include or Exclude (if negation is
+#'   FALSE).
+#'
+#' @rdname GaCondition
+#' @keywords internal
+#' @export GaCondition
+GaCondition <- function(..., negation = FALSE) {
+  if (isTRUE(negation)) {
+    .Deprecated("Exclude")
+    Exclude(...)
+  } else {
+    .Deprecated("Include")
+    Include(...)
+  }
+}
