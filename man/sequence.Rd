@@ -6,7 +6,6 @@
 \alias{Later,.compoundExpr-method}
 \alias{Sequence}
 \alias{Sequence,.compoundExpr-method}
-\alias{Sequence,gaSegmentSequenceStep-method}
 \alias{Then,.compoundExpr-method}
 \title{Sequence.}
 \usage{
@@ -17,8 +16,6 @@
 \S4method{First}{.compoundExpr}(object)
 
 \S4method{Sequence}{.compoundExpr}(object, ..., negation = FALSE)
-
-\S4method{Sequence}{gaSegmentSequenceStep}(object, ..., negation = FALSE)
 
 Sequence(object, ..., negation = FALSE)
 }
@@ -44,7 +41,5 @@ Create a new gaSequence object
 \item \code{.compoundExpr}: 
 
 \item \code{.compoundExpr}: 
-
-\item \code{gaSegmentSequenceStep}: 
 }}
 
