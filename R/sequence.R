@@ -14,10 +14,10 @@ NULL
 #'   repreating a step in the sequence.
 #'
 #' @examples
-#' a <- condition(pagePath == "/home")
-#' b <- condition(eventCategory == "Video") &
-#'   condition(eventAction == "Play")
-#' c <- condition(medium == "email")
+#' a <- Expr(~pagePath == "/home")
+#' b <- Expr(~eventCategory == "Video") &
+#'   Expr(~eventAction == "Play")
+#' c <- Expr(~medium == "email")
 #' s <- sequential_segment(list( ..., a, ..., b, c ))
 #'
 #' @export

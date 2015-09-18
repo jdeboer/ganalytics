@@ -104,6 +104,7 @@ setMethod(
   }
 )
 
+#' @describeIn IsNegated
 setMethod(
   f = "IsNegated",
   signature = ".gaSegmentFilter",
