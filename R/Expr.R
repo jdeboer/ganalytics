@@ -157,7 +157,7 @@ setMethod(
   f = "ScopeLevel<-",
   signature = c("gaMetExpr", "character"),
   definition = function(object, value) {
-    object <- as(object, "gaSegMetScope")
+    object <- as(object, "gaSegMetExpr")
     object@metricScope <- value
     validObject(object)
     object
