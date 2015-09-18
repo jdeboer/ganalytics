@@ -61,3 +61,15 @@ test_that("segments can be selected by ID and parsed", {
     "gaid::1"
   )
 })
+
+test_that("Include and Exclude can be used to define segment filters", {
+  expr1 <- Expr("EventCategory", "=", "video")
+  expr2 <- Expr("EventAction", "=", "play")
+  include_filter <- Include(expr1, expr2)
+  exclude_filter <- Exclude(expr1, expr2)
+  expect_is(include_filter, "gaSegmentFilterList")
+  expect_is(exclude_filter, "gaSegmentFilterList")
+  expect_equal(length(include_filter), 2)
+  expect_equal(length(exclude_filter), 2)
+  expect_true(all(sapply(include_filter, function(seg_filter) {!IsNegated(seg_filter)})))
+  expect_true(all(sapply(exclude_filter, function(seg_filter) {IsNegated(seg_filter)})))

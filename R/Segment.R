@@ -54,7 +54,10 @@ setMethod(
   f = "Include",
   signature = ".compoundExpr",
   definition = function(object, ...) {
-    SegmentConditionFilter(object, ..., negation = FALSE)
+    exprList <- list(object, ...)
+    do.call(
+      SegmentFilters, lapply(exprList, SegmentConditionFilter, negation = FALSE)
+    )
   }
 )
 
@@ -63,7 +66,10 @@ setMethod(
   f = "Exclude",
   signature = ".compoundExpr",
   definition = function(object, ...) {
-    SegmentConditionFilter(object, ..., negation = TRUE)
+    exprList <- list(object, ...)
+    do.call(
+      SegmentFilters, lapply(exprList, SegmentConditionFilter, negation = TRUE)
+    )
   }
 )
 
