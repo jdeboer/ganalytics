@@ -88,6 +88,10 @@ test_that("Include and Exclude can be used to define segment filters", {
   expect_true(all(sapply(exclude_filter, function(seg_filter) {IsNegated(seg_filter)})))
 })
 
+test_that("PerUser and PerSession can be used to scope segment filters", {
+  segment_filter_list <- PerSession(Expr("pagePath", "=", "/"))
+  expect_equal(as(segment_filter_list, "character"), "sessions::condition::ga:pagePath==/")
+})
 
 test_that("Non standard evaluation can be used to define conditions and sequences", {
   step1 <- Expr(~pagepath == "/")
@@ -100,3 +104,4 @@ test_that("Non standard evaluation can be used to define conditions and sequence
   )
   expect_identical(nse_sequence, se_sequence)
 })
+
