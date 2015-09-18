@@ -85,7 +85,7 @@ setMethod(
   }
 )
 
-# ---- SegmentConditionFilter, SegmentFilters ----
+# ---- SegmentConditionFilter, SegmentFilters, IsNegated ----
 
 #' @describeIn SegmentConditionFilter
 setMethod(
@@ -95,6 +95,14 @@ setMethod(
     exprList <- list(object, ...)
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
     new("gaSegmentConditionFilter", exprList, negation = negation)
+  }
+)
+
+setMethod(
+  f = "IsNegated",
+  signature = ".gaSegmentFilter",
+  definition = function(object) {
+    object@negation
   }
 )
 

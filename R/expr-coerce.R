@@ -59,4 +59,3 @@ setAs(from = "orExpr", to = "andExpr", def = simpleCoerceToList)
 setAs(from = ".expr", to = "andExpr", def = function(from, to) {
   as(as(from, "orExpr"), "andExpr")
 })
-

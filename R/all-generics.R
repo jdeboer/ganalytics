@@ -537,6 +537,21 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' IsNegated
+#'
+#' Tests whether a segment filter is negated.
+#'
+#' @param object an object to test for negation belonging to the superclass
+#'   \code{.gaSegmentFilter}.
+#'
+#' @export
+setGeneric(
+  "IsNegated",
+  function(object) {},
+  valueClass = "logical",
+  useAsDefault = FALSE
+)
+
 #' PerHit
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
