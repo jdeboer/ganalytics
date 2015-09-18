@@ -11,11 +11,12 @@ sequential_segment(steps)
   repreating a step in the sequence.}
 }
 \description{
-Create a sequence using non-standard evaluation.
+Create a sequence using R non-standard evaluation syntax.
 }
 \details{
-Steps must be separated by commas (\code{,}). ... denotes zero or more of any
-interaction preceeding the step that follows.
+Steps must be separated by commas (\code{,}). ... denotes zero or more of
+interactions may preceed the step that follows, otherwise without ... then
+the there must not be any interactions between the adjacent steps.
 }
 \examples{
 a <- condition(pagePath == "/home")
