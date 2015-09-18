@@ -62,6 +62,19 @@ test_that("segments can be selected by ID and parsed", {
   )
 })
 
+test_that("PerHit returns the expected classes of output given the class of its input", {
+  expect_is(
+    PerHit(Expr("pageviews", "=", 1)),
+    "gaSegMetExpr"
+  )
+  single_step_sequence <- PerHit(
+    Expr("totalEvents", "=", 1) &
+      Expr("pagePath", "=", "/")
+  )
+  expect_is(single_step_sequence, "gaSegmentSequenceFilter")
+  expect_equal(length(single_step_sequence), 1)
+})
+
 test_that("Include and Exclude can be used to define segment filters", {
   expr1 <- Expr("EventCategory", "=", "video")
   expr2 <- Expr("EventAction", "=", "play")
@@ -73,3 +86,17 @@ test_that("Include and Exclude can be used to define segment filters", {
   expect_equal(length(exclude_filter), 2)
   expect_true(all(sapply(include_filter, function(seg_filter) {!IsNegated(seg_filter)})))
   expect_true(all(sapply(exclude_filter, function(seg_filter) {IsNegated(seg_filter)})))
+})
+
+
+test_that("Non standard evaluation can be used to define conditions and sequences", {
+  step1 <- Expr(~pagepath == "/")
+  step2 <- Expr(~pagepath == "/cart")
+  nse_sequence <- sequential_segment(list(
+    step1, ..., step2
+  ))
+  se_sequence <- Sequence(
+    step1, Later(step2)
+  )
+  expect_identical(nse_sequence, se_sequence)
+})
