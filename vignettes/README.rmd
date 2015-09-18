@@ -39,7 +39,7 @@ Function names have changed, however the old function names are still supported 
 
 Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.
 
-Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), & (And), and ! (Not) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and & operators. Therefore, remember to use parentheses () to force the order of operation given to your Boolean expressions.
+Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), & (And), and ! (Not) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and & operators. Therefore, remember to use parentheses () to force the order of operation applied to your Boolean expressions.
 
 There is now support for user and session level condition based segments as well as sequential segmentation.
 

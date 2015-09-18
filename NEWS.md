@@ -1,8 +1,15 @@
-2015-09-15 Renamed GaSequence to Sequence. Added PerUser, PerSession and PerHit generic functions for setting the scope of segment filters, and metrics conditions used within segments. Also, renamed GaScopeLevel and GaScopeLevel<- functions to ScopeLevel and ScopeLevel<- respectively.
+2015-09-18 PerUser and PerSession can now be used instead of SegmentFilters to create a scoped segment filter list. Also, Include and Exclude have been added to add include and exclude (i.e negate) filters to a segment definition, rather than needing to use the negate argument of the Sequence and SegmentConditionFilter functions.
+Added function for generating a segment definition from a list where ... can be used to mean 'followed-by / Later' prior to the next step in the sequence. Note this function uses non-standard evaluation.
+PerHit can be used to transform a condition filter into a sequence of length one, which offers a powerful form of segmentation where all conditions must be met for a single hit rather than scoped across sessions or users.
+Expr can now be used with a formula denoted by the prefix `~`. This uses non-standard evaluation so that variable names and condition operators do not need to be surrounded by quotation marks.
+Added IsNegated generic function and method for testing whether a segment filter's negated slot is set to TRUE.
+
+2015-09-16 Renamed segmentation functions: GaSequenceCondition -> Sequence; GaNonSequenceCondition -> SegmentConditionFilter; GaSegmentCondition -> SegmentFilters
+
+2015-09-15 Renamed GaSequence to Sequence. Added PerUser, PerSession and PerHit generic functions for setting the scope of segment filters, and metrics conditions used within segments. Also, renamed GaScopeLevel and GaScopeLevel<- functions to ScopeLevel and ScopeLevel<- respectively. Sampling warnings are now more informative by notifying you of the total sample size and space with a sampling rate percentage too. Authentication credentials are remembered between commands without the need for the user to store them in a local variable.
 
 2015-09-01 Added Domain Specific Language (DSL) functions utilising Non-standard Evaluation (NSE) for defining conditions and sequences.
-2015-08-20 Renamed segmentation functions: GaStartsWith -> First, GaPreceeds -> Later, GaImmediatelyPreceeds -> Then
-2015-08-18 Renamed segmentation functions: GaSequenceCondition -> GaSequence; GaNonSequenceCondition -> GaCondition; GaSegmentCondition -> GaSegmentFilters . Renamed operator to comparator. Added functions to set scope of segment filters and segment metric expressions.
+2015-08-20 Renamed segmentation functions: GaStartsWith -> First, GaPreceeds -> Later, GaImmediatelyPreceeds -> Then . Renamed operator to comparator. Added functions to set scope of segment filters and segment metric expressions.
 
 2015-08-17 Update to latest dimension and metrics metadata and added support for custom dimensions and device category as view filter fields. Changed default metric for real-time queries to rt:pageviews.
 2015-08-14 Added demos. Added support for new alphanumeric segment IDs. Foundations to support multiple segments within a single query.
