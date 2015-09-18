@@ -7,7 +7,7 @@
 \alias{PerHit,gaMetExpr-method}
 \title{PerHit}
 \usage{
-\S4method{PerHit}{gaMetExpr}(object, ...)
+\S4method{PerHit}{gaMetExpr}(object)
 
 \S4method{PerHit}{.compoundExpr}(object, ...)
 

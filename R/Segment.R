@@ -213,11 +213,9 @@ setMethod(
 setMethod(
   f = "PerHit",
   signature = "gaMetExpr",
-  definition = function(object, ...) {
+  definition = function(object) {
     ScopeLevel(object) <- "perHit"
-    if (!missing(...)) {
-      SegmentFilters(object, ...)
-    }
+    object
   }
 )
 
