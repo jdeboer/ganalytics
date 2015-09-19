@@ -28,7 +28,7 @@ setMethod(
     comparator <- switch(
       comparator,
       `%starts_with%` = "=@",
-      `=@` = "=@",
+      `%=@%` = "=@",
       `%matches%` = "=~",
       `%=~%` = "=~",
       `%in%` = "[]",
