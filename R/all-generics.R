@@ -42,6 +42,8 @@
 #'   \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
 #'    Reporting API dimensions and metrics} }
 #'
+#' @family Var var functions
+#'
 #' @export
 #' @rdname Var
 setGeneric(
@@ -185,12 +187,36 @@ setGeneric(
   }
 )
 
+#' @export
+setGeneric(
+  "%starts_with%",
+  function(var, operand) {},
+  useAsDefault = FALSE
+)
+
+#' @export
+setGeneric(
+  "%matches%",
+  function(var, operand) {},
+  useAsDefault = FALSE
+)
+
+#' @export
+setGeneric(
+  "%between%",
+  function(var, operand) {},
+  useAsDefault = FALSE
+)
+
+#' @export
+setGeneric("%in%")
+
 #' Operand.
 #'
 #' Get the operand of an expression.
 #'
 #' @param object The object for which to set the operand of.
-#' @param value The value to set the operand to.
+#' @param value Character or numeric. The value to set the operand to.
 #'
 #' @export
 #' @rdname Operand
@@ -243,6 +269,8 @@ setGeneric(
 #' @param metricScope The scope to use for segmentation if using a metric.
 #'   Possible values include "perUser" or "perSession".
 #'
+#' @family expression generators
+#'
 #' @export
 setGeneric(
   "Expr",
@@ -263,6 +291,9 @@ setGeneric(
 #'   GetGaData(myQuery)
 #' }
 #' @inheritParams Expr
+#'
+#' @family expression generators
+#'
 #' @export
 setGeneric(
   "GaExpr",
@@ -282,7 +313,11 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
+#'
 #' @inheritParams Expr
+#'
+#' @family expression generators
+#'
 #' @export
 setGeneric(
   "McfExpr",
@@ -302,7 +337,11 @@ setGeneric(
 #'   TableFilter(myQuery) <- source_matches_google
 #'   GetData(myQuery)
 #' }
+#'
 #' @inheritParams Expr
+#'
+#' @family expression generators
+#'
 #' @export
 setGeneric(
   "RtExpr",
@@ -316,6 +355,8 @@ setGeneric(
 #' Invert an expression, i.e. NOT.
 #'
 #' @param object An object to get the logical inverse of.
+#'
+#' @seealso \code{link{And}} \code{link{Or}} \code{link{xor}}
 #'
 #' @export
 #' @rdname Not
@@ -334,6 +375,8 @@ setGeneric(
 #' @param ... Additional objects to include within the OR expression.
 #'
 #' @return An object of class orExpr.
+#'
+#' @seealso \code{link{And}} \code{link{xor}} \code{link{Not}}
 #'
 #' @export
 #' @rdname Or
@@ -357,6 +400,8 @@ setGeneric(
 #'
 #' @return an object of class \code{andExpr}
 #'
+#' @seealso \code{link{Or}} \code{link{xor}} \code{link{Not}}
+#'
 #' @export
 #' @rdname And
 setGeneric(
@@ -370,6 +415,7 @@ setGeneric(
 #'
 #' @param x,y Conditions for an exclusive-or expression.
 #'
+#' @seealso \code{link{Or}} \code{link{And}} \code{link{Not}}
 #'
 #' @export
 #' @rdname xor
