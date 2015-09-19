@@ -167,6 +167,7 @@ setMethod(
   definition = function(.Object, var, comparator, operand) {
     .Object@var <- var
     .Object@comparator <- comparator
+    var <- as.character(var)
     if (comparator %in% c("!=", "==", "[]", "<>")) {
       if (var %in% kGaDimTypes$bools) {
         operand <- as(as(operand, "logical"), class(operand))

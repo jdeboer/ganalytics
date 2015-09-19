@@ -26,7 +26,7 @@ IsVarMatch <- function(thisVar, inVars) {
 #'
 ValidGaOperand <- function(var, operand) {
   test <- switch(
-    var,
+    as.character(var),
     "ga:date" = grepl(pattern = "^[0-9]{8}$", x = operand) &&
       (as.Date(x = operand, format = kGaDateOutFormat) >= kGaDateOrigin),
     "ga:year" = grepl(pattern = "^[0-9]{4}$", x = operand) &&

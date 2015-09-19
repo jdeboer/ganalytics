@@ -169,7 +169,7 @@ setClass(
   validity = function(object) {
     if (object@comparator == "<>") {
       rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
-      if (!(object@var %in% rangeDimVars)) {
+      if (!(as.character(object@var) %in% rangeDimVars)) {
         return("A range comparator only supports numerical dimensions or metrics")
       }
     }
