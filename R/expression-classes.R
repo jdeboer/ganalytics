@@ -331,5 +331,10 @@ setClass(
 #' @exportClass .compoundExpr
 setClassUnion(".compoundExpr", c(
   ".expr", "orExpr", "andExpr",
+  # Although the following classes belong to .expr, they also need to be
+  # included in this class union, otherwise they will not be recognised
+  # inheriting from this union when being checked against method signatures - it
+  # has not been asertained as to why this is the case, but has something to do
+  # with namespaces and R's S4 class inheritance tree caching.
   "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
 ))

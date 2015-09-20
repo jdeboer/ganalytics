@@ -5,6 +5,9 @@
 \alias{Operand}
 \alias{Operand,.expr-method}
 \alias{Operand,.operand-method}
+\alias{Operand,character-method}
+\alias{Operand,logical-method}
+\alias{Operand,numeric-method}
 \alias{Operand<-}
 \alias{Operand<-,.expr-method}
 \title{Operand.}
@@ -12,6 +15,12 @@
 \S4method{Operand}{.operand}(object)
 
 \S4method{Operand}{.expr}(object)
+
+\S4method{Operand}{character}(object)
+
+\S4method{Operand}{numeric}(object)
+
+\S4method{Operand}{logical}(object)
 
 \S4method{Operand}{.expr}(object) <- value
 
@@ -34,6 +43,12 @@ Set the operand of an expression.
 \item \code{.operand}: 
 
 \item \code{.expr}: 
+
+\item \code{character}: 
+
+\item \code{numeric}: 
+
+\item \code{logical}: 
 
 \item \code{.expr}: 
 }}

@@ -8,6 +8,7 @@ NULL
 
 # ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
 
+#' @rdname Comparator
 setMethod(
   f = "%matches%",
   signature = c(".var", ".dimOperand"),
@@ -17,6 +18,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
@@ -26,6 +28,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
@@ -35,6 +38,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "%in%",
   signature = c(".var", ".operand"),
@@ -44,6 +48,9 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
 setMethod(
   f = "==",
   signature = c(".var", ".operand"),
@@ -53,6 +60,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "!=",
   signature = c(".var", ".operand"),
@@ -62,6 +70,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
@@ -71,6 +80,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "<",
   signature = c(".var", ".metOperand"),
@@ -80,6 +90,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = ">=",
   signature = c(".var", ".metOperand"),
@@ -89,6 +100,7 @@ setMethod(
   }
 )
 
+#' @rdname Comparator
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),
