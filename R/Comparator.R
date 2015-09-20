@@ -6,6 +6,98 @@
 #' @include utils.R
 NULL
 
+# ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
+
+setMethod(
+  f = "%matches%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
+    comparator <- "=~"
+    Expr(var, comparator, operand)
+  }
+)
+
+setMethod(
+  f = "%starts_with%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
+    comparator <- "=@"
+    Expr(var, comparator, operand)
+  }
+)
+
+setMethod(
+  f = "%between%",
+  signature = c(".var", ".operand"),
+  function(var, operand) {
+    comparator <- "<>"
+    Expr(var, comparator, operand)
+  }
+)
+
+setMethod(
+  f = "%in%",
+  signature = c(".var", ".operand"),
+  function(x, table) {
+    comparator <- "[]"
+    Expr(x, comparator, table)
+  }
+)
+
+setMethod(
+  f = "==",
+  signature = c(".var", ".operand"),
+  function(e1, e2) {
+    comparator <- "=="
+    Expr(e1, comparator, e2)
+  }
+)
+
+setMethod(
+  f = "!=",
+  signature = c(".var", ".operand"),
+  function(e1, e2) {
+    comparator <- "!="
+    Expr(e1, comparator, e2)
+  }
+)
+
+setMethod(
+  f = ">",
+  signature = c(".var", ".metOperand"),
+  function(e1, e2) {
+    comparator <- ">"
+    Expr(e1, comparator, e2)
+  }
+)
+
+setMethod(
+  f = "<",
+  signature = c(".var", ".metOperand"),
+  function(e1, e2) {
+    comparator <- "<"
+    Expr(e1, comparator, e2)
+  }
+)
+
+setMethod(
+  f = ">=",
+  signature = c(".var", ".metOperand"),
+  function(e1, e2) {
+    comparator <- ">="
+    Expr(e1, comparator, e2)
+  }
+)
+
+setMethod(
+  f = "<=",
+  signature = c(".var", ".metOperand"),
+  function(e1, e2) {
+    comparator <- "<="
+    Expr(e1, comparator, e2)
+  }
+)
+
 # ---- Comparator, GaDimComparator, GaMetComparator ----
 
 #' @describeIn Comparator

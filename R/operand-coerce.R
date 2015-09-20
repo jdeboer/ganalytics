@@ -20,6 +20,7 @@ setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
 
 setAs(from = "character", to = ".dimOperand", def = simpleCoerce)
 setAs(from = "numeric", to = ".metOperand", def = simpleCoerce)
+setAs(from = "logical", to = ".dimOperand", def = coerceLogicalOperand)
 
 setAs(from = "character", to = ".operand", def = function(from){
   as(from, ".dimOperand")
@@ -28,6 +29,11 @@ setAs(from = "character", to = ".operand", def = function(from){
 setAs(from = "numeric", to = ".operand", def = function(from){
   as(from, ".metOperand")
 })
+
+setAs(from = "logical", to = ".operand", def = function(from){
+  as(from, ".dimOperand")
+})
+
 
 #############\/ Transform to method of Operand and Operand<- generic functions
 

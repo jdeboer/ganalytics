@@ -177,9 +177,7 @@ setValidity(".rtOperand", function(object) {
 #'
 #' @exportClass .operand
 setClassUnion(".operand", c(
-  "gaMetOperand", "gaDimOperand",
-  "mcfMetOperand", "mcfDimOperand",
-  "rtMetOperand", "rtDimOperand"
+  ".dimOperand", ".metOperand"
 ))
 
 setValidity(".operand", function(object){

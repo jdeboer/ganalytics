@@ -15,6 +15,15 @@ setMethod("Operand", ".operand", function(object) {object})
 setMethod("Operand", ".expr", function(object) {as(object, ".operand")})
 
 #' @describeIn Operand
+setMethod("Operand", "character", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
+setMethod("Operand", "numeric", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
+setMethod("Operand", "logical", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
 setMethod(
   f = "Operand<-",
   signature = c(".expr", "ANY"),
