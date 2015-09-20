@@ -14,7 +14,7 @@ NULL
 IsVarMatch <- function(thisVar, inVars) {
   inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
   inVars <- regex(paste0("^", inVars, "$"), ignore_case = TRUE)
-  any(str_detect(thisVar, inVars))
+  any(str_detect(as.character(thisVar), inVars))
 }
 
 #' ValidGaOperand.

@@ -20,13 +20,13 @@ setMethod(
   signature = ".gaVar",
   definition = function(.Object, value) {
     if (!missing(value)) {
-      tmp <- tolower(value)
+      tmp <- as.character(tolower(value))
       ## Substitute ga; ga- ga. ga_ with ga:
       ## Check var name starts with ga:
       ## Put ga: at start of GA var name
       tmp <- sub(kGaPrefix, "ga:", tmp)
       tmp <- sub("^(ga:)?([a-z0-9]+)$", "ga:\\2", tmp)
-      if (str_detect(value, regex("dateofsession", ignore_case = TRUE))) {
+      if (str_detect(as.character(value), regex("dateofsession", ignore_case = TRUE))) {
         tmp <- "dateOfSession"
       }
       ## Replace GA Var with correct casing of valid Var Name
@@ -74,7 +74,7 @@ setMethod(
   signature = ".mcfVar",
   definition = function(.Object, value) {
     if (!missing(value)) {
-      tmp <- tolower(value)
+      tmp <- as.character(tolower(value))
       tmp <- sub(kMcfPrefix, "mcf:", tmp)
       tmp <- sub("^(mcf:)?(.*)", "mcf:\\2", tmp)
       allVars <- with(kMcfVars, union(dims, mets))
@@ -92,7 +92,7 @@ setMethod(
   signature = ".rtVar",
   definition = function(.Object, value) {
     if (!missing(value)) {
-      tmp <- tolower(value)
+      tmp <- as.character(tolower(value))
       tmp <- sub(kRtPrefix, "rt:", tmp)
       tmp <- sub("^(rt:)?(.*)", "rt:\\2", tmp)
       allVars <- with(kRtVars, union(dims, mets))
