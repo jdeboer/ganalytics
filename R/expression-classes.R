@@ -1,7 +1,7 @@
 #' @include var-classes.R
 #' @include comparator-classes.R
 #' @include operand-classes.R
-#' @include all-generics.R
+#' @include Expr-generics.R
 #' @include globaldata.R
 #' @include utils.R
 #' @importFrom methods setClass setClassUnion
@@ -332,9 +332,10 @@ setClass(
 setClassUnion(".compoundExpr", c(
   ".expr", "orExpr", "andExpr",
   # Although the following classes belong to .expr, they also need to be
-  # included in this class union, otherwise they will not be recognised
-  # inheriting from this union when being checked against method signatures - it
-  # has not been asertained as to why this is the case, but has something to do
-  # with namespaces and R's S4 class inheritance tree caching.
+  # explicitly included in this class union, otherwise they will not be
+  # recognised as inheriting from this union when being checked against method
+  # signatures - it has not been asertained as to why this is the case, but
+  # could have something to do with the implications of namespaces on R's S4
+  # class inheritance tree caching.
   "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
 ))

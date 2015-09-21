@@ -1,5 +1,5 @@
 #' @include expression-classes.R
-#' @include all-generics.R
+#' @include Segment-generics.R
 #' @include utils.R
 #' @importFrom methods setClass setClassUnion prototype
 #' @importFrom assertthat validate_that

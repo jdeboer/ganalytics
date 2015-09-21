@@ -1,4 +1,4 @@
-#' @include all-generics.R
+#' @include Query-generics.R
 #' @include GaApiRequest.R
 #' @importFrom methods setMethod validObject
 NULL

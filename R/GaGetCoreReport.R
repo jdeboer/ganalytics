@@ -1,6 +1,6 @@
 #' @include all-coercions.R
 #' @include query-classes.R
-#' @include all-generics.R
+#' @include Query-generics.R
 #' @include GaApiRequest.R
 NULL
 

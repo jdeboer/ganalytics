@@ -1,6 +1,6 @@
 #' @include expression-classes.R
 #' @include init-methods.R
-#' @include all-generics.R
+#' @include Expr-generics.R
 #' @include all-coercions.R
 #' @include expr-coerce.R
 #' @include Var.R

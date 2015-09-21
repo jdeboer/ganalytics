@@ -5,7 +5,7 @@ NULL
 
 # ---- expression operands ----
 
-#' `metOperand` class.
+#' `.metOperand` class.
 #'
 #' An S4 class to represent the numerical value of a metric condition expression.
 #'
@@ -21,7 +21,7 @@ setClass(
   }
 )
 
-#' `dimOperand` class.
+#' `.dimOperand` class.
 #'
 #' An S4 class to represent the operand value of a dimension condition expression.
 #'

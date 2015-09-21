@@ -1,6 +1,6 @@
 #' @include operand-classes.R
 #' @include expression-classes.R
-#' @include all-generics.R
+#' @include Operand-generics.R
 #' @include all-coercions.R
 #' @include operand-coerce.R
 #' @importFrom methods setMethod as

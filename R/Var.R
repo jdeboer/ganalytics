@@ -6,7 +6,8 @@
 #' @include var-list-coerce.R
 #' @include query-classes.R
 #' @include init-methods.R
-#' @include all-generics.R
+#' @include Var-generics.R
+#' @include Var-list-generics.R
 #' @include utils.R
 #' @importFrom methods new setMethod
 NULL

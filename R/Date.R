@@ -1,4 +1,4 @@
-#' @include all-generics.R
+#' @include Date-generics.R
 #' @include query-classes.R
 #' @include init-methods.R
 #' @include all-coercions.R

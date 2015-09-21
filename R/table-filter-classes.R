@@ -1,6 +1,6 @@
 #' @include expression-classes.R
 #' @include utils.R
-#' @include all-generics.R
+#' @include TableFilter-generics.R
 #' @importFrom methods setClass
 NULL
 

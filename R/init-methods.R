@@ -4,7 +4,11 @@
 #' @include expression-classes.R
 #' @include segment-classes.R
 #' @include query-classes.R
-#' @include all-generics.R
+#' @include Var-generics.R
+#' @include Comparator-generics.R
+#' @include Segment-generics.R
+#' @include Query-generics.R
+#' @include Var-list-generics.R
 #' @importFrom stringr str_match str_detect regex
 #' @importFrom lubridate ymd
 #' @importFrom methods setMethod validObject

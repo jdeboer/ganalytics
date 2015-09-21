@@ -1,5 +1,5 @@
 #' @include query-classes.R
-#' @include all-generics.R
+#' @include Query-generics.R
 #' @include all-coercions.R
 #' @include ga-api-coerce.R
 #' @include GaGetCoreReport.R

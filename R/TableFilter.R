@@ -1,4 +1,4 @@
-#' @include all-generics.R
+#' @include TableFilter-generics.R
 #' @include table-filter-classes.R
 #' @include table-filter-coerce.R
 #' @include all-coercions.R

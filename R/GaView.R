@@ -2,7 +2,7 @@
 #' @include management-api-classes.R
 #' @include all-coercions.R
 #' @include view-coerce.R
-#' @include all-generics.R
+#' @include Query-generics.R
 #' @importFrom methods setMethod as
 NULL
 

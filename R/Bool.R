@@ -1,4 +1,4 @@
-#' @include all-generics.R
+#' @include Bool-generics.R
 #' @include all-coercions.R
 #' @include comparator-classes.R
 #' @include expression-classes.R
