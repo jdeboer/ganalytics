@@ -1,4 +1,6 @@
 #' @include utils.R
+#' @include operand-classes.R
+#' @include expr-classes.R
 NULL
 
 # Coercing to .operand subclasses

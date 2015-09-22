@@ -1,4 +1,6 @@
 #' @include utils.R
+#' @include init-methods.R
+#' @importFrom methods setAs validObject
 NULL
 
 ## As setAs looks within the global namespace for any internall called functions within

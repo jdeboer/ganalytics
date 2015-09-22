@@ -1,5 +1,6 @@
 #' @include Query-generics.R
 #' @include GaApiRequest.R
+#' @include query-classes.R
 #' @importFrom methods setMethod validObject
 NULL
 
