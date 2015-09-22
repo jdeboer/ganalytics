@@ -4,7 +4,6 @@
 #' @include GaApiRequest.R
 #' @include init-methods.R
 #' @include Query-generics.R
-#' @include all-coercions.R
 #' @importFrom methods new as
 NULL
 

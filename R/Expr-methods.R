@@ -1,7 +1,6 @@
 #' @include expr-classes.R
 #' @include init-methods.R
 #' @include Expr-generics.R
-#' @include all-coercions.R
 #' @include expr-coerce.R
 #' @include Var-methods.R
 #' @include Comparator-methods.R

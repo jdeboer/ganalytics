@@ -63,7 +63,6 @@ Collate:
     'Comparator-generics.R'
     'init-methods.R'
     'gtm-api-classes.R'
-    'all-coercions.R'
     'Bool-methods.R'
     'comparator-coerce.R'
     'Comparator-methods.R'

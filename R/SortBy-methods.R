@@ -2,7 +2,6 @@
 #' @include query-classes.R
 #' @include init-methods.R
 #' @include Var-list-generics.R
-#' @include all-coercions.R
 #' @include utils.R
 #' @importFrom methods setMethod as validObject new
 NULL

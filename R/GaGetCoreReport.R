@@ -1,4 +1,3 @@
-#' @include all-coercions.R
 #' @include query-classes.R
 #' @include Query-generics.R
 #' @include GaApiRequest.R

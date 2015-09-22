@@ -47,3 +47,12 @@ setAs(from = ".expr", to = ".operand",
         validObject(from)
         from
       })
+
+# Coercing to logical
+setAs(from = ".dimOperand", to = "logical",
+      def = function(from, to) {
+        YesNo <- c("Yes" = TRUE, "No" = FALSE)
+        index <- pmatch(tolower(from), tolower(names(YesNo)))
+        YesNo[index]
+      }
+)

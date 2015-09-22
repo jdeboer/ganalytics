@@ -34,6 +34,36 @@ setClass(
   contains = "character"
 )
 
+#' `.logicalDimOperand` class.
+#'
+#' An S4 class to represent the operand value of a logical dimension condition
+#' expression.
+#'
+#' @rdname logicalDimOperand-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  ".logicalDimOperand",
+  contains = "logical"
+)
+
+setOldClass("regex")
+
+#' `.regexDimOperand` class.
+#'
+#' An S4 class to represent the regex operand value of a dimension condition
+#' expression.
+#'
+#' @rdname logicalDimOperand-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  ".regexDimOperand",
+  contains = "character"
+)
+
 #' `gaMetOperand` class.
 #'
 #' An S4 class to represent a Core-Reporting metric operand.

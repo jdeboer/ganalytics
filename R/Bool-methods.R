@@ -1,5 +1,4 @@
 #' @include Bool-generics.R
-#' @include all-coercions.R
 #' @include comparator-classes.R
 #' @include expr-classes.R
 #' @include segment-classes.R

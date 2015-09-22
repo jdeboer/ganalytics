@@ -1,4 +1,3 @@
-#' @include all-coercions.R
 #' @include var-classes.R
 #' @include var-coerce.R
 #' @include expr-classes.R
