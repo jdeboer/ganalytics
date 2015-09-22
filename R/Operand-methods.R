@@ -1,5 +1,5 @@
 #' @include operand-classes.R
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include Operand-generics.R
 #' @include all-coercions.R
 #' @include operand-coerce.R

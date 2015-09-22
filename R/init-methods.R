@@ -1,7 +1,7 @@
 #' @include var-classes.R
 #' @include var-list-classes.R
 #' @include comparator-classes.R
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include segment-classes.R
 #' @include query-classes.R
 #' @include Var-generics.R

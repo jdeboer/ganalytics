@@ -1,4 +1,4 @@
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include utils.R
 #' @include TableFilter-generics.R
 #' @importFrom methods setClass

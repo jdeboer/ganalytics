@@ -1,5 +1,5 @@
 #' @include comparator-classes.R
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include Comparator-generics.R
 #' @include all-coercions.R
 #' @include comparator-coerce.R

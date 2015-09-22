@@ -1,4 +1,4 @@
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include init-methods.R
 #' @include Expr-generics.R
 #' @include all-coercions.R

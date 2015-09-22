@@ -1,7 +1,7 @@
 #' @include Bool-generics.R
 #' @include all-coercions.R
 #' @include comparator-classes.R
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include segment-classes.R
 #' @include utils.R
 #' @importFrom methods setMethod

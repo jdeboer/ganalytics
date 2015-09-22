@@ -48,7 +48,7 @@ Collate:
     'operand-classes.R'
     'comparator-classes.R'
     'Expr-generics.R'
-    'expression-classes.R'
+    'expr-classes.R'
     'Segment-generics.R'
     'segment-classes.R'
     'GaApiRequest.R'

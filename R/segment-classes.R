@@ -1,4 +1,4 @@
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include Segment-generics.R
 #' @include utils.R
 #' @importFrom methods setClass setClassUnion prototype
