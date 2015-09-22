@@ -1,7 +1,7 @@
-#' @include all-generics.R
+#' @include Date-generics.R
 #' @include query-classes.R
 #' @include init-methods.R
-#' @include all-coercions.R
+#' @include management-api-classes.R
 #' @include date-coerce.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed

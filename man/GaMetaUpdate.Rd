@@ -7,7 +7,7 @@ Update the metadata file
 Update the package system file containing metadata about valid dimensions and metrics, etc.
 This function should be used prior to package build.}
 \usage{
-GaMetaUpdate(creds = .creds)
+GaMetaUpdate(creds = get_creds())
 }
 \arguments{
 \item{creds}{Google Analytics OAuth 2.0 credentials object.}

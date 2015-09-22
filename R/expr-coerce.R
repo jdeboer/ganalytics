@@ -1,5 +1,5 @@
 #' @include utils.R
-#' @importFrom stringr str_replace_all str_match str_split_fixed
+#' @importFrom stringr str_replace_all str_match str_split_fixed str_split
 #' @importFrom assertthat assert_that
 NULL
 

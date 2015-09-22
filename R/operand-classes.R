@@ -5,7 +5,7 @@ NULL
 
 # ---- expression operands ----
 
-#' `metOperand` class.
+#' `.metOperand` class.
 #'
 #' An S4 class to represent the numerical value of a metric condition expression.
 #'
@@ -21,7 +21,7 @@ setClass(
   }
 )
 
-#' `dimOperand` class.
+#' `.dimOperand` class.
 #'
 #' An S4 class to represent the operand value of a dimension condition expression.
 #'
@@ -31,6 +31,36 @@ setClass(
 #' @export
 setClass(
   ".dimOperand",
+  contains = "character"
+)
+
+#' `.logicalDimOperand` class.
+#'
+#' An S4 class to represent the operand value of a logical dimension condition
+#' expression.
+#'
+#' @rdname logicalDimOperand-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  ".logicalDimOperand",
+  contains = "logical"
+)
+
+setOldClass("regex")
+
+#' `.regexDimOperand` class.
+#'
+#' An S4 class to represent the regex operand value of a dimension condition
+#' expression.
+#'
+#' @rdname logicalDimOperand-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  ".regexDimOperand",
   contains = "character"
 )
 
@@ -177,9 +207,7 @@ setValidity(".rtOperand", function(object) {
 #'
 #' @exportClass .operand
 setClassUnion(".operand", c(
-  "gaMetOperand", "gaDimOperand",
-  "mcfMetOperand", "mcfDimOperand",
-  "rtMetOperand", "rtDimOperand"
+  ".dimOperand", ".metOperand"
 ))
 
 setValidity(".operand", function(object){

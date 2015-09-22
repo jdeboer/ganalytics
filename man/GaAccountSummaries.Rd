@@ -4,7 +4,7 @@
 \alias{GaAccountSummaries}
 \title{GTM Account Summaries}
 \usage{
-GaAccountSummaries(creds = .creds)
+GaAccountSummaries(creds = get_creds())
 }
 \arguments{
 \item{creds}{The Google APIs credentials to use.}

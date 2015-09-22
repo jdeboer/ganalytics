@@ -14,7 +14,7 @@ NULL
 IsVarMatch <- function(thisVar, inVars) {
   inVars <- str_replace(inVars, "XX", replacement = "[0-9]+")
   inVars <- regex(paste0("^", inVars, "$"), ignore_case = TRUE)
-  any(str_detect(thisVar, inVars))
+  any(str_detect(as.character(thisVar), inVars))
 }
 
 #' ValidGaOperand.
@@ -26,7 +26,7 @@ IsVarMatch <- function(thisVar, inVars) {
 #'
 ValidGaOperand <- function(var, operand) {
   test <- switch(
-    var,
+    as.character(var),
     "ga:date" = grepl(pattern = "^[0-9]{8}$", x = operand) &&
       (as.Date(x = operand, format = kGaDateOutFormat) >= kGaDateOrigin),
     "ga:year" = grepl(pattern = "^[0-9]{4}$", x = operand) &&

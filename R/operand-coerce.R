@@ -1,4 +1,6 @@
 #' @include utils.R
+#' @include operand-classes.R
+#' @include expr-classes.R
 NULL
 
 # Coercing to .operand subclasses
@@ -20,6 +22,7 @@ setAs(from = "character", to = "rtMetOperand", def = simpleCoerceToNumeric)
 
 setAs(from = "character", to = ".dimOperand", def = simpleCoerce)
 setAs(from = "numeric", to = ".metOperand", def = simpleCoerce)
+setAs(from = "logical", to = ".dimOperand", def = coerceLogicalOperand)
 
 setAs(from = "character", to = ".operand", def = function(from){
   as(from, ".dimOperand")
@@ -28,6 +31,11 @@ setAs(from = "character", to = ".operand", def = function(from){
 setAs(from = "numeric", to = ".operand", def = function(from){
   as(from, ".metOperand")
 })
+
+setAs(from = "logical", to = ".operand", def = function(from){
+  as(from, ".dimOperand")
+})
+
 
 #############\/ Transform to method of Operand and Operand<- generic functions
 
@@ -41,3 +49,12 @@ setAs(from = ".expr", to = ".operand",
         validObject(from)
         from
       })
+
+# Coercing to logical
+setAs(from = ".dimOperand", to = "logical",
+      def = function(from, to) {
+        YesNo <- c("Yes" = TRUE, "No" = FALSE)
+        index <- pmatch(tolower(from), tolower(names(YesNo)))
+        YesNo[index]
+      }
+)

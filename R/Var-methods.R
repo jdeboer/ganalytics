@@ -1,12 +1,12 @@
-#' @include all-coercions.R
 #' @include var-classes.R
 #' @include var-coerce.R
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include var-list-classes.R
 #' @include var-list-coerce.R
 #' @include query-classes.R
 #' @include init-methods.R
-#' @include all-generics.R
+#' @include Var-generics.R
+#' @include Var-list-generics.R
 #' @include utils.R
 #' @importFrom methods new setMethod
 NULL

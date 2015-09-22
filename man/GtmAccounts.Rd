@@ -4,7 +4,7 @@
 \alias{GtmAccounts}
 \title{GTM Accounts}
 \usage{
-GtmAccounts(creds = .creds)
+GtmAccounts(creds = get_creds())
 }
 \arguments{
 \item{creds}{The Google APIs credentials to use.}

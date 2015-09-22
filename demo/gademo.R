@@ -1,12 +1,11 @@
 library(ganalytics)
 
-readline("press any key to continue")
-
 # Assumes app creds can be found in environment variables (default prefix) or in a JSON file (default filename)
 # Selects default view of first property in first account returned by the Management API.
 myQuery <- GaQuery()
 GetGaData(myQuery)
 
+readline("Press enter to continue.")
 # Example 1 - Setting the date range
 
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
@@ -23,6 +22,7 @@ EndDate(myQuery) <- "2013-03-31"
 myData <- GetGaData(myQuery)
 summary(myData)
 
+readline("Press enter to continue.")
 # Example 2 - Choosing what metrics to report
 
 # Report number of page views instead
@@ -39,6 +39,7 @@ Metrics(myQuery) <- c("ga:pageviews", "ga.sessions")
 myData <- GetGaData(myQuery)
 summary(myData)
 
+readline("Press enter to continue.")
 # Example 3 - Selecting what dimensions to split your metrics by
 
 # Similar to metrics, but for dimensions
@@ -51,6 +52,7 @@ myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
 
+readline("Press enter to continue.")
 # Example 4 - Sort by
 
 # Sort by descending number of pageviews
@@ -60,6 +62,7 @@ myData <- GetGaData(myQuery)
 head(myData)
 tail(myData)
 
+readline("Press enter to continue.")
 # Example 5 - Row filters
 
 # Filter for Sunday sessions only
@@ -75,6 +78,7 @@ TableFilter(myQuery) <- NULL
 myData <- GetGaData(myQuery)
 head(myData)
 
+readline("Press enter to continue.")
 # Example 6 - Combining filters with AND
 
 # Expression to define Sunday sessions
@@ -94,6 +98,7 @@ Dimensions(myQuery) <- c(Dimensions(myQuery), "medium")
 myData <- GetGaData(myQuery)
 head(myData)
 
+readline("Press enter to continue.")
 # Example 7 - Combining filters with OR
 
 # In a similar way to AND
@@ -105,6 +110,7 @@ TableFilter(myQuery) <- loyalOrRecent
 myData <- GetGaData(myQuery)
 summary(myData)
 
+readline("Press enter to continue.")
 # Example 8 - Filters that combine ORs with ANDs
 
 loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
@@ -123,6 +129,7 @@ Dimensions(myQuery) <- c("sessionCount", "daysSinceLastSession", "dayOfWeek")
 myData <- GetGaData(myQuery)
 summary(myData)
 
+readline("Press enter to continue.")
 # Example 9 - Sorting 'numeric' dimensions (continuing from example 8)
 
 # Continuing from example 8...
@@ -143,6 +150,7 @@ myData <- arrange(myData, desc(sessionCount), daysSinceLastSession)
 head(myData)
 tail(myData)
 
+readline("Press enter to continue.")
 # Example 10 - Session segmentation
 
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
@@ -162,6 +170,7 @@ SortBy(myQuery) <- "-sessions"
 myData <- GetGaData(myQuery)
 head(myData)
 
+readline("Press enter to continue.")
 # Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
 
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
@@ -190,6 +199,7 @@ with(sessions_by_dayOfWeek, barplot(sessions, names.arg = dayOfWeek))
 sessions_by_hour <- ddply(myData, ~hour, summarise, sessions = sum(sessions))
 with(sessions_by_hour, barplot(sessions, names.arg = hour))
 
+readline("Press enter to continue.")
 # Example 12 - Using ggplot2
 
 library(ggplot2)
@@ -234,10 +244,9 @@ qplot(
   stat = "identity"
 )
 
+readline("Press enter to continue.")
 # Real-time reporting API
 
-library(ganalytics)
-my_creds = GoogleApiCreds(userName = "my_username@gmail.com", appCreds = "~/oauth_app_creds.json")
 rt_query <- RtQuery(view = "ga:987654321", creds = my_creds)
 Dimensions(rt_query) <- "rt:minutesAgo"
 Metrics(rt_query) <- "rt:pageviews"

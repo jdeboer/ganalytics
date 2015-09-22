@@ -1,6 +1,6 @@
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include utils.R
-#' @include all-generics.R
+#' @include TableFilter-generics.R
 #' @importFrom methods setClass
 NULL
 
@@ -56,7 +56,7 @@ setClass(
     } else {
       return("All expressions within a gaFilter must be of superclass .gaExpr")
     }
-    if (all(sapply(unlist(object@.Data), GaVar) != "dateOfSession")) {
+    if (all(as.character(sapply(unlist(object@.Data), GaVar)) != "dateOfSession")) {
       TRUE
     } else {
       return("Filters do not support the 'dateOfSession' dimension. Use 'ga:date' instead.")

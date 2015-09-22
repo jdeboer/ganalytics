@@ -1,7 +1,7 @@
 #' @include segment-classes.R
 #' @include init-methods.R
-#' @include all-generics.R
-#' @include all-coercions.R
+#' @include Sequence-generics.R
+#' @include Segment-generics.R
 #' @include segment-coerce.R
 #' @include management-api-classes.R
 #' @importFrom methods new setMethod

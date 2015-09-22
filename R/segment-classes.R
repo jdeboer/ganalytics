@@ -1,5 +1,5 @@
-#' @include expression-classes.R
-#' @include all-generics.R
+#' @include expr-classes.R
+#' @include Segment-generics.R
 #' @include utils.R
 #' @importFrom methods setClass setClassUnion prototype
 #' @importFrom assertthat validate_that
@@ -20,7 +20,7 @@ setClass(
   contains = "andExpr",
   validity = function(object) {
     if (all(sapply(unlist(object@.Data), function(expr) {
-      if (Comparator(expr) == "<>" & Var(expr) == "dateOfSession") {
+      if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
         (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
       } else TRUE
     }))) {
@@ -29,7 +29,7 @@ setClass(
       return("The maximum date range for dateOfSession is 31 days.")
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
-      if (Var(expr) == "dateOfSession") {
+      if (as.character(Var(expr)) == "dateOfSession") {
         Comparator(expr) == "<>"
       } else TRUE
     }))) {

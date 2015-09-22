@@ -1,3 +1,5 @@
+2015-09-20 Comparators are now generic functions with methods for supplying a .var (LHS) and .operand (RHS)
+
 2015-09-18 PerUser and PerSession can now be used instead of SegmentFilters to create a scoped segment filter list. Also, Include and Exclude have been added to add include and exclude (i.e negate) filters to a segment definition, rather than needing to use the negate argument of the Sequence and SegmentConditionFilter functions.
 Added function for generating a segment definition from a list where ... can be used to mean 'followed-by / Later' prior to the next step in the sequence. Note this function uses non-standard evaluation.
 PerHit can be used to transform a condition filter into a sequence of length one, which offers a powerful form of segmentation where all conditions must be met for a single hit rather than scoped across sessions or users.

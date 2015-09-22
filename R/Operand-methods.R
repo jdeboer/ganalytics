@@ -1,7 +1,6 @@
 #' @include operand-classes.R
-#' @include expression-classes.R
-#' @include all-generics.R
-#' @include all-coercions.R
+#' @include expr-classes.R
+#' @include Operand-generics.R
 #' @include operand-coerce.R
 #' @importFrom methods setMethod as
 NULL
@@ -13,6 +12,15 @@ setMethod("Operand", ".operand", function(object) {object})
 
 #' @describeIn Operand
 setMethod("Operand", ".expr", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
+setMethod("Operand", "character", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
+setMethod("Operand", "numeric", function(object) {as(object, ".operand")})
+
+#' @describeIn Operand
+setMethod("Operand", "logical", function(object) {as(object, ".operand")})
 
 #' @describeIn Operand
 setMethod(

@@ -1,11 +1,10 @@
-#' @include expression-classes.R
+#' @include expr-classes.R
 #' @include init-methods.R
-#' @include all-generics.R
-#' @include all-coercions.R
+#' @include Expr-generics.R
 #' @include expr-coerce.R
-#' @include Var.R
-#' @include Comparator.R
-#' @include Operand.R
+#' @include Var-methods.R
+#' @include Comparator-methods.R
+#' @include Operand-methods.R
 #' @include utils.R
 #' @importFrom methods setMethod new validObject
 #' @importFrom lazyeval as.lazy
@@ -28,7 +27,7 @@ setMethod(
     comparator <- switch(
       comparator,
       `%starts_with%` = "=@",
-      `=@` = "=@",
+      `%=@%` = "=@",
       `%matches%` = "=~",
       `%=~%` = "=~",
       `%in%` = "[]",
