@@ -12,7 +12,7 @@ NULL
 #'
 #' @return a data.frame
 #' @param creds Google Analytics OAuth 2.0 credentials object.
-GaMetaUpdate <- function(creds = .creds) {
+GaMetaUpdate <- function(creds = get_creds()) {
   scope <- ga_scopes['read_only']
   request <- c("metadata", "ga", "columns")
   meta_data <- ga_api_request(creds = creds, request = request, scope = scope)
@@ -97,5 +97,7 @@ GaMetaUpdate <- function(creds = .creds) {
   assert_that(nchar(keypress) == 0)
 
   save(kGaVars, kGaVars_df, kMcfVars, kRtVars, metadata_path)
+
+  # use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
 
 }

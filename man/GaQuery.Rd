@@ -4,7 +4,7 @@
 \alias{GaQuery}
 \title{GaQuery.}
 \usage{
-GaQuery(view = NA, creds = .creds, startDate = Sys.Date() - 8,
+GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL,
   segments = NULL, samplingLevel = "DEFAULT", maxResults = kGaMaxResults,

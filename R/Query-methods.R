@@ -28,7 +28,7 @@ NULL
 #' @export
 GaQuery <- function(
   view = NA,
-  creds = .creds,
+  creds = get_creds(),
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "ga:sessions",
@@ -94,7 +94,7 @@ GaQuery <- function(
 #' @export
 McfQuery <- function(
   view = NA,
-  creds = .creds,
+  creds = get_creds(),
   startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 1,
   metrics = "mcf:totalConversions",
@@ -142,7 +142,7 @@ McfQuery <- function(
 #' @export
 RtQuery <- function(
   view = NA,
-  creds = .creds,
+  creds = get_creds(),
   metrics = "rt:pageviews",
   dimensions = "rt:minutesAgo",
   sortBy = NULL,

@@ -6,7 +6,17 @@
 NULL
 
 # This will be initialised using GoogleApiCreds() at time of package being loaded.
-.creds <- list()
+google_api <- new.env()
+
+set_creds <- function(new_creds = list()) {
+  assign("creds", new_creds, google_api)
+}
+
+set_creds()
+
+get_creds <- function() {
+  get("creds", google_api)
+}
 
 #' Google APIs OAuth 2.0 Credentials.
 #'
@@ -28,7 +38,7 @@ GoogleApiCreds <- function(
 ){
   cache_generic_file_name <- paste(tolower(appname), "auth.RDS", sep = "_")
   cache_file_prefix <- "."
-  cache_default_dir <- "~"
+  cache_default_dir <- "~" # Consider changing to tempdir() and/or make a global option (see httr options).
   if (length(cache) == 0) {
     if (length(userName) == 0) {
       cache <- cache_generic_file_name
@@ -37,7 +47,7 @@ GoogleApiCreds <- function(
     }
     cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
   }
-  .creds <<- list(
+  creds <- list(
     app = app_oauth_creds(
       appname = appname,
       creds = appCreds
@@ -48,7 +58,8 @@ GoogleApiCreds <- function(
     ),
     use_oob = use_oob
   )
-  .creds
+  set_creds(creds)
+  creds
 }
 
 app_oauth_creds <- function(appname, creds = NULL) {
@@ -300,7 +311,7 @@ get_privates <- function(class_gen){
 .googleApi <- R6Class(
   ".googleApi",
   public = list(
-    creds = .creds,
+    creds = get_creds(),
     get = function(max_results = NULL) {
       req_type <- "GET"
       private$api_req_func(
@@ -312,7 +323,7 @@ get_privates <- function(class_gen){
         max_results = max_results
       )
     },
-    initialize = function(creds = .creds) {
+    initialize = function(creds = get_creds()) {
       self$creds = creds
     }
   ),
@@ -357,7 +368,7 @@ get_privates <- function(class_gen){
       })
       self
     },
-    initialize = function(creds = .creds, parent = NULL, id = NA) {
+    initialize = function(creds = get_creds(), parent = NULL, id = NA) {
       super$initialize(creds = creds)
       stopifnot(is(parent, private$parent_class_name) | is(parent, "NULL"))
       self$parent <- parent
@@ -459,7 +470,7 @@ get_privates <- function(class_gen){
       )
       self$get()
     },
-    initialize = function(creds = .creds, parent = NULL) {
+    initialize = function(creds = get_creds(), parent = NULL) {
       super$initialize(creds = creds)
       entity_class_private <- get_privates(private$entity_class)
       private$request <- entity_class_private$request

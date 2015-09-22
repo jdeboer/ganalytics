@@ -4,7 +4,7 @@
 \alias{RtQuery}
 \title{RtQuery.}
 \usage{
-RtQuery(view = NA, creds = .creds, metrics = "rt:pageviews",
+RtQuery(view = NA, creds = get_creds(), metrics = "rt:pageviews",
   dimensions = "rt:minutesAgo", sortBy = NULL, filters = NULL,
   maxResults = kGaMaxResults)
 }

@@ -4,7 +4,7 @@
 \alias{GaAccountSummary}
 \title{GA Account Summary}
 \usage{
-GaAccountSummary(id = NULL, creds = .creds)
+GaAccountSummary(id = NULL, creds = get_creds())
 }
 \arguments{
 \item{id}{ID of the GA account to get a summary of.}
