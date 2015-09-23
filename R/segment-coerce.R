@@ -8,8 +8,20 @@ setAs(from = ".compoundExpr", to = "gaSegmentSequenceStep", def = function(from,
   new(to, as(from, "andExpr"))
 })
 
+setAs(from = ".compoundExpr", to = ".gaSegmentFilter", def = function(from, to) {
+  as(from, "gaSegmentConditionFilter")
+})
+
+setAs(from = "gaSegmentCondition", to = ".gaSegmentFilter", def = function(from, to) {
+  as(from, "gaSegmentConditionFilter")
+})
+
+setAs(from = "gaSegmentSequenceStep", to = ".gaSegmentFilter", def = function(from, to) {
+  as(from, "gaSegmentSequenceFilter")
+})
+
 setAs(from = ".compoundExpr", to = "gaSegmentSequenceFilter", def = function(from, to) {
-  new(to, as(as(from, "gaSegmentSequenceStep"), "andExpr"))
+  new(to, list(as(from, "gaSegmentSequenceStep")))
 })
 
 # Coercing to gaSegmentConditionFilter

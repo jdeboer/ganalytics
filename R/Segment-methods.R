@@ -49,15 +49,23 @@ setMethod(
 
 # ---- Include, Exclude ----
 
+segment_scope_negate <- function(object, ..., scope, negate = NULL) {
+  exprList <- list(object, ...)
+  #browser()
+  exprList <- lapply(exprList, function(expr){
+    expr <- as(expr, ".gaSegmentFilter")
+    if (!is.null(negate)) IsNegated(expr) <- negate
+    expr
+  })
+  new("gaSegmentFilterList", exprList, scope = scope)
+}
+
 #' @describeIn Include
 setMethod(
   f = "Include",
   signature = ".compoundExpr",
-  definition = function(object, ...) {
-    exprList <- list(object, ...)
-    do.call(
-      SegmentFilters, lapply(exprList, SegmentConditionFilter, negation = FALSE)
-    )
+  definition = function(object, ..., scope) {
+    segment_scope_negate(object, ..., scope = scope, negate = FALSE)
   }
 )
 
@@ -65,11 +73,8 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = ".compoundExpr",
-  definition = function(object, ...) {
-    exprList <- list(object, ...)
-    do.call(
-      SegmentFilters, lapply(exprList, SegmentConditionFilter, negation = TRUE)
-    )
+  definition = function(object, ..., scope) {
+    segment_scope_negate(object, ..., scope = scope, negate = TRUE)
   }
 )
 
@@ -77,8 +82,8 @@ setMethod(
 setMethod(
   f = "Include",
   signature = "gaSegmentSequenceFilter",
-  definition = function(object, ...) {
-    SegmentConditionFilter(object, ..., negation = FALSE)
+  definition = function(object, ..., scope) {
+    segment_scope_negate(object, ..., scope = scope, negate = FALSE)
   }
 )
 
@@ -86,8 +91,8 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "gaSegmentSequenceFilter",
-  definition = function(object, ...) {
-    SegmentConditionFilter(object, ..., negation = TRUE)
+  definition = function(object, ..., scope) {
+    segment_scope_negate(object, ..., scope, negate = TRUE)
   }
 )
 
@@ -99,8 +104,17 @@ setMethod(
   signature = ".compoundExpr",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
-    exprList <- do.call("And", lapply(exprList, function(expr){as(expr, "andExpr")}))
+    exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
     new("gaSegmentConditionFilter", exprList, negation = negation)
+  }
+)
+
+#' @describeIn SegmentConditionFilter
+setMethod(
+  f = "SegmentConditionFilter",
+  signature = "gaSegmentConditionFilter",
+  definition = function(object, ..., negation) {
+    object
   }
 )
 
@@ -128,8 +142,7 @@ setMethod(
   f = "SegmentFilters",
   signature = ".compoundExpr",
   definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    SegmentFilters(do.call("SegmentConditionFilter", exprList), scope = scope)
+    segment_scope_negate(object, ..., scope = scope)
   }
 )
 
@@ -138,8 +151,7 @@ setMethod(
   f = "SegmentFilters",
   signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    new("gaSegmentFilterList", exprList, conditionScope = scope)
+    segment_scope_negate(object, ..., scope = scope)
   }
 )
 
@@ -208,8 +220,9 @@ setMethod(
   f = "PerSession",
   signature = "gaMetExpr",
   definition = function(object, ...) {
-    ScopeLevel(object) <- "perSession"
-    if (!missing(...)) {
+    if (missing(...)) {
+      ScopeLevel(object) <- "perSession"
+    } else {
       SegmentFilters(object, ...)
     }
   }
@@ -248,8 +261,9 @@ setMethod(
   f = "PerUser",
   signature = "gaMetExpr",
   definition = function(object, ...) {
-    ScopeLevel(object) <- "perUser"
-    if (!missing(...)) {
+    if (missing(...)) {
+      ScopeLevel(object) <- "perUser"
+    } else {
       SegmentFilters(object, ...)
     }
   }
@@ -259,9 +273,13 @@ setMethod(
 setMethod(
   f = "PerHit",
   signature = "gaMetExpr",
-  definition = function(object) {
-    ScopeLevel(object) <- "perHit"
-    object
+  definition = function(object, ...) {
+    if (missing(...)) {
+      ScopeLevel(object) <- "perHit"
+      object
+    } else {
+      SegmentFilters(object, ...)
+    }
   }
 )
 
@@ -331,26 +349,9 @@ setMethod(
 #' @describeIn Segment
 setMethod(
   f = "Segment",
-  signature = "gaSegmentFilterList",
-  definition = function(object, ...) {
-    exprList <- list(object, ...)
-    new("gaDynSegment", exprList)
-  }
-)
-
-#' @describeIn Segment
-setMethod(
-  f = "Segment",
   signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr) {
-      SegmentFilters(
-        expr,
-        scope = scope
-      )
-    })
-    do.call(Segment, exprList)
+    Segment(SegmentFilters(object, ..., scope))
   }
 )
 
