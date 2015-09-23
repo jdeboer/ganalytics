@@ -135,10 +135,10 @@ setClass(
 setClass(
   "gaSegmentFilterList",
   slots = c(
-    conditionScope = "character"
+    scope = "character"
   ),
   prototype = prototype(
-    conditionScope = "sessions"
+    scope = "sessions"
   ),
   contains = "list",
   validity = function(object) {

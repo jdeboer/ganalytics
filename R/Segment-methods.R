@@ -159,7 +159,7 @@ setMethod(
   f = "ScopeLevel",
   signature = "gaSegmentFilterList",
   definition = function(object) {
-    object@conditionScope
+    object@scope
   }
 )
 
@@ -168,7 +168,7 @@ setMethod(
   f = "ScopeLevel<-",
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
-    object@conditionScope <- value
+    object@scope <- value
     object
   }
 )
