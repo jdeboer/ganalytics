@@ -355,18 +355,24 @@ setMethod(
   }
 )
 
-#' @describeIn Segment Coerce a Table Filter into a Segment
+#' @describeIn Segment
+#' Coerce a Table Filter into a Segment
 setMethod(
   f = "Segment",
   signature = "gaFilter",
   definition = function(object, ..., scope) {
     exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr) {
-      SegmentFilters(
-        SegmentConditionFilter(expr),
-        scope = scope
-      )
-    })
+    Segment(as(exprList, "gaSegmentConditionFilter"), scope = scope)
+  }
+)
+
+#' @describeIn Segment
+setMethod(
+  f = "Segment",
+  signature = "gaSegmentFilterList",
+  definition = function(object, ..., scope) {
+    exprList <- list(object, ...)
+    exprList <- lapply(exprList, SegmentFilters, scope = scope)
     new("gaDynSegment", exprList)
   }
 )
