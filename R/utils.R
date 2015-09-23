@@ -195,6 +195,10 @@ parse_date <- function(date, output_format = kGaDateInFormat) {
   format(ymd(date), format = output_format)
 }
 
+get_metadata_path <- function() {
+  system.file("extdata", "metadata.RDA", package = "ganalytics")
+}
+
 # Helper functions for coercion between classes
 # ---------------------------------------------
 
