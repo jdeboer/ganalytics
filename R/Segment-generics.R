@@ -70,12 +70,11 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' IsNegated
+#' IsNegated.
 #'
 #' Tests whether a segment filter is negated.
 #'
-#' @param object an object to test for negation belonging to the superclass
-#'   \code{.gaSegmentFilter}.
+#' @param object an object belonging to the superclass \code{.gaSegmentFilter}.
 #'
 #' @export
 setGeneric(
@@ -85,7 +84,6 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerHit
 #' IsNegated<-.
 #'
 #' Sets whether a segment filter should be negated.
@@ -103,6 +101,8 @@ setGeneric(
     object
   }
 )
+
+#' PerHit.
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
 #' filter to a sequence filter of length one (i.e. conditions to match a single
@@ -119,7 +119,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerSession
+#' PerSession.
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 #'
@@ -134,7 +134,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerUser
+#' PerUser.
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 #'
