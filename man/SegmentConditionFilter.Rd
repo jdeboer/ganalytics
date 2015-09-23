@@ -12,8 +12,7 @@ SegmentConditionFilter(object, ..., negation = FALSE)
 \S4method{SegmentConditionFilter}{.compoundExpr}(object, ...,
   negation = FALSE)
 
-\S4method{SegmentConditionFilter}{gaSegmentConditionFilter}(object, ...,
-  negation = FALSE)
+\S4method{SegmentConditionFilter}{gaSegmentConditionFilter}(object)
 }
 \arguments{
 \item{object}{An expression to be used as a non-sequential segment condition.}
