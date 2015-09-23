@@ -1,32 +1,5 @@
 #' @include GaApiRequest.R
 
-# API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
-
-#Make a Goolge API request
-ga_api_request <- function(
-  creds,
-  request,
-  scope = ga_scopes["read_only"],
-  base_url = "https://www.googleapis.com/analytics/v3",
-  req_type = "GET",
-  body_list = NULL,
-  fields = NULL,
-  queries = NULL,
-  max_results = NULL
-) {
-  stopifnot(scope %in% ga_scopes)
-  google_api_request(
-    creds = creds,
-    scope = scope,
-    request = request,
-    base_url = base_url,
-    queries = queries,
-    req_type = req_type,
-    body_list = body_list,
-    fields = fields
-  )
-}
-
 .gaManagementApi <- R6Class(
   ".gaManagementApi",
   inherit = .googleApi,

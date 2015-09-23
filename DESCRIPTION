@@ -43,6 +43,8 @@ Suggests:
 Collate:
     'Bool-generics.R'
     'utils.R'
+    'GaApiRequest.R'
+    'meta.R'
     'globaldata.R'
     'var-classes.R'
     'operand-classes.R'
@@ -60,7 +62,6 @@ Collate:
     'table-filter-classes.R'
     'query-classes.R'
     'Query-generics.R'
-    'GaApiRequest.R'
     'Creds-methods.R'
     'Date-generics.R'
     'management-api-classes.R'
@@ -92,7 +93,6 @@ Collate:
     'deprecated.R'
     'ganalytics-package.R'
     'gtm-api-classes.R'
-    'meta.R'
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr

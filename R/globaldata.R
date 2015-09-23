@@ -1,3 +1,6 @@
+#' @include meta.R
+NULL
+
 ga_scopes <- c(
   default = "https://www.googleapis.com/auth/analytics",
   edit = "https://www.googleapis.com/auth/analytics.edit",

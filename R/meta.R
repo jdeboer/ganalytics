@@ -1,4 +1,5 @@
 #' @include GaApiRequest.R
+#' @include utils.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
 #' @importFrom devtools use_data
