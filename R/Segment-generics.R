@@ -23,13 +23,15 @@ setGeneric(
 #'
 #' @param object a condition or sequence to include
 #' @param ... further conditions or sequences to include, i.e. ANDed.
+#' @param scope the scope of the returned gaSegmentList, either "users" OR
+#'   "sessions".
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @export
 setGeneric(
   "Include",
-  function(object, ...) {},
   valueClass = c(".gaSegmentFilter", "gaSegmentFilterList"),
+  function(object, ..., scope = "sessions") {},
   useAsDefault = FALSE
 )
 
@@ -40,12 +42,14 @@ setGeneric(
 #'
 #' @param object a condition or sequence to exclude
 #' @param ... further conditions or sequences to exclude.
+#' @param scope the scope of the returned gaSegmentList, either "users" OR
+#'   "sessions".
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @export
 setGeneric(
   "Exclude",
-  function(object, ...) {},
+  function(object, ..., scope = "sessions") {},
   valueClass = "gaSegmentFilterList",
   useAsDefault = TRUE
 )
