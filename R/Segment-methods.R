@@ -92,7 +92,7 @@ setMethod(
   f = "Exclude",
   signature = "gaSegmentSequenceFilter",
   definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope, negate = TRUE)
+    segment_scope_negate(object, ..., scope = scope, negate = TRUE)
   }
 )
 
@@ -113,7 +113,7 @@ setMethod(
 setMethod(
   f = "SegmentConditionFilter",
   signature = "gaSegmentConditionFilter",
-  definition = function(object, ..., negation) {
+  definition = function(object) {
     object
   }
 )
@@ -351,7 +351,7 @@ setMethod(
   f = "Segment",
   signature = ".gaSegmentFilter",
   definition = function(object, ..., scope) {
-    Segment(SegmentFilters(object, ..., scope))
+    Segment(SegmentFilters(object, ..., scope = scope))
   }
 )
 
