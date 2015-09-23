@@ -169,7 +169,6 @@ setMethod(
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@conditionScope <- value
-    validObject(object)
     object
   }
 )
@@ -425,7 +424,6 @@ setMethod(
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
     object@segments <- Segment(value)
-    validObject(object)
     object
   }
 )

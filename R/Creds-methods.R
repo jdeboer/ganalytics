@@ -34,6 +34,5 @@ setMethod("GaCreds", signature = c("missing"),
 setMethod("GaCreds<-", signature = c(".query", "list"),
           definition = function(object, value) {
             object@creds <- value
-            validObject(object)
             object
           })
