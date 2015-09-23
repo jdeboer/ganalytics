@@ -144,10 +144,10 @@ setClass(
   validity = function(object) {
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
-    } else if (length(object@conditionScope) != 1) {
-      "Slot 'conditionScope' must be of length 1."
-    } else if (!(object@conditionScope %in% c("users", "sessions"))) {
-      "Slot 'conditionScope' must be either 'users' or 'sessions'."
+    } else if (length(object@scope) != 1) {
+      "Slot 'scope' must be of length 1."
+    } else if (!(object@scope %in% c("users", "sessions"))) {
+      "Slot 'scope' must be either 'users' or 'sessions'."
     } else TRUE
   }
 )
