@@ -113,6 +113,16 @@ setMethod(
   }
 )
 
+#' @describeIn IsNegated
+setMethod(
+  f = "IsNegated<-",
+  signature = c(".gaSegmentFilter", "logical"),
+  definition = function(object, value) {
+    object@negation <- value
+    object
+  }
+)
+
 #' @describeIn SegmentFilters
 setMethod(
   f = "SegmentFilters",

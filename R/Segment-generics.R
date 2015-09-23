@@ -86,6 +86,23 @@ setGeneric(
 )
 
 #' PerHit
+#' IsNegated<-.
+#'
+#' Sets whether a segment filter should be negated.
+#'
+#' @param value the value of the negation slot, either \code{TRUE} or
+#'   \code{FALSE}.
+#'
+#' @rdname IsNegated
+#' @export
+setGeneric(
+  "IsNegated<-",
+  function(object, value) {
+    object <- standardGeneric("IsNegated<-")
+    validObject(object)
+    object
+  }
+)
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
 #' filter to a sequence filter of length one (i.e. conditions to match a single
