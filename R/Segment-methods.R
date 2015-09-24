@@ -356,17 +356,6 @@ setMethod(
 )
 
 #' @describeIn Segment
-#' Coerce a Table Filter into a Segment
-setMethod(
-  f = "Segment",
-  signature = "gaFilter",
-  definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    Segment(as(exprList, "gaSegmentConditionFilter"), scope = scope)
-  }
-)
-
-#' @describeIn Segment
 setMethod(
   f = "Segment",
   signature = "gaSegmentFilterList",

@@ -8,7 +8,6 @@
 \alias{Segment,NULL-method}
 \alias{Segment,character-method}
 \alias{Segment,gaDynSegment-method}
-\alias{Segment,gaFilter-method}
 \alias{Segment,gaQuery-method}
 \alias{Segment,gaSegmentFilterList-method}
 \alias{Segment,gaSegmentId-method}
@@ -36,8 +35,6 @@ Segment(object) <- value
 \S4method{Segment}{.compoundExpr}(object, ..., scope = "sessions")
 
 \S4method{Segment}{.gaSegmentFilter}(object, ..., scope = "sessions")
-
-\S4method{Segment}{gaFilter}(object, ..., scope = "sessions")
 
 \S4method{Segment}{gaSegmentFilterList}(object, ..., scope = "sessions")
 
@@ -83,8 +80,6 @@ Set the segment
 \item \code{.compoundExpr}: 
 
 \item \code{.gaSegmentFilter}: 
-
-\item \code{gaFilter}: Coerce a Table Filter into a Segment
 
 \item \code{gaSegmentFilterList}: 
 
