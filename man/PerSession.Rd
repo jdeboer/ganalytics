@@ -7,7 +7,7 @@
 \alias{PerSession,.gaSegmentFilter-method}
 \alias{PerSession,gaMetExpr-method}
 \alias{PerSession,gaSegmentFilterList-method}
-\title{PerSession}
+\title{PerSession.}
 \usage{
 PerSession(object, ...)
 

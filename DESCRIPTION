@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.7.1.0000
+Version: 0.7.3.0000
 Date: 2015-08-27
 Authors@R: person(
     given = "Johann",
@@ -43,6 +43,8 @@ Suggests:
 Collate:
     'Bool-generics.R'
     'utils.R'
+    'GaApiRequest.R'
+    'meta.R'
     'globaldata.R'
     'var-classes.R'
     'operand-classes.R'
@@ -60,7 +62,6 @@ Collate:
     'table-filter-classes.R'
     'query-classes.R'
     'Query-generics.R'
-    'GaApiRequest.R'
     'Creds-methods.R'
     'Date-generics.R'
     'management-api-classes.R'
@@ -86,13 +87,13 @@ Collate:
     'segment-coerce.R'
     'Sequence-generics.R'
     'Segment-methods.R'
+    'Sequence-methods.R'
     'SortBy-methods.R'
     'table-filter-coerce.R'
     'TableFilter-methods.R'
     'deprecated.R'
     'ganalytics-package.R'
     'gtm-api-classes.R'
-    'meta.R'
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr

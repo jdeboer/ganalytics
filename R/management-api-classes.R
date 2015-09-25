@@ -1,32 +1,5 @@
 #' @include GaApiRequest.R
 
-# API Error response codes: https://developers.google.com/analytics/devguides/config/mgmt/v3/errors
-
-#Make a Goolge API request
-ga_api_request <- function(
-  creds,
-  request,
-  scope = ga_scopes["read_only"],
-  base_url = "https://www.googleapis.com/analytics/v3",
-  req_type = "GET",
-  body_list = NULL,
-  fields = NULL,
-  queries = NULL,
-  max_results = NULL
-) {
-  stopifnot(scope %in% ga_scopes)
-  google_api_request(
-    creds = creds,
-    scope = scope,
-    request = request,
-    base_url = base_url,
-    queries = queries,
-    req_type = req_type,
-    body_list = body_list,
-    fields = fields
-  )
-}
-
 .gaManagementApi <- R6Class(
   ".gaManagementApi",
   inherit = .googleApi,
@@ -778,16 +751,35 @@ gaGoal <- R6Class(
     type = NA,
     value = NA,
     active = NA,
-    details = NA # TO BE IMPLEMENTED
+    details = NA
   ),
-  private = list(
+  active = list(
     api_list = function(){
-      c(list(
+      x <- c(super$api_list, list(
         type = self$type,
         value = self$value,
-        active = self$active,
-        details = self$details # TO BE IMPLEMENTED
+        active = self$active
       ))
+      x[[switch(
+        self$type,
+        URL_DESTINATION = "urlDestinationDetails",
+        VISIT_TIME_ON_SITE = "visitTimeOnSiteDetails",
+        VISIT_NUM_PAGES = "visitNumPagesDetails",
+        EVENT = "eventDetails"
+      )]] <- self$details
+      x
+    }
+  ),
+  private = list(
+    field_corrections = function(field_list) {
+      field_list$details <- switch(
+        field_list$type,
+        URL_DESTINATION = field_list$urlDestinationDetails,
+        VISIT_TIME_ON_SITE = field_list$visitTimeOnSiteDetails,
+        VISIT_NUM_PAGES = field_list$visitNumPagesDetails,
+        EVENT = field_list$eventDetails
+      )
+      field_list
     },
     parent_class_name = "gaView",
     request = "goals"

@@ -7,16 +7,19 @@
 \alias{Include,gaSegmentSequenceFilter-method}
 \title{Include.}
 \usage{
-Include(object, ...)
+Include(object, ..., scope = "sessions")
 
-\S4method{Include}{.compoundExpr}(object, ...)
+\S4method{Include}{.compoundExpr}(object, ..., scope = "sessions")
 
-\S4method{Include}{gaSegmentSequenceFilter}(object, ...)
+\S4method{Include}{gaSegmentSequenceFilter}(object, ..., scope = "sessions")
 }
 \arguments{
 \item{object}{a condition or sequence to include}
 
 \item{...}{further conditions or sequences to include, i.e. ANDed.}
+
+\item{scope}{the scope of the returned gaSegmentList, either "users" OR
+"sessions".}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to FALSE.

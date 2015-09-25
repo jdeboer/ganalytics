@@ -4,12 +4,15 @@
 \name{SegmentConditionFilter}
 \alias{SegmentConditionFilter}
 \alias{SegmentConditionFilter,.compoundExpr-method}
+\alias{SegmentConditionFilter,gaSegmentConditionFilter-method}
 \title{SegmentConditionFilter.}
 \usage{
 SegmentConditionFilter(object, ..., negation = FALSE)
 
 \S4method{SegmentConditionFilter}{.compoundExpr}(object, ...,
   negation = FALSE)
+
+\S4method{SegmentConditionFilter}{gaSegmentConditionFilter}(object)
 }
 \arguments{
 \item{object}{An expression to be used as a non-sequential segment condition.}
@@ -28,5 +31,7 @@ Create a new gaSegmentConditionFilter object
 \section{Methods (by class)}{
 \itemize{
 \item \code{.compoundExpr}: 
+
+\item \code{gaSegmentConditionFilter}: 
 }}
 

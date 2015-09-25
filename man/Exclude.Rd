@@ -7,16 +7,19 @@
 \alias{Exclude,gaSegmentSequenceFilter-method}
 \title{Exclude.}
 \usage{
-Exclude(object, ...)
+Exclude(object, ..., scope = "sessions")
 
-\S4method{Exclude}{.compoundExpr}(object, ...)
+\S4method{Exclude}{.compoundExpr}(object, ..., scope = "sessions")
 
-\S4method{Exclude}{gaSegmentSequenceFilter}(object, ...)
+\S4method{Exclude}{gaSegmentSequenceFilter}(object, ..., scope = "sessions")
 }
 \arguments{
 \item{object}{a condition or sequence to exclude}
 
 \item{...}{further conditions or sequences to exclude.}
+
+\item{scope}{the scope of the returned gaSegmentList, either "users" OR
+"sessions".}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to TRUE.

@@ -10,7 +10,7 @@
 
 <meta name="author" content="Johann de Boer" />
 
-<meta name="date" content="2015-09-18" />
+<meta name="date" content="2015-09-24" />
 
 <title>README</title>
 
@@ -72,21 +72,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">README</h1>
 <h4 class="author"><em>Johann de Boer</em></h4>
-<h4 class="date"><em>2015-09-18</em></h4>
+<h4 class="date"><em>2015-09-24</em></h4>
 </div>
 
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.rmd. Please edit that file -->
 <div id="ganalytics" class="section level1">
 <h1>ganalytics</h1>
 <p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAUCAYAAAAN+ioeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABQBJREFUWIXdmH1ME2cAxp/76FF6DBhYIESgbHNJFRlMqIAIcWMjbhNs1pj0Dwgmi+jm4j70Dz/mHKvZnBl1cYBLE9YYCJNNggs6s/hFNGBjthCJHyPqFkFCVAKDtZSud+/+YDto7cdJmVSf5E3vvd/d0+d9cndpjzIYDJEcx5kVCoURQDTCQH++c36+I8yNXDQhg/wV+8h4IctxnJll2WpCyHzHkhROWUKSQqCQNpahIlEXWIZhjOG2sHDLE6qoJMcSlhASFo+LmXrSiiacm2LDcVHhmClU0YQQ+BtNTU1+mdwRyGMu/B+XEbBoALMybW5uluUxW///e3QU3J5zz6CPjmDcl4qLi5GcnCzLwxebzXfOpXL3L4A6XzmnnkGvaKPRCKvVCpPJBLVaLbGWlhaPY2fOOzs7fV61arUaJpMJVqsVRqPRgwUaJwoHsF6zHW35fTjwQgcSI1Ie4McL+9GY04Xs2CJpf0H8ajS8eBrHCm7BmnsRpYlGWezStvse3saULfg+7xoO515CztOrJJYUkYqvso6jLb8P6zXbcaJwwO8aghZtt9uh1+ths9lQUVHh97afOfe3XVlZie7ubuj1ejidTtlFA4BjZBKldYvR3XcOGzR7PPiyffHQfZGAPR2bUa2pkfZveXY/PvtpK1aaU/FW0xt4js2Wxbzzi+M0VtctwZendmKD5hOJVWtqcP76KZTWLYZz1B1wPUGLPnr0KHieR1tbG7RabUhFa7VatLe3g+d5tLa2PlTRLdfqEZExiZabX2NpTJ7EsmOL8MPmC+jeOohDhh+xkE+X2LHLzfiwZC92GfdBm/U89p7dIot55z/ca4Zy6d+wuU4iWaWR2JIYHVpvTuVqvnowtKJVKpXH539MFEVQFAVCCBQKhayiA/kFyxGZwAA0QWQCA0Kmz/tgUS0OnvkUheYUrKxNAU0xEmu48jG2tVfhRn8fKtO3wfT6IVnMOzOd6AZoAjZWBE3R04wAyqTpXCEVvWbNGiiVSpSXl6Onp0dig4OD0Ol04DgOZWVlsoru6enx8HuYog2pGxFJ81iX9jZ+7e+SGAclhBg7EnJ4vG/Y7eG54xUzotM5tP/eCPPZj7AsZpUs5p0f1L9Z4LWeOza8mVKNSJqHIW1TaEWLogiLxYKMjAw0NDRIrK6uDlVVVbBYLJiYmJBVdH19PTIzM2GxWOB2B36meecgDhpHVvQi66kimG07JFZ7bidq8hrxbV4XhoeHPTwv3/oFn+d8h5/X/YFdrx5Azcl3ZTF/+b3n5os7kBtTgiMresE5VXC47H7XQOn1er+/pYaGhsDzPBwOB1iWRWxsLBhm6haZnJzE2NgYRFFEVFQUxsfHkZSUJJ3na1sQBIyOjsLtdkOlUsFut0tsprzf3p1++R7yrXGYGBLARlKIWsSCiaCmctwTYb8tABSgTKQxMSAgfjkHAHDeFTExKEB0ETBKCqqFDLg4Oigbtrkkj5nb3nPBSTB+ww3apUBF8UasTH4NW38r89kltXbt2rD7v+td9JmS+3jp1IJ5ShNYZ0ruQyQCbo1ex+6TmzCkvurzuMfiXUemKRrxyxXzlCawMk3RAAWwKgr8MwxYQvk8jiWE/AUg6tHGCyzvouN07AP7wkVxOtZj7isn7WIJS9N0syAI1Y8qmByFa6mzFXs3ppceGRl5j2GYbyiKGpvvQE+aaBdLIu4suEzuiUX/AG3EJVuesFjhAAAAAElFTkSuQmCC" alt="Travis-CI Build Status" /></a></p>
 <p>Interact with <strong>Google Analytics</strong> using <strong>R</strong></p>
 <p>Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.</p>
+<p>This package provides functions for querying the Google Analytics core reporting, real-time, multi-channel funnel and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the management and Google Tag Manager APIs so that you can change tag, property or view settings, for example. Define reporting queries using natural R expressions instead of being concerned as much about API technical intricacies like query syntax, character code escaping, and API limitations.</p>
 <div id="updates" class="section level2">
 <h2>Updates</h2>
+<p>Many new functions have been provided for writing segmentation expressions:</p>
+<ul>
+<li><code>Segment(...)</code> - define a segment based one or more expressions or select a built-in segment by its ID number.</li>
+<li><code>Include(...)</code> - expressions (conditions or sequences) defining users or sessions to include in the segment</li>
+<li><code>Exclude(...)</code> - expressions (conditions or sequences) defining users or sessions to exclude from the segment</li>
+<li><code>PerUser(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to user-level.</li>
+<li><code>PerSession(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to session-level.</li>
+<li><code>PerHit(...)</code> - specify that a set of logically combined conditions must all be met for a single hit, or set the scope of a metric condition to hit-level.</li>
+<li><code>Sequence(...)</code> - define a sequence of one or more conditions to use in a segment definition.</li>
+<li><code>Then(condition)</code> - used within a <code>Sequence()</code> to specify that this condition must immediately follow the preceding condition, rather than just any time after.</li>
+<li><code>Later(condition)</code> - similar to <code>Then()</code> but means that a condition can happen any time after the preceding condition.</li>
+<li><code>First(condition)</code> - similar to <code>Then()</code> but means that a condition must be the first ever interaction (hit) by the user within the specified date-range. Using <code>First()</code> is optional. Without using <code>First()</code> at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use <code>First()</code> anywhere else in the sequence other than at the start.</li>
+</ul>
 <p>Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.</p>
 <p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.</p>
-<p>Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), &amp; (And), and ! (Not) instead (thanks to <span class="citation">@hadley</span> for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and &amp; operators. Therefore, remember to use parentheses () to force the order of operation applied to your Boolean expressions.</p>
+<p>Instead of using <code>GaOr</code>, <code>GaAnd</code>, and <code>GaNot</code> (now called <code>Or</code>, <code>And</code>, and <code>Not</code>, respectively), it is now possible to use familiar R language Boolean operators, <code>|</code> (<code>Or</code>), <code>&amp;</code> (<code>And</code>), and <code>!</code> (<code>Not</code>) instead (thanks to <span class="citation">@hadley</span> for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires <code>Or</code> to have precedence over <code>And</code>, which is the opposite to the natural precedence given by R when using the <code>|</code> and <code>&amp;</code> operators. Therefore, remember to use parentheses <code>()</code> to force the order of operation applied to your Boolean expressions.</p>
 <p>There is now support for user and session level condition based segments as well as sequential segmentation.</p>
 <p>Also recently added is Google Management API support (still a work in progress) - so now you can get details in R about what goals you have defined, accounts, properties, views, etc. There are <em>write</em> methods in there too, but these have not been fully tested so perhaps try them under a test login if you want, otherwise just avoid using the “INSERT”, “UPDATE” and “DELETE” methods.</p>
 <p>There is also some basic support for the Google Tag Manager API, but again, still work in progress.</p>
@@ -99,7 +113,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4>Warning</h4>
 <ul>
 <li>The ganalytics package is currently under development.</li>
-<li>The installation procedure below installs directly from the respective GitHub repositories.</li>
+<li>The installation procedure below installs directly from the GitHub repository.</li>
 </ul>
 </div>
 <div id="prerequisites" class="section level4">
@@ -133,12 +147,10 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 <li>Choose <strong>Create Project</strong> from the Google API Console and give your project a name (or choose an existing project if you have one already).</li>
 <li>From the <strong>APIs</strong> page, enable the <strong>Analytics API</strong>. You may also want to enable the <strong>Tag Manager API</strong> if you wish to try that.</li>
 <li>You will need to <strong>agree</strong> and <strong>accept</strong> the Google APIs and Analytics API Terms of Service to proceed.</li>
-<li>Go to the <strong>Credentials</strong> page and click the blue button <strong>Create New Client ID</strong>.</li>
-<li>Select <strong>Installed Application</strong> as the application type.</li>
-<li>Select <strong>Other</strong> as the Installed Application Type.</li>
+<li>Go to the <strong>Credentials</strong> page, click <strong>Add credentials</strong>, choose <strong>OAuth 2.0 client ID</strong>, then select “Other”.</li>
 <li>Note your <strong>Client ID</strong> and <strong>Client Secret</strong> and download the JSON file to your R working directory.</li>
 </ul>
-<p><em>Note: For further information about Google APIs please refer to the <a href="https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references">References section</a> at the end of this document.</em></p>
+<p><em>Note: For further information about Google APIs, please refer to the <a href="https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references">References section</a> at the end of this document.</em></p>
 </div>
 <div id="set-your-system-environment-variables-this-is-optional-but-recommended" class="section level3">
 <h3>3. Set your system environment variables <em>(this is optional but recommended)</em></h3>
@@ -172,7 +184,7 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 <li>Within the <strong>Environment Variables</strong> window, add the above <strong>User Variables</strong> by selecting <strong>New</strong> and entering the <strong>Variable Name</strong> and <strong>Variable Value</strong>, then click <strong>OK</strong>. Do this for both variables listed in the above table.</li>
 <li>Click <strong>OK</strong>.</li>
 <li><strong>Restart</strong> your computer for the new environment variables to take effect.</li>
-<li>Alternatively you can use <code>Sys.setenv(GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;, GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;)</code>, or create an <code>.Renviron</code> file on Unix-like systems. (Thanks to <span class="citation">@unikum</span> for these suggestions.)</li>
+<li><strong>Alternatively</strong> you can use <code>Sys.setenv(GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;, GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;)</code>, or create an <code>.Renviron</code> file on Unix-like systems. (Thanks to <span class="citation">@unikum</span> for these suggestions.)</li>
 <li>There is also free open source utility to set environment variables on Mac OS called <a href="https://github.com/hschmidt/EnvPane">EnvPane</a></li>
 </ul>
 <p><em>Note: For other operating systems please refer to the Reference section at the end of this document.</em></p>
@@ -180,11 +192,11 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 <div id="authenticate-and-attempt-your-first-query-with-ganalytics" class="section level3">
 <h3>4. Authenticate and attempt your first query with ganalytics</h3>
 <ul>
-<li>To perform a query you will need to obtain your <strong>Google Analytics view ID</strong>. This can be accessed in a number of ways:</li>
+<li>ganalytics needs to know the ID of the Google Analytics <strong>view</strong> that you wish to query. You can obtain this in a number of ways:</li>
 <li>Using the <a href="http://ga-dev-tools.appspot.com/explorer/">Google Analytics Query Explorer tool</a></li>
-<li>The <strong>Admin page</strong> in Google Analytics under <strong>View Settings</strong>, or</li>
+<li>From the <strong>Admin page</strong> in Google Analytics under <strong>View Settings</strong>, or</li>
 <li><p>The browser’s address bar when viewing a report in Google Analytics - look for the digits between the letter <strong>‘p’</strong> and trailing <strong>‘/’</strong>, e.g. <code>.../a11111111w22222222p33333333/</code> shows a view ID of <code>33333333</code>.</p></li>
-<li><strong>If you do not provide a view ID then:</strong></li>
+<li><strong>Alternatively, ganalytics can look up the view ID for you:</strong></li>
 <li>If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.</li>
 <li><p>Otherwise it will select the default view of the first property from the first account it finds in the list of accounts you have access to.</p></li>
 <li><p>Return to R and execute the following to load the ganalytics package:</p></li>
@@ -196,9 +208,9 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 <p><code>r   my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;)</code></p>
 <ul>
 <li>Otherwise do one of the following:</li>
-<li><p>If you downloaded the JSON file containing your Google API app credentials, then provide the filename:</p>
+<li><p>If you downloaded the JSON file containing your Google API app credentials, then provide the file path:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(<span class="st">&quot;you@domain.com&quot;</span>, <span class="st">&quot;client_secret.json&quot;</span>)</code></pre></div></li>
-<li><p>Instead of a filename you may supply the <code>client_id</code> and <code>client_secret</code> directly:</p>
+<li><p>Instead of a file you can supply the <code>client_id</code> and <code>client_secret</code> directly:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(
   <span class="st">&quot;you@domain.com&quot;</span>,
   <span class="kw">list</span>(<span class="dt">client_id =</span> <span class="st">&quot;&lt;client id&gt;&quot;</span>, <span class="dt">client_secret =</span> <span class="st">&quot;&lt;client secret&gt;&quot;</span>)

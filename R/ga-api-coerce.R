@@ -91,7 +91,7 @@ setAs(from = "gaSegmentSequenceFilter", to = "character", def = function(from, t
 setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
   if (length(from) >= 1) {
     paste(
-      from@conditionScope,
+      from@scope,
       do.call(
         paste,
         c(

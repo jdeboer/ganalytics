@@ -7,7 +7,7 @@
 \alias{PerUser,.gaSegmentFilter-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,gaSegmentFilterList-method}
-\title{PerUser}
+\title{PerUser.}
 \usage{
 PerUser(object, ...)
 

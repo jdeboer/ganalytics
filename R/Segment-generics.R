@@ -23,13 +23,15 @@ setGeneric(
 #'
 #' @param object a condition or sequence to include
 #' @param ... further conditions or sequences to include, i.e. ANDed.
+#' @param scope the scope of the returned gaSegmentList, either "users" OR
+#'   "sessions".
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @export
 setGeneric(
   "Include",
-  function(object, ...) {},
-  valueClass = c(".gaSegmentFilter", "gaSegmentFilterList"),
+  function(object, ..., scope = "sessions") {},
+  valueClass = c("gaSegmentFilterList"),
   useAsDefault = FALSE
 )
 
@@ -40,12 +42,14 @@ setGeneric(
 #'
 #' @param object a condition or sequence to exclude
 #' @param ... further conditions or sequences to exclude.
+#' @param scope the scope of the returned gaSegmentList, either "users" OR
+#'   "sessions".
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @export
 setGeneric(
   "Exclude",
-  function(object, ...) {},
+  function(object, ..., scope = "sessions") {},
   valueClass = "gaSegmentFilterList",
   useAsDefault = TRUE
 )
@@ -70,12 +74,11 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' IsNegated
+#' IsNegated.
 #'
 #' Tests whether a segment filter is negated.
 #'
-#' @param object an object to test for negation belonging to the superclass
-#'   \code{.gaSegmentFilter}.
+#' @param object an object belonging to the superclass \code{.gaSegmentFilter}.
 #'
 #' @export
 setGeneric(
@@ -85,7 +88,25 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerHit
+#' IsNegated<-.
+#'
+#' Sets whether a segment filter should be negated.
+#'
+#' @param value the value of the negation slot, either \code{TRUE} or
+#'   \code{FALSE}.
+#'
+#' @rdname IsNegated
+#' @export
+setGeneric(
+  "IsNegated<-",
+  function(object, value) {
+    object <- standardGeneric("IsNegated<-")
+    validObject(object)
+    object
+  }
+)
+
+#' PerHit.
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
 #' filter to a sequence filter of length one (i.e. conditions to match a single
@@ -102,7 +123,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerSession
+#' PerSession.
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 #'
@@ -117,7 +138,7 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' PerUser
+#' PerUser.
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 #'

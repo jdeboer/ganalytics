@@ -14,7 +14,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -32,14 +32,28 @@ Interact with **Google Analytics** using **R**
 
 Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.
 
+This package provides functions for querying the Google Analytics core reporting, real-time, multi-channel funnel and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the management and Google Tag Manager APIs so that you can change tag, property or view settings, for example. Define reporting queries using natural R expressions instead of being concerned as much about API technical intricacies like query syntax, character code escaping, and API limitations.
+
 Updates
 -------
+Many new functions have been provided for writing segmentation expressions:
+
+* `Segment(...)` - define a segment based one or more expressions or select a built-in segment by its ID number.
+* `Include(...)` - expressions (conditions or sequences) defining users or sessions to include in the segment
+* `Exclude(...)` - expressions (conditions or sequences) defining users or sessions to exclude from the segment
+* `PerUser(...)` - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to user-level.
+* `PerSession(...)` - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to session-level.
+* `PerHit(...)` - specify that a set of logically combined conditions must all be met for a single hit, or set the scope of a metric condition to hit-level.
+* `Sequence(...)` - define a sequence of one or more conditions to use in a segment definition.
+* `Then(condition)` - used within a `Sequence()` to specify that this condition must immediately follow the preceding condition, rather than just any time after.
+* `Later(condition)` - similar to `Then()` but means that a condition can happen any time after the preceding condition.
+* `First(condition)` - similar to `Then()` but means that a condition must be the first ever interaction (hit) by the user within the specified date-range. Using `First()` is optional. Without using `First()` at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use `First()` anywhere else in the sequence other than at the start.
 
 Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.
 
 Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.
 
-Instead of using GaOr, GaAnd, and GaNot (now called Or, And, and Not, respectively), it is now possible to use familiar R language Boolean operators, | (Or), & (And), and ! (Not) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires Or to have precedence over And, which is the opposite to the natural precedence given by R when using the | and & operators. Therefore, remember to use parentheses () to force the order of operation applied to your Boolean expressions.
+Instead of using `GaOr`, `GaAnd`, and `GaNot` (now called `Or`, `And`, and `Not`, respectively), it is now possible to use familiar R language Boolean operators, `|` (`Or`), `&` (`And`), and `!` (`Not`) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires `Or` to have precedence over `And`, which is the opposite to the natural precedence given by R when using the `|` and `&` operators. Therefore, remember to use parentheses `()` to force the order of operation applied to your Boolean expressions.
 
 There is now support for user and session level condition based segments as well as sequential segmentation.
 
@@ -53,7 +67,7 @@ Installation
 
 #### Warning
 * The ganalytics package is currently under development.
-* The installation procedure below installs directly from the respective GitHub repositories.
+* The installation procedure below installs directly from the GitHub repository.
 
 #### Prerequisites
 * Ensure you have installed the latest version of [R](http://cran.r-project.org/)
@@ -79,12 +93,10 @@ devtools::install_github("jdeboer/ganalytics")
 * Choose **Create Project** from the Google API Console and give your project a name (or choose an existing project if you have one already).
 * From the **APIs** page, enable the **Analytics API**. You may also want to enable the **Tag Manager API** if you wish to try that.
 * You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
-* Go to the **Credentials** page and click the blue button **Create New Client ID**.
-* Select **Installed Application** as the application type.
-* Select **Other** as the Installed Application Type.
+* Go to the **Credentials** page, click **Add credentials**, choose **OAuth 2.0 client ID**, then select "Other".
 * Note your **Client ID** and **Client Secret** and download the JSON file to your R working directory.
 
-_Note: For further information about Google APIs please refer to the [References section](https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references) at the end of this document._
+_Note: For further information about Google APIs, please refer to the [References section](https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references) at the end of this document._
 
 ### 3. Set your system environment variables _(this is optional but recommended)_
 * Add the following two user variables:
@@ -99,18 +111,18 @@ _Note: For further information about Google APIs please refer to the [References
   * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
   * Click **OK**.
   * **Restart** your computer for the new environment variables to take effect.
-* Alternatively you can use `Sys.setenv(GOOGLE_APIS_CONSUMER_ID = "<Your client ID>", GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>")`, or create an `.Renviron` file on Unix-like systems. (Thanks to @unikum for these suggestions.)
+* **Alternatively** you can use `Sys.setenv(GOOGLE_APIS_CONSUMER_ID = "<Your client ID>", GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>")`, or create an `.Renviron` file on Unix-like systems. (Thanks to @unikum for these suggestions.)
 * There is also free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 
 ### 4. Authenticate and attempt your first query with ganalytics
-* To perform a query you will need to obtain your **Google Analytics view ID**. This can be accessed in a number of ways:
+* ganalytics needs to know the ID of the Google Analytics **view** that you wish to query. You can obtain this in a number of ways:
   * Using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
-  * The **Admin page** in Google Analytics under **View Settings**, or
+  * From the **Admin page** in Google Analytics under **View Settings**, or
   * The browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
-* **If you do not provide a view ID then:**
+* **Alternatively, ganalytics can look up the view ID for you:**
   * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.
   * Otherwise it will select the default view of the first property from the first account it finds in the list of accounts you have access to.
 
@@ -127,12 +139,12 @@ _Note: For further information about Google APIs please refer to the [References
   ```
 
 * Otherwise do one of the following:
-  * If you downloaded the JSON file containing your Google API app credentials, then provide the filename:
+  * If you downloaded the JSON file containing your Google API app credentials, then provide the file path:
 
     ```r
     my_creds <- GoogleApiCreds("you@domain.com", "client_secret.json")
     ```
-  * Instead of a filename you may supply the `client_id` and `client_secret` directly:
+  * Instead of a file you can supply the `client_id` and `client_secret` directly:
 
     ```r
     my_creds <- GoogleApiCreds(

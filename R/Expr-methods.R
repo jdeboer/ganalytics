@@ -146,7 +146,6 @@ setMethod(
   signature = c("gaSegMetExpr", "character"),
   definition = function(object, value) {
     object@metricScope <- value
-    validObject(object)
     object
   }
 )
@@ -158,7 +157,6 @@ setMethod(
   definition = function(object, value) {
     object <- as(object, "gaSegMetExpr")
     object@metricScope <- value
-    validObject(object)
     object
   }
 )

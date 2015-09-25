@@ -1,4 +1,5 @@
 #' @include GaApiRequest.R
+#' @include utils.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
 #' @importFrom devtools use_data
@@ -76,7 +77,7 @@ GaMetaUpdate <- function(creds = get_creds()) {
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  metadata_path <- system.file("extdata", "metadata.RDA", package = "ganalytics")
+  metadata_path <- get_metadata_path()
 
   if (nchar(metadata_path) == 0) {
     package_path <- system.file(package = "ganalytics")
@@ -89,14 +90,16 @@ GaMetaUpdate <- function(creds = get_creds()) {
   }
 
   prompt <- paste0(
-    "Ready to update ganalytics metadata files, located in: ",
+    "Ready to update the metadata file for ganalytics located in: ",
     metadata_path,
     "\nPress enter to continue..."
   )
-  keypress <- readline(prompt)
-  assert_that(nchar(keypress) == 0)
+  if (interactive()) {
+    keypress <- readline(prompt)
+    assert_that(nchar(keypress) == 0)
+  }
 
-  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, metadata_path)
+  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, file = metadata_path)
 
   # use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
 

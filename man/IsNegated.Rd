@@ -4,21 +4,33 @@
 \name{IsNegated}
 \alias{IsNegated}
 \alias{IsNegated,.gaSegmentFilter-method}
-\title{IsNegated}
+\alias{IsNegated<-}
+\alias{IsNegated<-,.gaSegmentFilter,logical-method}
+\title{IsNegated.}
 \usage{
 IsNegated(object)
 
+IsNegated(object) <- value
+
 \S4method{IsNegated}{.gaSegmentFilter}(object)
+
+\S4method{IsNegated}{.gaSegmentFilter,logical}(object) <- value
 }
 \arguments{
-\item{object}{an object to test for negation belonging to the superclass
-  \code{.gaSegmentFilter}.}
+\item{object}{an object belonging to the superclass \code{.gaSegmentFilter}.}
+
+\item{value}{the value of the negation slot, either \code{TRUE} or
+  \code{FALSE}.}
 }
 \description{
 Tests whether a segment filter is negated.
+
+Sets whether a segment filter should be negated.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{.gaSegmentFilter}: 
+
+\item \code{object = .gaSegmentFilter,value = logical}: 
 }}
 
