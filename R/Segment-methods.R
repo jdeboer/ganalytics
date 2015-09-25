@@ -7,46 +7,6 @@
 #' @importFrom methods new setMethod
 NULL
 
-# ---- Later, Then, First, Sequence ----
-
-#' @describeIn Sequence
-setMethod(
-  f = "Later",
-  signature = ".compoundExpr",
-  definition = function(object) {
-    new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = FALSE)
-  }
-)
-
-#' @describeIn Sequence
-setMethod(
-  f = "Then",
-  signature = ".compoundExpr",
-  definition = function(object) {
-    new("gaSegmentSequenceStep", as(object, "andExpr"), immediatelyPrecedes = TRUE)
-  }
-)
-
-#' @describeIn Sequence
-setMethod(
-  f = "First",
-  signature = ".compoundExpr",
-  definition = function(object) {
-    Then(object)
-  }
-)
-
-#' @describeIn Sequence
-setMethod(
-  f = "Sequence",
-  signature = ".compoundExpr",
-  definition = function(object, ..., negation) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
-    new("gaSegmentSequenceFilter", exprList, negation = negation)
-  }
-)
-
 # ---- Include, Exclude ----
 
 segment_scope_negate <- function(object, ..., scope, negate = NULL) {

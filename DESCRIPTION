@@ -87,6 +87,7 @@ Collate:
     'segment-coerce.R'
     'Sequence-generics.R'
     'Segment-methods.R'
+    'Sequence-methods.R'
     'SortBy-methods.R'
     'table-filter-coerce.R'
     'TableFilter-methods.R'
