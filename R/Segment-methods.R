@@ -182,8 +182,9 @@ setMethod(
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perSession"
+      object
     } else {
-      SegmentFilters(object, ...)
+      SegmentFilters(object, ..., scope = "sessions")
     }
   }
 )
@@ -223,8 +224,9 @@ setMethod(
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perUser"
+      object
     } else {
-      SegmentFilters(object, ...)
+      SegmentFilters(object, ..., scope = "users")
     }
   }
 )
@@ -238,7 +240,7 @@ setMethod(
       ScopeLevel(object) <- "perHit"
       object
     } else {
-      SegmentFilters(object, ...)
+      Sequence(And(object, ...))
     }
   }
 )
