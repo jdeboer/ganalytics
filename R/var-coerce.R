@@ -1,4 +1,5 @@
 #' @include utils.R
+#' @include management-api-classes.R
 NULL
 
 # Coercing to .var classes
@@ -148,3 +149,10 @@ setAs(from = ".expr", to = ".gaVar",
         from
       }
 )
+
+setAs(from = "gaGoal", to = "gaMetVar",
+      def = function(from, to) {
+        Var(paste0("goal", from$id, "completions"))
+      }
+)
+
