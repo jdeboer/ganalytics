@@ -931,7 +931,17 @@ gaViewFilterLinks <- R6Class(
   )
 )
 
+#' @exportClass gaGoal
+setOldClass(c("gaGoal", "R6"))
+
+#' @exportClass gaUserSegment
 setOldClass(c("gaUserSegment", "R6"))
+
+#' @exportClass gaAccount
 setOldClass(c("gaAccount", "R6"))
+
+#' @exportClass gaProperty
 setOldClass(c("gaProperty", "R6"))
+
+#' @exportClass gaView
 setOldClass(c("gaView", "R6"))
