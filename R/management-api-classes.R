@@ -19,21 +19,21 @@
   )
 )
 
-.gaResource <- R6Class(
-  ".gaResource",
+gaResource <- R6Class(
+  "gaResource",
   inherit = .googleApiResource,
   private = get_privates(.gaManagementApi)
 )
 
-.gaCollection <- R6Class(
-  ".gaCollection",
+gaCollection <- R6Class(
+  "gaCollection",
   inherit = .googleApiCollection,
   private = get_privates(.gaManagementApi)
 )
 
 gaUserSegment <- R6Class(
   "gaUserSegment",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     type = NA,
     segmentId = NA,
@@ -92,7 +92,7 @@ GaUserSegment <- function(id = NULL, definition = NA, creds = get_creds()){
 
 gaUserSegments <- R6Class(
   "gaUserSegments",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = NULL,
     DELETE = NULL
@@ -117,7 +117,7 @@ GaUserSegments <- function(creds = get_creds()){
 
 gaAccountSummary <- R6Class(
   "gaAccountSummary",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     webProperties = NULL,
     get = function() {
@@ -178,7 +178,7 @@ GaAccountSummary <- function(id = NULL, creds = get_creds()){
 
 gaAccountSummaries <- R6Class(
   "gaAccountSummaries",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = NULL,
     DELETE = NULL
@@ -213,7 +213,7 @@ GaAccountSummaries <- function(creds = get_creds()){
 
 gaAccount <- R6Class(
   "gaAccount",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     get = function() {
       if (!is.null(self$.req_path)) {
@@ -270,7 +270,7 @@ GaAccount <- function(id = NULL, creds = get_creds()){
 
 gaAccounts <- R6Class(
   "gaAccounts",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = NULL,
     DELETE = NULL
@@ -295,7 +295,7 @@ GaAccounts <- function(creds = get_creds()){
 
 gaViewFilter <- R6Class(
   "gaViewFilter",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     type = NA,
     details = NA
@@ -345,7 +345,7 @@ gaViewFilter <- R6Class(
 
 gaViewFilters <- R6Class(
   "gaViewFilters",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaViewFilter,
     field_corrections = gaViewFilter$private_methods$field_corrections
@@ -354,7 +354,7 @@ gaViewFilters <- R6Class(
 
 gaAccountUserLink <- R6Class(
   "gaAccountUserLink",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     email = NA,
     local_permissions = list(
@@ -410,7 +410,7 @@ gaAccountUserLink <- R6Class(
 
 gaAccountUserLinks <- R6Class(
   "gaAccountUserLinks",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = function(entity) {
       super$INSERT(entity = entity, scope = private$scope)
@@ -428,7 +428,7 @@ gaAccountUserLinks <- R6Class(
 
 gaProperty <- R6Class(
   "gaProperty",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     websiteUrl = NA,
     industryVertical = NA,
@@ -473,7 +473,7 @@ gaProperty <- R6Class(
 
 gaProperties <- R6Class(
   "gaProperties",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     DELETE = NULL
   ),
@@ -485,7 +485,7 @@ gaProperties <- R6Class(
 
 gaPropertyUserLink <- R6Class(
   "gaPropertyUserLink",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be implemented
   private = list(
     parent_class_name = "gaProperty",
@@ -496,7 +496,7 @@ gaPropertyUserLink <- R6Class(
 
 gaPropertyUserLinks <- R6Class(
   "gaPropertyUserLinks",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = function(entity) {
       super$INSERT(entity = entity, scope = private$scope)
@@ -513,7 +513,7 @@ gaPropertyUserLinks <- R6Class(
 
 gaAdwordsLink <- R6Class(
   "gaAdwordsLink",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be completely implemented - partially done.
   public = list(
     adWordsAccounts = NA
@@ -533,7 +533,7 @@ gaAdwordsLink <- R6Class(
 
 gaAdwordsLinks <- R6Class(
   "gaAdwordsLinks",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaAdwordsLink
   )
@@ -541,7 +541,7 @@ gaAdwordsLinks <- R6Class(
 
 gaCustomDimension <- R6Class(
   "gaCustomDimension",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     index = NA,
     scope = NA,
@@ -564,7 +564,7 @@ gaCustomDimension <- R6Class(
 
 gaCustomDimensions <- R6Class(
   "gaCustomDimensions",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     DELETE = NULL
   ),
@@ -575,7 +575,7 @@ gaCustomDimensions <- R6Class(
 
 gaCustomMetric <- R6Class(
   "gaCustomMetric",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     index = NA,
     scope = NA,
@@ -604,7 +604,7 @@ gaCustomMetric <- R6Class(
 
 gaCustomMetrics <- R6Class(
   "gaCustomMetrics",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     DELETE = NULL
   ),
@@ -615,7 +615,7 @@ gaCustomMetrics <- R6Class(
 
 gaDataSource <- R6Class(
   "gaDataSource",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     description = NA,
     type = NA,
@@ -642,7 +642,7 @@ gaDataSource <- R6Class(
 
 gaDataSources <- R6Class(
   "gaDataSources",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = NULL,
     DELETE = NULL
@@ -654,7 +654,7 @@ gaDataSources <- R6Class(
 
 gaUpload <- R6Class(
   "gaUpload",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     status = NA,
     errors = NA,
@@ -668,7 +668,7 @@ gaUpload <- R6Class(
 
 gaUploads <- R6Class(
   "gaUploads",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   # INSERT and DELETE methods particular for uploads to be implemented
   private = list(
     entity_class = gaUpload
@@ -677,7 +677,7 @@ gaUploads <- R6Class(
 
 gaView <- R6Class(
   "gaView",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     type = NA,
     currency = NA,
@@ -738,7 +738,7 @@ gaView <- R6Class(
 
 gaViews <- R6Class(
   "gaViews",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaView,
     field_corrections = gaView$private_methods$field_corrections
@@ -747,7 +747,7 @@ gaViews <- R6Class(
 
 gaGoal <- R6Class(
   "gaGoal",
-  inherit = .gaResource,
+  inherit = gaResource,
   public = list(
     type = NA,
     value = NA,
@@ -789,7 +789,7 @@ gaGoal <- R6Class(
 
 gaGoals <- R6Class(
   "gaGoals",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaGoal
   )
@@ -797,7 +797,7 @@ gaGoals <- R6Class(
 
 gaExperiment <- R6Class(
   "gaExperiment",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be completely implemented - partially done.
   public = list(
     description = NA,
@@ -845,7 +845,7 @@ gaExperiment <- R6Class(
 
 gaExperiments <- R6Class(
   "gaExperiments",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaExperiment
   )
@@ -853,7 +853,7 @@ gaExperiments <- R6Class(
 
 gaUnsampledReport <- R6Class(
   "gaUnsampledReport",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be completely implemented - partially done.
   public = list(
     title = NA,
@@ -877,7 +877,7 @@ gaUnsampledReport <- R6Class(
 
 gaUnsampledReports <- R6Class(
   "gaUnsampledReports",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     DELETE = NULL
   ),
@@ -888,7 +888,7 @@ gaUnsampledReports <- R6Class(
 
 gaViewUserLink <- R6Class(
   "gaViewUserLink",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be implemented
   private = list(
     parent_class_name = "gaView",
@@ -899,7 +899,7 @@ gaViewUserLink <- R6Class(
 
 gaViewUserLinks <- R6Class(
   "gaViewUserLinks",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   public = list(
     INSERT = function(entity) {
       super$INSERT(entity = entity, scope = private$scope)
@@ -916,7 +916,7 @@ gaViewUserLinks <- R6Class(
 
 gaViewFilterLink <- R6Class(
   "gaViewFilterLink",
-  inherit = .gaResource,
+  inherit = gaResource,
   # properties and api_list active property to be implemented
   private = list(
     parent_class_name = "gaView",
@@ -926,7 +926,7 @@ gaViewFilterLink <- R6Class(
 
 gaViewFilterLinks <- R6Class(
   "gaViewFilterLinks",
-  inherit = .gaCollection,
+  inherit = gaCollection,
   private = list(
     entity_class = gaViewFilterLink
   )
