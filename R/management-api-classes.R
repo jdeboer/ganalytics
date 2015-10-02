@@ -931,17 +931,53 @@ gaViewFilterLinks <- R6Class(
   )
 )
 
+#' `gaGoal` class
+#'
+#' An R6 class representing a defined Google Analytics goal.
+#'
+#' @name gaGoal-class
+#' @rdname gaGoal-class
+#' @keywords internal
 #' @exportClass gaGoal
 setOldClass(c("gaGoal", "R6"))
 
+#' `gaUserSegment` class
+#'
+#' An R6 class representing a default or custom segment available with the
+#' credentials provided.
+#'
+#' @name gaUserSegment-class
+#' @rdname gaUserSegment-class
+#' @keywords internal
 #' @exportClass gaUserSegment
 setOldClass(c("gaUserSegment", "R6"))
 
+#' `gaAccount` class
+#'
+#' An R6 class representing a Google Analytics account.
+#'
+#' @name gaAccount-class
+#' @rdname gaAccount-class
+#' @keywords internal
 #' @exportClass gaAccount
 setOldClass(c("gaAccount", "R6"))
 
+#' `gaProperty` class
+#'
+#' An R6 class representing a Google Analytics property.
+#'
+#' @name gaProperty-class
+#' @rdname gaProperty-class
+#' @keywords internal
 #' @exportClass gaProperty
 setOldClass(c("gaProperty", "R6"))
 
+#' `gaView` class
+#'
+#' An R6 class representing a Google Analytics reporting view.
+#'
+#' @name gaView-class
+#' @rdname gaView-class
+#' @keywords internal
 #' @exportClass gaView
 setOldClass(c("gaView", "R6"))
