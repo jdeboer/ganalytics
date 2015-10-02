@@ -31,6 +31,9 @@ gaCollection <- R6Class(
   private = get_privates(.gaManagementApi)
 )
 
+`[.gaCollection` <- function(x, i) {x$entities[i]}
+`[[.gaCollection` <- function(x, i) {x$entities[[i]]}
+
 gaUserSegment <- R6Class(
   "gaUserSegment",
   inherit = gaResource,
