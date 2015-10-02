@@ -1,4 +1,5 @@
 #' @include GaApiRequest.R
+#' @include ga-api-classes.R
 
 .gaManagementApi <- R6Class(
   ".gaManagementApi",
