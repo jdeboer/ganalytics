@@ -1075,6 +1075,26 @@ gaViewFilterLinks <- R6Class(
 #' @exportClass gaGoal
 setOldClass(c("gaGoal", "R6"))
 
+#' `gaCustomDimension` class
+#'
+#' An R6 class representing a defined Google Analytics custom dimension.
+#'
+#' @name gaCustomDimension-class
+#' @rdname gaCustomDimension-class
+#' @keywords internal
+#' @exportClass gaCustomDimension
+setOldClass(c("gaCustomDimension", "R6"))
+
+#' `gaCustomMetric` class
+#'
+#' An R6 class representing a defined Google Analytics custom metric.
+#'
+#' @name gaCustomMetric-class
+#' @rdname gaCustomMetric-class
+#' @keywords internal
+#' @exportClass gaCustomMetric
+setOldClass(c("gaCustomMetric", "R6"))
+
 #' `gaUserSegment` class
 #'
 #' An R6 class representing a default or custom segment available with the
