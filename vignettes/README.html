@@ -10,9 +10,9 @@
 
 <meta name="author" content="Johann de Boer" />
 
-<meta name="date" content="2015-09-24" />
+<meta name="date" content="2015-09-25" />
 
-<title>README</title>
+<title>Interactively querying Google Analytics reports</title>
 
 
 
@@ -70,9 +70,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div id="header">
-<h1 class="title">README</h1>
+<h1 class="title">Interactively querying Google Analytics reports</h1>
 <h4 class="author"><em>Johann de Boer</em></h4>
-<h4 class="date"><em>2015-09-24</em></h4>
+<h4 class="date"><em>2015-09-25</em></h4>
 </div>
 
 
@@ -179,14 +179,23 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 </tbody>
 </table>
 <ul>
-<li>To do this in Windows:</li>
+<li>To do this in Windows:
+<ul>
 <li>Search for and select <strong>“Edit Environment Variables For Your Account”</strong> from the Start menu.</li>
 <li>Within the <strong>Environment Variables</strong> window, add the above <strong>User Variables</strong> by selecting <strong>New</strong> and entering the <strong>Variable Name</strong> and <strong>Variable Value</strong>, then click <strong>OK</strong>. Do this for both variables listed in the above table.</li>
 <li>Click <strong>OK</strong>.</li>
 <li><strong>Restart</strong> your computer for the new environment variables to take effect.</li>
-<li><strong>Alternatively</strong> you can use <code>Sys.setenv(GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;, GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;)</code>, or create an <code>.Renviron</code> file on Unix-like systems. (Thanks to <span class="citation">@unikum</span> for these suggestions.)</li>
+</ul></li>
 <li>There is also free open source utility to set environment variables on Mac OS called <a href="https://github.com/hschmidt/EnvPane">EnvPane</a></li>
+<li>Another method that works across platforms is to create an <code>.Renviron</code> file that is structured like this:</li>
 </ul>
+<pre><code>GOOGLE_APIS_CONSUMER_ID = &lt;Your client ID&gt;
+GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;</code></pre>
+<p><strong>Alternatively</strong> you can temporarily set your environment variables straight from R using this command:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setenv</span>(
+  <span class="dt">GOOGLE_APIS_CONSUMER_ID =</span> <span class="st">&quot;&lt;Your client ID&gt;&quot;</span>,
+  <span class="dt">GOOGLE_APIS_CONSUMER_SECRET =</span> <span class="st">&quot;&lt;Your client secret&gt;&quot;</span>
+)</code></pre></div>
 <p><em>Note: For other operating systems please refer to the Reference section at the end of this document.</em></p>
 </div>
 <div id="authenticate-and-attempt-your-first-query-with-ganalytics" class="section level3">

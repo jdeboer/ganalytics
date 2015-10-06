@@ -1,6 +1,6 @@
-# README
+# Interactively querying Google Analytics reports
 Johann de Boer  
-`r Sys.Date()`  
+2015-09-25  
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
@@ -88,13 +88,27 @@ _Note: For further information about Google APIs, please refer to the [Reference
   |   1 | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
   |   2 | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
 
-* To do this in Windows:
-  * Search for and select **"Edit Environment Variables For Your Account"** from the Start menu.
-  * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
-  * Click **OK**.
-  * **Restart** your computer for the new environment variables to take effect.
-* **Alternatively** you can use `Sys.setenv(GOOGLE_APIS_CONSUMER_ID = "<Your client ID>", GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>")`, or create an `.Renviron` file on Unix-like systems. (Thanks to @unikum for these suggestions.)
-* There is also free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
+  * To do this in Windows:
+    * Search for and select **"Edit Environment Variables For Your Account"** from the Start menu.
+    * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
+    * Click **OK**.
+    * **Restart** your computer for the new environment variables to take effect.
+  * There is also free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
+  * Another method that works across platforms is to create an `.Renviron` file that is structured like this:
+  
+```
+GOOGLE_APIS_CONSUMER_ID = <Your client ID>
+GOOGLE_APIS_CONSUMER_SECRET = <Your client secret>
+```
+
+**Alternatively** you can temporarily set your environment variables straight from R using this command:
+
+```r
+Sys.setenv(
+  GOOGLE_APIS_CONSUMER_ID = "<Your client ID>",
+  GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>"
+)
+```
 
   _Note: For other operating systems please refer to the Reference section at the end of this document._
 

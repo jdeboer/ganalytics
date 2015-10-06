@@ -48,13 +48,13 @@ GaQuery <- function(
 #   }
 
   if (missing(profileId)) {
-    if (!is(view, ".gaResource")) {
+    if (!is(view, "gaResource")) {
       if (any(is.na(view))) {
         view <- GaAccounts(creds = creds)$entities[[1]]
       }
     }
   } else view <- profileId
-  if (missing(creds) & is(view, ".gaResource")) {
+  if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
   if (is(creds, "character")) {creds <- GaCreds(cache = creds)}
@@ -107,7 +107,7 @@ McfQuery <- function(
   if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
-  if (missing(creds) & is(view, ".gaResource")) {
+  if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
   new("mcfQuery",
@@ -152,7 +152,7 @@ RtQuery <- function(
   if (is.na(view[[1]])) {
     view <- GaAccounts(creds = creds)$entities[[1]]
   }
-  if (missing(creds) & is(view, ".gaResource")) {
+  if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
   new("rtQuery",
