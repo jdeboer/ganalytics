@@ -31,7 +31,10 @@ gaCollection <- R6Class(
   private = get_privates(.gaManagementApi)
 )
 
+#' @export
 `[.gaCollection` <- function(x, i) {x$entities[i]}
+
+#' @export
 `[[.gaCollection` <- function(x, i) {x$entities[[i]]}
 
 gaUserSegment <- R6Class(
