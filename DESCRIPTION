@@ -1,48 +1,101 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.1
+Version: 0.7.4.0000
+Date: 2015-08-27
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
     role = c("aut", "cre"),
     email = "johanndeboer@gmail.com")
-Description: S4 classes and methods for interacting with Google Analytics.
-    Supports OAuth 2.0 user authentication.
-License: MIT
+Description: Functions for querying the Google Analytics core reporting,
+    real-time, multi-channel funnel and management APIs, as well as the Google
+    Tag Manager API. Write methods are also provided for the management and
+    Google Tag Manager APIs so that you can change tag, property or view
+    settings, for example. Define reporting queries using natural R expressions
+    instead of being concerned as much about API technical intricacies like
+    query syntax, character code escaping, and API limitations.
+URL: https://github.com/jdeboer/ganalytics
+BugReports: https://github.com/jdeboer/ganalytics/issues
+License: MIT + file LICENCE
 Depends:
-    R(>= 3.0.0)
+    R(>= 3.1.0)
 Imports:
+    httpuv,
     methods,
-    httr,
-    plyr
+    httr (>= 1.0.0),
+    plyr,
+    stringr (>= 1.0),
+    jsonlite,
+    XML,
+    selectr,
+    lubridate,
+    R6,
+    assertthat,
+    devtools,
+    rvest,
+    lazyeval,
+    scales
+Suggests:
+    testthat,
+    knitr,
+    rmarkdown,
+    ggplot2
 Collate:
-    'globaldata.R'
-    'ArgList.R'
-    'ValidGaOperand.R'
-    'ganalytics-package.R'
-    'all-classes.R'
-    'init-methods.R'
-    'flatten-list.R'
-    'all-generics.R'
-    'all-coercions.R'
-    'GaAnd.R'
-    'GaDate.R'
-    'GaOperand.R'
-    'GaOperator.R'
-    'GaVar.R'
-    'GaExpr.R'
-    'GaFilter.R'
-    'GaIsRegEx.R'
-    'GaNot.R'
-    'GaOr.R'
-    'GaProfile.R'
-    'GaQuery.R'
-    'GaSegment.R'
-    'GaSortBy.R'
+    'Bool-generics.R'
+    'utils.R'
     'GaApiRequest.R'
+    'meta.R'
+    'globaldata.R'
+    'var-classes.R'
+    'operand-classes.R'
+    'comparator-classes.R'
+    'Expr-generics.R'
+    'expr-classes.R'
+    'Segment-generics.R'
+    'segment-classes.R'
+    'Bool-methods.R'
+    'Comparator-generics.R'
+    'comparator-coerce.R'
+    'Comparator-methods.R'
+    'var-list-classes.R'
+    'TableFilter-generics.R'
+    'table-filter-classes.R'
+    'query-classes.R'
+    'Query-generics.R'
+    'Creds-methods.R'
+    'Date-generics.R'
+    'ga-api-classes.R'
+    'management-api-classes.R'
+    'Var-list-generics.R'
+    'Var-generics.R'
+    'init-methods.R'
+    'date-coerce.R'
+    'Date-methods.R'
+    'expr-coerce.R'
+    'var-list-coerce.R'
+    'var-coerce.R'
+    'Var-methods.R'
+    'operand-coerce.R'
+    'Operand-generics.R'
+    'Operand-methods.R'
+    'Expr-methods.R'
     'GaGetCoreReport.R'
-    'YesNo2Logical.R'
-    'ColTypes.R'
-    'GaListToDataframe.R'
-    'GaPaginate.R'
-    'GetGa.R'
+    'view-coerce.R'
+    'GaView-methods.R'
+    'ga-api-coerce.R'
+    'GetGa-methods.R'
+    'Query-methods.R'
+    'segment-coerce.R'
+    'Sequence-generics.R'
+    'Segment-methods.R'
+    'Sequence-methods.R'
+    'SortBy-methods.R'
+    'table-filter-coerce.R'
+    'TableFilter-methods.R'
+    'deprecated.R'
+    'ganalytics-package.R'
+    'gtm-api-classes.R'
+    'sequence.R'
+    'zzz.R'
+VignetteBuilder: knitr
+LazyData: true
