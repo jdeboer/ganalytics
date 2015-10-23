@@ -1,6 +1,20 @@
 library(ganalytics)
 library(lubridate)
 
+# check_api <- function() {
+#   if (not_working()) {
+#     skip("API not available")
+#   }
+# }
+#
+# test_that("foo api returns bar when given baz", {
+#   check_api()
+#   ...
+# })
+
+# Place skip_on_cran() at the beginning of long-running tests that shouldn’t be
+# run on CRAN
+
 context("Forming a basic condition expression")
 
 test_that("GaExpr generates a .gaExpr object of the appropriate subclass", {
