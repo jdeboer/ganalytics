@@ -6,7 +6,7 @@
 #' @importFrom methods setMethod as validObject new
 NULL
 
-# -- GaSortBy ----
+# -- SortBy ----
 
 #' @describeIn SortBy
 setMethod(
