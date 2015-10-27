@@ -39,9 +39,9 @@ test_that(".gaExpr objects coerce to character", {
     "character"), "ga:pagePath=~[\\;\\,\\\\-].+")
 })
 
-test_that("GaNot can be used to invert an expression", {
+test_that("`Not` can be used to invert an expression", {
   expect_identical(
-    GaNot(GaExpr("pageviews", ">", 10)),
+    Not(GaExpr("pageviews", ">", 10)),
     GaExpr("pageviews", "<=", 10)
   )
   expect_identical(
@@ -162,7 +162,7 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
 
 test_that("ORed expressions can be NOTed", {
   expect_identical(
-    GaNot(Or(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
+    Not(Or(GaExpr("source", "=", "google"), GaExpr("medium", "=", "organic"))),
     And(GaExpr("source", "!=", "google"), GaExpr("medium", "!=", "organic"))
   )
   expect_identical(
@@ -212,35 +212,35 @@ test_that("expressions operands are corrected depending on the type of dimension
 
 context("Constructing Core Reporting API queries")
 
-test_that("GaStartDate, GaEndDate, and GaDateRange give correct formats for API requests", {
+test_that("StartDate, EndDate, and DateRange give correct formats for API requests", {
   expect_equal(
-    as(GaStartDate("2011-01-01"), "character"),
+    as(StartDate("2011-01-01"), "character"),
     "2011-01-01"
   )
   expect_equal(
-    as(GaEndDate("2011-01-01"), "character"),
+    as(EndDate("2011-01-01"), "character"),
     "2011-01-01"
   )
   expect_equal(
-    as(GaStartDate("20110101"), "character"),
+    as(StartDate("20110101"), "character"),
     "2011-01-01"
   )
   expect_identical(
-    GaDateRange("2011-01-01", "20110131"),
-    GaDateRange("20110101", "2011-01-31")
+    DateRange("2011-01-01", "20110131"),
+    DateRange("20110101", "2011-01-31")
   )
   expect_identical(
-    GaDateRange("2011-01-01", "2011-01-31"),
-    GaDateRange(as.Date("2011-01-01"), as.Date("2011-01-31"))
+    DateRange("2011-01-01", "2011-01-31"),
+    DateRange(as.Date("2011-01-01"), as.Date("2011-01-31"))
   )
 })
 
 test_that("Sortby parameter is corrected coerced to character", {
   expect_equal(as(
-    GaSortBy(c("+source", "-pageviews", "+ga:hostname")),
+    SortBy(c("+source", "-pageviews", "+ga:hostname")),
     "character"), "ga:source,-ga:pageviews,ga:hostname")
   expect_equal(as(
-    GaSortBy(c("-source", "+pageviews", "-ga:hostname")),
+    SortBy(c("-source", "+pageviews", "-ga:hostname")),
     "character"), "-ga:source,ga:pageviews,-ga:hostname")
 })
 
@@ -252,7 +252,7 @@ test_that("Query limits are enforced", {
     "Maximum of 7 dimensions"
   )
   expect_equal(
-    length(GaDimensions(GaQuery(view = 0, dimensions = NULL))),
+    length(Dimensions(GaQuery(view = 0, dimensions = NULL))),
     0
   )
   expect_error(
@@ -277,8 +277,8 @@ test_that("Query limits are enforced", {
   # provided all dimensions/metrics in the request and the filter are valid
   # combinations.
   expect_identical(
-    GaFilter(GaExpr("pageviews", ">", 1)),
-    GaFilter(
+    TableFilter(GaExpr("pageviews", ">", 1)),
+    TableFilter(
       GaQuery(view = 0, dimensions = "source", metrics = "sessions",
               filters = GaExpr("pageviews", ">", 1))
     )
