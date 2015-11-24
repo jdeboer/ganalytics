@@ -5,19 +5,21 @@
 #' @importFrom methods setMethod
 NULL
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Return the TableFilter that has been applied to the
+#'   given query
 setMethod("TableFilter", ".query", function(object) {as(object, ".tableFilter")})
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Returns NULL
 setMethod("TableFilter", "NULL", function(object) {as(object, ".tableFilter")})
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Returns itself
 setMethod("TableFilter", ".tableFilter", function(object) {object})
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Coerce an expression into a table filter.
 setMethod("TableFilter", ".compoundExpr", function(object) {as(object, ".tableFilter")})
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Coerce a segment into a table filter. Only possible
+#'   for segments without sequential conditions.
 setMethod("TableFilter", "gaDynSegment", function(object) {as(object, ".tableFilter")})
 
 #' @describeIn TableFilter
@@ -30,7 +32,7 @@ setMethod(
   }
 )
 
-#' @describeIn TableFilter
+#' @describeIn TableFilter Method to replace the table filter of a query
 setMethod(
   f = "TableFilter<-",
   signature = c(".query", "ANY"),

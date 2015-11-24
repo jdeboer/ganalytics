@@ -218,7 +218,7 @@ modify_query <- function(
   # creds
 }
 
-#' @describeIn MaxResults
+#' @describeIn MaxResults Return the maximum number of rows a query is allowed to return.
 setMethod(
   f = "MaxResults",
   signature = ".query",
@@ -227,7 +227,7 @@ setMethod(
   }
 )
 
-#' @describeIn MaxResults
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to return.
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
@@ -237,7 +237,8 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Return what level the sampling level of the query
+#'   has been set to.
 setMethod(
   f = "SamplingLevel",
   signature = ".standardQuery",
@@ -246,7 +247,7 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Set the sampling level of the query.
 setMethod(
   f = "SamplingLevel<-",
   signature = c(".standardQuery", "ANY"),
@@ -256,7 +257,8 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Return details about any sampling that was applied
+#'   in the response of the query.
 setMethod(
   f = "SamplingLevel",
   signature = "data.frame",

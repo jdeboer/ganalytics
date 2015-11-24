@@ -4,7 +4,8 @@
 #' @importFrom methods setMethod validObject
 NULL
 
-#' @describeIn GaCreds
+#' @describeIn GaCreds Return the query with the supplied authentication
+#'   credentials supplied.
 setMethod("GaCreds", signature = c(".query", "list"),
           definition = function(object, value) {
             object@creds <- value
@@ -12,25 +13,26 @@ setMethod("GaCreds", signature = c(".query", "list"),
             object
           })
 
-#' @describeIn GaCreds
+#' @describeIn GaCreds Return the credentials used within the supplied query.
 setMethod("GaCreds", signature = c(".query"),
           definition = function(object) {
             object@creds
           })
 
-#' @describeIn GaCreds
+#' @describeIn GaCreds Create a set of authentication credentials using the
+#'   supplied application name.
 setMethod("GaCreds", signature = c("character"),
           definition = function(object, ...) {
             GoogleApiCreds(appname = object, ...)
           })
 
-#' @describeIn GaCreds
+#' @describeIn GaCreds Return default authentication credentials.
 setMethod("GaCreds", signature = c("missing"),
           definition = function(object, ...) {
             GoogleApiCreds()
           })
 
-#' @describeIn GaCreds
+#' @describeIn GaCreds Replace the authentication credentials of a query.
 setMethod("GaCreds<-", signature = c(".query", "list"),
           definition = function(object, value) {
             object@creds <- value

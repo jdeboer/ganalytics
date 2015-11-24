@@ -284,7 +284,6 @@ source("R/GaApiRequest.R")
       # request path, i.e. it will be NULL. Otherwise, if there is a
       # parent_entity, but it has no request path, then this should also not
       # have a request path.
-      # browser()
       if (!is.null(parent_entity)) {
         if (is.null(parent_entity$req_path())) {
           return(NULL)
