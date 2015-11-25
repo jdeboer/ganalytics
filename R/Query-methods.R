@@ -19,7 +19,7 @@ NULL
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param segments a segment object
+#' @param segments a segment object or list of segments
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #' @param profileId Deprecated, use view instead.
@@ -41,19 +41,19 @@ GaQuery <- function(
   profileId = NA
 ) {
 
-#   if (!missing(profileId)) {
-#     warning("argument profileId is deprecated; please use view instead.",
-#             call. = FALSE)
-#     view <- profileId
-#   }
-
   if (missing(profileId)) {
     if (!is(view, "gaResource")) {
       if (any(is.na(view))) {
         view <- GaAccounts(creds = creds)$entities[[1]]
       }
     }
-  } else view <- profileId
+  } else {
+    warning(
+      "argument profileId is deprecated; please use view instead.",
+      call. = FALSE
+    )
+    view <- profileId
+  }
   if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
