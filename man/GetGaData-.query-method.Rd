@@ -6,7 +6,7 @@
 \title{GetGaData Execute a ganalytics query.}
 \usage{
 \S4method{GetGaData}{.query}(query, creds = NULL, .progress = "time",
-  use_oob = FALSE, addViewId = FALSE)
+  use_oob = FALSE, addViewId = FALSE, addSegmentId = FALSE)
 }
 \arguments{
 \item{query}{the query to execute.}

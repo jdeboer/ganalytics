@@ -14,13 +14,16 @@ NULL
 #' @param use_oob httr argument
 #' @param addViewId logical value indicating whether to add a viewID column for
 #'   when more than one view has been provided.
+#' @param addSegmentId logical value indicating whether to add the name of the
+#'   segment for when more than one segment has been queried.
 #' @return a dataframe
 setMethod("GetGaData", ".query", function(
   query,
   creds = NULL,
   .progress = "time",
   use_oob = FALSE,
-  addViewId = FALSE
+  addViewId = FALSE,
+  addSegmentId = FALSE
 ) {
   if (is.null(creds)) {
     creds <- query@creds
