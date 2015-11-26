@@ -82,6 +82,12 @@ setAs(
   }
 )
 
+setAs(from = ".gaSegment", to = "gaSegmentList",
+      def = function(from) {
+        simpleCoerceToList(from, to)
+      }
+)
+
 #############\/ Transform to method of Segment and Segment<- generic functions
 setAs(from = "gaQuery", to = "gaSegmentList",
       def = function(from) {
@@ -93,4 +99,3 @@ setAs(from = "gaQuery", to = "gaSegmentList",
         from
       }
 )
-
