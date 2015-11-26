@@ -9,7 +9,6 @@
 \alias{TableFilter,NULL-method}
 \alias{TableFilter,gaDynSegment-method}
 \alias{TableFilter<-}
-\alias{TableFilter<-,.tableFilter,andExpr-method}
 \alias{TableFilter<-,.query-method}
 \title{TableFilter.}
 \usage{
@@ -27,7 +26,6 @@ TableFilter(object) <- value
 
 \S4method{TableFilter}{gaDynSegment}(object)
 
-\S4method{TableFilter}{.tableFilter,andExpr}(object) <- value
 \S4method{TableFilter}{.query}(object) <- value
 }
 \arguments{

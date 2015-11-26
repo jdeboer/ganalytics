@@ -50,15 +50,6 @@ setMethod(
   }
 )
 
-#' @describeIn SortBy
-setMethod(
-  f = "SortBy",
-  signature = "list",
-  definition = function(object, ..., desc = logical(0)) {
-    SortBy(as(ArgList(object, ...), ".sortBy"), desc = desc)
-  }
-)
-
 #' @describeIn SortBy Replace the sort by argument of a query.
 setMethod(
   f = "SortBy",

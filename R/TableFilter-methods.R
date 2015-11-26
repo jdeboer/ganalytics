@@ -22,16 +22,6 @@ setMethod("TableFilter", ".compoundExpr", function(object) {as(object, ".tableFi
 #'   for segments without sequential conditions.
 setMethod("TableFilter", "gaDynSegment", function(object) {as(object, ".tableFilter")})
 
-#' @describeIn TableFilter
-setMethod(
-  f = "TableFilter<-",
-  signature = c(".tableFilter", "andExpr"),
-  definition = function(object, value) {
-    as(object, "andExpr") <- value
-    object
-  }
-)
-
 #' @describeIn TableFilter Method to replace the table filter of a query
 setMethod(
   f = "TableFilter<-",
