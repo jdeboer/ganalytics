@@ -83,12 +83,12 @@ setAs(
 )
 
 #############\/ Transform to method of Segment and Segment<- generic functions
-setAs(from = "gaQuery", to = ".gaSegment",
+setAs(from = "gaQuery", to = "gaSegmentList",
       def = function(from) {
         from@segments
       },
       replace = function(from, value) {
-        from@segments <- as(value, ".gaSegment") # Need to define coercions to .gaSegment from char and numeric
+        from@segments <- as(value, "gaSegmentList") # Need to define coercions to .gaSegment from char and numeric
         validObject(from)
         from
       }
