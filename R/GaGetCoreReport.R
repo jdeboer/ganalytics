@@ -3,7 +3,7 @@
 #' @include GaApiRequest.R
 NULL
 
-GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery") {
+GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery", segmentName = NULL) {
   # Get the first page to determine the total number of rows available.
   gaPage <- GaGetCoreReport(
     query = query,
@@ -49,7 +49,8 @@ GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery") {
       sampled = sampled,
       viewId = viewId,
       sampleSize = sampleSize,
-      sampleSpace = sampleSpace
+      sampleSpace = sampleSpace,
+      segmentName = segmentName
     )
   )
 }

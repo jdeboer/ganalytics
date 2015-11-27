@@ -68,7 +68,7 @@ GaQuery <- function(
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
       filters = as(filters, "gaFilter"),
-      segments = Segment(segments),
+      segments = as(Segment(segments), "gaSegmentList"),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds

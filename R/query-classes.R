@@ -152,7 +152,7 @@ setClass(
     dimensions = "gaDimensions",
     sortBy = "gaSortBy",
     filters = "gaFilter",
-    segments = ".gaSegment",
+    segments = "gaSegmentList",
     buckets = "numeric"
   ),
   prototype = prototype(

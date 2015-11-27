@@ -478,7 +478,7 @@ test_that("Segment<- replaces the segment of a query", {
     Expr("ga:source", "=", "google.com") &
       Expr("ga:deviceCategory", "=", "mobile")
   Segment(query) <- segment
-  expect_identical(Segment(query), Segment(segment))
+  expect_identical(Segment(query)[[1]], Segment(segment))
 })
 
 test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {

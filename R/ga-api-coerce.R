@@ -159,31 +159,31 @@ setAs(
   from = "gaQuery",
   to = "matrix",
   def = function(from) {
-    views <- as(from, "viewId")
-    dateRange <- as(from, "dateRange")
-    startDates <- dateRange@startDate
-    endDates <- dateRange@endDate
-    viewsDatesSegments <- do.call(
-      what = rbind,
-      args = lapply(
-        X = views,
-        FUN = function(viewId) {
-          data.frame(
-            startDate = startDates,
-            endDate = endDates,
-            viewId = viewId,
-            stringsAsFactors = FALSE
-          )
-        }
-      )
+    viewsDatesSegments <- expand.grid(
+      list(
+        viewId = as(from, "viewId"),
+        dateRange = alply(data.frame(
+          startDate = StartDate(from),
+          endDate = EndDate(from)
+        ), 1),
+        segment = as(from, "gaSegmentList")
+      ),
+      stringsAsFactors = FALSE,
+      KEEP.OUT.ATTRS = FALSE
+    )
+    viewsDatesSegments <- c(
+      list(
+        viewId = viewsDatesSegments$viewId,
+        segment = viewsDatesSegments$segment
+      ),
+      ldply(viewsDatesSegments$dateRange, .id = NULL)
     )
     params <- mapply(
-      FUN = function(startDate, endDate, viewId) {
+      FUN = function(startDate, endDate, viewId, segment) {
         metrics <- as(from, ".metrics")
         dimensions <- as(from, ".dimensions")
         sortBy <- as(from, ".sortBy")
         tableFilter <- as(from, ".tableFilter")
-        segments <- as(from, ".gaSegment")
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -199,14 +199,15 @@ setAs(
             as(tableFilter, "character")
           },
           "segment" = if (length(segments) >= 1) {
-            as(segments, "character")
+            as(segment, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
         )
       },
       viewsDatesSegments$startDate,
       viewsDatesSegments$endDate,
-      viewsDatesSegments$viewId
+      viewsDatesSegments$viewId,
+      viewsDatesSegments$segment
     )
   }
 )
