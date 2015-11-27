@@ -19,7 +19,7 @@ NULL
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param segments a segment object
+#' @param segments a segment object or list of segments
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #' @param profileId Deprecated, use view instead.
@@ -41,19 +41,19 @@ GaQuery <- function(
   profileId = NA
 ) {
 
-#   if (!missing(profileId)) {
-#     warning("argument profileId is deprecated; please use view instead.",
-#             call. = FALSE)
-#     view <- profileId
-#   }
-
   if (missing(profileId)) {
     if (!is(view, "gaResource")) {
       if (any(is.na(view))) {
         view <- GaAccounts(creds = creds)$entities[[1]]
       }
     }
-  } else view <- profileId
+  } else {
+    warning(
+      "argument profileId is deprecated; please use view instead.",
+      call. = FALSE
+    )
+    view <- profileId
+  }
   if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
@@ -68,7 +68,7 @@ GaQuery <- function(
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
       filters = as(filters, "gaFilter"),
-      segments = Segment(segments),
+      segments = as(Segment(segments), "gaSegmentList"),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds
@@ -218,7 +218,7 @@ modify_query <- function(
   # creds
 }
 
-#' @describeIn MaxResults
+#' @describeIn MaxResults Return the maximum number of rows a query is allowed to return.
 setMethod(
   f = "MaxResults",
   signature = ".query",
@@ -227,7 +227,7 @@ setMethod(
   }
 )
 
-#' @describeIn MaxResults
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to return.
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
@@ -237,7 +237,8 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Return what level the sampling level of the query
+#'   has been set to.
 setMethod(
   f = "SamplingLevel",
   signature = ".standardQuery",
@@ -246,7 +247,7 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Set the sampling level of the query.
 setMethod(
   f = "SamplingLevel<-",
   signature = c(".standardQuery", "ANY"),
@@ -256,7 +257,8 @@ setMethod(
   }
 )
 
-#' @describeIn SamplingLevel
+#' @describeIn SamplingLevel Return details about any sampling that was applied
+#'   in the response of the query.
 setMethod(
   f = "SamplingLevel",
   signature = "data.frame",

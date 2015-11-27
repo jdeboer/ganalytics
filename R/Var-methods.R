@@ -51,7 +51,7 @@ setMethod("Var", ".gaVarList", function(object) {object})
 #' @describeIn Var GaVar takes a GA variable name and determines whether to return a Dimension or Metric object
 setMethod("GaVar", "character", function(object) {as(object, ".gaVar")})
 
-#' @describeIn Var
+#' @describeIn Var Set the Var of a gaExpr object.
 setMethod(
   f = "GaVar<-",
   signature = c(".gaVar", "character"),
@@ -154,7 +154,7 @@ setMethod(
 
 # -- Dimensions ----
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Returns NULL.
 #' @export
 setMethod(
   f = "Dimensions",
@@ -165,7 +165,7 @@ setMethod(
   }
 )
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Returns itself.
 #' @export
 setMethod(
   f = "Dimensions",
@@ -176,7 +176,8 @@ setMethod(
   }
 )
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Coerces the supplied character vector into a vector of
+#'   Google Analytics dimensions.
 #' @export
 setMethod(
   f = "Dimensions",
@@ -187,7 +188,8 @@ setMethod(
   }
 )
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Coerces the supplied list into a vector of Google
+#'   Analytics dimension variables.
 #' @export
 setMethod(
   f = "Dimensions",
@@ -198,11 +200,11 @@ setMethod(
   }
 )
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Returns the dimensions used within the supplied query.
 #' @export
 setMethod("Dimensions", ".query", function(object) {as(object, ".dimensions")})
 
-#' @describeIn Dimensions
+#' @describeIn Dimensions Replace the dimensions of the query.
 #' @export
 setMethod(
   f = "Dimensions<-",

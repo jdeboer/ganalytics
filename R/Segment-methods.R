@@ -11,7 +11,6 @@ NULL
 
 segment_scope_negate <- function(object, ..., scope, negate = NULL) {
   exprList <- list(object, ...)
-  #browser()
   exprList <- lapply(exprList, function(expr){
     expr <- as(expr, ".gaSegmentFilter")
     if (!is.null(negate)) IsNegated(expr) <- negate
@@ -20,7 +19,8 @@ segment_scope_negate <- function(object, ..., scope, negate = NULL) {
   new("gaSegmentFilterList", exprList, scope = scope)
 }
 
-#' @describeIn Include
+#' @describeIn Include Define an include segment filter using the supplied
+#'   expression.
 setMethod(
   f = "Include",
   signature = ".compoundExpr",
@@ -29,7 +29,8 @@ setMethod(
   }
 )
 
-#' @describeIn Exclude
+#' @describeIn Exclude Define an exclude segment filter using the supplied
+#'   expressions.
 setMethod(
   f = "Exclude",
   signature = ".compoundExpr",
@@ -38,7 +39,8 @@ setMethod(
   }
 )
 
-#' @describeIn Include
+#' @describeIn Include Return the supplied Sequence Segment Filter with negation
+#'   not set so as to produce an include filter.
 setMethod(
   f = "Include",
   signature = "gaSegmentSequenceFilter",
@@ -47,7 +49,8 @@ setMethod(
   }
 )
 
-#' @describeIn Exclude
+#' @describeIn Exclude Set the negatation field of the supplied sequence filter
+#'   so as to exclude matching sequences.
 setMethod(
   f = "Exclude",
   signature = "gaSegmentSequenceFilter",
@@ -58,7 +61,9 @@ setMethod(
 
 # ---- SegmentConditionFilter, SegmentFilters, IsNegated ----
 
-#' @describeIn SegmentConditionFilter
+#' @describeIn SegmentConditionFilter Create a non-sequential segment condition
+#'   filter from one or more expressions. All conditions within the filter must
+#'   hold true within a single session.
 setMethod(
   f = "SegmentConditionFilter",
   signature = ".compoundExpr",
@@ -69,7 +74,7 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentConditionFilter
+#' @describeIn SegmentConditionFilter Returns itself.
 setMethod(
   f = "SegmentConditionFilter",
   signature = "gaSegmentConditionFilter",
@@ -78,7 +83,8 @@ setMethod(
   }
 )
 
-#' @describeIn IsNegated
+#' @describeIn IsNegated Test whether a segment filter is negated, i.e. used to
+#'   define an exclude filter for the segment.
 setMethod(
   f = "IsNegated",
   signature = ".gaSegmentFilter",
@@ -87,7 +93,8 @@ setMethod(
   }
 )
 
-#' @describeIn IsNegated
+#' @describeIn IsNegated Set whether a segment filter should be negated, i.e.
+#'   used as an exclude filter in a segment definition.
 setMethod(
   f = "IsNegated<-",
   signature = c(".gaSegmentFilter", "logical"),
@@ -97,7 +104,8 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters
+#' @describeIn SegmentFilters Define a list of filters from one or more
+#'   expressions applied using the specified scope.
 setMethod(
   f = "SegmentFilters",
   signature = ".compoundExpr",
@@ -106,7 +114,8 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters
+#' @describeIn SegmentFilters Combine one or more filters within the specified
+#'   scope.
 setMethod(
   f = "SegmentFilters",
   signature = ".gaSegmentFilter",
@@ -115,7 +124,7 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters
+#' @describeIn SegmentFilters Returns itself.
 setMethod(
   f = "SegmentFilters",
   signature = "gaSegmentFilterList",
@@ -126,7 +135,7 @@ setMethod(
 
 # ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn ScopeLevel
+#' @describeIn ScopeLevel Return the scope of the supplied gaSegmentFilterList.
 setMethod(
   f = "ScopeLevel",
   signature = "gaSegmentFilterList",
@@ -135,7 +144,8 @@ setMethod(
   }
 )
 
-#' @describeIn ScopeLevel
+#' @describeIn ScopeLevel Set the scope level of a gaSegmentFilterList to either
+#'   "user" or "session" level.
 setMethod(
   f = "ScopeLevel<-",
   signature = c("gaSegmentFilterList", "character"),
@@ -147,7 +157,8 @@ setMethod(
 
 # ---- PerSession, PerUser ----
 
-#' @describeIn PerSession
+#' @describeIn PerSession Set the scope of the supplied segment filters to
+#'   session level.
 setMethod(
   f = "PerSession",
   signature = "gaSegmentFilterList",
@@ -157,7 +168,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerSession
+#' @describeIn PerSession Set the scope of the supplied segment filters to
+#'   session level.
 setMethod(
   f = "PerSession",
   signature = ".gaSegmentFilter",
@@ -166,7 +178,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerSession
+#' @describeIn PerSession Create a session level segment filter list from the
+#'   supplied expressions, interpreted as condition filters.
 setMethod(
   f = "PerSession",
   signature = ".compoundExpr",
@@ -175,7 +188,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerSession
+#' @describeIn PerSession Set the scope of the supplied metric condition to
+#'   session-level.
 setMethod(
   f = "PerSession",
   signature = "gaMetExpr",
@@ -189,7 +203,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerUser
+#' @describeIn PerUser Set the scope of the supplied segment filter list to user
+#'   level.
 setMethod(
   f = "PerUser",
   signature = "gaSegmentFilterList",
@@ -199,7 +214,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerUser
+#' @describeIn PerUser Set the scope of the supplied segment filter to
+#'   user-level.
 setMethod(
   f = "PerUser",
   signature = ".gaSegmentFilter",
@@ -208,7 +224,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerUser
+#' @describeIn PerUser Create a user-level segment filter list from the supplied
+#'   expressions, each interpreted as an include segment filter.
 setMethod(
   f = "PerUser",
   signature = ".compoundExpr",
@@ -217,7 +234,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerUser
+#' @describeIn PerUser Set the scope of the supplied metric condition to
+#'   user-level.
 setMethod(
   f = "PerUser",
   signature = "gaMetExpr",
@@ -231,7 +249,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerHit
+#' @describeIn PerHit Set the scope of the supplied metric condition to
+#'   hit-level.
 setMethod(
   f = "PerHit",
   signature = "gaMetExpr",
@@ -245,7 +264,8 @@ setMethod(
   }
 )
 
-#' @describeIn PerHit
+#' @describeIn PerHit Create a single step sequence filter from the supplied
+#'   expression.
 setMethod(
   f = "PerHit",
   signature = ".compoundExpr",
@@ -256,7 +276,7 @@ setMethod(
 
 # ---- Segment, Segment<- ----
 
-#' @describeIn Segment
+#' @describeIn Segment returns itself.
 setMethod(
   f = "Segment",
   signature = "gaSegmentId",
@@ -265,7 +285,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Interpret the supplied character value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "character",
@@ -274,7 +294,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Interpret the supplied numerical value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "numeric",
@@ -283,7 +303,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment returns itself.
 setMethod(
   f = "Segment",
   signature = "gaDynSegment",
@@ -292,7 +312,8 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Create a non-sequential segment using the supplied
+#'   expressions.
 setMethod(
   f = "Segment",
   signature = ".compoundExpr",
@@ -308,7 +329,8 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Create a dynamic segment from the supplied segment
+#'   filters.
 setMethod(
   f = "Segment",
   signature = ".gaSegmentFilter",
@@ -317,7 +339,8 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Create a dynamic segment using the supplied scoped lists
+#'   of segment filters.
 setMethod(
   f = "Segment",
   signature = "gaSegmentFilterList",
@@ -328,7 +351,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment returns NULL
 setMethod(
   f = "Segment",
   signature = "NULL",
@@ -337,7 +360,8 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Change the definition of a dynamic segment using the
+#'   supplied expression.
 setMethod(
   f = "Segment<-",
   signature = c("gaDynSegment", "andExpr"),
@@ -347,7 +371,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Change the definition of a dynamic segment.
 setMethod(
   f = "Segment<-",
   signature = c("gaDynSegment", "ANY"),
@@ -356,7 +380,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Change the ID of the supplied segment.
 setMethod(
   f = "Segment<-",
   signature = "gaSegmentId",
@@ -367,7 +391,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Return the definition of the segment applied to the view.
 setMethod(
   f = "Segment",
   signature = "gaQuery",
@@ -376,17 +400,18 @@ setMethod(
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Set the segments to be used witin a query.
 setMethod(
   f = "Segment<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
-    object@segments <- Segment(value)
+    object@segments <- as(Segment(value), "gaSegmentList")
     object
   }
 )
 
-#' @describeIn Segment
+#' @describeIn Segment Return the segment ID of the supplied GA Management API
+#'   user segment.
 setMethod(
   f = "Segment",
   signature = "gaUserSegment",

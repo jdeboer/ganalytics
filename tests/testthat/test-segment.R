@@ -36,7 +36,7 @@ test_that("segment expressions can be negated", {
       GaExpr("source", "=", "google"),
       negation = TRUE
     ),
-    GaNot(SegmentConditionFilter(
+    Not(SegmentConditionFilter(
       GaExpr("source", "=", "google"),
       negation = FALSE
     ))

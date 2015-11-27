@@ -202,7 +202,7 @@ setGeneric(
 setGeneric(
   "Segment",
   function(object, ..., scope = "sessions") {},
-  valueClass = ".gaSegment",
+  valueClass = c(".gaSegment", "gaSegmentList"),
   useAsDefault = FALSE
 )
 

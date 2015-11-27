@@ -9,7 +9,9 @@ NULL
 
 # ---- Later, Then, First, Sequence ----
 
-#' @describeIn Sequence
+#' @describeIn Sequence Defines a sequence step using the supplied expression that does
+#'   not need to be immediately at the start nor immediately following any
+#'   preceeding step.
 setMethod(
   f = "Later",
   signature = ".compoundExpr",
@@ -18,7 +20,10 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence
+#' @describeIn Sequence Defines a sequencial step using the supplied expression
+#'   that should immediately follow any preceding step or be the very first
+#'   required interaction in any sequences being matched to this sequential
+#'   segment definition.
 setMethod(
   f = "Then",
   signature = ".compoundExpr",
@@ -27,7 +32,7 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence
+#' @describeIn Sequence Alias to Then.
 setMethod(
   f = "First",
   signature = ".compoundExpr",
@@ -36,7 +41,9 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence
+#' @describeIn Sequence Return a seuqnece of length of one step using the
+#'   supplied expression to define that step, where that step can occur anywhere
+#'   with the sequences of interactions being matched.
 setMethod(
   f = "Sequence",
   signature = ".compoundExpr",

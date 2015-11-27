@@ -6,9 +6,9 @@
 #' @importFrom methods setMethod as validObject new
 NULL
 
-# -- GaSortBy ----
+# -- SortBy ----
 
-#' @describeIn SortBy
+#' @describeIn SortBy Coerce a .varList object to a .sortBy child-class.
 setMethod(
   f = "SortBy",
   signature = ".varList",
@@ -20,10 +20,12 @@ setMethod(
   }
 )
 
-#' @describeIn SortBy
+#' @describeIn SortBy Returns NULL
 setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 
-#' @describeIn SortBy
+#' @describeIn SortBy Return a sortBy object given by the variables named within
+#'   a character vector, optionally denoted with - or + to indicate decending or
+#'   acending sorting for each variable respectively in order of precednece.
 setMethod(
   f = "SortBy",
   signature = "character",
@@ -48,19 +50,11 @@ setMethod(
   }
 )
 
-#' @describeIn SortBy
-setMethod(
-  f = "SortBy",
-  signature = "list",
-  definition = function(object, ..., desc = logical(0)) {
-    SortBy(as(ArgList(object, ...), ".sortBy"), desc = desc)
-  }
-)
-
-#' @describeIn SortBy
+#' @describeIn SortBy Replace the sort by argument of a query.
 setMethod(
   f = "SortBy",
   signature = c(".query", "ANY"),
+  # Need to add an argument for acdending/descending order.
   definition = function(object, value) {
     if (missing(value)) {
       as(object, ".sortBy")
@@ -74,7 +68,7 @@ setMethod(
   }
 )
 
-#' @describeIn SortBy
+#' @describeIn SortBy Replace the sort by argument of a query.
 setMethod(
   f = "SortBy<-",
   signature = c(".query", "ANY"),

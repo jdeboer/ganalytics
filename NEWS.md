@@ -1,3 +1,11 @@
+2015-11-27 Support multiple segments being applied to a query.
+
+2015-11-25 profileId argument for Query generators is deprecated.
+
+2015-10-06 [] and [[]] operators now supported by Management API collection objects, so get a single entity resource from collection such as Accounts, Properties, Views, Goals, etc.
+
+2015-09-25 gaGoal objects now include goal configuration details.
+
 2015-09-20 Comparators are now generic functions with methods for supplying a .var (LHS) and .operand (RHS)
 
 2015-09-18 PerUser and PerSession can now be used instead of SegmentFilters to create a scoped segment filter list. Also, Include and Exclude have been added to add include and exclude (i.e negate) filters to a segment definition, rather than needing to use the negate argument of the Sequence and SegmentConditionFilter functions.

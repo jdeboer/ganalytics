@@ -11,12 +11,12 @@
 #' @importFrom assertthat assert_that
 NULL
 
-#' @describeIn Expr
-#' Accepts a formula in the form of: \code{~ <variable> <comparator>
-#'   <operand>} where only the \code{<operand>} is evaluated.
+#' @describeIn Expr Returns itself.
 setMethod("Expr", ".expr", function(object) {object})
 
-#' @describeIn Expr
+#' @describeIn Expr Use non-standard formula evaluation to define an expression.
+#'   Accepts a formula in the form of: \code{~ <variable> <comparator>
+#'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod(
   f = "Expr",
   signature = c("formula"),
@@ -42,7 +42,8 @@ setMethod(
   }
 )
 
-#' @describeIn Expr
+#' @describeIn Expr Return an expression based on the described variable,
+#'   comparator and operand arguments.
 setMethod(
   f = "Expr",
   signature = c("character", "character", "ANY"),
@@ -58,7 +59,8 @@ setMethod(
   }
 )
 
-#' @describeIn GaExpr
+#' @describeIn GaExpr Return a Google Analytics expression using the described
+#'   variable, operator and operand.
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),
@@ -91,7 +93,8 @@ setMethod(
   }
 )
 
-#' @describeIn McfExpr
+#' @describeIn McfExpr Return a Multi-channel Funnel condition based on the
+#'   supplied arguments describing the variable, comparator and operator.
 setMethod(
   f = "McfExpr",
   signature = c("character", "character", "ANY"),
@@ -113,7 +116,8 @@ setMethod(
   }
 )
 
-#' @describeIn RtExpr
+#' @describeIn RtExpr Define a Real-Time Reporting condition using the arguments
+#'   describing the variable, comparator and operand.
 setMethod(
   f = "RtExpr",
   signature = c("character", "character", "ANY"),
@@ -137,10 +141,12 @@ setMethod(
 
 # ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn ScopeLevel
+#' @describeIn ScopeLevel Return the scope of the supplied metric used within a
+#'   segment definition.
 setMethod("ScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
 
-#' @describeIn ScopeLevel
+#' @describeIn ScopeLevel Set the scope, as described in a character value, to
+#'   be used for a segment metric expression.
 setMethod(
   f = "ScopeLevel<-",
   signature = c("gaSegMetExpr", "character"),
@@ -150,7 +156,9 @@ setMethod(
   }
 )
 
-#' @describeIn ScopeLevel
+#' @describeIn ScopeLevel Set the scope, as described by a character value, to
+#'   be applied to the supplied metric condition for use within a segment
+#'   expression.
 setMethod(
   f = "ScopeLevel<-",
   signature = c("gaMetExpr", "character"),

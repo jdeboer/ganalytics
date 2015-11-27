@@ -14,13 +14,16 @@ NULL
 #' @param use_oob httr argument
 #' @param addViewId logical value indicating whether to add a viewID column for
 #'   when more than one view has been provided.
+#' @param addSegmentId logical value indicating whether to add the name of the
+#'   segment for when more than one segment has been queried.
 #' @return a dataframe
 setMethod("GetGaData", ".query", function(
   query,
   creds = NULL,
   .progress = "time",
   use_oob = FALSE,
-  addViewId = FALSE
+  addViewId = FALSE,
+  addSegmentId = FALSE
 ) {
   if (is.null(creds)) {
     creds <- query@creds
@@ -29,14 +32,19 @@ setMethod("GetGaData", ".query", function(
     warning("Argument 'use_oob' is defunct, please use the GaCreds or GoogleApiCreds functions instead to either supply a creds argument or to set the creds of the supplied query object.", call. = FALSE)
   }
   queryParams <- as(query, "matrix")
+  segmentNames <- names(query@segments)
   # Need to determine if the query object is a MCF or GA query and tell GaPaginate
-  responses <- alply(
-    .data = queryParams,
-    .margins = 2,
-    .fun = GaPaginate,
-    maxRequestedRows = MaxResults(query),
-    creds = creds,
-    queryClass = class(query),
+  responses <- llply(
+    .data = seq_len(ncol(queryParams)),
+    .fun = function(i) {
+      GaPaginate(
+        queryParams[, i],
+        maxRequestedRows = MaxResults(query),
+        creds = creds,
+        queryClass = class(query),
+        segmentName = segmentNames[i]
+      )
+    },
     .progress = .progress
   )
   data <- ldply(
@@ -46,9 +54,12 @@ setMethod("GetGaData", ".query", function(
       if (addViewId & nrow(df) >= 1) {
         df <- mutate(df, viewId = response$viewId)
       }
+      if (addSegmentId & nrow(df) >= 1) {
+        df <- mutate(df, segment = response$segmentName)
+      }
       return(df)
     }
-  )[-1]
+  )
   attr(data, "sampleSize") <- sum(laply(responses, function(response){as.numeric(response$sampleSize)}))
   attr(data, "sampleSpace") <- sum(laply(responses, function(response){as.numeric(response$sampleSpace)}))
   sampleSize <- attr(data, "sampleSize")
