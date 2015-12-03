@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.8.0.0000
+Version: 0.8.0.9000
 Date: 2015-08-27
 Authors@R: person(
     given = "Johann",
@@ -27,6 +27,7 @@ Imports:
     stringr (>= 1.0),
     jsonlite,
     XML,
+    xml2,
     selectr,
     lubridate,
     R6,

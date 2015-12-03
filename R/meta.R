@@ -3,7 +3,8 @@
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
 #' @importFrom devtools use_data
-#' @importFrom rvest html html_nodes html_text
+#' @importFrom rvest html_nodes html_text
+#' @importFrom xml2 read_html
 NULL
 
 #' GaMetaUpdate
@@ -64,14 +65,14 @@ GaMetaUpdate <- function(creds = get_creds()) {
   ))
 
   mcf_var_ref <- "http://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
-  mcf_ref_html <- html(mcf_var_ref)
+  mcf_ref_html <- read_html(mcf_var_ref)
   kMcfVars <- list(
     dims = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
   rt_var_ref <- "http://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
-  rt_ref_html <- html(rt_var_ref)
+  rt_ref_html <- read_html(rt_var_ref)
   kRtVars <- list(
     dims = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
