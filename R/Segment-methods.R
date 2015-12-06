@@ -391,6 +391,16 @@ setMethod(
   }
 )
 
+
+#' @describeIn Segment Returns itself
+setMethod(
+  f = "Segment",
+  signature = "gaSegmentList",
+  definition = function(object) {
+    object
+  }
+)
+
 #' @describeIn Segment Return the definition of the segment applied to the view.
 setMethod(
   f = "Segment",

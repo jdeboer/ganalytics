@@ -11,6 +11,7 @@
 \alias{Segment,gaQuery-method}
 \alias{Segment,gaSegmentFilterList-method}
 \alias{Segment,gaSegmentId-method}
+\alias{Segment,gaSegmentList-method}
 \alias{Segment,gaUserSegment-method}
 \alias{Segment,numeric-method}
 \alias{Segment<-}
@@ -45,6 +46,8 @@ Segment(object) <- value
 \S4method{Segment}{gaDynSegment,ANY}(object) <- value
 
 \S4method{Segment}{gaSegmentId,ANY}(object) <- value
+
+\S4method{Segment}{gaSegmentList}(object)
 
 \S4method{Segment}{gaQuery}(object)
 
@@ -94,6 +97,8 @@ supplied expression.
 \item \code{object = gaDynSegment,value = ANY}: Change the definition of a dynamic segment.
 
 \item \code{object = gaSegmentId,value = ANY}: Change the ID of the supplied segment.
+
+\item \code{gaSegmentList}: Returns itself
 
 \item \code{gaQuery}: Return the definition of the segment applied to the view.
 
