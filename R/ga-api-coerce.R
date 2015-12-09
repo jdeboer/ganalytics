@@ -1,6 +1,7 @@
 #' @include utils.R
 #' @include init-methods.R
 #' @importFrom methods setAs validObject
+#' @importFrom plyr ldply alply
 NULL
 
 ## As setAs looks within the global namespace for any internall called functions within

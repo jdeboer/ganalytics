@@ -4,7 +4,7 @@
 #' @include Expr-generics.R
 #' @include globaldata.R
 #' @include utils.R
-#' @importFrom methods setClass setClassUnion
+#' @importFrom methods setClass setClassUnion prototype
 #' @importFrom assertthat validate_that
 NULL
 

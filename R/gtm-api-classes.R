@@ -1,4 +1,5 @@
 #' @include GaApiRequest.R
+#' @importFrom R6 R6Class
 
 gtm_api_request <- function(
   creds,

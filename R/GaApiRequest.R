@@ -1,8 +1,12 @@
-#' @importFrom jsonlite validate fromJSON toJSON
+#' @import httpuv
+#' @importFrom jsonlite fromJSON toJSON
 #' @importFrom httr GET POST PUT DELETE oauth_endpoints oauth1.0_token oauth2.0_token config
 #'   stop_for_status content oauth_app modify_url add_headers
 #' @importFrom R6 R6Class
-#' @importFrom stringr str_c
+#' @importFrom stringr str_c str_pad str_detect
+#' @importFrom selectr querySelector querySelectorAll
+#' @importFrom XML xmlParse xmlToList xmlApply
+#' @importFrom plyr laply aaply
 NULL
 
 # This will be initialised using GoogleApiCreds() at time of package being loaded.
@@ -64,7 +68,7 @@ GoogleApiCreds <- function(
 
 app_oauth_creds <- function(appname, creds = NULL) {
   if (typeof(creds) == "character" & length(creds) == 1) {
-    if (validate(creds)) {
+    if (jsonlite::validate(creds)) {
       creds <- fromJSON(creds)
     } else if (file.exists(creds)) {
       creds <- fromJSON(creds)

@@ -3,7 +3,7 @@
 #' @include ga-api-coerce.R
 #' @include GaGetCoreReport.R
 #' @importFrom methods setMethod as
-#' @importFrom plyr alply ldply mutate
+#' @importFrom plyr alply ldply mutate llply laply
 #' @importFrom scales percent
 NULL
 
