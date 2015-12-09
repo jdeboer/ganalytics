@@ -1,5 +1,6 @@
 #' @importFrom lubridate ymd
-#' @importFrom stringr regex
+#' @importFrom stringr regex str_replace str_detect
+#' @importFrom plyr llply
 NULL
 
 #' IsVarMatch.
