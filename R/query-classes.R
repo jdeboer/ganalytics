@@ -31,8 +31,8 @@ setClass(
     endDate = "Date"
   ),
   prototype = prototype(
-    startDate = Sys.Date() - 8,
-    endDate = Sys.Date() - 1
+    startDate = Sys.Date() - 9,
+    endDate = Sys.Date() - 2
   ),
   validity = function(object) {
     if (length(object@startDate) != length(object@endDate)) {
