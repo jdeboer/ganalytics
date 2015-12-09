@@ -43,7 +43,23 @@ setMethod(
   signature = ".expr",
   definition = function(object) {
     comparator <- as(object, ".comparator")
-    as(object, ".comparator") <- Not(comparator)
+    switch(
+      comparator,
+      "<>" = {
+        assert_that(is(object, ".metExpr"))
+        var <- as(object, ".var")
+        operand <- sort(as(object, ".operand"))
+        object <- Expr(var, "<", operand[1]) | Expr(var, ">", operand[2])
+      },
+      `[]` = {
+        operand <- as(object, ".operand")
+        operand <- paste0("^(", paste(operand, collapse = "|"), ")$")
+        comparator <- "!~"
+        var <- as(object, ".var")
+        object <- Expr(var, comparator, operand)
+      },
+      as(object, ".comparator") <- Not(comparator)
+    )
     object
   }
 )
