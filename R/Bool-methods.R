@@ -139,19 +139,11 @@ setMethod(
           expr <- unlist(expr, recursive = FALSE)
           expr <- lapply(expr, as, "orExpr")
         } else {
-          as(expr, "orExpr")
+          list(as(expr, "orExpr"))
         }
       }
     )
-    nested <- !sapply(exprList, is, "orExpr")
-    exprList <- c(
-      exprList[!nested],
-      unlist(
-        exprList[nested],
-        recursive = FALSE
-      )
-    )
-    new("andExpr", exprList)
+    new("andExpr", unlist(exprList, recursive = FALSE))
   }
 )
 
