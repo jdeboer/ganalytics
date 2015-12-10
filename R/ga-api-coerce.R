@@ -202,7 +202,8 @@ setAs(
           "segment" = if (length(segments) >= 1) {
             as(segment, "character")
           },
-          "samplingLevel" = as(from@samplingLevel, "character")
+          "samplingLevel" = as(from@samplingLevel, "character"),
+          "include-empty-rows" = "false"
         )
       },
       viewsDatesSegments$startDate,

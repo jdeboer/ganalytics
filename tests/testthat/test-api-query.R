@@ -17,7 +17,8 @@ test_that("Queries are constructed correctly for API requests", {
       sort = "ga:deviceCategory",
       filters = "ga:source==google",
       segment = "sessions::condition::ga:country==Australia",
-      samplingLevel = "HIGHER_PRECISION"
+      samplingLevel = "HIGHER_PRECISION",
+      `include-empty-rows` = "false"
     )
   )
 })
@@ -34,6 +35,6 @@ test_that("providing multiple view IDs, date ranges and multiple segments coerce
                 segments = GaExpr("country", "=", "Australia"),
                 maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
         "matrix")
-    ), c(9, 6)
+    ), c(10, 6)
   )
 })
