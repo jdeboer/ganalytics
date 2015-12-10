@@ -51,7 +51,7 @@ setMethod(
         operand <- sort(as(object, ".operand"))
         object <- Expr(var, "<", operand[1]) | Expr(var, ">", operand[2])
       },
-      `[]` = {
+      "[]" = {
         operand <- as(object, ".operand")
         operand <- paste0("^(", paste(operand, collapse = "|"), ")$")
         comparator <- "!~"

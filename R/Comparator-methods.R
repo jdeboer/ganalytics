@@ -128,8 +128,12 @@ setMethod(
 
 #' @describeIn IsRegEx Test whether the supplied comparator is for a regular
 #'   expression.
-setMethod("IsRegEx", ".dimComparator", function(object) {object %in% c("=~", "!~")})
+setMethod("IsRegEx", ".dimComparator", function(object) {
+  object %in% c("=~", "!~")
+})
 
 #' @describeIn IsRegEx Test whether a conditional epxression is using regular
 #'   expression match.
-setMethod("IsRegEx", ".expr", function(object) {IsRegEx(Comparator(object))})
+setMethod("IsRegEx", ".expr", function(object) {
+  IsRegEx(Comparator(object))
+})
