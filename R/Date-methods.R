@@ -9,16 +9,16 @@
 #' @importFrom methods setMethod new
 NULL
 
-#'SplitDateRange
+#' SplitDateRange
 #'
-#'Splits a gaDateRange object into N pieces. Useful for splitting a query into
-#'smaller chunks in order to overcome sampling.
+#' Splits a gaDateRange object into N pieces. Useful for splitting a query into
+#' smaller chunks in order to overcome sampling.
 #'
-#'@param dateRange the gaDateRange object to be split
-#'@param N the number of the separate date ranges to be split into; use 0 for
-#'  single days.
+#' @param dateRange the gaDateRange object to be split
+#' @param N the number of the separate date ranges to be split into; use 0 for
+#'   single days.
 #'
-#'@export
+#' @export
 SplitDateRange <- function(dateRange, N) {
   # TO DO
   # Assert:

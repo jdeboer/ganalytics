@@ -11,24 +11,20 @@
 \alias{DateRange<-,.standardQuery,character-method}
 \alias{DateRange<-,ANY,ANY-method}
 \alias{DateRange<-,dateRange,character-method}
-\alias{EndDate}
 \alias{EndDate,.standardQuery-method}
 \alias{EndDate,Interval-method}
 \alias{EndDate,character-method}
 \alias{EndDate,dateRange-method}
 \alias{EndDate,gaView-method}
-\alias{EndDate<-}
 \alias{EndDate<-,.standardQuery,Date-method}
 \alias{EndDate<-,.standardQuery,character-method}
 \alias{EndDate<-,dateRange,Date-method}
 \alias{EndDate<-,dateRange,character-method}
-\alias{StartDate}
 \alias{StartDate,.standardQuery-method}
 \alias{StartDate,Interval-method}
 \alias{StartDate,character-method}
 \alias{StartDate,dateRange-method}
 \alias{StartDate,gaView-method}
-\alias{StartDate<-}
 \alias{StartDate<-,.standardQuery,Date-method}
 \alias{StartDate<-,.standardQuery,character-method}
 \alias{StartDate<-,dateRange,Date-method}
@@ -38,14 +34,6 @@
 DateRange(object, endDate)
 
 DateRange(object) <- value
-
-StartDate(object, value)
-
-StartDate(object) <- value
-
-EndDate(object, value)
-
-EndDate(object) <- value
 
 \S4method{StartDate}{character}(object)
 
@@ -111,14 +99,6 @@ range.}
 Get the date range.
 
 Set the date range.
-
-Get the start date.
-
-Set the start date.
-
-Get the end date of the date range.
-
-Set the endDate of the date range.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -182,4 +162,8 @@ date specified in the supplied character vector of length 2.
 \item \code{object = ANY,value = ANY}: Replace or set the date range using the supplied Date,
 lubridate Interval or another ganalytics dateRange or query object.
 }}
+\seealso{
+Other date range functions: \code{\link{EndDate}},
+  \code{\link{StartDate}}
+}
 
