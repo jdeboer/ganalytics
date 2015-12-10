@@ -5,6 +5,13 @@ NULL
 
 #############\/ Transform to method of DateRange and DateRange<- generic functions
 
+# Coercion to Date
+setAs(from = "character", to = "Date",
+      def = function(from) {
+        as.Date(parse_date(from, output_format = kGaDateInFormat), format = kGaDateInFormat)
+      }
+)
+
 # Coercion to dateRange
 setAs(from = "Date", to = "dateRange",
       def = function(from, to) {
