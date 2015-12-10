@@ -37,7 +37,7 @@ setMethod(
 #' @export
 setMethod("!", ".comparator", function(x) {Not(x)})
 
-#' @describeIn Not Invert the comparator of the condition expression.
+#' @describeIn Not Invert the comparator of a condition expression.
 setMethod(
   f = "Not",
   signature = ".expr",
@@ -68,7 +68,7 @@ setMethod(
 #' @export
 setMethod("!", ".expr", function(x) {Not(x)})
 
-#' @describeIn Not Apply De Morgan's Theorem to transform
+#' @describeIn Not Invert an OR expression using De Morgan's Theorem.
 setMethod(
   f = "Not",
   signature = "orExpr",
@@ -77,7 +77,7 @@ setMethod(
   }
 )
 
-#' @describeIn Not Invert an OR expression using De Morgan's Theroem.
+#' @describeIn Not Invert an OR expression using De Morgan's Theorem.
 #' @export
 setMethod("!", "orExpr", function(x) {Not(x)})
 
