@@ -9,11 +9,9 @@
 \alias{>,.var,.metOperand-method}
 \alias{>=,.var,.metOperand-method}
 \alias{Comparator}
-\alias{Comparator,.comparator-method}
-\alias{Comparator,.expr-method}
+\alias{Comparator,ANY-method}
 \alias{Comparator<-}
-\alias{Comparator<-,.comparator,character-method}
-\alias{Comparator<-,.expr,ANY-method}
+\alias{Comparator<-,ANY-method}
 \alias{\%between\%}
 \alias{\%between\%,.var,.operand-method}
 \alias{\%in\%}
@@ -56,13 +54,9 @@ x \%in\% table
 
 \S4method{<=}{.var,.metOperand}(e1, e2)
 
-\S4method{Comparator}{.comparator}(object)
+\S4method{Comparator}{ANY}(object)
 
-\S4method{Comparator}{.comparator,character}(object) <- value
-
-\S4method{Comparator}{.expr}(object)
-
-\S4method{Comparator}{.expr,ANY}(object) <- value
+\S4method{Comparator}{ANY}(object) <- value
 }
 \arguments{
 \item{object}{The object to be coerced to a '.Comparator' class or to get the
@@ -91,15 +85,10 @@ Set the comparator used in an expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.comparator}: Returns itself.
-
-\item \code{object = .comparator,value = character}: Replace the comparator with the comparator described
-by the supplied character value.
-
-\item \code{.expr}: Return the comparator used within the supplied
+\item \code{ANY}: Return the comparator used within the supplied
 conditional expression.
 
-\item \code{object = .expr,value = ANY}: Replace the comparator used in the supplied
+\item \code{ANY}: Replace the comparator used in the supplied
 conditional expression.
 }}
 \section{\%starts_with\%}{

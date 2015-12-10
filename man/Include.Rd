@@ -3,15 +3,12 @@
 \docType{methods}
 \name{Include}
 \alias{Include}
-\alias{Include,.compoundExpr-method}
-\alias{Include,gaSegmentSequenceFilter-method}
+\alias{Include,ANY-method}
 \title{Include.}
 \usage{
 Include(object, ..., scope = "sessions")
 
-\S4method{Include}{.compoundExpr}(object, ..., scope = "sessions")
-
-\S4method{Include}{gaSegmentSequenceFilter}(object, ..., scope = "sessions")
+\S4method{Include}{ANY}(object, ..., scope = "sessions")
 }
 \arguments{
 \item{object}{a condition or sequence to include}
@@ -30,10 +27,7 @@ or session segment.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: Define an include segment filter using the supplied
+\item \code{ANY}: Define an include segment filter using the supplied
 expression.
-
-\item \code{gaSegmentSequenceFilter}: Return the supplied Sequence Segment Filter with negation
-not set so as to produce an include filter.
 }}
 

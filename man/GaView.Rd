@@ -3,13 +3,7 @@
 \docType{methods}
 \name{GaView}
 \alias{GaView}
-\alias{GaView,.query-method}
-\alias{GaView,character-method}
-\alias{GaView,gaAccount-method}
-\alias{GaView,gaProperty-method}
-\alias{GaView,gaView-method}
-\alias{GaView,numeric-method}
-\alias{GaView,viewId-method}
+\alias{GaView,ANY-method}
 \alias{GaView<-}
 \alias{GaView<-,.query-method}
 \title{GaView.}
@@ -18,19 +12,7 @@ GaView(object, value)
 
 GaView(object) <- value
 
-\S4method{GaView}{viewId}(object)
-
-\S4method{GaView}{gaView}(object)
-
-\S4method{GaView}{gaProperty}(object)
-
-\S4method{GaView}{gaAccount}(object)
-
-\S4method{GaView}{character}(object)
-
-\S4method{GaView}{numeric}(object)
-
-\S4method{GaView}{.query}(object)
+\S4method{GaView}{ANY}(object)
 
 \S4method{GaView}{.query}(object) <- value
 }
@@ -49,21 +31,10 @@ Set the viewId for the query.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{viewId}: Returns itself
-
-\item \code{gaView}: Returns the ID of the supplied view.
-
-\item \code{gaProperty}: Returns the ID of the first view within the supplied
-property.
-
-\item \code{gaAccount}: Returns the ID of the first view within the first property
-of the supplied account.
-
-\item \code{character}: Parses the supplied character value as a valid view ID.
-
-\item \code{numeric}: Parses the supplied numeric value as a valid view ID.
-
-\item \code{.query}: Returns the view ID of the given query.
+\item \code{ANY}: Returns the ID of the supplied view, or the first view
+within the supplied property or the first view within the first property of
+the supplied account, or get the view ID of the supplied query, or coerce a
+numeric or character into a viewId.
 
 \item \code{.query}: Replace the view being used by a query.
 }}

@@ -5,15 +5,13 @@
 \alias{Segment}
 \alias{Segment,.compoundExpr-method}
 \alias{Segment,.gaSegmentFilter-method}
+\alias{Segment,ANY-method}
 \alias{Segment,NULL-method}
-\alias{Segment,character-method}
 \alias{Segment,gaDynSegment-method}
 \alias{Segment,gaQuery-method}
 \alias{Segment,gaSegmentFilterList-method}
-\alias{Segment,gaSegmentId-method}
 \alias{Segment,gaSegmentList-method}
 \alias{Segment,gaUserSegment-method}
-\alias{Segment,numeric-method}
 \alias{Segment<-}
 \alias{Segment<-,gaDynSegment,ANY-method}
 \alias{Segment<-,gaDynSegment,andExpr-method}
@@ -25,11 +23,7 @@ Segment(object, ..., scope = "sessions")
 
 Segment(object) <- value
 
-\S4method{Segment}{gaSegmentId}(object)
-
-\S4method{Segment}{character}(object)
-
-\S4method{Segment}{numeric}(object)
+\S4method{Segment}{ANY}(object)
 
 \S4method{Segment}{gaDynSegment}(object)
 
@@ -72,11 +66,7 @@ Set the segment
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegmentId}: returns itself.
-
-\item \code{character}: Interpret the supplied character value as a segment ID.
-
-\item \code{numeric}: Interpret the supplied numerical value as a segment ID.
+\item \code{ANY}: Interpret the supplied character or numeric value as a segment ID.
 
 \item \code{gaDynSegment}: returns itself.
 

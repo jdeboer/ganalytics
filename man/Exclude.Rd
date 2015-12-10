@@ -3,15 +3,12 @@
 \docType{methods}
 \name{Exclude}
 \alias{Exclude}
-\alias{Exclude,.compoundExpr-method}
-\alias{Exclude,gaSegmentSequenceFilter-method}
+\alias{Exclude,ANY-method}
 \title{Exclude.}
 \usage{
 Exclude(object, ..., scope = "sessions")
 
-\S4method{Exclude}{.compoundExpr}(object, ..., scope = "sessions")
-
-\S4method{Exclude}{gaSegmentSequenceFilter}(object, ..., scope = "sessions")
+\S4method{Exclude}{ANY}(object, ..., scope = "sessions")
 }
 \arguments{
 \item{object}{a condition or sequence to exclude}
@@ -30,10 +27,7 @@ or session segment.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: Define an exclude segment filter using the supplied
+\item \code{ANY}: Define an exclude segment filter using the supplied
 expressions.
-
-\item \code{gaSegmentSequenceFilter}: Set the negatation field of the supplied sequence filter
-so as to exclude matching sequences.
 }}
 

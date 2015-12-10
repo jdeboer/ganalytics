@@ -23,7 +23,7 @@ segment_scope_negate <- function(object, ..., scope, negate = NULL) {
 #'   expression.
 setMethod(
   f = "Include",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ..., scope) {
     segment_scope_negate(object, ..., scope = scope, negate = FALSE)
   }
@@ -33,27 +33,7 @@ setMethod(
 #'   expressions.
 setMethod(
   f = "Exclude",
-  signature = ".compoundExpr",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope, negate = TRUE)
-  }
-)
-
-#' @describeIn Include Return the supplied Sequence Segment Filter with negation
-#'   not set so as to produce an include filter.
-setMethod(
-  f = "Include",
-  signature = "gaSegmentSequenceFilter",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope, negate = FALSE)
-  }
-)
-
-#' @describeIn Exclude Set the negatation field of the supplied sequence filter
-#'   so as to exclude matching sequences.
-setMethod(
-  f = "Exclude",
-  signature = "gaSegmentSequenceFilter",
+  signature = "ANY",
   definition = function(object, ..., scope) {
     segment_scope_negate(object, ..., scope = scope, negate = TRUE)
   }
@@ -108,17 +88,7 @@ setMethod(
 #'   expressions applied using the specified scope.
 setMethod(
   f = "SegmentFilters",
-  signature = ".compoundExpr",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope)
-  }
-)
-
-#' @describeIn SegmentFilters Combine one or more filters within the specified
-#'   scope.
-setMethod(
-  f = "SegmentFilters",
-  signature = ".gaSegmentFilter",
+  signature = "ANY",
   definition = function(object, ..., scope) {
     segment_scope_negate(object, ..., scope = scope)
   }
@@ -168,21 +138,11 @@ setMethod(
   }
 )
 
-#' @describeIn PerSession Set the scope of the supplied segment filters to
-#'   session level.
-setMethod(
-  f = "PerSession",
-  signature = ".gaSegmentFilter",
-  definition = function(object, ...) {
-    SegmentFilters(object, ..., scope = "sessions")
-  }
-)
-
 #' @describeIn PerSession Create a session level segment filter list from the
 #'   supplied expressions, interpreted as condition filters.
 setMethod(
   f = "PerSession",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ...) {
     SegmentFilters(object, ..., scope = "sessions")
   }
@@ -214,21 +174,11 @@ setMethod(
   }
 )
 
-#' @describeIn PerUser Set the scope of the supplied segment filter to
-#'   user-level.
-setMethod(
-  f = "PerUser",
-  signature = ".gaSegmentFilter",
-  definition = function(object, ...) {
-    SegmentFilters(object, ..., scope = "users")
-  }
-)
-
 #' @describeIn PerUser Create a user-level segment filter list from the supplied
 #'   expressions, each interpreted as an include segment filter.
 setMethod(
   f = "PerUser",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ...) {
     SegmentFilters(object, ..., scope = "users")
   }
@@ -276,28 +226,10 @@ setMethod(
 
 # ---- Segment, Segment<- ----
 
-#' @describeIn Segment returns itself.
+#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
 setMethod(
   f = "Segment",
-  signature = "gaSegmentId",
-  definition = function(object) {
-    object
-  }
-)
-
-#' @describeIn Segment Interpret the supplied character value as a segment ID.
-setMethod(
-  f = "Segment",
-  signature = "character",
-  definition = function(object) {
-    as(object, "gaSegmentId")
-  }
-)
-
-#' @describeIn Segment Interpret the supplied numerical value as a segment ID.
-setMethod(
-  f = "Segment",
-  signature = "numeric",
+  signature = "ANY",
   definition = function(object) {
     as(object, "gaSegmentId")
   }

@@ -3,16 +3,13 @@
 \docType{methods}
 \name{SegmentFilters}
 \alias{SegmentFilters}
-\alias{SegmentFilters,.compoundExpr-method}
-\alias{SegmentFilters,.gaSegmentFilter-method}
+\alias{SegmentFilters,ANY-method}
 \alias{SegmentFilters,gaSegmentFilterList-method}
 \title{SegmentFilters.}
 \usage{
 SegmentFilters(object, ..., scope = "sessions")
 
-\S4method{SegmentFilters}{.compoundExpr}(object, ..., scope = "sessions")
-
-\S4method{SegmentFilters}{.gaSegmentFilter}(object, ..., scope = "sessions")
+\S4method{SegmentFilters}{ANY}(object, ..., scope = "sessions")
 
 \S4method{SegmentFilters}{gaSegmentFilterList}(object)
 }
@@ -35,11 +32,8 @@ non-sequential conditoins can be combined using this function.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: Define a list of filters from one or more
+\item \code{ANY}: Define a list of filters from one or more
 expressions applied using the specified scope.
-
-\item \code{.gaSegmentFilter}: Combine one or more filters within the specified
-scope.
 
 \item \code{gaSegmentFilterList}: Returns itself.
 }}

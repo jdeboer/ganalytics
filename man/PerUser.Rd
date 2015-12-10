@@ -3,8 +3,7 @@
 \docType{methods}
 \name{PerUser}
 \alias{PerUser}
-\alias{PerUser,.compoundExpr-method}
-\alias{PerUser,.gaSegmentFilter-method}
+\alias{PerUser,ANY-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,gaSegmentFilterList-method}
 \title{PerUser.}
@@ -13,9 +12,7 @@ PerUser(object, ...)
 
 \S4method{PerUser}{gaSegmentFilterList}(object, ...)
 
-\S4method{PerUser}{.gaSegmentFilter}(object, ...)
-
-\S4method{PerUser}{.compoundExpr}(object, ...)
+\S4method{PerUser}{ANY}(object, ...)
 
 \S4method{PerUser}{gaMetExpr}(object, ...)
 }
@@ -32,10 +29,7 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 \item \code{gaSegmentFilterList}: Set the scope of the supplied segment filter list to user
 level.
 
-\item \code{.gaSegmentFilter}: Set the scope of the supplied segment filter to
-user-level.
-
-\item \code{.compoundExpr}: Create a user-level segment filter list from the supplied
+\item \code{ANY}: Create a user-level segment filter list from the supplied
 expressions, each interpreted as an include segment filter.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to

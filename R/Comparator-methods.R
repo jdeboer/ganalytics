@@ -111,31 +111,17 @@ setMethod(
 
 # ---- Comparator, GaDimComparator, GaMetComparator ----
 
-#' @describeIn Comparator Returns itself.
-setMethod("Comparator", ".comparator", function(object) {object})
-
-#' @describeIn Comparator Replace the comparator with the comparator described
-#'   by the supplied character value.
-setMethod(
-  f = "Comparator<-",
-  signature = c(".comparator", "character"),
-  definition = function(object, value) {
-    as(object, "character") <- value
-    object
-  }
-)
-
 #' @describeIn Comparator Return the comparator used within the supplied
 #'   conditional expression.
-setMethod("Comparator", ".expr", function(object) {as(object, ".comparator")})
+setMethod("Comparator", "ANY", function(object) {as(object, ".comparator")})
 
 #' @describeIn Comparator Replace the comparator used in the supplied
 #'   conditional expression.
 setMethod(
   f = "Comparator<-",
-  signature = ".expr",
+  signature = c("ANY", "ANY"),
   definition = function(object, value) {
-    as(object, ".comparator") <- value
+    as(object, ".comparator") <- as(value, ".comparator")
     object
   }
 )
