@@ -5,7 +5,7 @@
 #'
 #' @param object An object to get the logical inverse of.
 #'
-#' @seealso \code{link{And}} \code{link{Or}} \code{link{xor}}
+#' @seealso \code{\link{And}} \code{\link{Or}} \code{\link{xor}}
 #'
 #' @export
 #' @rdname Not
@@ -25,7 +25,7 @@ setGeneric(
 #'
 #' @return An object of class orExpr.
 #'
-#' @seealso \code{link{And}} \code{link{xor}} \code{link{Not}}
+#' @seealso \code{\link{And}} \code{\link{xor}} \code{\link{Not}}
 #'
 #' @export
 #' @rdname Or
@@ -49,7 +49,7 @@ setGeneric(
 #'
 #' @return an object of class \code{andExpr}
 #'
-#' @seealso \code{link{Or}} \code{link{xor}} \code{link{Not}}
+#' @seealso \code{\link{Or}} \code{\link{xor}} \code{\link{Not}}
 #'
 #' @export
 #' @rdname And
@@ -64,7 +64,7 @@ setGeneric(
 #'
 #' @param x,y Conditions for an exclusive-or expression.
 #'
-#' @seealso \code{link{Or}} \code{link{And}} \code{link{Not}}
+#' @seealso \code{\link{Or}} \code{\link{And}} \code{\link{Not}}
 #'
 #' @export
 #' @rdname xor

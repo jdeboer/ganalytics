@@ -10,7 +10,7 @@
 #'
 #' @return a gaSegmentSequenceStep object, with the immediate flag not set.
 #'
-#' @seealso Sequence
+#' @seealso \code{\link{Sequence}}
 #'
 #' @export
 setGeneric(
@@ -33,7 +33,7 @@ setGeneric(
 #' @return a gaSegmentSequenceStep object, with the immediate flag set.
 #'
 #' @export
-#' @seealso Sequence
+#' @seealso \code{\link{Sequence}}
 setGeneric(
   "Then",
   function(object, ...) {},
@@ -56,7 +56,7 @@ setGeneric(
 #'
 #'
 #' @export
-#' @seealso Sequence
+#' @seealso \code{\link{Sequence}}
 setGeneric(
   "First",
   function(object, ...) {},

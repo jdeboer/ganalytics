@@ -60,6 +60,6 @@ include <-> exclude
 include <-> exclude
 }}
 \seealso{
-\code{link{And}} \code{link{Or}} \code{link{xor}}
+\code{\link{And}} \code{\link{Or}} \code{\link{xor}}
 }
 

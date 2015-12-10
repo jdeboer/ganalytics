@@ -40,6 +40,6 @@ A single list of objects is also accepted.
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expresisons.
 }}
 \seealso{
-\code{link{Or}} \code{link{xor}} \code{link{Not}}
+\code{\link{Or}} \code{\link{xor}} \code{\link{Not}}
 }
 
