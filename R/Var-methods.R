@@ -79,60 +79,20 @@ setMethod("GaVar", ".gaVarList", function(object) {object})
 
 # ---- McfVar ----
 
-#' @describeIn Var Get the value of a .mcfVar object.
-setMethod("McfVar", ".mcfVar", function(object) {object})
-
-# Create a mcfMet or mcfDim object
-
 #' @describeIn Var McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
-setMethod("McfVar", "character", function(object) {as(object, ".mcfVar")})
+setMethod("McfVar", "ANY", function(object) {as(object, ".mcfVar")})
 
 # ---- RtVar ----
 
-#' @describeIn Var Get the value of a .rtVar object.
-setMethod("RtVar", ".rtVar", function(object) {object})
-
-# Create a rtMet or rtDim object
-
 #' @describeIn Var McfVar takes a RT variable and determines whether to return a Dimension or Metric object
-setMethod("RtVar", "character", function(object) {as(object, ".rtVar")})
+setMethod("RtVar", "ANY", function(object) {as(object, ".rtVar")})
 
 # -- GaMetrics ----
 
-#' @describeIn Metrics Return an empty .metrics object
+#' @describeIn Metrics Coerce one or more supplied objects to .metrics.
 setMethod(
   f = "Metrics",
-  signature = "NULL",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".metrics")
-  }
-)
-
-#' @describeIn Metrics Return the value of a .metrics object or concatenated .metrics objects
-setMethod(
-  f = "Metrics",
-  signature = ".metrics",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".metrics")
-  }
-)
-
-#' @describeIn Metrics Coerce one or more supplied character values to .metrics.
-setMethod(
-  f = "Metrics",
-  signature = "character",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".metrics")
-  }
-)
-
-#' @describeIn Metrics Coerce one or more supplied lists to .metrics
-setMethod(
-  f = "Metrics",
-  signature = "list",
+  signature = "ANY",
   definition = function(object, ...) {
     vars <- ArgList(object, ...)
     as(vars, ".metrics")
@@ -154,46 +114,12 @@ setMethod(
 
 # -- Dimensions ----
 
-#' @describeIn Dimensions Returns NULL.
-#' @export
-setMethod(
-  f = "Dimensions",
-  signature = "NULL",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".dimensions")
-  }
-)
-
-#' @describeIn Dimensions Returns itself.
-#' @export
-setMethod(
-  f = "Dimensions",
-  signature = ".dimensions",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".dimensions")
-  }
-)
-
-#' @describeIn Dimensions Coerces the supplied character vector into a vector of
+#' @describeIn Dimensions Coerces the supplied character vector or list into a vector of
 #'   Google Analytics dimensions.
 #' @export
 setMethod(
   f = "Dimensions",
-  signature = "character",
-  definition = function(object, ...) {
-    vars <- ArgList(object, ...)
-    as(vars, ".dimensions")
-  }
-)
-
-#' @describeIn Dimensions Coerces the supplied list into a vector of Google
-#'   Analytics dimension variables.
-#' @export
-setMethod(
-  f = "Dimensions",
-  signature = "list",
+  signature = "ANY",
   definition = function(object, ...) {
     vars <- ArgList(object, ...)
     as(vars, ".dimensions")

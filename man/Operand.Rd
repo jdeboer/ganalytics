@@ -3,11 +3,7 @@
 \docType{methods}
 \name{Operand}
 \alias{Operand}
-\alias{Operand,.expr-method}
-\alias{Operand,.operand-method}
-\alias{Operand,character-method}
-\alias{Operand,logical-method}
-\alias{Operand,numeric-method}
+\alias{Operand,ANY-method}
 \alias{Operand<-}
 \alias{Operand<-,.expr-method}
 \title{Operand.}
@@ -16,15 +12,7 @@ Operand(object, value)
 
 Operand(object) <- value
 
-\S4method{Operand}{.operand}(object)
-
-\S4method{Operand}{.expr}(object)
-
-\S4method{Operand}{character}(object)
-
-\S4method{Operand}{numeric}(object)
-
-\S4method{Operand}{logical}(object)
+\S4method{Operand}{ANY}(object)
 
 \S4method{Operand}{.expr}(object) <- value
 }
@@ -40,15 +28,8 @@ Set the operand of an expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.operand}: Returns itself.
-
-\item \code{.expr}: Return the operand used within the condition.
-
-\item \code{character}: Coerce a character value as dimension operand.
-
-\item \code{numeric}: Coerce a numeric value as a metric operand.
-
-\item \code{logical}: Coerce a logical value as a dimension operator.
+\item \code{ANY}: Return the operand used within the condition, or coerce
+the supplied value into an operand.
 
 \item \code{.expr}: Replace the operand of a condition.
 }}

@@ -3,11 +3,8 @@
 \docType{methods}
 \name{Metrics}
 \alias{Metrics}
-\alias{Metrics,.metrics-method}
 \alias{Metrics,.query-method}
-\alias{Metrics,NULL-method}
-\alias{Metrics,character-method}
-\alias{Metrics,list-method}
+\alias{Metrics,ANY-method}
 \alias{Metrics<-}
 \alias{Metrics<-,.query-method}
 \title{Metrics.}
@@ -16,13 +13,7 @@ Metrics(object, ...)
 
 Metrics(object) <- value
 
-\S4method{Metrics}{`NULL`}(object, ...)
-
-\S4method{Metrics}{.metrics}(object, ...)
-
-\S4method{Metrics}{character}(object, ...)
-
-\S4method{Metrics}{list}(object, ...)
+\S4method{Metrics}{ANY}(object, ...)
 
 \S4method{Metrics}{.query}(object)
 
@@ -44,13 +35,7 @@ Set the metrics of the object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{NULL}: Return an empty .metrics object
-
-\item \code{.metrics}: Return the value of a .metrics object or concatenated .metrics objects
-
-\item \code{character}: Coerce one or more supplied character values to .metrics.
-
-\item \code{list}: Coerce one or more supplied lists to .metrics
+\item \code{ANY}: Coerce one or more supplied objects to .metrics.
 
 \item \code{.query}: Get the list of metrics for a '.query'.
 

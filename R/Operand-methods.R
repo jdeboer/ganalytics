@@ -7,20 +7,9 @@ NULL
 
 # ---- Operand ----
 
-#' @describeIn Operand Returns itself.
-setMethod("Operand", ".operand", function(object) {object})
-
-#' @describeIn Operand Return the operand used within the condition.
-setMethod("Operand", ".expr", function(object) {as(object, ".operand")})
-
-#' @describeIn Operand Coerce a character value as dimension operand.
-setMethod("Operand", "character", function(object) {as(object, ".operand")})
-
-#' @describeIn Operand Coerce a numeric value as a metric operand.
-setMethod("Operand", "numeric", function(object) {as(object, ".operand")})
-
-#' @describeIn Operand Coerce a logical value as a dimension operator.
-setMethod("Operand", "logical", function(object) {as(object, ".operand")})
+#' @describeIn Operand Return the operand used within the condition, or coerce
+#'   the supplied value into an operand.
+setMethod("Operand", "ANY", function(object) {as(object, ".operand")})
 
 #' @describeIn Operand Replace the operand of a condition.
 setMethod(
