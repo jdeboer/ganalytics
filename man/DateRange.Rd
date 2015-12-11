@@ -4,31 +4,24 @@
 \name{DateRange}
 \alias{DateRange}
 \alias{DateRange,ANY,ANY-method}
-\alias{DateRange,Date,Date-method}
-\alias{DateRange,character,character-method}
+\alias{DateRange,ANY,missing-method}
 \alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-}
-\alias{DateRange<-,.standardQuery,character-method}
-\alias{DateRange<-,ANY,ANY-method}
-\alias{DateRange<-,dateRange,character-method}
+\alias{DateRange<-,ANY-method}
 \alias{EndDate,.standardQuery-method}
 \alias{EndDate,Interval-method}
 \alias{EndDate,character-method}
 \alias{EndDate,dateRange-method}
 \alias{EndDate,gaView-method}
-\alias{EndDate<-,.standardQuery,Date-method}
-\alias{EndDate<-,.standardQuery,character-method}
-\alias{EndDate<-,dateRange,Date-method}
-\alias{EndDate<-,dateRange,character-method}
+\alias{EndDate<-,.standardQuery-method}
+\alias{EndDate<-,dateRange-method}
 \alias{StartDate,.standardQuery-method}
 \alias{StartDate,Interval-method}
 \alias{StartDate,character-method}
 \alias{StartDate,dateRange-method}
 \alias{StartDate,gaView-method}
-\alias{StartDate<-,.standardQuery,Date-method}
-\alias{StartDate<-,.standardQuery,character-method}
-\alias{StartDate<-,dateRange,Date-method}
-\alias{StartDate<-,dateRange,character-method}
+\alias{StartDate<-,.standardQuery-method}
+\alias{StartDate<-,dateRange-method}
 \title{DateRange.}
 \usage{
 DateRange(object, endDate)
@@ -55,35 +48,21 @@ DateRange(object) <- value
 
 \S4method{EndDate}{gaView}(object)
 
-\S4method{StartDate}{dateRange,character}(object) <- value
+\S4method{StartDate}{dateRange}(object) <- value
 
-\S4method{EndDate}{dateRange,character}(object) <- value
+\S4method{EndDate}{dateRange}(object) <- value
 
-\S4method{StartDate}{dateRange,Date}(object) <- value
+\S4method{StartDate}{.standardQuery}(object) <- value
 
-\S4method{EndDate}{dateRange,Date}(object) <- value
+\S4method{EndDate}{.standardQuery}(object) <- value
 
-\S4method{StartDate}{.standardQuery,character}(object) <- value
+\S4method{DateRange}{ANY,ANY}(object, endDate)
 
-\S4method{EndDate}{.standardQuery,character}(object) <- value
-
-\S4method{StartDate}{.standardQuery,Date}(object) <- value
-
-\S4method{EndDate}{.standardQuery,Date}(object) <- value
-
-\S4method{DateRange}{character,character}(object, endDate)
-
-\S4method{DateRange}{Date,Date}(object, endDate)
-
-\S4method{DateRange}{ANY,ANY}(object)
+\S4method{DateRange}{ANY,missing}(object)
 
 \S4method{DateRange}{gaView,ANY}(object)
 
-\S4method{DateRange}{dateRange,character}(object) <- value
-
-\S4method{DateRange}{.standardQuery,character}(object) <- value
-
-\S4method{DateRange}{ANY,ANY}(object) <- value
+\S4method{DateRange}{ANY}(object) <- value
 }
 \arguments{
 \item{object}{The start date of the date range or a object to coerce to a
@@ -124,43 +103,26 @@ object.
 
 \item \code{gaView}: Get the last day a view received hits.
 
-\item \code{object = dateRange,value = character}: Set a new start date for a date range.
+\item \code{dateRange}: Set a new start date for a date range.
 
-\item \code{object = dateRange,value = character}: Set a new end date for a date range.
+\item \code{dateRange}: Set a new end date for a date range.
 
-\item \code{object = dateRange,value = Date}: Set a new start date for a date range.
+\item \code{.standardQuery}: Set a new start date for a query.
 
-\item \code{object = dateRange,value = Date}: Set a new end date for a date range.
+\item \code{.standardQuery}: Set a new end date for a query.
 
-\item \code{object = .standardQuery,value = character}: Set a new start date for a query.
-
-\item \code{object = .standardQuery,value = character}: Set a new end date for a query.
-
-\item \code{object = .standardQuery,value = Date}: Set a new start date for a query.
-
-\item \code{object = .standardQuery,value = Date}: Set a new end date for a query.
-
-\item \code{object = character,endDate = character}: generates a date range object from a vector of start
-and end date character vectors.
-
-\item \code{object = Date,endDate = Date}: generates a date range object using the supplied
+\item \code{object = ANY,endDate = ANY}: generates a date range object using the supplied
 vectors of start date and end dates.
 
-\item \code{object = ANY,endDate = ANY}: Returns the date range of the given query or coerces
+\item \code{object = ANY,endDate = missing}: Returns the date range of the given query or coerces
 the supplied object into a dateRange.
 
 \item \code{object = gaView,endDate = ANY}: Returns the maximum date range of when a view has been
 recieving hits.
 
-\item \code{object = dateRange,value = character}: Change the date range of the date range object using
-the dates supplied in the character string of length 2, where the first
-element is the start date and second being the end date.
-
-\item \code{object = .standardQuery,value = character}: Replace the date range of a query with a start and end
-date specified in the supplied character vector of length 2.
-
-\item \code{object = ANY,value = ANY}: Replace or set the date range using the supplied Date,
-lubridate Interval or another ganalytics dateRange or query object.
+\item \code{ANY}: Change the date range of the date range object using
+the dates supplied in a vector of length 2, where the first element is the
+start date and second being the end date.
 }}
 \seealso{
 Other date range functions: \code{\link{EndDate}},
