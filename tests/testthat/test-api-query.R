@@ -24,17 +24,17 @@ test_that("Queries are constructed correctly for API requests", {
 })
 
 test_that("providing multiple view IDs, date ranges and multiple segments coerces to a multiple column matrix", {
-  expect_equal(
-    dim(
-      as(
-        GaQuery(view = c(0, 1, 2),
-                startDate = c("2014-01-01", "2014-01-01"),
-                endDate = c("2015-01-01", "2015-01-28"),
-                metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
-                filters = GaExpr("source", "=", "google"),
-                segments = GaExpr("country", "=", "Australia"),
-                maxResults = 3, samplingLevel = "HIGHER_PRECISION"),
-        "matrix")
-    ), c(10, 6)
+  q <- GaQuery(view = c(0, 1, 2),
+          startDate = c("2014-01-01", "2014-01-01"),
+          endDate = c("2015-01-01", "2015-01-28"),
+          metrics = "sessions", dimensions = "deviceCategory", sortBy = "deviceCategory",
+          filters = GaExpr("source", "=", "google"),
+          segments = GaExpr("country", "=", "Australia"),
+          maxResults = 3, samplingLevel = "HIGHER_PRECISION")
+  expect_equal(dim(as(q, "matrix")), c(10, 6))
+  Segment(q) <- list(
+    bounce_sessions = PerSession(Expr(~bounces == 0)),
+    non_bounce_sessions = PerSession(Expr(~bounces > 0))
   )
+  expect_equal(dim(as(q, "matrix")), c(10, 12))
 })

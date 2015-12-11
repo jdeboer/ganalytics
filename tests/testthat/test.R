@@ -1,16 +1,7 @@
-library(ganalytics)
-library(lubridate)
-
-# check_api <- function() {
-#   if (not_working()) {
-#     skip("API not available")
-#   }
-# }
+# library(ganalytics)
+# library(lubridate)
 #
-# test_that("foo api returns bar when given baz", {
-#   check_api()
-#   ...
-# })
+
 
 # Place skip_on_cran() at the beginning of long-running tests that shouldn’t be
 # run on CRAN
@@ -62,7 +53,7 @@ test_that("! can be used instead of Not", {
   )
 })
 
-test_that("TableFilter can be used instead of deprecated GaFilter function", {
+test_that("TableFilter can be used on MCF expressions", {
   expect_is(
     TableFilter(Expr("mcf:totalConversions", ">", 10)),
     "mcfFilter"
@@ -170,7 +161,7 @@ test_that("Segment<- replaces the segment of a query", {
     Expr("ga:source", "=", "google.com") &
       Expr("ga:deviceCategory", "=", "mobile")
   Segment(query) <- segment
-  expect_identical(Segment(query)[[1]], Segment(segment))
+  expect_identical(Segment(query)[[1]], Segment(segment)[[1]])
 })
 
 test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {
