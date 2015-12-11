@@ -3,15 +3,15 @@
 \docType{methods}
 \name{SegmentFilters}
 \alias{SegmentFilters}
-\alias{SegmentFilters,ANY-method}
-\alias{SegmentFilters,gaSegmentFilterList-method}
+\alias{SegmentFilters,ANY,ANY-method}
+\alias{SegmentFilters,gaSegmentFilterList,missing-method}
 \title{SegmentFilters.}
 \usage{
 SegmentFilters(object, ..., scope = "sessions")
 
-\S4method{SegmentFilters}{ANY}(object, ..., scope = "sessions")
+\S4method{SegmentFilters}{ANY,ANY}(object, ..., scope = "sessions")
 
-\S4method{SegmentFilters}{gaSegmentFilterList}(object)
+\S4method{SegmentFilters}{gaSegmentFilterList,missing}(object)
 }
 \arguments{
 \item{object}{The first condition to be included in the segments definition.}
@@ -32,9 +32,9 @@ non-sequential conditoins can be combined using this function.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ANY}: Define a list of filters from one or more
+\item \code{object = ANY,scope = ANY}: Define a list of filters from one or more
 expressions applied using the specified scope.
 
-\item \code{gaSegmentFilterList}: Returns itself.
+\item \code{object = gaSegmentFilterList,scope = missing}: Returns itself.
 }}
 

@@ -9,9 +9,9 @@
 \usage{
 PerHit(object, ...)
 
-\S4method{PerHit}{gaMetExpr}(object, ...)
-
 \S4method{PerHit}{.compoundExpr}(object, ...)
+
+\S4method{PerHit}{gaMetExpr}(object, ...)
 }
 \arguments{
 \item{object}{a gaMetExpr object to coerce to user-level.}
@@ -25,10 +25,10 @@ hit).
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaMetExpr}: Set the scope of the supplied metric condition to
-hit-level.
-
 \item \code{.compoundExpr}: Create a single step sequence filter from the supplied
 expression.
+
+\item \code{gaMetExpr}: Set the scope of the supplied metric condition to
+hit-level.
 }}
 

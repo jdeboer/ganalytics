@@ -5,12 +5,9 @@
 \alias{PerSession}
 \alias{PerSession,ANY-method}
 \alias{PerSession,gaMetExpr-method}
-\alias{PerSession,gaSegmentFilterList-method}
 \title{PerSession.}
 \usage{
 PerSession(object, ...)
-
-\S4method{PerSession}{gaSegmentFilterList}(object, ...)
 
 \S4method{PerSession}{ANY}(object, ...)
 
@@ -26,9 +23,6 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegmentFilterList}: Set the scope of the supplied segment filters to
-session level.
-
 \item \code{ANY}: Create a session level segment filter list from the
 supplied expressions, interpreted as condition filters.
 

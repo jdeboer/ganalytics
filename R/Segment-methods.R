@@ -9,6 +9,8 @@ NULL
 
 # ---- Include, Exclude ----
 
+# This function takes one or more gaSegmentFilter, expressions or conditions
+# and combines them into a gaSegmentFilterList, which has a single scope applied.
 segment_scope_negate <- function(object, ..., scope, negate = NULL) {
   exprList <- list(object, ...)
   exprList <- lapply(exprList, function(expr){
@@ -43,23 +45,17 @@ setMethod(
 
 #' @describeIn SegmentConditionFilter Create a non-sequential segment condition
 #'   filter from one or more expressions. All conditions within the filter must
-#'   hold true within a single session.
+#'   hold true within a single session if applied to a gaSegmentFilterList
+#'   scoped at session-level, or to a single hit if scoped at user-level.
 setMethod(
   f = "SegmentConditionFilter",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ..., negation) {
     exprList <- list(object, ...)
+    nested <- sapply(exprList, is, "gaSegmentConditionFilter")
+    exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
     new("gaSegmentConditionFilter", exprList, negation = negation)
-  }
-)
-
-#' @describeIn SegmentConditionFilter Returns itself.
-setMethod(
-  f = "SegmentConditionFilter",
-  signature = "gaSegmentConditionFilter",
-  definition = function(object) {
-    object
   }
 )
 
@@ -97,7 +93,7 @@ setMethod(
 #' @describeIn SegmentFilters Returns itself.
 setMethod(
   f = "SegmentFilters",
-  signature = "gaSegmentFilterList",
+  signature = c("gaSegmentFilterList", "missing"),
   definition = function(object) {
     object
   }
@@ -127,17 +123,6 @@ setMethod(
 
 # ---- PerSession, PerUser ----
 
-#' @describeIn PerSession Set the scope of the supplied segment filters to
-#'   session level.
-setMethod(
-  f = "PerSession",
-  signature = "gaSegmentFilterList",
-  definition = function(object, ...) {
-    ScopeLevel(object) <- "sessions"
-    SegmentFilters(object, ...)
-  }
-)
-
 #' @describeIn PerSession Create a session level segment filter list from the
 #'   supplied expressions, interpreted as condition filters.
 setMethod(
@@ -152,7 +137,7 @@ setMethod(
 #'   session-level.
 setMethod(
   f = "PerSession",
-  signature = "gaMetExpr",
+  signature = c("gaMetExpr"),
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perSession"
@@ -160,17 +145,6 @@ setMethod(
     } else {
       SegmentFilters(object, ..., scope = "sessions")
     }
-  }
-)
-
-#' @describeIn PerUser Set the scope of the supplied segment filter list to user
-#'   level.
-setMethod(
-  f = "PerUser",
-  signature = "gaSegmentFilterList",
-  definition = function(object, ...) {
-    ScopeLevel(object) <- "users"
-    SegmentFilters(object, ...)
   }
 )
 
@@ -188,28 +162,13 @@ setMethod(
 #'   user-level.
 setMethod(
   f = "PerUser",
-  signature = "gaMetExpr",
+  signature = c("gaMetExpr"),
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perUser"
       object
     } else {
       SegmentFilters(object, ..., scope = "users")
-    }
-  }
-)
-
-#' @describeIn PerHit Set the scope of the supplied metric condition to
-#'   hit-level.
-setMethod(
-  f = "PerHit",
-  signature = "gaMetExpr",
-  definition = function(object, ...) {
-    if (missing(...)) {
-      ScopeLevel(object) <- "perHit"
-      object
-    } else {
-      Sequence(And(object, ...))
     }
   }
 )
@@ -224,23 +183,38 @@ setMethod(
   }
 )
 
+#' @describeIn PerHit Set the scope of the supplied metric condition to
+#'   hit-level.
+setMethod(
+  f = "PerHit",
+  signature = c("gaMetExpr"),
+  definition = function(object, ...) {
+    if (missing(...)) {
+      ScopeLevel(object) <- "perHit"
+      object
+    } else {
+      Sequence(And(object, ...))
+    }
+  }
+)
+
 # ---- Segment, Segment<- ----
 
 #' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
 setMethod(
   f = "Segment",
-  signature = "ANY",
+  signature = "numeric",
   definition = function(object) {
     as(object, "gaSegmentId")
   }
 )
 
-#' @describeIn Segment returns itself.
+#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
 setMethod(
   f = "Segment",
-  signature = "gaDynSegment",
+  signature = "character",
   definition = function(object) {
-    object
+    as(object, "gaSegmentId")
   }
 )
 
@@ -248,38 +222,48 @@ setMethod(
 #'   expressions.
 setMethod(
   f = "Segment",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr) {
-      SegmentFilters(
-        SegmentConditionFilter(expr),
-        scope = scope
+    if (missing(scope)) scope <- NA
+    segment_list <- list(object, ...)
+
+    segment_list <- lapply(segment_list, function(segment_def) {
+      tryCatch(
+        {
+          stopifnot(class(segment_def) != "list")
+          as(segment_def, "gaSegmentFilterList")
+        },
+        error = function(e) {
+          segment_def
+        }
       )
     })
-    new("gaDynSegment", exprList)
-  }
-)
+    filter_lists <- sapply(segment_list, is, "gaSegmentFilterList")
+    proper_segments <- sapply(segment_list, is, ".gaSegment")
 
-#' @describeIn Segment Create a dynamic segment from the supplied segment
-#'   filters.
-setMethod(
-  f = "Segment",
-  signature = ".gaSegmentFilter",
-  definition = function(object, ..., scope) {
-    Segment(SegmentFilters(object, ..., scope = scope))
-  }
-)
-
-#' @describeIn Segment Create a dynamic segment using the supplied scoped lists
-#'   of segment filters.
-setMethod(
-  f = "Segment",
-  signature = "gaSegmentFilterList",
-  definition = function(object, ..., scope) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, SegmentFilters, scope = scope)
-    new("gaDynSegment", exprList)
+    segment_list <- c(
+      lapply(
+        unlist(
+          segment_list[!(filter_lists | proper_segments)],
+          recursive = FALSE
+        ),
+        as, ".gaSegment"
+      ),
+      segment_list[proper_segments],
+      if (any(filter_lists)) {
+        list(
+          new(
+            "gaDynSegment",
+            if (!is.na(scope)) {
+              lapply(segment_list[filter_lists], ScopeLevel, scope)
+            } else {
+              segment_list[filter_lists]
+            }
+          )
+        )
+      }
+    )
+    new("gaSegmentList", segment_list)
   }
 )
 
@@ -289,17 +273,6 @@ setMethod(
   signature = "NULL",
   definition = function(object) {
     new("gaDynSegment", list())
-  }
-)
-
-#' @describeIn Segment Change the definition of a dynamic segment using the
-#'   supplied expression.
-setMethod(
-  f = "Segment<-",
-  signature = c("gaDynSegment", "andExpr"),
-  definition = function(object, value) {
-    as(object, "andExpr") <- value
-    object
   }
 )
 

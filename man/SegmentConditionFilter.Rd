@@ -3,16 +3,12 @@
 \docType{methods}
 \name{SegmentConditionFilter}
 \alias{SegmentConditionFilter}
-\alias{SegmentConditionFilter,.compoundExpr-method}
-\alias{SegmentConditionFilter,gaSegmentConditionFilter-method}
+\alias{SegmentConditionFilter,ANY-method}
 \title{SegmentConditionFilter.}
 \usage{
 SegmentConditionFilter(object, ..., negation = FALSE)
 
-\S4method{SegmentConditionFilter}{.compoundExpr}(object, ...,
-  negation = FALSE)
-
-\S4method{SegmentConditionFilter}{gaSegmentConditionFilter}(object)
+\S4method{SegmentConditionFilter}{ANY}(object, ..., negation = FALSE)
 }
 \arguments{
 \item{object}{An expression to be used as a non-sequential segment condition.}
@@ -30,10 +26,9 @@ Create a new gaSegmentConditionFilter object
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: Create a non-sequential segment condition
+\item \code{ANY}: Create a non-sequential segment condition
 filter from one or more expressions. All conditions within the filter must
-hold true within a single session.
-
-\item \code{gaSegmentConditionFilter}: Returns itself.
+hold true within a single session if applied to a gaSegmentFilterList
+scoped at session-level, or to a single hit if scoped at user-level.
 }}
 

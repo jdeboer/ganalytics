@@ -5,12 +5,9 @@
 \alias{PerUser}
 \alias{PerUser,ANY-method}
 \alias{PerUser,gaMetExpr-method}
-\alias{PerUser,gaSegmentFilterList-method}
 \title{PerUser.}
 \usage{
 PerUser(object, ...)
-
-\S4method{PerUser}{gaSegmentFilterList}(object, ...)
 
 \S4method{PerUser}{ANY}(object, ...)
 
@@ -26,9 +23,6 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegmentFilterList}: Set the scope of the supplied segment filter list to user
-level.
-
 \item \code{ANY}: Create a user-level segment filter list from the supplied
 expressions, each interpreted as an include segment filter.
 
