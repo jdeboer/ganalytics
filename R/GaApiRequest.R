@@ -7,7 +7,6 @@
 #' @importFrom selectr querySelector querySelectorAll
 #' @importFrom XML xmlParse xmlToList xmlApply
 #' @importFrom plyr laply aaply
-#' @importFrom testthat skip
 NULL
 
 # This will be initialised using GoogleApiCreds() at time of package being loaded.
@@ -21,19 +20,6 @@ set_creds()
 
 get_creds <- function() {
   get("creds", google_api)
-}
-
-check_api <- function() {
-  if (length(get_creds()) == 0) {
-    skip("API not available because no API credentials were found.")
-  } else {
-    tryCatch(
-      view <- GaAccount("30481")$properties[["UA-30481-1"]]$views[["1174"]],
-      error = function(e) {
-        skip("View used for testing is unavailable.")
-      }
-    )
-  }
 }
 
 #' Google APIs OAuth 2.0 Credentials.
