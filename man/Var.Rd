@@ -10,12 +10,10 @@
 \alias{GaVar<-,.expr,character-method}
 \alias{GaVar<-,.gaVar,character-method}
 \alias{McfVar}
-\alias{McfVar,.mcfVar-method}
-\alias{McfVar,character-method}
+\alias{McfVar,ANY-method}
 \alias{McfVar<-}
 \alias{RtVar}
-\alias{RtVar,.rtVar-method}
-\alias{RtVar,character-method}
+\alias{RtVar,ANY-method}
 \alias{RtVar<-}
 \alias{Var}
 \alias{Var,.expr-method}
@@ -62,13 +60,9 @@ RtVar(object) <- value
 
 \S4method{GaVar}{.gaVarList}(object)
 
-\S4method{McfVar}{.mcfVar}(object)
+\S4method{McfVar}{ANY}(object)
 
-\S4method{McfVar}{character}(object)
-
-\S4method{RtVar}{.rtVar}(object)
-
-\S4method{RtVar}{character}(object)
+\S4method{RtVar}{ANY}(object)
 }
 \arguments{
 \item{object}{an object that inherits from or extends the class '.var',
@@ -144,13 +138,9 @@ dimension or metric used within that Google Analytics expression.
 
 \item \code{.gaVarList}: Get the variables of a .gaVarList.
 
-\item \code{.mcfVar}: Get the value of a .mcfVar object.
+\item \code{ANY}: McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
 
-\item \code{character}: McfVar takes a MCF variable and determines whether to return a Dimension or Metric object
-
-\item \code{.rtVar}: Get the value of a .rtVar object.
-
-\item \code{character}: McfVar takes a RT variable and determines whether to return a Dimension or Metric object
+\item \code{ANY}: McfVar takes a RT variable and determines whether to return a Dimension or Metric object
 }}
 \examples{
 Var("source")

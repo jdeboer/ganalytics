@@ -3,58 +3,30 @@
 \docType{methods}
 \name{DateRange}
 \alias{DateRange}
-\alias{DateRange,.standardQuery,ANY-method}
-\alias{DateRange,Date,Date-method}
-\alias{DateRange,Interval,ANY-method}
-\alias{DateRange,character,character-method}
-\alias{DateRange,dateRange,ANY-method}
+\alias{DateRange,ANY,ANY-method}
+\alias{DateRange,ANY,missing-method}
 \alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-}
-\alias{DateRange<-,.standardQuery,.standardQuery-method}
-\alias{DateRange<-,.standardQuery,Date-method}
-\alias{DateRange<-,.standardQuery,Interval-method}
-\alias{DateRange<-,.standardQuery,character-method}
-\alias{DateRange<-,.standardQuery,dateRange-method}
-\alias{DateRange<-,dateRange,.standardQuery-method}
-\alias{DateRange<-,dateRange,Date-method}
-\alias{DateRange<-,dateRange,Interval-method}
-\alias{DateRange<-,dateRange,character-method}
-\alias{DateRange<-,dateRange,dateRange-method}
-\alias{EndDate}
+\alias{DateRange<-,ANY-method}
 \alias{EndDate,.standardQuery-method}
 \alias{EndDate,Interval-method}
 \alias{EndDate,character-method}
 \alias{EndDate,dateRange-method}
 \alias{EndDate,gaView-method}
-\alias{EndDate<-}
-\alias{EndDate<-,.standardQuery,Date-method}
-\alias{EndDate<-,.standardQuery,character-method}
-\alias{EndDate<-,dateRange,Date-method}
-\alias{EndDate<-,dateRange,character-method}
-\alias{StartDate}
+\alias{EndDate<-,.standardQuery-method}
+\alias{EndDate<-,dateRange-method}
 \alias{StartDate,.standardQuery-method}
 \alias{StartDate,Interval-method}
 \alias{StartDate,character-method}
 \alias{StartDate,dateRange-method}
 \alias{StartDate,gaView-method}
-\alias{StartDate<-}
-\alias{StartDate<-,.standardQuery,Date-method}
-\alias{StartDate<-,.standardQuery,character-method}
-\alias{StartDate<-,dateRange,Date-method}
-\alias{StartDate<-,dateRange,character-method}
+\alias{StartDate<-,.standardQuery-method}
+\alias{StartDate<-,dateRange-method}
 \title{DateRange.}
 \usage{
 DateRange(object, endDate)
 
 DateRange(object) <- value
-
-StartDate(object, value)
-
-StartDate(object) <- value
-
-EndDate(object, value)
-
-EndDate(object) <- value
 
 \S4method{StartDate}{character}(object)
 
@@ -76,53 +48,21 @@ EndDate(object) <- value
 
 \S4method{EndDate}{gaView}(object)
 
-\S4method{StartDate}{dateRange,character}(object) <- value
+\S4method{StartDate}{dateRange}(object) <- value
 
-\S4method{EndDate}{dateRange,character}(object) <- value
+\S4method{EndDate}{dateRange}(object) <- value
 
-\S4method{StartDate}{dateRange,Date}(object) <- value
+\S4method{StartDate}{.standardQuery}(object) <- value
 
-\S4method{EndDate}{dateRange,Date}(object) <- value
+\S4method{EndDate}{.standardQuery}(object) <- value
 
-\S4method{StartDate}{.standardQuery,character}(object) <- value
+\S4method{DateRange}{ANY,ANY}(object, endDate)
 
-\S4method{EndDate}{.standardQuery,character}(object) <- value
-
-\S4method{StartDate}{.standardQuery,Date}(object) <- value
-
-\S4method{EndDate}{.standardQuery,Date}(object) <- value
-
-\S4method{DateRange}{dateRange,ANY}(object)
-
-\S4method{DateRange}{character,character}(object, endDate)
-
-\S4method{DateRange}{Date,Date}(object, endDate)
-
-\S4method{DateRange}{.standardQuery,ANY}(object)
-
-\S4method{DateRange}{Interval,ANY}(object)
+\S4method{DateRange}{ANY,missing}(object)
 
 \S4method{DateRange}{gaView,ANY}(object)
 
-\S4method{DateRange}{dateRange,character}(object) <- value
-
-\S4method{DateRange}{dateRange,Date}(object) <- value
-
-\S4method{DateRange}{dateRange,dateRange}(object) <- value
-
-\S4method{DateRange}{dateRange,.standardQuery}(object) <- value
-
-\S4method{DateRange}{dateRange,Interval}(object) <- value
-
-\S4method{DateRange}{.standardQuery,character}(object) <- value
-
-\S4method{DateRange}{.standardQuery,Date}(object) <- value
-
-\S4method{DateRange}{.standardQuery,dateRange}(object) <- value
-
-\S4method{DateRange}{.standardQuery,Interval}(object) <- value
-
-\S4method{DateRange}{.standardQuery,.standardQuery}(object) <- value
+\S4method{DateRange}{ANY}(object) <- value
 }
 \arguments{
 \item{object}{The start date of the date range or a object to coerce to a
@@ -138,14 +78,6 @@ range.}
 Get the date range.
 
 Set the date range.
-
-Get the start date.
-
-Set the start date.
-
-Get the end date of the date range.
-
-Set the endDate of the date range.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -171,68 +103,29 @@ object.
 
 \item \code{gaView}: Get the last day a view received hits.
 
-\item \code{object = dateRange,value = character}: Set a new start date for a date range.
+\item \code{dateRange}: Set a new start date for a date range.
 
-\item \code{object = dateRange,value = character}: Set a new end date for a date range.
+\item \code{dateRange}: Set a new end date for a date range.
 
-\item \code{object = dateRange,value = Date}: Set a new start date for a date range.
+\item \code{.standardQuery}: Set a new start date for a query.
 
-\item \code{object = dateRange,value = Date}: Set a new end date for a date range.
+\item \code{.standardQuery}: Set a new end date for a query.
 
-\item \code{object = .standardQuery,value = character}: Set a new start date for a query.
-
-\item \code{object = .standardQuery,value = character}: Set a new end date for a query.
-
-\item \code{object = .standardQuery,value = Date}: Set a new start date for a query.
-
-\item \code{object = .standardQuery,value = Date}: Set a new end date for a query.
-
-\item \code{object = dateRange,endDate = ANY}: returns itself.
-
-\item \code{object = character,endDate = character}: generates a date range object from a vector of start
-and end date character vectors.
-
-\item \code{object = Date,endDate = Date}: generates a date range object using the supplied
+\item \code{object = ANY,endDate = ANY}: generates a date range object using the supplied
 vectors of start date and end dates.
 
-\item \code{object = .standardQuery,endDate = ANY}: Returns the date range of the given query.
-
-\item \code{object = Interval,endDate = ANY}: Coerces a lubridate Interval to a ganalytics dateRange
-object.
+\item \code{object = ANY,endDate = missing}: Returns the date range of the given query or coerces
+the supplied object into a dateRange.
 
 \item \code{object = gaView,endDate = ANY}: Returns the maximum date range of when a view has been
 recieving hits.
 
-\item \code{object = dateRange,value = character}: Change the date range of the date range object using
-the dates supplied in the character string of length 2, where the first
-element is the start date and second being the end date.
-
-\item \code{object = dateRange,value = Date}: Change the date range of the supplied date range object
-using the start and end date specified in the first and second element of
-the supplied Date vecotr.
-
-\item \code{object = dateRange,value = dateRange}: Set the date range of a date range object to that of
-the second supplied date range.
-
-\item \code{object = dateRange,value = .standardQuery}: Replace the date range with the date range from the
-supplied query.
-
-\item \code{object = dateRange,value = Interval}: Replace the date range with date range from the
-supplied lubridate Interval.
-
-\item \code{object = .standardQuery,value = character}: Replace the date range of a query with a start and end
-date specified in the supplied character vector of length 2.
-
-\item \code{object = .standardQuery,value = Date}: Replace the date range of the supplied query with the
-start and end date specified in the supplied date vector of length 2.
-
-\item \code{object = .standardQuery,value = dateRange}: Replace the date range of the query with the supplied
-ganalytics dateRange object.
-
-\item \code{object = .standardQuery,value = Interval}: Set the date range of a query using the supplied
-lubridate Interval
-
-\item \code{object = .standardQuery,value = .standardQuery}: Set the date range of a query using the date range of
-another query.
+\item \code{ANY}: Change the date range of the date range object using
+the dates supplied in a vector of length 2, where the first element is the
+start date and second being the end date.
 }}
+\seealso{
+Other date range functions: \code{\link{EndDate}},
+  \code{\link{StartDate}}
+}
 

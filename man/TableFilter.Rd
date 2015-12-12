@@ -3,11 +3,7 @@
 \docType{methods}
 \name{TableFilter}
 \alias{TableFilter}
-\alias{TableFilter,.compoundExpr-method}
-\alias{TableFilter,.query-method}
-\alias{TableFilter,.tableFilter-method}
-\alias{TableFilter,NULL-method}
-\alias{TableFilter,gaDynSegment-method}
+\alias{TableFilter,ANY-method}
 \alias{TableFilter<-}
 \alias{TableFilter<-,.query-method}
 \title{TableFilter.}
@@ -16,15 +12,7 @@ TableFilter(object, value)
 
 TableFilter(object) <- value
 
-\S4method{TableFilter}{.query}(object)
-
-\S4method{TableFilter}{`NULL`}(object)
-
-\S4method{TableFilter}{.tableFilter}(object)
-
-\S4method{TableFilter}{.compoundExpr}(object)
-
-\S4method{TableFilter}{gaDynSegment}(object)
+\S4method{TableFilter}{ANY}(object)
 
 \S4method{TableFilter}{.query}(object) <- value
 }
@@ -41,17 +29,8 @@ Set the filter.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.query}: Return the TableFilter that has been applied to the
-given query
-
-\item \code{NULL}: Returns NULL
-
-\item \code{.tableFilter}: Returns itself
-
-\item \code{.compoundExpr}: Coerce an expression into a table filter.
-
-\item \code{gaDynSegment}: Coerce a segment into a table filter. Only possible
-for segments without sequential conditions.
+\item \code{ANY}: Return the TableFilter that has been applied to the
+given query, or coerce the given object into a table filter.
 
 \item \code{.query}: Method to replace the table filter of a query
 }}

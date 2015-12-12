@@ -9,16 +9,16 @@
 #' @importFrom methods setMethod new
 NULL
 
-#'SplitDateRange
+#' SplitDateRange
 #'
-#'Splits a gaDateRange object into N pieces. Useful for splitting a query into
-#'smaller chunks in order to overcome sampling.
+#' Splits a gaDateRange object into N pieces. Useful for splitting a query into
+#' smaller chunks in order to overcome sampling.
 #'
-#'@param dateRange the gaDateRange object to be split
-#'@param N the number of the separate date ranges to be split into; use 0 for
-#'  single days.
+#' @param dateRange the gaDateRange object to be split
+#' @param N the number of the separate date ranges to be split into; use 0 for
+#'   single days.
 #'
-#'@export
+#' @export
 SplitDateRange <- function(dateRange, N) {
   # TO DO
   # Assert:
@@ -62,23 +62,15 @@ GetDataByDateRange <- function(query, dates) {
 
 #' @describeIn DateRange Coerce a character vector into a Google Analytics date
 #'   object.
-setMethod(
-  f = "StartDate",
-  signature = "character",
-  definition = function(object) {
-    as.Date(parse_date(object, output_format = kGaDateInFormat), format = kGaDateInFormat)
-  }
-)
+setMethod("StartDate", "character", function(object) {
+  as(object, "Date")
+})
 
 #' @describeIn DateRange Coerce a character vector into a Google Analytics date
 #'   object.
-setMethod(
-  f = "EndDate",
-  signature = "character",
-  definition = function(object) {
-    as.Date(parse_date(object, output_format = kGaDateInFormat), format = kGaDateInFormat)
-  }
-)
+setMethod("EndDate", "character", function(object) {
+  as(object, "Date")
+})
 
 #' @describeIn DateRange Return the start dates of a date range vector
 setMethod("StartDate", "dateRange", function(object) {object@startDate})
@@ -131,9 +123,9 @@ setMethod("EndDate", "gaView", function(object) {
 #' @describeIn DateRange Set a new start date for a date range.
 setMethod(
   f = "StartDate<-",
-  signature = c("dateRange", "character"),
+  signature = c("dateRange", "ANY"),
   definition = function(object, value) {
-    startDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
+    startDate <- as(value, "Date")
     endDate <- EndDate(object)
     DateRange(startDate, endDate)
   }
@@ -142,32 +134,10 @@ setMethod(
 #' @describeIn DateRange Set a new end date for a date range.
 setMethod(
   f = "EndDate<-",
-  signature = c("dateRange", "character"),
+  signature = c("dateRange", "ANY"),
   definition = function(object, value) {
     startDate <- StartDate(object)
-    endDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    DateRange(startDate, endDate)
-  }
-)
-
-#' @describeIn DateRange Set a new start date for a date range.
-setMethod(
-  f = "StartDate<-",
-  signature = c("dateRange", "Date"),
-  definition = function(object, value) {
-    startDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    endDate <- EndDate(object)
-    DateRange(startDate, endDate)
-  }
-)
-
-#' @describeIn DateRange Set a new end date for a date range.
-setMethod(
-  f = "EndDate<-",
-  signature = c("dateRange", "Date"),
-  definition = function(object, value) {
-    startDate <- StartDate(object)
-    endDate <- as.Date(parse_date(value, output_format = kGaDateInFormat), format = kGaDateInFormat)
+    endDate <- as(value, "Date")
     DateRange(startDate, endDate)
   }
 )
@@ -175,7 +145,7 @@ setMethod(
 #' @describeIn DateRange Set a new start date for a query.
 setMethod(
   f = "StartDate<-",
-  signature = c(".standardQuery", "character"),
+  signature = c(".standardQuery", "ANY"),
   definition = function(object, value) {
     dateRange <- DateRange(object)
     StartDate(dateRange) <- value
@@ -187,31 +157,7 @@ setMethod(
 #' @describeIn DateRange Set a new end date for a query.
 setMethod(
   f = "EndDate<-",
-  signature = c(".standardQuery", "character"),
-  definition = function(object, value) {
-    dateRange <- DateRange(object)
-    EndDate(dateRange) <- value
-    DateRange(object) <- dateRange
-    object
-  }
-)
-
-#' @describeIn DateRange Set a new start date for a query.
-setMethod(
-  f = "StartDate<-",
-  signature = c(".standardQuery", "Date"),
-  definition = function(object, value) {
-    dateRange <- DateRange(object)
-    StartDate(dateRange) <- value
-    DateRange(object) <- dateRange
-    object
-  }
-)
-
-#' @describeIn DateRange Set a new end date for a query.
-setMethod(
-  f = "EndDate<-",
-  signature = c(".standardQuery", "Date"),
+  signature = c(".standardQuery", "ANY"),
   definition = function(object, value) {
     dateRange <- DateRange(object)
     EndDate(dateRange) <- value
@@ -222,38 +168,21 @@ setMethod(
 
 # DateRange
 
-#' @describeIn DateRange returns itself.
-setMethod("DateRange", "dateRange", function(object) {object})
-
-#' @describeIn DateRange generates a date range object from a vector of start
-#'   and end date character vectors.
-setMethod(
-  f = "DateRange",
-  signature = c("character", "character"),
-  definition = function(object, endDate) {
-    startDate <- as.Date(parse_date(object, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    endDate <- as.Date(parse_date(endDate, output_format = kGaDateInFormat), format = kGaDateInFormat)
-    new("dateRange", startDate, endDate)
-  }
-)
-
 #' @describeIn DateRange generates a date range object using the supplied
 #'   vectors of start date and end dates.
 setMethod(
   f = "DateRange",
-  signature = c("Date", "Date"),
+  signature = c("ANY", "ANY"),
   definition = function(object, endDate) {
-    startDate <- object
+    startDate <- as(object, "Date")
+    endDate <- as(endDate, "Date")
     new("dateRange", startDate, endDate)
   }
 )
 
-#' @describeIn DateRange Returns the date range of the given query.
-setMethod("DateRange", ".standardQuery", function(object) {object@dateRange})
-
-#' @describeIn DateRange Coerces a lubridate Interval to a ganalytics dateRange
-#'   object.
-setMethod("DateRange", "Interval", function(object) {
+#' @describeIn DateRange Returns the date range of the given query or coerces
+#'   the supplied object into a dateRange.
+setMethod("DateRange", c("ANY", "missing"), function(object) {
   as(object, "dateRange")
 })
 
@@ -278,120 +207,22 @@ setMethod("DateRange", "gaView", function(object) {
 })
 
 #' @describeIn DateRange Change the date range of the date range object using
-#'   the dates supplied in the character string of length 2, where the first
-#'   element is the start date and second being the end date.
+#'   the dates supplied in a vector of length 2, where the first element is the
+#'   start date and second being the end date.
 setMethod(
   f = "DateRange<-",
-  signature = c("dateRange", "character"),
+  signature = c("ANY", "ANY"),
   definition = function(object, value) {
     if (length(value) != 2) {
-      stop("value must contain the start date and end date in a character vecotr of legnth 2.")
+      as(object, "dateRange") <- as(value, "dateRange")
+      object
     } else {
-      startDate <- as.Date(parse_date(value[1], output_format = kGaDateInFormat), format = kGaDateInFormat)
-      endDate <- as.Date(parse_date(value[2], output_format = kGaDateInFormat), format = kGaDateInFormat)
+      startDate <- as(value[1], "Date")
+      endDate <- as(value[2], "Date")
       new("dateRange", startDate, endDate)
-    }
-  }
-)
-
-#' @describeIn DateRange Change the date range of the supplied date range object
-#'   using the start and end date specified in the first and second element of
-#'   the supplied Date vecotr.
-setMethod(
-  f = "DateRange<-",
-  signature = c("dateRange", "Date"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange Set the date range of a date range object to that of
-#'   the second supplied date range.
-setMethod(
-  f = "DateRange<-",
-  signature = c("dateRange", "dateRange"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange Replace the date range with the date range from the
-#'   supplied query.
-setMethod(
-  f = "DateRange<-",
-  signature = c("dateRange", ".standardQuery"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange Replace the date range with date range from the
-#'   supplied lubridate Interval.
-setMethod(
-  f = "DateRange<-",
-  signature = c("dateRange", "Interval"),
-  definition = function(object, value) {
-    object <- as(value, "dateRange")
-  }
-)
-
-#' @describeIn DateRange Replace the date range of a query with a start and end
-#'   date specified in the supplied character vector of length 2.
-setMethod(
-  f = "DateRange<-",
-  signature = c(".standardQuery", "character"),
-  definition = function(object, value) {
-    if (length(value) != 2) {
-      stop("value must contain the start date and end date in a character vecotr of legnth 2.")
-    } else {
-      startDate <- as.Date(parse_date(value[1], output_format = kGaDateInFormat), format = kGaDateInFormat)
-      endDate <- as.Date(parse_date(value[2], output_format = kGaDateInFormat), format = kGaDateInFormat)
       newDateRange <- new("dateRange", startDate, endDate)
       DateRange(object) <- newDateRange
       object
     }
-  }
-)
-
-#' @describeIn DateRange Replace the date range of the supplied query with the
-#'   start and end date specified in the supplied date vector of length 2.
-setMethod("DateRange<-", c(".standardQuery", "Date"), function(object, value) {
-  as(object, "dateRange") <- as(value, "dateRange")
-  object
-})
-
-#' @describeIn DateRange Replace the date range of the query with the supplied
-#'   ganalytics dateRange object.
-setMethod(
-  f = "DateRange<-",
-  signature = c(".standardQuery", "dateRange"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange Set the date range of a query using the supplied
-#'   lubridate Interval
-setMethod(
-  f = "DateRange<-",
-  signature = c(".standardQuery", "Interval"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
-  }
-)
-
-#' @describeIn DateRange Set the date range of a query using the date range of
-#'   another query.
-setMethod(
-  f = "DateRange<-",
-  signature = c(".standardQuery", ".standardQuery"),
-  definition = function(object, value) {
-    as(object, "dateRange") <- value
-    object
   }
 )

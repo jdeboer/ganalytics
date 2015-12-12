@@ -7,7 +7,6 @@
 \alias{ScopeLevel,gaSegmentFilterList-method}
 \alias{ScopeLevel<-}
 \alias{ScopeLevel<-,gaMetExpr,character-method}
-\alias{ScopeLevel<-,gaSegMetExpr,character-method}
 \alias{ScopeLevel<-,gaSegmentFilterList,character-method}
 \title{ScopeLevel.}
 \usage{
@@ -16,8 +15,6 @@ ScopeLevel(object, value)
 ScopeLevel(object) <- value
 
 \S4method{ScopeLevel}{gaSegMetExpr}(object)
-
-\S4method{ScopeLevel}{gaSegMetExpr,character}(object) <- value
 
 \S4method{ScopeLevel}{gaMetExpr,character}(object) <- value
 
@@ -43,9 +40,6 @@ For metric expressions one of 'perUser', 'perSession' or 'perHit'
 \itemize{
 \item \code{gaSegMetExpr}: Return the scope of the supplied metric used within a
 segment definition.
-
-\item \code{object = gaSegMetExpr,value = character}: Set the scope, as described in a character value, to
-be used for a segment metric expression.
 
 \item \code{object = gaMetExpr,value = character}: Set the scope, as described by a character value, to
 be applied to the supplied metric condition for use within a segment

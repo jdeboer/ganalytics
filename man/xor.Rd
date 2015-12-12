@@ -21,6 +21,6 @@ Generate an expression that gives the Exclusive-OR of two expressions.
 \item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
 }}
 \seealso{
-\code{link{Or}} \code{link{And}} \code{link{Not}}
+\code{\link{Or}} \code{\link{And}} \code{\link{Not}}
 }
 

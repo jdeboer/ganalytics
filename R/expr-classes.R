@@ -4,7 +4,7 @@
 #' @include Expr-generics.R
 #' @include globaldata.R
 #' @include utils.R
-#' @importFrom methods setClass setClassUnion
+#' @importFrom methods setClass setClassUnion prototype
 #' @importFrom assertthat validate_that
 NULL
 
@@ -181,6 +181,9 @@ setClass(
       if (nchar(object@operand) > 128) {
         return(paste0("Regular expressions in GA Dimension Expressions cannot exceed 128 chars. Length = ", nchar(object@operand)))
       }
+    }
+    if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
+      return("The maximum expression length for dimension conditions is 1024 characters.")
     }
     if (object@comparator %in% c("!=", "==", "<>", "[]")) {
       ValidGaOperand(object@var, object@operand)

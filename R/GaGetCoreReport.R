@@ -1,6 +1,7 @@
 #' @include query-classes.R
 #' @include Query-generics.R
 #' @include GaApiRequest.R
+#' @importFrom plyr llply
 NULL
 
 GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery", segmentName = NULL) {

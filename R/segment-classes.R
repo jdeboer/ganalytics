@@ -19,6 +19,9 @@ setClass(
   "gaSegmentCondition",
   contains = "andExpr",
   validity = function(object) {
+    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
+      return("A maximum of 10 dimension or metric conditions per segment.")
+    }
     if (all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
         (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
@@ -101,6 +104,7 @@ setClass(
   "gaSegmentSequenceFilter",
   contains = c("list", ".gaSegmentFilter"),
   validity = function(object) {
+    validate_that(length(object) <= 10)
     if (all_inherit(object@.Data, "gaSegmentSequenceStep")) {
       TRUE
     } else {
@@ -166,10 +170,6 @@ setClass(
   validity = function(object) {
     if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
-    } else if (identical(nchar(as(object, "character")) > 1024, TRUE)) {
-      "The maximum expression length for dimension conditions is 1024 characters."
-    } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      "A maximum of 10 dimension or metric conditions per segment."
     } else TRUE
   }
 )

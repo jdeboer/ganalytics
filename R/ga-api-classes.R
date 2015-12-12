@@ -1,4 +1,7 @@
 #' @include GaApiRequest.R
+#' @importFrom R6 R6Class
+#' @importFrom lubridate ymd_hms
+#' @importFrom plyr l_ply alply
 
 get_privates <- function(class_gen){
   with(class_gen, c(private_fields, private_methods))

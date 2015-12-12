@@ -21,6 +21,6 @@ Treat a step within a sequence as happening immediately after any preceding
 steps in the sequence, i.e. 'immediately following'.
 }
 \seealso{
-Sequence
+\code{\link{Sequence}}
 }
 

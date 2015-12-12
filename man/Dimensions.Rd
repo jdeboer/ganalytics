@@ -3,11 +3,8 @@
 \docType{methods}
 \name{Dimensions}
 \alias{Dimensions}
-\alias{Dimensions,.dimensions-method}
 \alias{Dimensions,.query-method}
-\alias{Dimensions,NULL-method}
-\alias{Dimensions,character-method}
-\alias{Dimensions,list-method}
+\alias{Dimensions,ANY-method}
 \alias{Dimensions<-}
 \alias{Dimensions<-,.query-method}
 \title{Dimensions.}
@@ -16,13 +13,7 @@ Dimensions(object, ...)
 
 Dimensions(object) <- value
 
-\S4method{Dimensions}{`NULL`}(object, ...)
-
-\S4method{Dimensions}{.dimensions}(object, ...)
-
-\S4method{Dimensions}{character}(object, ...)
-
-\S4method{Dimensions}{list}(object, ...)
+\S4method{Dimensions}{ANY}(object, ...)
 
 \S4method{Dimensions}{.query}(object)
 
@@ -43,15 +34,8 @@ Set the dimensions for the object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{NULL}: Returns NULL.
-
-\item \code{.dimensions}: Returns itself.
-
-\item \code{character}: Coerces the supplied character vector into a vector of
+\item \code{ANY}: Coerces the supplied character vector or list into a vector of
 Google Analytics dimensions.
-
-\item \code{list}: Coerces the supplied list into a vector of Google
-Analytics dimension variables.
 
 \item \code{.query}: Returns the dimensions used within the supplied query.
 

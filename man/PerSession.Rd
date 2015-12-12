@@ -3,19 +3,13 @@
 \docType{methods}
 \name{PerSession}
 \alias{PerSession}
-\alias{PerSession,.compoundExpr-method}
-\alias{PerSession,.gaSegmentFilter-method}
+\alias{PerSession,ANY-method}
 \alias{PerSession,gaMetExpr-method}
-\alias{PerSession,gaSegmentFilterList-method}
 \title{PerSession.}
 \usage{
 PerSession(object, ...)
 
-\S4method{PerSession}{gaSegmentFilterList}(object, ...)
-
-\S4method{PerSession}{.gaSegmentFilter}(object, ...)
-
-\S4method{PerSession}{.compoundExpr}(object, ...)
+\S4method{PerSession}{ANY}(object, ...)
 
 \S4method{PerSession}{gaMetExpr}(object, ...)
 }
@@ -29,13 +23,7 @@ Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegmentFilterList}: Set the scope of the supplied segment filters to
-session level.
-
-\item \code{.gaSegmentFilter}: Set the scope of the supplied segment filters to
-session level.
-
-\item \code{.compoundExpr}: Create a session level segment filter list from the
+\item \code{ANY}: Create a session level segment filter list from the
 supplied expressions, interpreted as condition filters.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to

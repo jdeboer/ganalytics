@@ -111,39 +111,29 @@ setMethod(
 
 # ---- Comparator, GaDimComparator, GaMetComparator ----
 
-#' @describeIn Comparator Returns itself.
-setMethod("Comparator", ".comparator", function(object) {object})
-
-#' @describeIn Comparator Replace the comparator with the comparator described
-#'   by the supplied character value.
-setMethod(
-  f = "Comparator<-",
-  signature = c(".comparator", "character"),
-  definition = function(object, value) {
-    as(object, "character") <- value
-    object
-  }
-)
-
 #' @describeIn Comparator Return the comparator used within the supplied
 #'   conditional expression.
-setMethod("Comparator", ".expr", function(object) {as(object, ".comparator")})
+setMethod("Comparator", "ANY", function(object) {as(object, ".comparator")})
 
 #' @describeIn Comparator Replace the comparator used in the supplied
 #'   conditional expression.
 setMethod(
   f = "Comparator<-",
-  signature = ".expr",
+  signature = c("ANY", "ANY"),
   definition = function(object, value) {
-    as(object, ".comparator") <- value
+    as(object, ".comparator") <- as(value, ".comparator")
     object
   }
 )
 
 #' @describeIn IsRegEx Test whether the supplied comparator is for a regular
 #'   expression.
-setMethod("IsRegEx", ".dimComparator", function(object) {object %in% c("=~", "!~")})
+setMethod("IsRegEx", ".dimComparator", function(object) {
+  object %in% c("=~", "!~")
+})
 
 #' @describeIn IsRegEx Test whether a conditional epxression is using regular
 #'   expression match.
-setMethod("IsRegEx", ".expr", function(object) {IsRegEx(Comparator(object))})
+setMethod("IsRegEx", ".expr", function(object) {
+  IsRegEx(Comparator(object))
+})

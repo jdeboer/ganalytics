@@ -19,7 +19,7 @@ test_that("segment expressions are correctly coerced to character string", {
           SegmentConditionFilter(GaExpr("deviceCategory", "=", "mobile")),
           scope = "users"
         )
-      ),
+      )[[1]],
       "character"),
     "sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/;users::condition::ga:deviceCategory==mobile")
 })

@@ -7,6 +7,9 @@
 #' @param endDate The end date of the date range. Alternatively, if
 #'   \code{object} is a '.query' object, then endDate is the replacement date
 #'   range.
+#'
+#' @family date range functions
+#'
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -37,8 +40,13 @@ setGeneric(
 #'
 #' Get the start date.
 #'
+#' @param object Object to get start date of.
+#' @param value value to set start date of object to.
+#'
+#' @family date range functions
+#'
 #' @export
-#' @rdname DateRange
+#' @rdname StartDate
 setGeneric(
   "StartDate",
   function(object, value) {},
@@ -51,7 +59,7 @@ setGeneric(
 #' Set the start date.
 #'
 #' @export
-#' @rdname DateRange
+#' @rdname StartDate
 setGeneric(
   "StartDate<-",
   function(object, value) {
@@ -65,8 +73,13 @@ setGeneric(
 #'
 #' Get the end date of the date range.
 #'
+#' @param object Object to get end date of.
+#' @param value value to set end date of object to.
+#'
+#' @family date range functions
+#'
 #' @export
-#' @rdname DateRange
+#' @rdname EndDate
 setGeneric(
   "EndDate",
   function(object, value) {},
@@ -79,7 +92,7 @@ setGeneric(
 #' Set the endDate of the date range.
 #'
 #' @export
-#' @rdname DateRange
+#' @rdname EndDate
 setGeneric(
   "EndDate<-",
   function(object, value) {

@@ -34,6 +34,10 @@ setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, t
   new(to, list(as(from, "gaSegmentConditionFilter")))
 })
 
+setAs(from = ".gaSegmentFilter", to = "gaSegmentFilterList", def = function(from, to) {
+  new(to, list(from, "gaSegmentConditionFilter"))
+})
+
 # Coercion to gaSegmentId
 
 setAs(from = "character", to = "gaSegmentId", def = simpleCoerce)
@@ -61,6 +65,30 @@ setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
 
 setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
   as(as(from, "andExpr"), to)
+})
+
+setAs(from = "gaSegmentFilterList", to = "gaDynSegment", def = function(from, to) {
+  new(to, list(from))
+})
+
+setAs(from = ".compoundExpr", to = ".gaSegment", def = function(from, to) {
+  as(from, "gaDynSegment")
+})
+
+setAs(from = "gaFilter", to = ".gaSegment", def = function(from, to) {
+  as(from, "gaDynSegment")
+})
+
+setAs(from = ".gaSegmentFilter", to = ".gaSegment", def = function(from, to) {
+  as(from, "gaDynSegment")
+})
+
+setAs(from = "gaSegmentFilterList", to = ".gaSegment", def = function(from, to) {
+  as(from, "gaDynSegment")
+})
+
+setAs(from = "gaDynSegment", to = ".gaSegment", def = function(from, to) {
+  as(from, "gaDynSegment")
 })
 
 # Coercion to numeric

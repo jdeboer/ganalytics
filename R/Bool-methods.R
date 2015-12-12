@@ -37,13 +37,29 @@ setMethod(
 #' @export
 setMethod("!", ".comparator", function(x) {Not(x)})
 
-#' @describeIn Not Invert the comparator of the condition expression.
+#' @describeIn Not Invert the comparator of a condition expression.
 setMethod(
   f = "Not",
   signature = ".expr",
   definition = function(object) {
     comparator <- as(object, ".comparator")
-    as(object, ".comparator") <- Not(comparator)
+    switch(
+      comparator,
+      "<>" = {
+        assert_that(is(object, ".metExpr"))
+        var <- as(object, ".var")
+        operand <- sort(as(object, ".operand"))
+        object <- Expr(var, "<", operand[1]) | Expr(var, ">", operand[2])
+      },
+      "[]" = {
+        operand <- as(object, ".operand")
+        operand <- paste0("^(", paste(operand, collapse = "|"), ")$")
+        comparator <- "!~"
+        var <- as(object, ".var")
+        object <- Expr(var, comparator, operand)
+      },
+      as(object, ".comparator") <- Not(comparator)
+    )
     object
   }
 )
@@ -52,7 +68,7 @@ setMethod(
 #' @export
 setMethod("!", ".expr", function(x) {Not(x)})
 
-#' @describeIn Not Apply De Morgan's Theorem to transform
+#' @describeIn Not Invert an OR expression using De Morgan's Theorem.
 setMethod(
   f = "Not",
   signature = "orExpr",
@@ -61,7 +77,7 @@ setMethod(
   }
 )
 
-#' @describeIn Not Invert an OR expression using De Morgan's Theroem.
+#' @describeIn Not Invert an OR expression using De Morgan's Theorem.
 #' @export
 setMethod("!", "orExpr", function(x) {Not(x)})
 
@@ -123,19 +139,11 @@ setMethod(
           expr <- unlist(expr, recursive = FALSE)
           expr <- lapply(expr, as, "orExpr")
         } else {
-          as(expr, "orExpr")
+          list(as(expr, "orExpr"))
         }
       }
     )
-    nested <- !sapply(exprList, is, "orExpr")
-    exprList <- c(
-      exprList[!nested],
-      unlist(
-        exprList[nested],
-        recursive = FALSE
-      )
-    )
-    new("andExpr", exprList)
+    new("andExpr", unlist(exprList, recursive = FALSE))
   }
 )
 

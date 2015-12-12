@@ -21,9 +21,6 @@ setClass(
     if (!all_inherit(object, ".metVar")) {
       return("Must be a list containing objects of class .metVar")
     } else TRUE
-    if (length(object) > kGaMax$metrics) {
-      return(paste("Maximum of", kGaMax$metrics, "metrics allowed."))
-    } else TRUE
   }
 )
 

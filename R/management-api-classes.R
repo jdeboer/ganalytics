@@ -1,5 +1,7 @@
 #' @include GaApiRequest.R
 #' @include ga-api-classes.R
+#' @importFrom R6 R6Class
+#' @importFrom plyr ldply alply mutate
 
 .gaManagementApi <- R6Class(
   ".gaManagementApi",
