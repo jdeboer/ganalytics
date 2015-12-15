@@ -94,7 +94,12 @@ setMethod("GetGaData", ".query", function(
   join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub(kAnyPrefix, "", as.character(Dimensions(query))))
 
   if (length(join_by_vars) == 0) {
-    data <- Reduce(function(x, y) {cbind(x, y)}, data_by_metric_group)
+    if (length(data_by_metric_group) > 1) {
+      required_rows <- 1:max(lapply(data_by_metric_group, nrow))
+      data <- Reduce(function(x, y) {cbind(x[required_rows, ], y[required_rows, ])}, data_by_metric_group)
+    } else {
+      data <- data_by_metric_group[[1]]
+    }
   } else {
     data <- Reduce(function(x, y) {join(x, y, by = join_by_vars, type = "full")}, data_by_metric_group)
   }
