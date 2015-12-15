@@ -91,7 +91,7 @@ setMethod("GetGaData", ".query", function(
     data
   })
 
-  join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub("^ga:", "", as.character(Dimensions(query))))
+  join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub(kAnyPrefix, "", as.character(Dimensions(query))))
 
   if (length(join_by_vars) == 0) {
     data <- Reduce(function(x, y) {cbind(x, y)}, data_by_metric_group)
@@ -99,7 +99,7 @@ setMethod("GetGaData", ".query", function(
     data <- Reduce(function(x, y) {join(x, y, by = join_by_vars, type = "full")}, data_by_metric_group)
   }
 
-  metric_columns <- sub("^ga:", "", metrics)
+  metric_columns <- sub(kAnyPrefix, "", metrics)
 
   data[metric_columns] <- lapply(data[metric_columns], function(col) {
     col[is.na(col)] <- 0
