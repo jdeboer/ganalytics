@@ -24,7 +24,7 @@ setClass(
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
-        (Operand(expr)[2] - Operand(expr)[1] + 1) <= 31
+        (as.Date(Operand(expr))[2] - as.Date(Operand(expr))[1] + 1) <= 31
       } else TRUE
     }))) {
       TRUE
