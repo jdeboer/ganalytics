@@ -1,6 +1,6 @@
 # Interactively querying Google Analytics reports
 Johann de Boer  
-2015-09-25  
+2015-12-19  
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
