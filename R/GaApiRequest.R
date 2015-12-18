@@ -34,12 +34,15 @@ get_creds <- function() {
 #'
 #' @export
 GoogleApiCreds <- function(
-  userName = character(0),
+  userName = Sys.getenv(paste0(appname, "_USER")),
   appCreds = NULL,
   cache = character(0),
   use_oob = FALSE,
   appname = "GOOGLE_APIS"
 ){
+  if (userName == "") {
+    userName <- character(0)
+  }
   cache_generic_file_name <- paste(tolower(appname), "auth.RDS", sep = "_")
   cache_file_prefix <- "."
   cache_default_dir <- "~" # Consider changing to tempdir() and/or make a global option (see httr options).
