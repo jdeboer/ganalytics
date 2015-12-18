@@ -71,11 +71,11 @@ setMethod("GetGaData", ".query", function(
       .data = responses,
       .fun = function(response) {
         df <- response$data
-        if (addViewId & nrow(df) >= 1) {
-          df <- mutate(df, viewId = response$viewId)
+        if (addViewId) {
+          df <- mutate(df, viewId = response$viewId[nrow(df) >= 1])
         }
-        if (addSegmentId & nrow(df) >= 1) {
-          df <- mutate(df, segment = response$segmentName)
+        if (addSegmentId) {
+          df <- mutate(df, segment = response$segmentName[nrow(df) >= 1])
         }
         return(df)
       }
