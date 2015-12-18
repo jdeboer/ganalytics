@@ -71,11 +71,11 @@ setMethod("GetGaData", ".query", function(
       .data = responses,
       .fun = function(response) {
         df <- response$data
-        if (addViewId & nrow(df) >= 1) {
-          df <- mutate(df, viewId = response$viewId)
+        if (addViewId) {
+          df <- mutate(df, viewId = response$viewId[nrow(df) >= 1])
         }
-        if (addSegmentId & nrow(df) >= 1) {
-          df <- mutate(df, segment = response$segmentName)
+        if (addSegmentId) {
+          df <- mutate(df, segment = response$segmentName[nrow(df) >= 1])
         }
         return(df)
       }
@@ -91,15 +91,20 @@ setMethod("GetGaData", ".query", function(
     data
   })
 
-  join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub("^ga:", "", as.character(Dimensions(query))))
+  join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub(kAnyPrefix, "", as.character(Dimensions(query))))
 
   if (length(join_by_vars) == 0) {
-    data <- Reduce(function(x, y) {cbind(x, y)}, data_by_metric_group)
+    if (length(data_by_metric_group) > 1) {
+      required_rows <- 1:max(lapply(data_by_metric_group, nrow))
+      data <- Reduce(function(x, y) {cbind(x[required_rows, ], y[required_rows, ])}, data_by_metric_group)
+    } else {
+      data <- data_by_metric_group[[1]]
+    }
   } else {
     data <- Reduce(function(x, y) {join(x, y, by = join_by_vars, type = "full")}, data_by_metric_group)
   }
 
-  metric_columns <- sub("^ga:", "", metrics)
+  metric_columns <- sub(kAnyPrefix, "", metrics)
 
   data[metric_columns] <- lapply(data[metric_columns], function(col) {
     col[is.na(col)] <- 0

@@ -13,12 +13,24 @@ NULL
 # and combines them into a gaSegmentFilterList, which has a single scope applied.
 segment_scope_negate <- function(object, ..., scope, negate = NULL) {
   exprList <- list(object, ...)
-  exprList <- lapply(exprList, function(expr){
+  nested <- sapply(exprList, is, "gaSegmentFilterList")
+  segment_filter_list <- lapply(exprList[!nested], function(expr){
     expr <- as(expr, ".gaSegmentFilter")
     if (!is.null(negate)) IsNegated(expr) <- negate
     expr
   })
-  new("gaSegmentFilterList", exprList, scope = scope)
+  nested_segment_filters <- unlist(exprList[nested], recursive = FALSE)
+  if (!is.null(negate)) {
+    nested_segment_filters <- lapply(nested_segment_filters, function(segment_filter) {
+      IsNegated(segment_filter) <- negate
+      segment_filter
+    })
+  }
+  segment_filter_list <- c(
+    segment_filter_list,
+    nested_segment_filters
+  )
+  new("gaSegmentFilterList", segment_filter_list, scope = scope)
 }
 
 #' @describeIn Include Define an include segment filter using the supplied

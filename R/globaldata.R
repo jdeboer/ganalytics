@@ -120,11 +120,12 @@ kRtOps <- list(
 
 # ganalytics tolerated dimension and metric prefixes
 kPrefixDelim <- paste0("[", paste0(c(
-  ";", "\\-", "\\.", "_"),
+  ":", ";", "\\-", "\\.", "_"),
 collapse = ""), "]")
 kGaPrefix <- paste0("^ga", kPrefixDelim)
 kMcfPrefix <- paste0("^mcf", kPrefixDelim)
 kRtPrefix <- paste0("^rt", kPrefixDelim)
+kAnyPrefix <- paste0("^(ga|mcf|rt)", kPrefixDelim)
 
 # Maximum dimensions and metrics allowed by Google Analytics Core Reporting API
 kGaMax <- list(

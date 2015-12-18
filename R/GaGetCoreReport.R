@@ -134,8 +134,8 @@ GaListToDataframe <- function(gaData, queryClass) {
     gaData$rows <- ColTypes(df = gaData$rows, colNames = names(charCols)[charCols], asFun = factor)
   } else {
     cols <- as.list(gaData$columnHeaders$name)
-    names(cols) <- cols
-    gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0,]
+    names(cols) <- as.character(cols)
+    gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0, , drop = FALSE]
     names(gaData$rows) <- gaData$columnHeaders$name
   }
   names(gaData$rows) <- sub("^(ga|rt|mcf)[:\\.]", "", names(gaData$rows))

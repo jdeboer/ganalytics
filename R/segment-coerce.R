@@ -35,7 +35,7 @@ setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, t
 })
 
 setAs(from = ".gaSegmentFilter", to = "gaSegmentFilterList", def = function(from, to) {
-  new(to, list(from, "gaSegmentConditionFilter"))
+  new(to, list(from))
 })
 
 # Coercion to gaSegmentId
