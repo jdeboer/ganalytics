@@ -4,8 +4,8 @@
 \alias{McfQuery}
 \title{McfQuery.}
 \usage{
-McfQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
-  endDate = Sys.Date() - 1, metrics = "mcf:totalConversions",
+McfQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 9,
+  endDate = Sys.Date() - 2, metrics = "mcf:totalConversions",
   dimensions = "mcf:nthDay", sortBy = NULL, filters = NULL,
   samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
 }
