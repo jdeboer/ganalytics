@@ -769,6 +769,7 @@ gaView <- R6Class(
     stripSiteSearchCategoryParameters = NA,
     eCommerceTracking = NA,
     enhancedECommerceTracking = NA,
+    botFilteringEnabled = NA,
     print = function(...) {
       super$print(...)
       cat("  $type                           = ", self$type, "\n")
@@ -781,6 +782,7 @@ gaView <- R6Class(
       cat("  $stripSiteSearchQueryParameters = ", self$stripSiteSearchQueryParameters, "\n")
       cat("  $eCommerceTracking              = ", self$eCommerceTracking, "\n")
       cat("  $enhancedECommerceTracking      = ", self$enhancedECommerceTracking, "\n")
+      cat("  $botFilteringEnabled            = ", self$botFilteringEnabled, "\n")
       cat("  $goals\n")
       cat("  $experiments\n")
       cat("  $unsampledReports\n")
@@ -814,7 +816,8 @@ gaView <- R6Class(
         siteSearchCategoryParameters = self$siteSearchCategoryParameters,
         stripSiteSearchCategoryParameters = self$stripSiteSearchCategoryParameters,
         eCommerceTracking = self$eCommerceTracking,
-        enhancedECommerceTracking = self$enhancedECommerceTracking
+        enhancedECommerceTracking = self$enhancedECommerceTracking,
+        botFilteringEnabled = self$botFilteringEnabled
       ))
     }
   ),
@@ -1013,9 +1016,6 @@ gaUnsampledReport <- R6Class(
 gaUnsampledReports <- R6Class(
   "gaUnsampledReports",
   inherit = gaCollection,
-  public = list(
-    DELETE = NULL
-  ),
   private = list(
     entity_class = gaUnsampledReport
   )
