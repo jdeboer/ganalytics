@@ -4,6 +4,7 @@
 \name{PerSession}
 \alias{PerSession}
 \alias{PerSession,ANY-method}
+\alias{PerSession,formula-method}
 \alias{PerSession,gaMetExpr-method}
 \title{PerSession.}
 \usage{
@@ -12,6 +13,8 @@ PerSession(object, ...)
 \S4method{PerSession}{ANY}(object, ...)
 
 \S4method{PerSession}{gaMetExpr}(object, ...)
+
+\S4method{PerSession}{formula}(object, ...)
 }
 \arguments{
 \item{object}{a gaSegmentFilterList or gaMetExpr object to coerce to session-level.}
@@ -28,5 +31,8 @@ supplied expressions, interpreted as condition filters.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to
 session-level.
+
+\item \code{formula}: Set the scope of the supplied non-standard-evaluation
+metric condition to session-level.
 }}
 

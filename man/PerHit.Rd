@@ -4,6 +4,7 @@
 \name{PerHit}
 \alias{PerHit}
 \alias{PerHit,.compoundExpr-method}
+\alias{PerHit,formula-method}
 \alias{PerHit,gaMetExpr-method}
 \title{PerHit.}
 \usage{
@@ -12,6 +13,8 @@ PerHit(object, ...)
 \S4method{PerHit}{.compoundExpr}(object, ...)
 
 \S4method{PerHit}{gaMetExpr}(object, ...)
+
+\S4method{PerHit}{formula}(object, ...)
 }
 \arguments{
 \item{object}{a gaMetExpr object to coerce to user-level.}
@@ -30,5 +33,8 @@ expression.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to
 hit-level.
+
+\item \code{formula}: Set the scope of the supplied non-standard-evaluation
+metric condition to hit-level.
 }}
 
