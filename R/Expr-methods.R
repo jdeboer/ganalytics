@@ -7,7 +7,6 @@
 #' @include Operand-methods.R
 #' @include utils.R
 #' @importFrom methods setMethod new validObject
-#' @importFrom lazyeval as.lazy
 #' @importFrom assertthat assert_that
 NULL
 
@@ -21,24 +20,7 @@ setMethod(
   f = "Expr",
   signature = c("formula"),
   definition = function(object) {
-    lazy_expr <- as.lazy(object)
-    assert_that(length(lazy_expr$expr) == 3)
-    comparator <- as.character(lazy_expr$expr[[1]])
-    comparator <- switch(
-      comparator,
-      `%starts_with%` = "=@",
-      `%=@%` = "=@",
-      `%matches%` = "=~",
-      `%=~%` = "=~",
-      `%in%` = "[]",
-      `%[]%` = "[]",
-      `%between%` = "<>",
-      `%<>%` = "<>",
-      comparator
-    )
-    var <- as.character(lazy_expr$expr[[2]])
-    operand <- as.expression(lazy_expr$expr[[3]])
-    Expr(var, comparator, eval(operand, envir = lazy_expr$env))
+    as(object, ".expr")
   }
 )
 

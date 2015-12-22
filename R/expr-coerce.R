@@ -1,6 +1,7 @@
 #' @include utils.R
 #' @importFrom stringr str_replace_all str_match str_split_fixed str_split
 #' @importFrom assertthat assert_that
+#' @importFrom lazyeval as.lazy
 NULL
 
 # Coercing to .expr
@@ -25,6 +26,28 @@ setAs(from = "character", to = ".expr", def = function(from) {
   var <- Var(x[1,1])
   operand <- x[1,2]
   Expr(var, comparator, parseOperand(operand, comparator))
+})
+
+# Coercing from formula
+setAs(from = "formula", to = ".expr", def = function(from) {
+  lazy_expr <- as.lazy(from)
+  assert_that(length(lazy_expr$expr) == 3)
+  comparator <- as.character(lazy_expr$expr[[1]])
+  comparator <- switch(
+    comparator,
+    `%starts_with%` = "=@",
+    `%=@%` = "=@",
+    `%matches%` = "=~",
+    `%=~%` = "=~",
+    `%in%` = "[]",
+    `%[]%` = "[]",
+    `%between%` = "<>",
+    `%<>%` = "<>",
+    comparator
+  )
+  var <- as.character(lazy_expr$expr[[2]])
+  operand <- as.expression(lazy_expr$expr[[3]])
+  Expr(var, comparator, eval(operand, envir = lazy_expr$env))
 })
 
 # Coercing to orExpr
