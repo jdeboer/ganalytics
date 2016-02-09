@@ -27,7 +27,7 @@ Create a Multi-Chanel Funnel Reporting API expression.
 supplied arguments describing the variable, comparator and operator.
 }}
 \examples{
-\donttest{
+\dontrun{
   myQuery <- McfQuery(view = 123456789)
   source_matches_google <- McfExpr("mcf:source", "~", "google")
   TableFilter(myQuery) <- source_matches_google
