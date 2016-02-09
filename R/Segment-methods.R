@@ -160,6 +160,16 @@ setMethod(
   }
 )
 
+#' @describeIn PerSession Set the scope of the supplied non-standard-evaluation
+#'   metric condition to session-level.
+setMethod(
+  f = "PerSession",
+  signature = c("formula"),
+  definition = function(object, ...) {
+    PerSession(Expr(object), ...)
+  }
+)
+
 #' @describeIn PerUser Create a user-level segment filter list from the supplied
 #'   expressions, each interpreted as an include segment filter.
 setMethod(
@@ -185,6 +195,16 @@ setMethod(
   }
 )
 
+#' @describeIn PerUser Set the scope of the supplied non-standard-evaluation
+#'   metric condition to user-level.
+setMethod(
+  f = "PerUser",
+  signature = c("formula"),
+  definition = function(object, ...) {
+    PerUser(Expr(object), ...)
+  }
+)
+
 #' @describeIn PerHit Create a single step sequence filter from the supplied
 #'   expression.
 setMethod(
@@ -207,6 +227,16 @@ setMethod(
     } else {
       Sequence(And(object, ...))
     }
+  }
+)
+
+#' @describeIn PerHit Set the scope of the supplied non-standard-evaluation
+#'   metric condition to hit-level.
+setMethod(
+  f = "PerHit",
+  signature = c("formula"),
+  definition = function(object, ...) {
+    PerHit(Expr(object), ...)
   }
 )
 

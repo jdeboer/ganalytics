@@ -4,6 +4,7 @@
 \name{PerUser}
 \alias{PerUser}
 \alias{PerUser,ANY-method}
+\alias{PerUser,formula-method}
 \alias{PerUser,gaMetExpr-method}
 \title{PerUser.}
 \usage{
@@ -12,6 +13,8 @@ PerUser(object, ...)
 \S4method{PerUser}{ANY}(object, ...)
 
 \S4method{PerUser}{gaMetExpr}(object, ...)
+
+\S4method{PerUser}{formula}(object, ...)
 }
 \arguments{
 \item{object}{a gaSegmentFilterList or gaMetExpr object to coerce to user-level.}
@@ -28,5 +31,8 @@ expressions, each interpreted as an include segment filter.
 
 \item \code{gaMetExpr}: Set the scope of the supplied metric condition to
 user-level.
+
+\item \code{formula}: Set the scope of the supplied non-standard-evaluation
+metric condition to user-level.
 }}
 

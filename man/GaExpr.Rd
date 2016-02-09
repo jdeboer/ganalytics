@@ -31,7 +31,7 @@ Create a Core Reporting API expression.
 variable, operator and operand.
 }}
 \examples{
-\donttest{
+\dontrun{
   myQuery <- GaQuery(view = 123456789)
   source_matches_google <- GaExpr("source", "~", "google")
   TableFilter(myQuery) <- source_matches_google

@@ -30,7 +30,7 @@ GaQuery <- function(
   view = NA,
   creds = get_creds(),
   startDate = Sys.Date() - 8,
-  endDate = Sys.Date() - 1,
+  endDate = Sys.Date() - 2,
   metrics = "ga:sessions",
   dimensions = "ga:date",
   sortBy = NULL,
@@ -95,7 +95,7 @@ GaQuery <- function(
 McfQuery <- function(
   view = NA,
   creds = get_creds(),
-  startDate = Sys.Date() - 9,
+  startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 2,
   metrics = "mcf:totalConversions",
   dimensions = "mcf:nthDay",

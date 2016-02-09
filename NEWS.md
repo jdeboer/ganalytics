@@ -1,3 +1,6 @@
+2015-12-19 Username (email address) for Google API authentication can now be set using via a system environment variable with a key named as [APPNAME]_USER, where [APPNAME] is 'GOOGLE_APIS' default, e.g. GOOGLE_APIS_USER = me@example-domain.com
+Updates to support recent API additions, including Management API view bot filtering flag.
+
 2015-12-12 Ability to query past 10 metrics by automatically joining API results by there dimensions. Added methods for NOTing one-of-in-list '[]' dimension and within-range '<>' metric expressions. Default date ragne has been pushed back 1 day to ensure complete data is returned by MCF queries.
 
 2015-11-27 Support multiple segments being applied to a query.
