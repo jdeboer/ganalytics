@@ -5,7 +5,7 @@
 \title{GaQuery.}
 \usage{
 GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
-  endDate = Sys.Date() - 1, metrics = "ga:sessions",
+  endDate = Sys.Date() - 2, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL,
   segments = NULL, samplingLevel = "DEFAULT", maxResults = kGaMaxResults,
   profileId = NA)
