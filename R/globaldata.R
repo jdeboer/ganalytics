@@ -202,7 +202,7 @@ user_segment_type_levels <- c(
 
 metadata_path <- get_metadata_path()
 if (nchar(metadata_path) == 0) {
-  GaMetaUpdate()
+  if (interactive()) GaMetaUpdate()
   metadata_path <- get_metadata_path()
 }
 assert_that(file.exists(metadata_path))
