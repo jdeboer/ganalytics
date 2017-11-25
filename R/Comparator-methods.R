@@ -22,6 +22,28 @@ setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
+    operand <- paste("^", quotemeta(operand), sep = "")
+    comparator <- "=~"
+    Expr(var, comparator, operand)
+  }
+)
+
+#' @rdname Comparator
+setMethod(
+  f = "%ends_with%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
+    operand <- paste(quotemeta(operand), "$", sep = "")
+    comparator <- "=~"
+    Expr(var, comparator, operand)
+  }
+)
+
+#' @rdname Comparator
+setMethod(
+  f = "%contains%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
     comparator <- "=@"
     Expr(var, comparator, operand)
   }

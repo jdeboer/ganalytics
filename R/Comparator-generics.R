@@ -33,14 +33,40 @@ setGeneric(
 )
 
 #' @section \%starts_with\%:
-#' A condition where the dimension (LHS) matches values that start
-#'   with character string given by the operand (RHS).
+#' A condition where the dimension (LHS) matches values that start with
+#'   the character string given by the operand (RHS).
 #' @rdname Comparator
 #' @param var dimension or metric object
 #' @param operand operand object
 #' @export
 setGeneric(
   "%starts_with%",
+  function(var, operand) {},
+  useAsDefault = FALSE
+)
+
+#' @section \%ends_with\%:
+#' A condition where the dimension (LHS) matches values that end with
+#'   the character string given by the operand (RHS).
+#' @rdname Comparator
+#' @param var dimension or metric object
+#' @param operand operand object
+#' @export
+setGeneric(
+  "%ends_with%",
+  function(var, operand) {},
+  useAsDefault = FALSE
+)
+
+#' @section \%contains\%:
+#' A condition where the dimension (LHS) matches values that contain
+#'   the character string given by the operand (RHS).
+#' @rdname Comparator
+#' @param var dimension or metric object
+#' @param operand operand object
+#' @export
+setGeneric(
+  "%contains%",
   function(var, operand) {},
   useAsDefault = FALSE
 )
