@@ -41,9 +41,9 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence Return a seuqnece of length of one step using the
+#' @describeIn Sequence Return a seuqnece of of just one step using the
 #'   supplied expression to define that step, where that step can occur anywhere
-#'   with the sequences of interactions being matched.
+#'   within the sequences of interactions being matched.
 setMethod(
   f = "Sequence",
   signature = ".compoundExpr",

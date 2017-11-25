@@ -10,7 +10,7 @@ NULL
 # ---- Include, Exclude ----
 
 # This function takes one or more gaSegmentFilter, expressions or conditions
-# and combines them into a gaSegmentFilterList, which has a single scope applied.
+# and combines them into a gaSegmentFilterList, which has an overarching scope applied.
 segment_scope_negate <- function(object, ..., scope, negate = NULL) {
   exprList <- list(object, ...)
   nested <- sapply(exprList, is, "gaSegmentFilterList")
