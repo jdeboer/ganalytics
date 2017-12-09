@@ -167,7 +167,7 @@ setClass(
   ),
   contains = c(".gaExpr", ".dimExpr"),
   validity = function(object) {
-    if (object@comparator == "<>") {
+    if (isTRUE(object@comparator == "<>")) {
       rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
       if (!(as.character(object@var) %in% rangeDimVars)) {
         return("A range comparator only supports numerical dimensions or metrics")

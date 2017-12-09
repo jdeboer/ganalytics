@@ -14,9 +14,9 @@ compileOperand <- function(from) {
     replacement = "\\\\\\1",
     x = unEscapedOperand
   )
-  if (comparator == "[]") {
+  if (isTRUE(comparator == "[]")) {
     compiledOperand <- paste0(compiledOperand, collapse = "|")
-  } else if (from@comparator == "<>") {
+  } else if (isTRUE(from@comparator == "<>")) {
     compiledOperand <- paste0(compiledOperand, collapse = "_")
   }
   compiledOperand

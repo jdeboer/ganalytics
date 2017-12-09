@@ -128,6 +128,7 @@ setMethod(
   signature = ".comparator",
   definition = function(.Object, value) {
     if (!missing(value)) {
+      value <- toupper(value)
       if (value == "=") value <- "=="
       else if (value %in% c("!","=!")) value <- "!="
       else if (value == "][") value <- "[]"

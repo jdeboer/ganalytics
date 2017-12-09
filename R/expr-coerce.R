@@ -8,9 +8,9 @@ NULL
 
 # Need to consider escaping of the following characters in the operand:\|,;_
 parseOperand <- function(operand, comparator) {
-  if (comparator == "[]") {
+  if (isTRUE(comparator == "[]")) {
     operand <- str_split(operand, "\\|")[[1]]
-  } else if (comparator == "<>") {
+  } else if (isTRUE(comparator == "<>")) {
     operand <- str_split_fixed(operand, "_", 2)[1,]
   }
   operand <- gsub("\\\\", "\\", operand)
