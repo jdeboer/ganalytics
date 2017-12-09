@@ -35,7 +35,9 @@ setAs(from = "formula", to = ".expr", def = function(from) {
   comparator <- as.character(lazy_expr$expr[[1]])
   comparator <- switch(
     comparator,
-    `%starts_with%` = "=@",
+    `%starts_with%` = "STARTS_WITH",
+    `%ends_with%` = "ENDS_WITH",
+    `%contains%` = "=@",
     `%=@%` = "=@",
     `%matches%` = "=~",
     `%=~%` = "=~",
