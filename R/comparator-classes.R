@@ -18,9 +18,17 @@ NULL
 setClass(
   ".comparator",
   contains = "character",
-  prototype = prototype("=="),
+  slots = c(
+    negated = "logical"
+  ),
+  prototype = prototype(
+    "==", negated = FALSE
+  ),
   validity = function(object) {
-    validate_that(length(object) == 1)
+    validate_that(
+      length(object) == 1L,
+      length(negated) == 1L
+    )
   }
 )
 
@@ -36,8 +44,17 @@ setClass(
 setClass(
   "gaMetComparator",
   contains = ".comparator",
+  slots = c(
+    operator = "character"
+  ),
+  prototype = prototype(
+    operator = "EQUAL"
+  ),
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$met)
+    validate_that(
+      object@.Data %in% kGaOps$met,
+      length(object@operator) == 1L
+    )
   }
 )
 
@@ -53,8 +70,17 @@ setClass(
 setClass(
   "gaDimComparator",
   contains = ".comparator",
+  slots = c(
+    operator = "character"
+  ),
+  prototype = prototype(
+    operator = "EXACT"
+  ),
   validity = function(object) {
-    validate_that(object@.Data %in% kGaOps$dim)
+    validate_that(
+      object@.Data %in% kGaOps$dim,
+      length(object@operator) == 1L
+    )
   }
 )
 
