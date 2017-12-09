@@ -142,6 +142,7 @@ setMethod(
       else if (value %in% c("@=", "@")) value <- "=@"
       else if (value == "@!") value <- "!@"
       .Object@.Data <- value
+      .Object@negated <- value %in% kGa4Ops$negated_operators
       validObject(.Object)
     }
     .Object

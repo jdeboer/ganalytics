@@ -108,6 +108,29 @@ kGaOps <- list(
   dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
 )
 
+kGa4Ops <- list(
+  metric_operators = c(
+    "EQUAL" = "==",
+    "LESS_THAN" = "<",
+    "GREATER_THAN" = ">",
+    "BETWEEN" = "<>"
+  ),
+  dimension_operators = c(
+    "BEGINS_WITH" = NA,
+    "ENDS_WITH" = NA,
+    "REGEXP" = "=~",
+    "PARTIAL" = "=@",
+    "EXACT" = "==",
+    "IN_LIST" = "[]",
+    "NUMERIC_LESS_THAN" = "<",
+    "NUMERIC_GREATER_THAN" = ">",
+    "NUMERIC_BETWEEN" = "<>"
+  ),
+  negated_operators = c(
+    "!=", "!~", "!@", ">=", "<="
+  )
+)
+
 kMcfOps <- list(
   met = c("==", "!=", "<", ">", "<=", ">="),
   dim = c("==", "!=", "=~", "!~", "=@", "!@")
