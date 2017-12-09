@@ -2,24 +2,28 @@
 % Please edit documentation in R/Comparator-generics.R, R/Comparator-methods.R
 \docType{methods}
 \name{Comparator}
-\alias{!=,.var,.operand-method}
-\alias{<,.var,.metOperand-method}
-\alias{<=,.var,.metOperand-method}
-\alias{==,.var,.operand-method}
-\alias{>,.var,.metOperand-method}
-\alias{>=,.var,.metOperand-method}
 \alias{Comparator}
-\alias{Comparator,ANY-method}
 \alias{Comparator<-}
-\alias{Comparator<-,ANY-method}
-\alias{\%between\%}
-\alias{\%between\%,.var,.operand-method}
-\alias{\%in\%}
-\alias{\%in\%,.var,.operand-method}
-\alias{\%matches\%}
-\alias{\%matches\%,.var,.dimOperand-method}
 \alias{\%starts_with\%}
+\alias{\%ends_with\%}
+\alias{\%contains\%}
+\alias{\%matches\%}
+\alias{\%between\%}
+\alias{\%in\%}
+\alias{\%matches\%,.var,.dimOperand-method}
 \alias{\%starts_with\%,.var,.dimOperand-method}
+\alias{\%ends_with\%,.var,.dimOperand-method}
+\alias{\%contains\%,.var,.dimOperand-method}
+\alias{\%between\%,.var,.operand-method}
+\alias{\%in\%,.var,.operand-method}
+\alias{==,.var,.operand-method}
+\alias{!=,.var,.operand-method}
+\alias{>,.var,.metOperand-method}
+\alias{<,.var,.metOperand-method}
+\alias{>=,.var,.metOperand-method}
+\alias{<=,.var,.metOperand-method}
+\alias{Comparator,ANY-method}
+\alias{Comparator<-,ANY-method}
 \title{Comparator.}
 \usage{
 Comparator(object, ...)
@@ -27,6 +31,10 @@ Comparator(object, ...)
 Comparator(object) <- value
 
 var \%starts_with\% operand
+
+var \%ends_with\% operand
+
+var \%contains\% operand
 
 var \%matches\% operand
 
@@ -37,6 +45,10 @@ x \%in\% table
 \S4method{\%matches\%}{.var,.dimOperand}(var, operand)
 
 \S4method{\%starts_with\%}{.var,.dimOperand}(var, operand)
+
+\S4method{\%ends_with\%}{.var,.dimOperand}(var, operand)
+
+\S4method{\%contains\%}{.var,.dimOperand}(var, operand)
 
 \S4method{\%between\%}{.var,.operand}(var, operand)
 
@@ -77,6 +89,14 @@ comparator from.}
 \item{e1}{Dimension or metric object}
 
 \item{e2}{Operand object}
+
+\item{var}{dimension or metric object}
+
+\item{operand}{operand object}
+
+\item{var}{dimension or metric object}
+
+\item{operand}{operand object}
 }
 \description{
 Get or create an comparator used in an expression.
@@ -91,10 +111,23 @@ conditional expression.
 \item \code{ANY}: Replace the comparator used in the supplied
 conditional expression.
 }}
+
 \section{\%starts_with\%}{
 
-A condition where the dimension (LHS) matches values that start
-  with character string given by the operand (RHS).
+A condition where the dimension (LHS) matches values that start with
+  the character string given by the operand (RHS).
+}
+
+\section{\%ends_with\%}{
+
+A condition where the dimension (LHS) matches values that end with
+  the character string given by the operand (RHS).
+}
+
+\section{\%contains\%}{
+
+A condition where the dimension (LHS) matches values that contain
+  the character string given by the operand (RHS).
 }
 
 \section{\%matches\%}{

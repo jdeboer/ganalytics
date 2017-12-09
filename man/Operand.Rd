@@ -3,8 +3,8 @@
 \docType{methods}
 \name{Operand}
 \alias{Operand}
-\alias{Operand,ANY-method}
 \alias{Operand<-}
+\alias{Operand,ANY-method}
 \alias{Operand<-,.expr-method}
 \title{Operand.}
 \usage{

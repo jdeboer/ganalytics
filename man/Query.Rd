@@ -16,4 +16,3 @@ GetGaData(query, creds = NULL, ...)
 \description{
 Fetch the data for the Google Analytics API query.
 }
-

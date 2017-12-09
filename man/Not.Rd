@@ -2,15 +2,15 @@
 % Please edit documentation in R/Bool-generics.R, R/Bool-methods.R
 \docType{methods}
 \name{Not}
-\alias{!,.comparator-method}
-\alias{!,.expr-method}
-\alias{!,.gaSegmentFilter-method}
-\alias{!,orExpr-method}
 \alias{Not}
 \alias{Not,.comparator-method}
+\alias{!,.comparator-method}
 \alias{Not,.expr-method}
-\alias{Not,.gaSegmentFilter-method}
+\alias{!,.expr-method}
 \alias{Not,orExpr-method}
+\alias{!,orExpr-method}
+\alias{Not,.gaSegmentFilter-method}
+\alias{!,.gaSegmentFilter-method}
 \title{Not.}
 \usage{
 Not(object)
@@ -59,7 +59,7 @@ include <-> exclude
 \item \code{.gaSegmentFilter}: Invert the negation of a segment filter condition, i.e.
 include <-> exclude
 }}
+
 \seealso{
 \code{\link{And}} \code{\link{Or}} \code{\link{xor}}
 }
-

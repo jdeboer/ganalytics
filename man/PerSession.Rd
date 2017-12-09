@@ -4,8 +4,8 @@
 \name{PerSession}
 \alias{PerSession}
 \alias{PerSession,ANY-method}
-\alias{PerSession,formula-method}
 \alias{PerSession,gaMetExpr-method}
+\alias{PerSession,formula-method}
 \title{PerSession.}
 \usage{
 PerSession(object, ...)

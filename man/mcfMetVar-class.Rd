@@ -11,4 +11,3 @@ An S4 class to represent a Multi-Channel Funnel metric.
 Set to "mcf:totalConversions" by default.
 }
 \keyword{internal}
-

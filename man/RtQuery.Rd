@@ -27,4 +27,3 @@ up to 1,000,000}
 \description{
 Create a Real-Time reporting API query object
 }
-

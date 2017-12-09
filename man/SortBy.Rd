@@ -3,11 +3,11 @@
 \docType{methods}
 \name{SortBy}
 \alias{SortBy}
-\alias{SortBy,.query-method}
+\alias{SortBy<-}
 \alias{SortBy,.varList-method}
 \alias{SortBy,NULL-method}
 \alias{SortBy,character-method}
-\alias{SortBy<-}
+\alias{SortBy,.query-method}
 \alias{SortBy<-,.query-method}
 \title{SortBy.}
 \usage{

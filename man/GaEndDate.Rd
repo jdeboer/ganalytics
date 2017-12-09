@@ -20,4 +20,3 @@ Deprecated, use EndDate instead.
 Deprecated, use EndDate instead.
 }
 \keyword{internal}
-

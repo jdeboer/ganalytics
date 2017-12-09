@@ -8,4 +8,3 @@
 An S4 class to represent the numerical value of a metric condition expression.
 }
 \keyword{internal}
-

@@ -8,4 +8,3 @@
 An S4 class to represent Multi-Channel metric condition operand.
 }
 \keyword{internal}
-

@@ -3,10 +3,10 @@
 \docType{methods}
 \name{SamplingLevel}
 \alias{SamplingLevel}
-\alias{SamplingLevel,.standardQuery-method}
-\alias{SamplingLevel,data.frame-method}
 \alias{SamplingLevel<-}
+\alias{SamplingLevel,.standardQuery-method}
 \alias{SamplingLevel<-,.standardQuery-method}
+\alias{SamplingLevel,data.frame-method}
 \title{SamplingLevel.}
 \usage{
 SamplingLevel(object, value)

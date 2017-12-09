@@ -9,4 +9,3 @@ An S4 class to represent a Core-Reporting metric condition for use in segment
 expressions.
 }
 \keyword{internal}
-

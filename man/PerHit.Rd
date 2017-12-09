@@ -4,8 +4,8 @@
 \name{PerHit}
 \alias{PerHit}
 \alias{PerHit,.compoundExpr-method}
-\alias{PerHit,formula-method}
 \alias{PerHit,gaMetExpr-method}
+\alias{PerHit,formula-method}
 \title{PerHit.}
 \usage{
 PerHit(object, ...)

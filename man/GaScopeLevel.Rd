@@ -20,4 +20,3 @@ Deprecated, use \code{ScopeLevel} instead
 Deprecated, use \code{ScopeLevel<-} instead.
 }
 \keyword{internal}
-

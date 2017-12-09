@@ -3,9 +3,9 @@
 \docType{methods}
 \name{Dimensions}
 \alias{Dimensions}
-\alias{Dimensions,.query-method}
-\alias{Dimensions,ANY-method}
 \alias{Dimensions<-}
+\alias{Dimensions,ANY-method}
+\alias{Dimensions,.query-method}
 \alias{Dimensions<-,.query-method}
 \title{Dimensions.}
 \usage{

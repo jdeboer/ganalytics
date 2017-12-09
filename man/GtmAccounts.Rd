@@ -12,4 +12,3 @@ GtmAccounts(creds = get_creds())
 \description{
 Get a collection of GTM accounts.
 }
-

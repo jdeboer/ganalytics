@@ -7,4 +7,3 @@
 An R6 class representing a defined Google Analytics custom dimension.
 }
 \keyword{internal}
-

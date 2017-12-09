@@ -12,4 +12,3 @@ GaAccountSummaries(creds = get_creds())
 \description{
 Get a collection of Google Analytics account summaries.
 }
-

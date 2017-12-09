@@ -7,4 +7,3 @@
 An R6 class representing a Google Analytics property.
 }
 \keyword{internal}
-

@@ -17,4 +17,3 @@ Check the length of each named slot within object is within the lower and
 upper bounds specified.
 }
 \keyword{internal}
-

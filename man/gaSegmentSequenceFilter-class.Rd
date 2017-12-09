@@ -8,4 +8,3 @@
 An S4 class to represent a sequence expression as a segment filter.
 }
 \keyword{internal}
-

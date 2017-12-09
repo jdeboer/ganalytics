@@ -8,4 +8,3 @@
 An S4 class to represent a query table filter epxression.
 }
 \keyword{internal}
-

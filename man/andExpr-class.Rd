@@ -8,4 +8,3 @@
 An S4 class to represent an expression of ANDed 'OR' expression.
 }
 \keyword{internal}
-

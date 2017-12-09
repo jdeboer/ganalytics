@@ -12,4 +12,3 @@ name.
 Set to "ga:date" by default.
 }
 \keyword{internal}
-

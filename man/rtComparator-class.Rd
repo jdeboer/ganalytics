@@ -8,4 +8,3 @@
 An S4 class union representing Real-Time condition comparator operators.
 }
 \keyword{internal}
-

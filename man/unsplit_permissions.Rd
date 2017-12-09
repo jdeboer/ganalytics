@@ -11,4 +11,3 @@ Take a list of Google Analytics user permissions for a list of one or more users
 transform the into a list of character vector.
 }
 \keyword{internal}
-

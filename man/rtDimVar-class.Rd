@@ -11,4 +11,3 @@ An S4 class to represent a Real-Time reporting dimension.
 Set to "rt:minutesAgo" by default.
 }
 \keyword{internal}
-

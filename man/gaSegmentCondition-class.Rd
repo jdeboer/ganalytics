@@ -8,4 +8,3 @@
 An S4 class to represent an expression for a custom segment.
 }
 \keyword{internal}
-

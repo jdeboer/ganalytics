@@ -16,4 +16,3 @@ GaUserSegment(id = NULL, definition = NA, creds = get_creds())
 \description{
 Get a user or system defined segment.
 }
-

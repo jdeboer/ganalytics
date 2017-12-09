@@ -8,4 +8,3 @@
 An S4 class to represent a Multi-Channel funnel condition expression.
 }
 \keyword{internal}
-

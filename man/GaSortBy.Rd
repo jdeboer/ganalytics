@@ -20,4 +20,3 @@ Deprecated, use SortBy instead.
 Deprecated, use SortBy<- instead.
 }
 \keyword{internal}
-

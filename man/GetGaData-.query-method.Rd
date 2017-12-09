@@ -29,4 +29,3 @@ a dataframe
 \description{
 GetGaData Execute a ganalytics query.
 }
-

@@ -13,4 +13,3 @@ GaAccounts(creds = get_creds())
 Get the collection of GA accounts accessible to the user with the credentials
 supplied by \code{creds}..
 }
-

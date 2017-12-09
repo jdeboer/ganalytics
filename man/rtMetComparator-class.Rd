@@ -8,4 +8,3 @@
 An S4 class representing Real-Time metric condition comparator operators.
 }
 \keyword{internal}
-

@@ -3,8 +3,8 @@
 \docType{methods}
 \name{IsNegated}
 \alias{IsNegated}
-\alias{IsNegated,.gaSegmentFilter-method}
 \alias{IsNegated<-}
+\alias{IsNegated,.gaSegmentFilter-method}
 \alias{IsNegated<-,.gaSegmentFilter,logical-method}
 \title{IsNegated.}
 \usage{

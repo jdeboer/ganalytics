@@ -39,4 +39,3 @@ up to 1,000,000}
 \description{
 Create a ganalytics query object
 }
-

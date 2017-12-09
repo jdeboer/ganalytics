@@ -3,17 +3,17 @@
 \docType{methods}
 \name{Segment}
 \alias{Segment}
+\alias{Segment<-}
+\alias{Segment,numeric-method}
+\alias{Segment,character-method}
 \alias{Segment,ANY-method}
 \alias{Segment,NULL-method}
-\alias{Segment,character-method}
-\alias{Segment,gaQuery-method}
-\alias{Segment,gaSegmentList-method}
-\alias{Segment,gaUserSegment-method}
-\alias{Segment,numeric-method}
-\alias{Segment<-}
 \alias{Segment<-,gaDynSegment-method}
-\alias{Segment<-,gaQuery-method}
 \alias{Segment<-,gaSegmentId-method}
+\alias{Segment,gaSegmentList-method}
+\alias{Segment,gaQuery-method}
+\alias{Segment<-,gaQuery-method}
+\alias{Segment,gaUserSegment-method}
 \title{Segment.}
 \usage{
 Segment(object, ..., scope = "sessions")

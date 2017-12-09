@@ -16,4 +16,3 @@ The following method is a temporary workaround to support XX placeholders in dim
 names, such as with custom dimensions, metrics and various goal related variables.
 }
 \keyword{internal}
-

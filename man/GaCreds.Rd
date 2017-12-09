@@ -3,11 +3,11 @@
 \docType{methods}
 \name{GaCreds}
 \alias{GaCreds}
-\alias{GaCreds,.query,ANY-method}
+\alias{GaCreds<-}
 \alias{GaCreds,.query,list-method}
+\alias{GaCreds,.query,ANY-method}
 \alias{GaCreds,character,ANY-method}
 \alias{GaCreds,missing,ANY-method}
-\alias{GaCreds<-}
 \alias{GaCreds<-,.query,list-method}
 \title{Authentication credentials for Google Analytics API queries.}
 \usage{

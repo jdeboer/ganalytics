@@ -8,4 +8,3 @@
 An S4 class to represent a step within a sequence expression.
 }
 \keyword{internal}
-

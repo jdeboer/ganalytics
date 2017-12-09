@@ -9,4 +9,3 @@ An S4 class to represent a non-sequential condition-based segment filter
 expression.
 }
 \keyword{internal}
-

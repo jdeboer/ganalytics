@@ -34,4 +34,3 @@ up to 1,000,000}
 \description{
 Create a Multi-Channel Funnel Reporting API query object
 }
-

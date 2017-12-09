@@ -4,8 +4,8 @@
 \name{Expr}
 \alias{Expr}
 \alias{Expr,.expr,ANY-method}
-\alias{Expr,character,character-method}
 \alias{Expr,formula,ANY-method}
+\alias{Expr,character,character-method}
 \title{Expr.}
 \usage{
 Expr(object, comparator, operand, metricScope = "")
@@ -42,8 +42,8 @@ Accepts a formula in the form of: \code{~ <variable> <comparator>
 \item \code{object = character,comparator = character}: Return an expression based on the described variable,
 comparator and operand arguments.
 }}
+
 \seealso{
 Other expression generators: \code{\link{GaExpr}},
   \code{\link{McfExpr}}, \code{\link{RtExpr}}
 }
-

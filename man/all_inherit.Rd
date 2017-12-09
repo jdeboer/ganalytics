@@ -10,4 +10,3 @@ all_inherit(list_object, class_names)
 Test whether all objects within a list all inherit from the same given class.
 }
 \keyword{internal}
-

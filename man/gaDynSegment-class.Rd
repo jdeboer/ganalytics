@@ -8,4 +8,3 @@
 An S4 class to represent a list of scoped segment filter lists.
 }
 \keyword{internal}
-

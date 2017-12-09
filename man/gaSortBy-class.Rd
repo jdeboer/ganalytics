@@ -8,4 +8,3 @@
 An S4 class to represent Core Reporting sorting lists.
 }
 \keyword{internal}
-

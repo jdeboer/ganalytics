@@ -8,4 +8,3 @@
 An S4 class to represent Real-Time dimension condition comparator operators.
 }
 \keyword{internal}
-

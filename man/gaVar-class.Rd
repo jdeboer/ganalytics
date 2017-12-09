@@ -8,4 +8,3 @@
 An S4 class union to represent a Core Reporting variable.
 }
 \keyword{internal}
-

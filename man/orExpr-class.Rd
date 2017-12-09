@@ -8,4 +8,3 @@
 An S4 class to represent an expression of ORed conditions.
 }
 \keyword{internal}
-

@@ -8,4 +8,3 @@
 An S4 class to represent Multi-Channel Funnel sorting lists.
 }
 \keyword{internal}
-

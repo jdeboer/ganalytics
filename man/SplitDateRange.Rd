@@ -16,4 +16,3 @@ single days.}
 Splits a gaDateRange object into N pieces. Useful for splitting a query into
 smaller chunks in order to overcome sampling.
 }
-

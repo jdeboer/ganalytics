@@ -26,6 +26,7 @@ Create a Multi-Chanel Funnel Reporting API expression.
 \item \code{object = character,comparator = character}: Return a Multi-channel Funnel condition based on the
 supplied arguments describing the variable, comparator and operator.
 }}
+
 \examples{
 \dontrun{
   myQuery <- McfQuery(view = 123456789)
@@ -39,4 +40,3 @@ supplied arguments describing the variable, comparator and operator.
 Other expression generators: \code{\link{Expr}},
   \code{\link{GaExpr}}, \code{\link{RtExpr}}
 }
-

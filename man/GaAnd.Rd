@@ -13,4 +13,3 @@ GaAnd(...)
 Deprecated, use And or & instead.
 }
 \keyword{internal}
-

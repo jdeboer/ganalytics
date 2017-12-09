@@ -8,4 +8,3 @@
 An S4 class to represent a Core-Reporting metric condition expression.
 }
 \keyword{internal}
-

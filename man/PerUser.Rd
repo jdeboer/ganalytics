@@ -4,8 +4,8 @@
 \name{PerUser}
 \alias{PerUser}
 \alias{PerUser,ANY-method}
-\alias{PerUser,formula-method}
 \alias{PerUser,gaMetExpr-method}
+\alias{PerUser,formula-method}
 \title{PerUser.}
 \usage{
 PerUser(object, ...)

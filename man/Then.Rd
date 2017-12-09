@@ -23,4 +23,3 @@ steps in the sequence, i.e. 'immediately following'.
 \seealso{
 \code{\link{Sequence}}
 }
-

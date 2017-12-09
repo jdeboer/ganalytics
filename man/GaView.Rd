@@ -3,8 +3,8 @@
 \docType{methods}
 \name{GaView}
 \alias{GaView}
-\alias{GaView,ANY-method}
 \alias{GaView<-}
+\alias{GaView,ANY-method}
 \alias{GaView<-,.query-method}
 \title{GaView.}
 \usage{

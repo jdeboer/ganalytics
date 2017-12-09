@@ -22,4 +22,3 @@ GoogleApiCreds(userName = Sys.getenv(paste0(appname, "_USER")),
 \description{
 Create a Google APIs OAuth2.0 credentials object
 }
-

@@ -13,4 +13,3 @@ An S4 class to represent the regex operand value of a dimension condition
 expression.
 }
 \keyword{internal}
-

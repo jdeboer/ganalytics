@@ -3,9 +3,9 @@
 \docType{methods}
 \name{Metrics}
 \alias{Metrics}
-\alias{Metrics,.query-method}
-\alias{Metrics,ANY-method}
 \alias{Metrics<-}
+\alias{Metrics,ANY-method}
+\alias{Metrics,.query-method}
 \alias{Metrics<-,.query-method}
 \title{Metrics.}
 \usage{

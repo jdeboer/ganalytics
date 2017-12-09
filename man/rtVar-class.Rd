@@ -8,4 +8,3 @@
 An S4 class to represent a Real-Time reporting variable.
 }
 \keyword{internal}
-

@@ -8,4 +8,3 @@
 An S4 class to represent a list of segment expressions to query.
 }
 \keyword{internal}
-

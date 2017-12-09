@@ -9,4 +9,3 @@ An S4 class to represent a list of segment filter expressions that belong to a
 specified scope.
 }
 \keyword{internal}
-

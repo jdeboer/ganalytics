@@ -34,7 +34,7 @@ OR two or more expressions.
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: OR two expressions.
 }}
+
 \seealso{
 \code{\link{And}} \code{\link{xor}} \code{\link{Not}}
 }
-

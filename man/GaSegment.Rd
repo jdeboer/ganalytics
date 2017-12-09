@@ -20,4 +20,3 @@ Deprecated, use Segment instead.
 Deprecated, use Segment<- instead.
 }
 \keyword{internal}
-

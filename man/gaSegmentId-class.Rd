@@ -8,4 +8,3 @@
 An S4 class to represent a pre-defined custom or built-in segment by its ID.
 }
 \keyword{internal}
-

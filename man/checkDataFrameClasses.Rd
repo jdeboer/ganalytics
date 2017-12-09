@@ -11,4 +11,3 @@ Test whether the class for each column of a data.frame match a list of
 expected classes.
 }
 \keyword{internal}
-
