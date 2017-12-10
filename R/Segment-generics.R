@@ -54,26 +54,6 @@ setGeneric(
   useAsDefault = TRUE
 )
 
-#' SegmentFilters.
-#'
-#' Create a new gaSegmentFilterList object
-#'
-#' A segment condition is either sequential or non-sequential. Sequential and
-#' non-sequential conditoins can be combined using this function.
-#'
-#' @param object The first condition to be included in the segments definition.
-#' @param ... Other conditions to be included in the segment definition.
-#' @param scope The scope of this condition, either 'user' or 'session' level.
-#' @return a gaSegmentFilterList object.
-#'
-#' @export
-setGeneric(
-  "SegmentFilters",
-  function(object, ..., scope = "sessions") {},
-  valueClass = "gaSegmentFilterList",
-  useAsDefault = FALSE
-)
-
 #' IsNegated.
 #'
 #' Tests whether a segment filter is negated.
@@ -104,6 +84,26 @@ setGeneric(
     validObject(object)
     object
   }
+)
+
+#' SegmentFilters.
+#'
+#' Create a new gaSegmentFilterList object
+#'
+#' A segment condition is either sequential or non-sequential. Sequential and
+#' non-sequential conditoins can be combined using this function.
+#'
+#' @param object The first condition to be included in the segments definition.
+#' @param ... Other conditions to be included in the segment definition.
+#' @param scope The scope of this condition, either 'user' or 'session' level.
+#' @return a gaSegmentFilterList object.
+#'
+#' @export
+setGeneric(
+  "SegmentFilters",
+  function(object, ..., scope = "sessions") {},
+  valueClass = "gaSegmentFilterList",
+  useAsDefault = FALSE
 )
 
 #' PerHit.
