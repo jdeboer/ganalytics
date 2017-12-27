@@ -241,6 +241,17 @@ setMethod(
 )
 
 # ---- Segment, Segment<- ----
+#' @describeIn PerProduct Set the scope of the supplied metric condition to
+#'   product-level.
+setMethod(
+  f = "PerProduct",
+  signature = c("gaMetExpr"),
+  definition = function(object) {
+    ScopeLevel(object) <- "perProduct"
+    object
+  }
+)
+
 #' @describeIn PerProduct Set the scope of the supplied non-standard-evaluation
 #'   metric condition to product-level.
 setMethod(

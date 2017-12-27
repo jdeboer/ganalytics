@@ -117,7 +117,7 @@ setMethod(
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- toupper(value)
-      if (value == "=") value <- "=="
+      if (value %in% c("=", "EXACT", "EQUAL")) value <- "=="
       else if (value %in% c("!","=!")) value <- "!="
       else if (value == "][") value <- "[]"
       else if (value == "><") value <- "<>"
@@ -125,9 +125,9 @@ setMethod(
       else if (value == ">>") value <- ">"
       else if (value == "=>") value <- ">="
       else if (value == "=<") value <- "<="
-      else if (value %in% c("~=", "~")) value <- "=~"
+      else if (value %in% c("~=", "~", "MATCHES", "REGEXP")) value <- "=~"
       else if (value == "~!") value <- "!~"
-      else if (value %in% c("@=", "@")) value <- "=@"
+      else if (value %in% c("@=", "@", "CONTAINS", "PARTIAL")) value <- "=@"
       else if (value == "@!") value <- "!@"
       .Object@.Data <- value
       .Object@negated <- value %in% kGa4Ops$negated_operators

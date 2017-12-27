@@ -68,6 +68,8 @@ setClass(
   validity = function(object) {
     if (length(object@.Data) != length(object@desc)) {
       "List vector and desc vector must be of equal lengths"
+    } else if (!all(object@orderType %in% kGaSortTypes)) {
+      paste("Each orderType must be one of:", kGaSortTypes)
     } else TRUE
   }
 )

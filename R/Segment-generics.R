@@ -70,7 +70,7 @@ setGeneric(
 
 #' IsNegated<-.
 #'
-#' Sets whether a segment filter should be negated.
+#' Sets the negation flag of a segment filter.
 #'
 #' @param value the value of the negation slot, either \code{TRUE} or
 #'   \code{FALSE}.
