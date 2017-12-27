@@ -35,7 +35,8 @@ kGaDimTypes <- list(
     "dateOfSession",
     "ga:date",
     "ga:dateHour",
-    "ga:socialActivityTimestamp"
+    "ga:socialActivityTimestamp"#,
+    #"mcf:conversionDate"
   ),
   orderedIntFactors = c(
     "ga:year",
@@ -56,7 +57,8 @@ kGaDimTypes <- list(
     "ga:screenResolution",
     "ga:userAgeBracket",
     "ga:visitorAgeBracket",
-    "ga:dayOfWeekName"
+    "ga:dayOfWeekName",
+    "rt:goalId"
   ),
   nums = c(
     "ga:latitude",
@@ -78,7 +80,13 @@ kGaDimTypes <- list(
     "ga:nthHour",
     "ga:nthDay",
     "ga:nthWeek",
-    "ga:nthMonth"
+    "ga:nthMonth",
+    #"mcf:pathLengthInInteractionsHistogram",
+    #"mcf:timeLagInDaysHistogram",
+    #"mcf:nthDay",
+    "rt:minutesAgo",
+    "rt:latitude",
+    "rt:longitude"
   ),
   bools = c(
     "ga:isMobile",
@@ -105,7 +113,7 @@ kGaDateOrigin <- as.Date("2005-01-01")
 # Google Analytics expression comparators
 kGaOps <- list(
   met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
-  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
+  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]", "<", ">", "<=", ">=")
 )
 
 kMcfOps <- list(
@@ -207,3 +215,11 @@ if (nchar(metadata_path) == 0) {
 }
 assert_that(file.exists(metadata_path))
 load(metadata_path)
+
+metric_data_types <- c(
+  "Integer",
+  "Currency",
+  "Time",
+  "Float",
+  "Percentage"
+)

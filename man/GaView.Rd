@@ -3,7 +3,8 @@
 \docType{methods}
 \name{GaView}
 \alias{GaView}
-\alias{GaView,ANY-method}
+\alias{GaView,.query,ANY-method}
+\alias{GaView,ANY,missing-method}
 \alias{GaView<-}
 \alias{GaView<-,.query-method}
 \title{GaView.}
@@ -12,7 +13,9 @@ GaView(object, value)
 
 GaView(object) <- value
 
-\S4method{GaView}{ANY}(object)
+\S4method{GaView}{ANY,missing}(object)
+
+\S4method{GaView}{.query,ANY}(object, value)
 
 \S4method{GaView}{.query}(object) <- value
 }
@@ -31,10 +34,12 @@ Set the viewId for the query.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ANY}: Returns the ID of the supplied view, or the first view
+\item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the first view
 within the supplied property or the first view within the first property of
 the supplied account, or get the view ID of the supplied query, or coerce a
 numeric or character into a viewId.
+
+\item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the updated view applied.
 
 \item \code{.query}: Replace the view being used by a query.
 }}

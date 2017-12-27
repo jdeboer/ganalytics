@@ -9,3 +9,4 @@ logo.png
 logo.xcf
 .app_oauth_creds.json
 inst/doc
+.GOOGLE_APIS_auth.RDS

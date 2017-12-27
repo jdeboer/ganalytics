@@ -20,7 +20,7 @@ setClass(
   contains = "andExpr",
   validity = function(object) {
     if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      return("A maximum of 10 dimension or metric conditions per segment.")
+      return("A maximum of 10 dimension or metric conditions per segment condition.")
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
@@ -168,6 +168,9 @@ setClass(
   "gaDynSegment",
   contains = "list",
   validity = function(object) {
+    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
+      return("A maximum of 10 dimension or metric conditions per segment.")
+    }
     if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
     } else TRUE
