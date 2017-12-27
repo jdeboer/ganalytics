@@ -56,11 +56,13 @@ setClass(
 setClass(
   ".sortBy",
   slots = c(
-    desc = "logical"
+    desc = "logical",
+    orderType = "character"
   ),
   prototype = prototype(
     list(),
-    desc = logical()
+    desc = logical(),
+    orderType = "VALUE"
   ),
   contains = "list",
   validity = function(object) {

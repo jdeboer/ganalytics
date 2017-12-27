@@ -18,7 +18,7 @@ setMethod("Expr", ".expr", function(object) {object})
 #'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod(
   f = "Expr",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object) {
     as(object, ".expr")
   }

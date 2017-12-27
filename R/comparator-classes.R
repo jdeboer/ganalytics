@@ -27,7 +27,8 @@ setClass(
   validity = function(object) {
     validate_that(
       length(object) == 1L,
-      length(object@negated) == 1L
+      length(object@negated) == 1L,
+      object@negated %in% c(FALSE, TRUE)
     )
   }
 )
@@ -52,8 +53,9 @@ setClass(
   ),
   validity = function(object) {
     validate_that(
-      object@.Data %in% kGaOps$met,
-      length(object@operator) == 1L
+      object@.Data %in% c(kGaOps$met, NA_character_),
+      length(object@operator) == 1L,
+      object@operator %in% names(kGa4Ops$metric_operators)
     )
   }
 )
@@ -78,8 +80,9 @@ setClass(
   ),
   validity = function(object) {
     validate_that(
-      object@.Data %in% kGaOps$dim,
-      length(object@operator) == 1L
+      object@.Data %in% c(kGaOps$dim, NA_character_),
+      length(object@operator) == 1L,
+      object@operator %in% names(kGa4Ops$dimension_operators)
     )
   }
 )

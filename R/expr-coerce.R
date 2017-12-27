@@ -57,15 +57,16 @@ setAs(from = ".expr", to = "orExpr", def = simpleCoerceToList)
 
 setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
   # This is currently only legal if the gaAnd object does not contain any gaOr
-  # object of length greater than 1 OR if there is only one gaOr. Otherwise,
-  # in a future implementation if any gaOr objects have a length greater than
-  # 1, then they will need to be shortened to length 1 which is only possible
-  # if each expression within that gaOr shares the same dimension and the
-  # expression comparators and operands can be combined either as a match regex
-  # or a match list.
+  # object of length greater than 1 OR if there is only one gaOr.
 
   # Check that all contained gaOr objects in the list have a length of 1
   assert_that(all(sapply(from, length) == 1) | length(from) == 1)
+
+  # Otherwise, in a future implementation if any gaOr objects have a length greater
+  # than 1, then they will need to be shortened to length 1 which is only possible
+  # if each expression within that gaOr shares the same dimension and the
+  # expression comparators and operands can be combined either as a match regex
+  # or a match list.
 
   # Break apart the AND expression into OR expressions
   # then break apart each OR expression into single
@@ -75,8 +76,7 @@ setAs(from = "andExpr", to = "orExpr", def = function(from, to) {
 
   orExpr <- as.list(do.call(c, do.call(c, from@.Data)))
   as(orExpr, to)
-}
-)
+})
 
 # Coercing to andExpr
 setAs(from = "orExpr", to = "andExpr", def = simpleCoerceToList)

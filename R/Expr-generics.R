@@ -6,7 +6,7 @@
 #'   to an .expr object.
 #' @param comparator The comparator to use for the expression.
 #' @param operand The operand to use for the expression.
-#' @param metricScope The scope to use for segmentation if using a metric.
+#' @param metricScope Optional scope to use for segmentation if using a metric.
 #'   Possible values include "perUser" or "perSession".
 #'
 #' @family expression generators

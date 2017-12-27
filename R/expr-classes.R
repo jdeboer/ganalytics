@@ -113,11 +113,11 @@ setClass(
   contains = c(".gaExpr", ".metExpr"),
   validity = function(object) {
     if (object@comparator == "<>") {
-      if (length(object@operand) != 2) {
+      if (length(object@operand) != 2L) {
         "operand must be of length 2 when using a range comparator '<>'."
       } else TRUE
     } else {
-      if (length(object@operand) != 1) {
+      if (length(object@operand) != 1L) {
         "operand must be of length 1 unless using a range comparator '<>'."
       } else TRUE
     }
@@ -144,8 +144,8 @@ setClass(
   contains = "gaMetExpr",
   validity = function(object) {
     validate_that(
-      length(object@metricScope) == 1,
-      object@metricScope %in% c("perUser", "perSession", "perHit")
+      length(object@metricScope) == 1L,
+      object@metricScope %in% c("perUser", "perSession", "perHit", "perProduct")
     )
   }
 )
@@ -170,12 +170,12 @@ setClass(
     if (isTRUE(object@comparator == "<>")) {
       rangeDimVars <- unlist(kGaDimTypes[c("nums", "dates", "orderedIntFactors")], use.names = FALSE)
       if (!(as.character(object@var) %in% rangeDimVars)) {
-        return("A range comparator only supports numerical dimensions or metrics")
+        return("A range comparator only supports date, numerical dimensions and metrics.")
       }
     }
-    if (!(length(object@operand) == 1 | object@comparator %in% c("<>", "[]"))) {
+    if (!(length(object@operand) == 1L | object@comparator %in% c("<>", "[]"))) {
       return("operand must be of length 1 unless using a range '<>' or list '[]' comparator.")
-    } else if (!(length(object@operand) <= 2 | object@comparator == "[]")) {
+    } else if (!(length(object@operand) <= 2L | object@comparator == "[]")) {
       return("operand may only be greater than length 2 if using a list comparator '[]'.")
     } else if (IsRegEx(object@comparator)) {
       if (nchar(object@operand) > 128) {

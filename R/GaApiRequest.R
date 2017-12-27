@@ -7,6 +7,7 @@
 #' @importFrom selectr querySelector querySelectorAll
 #' @importFrom XML xmlParse xmlToList xmlApply
 #' @importFrom plyr laply aaply
+#' @importFrom stats runif
 NULL
 
 # This will be initialised using GoogleApiCreds() at time of package being loaded.
