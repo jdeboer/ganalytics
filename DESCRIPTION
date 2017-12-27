@@ -41,7 +41,7 @@ Suggests:
     knitr,
     rmarkdown,
     ggplot2
-Collate:
+Collate: 
     'Bool-generics.R'
     'utils.R'
     'Segment-generics.R'

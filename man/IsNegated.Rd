@@ -25,7 +25,7 @@ IsNegated(object) <- value
 \description{
 Tests whether a segment filter is negated.
 
-Sets whether a segment filter should be negated.
+Sets the negation flag of a segment filter.
 }
 \section{Methods (by class)}{
 \itemize{
