@@ -6,7 +6,10 @@ NULL
 # Coercion to Date
 setAs(from = "character", to = "Date",
       def = function(from) {
-        as.Date(parse_date(from, output_format = kGaDateInFormat), format = kGaDateInFormat)
+        as.Date(
+          parse_date(from, output_format = kGaDateInFormat),
+          format = kGaDateInFormat
+        )
       }
 )
 
