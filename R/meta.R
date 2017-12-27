@@ -33,14 +33,20 @@ GaMetaUpdate <- function(creds = get_creds()) {
   kGaVars <- rename(kGaVars, replace = c("DIMENSION" = "dims", "METRIC" = "mets"))
   kGaVars_df <- df
 
+  IndexBounds <- kGaVars_df[c(
+    "minTemplateIndex",
+    "maxTemplateIndex",
+    "premiumMinTemplateIndex",
+    "premiumMaxTemplateIndex"
+  )]
   kGaVars_df <- mutate(
     kGaVars_df,
-    lower_bounds = do.call(pmin, c(kGaVars_df[12:15], na.rm = TRUE)),
-    upper_bounds = do.call(pmax, c(kGaVars_df[12:15], na.rm = TRUE))
+    lower_bounds = do.call(pmin, c(IndexBounds, na.rm = TRUE)),
+    upper_bounds = do.call(pmax, c(IndexBounds, na.rm = TRUE))
   )
   kGaVars$allVars <- unlist(alply(kGaVars_df, 1, function(var_def){
     ret <- if (!is.na(var_def$upper_bounds)) {
-      str_replace(var_def$id, "XX", seq(var_def$lower_bounds, var_def$upper_bounds))
+      str_replace(var_def$id, "XX", as.character(seq(var_def$lower_bounds, var_def$upper_bounds)))
     } else {
       var_def$id
     }

@@ -188,10 +188,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId, segment) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -226,7 +226,7 @@ setAs(
   to = "matrix",
   def = function(from) {
     views <- as(from, "viewId")
-    dateRange <- as(from, "dateRange")
+    dateRange <- from@dateRange
     startDates <- dateRange@startDate
     endDates <- dateRange@endDate
     viewsDates <- do.call(
@@ -245,10 +245,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -291,10 +291,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(viewId) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),

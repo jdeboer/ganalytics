@@ -47,3 +47,4 @@ test_that("Filter expressions cannot use '[]' or '<>' comparators", {
     "<>"
   )
 })
+

@@ -16,3 +16,4 @@ test_that("Initialisation of a .gaVar object corrects the variable name", {
   expect_identical(GaVar("dateofsess"), GaVar("dateOfSession"))
   expect_identical(GaVar("completionsall"), GaVar("ga:goalCompletionsAll"))
 })
+

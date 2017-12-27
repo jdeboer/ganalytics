@@ -109,11 +109,6 @@ kGaDateOrigin <- as.Date("2005-01-01")
 kGaSortTypes <- c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")
 
 # Google Analytics expression comparators
-kGaOps <- list(
-  met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
-  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
-)
-
 kGa4Ops <- list(
   metric_operators = c(
     "EQUAL" = "==",
@@ -135,6 +130,11 @@ kGa4Ops <- list(
   negated_operators = c(
     "!=", "!~", "!@", ">=", "<="
   )
+)
+
+kGaOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
 )
 
 kMcfOps <- list(
@@ -165,6 +165,9 @@ kGaMax <- list(
 # Maximum results per page and maximum rows accessible in a query.
 kGaMaxResults <- 10000L
 kGaMaxRows <- 1000000L
+
+# Maximum queries per batch
+kGaMaxBatchQueries <- 4L
 
 user_permission_levels <- c(
   "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"
@@ -230,7 +233,7 @@ user_segment_type_levels <- c(
 )
 
 metadata_path <- get_metadata_path()
-if (nchar(metadata_path) == 0) {
+if (nchar(metadata_path) == 0L) {
   GaMetaUpdate()
   metadata_path <- get_metadata_path()
 }
