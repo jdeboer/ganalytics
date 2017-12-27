@@ -241,7 +241,7 @@ user_segment_type_levels <- c(
 )
 
 metadata_path <- get_metadata_path()
-if (nchar(metadata_path) == 0) {
+if (nchar(metadata_path) == 0L) {
   if (interactive()) GaMetaUpdate()
   metadata_path <- get_metadata_path()
 }

@@ -19,8 +19,8 @@ setClass(
   "gaSegmentCondition",
   contains = "andExpr",
   validity = function(object) {
-    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      return("A maximum of 10 dimension or metric conditions per segment condition.")
+    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10L) {
+      return("A maximum of 10 expressions per segment condition filter.")
     }
     if (!all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {

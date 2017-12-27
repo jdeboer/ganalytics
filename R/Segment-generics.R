@@ -26,8 +26,8 @@ setGeneric(
 #' @export
 setGeneric(
   "Include",
-  function(object, ..., scope = "sessions") {},
-  valueClass = c(".gaSegmentFilter", "gaSegmentFilterList"),
+  function(object) {},
+  valueClass = ".gaSegmentFilter",
   useAsDefault = FALSE
 )
 
@@ -41,8 +41,8 @@ setGeneric(
 #' @export
 setGeneric(
   "Exclude",
-  function(object, ..., scope = "sessions") {},
-  valueClass = c(".gaSegmentFilter", "gaSegmentFilterList"),
+  function(object) {},
+  valueClass = ".gaSegmentFilter",
   useAsDefault = TRUE
 )
 
