@@ -206,7 +206,7 @@ setAs(
           "filters" = if (length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
-          "segment" = if (length(segments) >= 1) {
+          "segment" = if (length(segment) >= 1) {
             as(segment, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character"),
