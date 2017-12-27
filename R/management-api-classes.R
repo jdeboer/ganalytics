@@ -86,7 +86,7 @@ gaUserSegment <- R6Class(
   )
 )
 
-#' User Segment
+#' User Segments
 #'
 #' Get a user or system defined segment.
 #'

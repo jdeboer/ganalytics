@@ -6,7 +6,7 @@
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
-#' @importFrom methods setMethod new
+#' @importFrom methods setMethod new as as<-
 NULL
 
 #' SplitDateRange

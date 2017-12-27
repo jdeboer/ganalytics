@@ -11,7 +11,7 @@
 #' @include Var-list-generics.R
 #' @importFrom stringr str_match str_detect regex
 #' @importFrom lubridate ymd
-#' @importFrom methods setMethod validObject
+#' @importFrom methods setMethod validObject .valueClassTest
 NULL
 
 # Class initialisation methods
@@ -129,6 +129,15 @@ setMethod(
       else if (value == "~!") value <- "!~"
       else if (value %in% c("@=", "@", "CONTAINS", "PARTIAL")) value <- "=@"
       else if (value == "@!") value <- "!@"
+      else if (value %in% c(
+        names(kGa4Ops$metric_operators),
+        names(kGa4Ops$dimension_operators)
+      )) {
+        .Object@operator <- value
+        value <- c(
+          kGa4Ops$metric_operators, kGa4Ops$dimension_operators
+        )[value]
+      }
       .Object@.Data <- value
       .Object@negated <- value %in% kGa4Ops$negated_operators
       validObject(.Object)

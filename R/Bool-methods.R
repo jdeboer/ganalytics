@@ -3,7 +3,7 @@
 #' @include expr-classes.R
 #' @include segment-classes.R
 #' @include utils.R
-#' @importFrom methods setMethod
+#' @importFrom methods setMethod as is as<-
 #' @importFrom assertthat assert_that
 NULL
 

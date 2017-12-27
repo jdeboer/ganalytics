@@ -1,4 +1,5 @@
 #' @include utils.R
+#' @importFrom methods initialize
 NULL
 
 ### Review the following coercions using "new"
@@ -47,7 +48,7 @@ setAs(from = "numeric", to = "gaSegmentId", def = function(from, to) {
 })
 
 setAs(from = "gaUserSegment", to = "gaSegmentId", def = function(from, to) {
-  new(to, Segment(from))
+  new(to, Segments(from))
 })
 
 # Coercing to gaDynSegment

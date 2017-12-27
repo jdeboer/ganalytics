@@ -156,7 +156,7 @@ readline("Press enter to continue.")
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
 thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
-Segment(myQuery) <- thankyouExpr
+Segments(myQuery) <- thankyouExpr
 
 # Reset the filter
 TableFilter(myQuery) <- NULL
@@ -176,7 +176,7 @@ readline("Press enter to continue.")
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
-Segment(myQuery) <- NULL
+Segments(myQuery) <- NULL
 # Define our date range
 DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
@@ -208,7 +208,7 @@ library(plyr)
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
-Segment(myQuery) <- NULL
+Segments(myQuery) <- NULL
 # Define our date range
 DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions

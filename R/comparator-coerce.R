@@ -1,4 +1,5 @@
 #' @include utils.R
+#' @importFrom methods setAs
 NULL
 
 # Coercing to .comparator subclasses
@@ -8,4 +9,3 @@ setAs(from = "character", to = "mcfDimComparator", def = simpleCoerce)
 setAs(from = "character", to = "mcfMetComparator", def = simpleCoerce)
 setAs(from = "character", to = "rtDimComparator", def = simpleCoerce)
 setAs(from = "character", to = "rtMetComparator", def = simpleCoerce)
-

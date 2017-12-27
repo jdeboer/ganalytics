@@ -3,6 +3,7 @@
 #' @include Comparator-generics.R
 #' @include comparator-coerce.R
 #' @include utils.R
+#' @importFrom methods as
 NULL
 
 # ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----

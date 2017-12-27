@@ -22,24 +22,21 @@ setClass(
     if (sum(rapply(object, is, class2 = ".gaExpr")) > 10L) {
       return("A maximum of 10 conditions per segment.")
     }
-    if (all(sapply(unlist(object@.Data), function(expr) {
+    if (!all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
         (as.Date(Operand(expr))[2L] - as.Date(Operand(expr))[1L] + 1L) <= 31L
       } else TRUE
     }))) {
-      TRUE
-    } else {
       return("The maximum date range for dateOfSession is 31 days.")
     }
-    if (all(sapply(unlist(object@.Data), function(expr) {
+    if (!all(sapply(unlist(object@.Data), function(expr) {
       if (as.character(Var(expr)) == "dateOfSession") {
         Comparator(expr) == "<>"
       } else TRUE
     }))) {
-      TRUE
-    } else {
       return("The dateOfSession dimension can only be used with a <> comparator.")
     }
+    TRUE
   }
 )
 
@@ -106,11 +103,11 @@ setClass(
   "gaSegmentSequenceFilter",
   contains = c("list", ".gaSegmentFilter"),
   validity = function(object) {
-    if (all_inherit(object@.Data, "gaSegmentSequenceStep")) {
-      TRUE
-    } else {
     validate_that(length(object) <= 10L)
+    if (!all_inherit(object@.Data, "gaSegmentSequenceStep")) {
       "All conditions within a sequence list must belong to the superclass 'gaSegmentSequenceStep'."
+    } else {
+      TRUE
     }
   }
 )

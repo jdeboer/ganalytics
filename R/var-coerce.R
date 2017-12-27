@@ -132,25 +132,6 @@ setAs(from = ".rtVar", to = ".mcfVar", def = coerceVarNS)
 setAs(from = ".gaVar", to = ".rtVar", def = coerceVarNS)
 setAs(from = ".mcfVar", to = ".rtVar", def = coerceVarNS)
 
-setAs(from = ".expr", to = ".var",
-      def = function(from, to) {
-        from@var
-      },
-      replace = function(from, value) {
-        Expr(value, from@comparator, from@operand)
-      }
-)
-
-setAs(from = ".expr", to = ".gaVar",
-      def = function(from, to) {
-        as(as(from, ".var"), to)
-      },
-      replace = function(from, value) {
-        as(from, ".var") <- as(value, ".gaVar")
-        from
-      }
-)
-
 setAs(from = "gaGoal", to = "gaMetVar",
       def = function(from, to) {
         Var(paste0("goal", from$id, "completions"))

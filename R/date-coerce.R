@@ -1,6 +1,7 @@
 #' @include utils.R
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_split_fixed
+#' @importFrom methods as setAs
 NULL
 
 # Coercion to Date

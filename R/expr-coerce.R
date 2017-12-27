@@ -2,6 +2,7 @@
 #' @importFrom stringr str_replace_all str_match str_split_fixed str_split
 #' @importFrom assertthat assert_that
 #' @importFrom lazyeval as.lazy
+#' @importFrom methods as setAs
 NULL
 
 # Coercing to .expr
