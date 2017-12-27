@@ -4,9 +4,11 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Johann de Boer" />
 
@@ -54,14 +56,10 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0A%7D%0Apre%20%7B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -69,17 +67,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<div id="header">
-<h1 class="title">Interactively querying Google Analytics reports</h1>
+
+<h1 class="title toc-ignore">Interactively querying Google Analytics reports</h1>
 <h4 class="author"><em>Johann de Boer</em></h4>
 <h4 class="date"><em>2015-12-19</em></h4>
-</div>
+
 
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 <div id="ganalytics" class="section level1">
 <h1>ganalytics</h1>
-<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAUCAYAAAAN+ioeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABQBJREFUWIXdmH1ME2cAxp/76FF6DBhYIESgbHNJFRlMqIAIcWMjbhNs1pj0Dwgmi+jm4j70Dz/mHKvZnBl1cYBLE9YYCJNNggs6s/hFNGBjthCJHyPqFkFCVAKDtZSud+/+YDto7cdJmVSf5E3vvd/d0+d9cndpjzIYDJEcx5kVCoURQDTCQH++c36+I8yNXDQhg/wV+8h4IctxnJll2WpCyHzHkhROWUKSQqCQNpahIlEXWIZhjOG2sHDLE6qoJMcSlhASFo+LmXrSiiacm2LDcVHhmClU0YQQ+BtNTU1+mdwRyGMu/B+XEbBoALMybW5uluUxW///e3QU3J5zz6CPjmDcl4qLi5GcnCzLwxebzXfOpXL3L4A6XzmnnkGvaKPRCKvVCpPJBLVaLbGWlhaPY2fOOzs7fV61arUaJpMJVqsVRqPRgwUaJwoHsF6zHW35fTjwQgcSI1Ie4McL+9GY04Xs2CJpf0H8ajS8eBrHCm7BmnsRpYlGWezStvse3saULfg+7xoO515CztOrJJYUkYqvso6jLb8P6zXbcaJwwO8aghZtt9uh1+ths9lQUVHh97afOfe3XVlZie7ubuj1ejidTtlFA4BjZBKldYvR3XcOGzR7PPiyffHQfZGAPR2bUa2pkfZveXY/PvtpK1aaU/FW0xt4js2Wxbzzi+M0VtctwZendmKD5hOJVWtqcP76KZTWLYZz1B1wPUGLPnr0KHieR1tbG7RabUhFa7VatLe3g+d5tLa2PlTRLdfqEZExiZabX2NpTJ7EsmOL8MPmC+jeOohDhh+xkE+X2LHLzfiwZC92GfdBm/U89p7dIot55z/ca4Zy6d+wuU4iWaWR2JIYHVpvTuVqvnowtKJVKpXH539MFEVQFAVCCBQKhayiA/kFyxGZwAA0QWQCA0Kmz/tgUS0OnvkUheYUrKxNAU0xEmu48jG2tVfhRn8fKtO3wfT6IVnMOzOd6AZoAjZWBE3R04wAyqTpXCEVvWbNGiiVSpSXl6Onp0dig4OD0Ol04DgOZWVlsoru6enx8HuYog2pGxFJ81iX9jZ+7e+SGAclhBg7EnJ4vG/Y7eG54xUzotM5tP/eCPPZj7AsZpUs5p0f1L9Z4LWeOza8mVKNSJqHIW1TaEWLogiLxYKMjAw0NDRIrK6uDlVVVbBYLJiYmJBVdH19PTIzM2GxWOB2B36meecgDhpHVvQi66kimG07JFZ7bidq8hrxbV4XhoeHPTwv3/oFn+d8h5/X/YFdrx5Azcl3ZTF/+b3n5os7kBtTgiMresE5VXC47H7XQOn1er+/pYaGhsDzPBwOB1iWRWxsLBhm6haZnJzE2NgYRFFEVFQUxsfHkZSUJJ3na1sQBIyOjsLtdkOlUsFut0tsprzf3p1++R7yrXGYGBLARlKIWsSCiaCmctwTYb8tABSgTKQxMSAgfjkHAHDeFTExKEB0ETBKCqqFDLg4Oigbtrkkj5nb3nPBSTB+ww3apUBF8UasTH4NW38r89kltXbt2rD7v+td9JmS+3jp1IJ5ShNYZ0ruQyQCbo1ex+6TmzCkvurzuMfiXUemKRrxyxXzlCawMk3RAAWwKgr8MwxYQvk8jiWE/AUg6tHGCyzvouN07AP7wkVxOtZj7isn7WIJS9N0syAI1Y8qmByFa6mzFXs3ppceGRl5j2GYbyiKGpvvQE+aaBdLIu4suEzuiUX/AG3EJVuesFjhAAAAAElFTkSuQmCC" alt="Travis-CI Build Status" /></a></p>
+<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAUCAYAAAAnStuxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAA81JREFUWIXtWM9LMlsYfsY5DubItTJT1EWbFnGtCEILooIWrcqkiFxkbeJbhd8yqD+gVh8tKi6zaVEQQrXKaFdxIaMWcm83QmpnP6jATE3DceauErUZ9YvL5yzuAy+c877nPOeZZ+YVZ6ixsbEahmF+qNVqD4DfoAAMDAxUW0IBMpmMGI1G/wmHwz2EYZgfhJBvoihWW1cOStICAIQQymg02gVB+JPQNO1RmkCl6flAXV3d70QURUW0YT6UahghhCJKFKdETR9QiaIIudjY2JCtVRqlOP4L/l8dJQ0D8CXSzc3Niji+yl/NKNuS5epS6Ovrg8ViqYhDqvaVM38Vyhrm8XgwODiISCSC5eVlPD4+AgC2trYwMTGRW5c/Pzo6Kqh9nNHY2AifzwebzYaDg4OCWj6kchqNBr29vbBYLIjH4zg+PsbT0xMAYGZmBsFgEK2trWBZFhzHSeZ0Oh36+/vR0NCA5+dnHB4eIpFIyHJIoWxLJpNJuN1unJ6eYnJyUrad8udyY6/Xi5OTE7jdbqTT6U8cpaKrqwvn5+eYm5vD7u4uenp6Cs7QaDRYWlrC7OysbK67uxtXV1dYWFhAOByG0+ksyfGlltze3gbLstjZ2cH6+nrB3S/eK1f7GLe0tGBxcREsy8Lv92N8fLziJ8xqtaK5uRmjo6OfbggABAIBmEwmWK3WXL44Zzab4ff70dTUhGAwCIfDUZajGGUN02q1SKVS0Gq1BRcjCAIoioIgCGAYpiLDSvHlQ07T/Pw8YrFYbm6323NjvV4PmqYL9hbnRFFEfX09eJ6HwWD4ZLoURzHKtuTQ0BA0Gg1cLhdCoVCudnd3B4fDAYZhMDw8nBNUqiVDoVABX36tXFxeXsLr9aKzsxNOpxM+n6/gDJVK9Ul7ce7m5gbt7e0ghKCjowPX19cl10tFWcMEQQDHcbDb7VhbW8vVVlZWMD09DY7jkEqlKjJsdXUVbW1t4DgOPM//lGH7+/tIp9PweDxwuVw4OzuT/T2Vy+3t7cFoNGJqagoGgwGBQKDkeqmg3G637PP38PAAlmXx9vYGQghqa2tB0zQA4P39Ha+vrxAEATqdDvF4HGazObdPapzNZvHy8gKe56HVapFMJnO1fEh9rchms7i/v0c8HgdN0zCZTNDr9QCAi4uLgvaUy2UyGUQiEaRSKdTU1MBms0GtVsuulwI1MjKiuD89Svu8k4//3yV/EkQUxQQAXbWF5EOphvE8LxKVSrWZzWa/VVtMPpRqWCKR+FsVjUa/0zT9B0VRr9UWpFTwPC/GYrG/bm9ve/8FR/MRqjuhxXgAAAAASUVORK5CYII=" alt="Travis-CI Build Status" /></a></p>
 <p>Interact with <strong>Google Analytics</strong> using <strong>R</strong></p>
 <p>Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.</p>
 <p>This package provides functions for querying the Google Analytics core reporting, real-time, multi-channel funnel and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the management and Google Tag Manager APIs so that you can change tag, property or view settings, for example. Define reporting queries using natural R expressions instead of being concerned as much about API technical intricacies like query syntax, character code escaping, and API limitations.</p>
@@ -87,16 +85,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Updates</h2>
 <p>Many new functions have been provided for writing segmentation expressions:</p>
 <ul>
-<li><code>Segment(...)</code> - define a segment based one or more expressions or select a built-in segment by its ID number.</li>
+<li><code>Segments(...)</code> - define a list of segments dynamically based on one or more expressions and/or a selection of built-in and/or custom segments by their IDs.</li>
 <li><code>Include(...)</code> - expressions (conditions or sequences) defining users or sessions to include in the segment</li>
 <li><code>Exclude(...)</code> - expressions (conditions or sequences) defining users or sessions to exclude from the segment</li>
 <li><code>PerUser(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to user-level.</li>
 <li><code>PerSession(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to session-level.</li>
 <li><code>PerHit(...)</code> - specify that a set of logically combined conditions must all be met for a single hit, or set the scope of a metric condition to hit-level.</li>
-<li><code>Sequence(...)</code> - define a sequence of one or more conditions to use in a segment definition.</li>
-<li><code>Then(condition)</code> - used within a <code>Sequence()</code> to specify that this condition must immediately follow the preceding condition, rather than just any time after.</li>
-<li><code>Later(condition)</code> - similar to <code>Then()</code> but means that a condition can happen any time after the preceding condition.</li>
-<li><code>First(condition)</code> - similar to <code>Then()</code> but means that a condition must be the first ever interaction (hit) by the user within the specified date-range. Using <code>First()</code> is optional. Without using <code>First()</code> at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use <code>First()</code> anywhere else in the sequence other than at the start.</li>
+<li><code>Sequence(...)</code> - define a sequence of one or more conditions to use in a dynamic segment definition.</li>
+<li><code>Then(condition)</code> - used within a <code>Sequence()</code> to specify that this condition must immediately follow the preceding condition, as opposed to the default of loosely following at some point later.</li>
+<li><code>Later(condition)</code> - similar to <code>Then()</code> but means that a condition can happen any point after the preceding condition - this is how conditions are treated by default in a sequence if not explicitly set.</li>
+<li><code>First(condition)</code> - similar to <code>Then()</code> but means that a condition must be the first interaction (hit) by the user within the specified date-range. Using <code>First()</code> is optional. Without using <code>First()</code> at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use <code>First()</code> anywhere else in the sequence other than at the start, if used at all.</li>
 </ul>
 <p>Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.</p>
 <p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.</p>
@@ -129,7 +127,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the latest version of devtools via CRAN</span>
 <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
 <span class="co"># Install ganalytics via the GitHub repository.</span>
-devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/ganalytics&quot;</span>)
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jdeboer/ganalytics&quot;</span>)
 <span class="co"># End</span></code></pre></div>
 </div>
 <div id="now-restart-r." class="section level4">
@@ -160,21 +158,21 @@ devtools::<span class="kw">install_github</span>(<span class="st">&quot;jdeboer/
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
-<th align="left">Variable name</th>
-<th align="left">Variable value</th>
+<th></th>
+<th>Variable name</th>
+<th>Variable value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">1</td>
-<td align="left"><code>GOOGLE_APIS_CONSUMER_ID</code></td>
-<td align="left"><code>&lt;Your client ID&gt;</code></td>
+<td>1</td>
+<td><code>GOOGLE_APIS_CONSUMER_ID</code></td>
+<td><code>&lt;Your client ID&gt;</code></td>
 </tr>
 <tr class="even">
-<td align="left">2</td>
-<td align="left"><code>GOOGLE_APIS_CONSUMER_SECRET</code></td>
-<td align="left"><code>&lt;Your client secret&gt;</code></td>
+<td>2</td>
+<td><code>GOOGLE_APIS_CONSUMER_SECRET</code></td>
+<td><code>&lt;Your client secret&gt;</code></td>
 </tr>
 </tbody>
 </table>
@@ -335,7 +333,7 @@ sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span clas
 <span class="co"># Expression to define organic search sessions</span>
 organicExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;medium&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;organic&quot;</span>)
 <span class="co"># Expression to define organic search sessions made on a Sunday</span>
-sundayOrganic &lt;-<span class="st"> </span>sundayExpr &amp;<span class="st"> </span>organicExpr
+sundayOrganic &lt;-<span class="st"> </span>sundayExpr <span class="op">&amp;</span><span class="st"> </span>organicExpr
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>sundayOrganic
 
 myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
@@ -353,7 +351,7 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In a similar way to AND</span>
 loyalExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;!~&quot;</span>, <span class="st">&quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span>
 recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span>
-loyalOrRecent &lt;-<span class="st"> </span>loyalExpr |<span class="st"> </span>recentExpr
+loyalOrRecent &lt;-<span class="st"> </span>loyalExpr <span class="op">|</span><span class="st"> </span>recentExpr
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent
 
 myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
@@ -364,9 +362,9 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <h3>Example 8 - Filters that combine ORs with ANDs</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">loyalExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;!~&quot;</span>, <span class="st">&quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span>
 recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span>
-loyalOrRecent &lt;-<span class="st"> </span>loyalExpr |<span class="st"> </span>recentExpr
+loyalOrRecent &lt;-<span class="st"> </span>loyalExpr <span class="op">|</span><span class="st"> </span>recentExpr
 sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;=&quot;</span>, <span class="st">&quot;0&quot;</span>)
-loyalOrRecent_Sunday &lt;-<span class="st"> </span>loyalOrRecent &amp;<span class="st"> </span>sundayExpr
+loyalOrRecent_Sunday &lt;-<span class="st"> </span>loyalOrRecent <span class="op">&amp;</span><span class="st"> </span>sundayExpr
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent_Sunday
 
 myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
@@ -384,7 +382,7 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Continuing from example 8...</span>
 
 <span class="co"># Change filter to loyal session AND recent sessions AND visited on Sunday</span>
-loyalAndRecent_Sunday &lt;-<span class="st"> </span>loyalExpr &amp;<span class="st"> </span>recentExpr &amp;<span class="st"> </span>sundayExpr
+loyalAndRecent_Sunday &lt;-<span class="st"> </span>loyalExpr <span class="op">&amp;</span><span class="st"> </span>recentExpr <span class="op">&amp;</span><span class="st"> </span>sundayExpr
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalAndRecent_Sunday
 
 <span class="co"># Sort by decending visit count and ascending days since last visit.</span>
@@ -405,7 +403,7 @@ myData &lt;-<span class="st"> </span><span class="kw">arrange</span>(myData, <sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.</span>
 <span class="co"># Define a segment for sessions where a &quot;thank-you&quot;, &quot;thankyou&quot; or &quot;success&quot; page was viewed.</span>
 thankyouExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="st">&quot;pagePath&quot;</span>, <span class="st">&quot;~&quot;</span>, <span class="st">&quot;thank</span><span class="ch">\\</span><span class="st">-?you|success&quot;</span>)
-<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span>thankyouExpr
+<span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span>thankyouExpr
 
 <span class="co"># Reset the filter</span>
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
@@ -425,7 +423,7 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows</span>
 <span class="co"># First let's clear any filters or segments defined previously</span>
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
-<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="co"># Define our date range</span>
 <span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2011-01-01&quot;</span>, <span class="st">&quot;2012-12-31&quot;</span>)
 <span class="co"># Define our metrics and dimensions</span>
@@ -441,11 +439,11 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <span class="kw">library</span>(plyr)
 
 <span class="co"># Sessions by day of week</span>
-sessions_by_dayOfWeek &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, ~dayOfWeek, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
+sessions_by_dayOfWeek &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, <span class="op">~</span>dayOfWeek, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
 <span class="kw">with</span>(sessions_by_dayOfWeek, <span class="kw">barplot</span>(sessions, <span class="dt">names.arg=</span>dayOfWeek))
 
 <span class="co"># Sessions by hour of day</span>
-sessions_by_hour &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, ~hour, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
+sessions_by_hour &lt;-<span class="st"> </span><span class="kw">ddply</span>(myData, <span class="op">~</span>hour, summarise, <span class="dt">sessions =</span> <span class="kw">sum</span>(sessions))
 <span class="kw">with</span>(sessions_by_hour, <span class="kw">barplot</span>(sessions, <span class="dt">names.arg=</span>hour))
 <span class="co"># End</span></code></pre></div>
 </div>
@@ -460,7 +458,7 @@ sessions_by_hour &lt;-<span class="st"> </span><span class="kw">ddply</span>(myD
 <span class="co"># Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows</span>
 <span class="co"># First let's clear any filters or segments defined previously</span>
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
-<span class="kw">Segment</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="co"># Define our date range</span>
 <span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2011-01-01&quot;</span>, <span class="st">&quot;2012-12-31&quot;</span>)
 <span class="co"># Define our metrics and dimensions</span>
@@ -474,13 +472,13 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <span class="co"># Sessions by hour of day and day of week</span>
 avg_sessions_by_hour_wday_mobile &lt;-<span class="st"> </span><span class="kw">ddply</span>(
   myData,
-  ~hour +<span class="st"> </span>dayOfWeek +<span class="st"> </span>isMobile,
+  <span class="op">~</span>hour <span class="op">+</span><span class="st"> </span>dayOfWeek <span class="op">+</span><span class="st"> </span>isMobile,
   summarise,
   <span class="dt">sessions =</span> <span class="kw">mean</span>(sessions)
 )
 
 <span class="co"># Relabel the days of week</span>
-<span class="kw">levels</span>(avg_sessions_by_hour_wday_mobile$dayOfWeek) &lt;-<span class="st"> </span><span class="kw">c</span>(
+<span class="kw">levels</span>(avg_sessions_by_hour_wday_mobile<span class="op">$</span>dayOfWeek) &lt;-<span class="st"> </span><span class="kw">c</span>(
   <span class="st">&quot;Sun&quot;</span>, <span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>
 )
 
@@ -489,7 +487,7 @@ avg_sessions_by_hour_wday_mobile &lt;-<span class="st"> </span><span class="kw">
   <span class="dt">x =</span> hour,
   <span class="dt">y =</span> sessions,
   <span class="dt">data =</span> avg_sessions_by_hour_wday_mobile,
-  <span class="dt">facets =</span> ~dayOfWeek,
+  <span class="dt">facets =</span> <span class="op">~</span>dayOfWeek,
   <span class="dt">fill =</span> isMobile,
   <span class="dt">geom =</span> <span class="st">&quot;bar&quot;</span>,
   <span class="dt">position =</span> <span class="st">&quot;stack&quot;</span>,
@@ -533,7 +531,7 @@ avg_sessions_by_hour_wday_mobile &lt;-<span class="st"> </span><span class="kw">
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

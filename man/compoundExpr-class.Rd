@@ -8,4 +8,3 @@
 An S4 class representing an expression containing one or more conditions.
 }
 \keyword{internal}
-

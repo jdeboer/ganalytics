@@ -3,6 +3,7 @@
 #' @include Comparator-generics.R
 #' @include comparator-coerce.R
 #' @include utils.R
+#' @importFrom methods as
 NULL
 
 # ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
@@ -12,8 +13,7 @@ setMethod(
   f = "%matches%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
-    comparator <- "=~"
-    Expr(var, comparator, operand)
+    Expr(var, "=~", operand)
   }
 )
 
@@ -22,8 +22,25 @@ setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
-    comparator <- "=@"
-    Expr(var, comparator, operand)
+    Expr(var, "BEGINS_WITH", operand)
+  }
+)
+
+#' @rdname Comparator
+setMethod(
+  f = "%ends_with%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
+    Expr(var, "ENDS_WITH", operand)
+  }
+)
+
+#' @rdname Comparator
+setMethod(
+  f = "%contains%",
+  signature = c(".var", ".dimOperand"),
+  function(var, operand) {
+    Expr(var, "=@", operand)
   }
 )
 
@@ -32,8 +49,7 @@ setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
   function(var, operand) {
-    comparator <- "<>"
-    Expr(var, comparator, operand)
+    Expr(var, "<>", operand)
   }
 )
 
@@ -42,8 +58,7 @@ setMethod(
   f = "%in%",
   signature = c(".var", ".operand"),
   function(x, table) {
-    comparator <- "[]"
-    Expr(x, comparator, table)
+    Expr(x, "[]", table)
   }
 )
 
@@ -54,8 +69,7 @@ setMethod(
   f = "==",
   signature = c(".var", ".operand"),
   function(e1, e2) {
-    comparator <- "=="
-    Expr(e1, comparator, e2)
+    Expr(e1, "==", e2)
   }
 )
 
@@ -64,8 +78,7 @@ setMethod(
   f = "!=",
   signature = c(".var", ".operand"),
   function(e1, e2) {
-    comparator <- "!="
-    Expr(e1, comparator, e2)
+    Expr(e1, "!=", e2)
   }
 )
 
@@ -74,8 +87,7 @@ setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
   function(e1, e2) {
-    comparator <- ">"
-    Expr(e1, comparator, e2)
+    Expr(e1, ">", e2)
   }
 )
 
@@ -84,8 +96,7 @@ setMethod(
   f = "<",
   signature = c(".var", ".metOperand"),
   function(e1, e2) {
-    comparator <- "<"
-    Expr(e1, comparator, e2)
+    Expr(e1, "<", e2)
   }
 )
 
@@ -94,8 +105,7 @@ setMethod(
   f = ">=",
   signature = c(".var", ".metOperand"),
   function(e1, e2) {
-    comparator <- ">="
-    Expr(e1, comparator, e2)
+    Expr(e1, ">=", e2)
   }
 )
 
@@ -104,8 +114,7 @@ setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),
   function(e1, e2) {
-    comparator <- "<="
-    Expr(e1, comparator, e2)
+    Expr(e1, "<=", e2)
   }
 )
 
@@ -113,18 +122,18 @@ setMethod(
 
 #' @describeIn Comparator Return the comparator used within the supplied
 #'   conditional expression.
-setMethod("Comparator", "ANY", function(object) {as(object, ".comparator")})
+setMethod("Comparator", signature = ".expr", definition = function(object){
+  object@comparator
+})
 
-#' @describeIn Comparator Replace the comparator used in the supplied
+#' @describeIn Comparator Replace the comparator of the supplied
 #'   conditional expression.
-setMethod(
-  f = "Comparator<-",
-  signature = c("ANY", "ANY"),
-  definition = function(object, value) {
-    as(object, ".comparator") <- as(value, ".comparator")
-    object
-  }
-)
+setMethod("Comparator<-", signature = c(".expr", "ANY"), definition = function(object, value){
+  use_class <- class(object@comparator)
+  object@comparator <- as(value, use_class)
+  validObject(object)
+  object
+})
 
 #' @describeIn IsRegEx Test whether the supplied comparator is for a regular
 #'   expression.

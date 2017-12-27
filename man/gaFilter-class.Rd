@@ -8,4 +8,3 @@
 An S4 class to represent a Core Reporting query table filter expression.
 }
 \keyword{internal}
-

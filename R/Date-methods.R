@@ -6,7 +6,7 @@
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
-#' @importFrom methods setMethod new
+#' @importFrom methods setMethod new as as<-
 NULL
 
 #' SplitDateRange
@@ -22,13 +22,17 @@ NULL
 SplitDateRange <- function(dateRange, N) {
   # TO DO
   # Assert:
-  # N >= 0 and length(dateRange) == 1
+  # length(dateRange) == 1
   #
   # If N = 0 then split date range into single days
   # If N = 1, then the date range returned will be of length 1
   #   i.e. it will be the same or of shorter length than the original.
   #
   # Set new start dates
+  assert_that(
+    N >= 0L,
+    class(dateRange) == "dateRange"
+  )
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
   if (N <= 0 | N > maxN) {
     N <- maxN
@@ -184,6 +188,16 @@ setMethod(
 #'   the supplied object into a dateRange.
 setMethod("DateRange", c("ANY", "missing"), function(object) {
   as(object, "dateRange")
+})
+
+setMethod("DateRange", c(".standardQuery"), function(object) {
+  object@dateRange
+})
+
+setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
+  object@dateRange <- as(value, "dateRange")
+  validObject(object)
+  object
 })
 
 #' @describeIn DateRange Returns the maximum date range of when a view has been

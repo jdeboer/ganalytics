@@ -11,4 +11,3 @@ An S4 class to represent a Multi-Channel Funnel dimension.
 Set to "mcf:nthDay" by default.
 }
 \keyword{internal}
-

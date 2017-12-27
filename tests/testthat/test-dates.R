@@ -45,3 +45,4 @@ test_that("SplitDateRange correctly splits a dateRange object, including that of
   # dateRange
   # query
 })
+

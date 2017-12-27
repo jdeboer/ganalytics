@@ -8,4 +8,3 @@
 An S4 class to represent Multi-Channel Funnel query table filter expression.
 }
 \keyword{internal}
-

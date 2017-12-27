@@ -8,4 +8,3 @@
 An S4 class union representing metric condition comparator operators.
 }
 \keyword{internal}
-

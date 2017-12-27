@@ -9,4 +9,3 @@ An S4 class representing Multi-Channel Funnel metric condtion comparison
 operators.
 }
 \keyword{internal}
-

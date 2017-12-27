@@ -20,4 +20,3 @@ Deprecated, use GaView instead.
 Deprecated, use GaView instead.
 }
 \keyword{internal}
-

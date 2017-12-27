@@ -8,4 +8,3 @@
 An S4 class to represent a list of variables to sort by.
 }
 \keyword{internal}
-

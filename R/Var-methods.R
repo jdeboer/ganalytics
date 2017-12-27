@@ -8,7 +8,7 @@
 #' @include Var-generics.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods new setMethod
+#' @importFrom methods new setMethod as<-
 NULL
 
 #' @describeIn Var Coerce a character to '.var'.
@@ -31,14 +31,14 @@ setMethod(
 )
 
 #' @describeIn Var Get the variable of an expression object.
-setMethod("Var", ".expr", function(object) {as(object, ".var")})
+setMethod("Var", ".expr", function(object) {object@var})
 
 #' @describeIn Var Set the variable of an expression object using a character value to be coerced to '.var'.
 setMethod(
   f = "Var<-",
   signature = c(".expr", "character"),
   definition = function(object, value) {
-    as(object, ".var") <- value
+    object <- Expr(value, object@comparator, object@operand)
     object
   }
 )
@@ -62,14 +62,14 @@ setMethod(
 )
 
 #' @describeIn Var Get the variable from expression object coerced to '.garVar'.
-setMethod("GaVar", ".expr", function(object) {as(object, ".gaVar")})
+setMethod("GaVar", ".expr", function(object) {object@var})
 
 #' @describeIn Var Set the variable of an expression to a .gaVar as named by a character value.
 setMethod(
   f = "GaVar<-",
   signature = c(".expr", "character"),
   definition = function(object, value) {
-    as(object, ".gaVar") <- value
+    object@var <- value
     object
   }
 )
@@ -88,6 +88,20 @@ setMethod("McfVar", "ANY", function(object) {as(object, ".mcfVar")})
 setMethod("RtVar", "ANY", function(object) {as(object, ".rtVar")})
 
 # -- GaMetrics ----
+
+#############\/ Transform to method of Metrics and Metrics<- generic functions
+setAs(from = ".query", to = ".metrics",
+      def = function(from, to) {
+        from@metrics
+      },
+      replace = function(from, value) {
+        use_class <- class(from@metrics)
+        from@metrics <- as(value, use_class)
+        from <- ganalytics:::updateSortBy(from)
+        validObject(from)
+        from
+      }
+)
 
 #' @describeIn Metrics Coerce one or more supplied objects to .metrics.
 setMethod(
@@ -128,7 +142,9 @@ setMethod(
 
 #' @describeIn Dimensions Returns the dimensions used within the supplied query.
 #' @export
-setMethod("Dimensions", ".query", function(object) {as(object, ".dimensions")})
+setMethod("Dimensions", ".query", function(object) {
+  object@dimensions
+})
 
 #' @describeIn Dimensions Replace the dimensions of the query.
 #' @export
@@ -136,7 +152,10 @@ setMethod(
   f = "Dimensions<-",
   signature = c(".query", "ANY"),
   definition = function(object, value) {
-    as(object, ".dimensions") <- value
+    use_class <- class(object@dimensions)
+    object@dimensions <- as(value, use_class)
+    object <- ganalytics:::updateSortBy(object)
+    validObject(object)
     object
   }
 )

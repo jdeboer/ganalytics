@@ -9,4 +9,3 @@ An S4 class to represent the name of a single Google Analytics dimension or
 metric variable.
 }
 \keyword{internal}
-

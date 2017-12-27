@@ -8,4 +8,3 @@
 An S4 class to represent a Multi-Channel dimension condition operand.
 }
 \keyword{internal}
-

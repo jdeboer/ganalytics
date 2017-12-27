@@ -15,4 +15,3 @@ GaSegmentFilters(..., scope = "sessions")
 Deprecated, use \code{PerSession} or \code{PerUser} instead.
 }
 \keyword{internal}
-

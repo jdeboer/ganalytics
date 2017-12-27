@@ -9,4 +9,3 @@ An S4 class to represent a Multi-Channel Funnel dimension condition
 expression.
 }
 \keyword{internal}
-

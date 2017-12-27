@@ -8,4 +8,3 @@
 An S4 class union representing Core-reporting condition operands.
 }
 \keyword{internal}
-

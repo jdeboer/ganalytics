@@ -16,4 +16,3 @@ FALSE).}
 Deprecated, use \code{Include} or \code{Exclude} instead.
 }
 \keyword{internal}
-

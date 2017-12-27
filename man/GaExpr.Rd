@@ -19,7 +19,7 @@ to an .expr object.}
 
 \item{operand}{The operand to use for the expression.}
 
-\item{metricScope}{The scope to use for segmentation if using a metric.
+\item{metricScope}{Optional scope to use for segmentation if using a metric.
 Possible values include "perUser" or "perSession".}
 }
 \description{
@@ -30,6 +30,7 @@ Create a Core Reporting API expression.
 \item \code{object = character,comparator = character}: Return a Google Analytics expression using the described
 variable, operator and operand.
 }}
+
 \examples{
 \dontrun{
   myQuery <- GaQuery(view = 123456789)
@@ -42,4 +43,3 @@ variable, operator and operand.
 Other expression generators: \code{\link{Expr}},
   \code{\link{McfExpr}}, \code{\link{RtExpr}}
 }
-

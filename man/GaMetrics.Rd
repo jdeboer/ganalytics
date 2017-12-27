@@ -20,4 +20,3 @@ Deprecated, use \code{Metrics} instead.
 Deprecated, use \code{Metrics<-} instead.
 }
 \keyword{internal}
-

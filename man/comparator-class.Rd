@@ -11,4 +11,3 @@ An S4 class to represent a condition's comparator operator.
 Set to "==" (exact match) by default.
 }
 \keyword{internal}
-

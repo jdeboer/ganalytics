@@ -98,7 +98,11 @@ kGaDimTypes <- list(
   )
 )
 
-samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
+samplingLevel_levels <- c(
+  DEFAULT = "DEFAULT",
+  SMALL = "FASTER",
+  LARGE = "HIGHER_PRECISION"
+)
 
 # Constants
 # ---------
@@ -110,7 +114,32 @@ kGaDateOutFormat <- "%Y%m%d"
 # The earliest valid date is 20050101. There is no upper limit restriction for a start-date.
 kGaDateOrigin <- as.Date("2005-01-01")
 
+kGaSortTypes <- c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")
+
 # Google Analytics expression comparators
+kGa4Ops <- list(
+  metric_operators = c(
+    "EQUAL" = "==",
+    "LESS_THAN" = "<",
+    "GREATER_THAN" = ">",
+    "BETWEEN" = "<>"
+  ),
+  dimension_operators = c(
+    "BEGINS_WITH" = NA,
+    "ENDS_WITH" = NA,
+    "REGEXP" = "=~",
+    "PARTIAL" = "=@",
+    "EXACT" = "==",
+    "IN_LIST" = "[]",
+    "NUMERIC_LESS_THAN" = "<",
+    "NUMERIC_GREATER_THAN" = ">",
+    "NUMERIC_BETWEEN" = "<>"
+  ),
+  negated_operators = c(
+    "!=", "!~", "!@", ">=", "<="
+  )
+)
+
 kGaOps <- list(
   met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
   dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]", "<", ">", "<=", ">=")
@@ -144,6 +173,9 @@ kGaMax <- list(
 # Maximum results per page and maximum rows accessible in a query.
 kGaMaxResults <- 10000L
 kGaMaxRows <- 1000000L
+
+# Maximum queries per batch
+kGaMaxBatchQueries <- 4L
 
 user_permission_levels <- c(
   "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"

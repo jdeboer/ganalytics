@@ -13,4 +13,3 @@ GaSequence(...)
 Deprecated, use \code{Sequence} instead.
 }
 \keyword{internal}
-

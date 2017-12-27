@@ -8,4 +8,3 @@
 An S4 class union representing condition expressions.
 }
 \keyword{internal}
-

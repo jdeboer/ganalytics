@@ -13,4 +13,3 @@ GaUserSegments(creds = get_creds())
 Returns a collection object of user and system defined segments available
 under the supplied user credentials.
 }
-

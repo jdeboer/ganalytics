@@ -24,4 +24,3 @@ range. First expressly means 'first interaction' within the date range.
 \seealso{
 \code{\link{Sequence}}
 }
-

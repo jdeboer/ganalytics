@@ -3,8 +3,8 @@
 \docType{methods}
 \name{MaxResults}
 \alias{MaxResults}
-\alias{MaxResults,.query-method}
 \alias{MaxResults<-}
+\alias{MaxResults,.query-method}
 \alias{MaxResults<-,.query-method}
 \title{MaxResults.}
 \usage{

@@ -144,30 +144,58 @@ GaSplitDateRange <- function(...){
 
 #' GaSegment
 #'
-#' Deprecated, use Segment instead.
+#' Deprecated, use Segments instead.
 #'
-#' @param ... arguments passed onto \code{Segment}
+#' @param ... arguments passed onto \code{Segments}
 #'
 #' @rdname GaSegment
 #' @keywords internal
 #' @export GaSegment
 GaSegment <- function(...){
-  .Deprecated("Segment")
-  Segment(...)
+  .Deprecated("Segments")
+  Segments(...)
 }
 
 #' GaSegment<-
 #'
-#' Deprecated, use Segment<- instead.
+#' Deprecated, use Segments<- instead.
 #'
-#' @param value passed onto \code{Segment}
+#' @param value passed onto \code{Segments}
 #'
 #' @rdname GaSegment
 #' @keywords internal
 #' @export GaSegment<-
 `GaSegment<-` <- function(..., value){
-  .Deprecated("Segment<-")
-  `Segment<-`(..., value)
+  .Deprecated("Segments<-")
+  `Segments<-`(..., value)
+}
+
+#' Segment
+#'
+#' Deprecated, use Segments instead.
+#'
+#' @param ... arguments passed onto \code{Segments}
+#'
+#' @rdname Segment
+#' @keywords internal
+#' @export Segment
+Segment <- function(...){
+  .Deprecated("Segments")
+  Segments(...)
+}
+
+#' Segment<-
+#'
+#' Deprecated, use Segments<- instead.
+#'
+#' @param value passed onto \code{Segments}
+#'
+#' @rdname Segment
+#' @keywords internal
+#' @export Segment<-
+`Segment<-` <- function(..., value){
+  .Deprecated("Segments<-")
+  `Segments<-`(..., value)
 }
 
 #' GaFilter

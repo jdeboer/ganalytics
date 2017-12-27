@@ -8,4 +8,3 @@
 An S4 class union of Real-Time variable lists.
 }
 \keyword{internal}
-

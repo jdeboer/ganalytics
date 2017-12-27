@@ -12,4 +12,3 @@ name.
 Set to "ga:sessions" by default.
 }
 \keyword{internal}
-

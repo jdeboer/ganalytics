@@ -3,8 +3,8 @@
 \docType{methods}
 \name{TableFilter}
 \alias{TableFilter}
-\alias{TableFilter,ANY-method}
 \alias{TableFilter<-}
+\alias{TableFilter,ANY-method}
 \alias{TableFilter<-,.query-method}
 \title{TableFilter.}
 \usage{

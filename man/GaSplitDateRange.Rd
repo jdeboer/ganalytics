@@ -13,4 +13,3 @@ GaSplitDateRange(...)
 Deprecated, use SplitDateRange instead.
 }
 \keyword{internal}
-

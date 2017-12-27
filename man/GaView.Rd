@@ -6,6 +6,7 @@
 \alias{GaView,.query,ANY-method}
 \alias{GaView,ANY,missing-method}
 \alias{GaView<-}
+\alias{GaView,ANY-method}
 \alias{GaView<-,.query-method}
 \title{GaView.}
 \usage{
@@ -36,7 +37,7 @@ Set the viewId for the query.
 \itemize{
 \item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the first view
 within the supplied property or the first view within the first property of
-the supplied account, or get the view ID of the supplied query, or coerce a
+the supplied account, or gets the view ID of the supplied query, or coerce a
 numeric or character into a viewId.
 
 \item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the updated view applied.

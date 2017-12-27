@@ -26,6 +26,7 @@ Create a Real-Time Reporting API expression.
 \item \code{object = character,comparator = character}: Define a Real-Time Reporting condition using the arguments
 describing the variable, comparator and operand.
 }}
+
 \examples{
 \dontrun{
   myQuery <- RtQuery(view = 123456789)
@@ -39,4 +40,3 @@ describing the variable, comparator and operand.
 Other expression generators: \code{\link{Expr}},
   \code{\link{GaExpr}}, \code{\link{McfExpr}}
 }
-

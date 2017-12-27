@@ -20,4 +20,3 @@ Deprecated, use MaxResults instead.
 Deprecated, use MaxResults<- instead.
 }
 \keyword{internal}
-

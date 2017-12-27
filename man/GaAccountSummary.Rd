@@ -14,4 +14,3 @@ GaAccountSummary(id = NULL, creds = get_creds())
 \description{
 Get a Google Analytics account summary resource.
 }
-

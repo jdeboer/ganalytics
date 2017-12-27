@@ -4,8 +4,8 @@
 \name{PerHit}
 \alias{PerHit}
 \alias{PerHit,.compoundExpr-method}
-\alias{PerHit,formula-method}
 \alias{PerHit,gaMetExpr-method}
+\alias{PerHit,formula-method}
 \title{PerHit.}
 \usage{
 PerHit(object, ...)
@@ -17,14 +17,20 @@ PerHit(object, ...)
 \S4method{PerHit}{formula}(object, ...)
 }
 \arguments{
-\item{object}{a gaMetExpr object to coerce to user-level.}
+\item{object}{a gaMetExpr object to coerce to hit-level or if multiple expressions
+are provided, then the first expression to combine into a single step of sequence
+filter.}
 
-\item{...}{Other conditions to be included in the segment definition.}
+\item{...}{Further expressions to be included in the filter definition if defining a
+sequence filter of length one.}
+}
+\value{
+a gaMetExpr or gaSegmentSequenceFilter.
 }
 \description{
 Set the scope of a gaMetExpr object to hit-level, or transforms a condition
-filter to a sequence filter of length one (i.e. conditions to match a single
-hit).
+filter to a sequence filter of length one (i.e. a combination of conditions for
+matching a single hit).
 }
 \section{Methods (by class)}{
 \itemize{

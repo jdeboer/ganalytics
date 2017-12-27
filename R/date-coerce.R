@@ -1,14 +1,16 @@
 #' @include utils.R
 #' @importFrom assertthat assert_that
 #' @importFrom stringr str_split_fixed
+#' @importFrom methods as setAs
 NULL
-
-#############\/ Transform to method of DateRange and DateRange<- generic functions
 
 # Coercion to Date
 setAs(from = "character", to = "Date",
       def = function(from) {
-        as.Date(parse_date(from, output_format = kGaDateInFormat), format = kGaDateInFormat)
+        as.Date(
+          parse_date(from, output_format = kGaDateInFormat),
+          format = kGaDateInFormat
+        )
       }
 )
 
@@ -32,16 +34,5 @@ setAs(from = "Interval", to = "dateRange",
         } else {
           new(to, end_date, start_date)
         }
-      }
-)
-
-setAs(from = ".query", to = "dateRange",
-      def = function(from, to) {
-        from@dateRange
-      },
-      replace = function(from, value) {
-        from@dateRange <- as(value, "dateRange")
-        validObject(from)
-        from
       }
 )

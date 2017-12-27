@@ -2,9 +2,9 @@
 % Please edit documentation in R/Bool-generics.R, R/Bool-methods.R
 \docType{methods}
 \name{And}
-\alias{&,.compoundExpr,.compoundExpr-method}
 \alias{And}
 \alias{And,.compoundExpr-method}
+\alias{&,.compoundExpr,.compoundExpr-method}
 \title{And.}
 \usage{
 And(object, ...)
@@ -39,7 +39,7 @@ A single list of objects is also accepted.
 
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expresisons.
 }}
+
 \seealso{
 \code{\link{Or}} \code{\link{xor}} \code{\link{Not}}
 }
-

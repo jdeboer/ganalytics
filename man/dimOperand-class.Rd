@@ -8,4 +8,3 @@
 An S4 class to represent the operand value of a dimension condition expression.
 }
 \keyword{internal}
-

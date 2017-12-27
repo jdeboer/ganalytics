@@ -20,4 +20,3 @@ Deprecated, use TableFilter instead.
 Deprecated, use TableFilter<- instead.
 }
 \keyword{internal}
-

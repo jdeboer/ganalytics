@@ -8,4 +8,3 @@
 An S4 class to represent Multi-Channel Funnel variable lists.
 }
 \keyword{internal}
-

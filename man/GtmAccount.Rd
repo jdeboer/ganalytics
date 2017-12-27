@@ -14,4 +14,3 @@ GtmAccount(id = NULL, creds = get_creds())
 \description{
 Get a GTM account.
 }
-

@@ -11,4 +11,3 @@ An S4 class to represent a Real-Time reporting metric.
 Set to "rt:pageviews" by default.
 }
 \keyword{internal}
-

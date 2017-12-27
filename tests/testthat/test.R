@@ -155,13 +155,13 @@ test_that("TableFilter<- replaces the table filter of a query", {
   expect_equivalent(TableFilter(query), TableFilter(NULL))
 })
 
-test_that("Segment<- replaces the segment of a query", {
+test_that("Segments<- replaces the segments of a query", {
   query <- GaQuery(view = 0)
   segment <-
     Expr("ga:source", "=", "google.com") &
       Expr("ga:deviceCategory", "=", "mobile")
-  Segment(query) <- segment
-  expect_identical(Segment(query)[[1]], Segment(segment)[[1]])
+  Segments(query) <- segment
+  expect_identical(Segments(query)[[1]], Segments(segment)[[1]])
 })
 
 test_that("Metrics<-, Dimensions<-, and SortBy<-, work as expected on a query", {

@@ -8,4 +8,3 @@
 An S4 class to represent a list of Real-Time reporting dimensions.
 }
 \keyword{internal}
-

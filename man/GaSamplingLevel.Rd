@@ -20,4 +20,3 @@ Deprecated, use SamplingLevel instead.
 Deprecated, use SamplingLevel<- instead.
 }
 \keyword{internal}
-

@@ -42,20 +42,6 @@ updateSortBy <- function(object) {
   object
 }
 
-#############\/ Transform to method of Dimensions and Dimensions<- generic functions
-setAs(from = ".query", to = ".dimensions",
-      def = function(from, to) {
-        from@dimensions
-      },
-      replace = function(from, value) {
-        use_class <- class(from@dimensions)
-        from@dimensions <- as(value, use_class)
-        from <- ganalytics:::updateSortBy(from)
-        validObject(from)
-        from
-      }
-)
-
 setAs(from = "list", to = ".metrics", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".metVar")}))
   if (length(vars) >= 1) {
@@ -71,20 +57,6 @@ setAs(from = "list", to = ".metrics", def = function(from) {
   }
 })
 
-#############\/ Transform to method of Metrics and Metrics<- generic functions
-setAs(from = ".query", to = ".metrics",
-      def = function(from, to) {
-        from@metrics
-      },
-      replace = function(from, value) {
-        use_class <- class(from@metrics)
-        from@metrics <- as(value, use_class)
-        from <- ganalytics:::updateSortBy(from)
-        validObject(from)
-        from
-      }
-)
-
 setAs(from = "list", to = ".sortBy", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".var")}))
   if (length(vars) >= 1) {
@@ -99,19 +71,6 @@ setAs(from = "list", to = ".sortBy", def = function(from) {
     new(to, vars)
   }
 })
-
-#############\/ Transform to method of SortBy and SortBy<- generic functions
-setAs(from = ".query", to = ".sortBy",
-      def = function(from, to) {
-        from@sortBy
-      },
-      replace = function(from, value) {
-        use_class <- class(from@sortBy)
-        from@sortBy <- as(value, use_class)
-        validObject(from)
-        from
-      }
-)
 
 setAs(from = "list", to = ".gaVarList", def = function(from) {
   vars <- unique(lapply(from, function(var) {as(as.character(var), ".gaVar")}))

@@ -15,10 +15,7 @@ NULL
 #' @export
 setClass(
   ".metOperand",
-  contains = "numeric",
-  validity = function(object) {
-    validate_that(all(is.na(object) == FALSE))
-  }
+  contains = "numeric"
 )
 
 #' `.dimOperand` class.
@@ -76,11 +73,11 @@ setClass(
   "gaMetOperand",
   contains = ".metOperand",
   validity = function(object) {
-    if (length(object) == 2) {
-      if (object[1] > object[2]) {
+    if (length(object) == 2L) {
+      if (object[1L] > object[2L]) {
         "The first value in a range must not be greater than the second"
       } else TRUE
-    } else validate_that(length(object) <= 2)
+    } else validate_that(length(object) <= 2L)
   }
 )
 
@@ -96,7 +93,7 @@ setClass(
   "gaDimOperand",
   contains = ".dimOperand",
   validity = function(object) {
-    validate_that(length(object) <= 10)
+    validate_that(length(object) <= 10L)
   }
 )
 
@@ -189,11 +186,11 @@ setClassUnion(".mcfOperand", c("mcfMetOperand", "mcfDimOperand"))
 setClassUnion(".rtOperand", c("rtMetOperand", "rtDimOperand"))
 
 setValidity(".mcfOperand", function(object) {
-  validate_that(length(object) == 1)
+  validate_that(length(object) == 1L)
 })
 
 setValidity(".rtOperand", function(object) {
-  validate_that(length(object) == 1)
+  validate_that(length(object) == 1L)
 })
 
 #' `.operand` class.
@@ -211,5 +208,8 @@ setClassUnion(".operand", c(
 ))
 
 setValidity(".operand", function(object){
-  validate_that(length(object) >= 1)
+  validate_that(
+    length(object) >= 1L,
+    all(is.na(object) == FALSE)
+  )
 })

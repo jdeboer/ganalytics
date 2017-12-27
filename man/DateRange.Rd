@@ -3,25 +3,25 @@
 \docType{methods}
 \name{DateRange}
 \alias{DateRange}
+\alias{DateRange<-}
+\alias{StartDate,character-method}
+\alias{EndDate,character-method}
+\alias{StartDate,dateRange-method}
+\alias{EndDate,dateRange-method}
+\alias{StartDate,Interval-method}
+\alias{EndDate,Interval-method}
+\alias{StartDate,.standardQuery-method}
+\alias{EndDate,.standardQuery-method}
+\alias{StartDate,gaView-method}
+\alias{EndDate,gaView-method}
+\alias{StartDate<-,dateRange-method}
+\alias{EndDate<-,dateRange-method}
+\alias{StartDate<-,.standardQuery-method}
+\alias{EndDate<-,.standardQuery-method}
 \alias{DateRange,ANY,ANY-method}
 \alias{DateRange,ANY,missing-method}
 \alias{DateRange,gaView,ANY-method}
-\alias{DateRange<-}
 \alias{DateRange<-,ANY-method}
-\alias{EndDate,.standardQuery-method}
-\alias{EndDate,Interval-method}
-\alias{EndDate,character-method}
-\alias{EndDate,dateRange-method}
-\alias{EndDate,gaView-method}
-\alias{EndDate<-,.standardQuery-method}
-\alias{EndDate<-,dateRange-method}
-\alias{StartDate,.standardQuery-method}
-\alias{StartDate,Interval-method}
-\alias{StartDate,character-method}
-\alias{StartDate,dateRange-method}
-\alias{StartDate,gaView-method}
-\alias{StartDate<-,.standardQuery-method}
-\alias{StartDate<-,dateRange-method}
 \title{DateRange.}
 \usage{
 DateRange(object, endDate)
@@ -124,8 +124,8 @@ recieving hits.
 the dates supplied in a vector of length 2, where the first element is the
 start date and second being the end date.
 }}
+
 \seealso{
 Other date range functions: \code{\link{EndDate}},
   \code{\link{StartDate}}
 }
-

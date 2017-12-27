@@ -4,8 +4,8 @@
 \name{PerSession}
 \alias{PerSession}
 \alias{PerSession,ANY-method}
-\alias{PerSession,formula-method}
 \alias{PerSession,gaMetExpr-method}
+\alias{PerSession,formula-method}
 \title{PerSession.}
 \usage{
 PerSession(object, ...)
@@ -17,9 +17,18 @@ PerSession(object, ...)
 \S4method{PerSession}{formula}(object, ...)
 }
 \arguments{
-\item{object}{a gaSegmentFilterList or gaMetExpr object to coerce to session-level.}
+\item{object}{a gaSegmentFilterList or gaMetExpr object to coerce to session-level.
+Alternatively, an dimension expression or segment filter to coerce into a session
+scoped gaSegmentFilterList.}
 
-\item{...}{Other conditions to be included in the segment definition.}
+\item{...}{Other filters to include in the gaSegmentFilterList.}
+}
+\value{
+a gaMetExpr or gaSegmentFilterList.
+
+To define a gaSegmentFilterList using metric expressions rather than setting the
+scope of the metric expression itself, wrap the metric expression in an
+\code{Include} or \code{Exclude} call.
 }
 \description{
 Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.

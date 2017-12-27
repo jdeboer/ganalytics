@@ -1,6 +1,7 @@
 #' @importFrom lubridate ymd
 #' @importFrom stringr regex str_replace str_detect
 #' @importFrom plyr llply
+#' @importFrom methods slot
 NULL
 
 #' IsVarMatch.
@@ -217,3 +218,7 @@ coerceLogicalOperand <- function(from, to){
   new(to, operand)
 }
 
+# Sourced from: https://stackoverflow.com/a/14838753/1007029
+quotemeta <- function(string) {
+  str_replace_all(string, "(\\W)", "\\\\\\1")
+}

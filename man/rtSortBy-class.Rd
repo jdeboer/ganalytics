@@ -8,4 +8,3 @@
 An S4 class to represent Real-Time variable sorting lists.
 }
 \keyword{internal}
-

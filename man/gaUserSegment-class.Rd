@@ -8,4 +8,3 @@ An R6 class representing a default or custom segment available with the
 credentials provided.
 }
 \keyword{internal}
-

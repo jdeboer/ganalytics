@@ -2,11 +2,11 @@
 % Please edit documentation in R/Sequence-generics.R, R/Sequence-methods.R
 \docType{methods}
 \name{Sequence}
-\alias{First,.compoundExpr-method}
-\alias{Later,.compoundExpr-method}
 \alias{Sequence}
-\alias{Sequence,.compoundExpr-method}
+\alias{Later,.compoundExpr-method}
 \alias{Then,.compoundExpr-method}
+\alias{First,.compoundExpr-method}
+\alias{Sequence,.compoundExpr-method}
 \title{Sequence.}
 \usage{
 Sequence(object, ..., negation = FALSE)
@@ -45,10 +45,11 @@ segment definition.
 
 \item \code{.compoundExpr}: Alias to Then.
 
-\item \code{.compoundExpr}: Return a seuqnece of length of one step using the
+\item \code{.compoundExpr}: Return a seuqnece of of just one step using the
 supplied expression to define that step, where that step can occur anywhere
-with the sequences of interactions being matched.
+within the sequences of interactions being matched.
 }}
+
 \examples{
 expr1 <- Expr(~pagepath == "/")
 expr2 <- Expr(~eventCategory == "video")
@@ -58,7 +59,7 @@ expr5 <- expr1 & expr2
 expr6 <- Expr(~eventAction == "click")
 expr7 <- Expr(~eventCategory == "video") & Expr(~eventAction == "play")
 expr8 <- Expr(~source == "google")
-Segment(
+Segments(
   PerUser(
     expr1, # treat an expression as 'condition type segment filter' by default
     PerHit(
@@ -78,4 +79,3 @@ Segment(
 )
 
 }
-

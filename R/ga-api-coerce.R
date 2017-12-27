@@ -7,16 +7,16 @@ NULL
 ## As setAs looks within the global namespace for any internall called functions within
 # the definition, then the following function is likely to throw an error if used with setAs.
 compileOperand <- function(from) {
-  unEscapedOperand <- as(as(from, ".operand"), "character")
-  comparator <- as(as(from, ".comparator"), "character")
+  unEscapedOperand <- as(Operand(from), "character")
+  comparator <- as(Comparator(from), "character")
   compiledOperand <- gsub(
     pattern = "(,|;|\\\\)", # What about _ and | used within an operand when using <> or [] comparators
     replacement = "\\\\\\1",
     x = unEscapedOperand
   )
-  if (comparator == "[]") {
+  if (isTRUE(comparator == "[]")) {
     compiledOperand <- paste0(compiledOperand, collapse = "|")
-  } else if (from@comparator == "<>") {
+  } else if (isTRUE(from@comparator == "<>")) {
     compiledOperand <- paste0(compiledOperand, collapse = "_")
   }
   compiledOperand
@@ -37,6 +37,13 @@ setAs(from = ".metOperand", to = "character",
 ## the folowing function calls another function which is not in the global namesapce
 # Coercing GA expressions to GA API compatible character strings
 setAs(from = ".expr", to = "character", def = function(from, to) {
+  if(from@comparator == "BEGINS_WITH") {
+    operand <- paste("^", quotemeta(operand), sep = "")
+    comparator <- "=~"
+  } else if(from@comparator == "ENDS_WITH") {
+    operand <- paste(quotemeta(operand), "$", sep = "")
+    comparator <- "=~"
+  }
   paste0(
     if (class(from) == "gaSegMetExpr") {
       if (from@metricScope != "") paste0(from@metricScope, "::")
@@ -181,10 +188,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId, segment) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -199,7 +206,7 @@ setAs(
           "filters" = if (length(tableFilter) >= 1) {
             as(tableFilter, "character")
           },
-          "segment" = if (length(segments) >= 1) {
+          "segment" = if (length(segment) >= 1) {
             as(segment, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character"),
@@ -219,7 +226,7 @@ setAs(
   to = "matrix",
   def = function(from) {
     views <- as(from, "viewId")
-    dateRange <- as(from, "dateRange")
+    dateRange <- from@dateRange
     startDates <- dateRange@startDate
     endDates <- dateRange@endDate
     viewsDates <- do.call(
@@ -238,10 +245,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(startDate, endDate, viewId) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -284,10 +291,10 @@ setAs(
     )
     params <- mapply(
       FUN = function(viewId) {
-        metrics <- as(from, ".metrics")
-        dimensions <- as(from, ".dimensions")
-        sortBy <- as(from, ".sortBy")
-        tableFilter <- as(from, ".tableFilter")
+        metrics <- from@metrics
+        dimensions <- from@dimensions
+        sortBy <- from@sortBy
+        tableFilter <- from@filter
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),

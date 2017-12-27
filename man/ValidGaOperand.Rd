@@ -14,4 +14,3 @@ ValidGaOperand(var, operand)
 \description{
 Checks whether an operand value is valid for a selected dimension.
 }
-

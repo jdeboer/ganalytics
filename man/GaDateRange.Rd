@@ -20,4 +20,3 @@ Deprecated, use DateRange instead.
 Deprecated, use DateRange instead.
 }
 \keyword{internal}
-

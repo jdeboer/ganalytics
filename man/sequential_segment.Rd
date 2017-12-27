@@ -14,9 +14,10 @@ repreating a step in the sequence.}
 Create a sequence using R non-standard evaluation syntax.
 }
 \details{
-Steps must be separated by commas (\code{,}). ... denotes zero or more of
-interactions may preceed the step that follows, otherwise without ... then
-the there must not be any interactions between the adjacent steps.
+Steps must be separated by commas (\code{,}). \code{...} denotes zero or more
+interactions may preceed the step that follows, otherwise without \code{...} then
+the there must not be any interactions between the adjacent steps in order for the
+results to the sequence.
 }
 \examples{
 a <- Expr(~pagePath == "/home")
@@ -26,4 +27,3 @@ c <- Expr(~medium == "email")
 s <- sequential_segment(list( ..., a, ..., b, c ))
 
 }
-

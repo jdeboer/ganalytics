@@ -23,4 +23,3 @@ necessarily immediately.
 \seealso{
 \code{\link{Sequence}}
 }
-

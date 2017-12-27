@@ -8,4 +8,3 @@
 An S4 class to represent a Real-Time dimension condition operand.
 }
 \keyword{internal}
-

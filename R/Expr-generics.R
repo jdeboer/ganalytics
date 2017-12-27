@@ -6,7 +6,7 @@
 #'   to an .expr object.
 #' @param comparator The comparator to use for the expression.
 #' @param operand The operand to use for the expression.
-#' @param metricScope The scope to use for segmentation if using a metric.
+#' @param metricScope Optional scope to use for segmentation if using a metric.
 #'   Possible values include "perUser" or "perSession".
 #'
 #' @family expression generators
@@ -88,4 +88,42 @@ setGeneric(
   function(object, comparator, operand) {},
   valueClass = ".rtExpr",
   useAsDefault = FALSE
+)
+
+#' ScopeLevel.
+#'
+#' Get the scope level of a gaSegmentFilterList or gaMetExpr.
+#'
+#' @param object a gaSegmentFilterList or a metric expression.
+#' @param value Optional new scope level to return an updated copy of the object
+#' with the new scope applied.
+#' @return the scope level as a character string, a gaSegmentFilterList or gaMetExpr.
+#'
+#' @export
+#' @rdname ScopeLevel
+setGeneric(
+  "ScopeLevel",
+  function(object, value) {},
+  valueClass = c("character", "gaSegmentFilterList", "gaMetExpr"),
+  useAsDefault = FALSE
+)
+
+#' ScopeLevel<-.
+#'
+#' Set the scope level of a gaDynSegment or a gaMetExpr
+#'
+#' @param object a gaSegmentFilterList or a metric expression.
+#' @param value The scope level to apply. For gaSegmentFilterLists this can be
+#' either 'users' or 'sessions'. For metric expressions use either 'perUser',
+#' 'perSession', 'perHit' or 'perProduct'.
+#'
+#' @export
+#' @rdname ScopeLevel
+setGeneric(
+  "ScopeLevel<-",
+  function(object, value) {
+    object <- standardGeneric("ScopeLevel<-")
+    validObject(object)
+    object
+  }
 )

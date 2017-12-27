@@ -8,4 +8,3 @@
 An S4 class union represent conditional comparator operators.
 }
 \keyword{internal}
-

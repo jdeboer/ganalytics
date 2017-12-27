@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{GaUserSegment}
 \alias{GaUserSegment}
-\title{User Segment}
+\title{User Segments}
 \usage{
 GaUserSegment(id = NULL, definition = NA, creds = get_creds())
 }
@@ -16,4 +16,3 @@ GaUserSegment(id = NULL, definition = NA, creds = get_creds())
 \description{
 Get a user or system defined segment.
 }
-

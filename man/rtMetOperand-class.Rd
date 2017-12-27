@@ -8,4 +8,3 @@
 An S4 class to represent a Real-Time metric condition operand.
 }
 \keyword{internal}
-

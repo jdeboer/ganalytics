@@ -3,23 +3,26 @@
 \docType{methods}
 \name{SortBy}
 \alias{SortBy}
-\alias{SortBy,.query-method}
+\alias{SortBy<-}
 \alias{SortBy,.varList-method}
 \alias{SortBy,NULL-method}
 \alias{SortBy,character-method}
-\alias{SortBy<-}
+\alias{SortBy,.query-method}
 \alias{SortBy<-,.query-method}
 \title{SortBy.}
 \usage{
-SortBy(object, ..., desc = logical(0))
+SortBy(object, ..., desc = logical(0), type = c("VALUE", "DELTA", "SMART",
+  "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L])
 
 SortBy(object) <- value
 
-\S4method{SortBy}{.varList}(object, desc = logical(0))
+\S4method{SortBy}{.varList}(object, desc, type)
 
 \S4method{SortBy}{`NULL`}(object)
 
-\S4method{SortBy}{character}(object, ..., desc = logical(0))
+\S4method{SortBy}{character}(object, ..., desc = logical(0),
+  type = c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET",
+  "DIMENSION_AS_INTEGER")[0L])
 
 \S4method{SortBy}{.query}(object, value)
 

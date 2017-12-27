@@ -4,7 +4,7 @@
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
-#' @param negation Logical TRUE or FALSE to match segments where this conditon
+#' @param negation Deprecated. Logical TRUE or FALSE to match segments where this conditon
 #'   has not been met.
 #' @return a gaSegmentConditionFilter object.
 #'
@@ -18,13 +18,9 @@ setGeneric(
 
 #' Include.
 #'
-#' One or more segment conditions or sequences to include from the defined user
-#' or session segment.
+#' Define a segment filter with its negation flag is set to FALSE.
 #'
-#' @param object a condition or sequence to include
-#' @param ... further conditions or sequences to include, i.e. ANDed.
-#' @param scope the scope of the returned gaSegmentList, either "users" OR
-#'   "sessions".
+#' @param object a segment filter condition or sequence to include.
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @export
@@ -37,13 +33,9 @@ setGeneric(
 
 #' Exclude.
 #'
-#' One or more segment conditions or sequences to exclude from the defined user
-#' or session segment.
+#' Define a segment filter with its negation flag is set to TRUE.
 #'
-#' @param object a condition or sequence to exclude
-#' @param ... further conditions or sequences to exclude.
-#' @param scope the scope of the returned gaSegmentList, either "users" OR
-#'   "sessions".
+#' @param object a segment filter condition or sequence to exclude.
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @export
@@ -54,32 +46,13 @@ setGeneric(
   useAsDefault = TRUE
 )
 
-#' SegmentFilters.
-#'
-#' Create a new gaSegmentFilterList object
-#'
-#' A segment condition is either sequential or non-sequential. Sequential and
-#' non-sequential conditoins can be combined using this function.
-#'
-#' @param object The first condition to be included in the segments definition.
-#' @param ... Other conditions to be included in the segment definition.
-#' @param scope The scope of this condition, either 'user' or 'session' level.
-#' @return a gaSegmentFilterList object.
-#'
-#' @export
-setGeneric(
-  "SegmentFilters",
-  function(object, ..., scope = "sessions") {},
-  valueClass = "gaSegmentFilterList",
-  useAsDefault = FALSE
-)
-
 #' IsNegated.
 #'
 #' Tests whether a segment filter is negated.
 #'
 #' @param object an object belonging to the superclass \code{.gaSegmentFilter}.
 #'
+#' @rdname IsNegated
 #' @export
 setGeneric(
   "IsNegated",
@@ -90,7 +63,7 @@ setGeneric(
 
 #' IsNegated<-.
 #'
-#' Sets whether a segment filter should be negated.
+#' Sets the negation flag of a segment filter.
 #'
 #' @param value the value of the negation slot, either \code{TRUE} or
 #'   \code{FALSE}.
@@ -106,14 +79,55 @@ setGeneric(
   }
 )
 
+#' SegmentFilters.
+#'
+#' Combine one or more segment condition filters and/or sequence filters into
+#' a gaSegmentFilterList that is scoped to either 'user' or 'session' level.
+#'
+#' A segment filter is either sequential or non-sequential conditions. Sequential
+#' and non-sequential conditoins can be combined using this function.
+#'
+#' @param object The first filter to include in the segment definition.
+#' @param ... Additional filters to be included in the segment definition.
+#' @param scope The scope of the resulting gaSegmentFilterList, either 'user' or
+#' 'session' level.
+#' @return a gaSegmentFilterList object.
+#'
+#' @export
+setGeneric(
+  "SegmentFilters",
+  function(object, ..., scope = "sessions") {},
+  valueClass = "gaSegmentFilterList",
+  useAsDefault = FALSE
+)
+
+#' PerProduct.
+#'
+#' Set the scope of a gaMetExpr object to product-level.
+#'
+#' @param object a gaMetExpr object to coerce to hit-level
+#' @return a gaMetExpr object.
+#'
+#' @export
+setGeneric(
+  "PerProduct",
+  function(object, ...){},
+  valueClass = "gaSegMetExpr",
+  useAsDefault = FALSE
+)
+
 #' PerHit.
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
-#' filter to a sequence filter of length one (i.e. conditions to match a single
-#' hit).
+#' filter to a sequence filter of length one (i.e. a combination of conditions for
+#' matching a single hit).
 #'
-#' @param object a gaMetExpr object to coerce to user-level.
-#' @param ... Other conditions to be included in the segment definition.
+#' @param object a gaMetExpr object to coerce to hit-level or if multiple expressions
+#' are provided, then the first expression to combine into a single step of sequence
+#' filter.
+#' @param ... Further expressions to be included in the filter definition if defining a
+#' sequence filter of length one.
+#' @return a gaMetExpr or gaSegmentSequenceFilter.
 #'
 #' @export
 setGeneric(
@@ -128,7 +142,14 @@ setGeneric(
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 #'
 #' @param object a gaSegmentFilterList or gaMetExpr object to coerce to session-level.
-#' @param ... Other conditions to be included in the segment definition.
+#' Alternatively, an dimension expression or segment filter to coerce into a session
+#' scoped gaSegmentFilterList.
+#' @param ... Other filters to include in the gaSegmentFilterList.
+#' @return a gaMetExpr or gaSegmentFilterList.
+#'
+#' To define a gaSegmentFilterList using metric expressions rather than setting the
+#' scope of the metric expression itself, wrap the metric expression in an
+#' \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -143,7 +164,14 @@ setGeneric(
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 #'
 #' @param object a gaSegmentFilterList or gaMetExpr object to coerce to user-level.
-#' @param ... Other conditions to be included in the segment definition.
+#' Alternatively, an dimension expression or segment filter to coerce into a user
+#' scoped gaSegmentFilterList.
+#' @param ... Other filters to include in the gaSegmentFilterList.
+#' @return a gaMetExpr or gaSegmentFilterList.
+#'
+#' To define a gaSegmentFilterList using metric expressions rather than setting the
+#' scope of the metric expression itself, wrap the metric expression in an
+#' \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -153,71 +181,59 @@ setGeneric(
   useAsDefault = FALSE
 )
 
-#' ScopeLevel.
-#'
-#' Get the scope level of a gaDynSegment or gaMetExpr
-#'
-#' @param object Segment condition or combined segment conditions or metric
-#'   expression.
-#' @param value If a new scope level is supplied, then this function will return
-#'   an updated copy of the supplied object with the new scope applied.
-#'
-#' @export
-#' @rdname ScopeLevel
-setGeneric(
-  "ScopeLevel",
-  function(object, value) {},
-  valueClass = "character",
-  useAsDefault = FALSE
-)
-
-#' ScopeLevel<-.
-#'
-#' Set the scope level of a gaDynSegment or a gaMetExpr
-#' For segments, one of 'users' or 'sessions'
-#' For metric expressions one of 'perUser', 'perSession' or 'perHit'
-#'
-#' @export
-#' @rdname ScopeLevel
-setGeneric(
-  "ScopeLevel<-",
-  function(object, value) {
-    object <- standardGeneric("ScopeLevel<-")
-    validObject(object)
-    object
-  }
-)
-
 #' Segment.
 #'
-#' Get the segment.
+#' Define a segment for use in a query's segment list.
 #'
-#' @param object An expression to coerce to a segment definition or segment ID
-#' @param ... Other expressions to combine with the first expression, if
-#'   appropriate.
-#' @param scope The scope level to apply to the resulting segment definition.
+#' @param object a segment or other object that can be coerced into
+#' a segment, including dynamic segments, built-in and/or custom
+#' segments by their ID.
+#' @param ... other segment conditions, filters or filter lists to include
+#' in the segment's definition (ANDed)
+#' @return an object belonging to the .gaSegment superclass.
 #'
+#' @name Segment
 #' @export
-#' @rdname Segment
 setGeneric(
   "Segment",
-  function(object, ..., scope = "sessions") {},
-  valueClass = c(".gaSegment", "gaSegmentList"),
+  function(object, ...) {},
+  valueClass = ".gaSegment",
   useAsDefault = FALSE
 )
 
-#' Segment<-.
+#' Segments.
 #'
-#' Set the segment
+#' Get the list of segments from the object or coerce the supplied objects into a
+#' a named list of segments.
 #'
-#' @param value The segment definition or ID to set the segment parameter to.
+#' @param object A query object to extract the segment list from.
+#' @param ... Alternatively, provide one or more named arguments
+#' (segments or objects that can be coerced into segments)
+#' including dynamic segments, built-in and/or custom segments by
+#' their ID.
+#' @return a gaSegmentList
 #'
 #' @export
-#' @rdname Segment
+#' @rdname Segments
 setGeneric(
-  "Segment<-",
+  "Segments",
+  function(object, ...) {},
+  valueClass = c("gaSegmentList"),
+  useAsDefault = FALSE
+)
+
+#' Segments<-.
+#'
+#' Set the segments of the query object.
+#'
+#' @param value The segment definition or ID or a list of segments.
+#'
+#' @export
+#' @rdname Segments
+setGeneric(
+  "Segments<-",
   function(object, value) {
-    object <- standardGeneric("Segment<-")
+    object <- standardGeneric("Segments<-")
     validObject(object)
     object
   }

@@ -20,4 +20,3 @@ Deprecated, use \code{Dimensions} instead.
 Deprecated, use \code{Dimensions<-} instead.
 }
 \keyword{internal}
-

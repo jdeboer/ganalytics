@@ -8,4 +8,3 @@
 An S4 class union representing dynamic and pre-defined segment expressions.
 }
 \keyword{internal}
-

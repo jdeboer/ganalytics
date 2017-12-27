@@ -9,4 +9,3 @@ An S4 class to represent a comparator operator for a Core Reporting metric
 condition.
 }
 \keyword{internal}
-

@@ -20,7 +20,7 @@ Generate an expression that gives the Exclusive-OR of two expressions.
 \itemize{
 \item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
 }}
+
 \seealso{
 \code{\link{Or}} \code{\link{And}} \code{\link{Not}}
 }
-

@@ -11,4 +11,3 @@ Coerce a date into a character string formatted to either the
 input or output format of the Google Analytics reporting API.
 }
 \keyword{internal}
-

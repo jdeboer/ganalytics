@@ -9,4 +9,3 @@ An S4 superclass to represent a negatable filter expression for a custom
 segment.
 }
 \keyword{internal}
-

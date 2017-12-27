@@ -23,4 +23,3 @@ Set the start date.
 Other date range functions: \code{\link{DateRange}},
   \code{\link{EndDate}}
 }
-

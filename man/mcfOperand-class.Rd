@@ -8,4 +8,3 @@
 An S4 class union representing Multi-Channel Funnel condition operands.
 }
 \keyword{internal}
-

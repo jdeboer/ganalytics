@@ -2,12 +2,12 @@
 #' @include management-api-classes.R
 #' @include view-coerce.R
 #' @include Query-generics.R
-#' @importFrom methods setMethod as
+#' @importFrom methods setMethod as as<-
 NULL
 
 #' @describeIn GaView Returns the ID of the supplied view, or the first view
 #'   within the supplied property or the first view within the first property of
-#'   the supplied account, or get the view ID of the supplied query, or coerce a
+#'   the supplied account, or gets the view ID of the supplied query, or coerce a
 #'   numeric or character into a viewId.
 setMethod("GaView", c("ANY", "missing"),
           function(object) {

@@ -2,26 +2,26 @@
 % Please edit documentation in R/Var-generics.R, R/Var-methods.R
 \docType{methods}
 \name{Var}
+\alias{Var}
+\alias{Var<-}
 \alias{GaVar}
-\alias{GaVar,.expr-method}
-\alias{GaVar,.gaVarList-method}
-\alias{GaVar,character-method}
 \alias{GaVar<-}
-\alias{GaVar<-,.expr,character-method}
-\alias{GaVar<-,.gaVar,character-method}
 \alias{McfVar}
-\alias{McfVar,ANY-method}
 \alias{McfVar<-}
 \alias{RtVar}
-\alias{RtVar,ANY-method}
 \alias{RtVar<-}
-\alias{Var}
-\alias{Var,.expr-method}
-\alias{Var,.gaVarList-method}
 \alias{Var,character-method}
-\alias{Var<-}
-\alias{Var<-,.expr,character-method}
 \alias{Var<-,.var,character-method}
+\alias{Var,.expr-method}
+\alias{Var<-,.expr,character-method}
+\alias{Var,.gaVarList-method}
+\alias{GaVar,character-method}
+\alias{GaVar<-,.gaVar,character-method}
+\alias{GaVar,.expr-method}
+\alias{GaVar<-,.expr,character-method}
+\alias{GaVar,.gaVarList-method}
+\alias{McfVar,ANY-method}
+\alias{RtVar,ANY-method}
 \title{Google Analytics dimension and metric variables.}
 \usage{
 Var(object, ...)
@@ -142,6 +142,7 @@ dimension or metric used within that Google Analytics expression.
 
 \item \code{ANY}: McfVar takes a RT variable and determines whether to return a Dimension or Metric object
 }}
+
 \examples{
 Var("source")
 dim <- Var("ga:medium")
@@ -162,4 +163,3 @@ Var(expr1) <- "uniquePageviews"
   \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
    Reporting API dimensions and metrics} }
 }
-

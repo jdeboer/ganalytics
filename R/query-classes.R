@@ -67,6 +67,101 @@ setClass(
   }
 )
 
+# -- GA report requests --
+setClass(
+  "gaCohort",
+  slots = c(
+    name = "character",
+    type = "character",
+    dateRange = "dateRange"
+  ),
+  prototype = prototype(
+    name = NA_character_,
+    type = "FIRST_VISIT_DATE",
+    dateRange = new("dateRange")
+  ),
+  validity = function(object) {
+    validate_that(
+      legnth(name) <= 1L,
+      length(type) == 1L,
+      type %in% c("FIRST_VISIT_DATE")
+    )
+  }
+)
+
+setClass(
+  "gaCohortGroup",
+  slots = c(
+    lifetimeValue = "logical"
+  ),
+  prototype = prototype(
+    lifetimeValue = FALSE
+  ),
+  contains = "list",
+  validity = function(object) {
+    validate_that(
+      all_inherit(object, "gaCohort"),
+      length(lifetimeValue) == 1L,
+      lifetimeValue %in% c(TRUE, FALSE)
+    )
+  }
+)
+
+setClass(
+  "gaDimFilters"
+)
+
+setClass(
+  "gaPivot",
+  slots = c(
+    dimensions = "gaDimensions",
+    dimensionFilters = "gaDimFilters",
+    metrics = "gaMetrics",
+    startGroup = "integer",
+    maxGroupCount = "integer"
+  )
+)
+
+setClass(
+  "gaPivots",
+  contains = "list",
+  validity = function(object) {
+    all_inherit(object, "gaPivot")
+  }
+)
+
+setClass(
+  "gaReportRequest",
+  slots = c(
+    dimensions = "gaDimensions",
+    metrics = "gaMetrics",
+    sortBy = "gaSortBy",
+    pivots = "gaPivots",
+    filters = "gaFilter"
+  )
+)
+
+setClass(
+  "gaReportRequests",
+  contains = "list",
+  slots = c(
+    viewId = "viewId",
+    creds = "list",
+    dateRange = "dateRange",
+    samplingLevel = "character",
+    segments = "gaSegmentList",
+    cohortGroup = "gaCohortGroup"
+  ),
+  prototype = prototype(
+    creds = list(),
+    dateRange = new("dateRange"),
+    samplingLevel = "DEFAULT"
+  ),
+  validity = function(object) {
+    all_inherit(object, "gaReportRequest")
+  }
+)
+
 # -- GA query construct ----
 
 #' `.query` class.

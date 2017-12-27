@@ -14,4 +14,3 @@ GaAccount(id = NULL, creds = get_creds())
 \description{
 Get a GA account.
 }
-

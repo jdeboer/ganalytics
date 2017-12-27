@@ -9,4 +9,3 @@ An S4 class union representing Multi-Channel Funnel condition comparator
 operators.
 }
 \keyword{internal}
-
