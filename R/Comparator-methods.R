@@ -21,7 +21,6 @@ setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
-    operand <- paste("^", quotemeta(operand), sep = "")
     Expr(var, "BEGINS_WITH", operand)
   }
 )
@@ -31,7 +30,6 @@ setMethod(
   f = "%ends_with%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
-    operand <- paste(quotemeta(operand), "$", sep = "")
     Expr(var, "ENDS_WITH", operand)
   }
 )

@@ -87,7 +87,12 @@ setGeneric(
 #' @rdname SortBy
 setGeneric(
   "SortBy",
-  function(object, ..., desc = logical(0)) {},
+  function(
+    object,
+    ...,
+    desc = logical(0),
+    type = c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L]
+  ) {},
   valueClass = c(".sortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )

@@ -106,6 +106,21 @@ setGeneric(
   useAsDefault = FALSE
 )
 
+#' PerProduct.
+#'
+#' Set the scope of a gaMetExpr object to product-level.
+#'
+#' @param object a gaMetExpr object to coerce to hit-level
+#' @return a gaMetExpr object.
+#'
+#' @export
+setGeneric(
+  "PerProduct",
+  function(object, ...){},
+  valueClass = "gaSegMetExpr",
+  useAsDefault = FALSE
+)
+
 #' PerHit.
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition

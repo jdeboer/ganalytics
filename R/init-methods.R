@@ -109,18 +109,6 @@ setMethod(
   }
 )
 
-# ---- SortBy ----
-
-setMethod(
-  f = "initialize",
-  signature = ".sortBy",
-  definition = function(.Object, value = list(), desc = logical(length(value))) {
-    .Object@.Data <- value
-    .Object@desc <- desc
-    .Object
-  }
-)
-
 # ---- .comparator ----
 
 setMethod(
@@ -146,24 +134,6 @@ setMethod(
       validObject(.Object)
     }
     .Object
-  }
-)
-
-# ---- gaSegmentId ----
-
-setMethod(
-  f = "initialize",
-  signature = "gaSegmentId",
-  definition = function(.Object, value) {
-    if (!missing(value)) {
-      value <- sub(kGaPrefix, "gaid::", value)
-      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
-        value <- paste("gaid", value, sep = "::")
-      }
-      .Object@.Data <- value
-      validObject(.Object)
-    }
-    return(.Object)
   }
 )
 
@@ -194,9 +164,27 @@ setMethod(
     if (IsRegEx(.Object)) {
       operand <- tolower(operand)
     }
-    as(.Object, ".operand") <- operand
+    Operand(.Object) <- operand
     validObject(.Object)
     .Object
+  }
+)
+
+# ---- gaSegmentId ----
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentId",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "gaid::", value)
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
+        value <- paste("gaid", value, sep = "::")
+      }
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
   }
 )
 
@@ -217,6 +205,18 @@ setMethod(
       .Object@.Data <- unique(value)
       validObject(.Object)
     }
+    .Object
+  }
+)
+
+# ---- SortBy ----
+
+setMethod(
+  f = "initialize",
+  signature = ".sortBy",
+  definition = function(.Object, value = list(), desc = logical(length(value))) {
+    .Object@.Data <- value
+    .Object@desc <- desc
     .Object
   }
 )

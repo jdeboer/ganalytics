@@ -31,14 +31,14 @@ setMethod(
 )
 
 #' @describeIn Var Get the variable of an expression object.
-setMethod("Var", ".expr", function(object) {as(object, ".var")})
+setMethod("Var", ".expr", function(object) {object@var})
 
 #' @describeIn Var Set the variable of an expression object using a character value to be coerced to '.var'.
 setMethod(
   f = "Var<-",
   signature = c(".expr", "character"),
   definition = function(object, value) {
-    as(object, ".var") <- value
+    object <- Expr(value, object@comparator, object@operand)
     object
   }
 )

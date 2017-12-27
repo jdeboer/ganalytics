@@ -12,9 +12,10 @@ NULL
 setMethod(
   f = "SortBy",
   signature = ".varList",
-  definition = function(object, desc = logical(0)) {
+  definition = function(object, desc, type) {
     vars <- as(object, ".sortBy")
     vars@desc <- desc
+    vars@orderType <- type
     validObject(vars)
     vars
   }
@@ -29,7 +30,7 @@ setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 setMethod(
   f = "SortBy",
   signature = "character",
-  definition = function(object, ..., desc = logical(0)) {
+  definition = function(object, ..., desc, type) {
     varsChar <- sapply(ArgList(object, ...), as.character)
     vars <- as(varsChar, ".sortBy")
     # For any var prefixed with "-", remove the prefix and set the desc flag to TRUE

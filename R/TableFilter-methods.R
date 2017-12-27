@@ -9,6 +9,17 @@ NULL
 #'   given query, or coerce the given object into a table filter.
 setMethod("TableFilter", "ANY", function(object) {as(object, ".tableFilter")})
 
+setMethod("TableFilter", "gaQuery", function(object) {
+  object@filters
+})
+
+setMethod("TableFilter", c("gaQuery", "ANY"), function(object, value) {
+  use_class <- class(object@filters)
+  object@filters <- as(value, use_class)
+  validObject(object)
+  object
+})
+
 #' @describeIn TableFilter Method to replace the table filter of a query
 setMethod(
   f = "TableFilter<-",

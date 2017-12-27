@@ -19,12 +19,12 @@ setClass(
   "gaSegmentCondition",
   contains = "andExpr",
   validity = function(object) {
-    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      return("A maximum of 10 dimension or metric conditions per segment.")
+    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10L) {
+      return("A maximum of 10 conditions per segment.")
     }
     if (all(sapply(unlist(object@.Data), function(expr) {
       if (Comparator(expr) == "<>" & as.character(Var(expr)) == "dateOfSession") {
-        (as.Date(Operand(expr))[2] - as.Date(Operand(expr))[1] + 1) <= 31
+        (as.Date(Operand(expr))[2L] - as.Date(Operand(expr))[1L] + 1L) <= 31L
       } else TRUE
     }))) {
       TRUE
@@ -63,7 +63,8 @@ setClass(
   contains = "VIRTUAL",
   validity = function(object) {
     validate_that(
-      length(object@negation) == 1
+      length(object@negation) == 1L,
+      object@negation %in% c(TRUE, FALSE)
     )
   }
 )
@@ -87,7 +88,8 @@ setClass(
   contains = "gaSegmentCondition",
   validity = function(object) {
     validate_that(
-      length(object@immediatelyPrecedes) == 1
+      length(object@immediatelyPrecedes) == 1L,
+      object@immediatelyPrecedes %in% c(TRUE, FALSE)
     )
   }
 )
@@ -104,10 +106,10 @@ setClass(
   "gaSegmentSequenceFilter",
   contains = c("list", ".gaSegmentFilter"),
   validity = function(object) {
-    validate_that(length(object) <= 10)
     if (all_inherit(object@.Data, "gaSegmentSequenceStep")) {
       TRUE
     } else {
+    validate_that(length(object) <= 10L)
       "All conditions within a sequence list must belong to the superclass 'gaSegmentSequenceStep'."
     }
   }
@@ -148,11 +150,13 @@ setClass(
   validity = function(object) {
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
-    } else if (length(object@scope) != 1) {
+    } else if (length(object@scope) != 1L) {
       "Slot 'scope' must be of length 1."
     } else if (!(object@scope %in% c("users", "sessions"))) {
       "Slot 'scope' must be either 'users' or 'sessions'."
-    } else TRUE
+    } else {
+      TRUE
+    }
   }
 )
 
@@ -170,7 +174,9 @@ setClass(
   validity = function(object) {
     if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
-    } else TRUE
+    } else {
+      TRUE
+    }
   }
 )
 
@@ -187,11 +193,13 @@ setClass(
   contains = "character",
   validity = function(object) {
     pattern <- "^gaid::\\-?[0-9A-Za-z]+$"
-    if (length(object) != 1) {
+    if (length(object) != 1L) {
       "gaSegmentId must be a character vector of length 1"
     } else if (!grepl(pattern = pattern, x = object@.Data)) {
       paste("gaSegmentId must match the regular expression ", pattern, sep = "")
-    } else TRUE
+    } else {
+      TRUE
+    }
   }
 )
 

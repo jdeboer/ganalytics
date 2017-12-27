@@ -15,10 +15,7 @@ NULL
 #' @export
 setClass(
   ".metOperand",
-  contains = "numeric",
-  validity = function(object) {
-    validate_that(all(is.na(object) == FALSE))
-  }
+  contains = "numeric"
 )
 
 #' `.dimOperand` class.
@@ -211,5 +208,8 @@ setClassUnion(".operand", c(
 ))
 
 setValidity(".operand", function(object){
-  validate_that(length(object) >= 1)
+  validate_that(
+    length(object) >= 1L,
+    all(is.na(object) == FALSE)
+  )
 })

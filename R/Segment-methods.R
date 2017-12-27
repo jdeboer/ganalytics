@@ -241,8 +241,18 @@ setMethod(
 )
 
 # ---- Segment, Segment<- ----
+#' @describeIn PerProduct Set the scope of the supplied non-standard-evaluation
+#'   metric condition to product-level.
+setMethod(
+  f = "PerProduct",
+  signature = c("formula"),
+  definition = function(object, ...) {
+    PerProduct(Expr(object), ...)
+  }
+)
 
-#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
+
+#' @describeIn Segments Interpret the supplied numeric value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "numeric",
@@ -251,7 +261,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
+#' @describeIn Segments Interpret the supplied character value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "character",

@@ -186,6 +186,16 @@ setMethod("DateRange", c("ANY", "missing"), function(object) {
   as(object, "dateRange")
 })
 
+setMethod("DateRange", c(".standardQuery"), function(object) {
+  object@dateRange
+})
+
+setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
+  object@dateRange <- as(value, "dateRange")
+  validObject(object)
+  object
+})
+
 #' @describeIn DateRange Returns the maximum date range of when a view has been
 #'   recieving hits.
 setMethod("DateRange", "gaView", function(object) {

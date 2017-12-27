@@ -38,18 +38,3 @@ setAs(from = ".expr", to = "rtFilter", def = coerceViaAnd)
 setAs(from = ".expr", to = ".tableFilter", def = coerceViaAnd)
 
 setAs(from = "gaSegmentCondition", to = ".tableFilter", def = simpleCoerceData)
-
-#############\/ Transform to method of TableFilter and TableFilter<- generic functions
-
-setAs(from = ".query", to = ".tableFilter",
-      def = function(from, to){
-        from@filters
-      },
-      replace = function(from, value) {
-        use_class <- class(from@filters)
-        from@filters <- as(value, use_class)
-        validObject(from)
-        from
-      }
-)
-

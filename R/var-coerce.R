@@ -1,5 +1,6 @@
 #' @include utils.R
 #' @include management-api-classes.R
+#' @importFrom methods extends
 NULL
 
 # Coercing to .var classes
