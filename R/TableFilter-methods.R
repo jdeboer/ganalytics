@@ -5,14 +5,16 @@
 #' @importFrom methods setMethod as<-
 NULL
 
-#' @describeIn TableFilter Return the TableFilter that has been applied to the
-#'   given query, or coerce the given object into a table filter.
+#' @describeIn TableFilter Coerce the given object into a table filter.
 setMethod("TableFilter", "ANY", function(object) {as(object, ".tableFilter")})
 
+#' @describeIn TableFilter Return the TableFilter that has been applied to the
+#'   given query.
 setMethod("TableFilter", ".query", function(object) {
   object@filters
 })
 
+#' @describeIn TableFilter Method to replace the table filter of a query
 setMethod("TableFilter", c("gaQuery", "ANY"), function(object, value) {
   use_class <- class(object@filters)
   object@filters <- as(value, use_class)

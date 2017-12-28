@@ -190,10 +190,12 @@ setMethod("DateRange", c("ANY", "missing"), function(object) {
   as(object, "dateRange")
 })
 
+#' @describeIn DateRange Returns the date range of the given query.
 setMethod("DateRange", c(".standardQuery"), function(object) {
   object@dateRange
 })
 
+#' @describeIn DateRange Modify the date range of the given query.
 setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
   object@dateRange <- as(value, "dateRange")
   validObject(object)

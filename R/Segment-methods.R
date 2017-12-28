@@ -262,8 +262,8 @@ setMethod(
 setMethod(
   f = "PerProduct",
   signature = c("formula"),
-  definition = function(object, ...) {
-    PerProduct(Expr(object), ...)
+  definition = function(object) {
+    PerProduct(Expr(object))
   }
 )
 
