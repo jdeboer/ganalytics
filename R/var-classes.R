@@ -58,7 +58,7 @@ setClass(
 setClass(
   "gaCalMetVar",
   contains = "language",
-  validty = function(object) {
+  validity = function(object) {
     # All of the symbols must be either numeric or calls For the elements within
     # calls, i.e. sub-elements, these must be either another call element
     # (recurisvely validate) or a name or a numeric. If a name, the object with
