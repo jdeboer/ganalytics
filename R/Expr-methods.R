@@ -125,7 +125,22 @@ setMethod(
 
 #' @describeIn ScopeLevel Return the scope of the supplied metric used within a
 #'   segment definition.
-setMethod("ScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
+setMethod(
+  "ScopeLevel",
+  signature = c("gaSegMetExpr", "missing"),
+  definition = function(object) {object@metricScope}
+)
+
+#' @describeIn ScopeLevel Set the scope, as described by a character value, to
+#'   be applied to the supplied metric condition for use within a segment
+#'   expression.
+setMethod(
+  "ScopeLevel",
+  signature = c("gaSegMetExpr", "character"),
+  definition = function(object, value) {
+    object@metricScope <- value
+  }
+)
 
 #' @describeIn ScopeLevel Set the scope, as described by a character value, to
 #'   be applied to the supplied metric condition for use within a segment
