@@ -7,11 +7,11 @@
 \alias{PerProduct,formula-method}
 \title{PerProduct.}
 \usage{
-PerProduct(object, ...)
+PerProduct(object)
 
 \S4method{PerProduct}{gaMetExpr}(object)
 
-\S4method{PerProduct}{formula}(object, ...)
+\S4method{PerProduct}{formula}(object)
 }
 \arguments{
 \item{object}{a gaMetExpr object to coerce to hit-level}

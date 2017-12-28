@@ -3,10 +3,10 @@
 \docType{methods}
 \name{GaView}
 \alias{GaView}
-\alias{GaView,.query,ANY-method}
-\alias{GaView,ANY,missing-method}
 \alias{GaView<-}
-\alias{GaView,ANY-method}
+\alias{GaView,ANY,missing-method}
+\alias{GaView,.query,ANY-method}
+\alias{GaView<-,.query-method}
 \alias{GaView<-,.query-method}
 \title{GaView.}
 \usage{
@@ -17,6 +17,8 @@ GaView(object) <- value
 \S4method{GaView}{ANY,missing}(object)
 
 \S4method{GaView}{.query,ANY}(object, value)
+
+\S4method{GaView}{.query}(object) <- value
 
 \S4method{GaView}{.query}(object) <- value
 }
@@ -43,5 +45,7 @@ numeric or character into a viewId.
 \item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the updated view applied.
 
 \item \code{.query}: Replace the view being used by a query.
+
+\item \code{.query}: Replaces the view being used by a query.
 }}
 

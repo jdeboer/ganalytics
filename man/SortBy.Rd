@@ -43,6 +43,10 @@ query then the replacement list of dimensions or metrics to sort by.}
 or metric variables, indicating which columns of the resulting query
 response should be sorted in decending order.}
 
+\item{type}{A character vector, same length as the vector of variables to sort by,
+indicating the method of sorting to be applied to each variable. Available sort
+types are "VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET" or "DIMENSION_AS_INTEGER".}
+
 \item{value}{The replacement dimensions and metrics for the supplied object.}
 }
 \description{

@@ -89,14 +89,6 @@ comparator from.}
 \item{e1}{Dimension or metric object}
 
 \item{e2}{Operand object}
-
-\item{var}{dimension object}
-
-\item{operand}{operand object}
-
-\item{var}{dimension object}
-
-\item{operand}{operand object}
 }
 \description{
 Get or create a comparator used in / for an expression.

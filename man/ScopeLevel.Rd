@@ -5,9 +5,10 @@
 \name{ScopeLevel}
 \alias{ScopeLevel}
 \alias{ScopeLevel<-}
-\alias{ScopeLevel,gaSegMetExpr-method}
+\alias{ScopeLevel,gaSegMetExpr,missing-method}
+\alias{ScopeLevel,gaSegMetExpr,character-method}
 \alias{ScopeLevel<-,gaMetExpr,character-method}
-\alias{ScopeLevel,gaSegmentFilterList-method}
+\alias{ScopeLevel,gaSegmentFilterList,ANY-method}
 \alias{ScopeLevel<-,gaSegmentFilterList,character-method}
 \title{ScopeLevel.}
 \usage{
@@ -15,23 +16,21 @@ ScopeLevel(object, value)
 
 ScopeLevel(object) <- value
 
-\S4method{ScopeLevel}{gaSegMetExpr}(object)
+\S4method{ScopeLevel}{gaSegMetExpr,missing}(object)
+
+\S4method{ScopeLevel}{gaSegMetExpr,character}(object, value)
 
 \S4method{ScopeLevel}{gaMetExpr,character}(object) <- value
 
-\S4method{ScopeLevel}{gaSegmentFilterList}(object)
+\S4method{ScopeLevel}{gaSegmentFilterList,ANY}(object)
 
 \S4method{ScopeLevel}{gaSegmentFilterList,character}(object) <- value
 }
 \arguments{
 \item{object}{a gaSegmentFilterList or a metric expression.}
 
-\item{value}{Optional new scope level to return an updated copy of the object
-with the new scope applied.}
-
-\item{object}{a gaSegmentFilterList or a metric expression.}
-
-\item{value}{The scope level to apply. For gaSegmentFilterLists this can be
+\item{value}{New scope level to return an updated copy of the object
+with the new scope applied. For gaSegmentFilterLists this can be
 either 'users' or 'sessions'. For metric expressions use either 'perUser',
 'perSession', 'perHit' or 'perProduct'.}
 }
@@ -45,14 +44,18 @@ Set the scope level of a gaDynSegment or a gaMetExpr
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegMetExpr}: Return the scope of the supplied metric used within a
+\item \code{object = gaSegMetExpr,value = missing}: Return the scope of the supplied metric used within a
 segment definition.
+
+\item \code{object = gaSegMetExpr,value = character}: Set the scope, as described by a character value, to
+be applied to the supplied metric condition for use within a segment
+expression.
 
 \item \code{object = gaMetExpr,value = character}: Set the scope, as described by a character value, to
 be applied to the supplied metric condition for use within a segment
 expression.
 
-\item \code{gaSegmentFilterList}: Return the scope of the supplied gaSegmentFilterList.
+\item \code{object = gaSegmentFilterList,value = ANY}: Return the scope of the supplied gaSegmentFilterList.
 
 \item \code{object = gaSegmentFilterList,value = character}: Set the scope level of a gaSegmentFilterList to either
 "user" or "session" level.
