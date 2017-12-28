@@ -95,8 +95,10 @@ setGeneric(
 #' Get the scope level of a gaSegmentFilterList or gaMetExpr.
 #'
 #' @param object a gaSegmentFilterList or a metric expression.
-#' @param value Optional new scope level to return an updated copy of the object
-#' with the new scope applied.
+#' @param value New scope level to return an updated copy of the object
+#' with the new scope applied. For gaSegmentFilterLists this can be
+#' either 'users' or 'sessions'. For metric expressions use either 'perUser',
+#' 'perSession', 'perHit' or 'perProduct'.
 #' @return the scope level as a character string, a gaSegmentFilterList or gaMetExpr.
 #'
 #' @export
@@ -111,11 +113,6 @@ setGeneric(
 #' ScopeLevel<-.
 #'
 #' Set the scope level of a gaDynSegment or a gaMetExpr
-#'
-#' @param object a gaSegmentFilterList or a metric expression.
-#' @param value The scope level to apply. For gaSegmentFilterLists this can be
-#' either 'users' or 'sessions'. For metric expressions use either 'perUser',
-#' 'perSession', 'perHit' or 'perProduct'.
 #'
 #' @export
 #' @rdname ScopeLevel

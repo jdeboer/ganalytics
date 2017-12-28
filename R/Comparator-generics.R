@@ -50,8 +50,6 @@ setGeneric(
 #' A condition where the dimension (LHS) matches values that end with
 #'   the character string given by the operand (RHS).
 #' @rdname Comparator
-#' @param var dimension object
-#' @param operand operand object
 #' @export
 setGeneric(
   "%ends_with%",
@@ -64,8 +62,6 @@ setGeneric(
 #' A condition where the dimension (LHS) matches values that contain
 #'   the character string given by the operand (RHS).
 #' @rdname Comparator
-#' @param var dimension object
-#' @param operand operand object
 #' @export
 setGeneric(
   "%contains%",

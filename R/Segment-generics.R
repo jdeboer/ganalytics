@@ -111,7 +111,7 @@ setGeneric(
 #' @export
 setGeneric(
   "PerProduct",
-  function(object, ...){},
+  function(object){},
   valueClass = "gaSegMetExpr",
   useAsDefault = FALSE
 )
