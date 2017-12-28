@@ -156,7 +156,7 @@ readline("Press enter to continue.")
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
 thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
-Segments(myQuery) <- thankyouExpr
+Segments(myQuery) <- list(thankyou = thankyouExpr)
 
 # Reset the filter
 TableFilter(myQuery) <- NULL

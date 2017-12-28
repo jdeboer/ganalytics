@@ -109,7 +109,7 @@ setMethod(
   definition = function(object, value) {
     use_class <- class(object@metrics)
     object@metrics <- as(value, use_class)
-    object <- ganalytics:::updateSortBy(object)
+    object <- updateSortBy(object)
     validObject(object)
     object
   }
@@ -143,7 +143,7 @@ setMethod(
   definition = function(object, value) {
     use_class <- class(object@dimensions)
     object@dimensions <- as(value, use_class)
-    object <- ganalytics:::updateSortBy(object)
+    object <- updateSortBy(object)
     validObject(object)
     object
   }

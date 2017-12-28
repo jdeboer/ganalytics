@@ -59,7 +59,7 @@ expr5 <- expr1 & expr2
 expr6 <- Expr(~eventAction == "click")
 expr7 <- Expr(~eventCategory == "video") & Expr(~eventAction == "play")
 expr8 <- Expr(~source == "google")
-Segments(
+Segment(
   PerUser(
     expr1, # treat an expression as 'condition type segment filter' by default
     PerHit(

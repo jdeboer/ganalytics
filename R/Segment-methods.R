@@ -351,7 +351,7 @@ setMethod(
   f = "Segment",
   signature = "gaUserSegment",
   definition = function(object) {
-    Segments(object$segmentId)
+    Segment(object$segmentId)
   }
 )
 

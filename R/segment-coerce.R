@@ -48,7 +48,7 @@ setAs(from = "numeric", to = "gaSegmentId", def = function(from, to) {
 })
 
 setAs(from = "gaUserSegment", to = "gaSegmentId", def = function(from, to) {
-  new(to, Segments(from))
+  new(to, Segment(from))
 })
 
 # Coercing to gaDynSegment
