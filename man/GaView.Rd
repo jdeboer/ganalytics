@@ -4,9 +4,11 @@
 \name{GaView}
 \alias{GaView}
 \alias{GaView<-}
+\alias{GaView,gaProperty,missing-method}
+\alias{GaView,gaAccount,missing-method}
 \alias{GaView,ANY,missing-method}
+\alias{GaView,.query,missing-method}
 \alias{GaView,.query,ANY-method}
-\alias{GaView<-,.query-method}
 \alias{GaView<-,.query-method}
 \title{GaView.}
 \usage{
@@ -14,11 +16,15 @@ GaView(object, value)
 
 GaView(object) <- value
 
+\S4method{GaView}{gaProperty,missing}(object)
+
+\S4method{GaView}{gaAccount,missing}(object)
+
 \S4method{GaView}{ANY,missing}(object)
 
-\S4method{GaView}{.query,ANY}(object, value)
+\S4method{GaView}{.query,missing}(object)
 
-\S4method{GaView}{.query}(object) <- value
+\S4method{GaView}{.query,ANY}(object, value)
 
 \S4method{GaView}{.query}(object) <- value
 }
@@ -37,14 +43,18 @@ Set the viewId for the query.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{object = gaProperty,value = missing}: Select the default view of the property
+
+\item \code{object = gaAccount,value = missing}: Selects the first property of the account, which is then
+used to select a view (as above).
+
 \item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the first view
 within the supplied property or the first view within the first property of
-the supplied account, or gets the view ID of the supplied query, or coerce a
-numeric or character into a viewId.
+the supplied account, or coerce a numeric or character into a viewId.
+
+\item \code{object = .query,value = missing}: gets the view ID of the supplied query
 
 \item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the updated view applied.
-
-\item \code{.query}: Replace the view being used by a query.
 
 \item \code{.query}: Replaces the view being used by a query.
 }}

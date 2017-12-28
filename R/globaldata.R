@@ -166,8 +166,8 @@ kAnyPrefix <- paste0("^(ga|mcf|rt)", kPrefixDelim)
 
 # Maximum dimensions and metrics allowed by Google Analytics Core Reporting API
 kGaMax <- list(
-  dimensions = 7,
-  metrics = 10
+  dimensions = 7L,
+  metrics = 10L
 )
 
 # Maximum results per page and maximum rows accessible in a query.

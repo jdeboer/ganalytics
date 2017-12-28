@@ -89,20 +89,6 @@ setMethod("RtVar", "ANY", function(object) {as(object, ".rtVar")})
 
 # -- GaMetrics ----
 
-#############\/ Transform to method of Metrics and Metrics<- generic functions
-setAs(from = ".query", to = ".metrics",
-      def = function(from, to) {
-        from@metrics
-      },
-      replace = function(from, value) {
-        use_class <- class(from@metrics)
-        from@metrics <- as(value, use_class)
-        from <- ganalytics:::updateSortBy(from)
-        validObject(from)
-        from
-      }
-)
-
 #' @describeIn Metrics Coerce one or more supplied objects to .metrics.
 setMethod(
   f = "Metrics",
@@ -114,14 +100,17 @@ setMethod(
 )
 
 #' @describeIn Metrics Get the list of metrics for a '.query'.
-setMethod("Metrics", ".query", function(object) {as(object, ".metrics")})
+setMethod("Metrics", ".query", function(object) {object@metrics})
 
 #' @describeIn Metrics Set the metrics for a '.query' object.
 setMethod(
   f = "Metrics<-",
   signature = c(".query", "ANY"),
   definition = function(object, value) {
-    as(object, ".metrics") <- value
+    use_class <- class(object@metrics)
+    object@metrics <- as(value, use_class)
+    object <- ganalytics:::updateSortBy(object)
+    validObject(object)
     object
   }
 )

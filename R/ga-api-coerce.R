@@ -4,7 +4,7 @@
 #' @importFrom plyr ldply alply
 NULL
 
-## As setAs looks within the global namespace for any internall called functions within
+## As setAs looks within the global namespace for any internally called functions within
 # the definition, then the following function is likely to throw an error if used with setAs.
 compileOperand <- function(from) {
   unEscapedOperand <- as(Operand(from), "character")
