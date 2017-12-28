@@ -22,7 +22,7 @@ library(httr)
 scope <- "https://www.googleapis.com/auth/analytics.readonly"
 url <- "https://www.googleapis.com/analytics/v3/metadata/ga/columns"
 endpoint <- oauth_endpoints(name = "google")
-cache <- "~/.google_apis_auth.RDS"
+cache <- file.path("~", ".google_apis_auth.RDS")
 app <- oauth_app(
   appname = "GOOGLE_APIS",
   key = client_id,

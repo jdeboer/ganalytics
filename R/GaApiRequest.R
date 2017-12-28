@@ -53,7 +53,7 @@ GoogleApiCreds <- function(
     } else {
       cache <- paste0(userName, "_", cache_generic_file_name)
     }
-    cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
+    cache <- file.path(cache_default_dir, paste0(cache_file_prefix, cache))
   }
   creds <- list(
     app = app_oauth_creds(
