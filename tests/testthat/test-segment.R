@@ -1,7 +1,5 @@
 library(ganalytics)
 
-testthat::skip()
-
 context("Segmentation queries are correctly formatted for API requests")
 
 test_that("segment expressions are correctly coerced to character string", {

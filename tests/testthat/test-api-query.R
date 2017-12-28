@@ -1,5 +1,3 @@
-skip()
-
 context("Translation of ganalytics query into an API request.")
 
 test_that("Queries are constructed correctly for API requests", {
