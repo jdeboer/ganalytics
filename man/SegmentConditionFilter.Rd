@@ -15,7 +15,7 @@ SegmentConditionFilter(object, ..., negation = FALSE)
 
 \item{...}{Other expressions to be ANDed to the first expression provided.}
 
-\item{negation}{Deprecated. Logical TRUE or FALSE to match segments where this conditon
+\item{negation}{Logical TRUE or FALSE to match segments where this conditon
 has not been met.}
 }
 \value{

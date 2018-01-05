@@ -11,13 +11,13 @@ Include(object)
 \S4method{Include}{ANY}(object)
 }
 \arguments{
-\item{object}{a segment filter condition or sequence to include.}
+\item{object}{a segment condition or sequence filter to include.}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to FALSE.
 }
 \description{
-Define a segment filter with its negation flag is set to FALSE.
+Set the negation flag of a segment filter to FALSE.
 }
 \section{Methods (by class)}{
 \itemize{

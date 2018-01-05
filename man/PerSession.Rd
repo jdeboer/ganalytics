@@ -26,9 +26,8 @@ scoped gaSegmentFilterList.}
 \value{
 a gaMetExpr or gaSegmentFilterList.
 
-To define a gaSegmentFilterList using metric expressions rather than setting the
-scope of the metric expression itself, wrap the metric expression in an
-\code{Include} or \code{Exclude} call.
+To define a gaSegmentFilterList comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \description{
 Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.

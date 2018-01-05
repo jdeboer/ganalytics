@@ -11,13 +11,13 @@ Exclude(object)
 \S4method{Exclude}{ANY}(object)
 }
 \arguments{
-\item{object}{a segment filter condition or sequence to exclude.}
+\item{object}{a segment condition or sequence filter to exclude.}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to TRUE.
 }
 \description{
-Define a segment filter with its negation flag is set to TRUE.
+Set the negation flag of a segment filter to TRUE.
 }
 \section{Methods (by class)}{
 \itemize{

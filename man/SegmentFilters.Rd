@@ -16,7 +16,7 @@ SegmentFilters(object, ..., scope = "sessions")
 \arguments{
 \item{object}{The first filter to include in the segment definition.}
 
-\item{...}{Additional filters to be included in the segment definition.}
+\item{...}{Additional filters to include in the segment definition, if needed.}
 
 \item{scope}{The scope of the resulting gaSegmentFilterList, either 'user' or
 'session' level.}
