@@ -182,9 +182,10 @@ setMethod(
 setMethod(
   "initialize",
   signature = "gaSegmentFilterList",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, scope) {
     if(!missing(value)) {
       .Object@.Data <- value
+      .Object@scope <- scope
       validObject(.Object)
     }
     return(.Object)
