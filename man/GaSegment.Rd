@@ -10,9 +10,9 @@ GaSegment(...)
 GaSegment(...) <- value
 }
 \arguments{
-\item{...}{arguments passed onto \code{Segments}}
+\item{...}{arguments passed onto \code{Segment}}
 
-\item{value}{passed onto \code{Segments}}
+\item{value}{passed onto \code{Segment}}
 }
 \description{
 Deprecated, use Segments instead.
