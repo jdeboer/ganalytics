@@ -179,6 +179,18 @@ setMethod(
   }
 )
 
+setMethod(
+  "initialize",
+  signature = "gaSegmentFilterList",
+  definition = function(.Object, value) {
+    if(!missing(value)) {
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
 # ---- gaSegmentId ----
 
 setMethod(
