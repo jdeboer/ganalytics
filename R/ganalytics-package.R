@@ -8,13 +8,13 @@
 #'
 #' To use this package with the Google Analytics Reporting and Google Tag
 #' Manager APIs, it is neccessary to provide details for a Google APIs project
-#' which has the neccessary APIs enabled.
+#' that has the neccessary APIs enabled.
 #'
 #' Features:
 #'
 #' * Auto-pagination to return up to 1,000,000 rows per query.
 #'
-#' * Ability to query more than 10 metrics at once. (TBA)
+#' * Ability to query more than 10 metrics at once. (TBC)
 #'
 #' * Minimise the effect of sampling by splitting the date range of queries
 #' using the SplitDateRange function.
@@ -22,14 +22,14 @@
 #' * When sampling has occured, the output data.frame includes the sample and
 #' total sizes as attributes.
 #'
-#' To report bugs enter: \code{utils::bug.report(package = "ganalytics")}
+#' Run this command to report any bugs: \code{utils::bug.report(package = "ganalytics")}
 #'
-#' When posting a bug, please try rerun your code wrapped within a call to
+#' When posting a bug, please try rerun any API queries wrapped within a call to
 #' \code{httr::with_verbose} and include the output in the bug report (taking
 #' care not to include any private data). For example:
 #' httr::with_verbose(GetGaData(my_query))
 #'
-#' For a step-by-step guide with examples: \code{browseVignettes(package =
+#' For a step-by-step guide with examples, run this command: \code{browseVignettes(package =
 #' "ganalytics")}
 #'
 #' @references Google Analytics dimensions and metrics reference:
@@ -38,12 +38,12 @@
 #' @references Google Analytics Table Filter expressions:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/v3/reference#filters}
 #'
-#' @references Google Analytics Custom Segmentation expressions
+#' @references Google Analytics Custom Segmentation expressions:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/v3/segments-feature-reference}
 #'
 #' @references Google Analytics Real-time Reporting API dimensions and metrics
 #' @references Google Analytics Multi-Channel Funnel conversions Reporting API
-#' @references Google Management API collections and resources
+#' @references Google Analytics Management API collections and resources
 #' @references Google Tag Manager API collection and resources
 #'
 #' @keywords package

@@ -144,7 +144,7 @@ GaSplitDateRange <- function(...){
 
 #' GaSegment
 #'
-#' Deprecated, use Segments instead.
+#' Deprecated, use Segment instead.
 #'
 #' @param ... arguments passed onto \code{Segment}
 #'
@@ -166,8 +166,8 @@ GaSegment <- function(...){
 #' @keywords internal
 #' @export GaSegment<-
 `GaSegment<-` <- function(..., value){
-  .Deprecated("Segment<-")
-  `Segment<-`(..., value)
+  .Deprecated("Segments<-")
+  `Segments<-`(..., value)
 }
 
 #' GaFilter

@@ -15,7 +15,7 @@ GaSegment(...) <- value
 \item{value}{passed onto \code{Segment}}
 }
 \description{
-Deprecated, use Segments instead.
+Deprecated, use Segment instead.
 
 Deprecated, use Segments<- instead.
 }
