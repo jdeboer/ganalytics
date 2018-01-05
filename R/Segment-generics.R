@@ -4,7 +4,7 @@
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
-#' @param negation Deprecated. Logical TRUE or FALSE to match segments where this conditon
+#' @param negation Logical TRUE or FALSE to match segments where this conditon
 #'   has not been met.
 #' @return a gaSegmentConditionFilter object.
 #'
@@ -18,9 +18,9 @@ setGeneric(
 
 #' Include.
 #'
-#' Define a segment filter with its negation flag is set to FALSE.
+#' Set the negation flag of a segment filter to FALSE.
 #'
-#' @param object a segment filter condition or sequence to include.
+#' @param object a segment condition or sequence filter to include.
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @export
@@ -33,9 +33,9 @@ setGeneric(
 
 #' Exclude.
 #'
-#' Define a segment filter with its negation flag is set to TRUE.
+#' Set the negation flag of a segment filter to TRUE.
 #'
-#' @param object a segment filter condition or sequence to exclude.
+#' @param object a segment condition or sequence filter to exclude.
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @export
@@ -88,7 +88,7 @@ setGeneric(
 #' and non-sequential conditoins can be combined using this function.
 #'
 #' @param object The first filter to include in the segment definition.
-#' @param ... Additional filters to be included in the segment definition.
+#' @param ... Additional filters to include in the segment definition, if needed.
 #' @param scope The scope of the resulting gaSegmentFilterList, either 'user' or
 #' 'session' level.
 #' @return a gaSegmentFilterList object.
@@ -147,9 +147,8 @@ setGeneric(
 #' @param ... Other filters to include in the gaSegmentFilterList.
 #' @return a gaMetExpr or gaSegmentFilterList.
 #'
-#' To define a gaSegmentFilterList using metric expressions rather than setting the
-#' scope of the metric expression itself, wrap the metric expression in an
-#' \code{Include} or \code{Exclude} call.
+#' To define a gaSegmentFilterList comprised of a single metric expression,
+#' wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -169,9 +168,8 @@ setGeneric(
 #' @param ... Other filters to include in the gaSegmentFilterList.
 #' @return a gaMetExpr or gaSegmentFilterList.
 #'
-#' To define a gaSegmentFilterList using metric expressions rather than setting the
-#' scope of the metric expression itself, wrap the metric expression in an
-#' \code{Include} or \code{Exclude} call.
+#' To define a gaSegmentFilterList comprised of a single metric expression,
+#' wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -206,7 +204,8 @@ setGeneric(
 #' Get the list of segments from the object or coerce the supplied objects into a
 #' a named list of segments.
 #'
-#' @param object A query object to extract the segment list from.
+#' @param object A query object to get the segment list from or to set the segment
+#' list of.
 #' @param ... Alternatively, provide one or more named arguments
 #' (segments or objects that can be coerced into segments)
 #' including dynamic segments, built-in and/or custom segments by
@@ -226,7 +225,7 @@ setGeneric(
 #'
 #' Set the segments of the query object.
 #'
-#' @param value The segment definition or ID or a list of segments.
+#' @param value A named list of segments or a single segment.
 #'
 #' @export
 #' @rdname Segments

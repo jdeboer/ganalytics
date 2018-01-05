@@ -135,6 +135,7 @@ setMethod(
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@scope <- value
+    validObject(object)
     object
   }
 )
