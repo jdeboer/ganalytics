@@ -27,7 +27,6 @@ setClass(
   validity = function(object) {
     validate_that(
       length(object) == 1L,
-      nchar(object) > 0L,
       length(object@negated) == 1L,
       object@negated %in% c(FALSE, TRUE)
     )
