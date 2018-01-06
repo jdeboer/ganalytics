@@ -129,17 +129,30 @@ setMethod(
       else if (value == "=<") value <- "<="
       else if (value == "~!") value <- "!~"
       else if (value == "@!") value <- "!@"
-      else if (value %in% c(
-        names(kGa4Ops$metric_operators),
-        names(kGa4Ops$dimension_operators)
-      )) {
-        .Object@operator <- value
-        value <- c(
-          kGa4Ops$metric_operators, kGa4Ops$dimension_operators
-        )[value]
+      if(inherits(.Object, ".gaComparator")) {
+        if (value %in% c(
+          names(kGa4Ops$metric_operators),
+          names(kGa4Ops$dimension_operators)
+        )) {
+          .Object@operator <- value
+          value <- c(
+            kGa4Ops$metric_operators, kGa4Ops$dimension_operators
+          )[value]
+        } else {
+          if(value %in% kGa4Ops$negated_operators) {
+            non_negated_value <- names(which(value == kGa4Ops$negated_operators))
+          } else {
+            non_negated_value <- value
+          }
+          if (inherits(.Object, ".dimComparator")) {
+            .Object@operator <- names(which(non_negated_value == kGa4Ops$dimension_operators))
+          } else {
+            .Object@operator <- names(which(non_negated_value == kGa4Ops$metric_operators))
+          }
+        }
+        .Object@negated <- value %in% kGa4Ops$negated_operators
       }
       .Object@.Data <- value
-      .Object@negated <- value %in% kGa4Ops$negated_operators
       validObject(.Object)
     }
     .Object
