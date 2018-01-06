@@ -27,7 +27,13 @@ setMethod(
   f = "TableFilter<-",
   signature = c(".query", "ANY"),
   definition = function(object, value) {
-    as(object, ".tableFilter") <- value
+    value <- switch(
+      class(object),
+      "gaQuery" = as(value, "gaFilter"),
+      "rtQuery" = as(value, "rtFilter"),
+      "mcfQuery" = as(value, "mcfFilter")
+    )
+    object@filters <- value
     validObject(object)
     object
   }
