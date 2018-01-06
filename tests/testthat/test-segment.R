@@ -78,8 +78,8 @@ test_that("PerHit returns the expected classes of output given the class of its 
 test_that("Include and Exclude can be used to define segment filters", {
   expr1 <- Expr("EventCategory", "=", "video")
   expr2 <- Expr("EventAction", "=", "play")
-  include_filter <- Include(expr1, expr2)
-  exclude_filter <- Exclude(expr1, expr2)
+  include_filter <- SegmentFilters(Include(expr1), Include(expr2))
+  exclude_filter <- SegmentFilters(Exclude(expr1), Exclude(expr2))
   expect_is(include_filter, "gaSegmentFilterList")
   expect_is(exclude_filter, "gaSegmentFilterList")
   expect_equal(length(include_filter), 2)
