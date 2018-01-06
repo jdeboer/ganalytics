@@ -37,12 +37,13 @@ setAs(from = ".metOperand", to = "character",
 ## the folowing function calls another function which is not in the global namesapce
 # Coercing GA expressions to GA API compatible character strings
 setAs(from = ".expr", to = "character", def = function(from, to) {
-  if(from@comparator == "BEGINS_WITH") {
-    operand <- paste("^", quotemeta(operand), sep = "")
-    comparator <- "=~"
-  } else if(from@comparator == "ENDS_WITH") {
-    operand <- paste(quotemeta(operand), "$", sep = "")
-    comparator <- "=~"
+  operand_class <- class(from@operand)
+    if(from@comparator@operator == "BEGINS_WITH") {
+      from@operand <- as(paste("^", quotemeta(from@operand), sep = ""), operand_class)
+      Comparator(from) <- "=~"
+    } else if(from@comparator@operator == "ENDS_WITH") {
+      from@operand <- as(paste(quotemeta(from@operand), "$", sep = ""), operand_class)
+      Comparator(from) <- "=~"
   }
   paste0(
     if (class(from) == "gaSegMetExpr") {
