@@ -376,13 +376,34 @@ setMethod(
   }
 )
 
+#' @describeIn Segments Coerce an object into a segmentList of length 1.
+setMethod(
+  f = "Segments",
+  signature = "ANY",
+  definition = function(object) {
+    if(inherits(object, c(
+      "gaUserSegment",
+      ".gaSegment",
+      "character",
+      "numeric",
+      "gaSegmentFilterList",
+      ".compoundExpr"
+    ))) {
+      new("gaSegmentList", list(segment = Segment(object)))
+    } else {
+      stopifnot(inherits(object, c("list", "NULL")))
+      new("gaSegmentList", object)
+    }
+  }
+)
+
 #' @describeIn Segments Set the segments to be used witin a query.
 setMethod(
   f = "Segments<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
     # Need to define coercions to .gaSegment from char and numeric
-    object@segments <- as(Segments(value), "gaSegmentList")
+    object@segments <- Segments(value)
     object
   }
 )
