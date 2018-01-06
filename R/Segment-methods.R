@@ -294,46 +294,14 @@ setMethod(
   f = "Segment",
   signature = "ANY",
   definition = function(object, ...) {
-    scope <- NA
-    segment_list <- list(object, ...)
-
-    segment_list <- lapply(segment_list, function(segment_def) {
-      tryCatch(
-        {
-          stopifnot(class(segment_def) != "list")
-          as(segment_def, "gaSegmentFilterList")
-        },
-        error = function(e) {
-          segment_def
-        }
-      )
+    dyn_segment_def <- list(object, ...)
+    segment_filter_list <- lapply(dyn_segment_def, function(segment_filter_list) {
+      as(segment_filter_list, "gaSegmentFilterList")
     })
-    filter_lists <- sapply(segment_list, is, "gaSegmentFilterList")
-    proper_segments <- sapply(segment_list, is, ".gaSegment")
-
-    segment_list <- c(
-      lapply(
-        unlist(
-          segment_list[!(filter_lists | proper_segments)],
-          recursive = FALSE
-        ),
-        as, ".gaSegment"
-      ),
-      segment_list[proper_segments],
-      if (any(filter_lists)) {
-        list(
-          new(
-            "gaDynSegment",
-            if (!is.na(scope)) {
-              lapply(segment_list[filter_lists], ScopeLevel, scope)
-            } else {
-              segment_list[filter_lists]
-            }
-          )
-        )
-      }
+    new(
+      "gaDynSegment",
+      segment_filter_list
     )
-    new("gaSegmentList", segment_list)
   }
 )
 
