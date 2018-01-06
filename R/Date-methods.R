@@ -191,7 +191,7 @@ setMethod("DateRange", c("ANY", "missing"), function(object) {
 })
 
 #' @describeIn DateRange Returns the date range of the given query.
-setMethod("DateRange", c(".standardQuery"), function(object) {
+setMethod("DateRange", c(".standardQuery", "missing"), function(object) {
   object@dateRange
 })
 
