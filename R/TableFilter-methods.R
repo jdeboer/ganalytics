@@ -28,6 +28,7 @@ setMethod(
   signature = c(".query", "ANY"),
   definition = function(object, value) {
     as(object, ".tableFilter") <- value
+    validObject(object)
     object
   }
 )
