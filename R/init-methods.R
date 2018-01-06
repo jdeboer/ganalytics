@@ -118,16 +118,16 @@ setMethod(
     if (!missing(value)) {
       value <- toupper(value)
       if (value %in% c("=", "EXACT", "EQUAL")) value <- "=="
+      else if (value %in% c("][", "IN_LIST")) value <- "[]"
+      else if (value %in% c("><", "BETWEEN", "NUMERIC_BETWEEN")) value <- "<>"
+      else if (value %in% c("<<", "LESS_THAN", "NUMERIC_LESS_THAN")) value <- "<"
+      else if (value %in% c(">>", "GREATER_THAN", "NUMERIC_GREATER_THAN")) value <- ">"
+      else if (value %in% c("~=", "~", "MATCHES", "REGEXP")) value <- "=~"
+      else if (value %in% c("@=", "@", "CONTAINS", "PARTIAL")) value <- "=@"
       else if (value %in% c("!","=!")) value <- "!="
-      else if (value == "][") value <- "[]"
-      else if (value == "><") value <- "<>"
-      else if (value == "<<") value <- "<"
-      else if (value == ">>") value <- ">"
       else if (value == "=>") value <- ">="
       else if (value == "=<") value <- "<="
-      else if (value %in% c("~=", "~", "MATCHES", "REGEXP")) value <- "=~"
       else if (value == "~!") value <- "!~"
-      else if (value %in% c("@=", "@", "CONTAINS", "PARTIAL")) value <- "=@"
       else if (value == "@!") value <- "!@"
       else if (value %in% c(
         names(kGa4Ops$metric_operators),
