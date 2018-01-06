@@ -210,6 +210,19 @@ setMethod(
   }
 )
 
+# -- gaSegmentList ----
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentList",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      .Object@.Data <- lapply(value, as, ".gaSegment")
+    }
+    .Object
+  }
+)
+
 # -- viewId ----
 
 setMethod(
