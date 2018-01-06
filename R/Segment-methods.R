@@ -40,7 +40,7 @@ setMethod(
   signature = "ANY",
   definition = function(object) {
     object <- as(object, ".gaSegmentFilter")
-    object@negated = FALSE
+    object@negation = FALSE
     validObject(object)
     object
   }
@@ -53,7 +53,7 @@ setMethod(
   signature = "ANY",
   definition = function(object) {
     object <- as(object, ".gaSegmentFilter")
-    object@negated = TRUE
+    object@negation = TRUE
     validObject(object)
     object
   }
