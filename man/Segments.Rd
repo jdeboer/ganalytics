@@ -11,6 +11,7 @@
 \alias{Segment,gaUserSegment-method}
 \alias{Segments,gaSegmentList-method}
 \alias{Segments,gaQuery-method}
+\alias{Segments,ANY-method}
 \alias{Segments<-,gaQuery-method}
 \title{Segments.}
 \usage{
@@ -31,6 +32,8 @@ Segments(object) <- value
 \S4method{Segments}{gaSegmentList}(object)
 
 \S4method{Segments}{gaQuery}(object)
+
+\S4method{Segments}{ANY}(object)
 
 \S4method{Segments}{gaQuery}(object) <- value
 }
@@ -71,6 +74,8 @@ user segment.
 \item \code{gaSegmentList}: Returns itself
 
 \item \code{gaQuery}: Return the definition of the segment applied to the view.
+
+\item \code{ANY}: Coerce an object into a segmentList of length 1.
 
 \item \code{gaQuery}: Set the segments to be used witin a query.
 }}

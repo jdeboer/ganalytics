@@ -20,7 +20,7 @@
 \alias{EndDate<-,.standardQuery-method}
 \alias{DateRange,ANY,ANY-method}
 \alias{DateRange,ANY,missing-method}
-\alias{DateRange,.standardQuery,ANY-method}
+\alias{DateRange,.standardQuery,missing-method}
 \alias{DateRange<-,.standardQuery-method}
 \alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-,ANY-method}
@@ -62,7 +62,7 @@ DateRange(object) <- value
 
 \S4method{DateRange}{ANY,missing}(object)
 
-\S4method{DateRange}{.standardQuery,ANY}(object)
+\S4method{DateRange}{.standardQuery,missing}(object)
 
 \S4method{DateRange}{.standardQuery}(object) <- value
 
@@ -123,7 +123,7 @@ vectors of start date and end dates.
 \item \code{object = ANY,endDate = missing}: Returns the date range of the given query or coerces
 the supplied object into a dateRange.
 
-\item \code{object = .standardQuery,endDate = ANY}: Returns the date range of the given query.
+\item \code{object = .standardQuery,endDate = missing}: Returns the date range of the given query.
 
 \item \code{.standardQuery}: Modify the date range of the given query.
 
