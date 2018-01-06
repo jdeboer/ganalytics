@@ -225,7 +225,7 @@ setAs(
   from = "mcfQuery",
   to = "matrix",
   def = function(from) {
-    views <- as(from, "viewId")
+    views <- as(GaView(from), "viewId")
     dateRange <- from@dateRange
     startDates <- dateRange@startDate
     endDates <- dateRange@endDate
@@ -280,7 +280,7 @@ setAs(
     views <- do.call(
       what = rbind,
       args = lapply(
-        X = as(from, "viewId"),
+        X = as(GaView(from), "viewId"),
         FUN = function(viewId) {
           data.frame(
             viewId = viewId,
