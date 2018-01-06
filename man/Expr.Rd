@@ -25,7 +25,7 @@ to an .expr object.}
 
 \item{operand}{The operand to use for the expression.}
 
-\item{metricScope}{The scope to use for segmentation if using a metric.
+\item{metricScope}{Optional scope to use for segmentation if using a metric.
 Possible values include "perUser" or "perSession".}
 }
 \description{

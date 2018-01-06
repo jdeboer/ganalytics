@@ -47,6 +47,27 @@ setClass(
   }
 )
 
+#' `gaCalMetVar` class.
+#'
+#' An S4 class to represent a valid Google Analytics Core Reporting API
+#' calculated metric equation.
+#'
+#' @keywords internal
+#'
+#' @export
+setClass(
+  "gaCalMetVar",
+  contains = "language",
+  validity = function(object) {
+    # All of the symbols must be either numeric or calls For the elements within
+    # calls, i.e. sub-elements, these must be either another call element
+    # (recurisvely validate) or a name or a numeric. If a name, the object with
+    # that name must be either of class function or gaMetVar; if a function,
+    # then that must be one of the accepted calculation functions, i.e. '+',
+    # '-', '*', '/'.
+  }
+)
+
 #' `gaDimVar` class.
 #'
 #' An S4 class to represent a valid Google Analytics Core Reporting API dimension

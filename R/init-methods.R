@@ -11,7 +11,7 @@
 #' @include Var-list-generics.R
 #' @importFrom stringr str_match str_detect regex
 #' @importFrom lubridate ymd
-#' @importFrom methods setMethod validObject
+#' @importFrom methods setMethod validObject .valueClassTest
 NULL
 
 # Class initialisation methods
@@ -109,18 +109,6 @@ setMethod(
   }
 )
 
-# ---- SortBy ----
-
-setMethod(
-  f = "initialize",
-  signature = ".sortBy",
-  definition = function(.Object, value = list(), desc = logical(length(value))) {
-    .Object@.Data <- value
-    .Object@desc <- desc
-    .Object
-  }
-)
-
 # ---- .comparator ----
 
 setMethod(
@@ -129,41 +117,45 @@ setMethod(
   definition = function(.Object, value) {
     if (!missing(value)) {
       value <- toupper(value)
-      if (value == "=") value <- "=="
+      if (value %in% c("=", "EXACT", "EQUAL")) value <- "=="
+      else if (value %in% c("][", "IN_LIST")) value <- "[]"
+      else if (value %in% c("><", "BETWEEN", "NUMERIC_BETWEEN")) value <- "<>"
+      else if (value %in% c("<<", "LESS_THAN", "NUMERIC_LESS_THAN")) value <- "<"
+      else if (value %in% c(">>", "GREATER_THAN", "NUMERIC_GREATER_THAN")) value <- ">"
+      else if (value %in% c("~=", "~", "MATCHES", "REGEXP")) value <- "=~"
+      else if (value %in% c("@=", "@", "CONTAINS", "PARTIAL")) value <- "=@"
       else if (value %in% c("!","=!")) value <- "!="
-      else if (value == "][") value <- "[]"
-      else if (value == "><") value <- "<>"
-      else if (value == "<<") value <- "<"
-      else if (value == ">>") value <- ">"
       else if (value == "=>") value <- ">="
       else if (value == "=<") value <- "<="
-      else if (value %in% c("~=", "~")) value <- "=~"
       else if (value == "~!") value <- "!~"
-      else if (value %in% c("@=", "@")) value <- "=@"
       else if (value == "@!") value <- "!@"
-      .Object@.Data <- value
-      .Object@negated <- value %in% kGa4Ops$negated_operators
-      validObject(.Object)
-    }
-    .Object
-  }
-)
-
-# ---- gaSegmentId ----
-
-setMethod(
-  f = "initialize",
-  signature = "gaSegmentId",
-  definition = function(.Object, value) {
-    if (!missing(value)) {
-      value <- sub(kGaPrefix, "gaid::", value)
-      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
-        value <- paste("gaid", value, sep = "::")
+      if(inherits(.Object, ".gaComparator")) {
+        if (value %in% c(
+          names(kGa4Ops$metric_operators),
+          names(kGa4Ops$dimension_operators)
+        )) {
+          .Object@operator <- value
+          value <- c(
+            kGa4Ops$metric_operators, kGa4Ops$dimension_operators
+          )[value]
+        } else {
+          if(value %in% kGa4Ops$negated_operators) {
+            non_negated_value <- names(which(value == kGa4Ops$negated_operators))
+          } else {
+            non_negated_value <- value
+          }
+          if (inherits(.Object, ".dimComparator")) {
+            .Object@operator <- names(which(non_negated_value == kGa4Ops$dimension_operators))
+          } else {
+            .Object@operator <- names(which(non_negated_value == kGa4Ops$metric_operators))
+          }
+        }
+        .Object@negated <- value %in% kGa4Ops$negated_operators
       }
       .Object@.Data <- value
       validObject(.Object)
     }
-    return(.Object)
+    .Object
   }
 )
 
@@ -194,8 +186,52 @@ setMethod(
     if (IsRegEx(.Object)) {
       operand <- tolower(operand)
     }
-    as(.Object, ".operand") <- operand
+    Operand(.Object) <- operand
     validObject(.Object)
+    .Object
+  }
+)
+
+setMethod(
+  "initialize",
+  signature = "gaSegmentFilterList",
+  definition = function(.Object, value, scope = "sessions") {
+    if(!missing(value)) {
+      .Object@.Data <- value
+      .Object@scope <- scope
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
+# ---- gaSegmentId ----
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentId",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "gaid::", value)
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
+        value <- paste("gaid", value, sep = "::")
+      }
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
+# -- gaSegmentList ----
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentList",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      .Object@.Data <- lapply(value, as, ".gaSegment")
+    }
     .Object
   }
 )
@@ -217,6 +253,18 @@ setMethod(
       .Object@.Data <- unique(value)
       validObject(.Object)
     }
+    .Object
+  }
+)
+
+# ---- SortBy ----
+
+setMethod(
+  f = "initialize",
+  signature = ".sortBy",
+  definition = function(.Object, value = list(), desc = logical(length(value))) {
+    .Object@.Data <- value
+    .Object@desc <- desc
     .Object
   }
 )

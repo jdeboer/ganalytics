@@ -4,7 +4,7 @@
 \name{Operand}
 \alias{Operand}
 \alias{Operand<-}
-\alias{Operand,ANY-method}
+\alias{Operand,.expr-method}
 \alias{Operand<-,.expr-method}
 \title{Operand.}
 \usage{
@@ -12,7 +12,7 @@ Operand(object, value)
 
 Operand(object) <- value
 
-\S4method{Operand}{ANY}(object)
+\S4method{Operand}{.expr}(object)
 
 \S4method{Operand}{.expr}(object) <- value
 }
@@ -28,7 +28,7 @@ Set the operand of an expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ANY}: Return the operand used within the condition, or coerce
+\item \code{.expr}: Return the operand used within the condition, or coerce
 the supplied value into an operand.
 
 \item \code{.expr}: Replace the operand of a condition.

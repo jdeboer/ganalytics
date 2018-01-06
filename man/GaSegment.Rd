@@ -17,6 +17,6 @@ GaSegment(...) <- value
 \description{
 Deprecated, use Segment instead.
 
-Deprecated, use Segment<- instead.
+Deprecated, use Segments<- instead.
 }
 \keyword{internal}

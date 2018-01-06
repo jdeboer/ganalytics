@@ -68,7 +68,7 @@ GaQuery <- function(
       dimensions = as(dimensions, "gaDimensions"),
       sortBy = as(sortBy, "gaSortBy"),
       filters = as(filters, "gaFilter"),
-      segments = as(Segment(segments), "gaSegmentList"),
+      segments = as(Segments(segments), "gaSegmentList"),
       samplingLevel = samplingLevel,
       maxResults = maxResults,
       creds = creds
@@ -204,7 +204,7 @@ modify_query <- function(
     TableFilter(query) <- filters
   }
   if (!is.na(segments)) {
-    Segment(query) <- segments
+    Segments(query) <- segments
   }
   if (!is.na(sampling_level)) {
     SamplingLevel(query) <- sampling_level

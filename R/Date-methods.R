@@ -6,7 +6,7 @@
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today
-#' @importFrom methods setMethod new
+#' @importFrom methods setMethod new as as<-
 NULL
 
 #' SplitDateRange
@@ -22,27 +22,31 @@ NULL
 SplitDateRange <- function(dateRange, N) {
   # TO DO
   # Assert:
-  # N >= 0 and length(dateRange) == 1
+  # length(dateRange) == 1L
   #
   # If N = 0 then split date range into single days
   # If N = 1, then the date range returned will be of length 1
   #   i.e. it will be the same or of shorter length than the original.
   #
   # Set new start dates
+  assert_that(
+    N >= 0L,
+    class(dateRange) == "dateRange"
+  )
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
-  if (N <= 0 | N > maxN) {
+  if (N <= 0L | N > maxN) {
     N <- maxN
   }
   start <- min(StartDate(dateRange))
   end <- max(EndDate(dateRange))
   start <- seq(
     from = start,
-    to = end + 1,
-    length.out = N + 1
-  )[-(N + 1)]
+    to = end + 1L,
+    length.out = N + 1L
+  )[-(N + 1L)]
   # Set new end dates
   end <- c(
-    start[-1] - 1,
+    start[-1L] - 1L,
     end
   )
   DateRange(dateRange) <- DateRange(start, end)
@@ -50,10 +54,10 @@ SplitDateRange <- function(dateRange, N) {
 }
 
 GetDataByDateRange <- function(query, dates) {
-  adply(dates, 1, function(dateRange) {
+  adply(dates, 1L, function(dateRange) {
     DateRange(query) <- DateRange(dateRange$start, dateRange$end)
     output <- GetGaData(query)
-    if (nrow(output) == 0){output <- NULL}
+    if (nrow(output) == 0L){output <- NULL}
     return(output)
   })
 }
@@ -99,8 +103,8 @@ setMethod("StartDate", "gaView", function(object) {
   EndDate(query) <- end_date
   Metrics(query) <- "hits"
   Dimensions(query) <- "date"
-  MaxResults(query) <- 1
-  TableFilter(query) <- Expr("hits", ">", 0)
+  MaxResults(query) <- 1L
+  TableFilter(query) <- Expr("hits", ">", 0L)
   SortBy(query) <- "+date"
   GetGaData(query)$date
 })
@@ -114,8 +118,8 @@ setMethod("EndDate", "gaView", function(object) {
   EndDate(query) <- end_date
   Metrics(query) <- "hits"
   Dimensions(query) <- "date"
-  MaxResults(query) <- 1
-  TableFilter(query) <- Expr("hits", ">", 0)
+  MaxResults(query) <- 1L
+  TableFilter(query) <- Expr("hits", ">", 0L)
   SortBy(query) <- "-date"
   GetGaData(query)$date
 })
@@ -186,6 +190,18 @@ setMethod("DateRange", c("ANY", "missing"), function(object) {
   as(object, "dateRange")
 })
 
+#' @describeIn DateRange Returns the date range of the given query.
+setMethod("DateRange", c(".standardQuery", "missing"), function(object) {
+  object@dateRange
+})
+
+#' @describeIn DateRange Modify the date range of the given query.
+setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
+  object@dateRange <- as(value, "dateRange")
+  validObject(object)
+  object
+})
+
 #' @describeIn DateRange Returns the maximum date range of when a view has been
 #'   recieving hits.
 setMethod("DateRange", "gaView", function(object) {
@@ -196,8 +212,8 @@ setMethod("DateRange", "gaView", function(object) {
   EndDate(query) <- end_date
   Metrics(query) <- "hits"
   Dimensions(query) <- "date"
-  MaxResults(query) <- 1
-  TableFilter(query) <- Expr("hits", ">", 0)
+  MaxResults(query) <- 1L
+  TableFilter(query) <- Expr("hits", ">", 0L)
   SortBy(query) <- "+date"
   start_date <- GetGaData(query)$date
   StartDate(query) <- start_date
@@ -213,12 +229,12 @@ setMethod(
   f = "DateRange<-",
   signature = c("ANY", "ANY"),
   definition = function(object, value) {
-    if (length(value) != 2) {
+    if (length(value) != 2L) {
       as(object, "dateRange") <- as(value, "dateRange")
       object
     } else {
-      startDate <- as(value[1], "Date")
-      endDate <- as(value[2], "Date")
+      startDate <- as(value[1L], "Date")
+      endDate <- as(value[2L], "Date")
       new("dateRange", startDate, endDate)
       newDateRange <- new("dateRange", startDate, endDate)
       DateRange(object) <- newDateRange

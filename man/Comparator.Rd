@@ -22,8 +22,8 @@
 \alias{<,.var,.metOperand-method}
 \alias{>=,.var,.metOperand-method}
 \alias{<=,.var,.metOperand-method}
-\alias{Comparator,ANY-method}
-\alias{Comparator<-,ANY-method}
+\alias{Comparator,.expr-method}
+\alias{Comparator<-,.expr-method}
 \title{Comparator.}
 \usage{
 Comparator(object, ...)
@@ -66,19 +66,19 @@ x \%in\% table
 
 \S4method{<=}{.var,.metOperand}(e1, e2)
 
-\S4method{Comparator}{ANY}(object)
+\S4method{Comparator}{.expr}(object)
 
-\S4method{Comparator}{ANY}(object) <- value
+\S4method{Comparator}{.expr}(object) <- value
 }
 \arguments{
-\item{object}{The object to be coerced to a '.Comparator' class or to get the
+\item{object}{The object to be coerced to a '.Comparator' subclass or to obtain the
 comparator from.}
 
 \item{...}{Used by certain methods.}
 
 \item{value}{The value to set the comparator to.}
 
-\item{var}{dimension or metric object}
+\item{var}{dimension object}
 
 \item{operand}{operand object}
 
@@ -89,26 +89,18 @@ comparator from.}
 \item{e1}{Dimension or metric object}
 
 \item{e2}{Operand object}
-
-\item{var}{dimension or metric object}
-
-\item{operand}{operand object}
-
-\item{var}{dimension or metric object}
-
-\item{operand}{operand object}
 }
 \description{
-Get or create an comparator used in an expression.
+Get or create a comparator used in / for an expression.
 
 Set the comparator used in an expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ANY}: Return the comparator used within the supplied
+\item \code{.expr}: Return the comparator used within the supplied
 conditional expression.
 
-\item \code{ANY}: Replace the comparator used in the supplied
+\item \code{.expr}: Replace the comparator of the supplied
 conditional expression.
 }}
 
@@ -138,7 +130,7 @@ A condition where the dimension (LHS) matches a regular
 
 \section{\%between\%}{
 
-A condition where the dimension (LHS) is within the lower and
+A condition where the var (LHS) is within the lower and
   uppoer bounds specified by first and second vector value (respectively) of
   the operand (RHS).
 }
@@ -146,6 +138,6 @@ A condition where the dimension (LHS) is within the lower and
 \section{\%in\%}{
 
 A condition where the dimension (LHS) matches one of the
-  values of a vecotr specified by the operand (RHS).
+  values in the vecotr specified by the operand (RHS).
 }
 

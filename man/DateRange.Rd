@@ -20,6 +20,8 @@
 \alias{EndDate<-,.standardQuery-method}
 \alias{DateRange,ANY,ANY-method}
 \alias{DateRange,ANY,missing-method}
+\alias{DateRange,.standardQuery,missing-method}
+\alias{DateRange<-,.standardQuery-method}
 \alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-,ANY-method}
 \title{DateRange.}
@@ -59,6 +61,10 @@ DateRange(object) <- value
 \S4method{DateRange}{ANY,ANY}(object, endDate)
 
 \S4method{DateRange}{ANY,missing}(object)
+
+\S4method{DateRange}{.standardQuery,missing}(object)
+
+\S4method{DateRange}{.standardQuery}(object) <- value
 
 \S4method{DateRange}{gaView,ANY}(object)
 
@@ -116,6 +122,10 @@ vectors of start date and end dates.
 
 \item \code{object = ANY,endDate = missing}: Returns the date range of the given query or coerces
 the supplied object into a dateRange.
+
+\item \code{object = .standardQuery,endDate = missing}: Returns the date range of the given query.
+
+\item \code{.standardQuery}: Modify the date range of the given query.
 
 \item \code{object = gaView,endDate = ANY}: Returns the maximum date range of when a view has been
 recieving hits.

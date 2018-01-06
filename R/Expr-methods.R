@@ -6,7 +6,7 @@
 #' @include Comparator-methods.R
 #' @include Operand-methods.R
 #' @include utils.R
-#' @importFrom methods setMethod new validObject
+#' @importFrom methods setMethod new validObject as
 #' @importFrom assertthat assert_that
 NULL
 
@@ -18,7 +18,7 @@ setMethod("Expr", ".expr", function(object) {object})
 #'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod(
   f = "Expr",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object) {
     as(object, ".expr")
   }
@@ -56,7 +56,7 @@ setMethod(
     } else if (class(var) == "gaMetVar") {
       comparator <- as(comparator, "gaMetComparator")
       operand <- as(operand, "gaMetOperand")
-      if (metricScope != "") {
+      if (metricScope %in% c("perUser", "perSession", "perHit", "perProduct")) {
         gaExprClass <- "gaSegMetExpr"
         new(
           gaExprClass,
@@ -125,7 +125,22 @@ setMethod(
 
 #' @describeIn ScopeLevel Return the scope of the supplied metric used within a
 #'   segment definition.
-setMethod("ScopeLevel", "gaSegMetExpr", function(object) {object@metricScope})
+setMethod(
+  "ScopeLevel",
+  signature = c("gaSegMetExpr", "missing"),
+  definition = function(object) {object@metricScope}
+)
+
+#' @describeIn ScopeLevel Set the scope, as described by a character value, to
+#'   be applied to the supplied metric condition for use within a segment
+#'   expression.
+setMethod(
+  "ScopeLevel",
+  signature = c("gaSegMetExpr", "character"),
+  definition = function(object, value) {
+    object@metricScope <- value
+  }
+)
 
 #' @describeIn ScopeLevel Set the scope, as described by a character value, to
 #'   be applied to the supplied metric condition for use within a segment

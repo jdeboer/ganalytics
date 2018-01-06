@@ -3,7 +3,7 @@
 #' @include expr-classes.R
 #' @include segment-classes.R
 #' @include utils.R
-#' @importFrom methods setMethod
+#' @importFrom methods setMethod as is as<-
 #' @importFrom assertthat assert_that
 NULL
 
@@ -42,23 +42,23 @@ setMethod(
   f = "Not",
   signature = ".expr",
   definition = function(object) {
-    comparator <- as(object, ".comparator")
+    comparator <- Comparator(object)
     switch(
       comparator,
       "<>" = {
         assert_that(is(object, ".metExpr"))
-        var <- as(object, ".var")
-        operand <- sort(as(object, ".operand"))
+        var <- object@var
+        operand <- sort(Operand(object))
         object <- Expr(var, "<", operand[1]) | Expr(var, ">", operand[2])
       },
       "[]" = {
-        operand <- as(object, ".operand")
+        operand <- Operand(object)
         operand <- paste0("^(", paste(operand, collapse = "|"), ")$")
         comparator <- "!~"
-        var <- as(object, ".var")
+        var <- object@var
         object <- Expr(var, comparator, operand)
       },
-      as(object, ".comparator") <- Not(comparator)
+      Comparator(object) <- Not(comparator)
     )
     object
   }

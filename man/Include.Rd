@@ -6,24 +6,18 @@
 \alias{Include,ANY-method}
 \title{Include.}
 \usage{
-Include(object, ..., scope = "sessions")
+Include(object)
 
-\S4method{Include}{ANY}(object, ..., scope = "sessions")
+\S4method{Include}{ANY}(object)
 }
 \arguments{
-\item{object}{a condition or sequence to include}
-
-\item{...}{further conditions or sequences to include, i.e. ANDed.}
-
-\item{scope}{the scope of the returned gaSegmentList, either "users" OR
-"sessions".}
+\item{object}{a segment condition or sequence filter to include.}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to FALSE.
 }
 \description{
-One or more segment conditions or sequences to include from the defined user
-or session segment.
+Set the negation flag of a segment filter to FALSE.
 }
 \section{Methods (by class)}{
 \itemize{

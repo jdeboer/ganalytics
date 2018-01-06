@@ -38,8 +38,11 @@ segment_scope_negate <- function(object, ..., scope, negate = NULL) {
 setMethod(
   f = "Include",
   signature = "ANY",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope, negate = FALSE)
+  definition = function(object) {
+    object <- as(object, ".gaSegmentFilter")
+    object@negation = FALSE
+    validObject(object)
+    object
   }
 )
 
@@ -48,8 +51,11 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "ANY",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope, negate = TRUE)
+  definition = function(object) {
+    object <- as(object, ".gaSegmentFilter")
+    object@negation = TRUE
+    validObject(object)
+    object
   }
 )
 
@@ -129,6 +135,7 @@ setMethod(
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
     object@scope <- value
+    validObject(object)
     object
   }
 )
@@ -240,9 +247,30 @@ setMethod(
   }
 )
 
-# ---- Segment, Segment<- ----
+#' @describeIn PerProduct Set the scope of the supplied metric condition to
+#'   product-level.
+setMethod(
+  f = "PerProduct",
+  signature = c("gaMetExpr"),
+  definition = function(object) {
+    ScopeLevel(object) <- "perProduct"
+    object
+  }
+)
 
-#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
+#' @describeIn PerProduct Set the scope of the supplied non-standard-evaluation
+#'   metric condition to product-level.
+setMethod(
+  f = "PerProduct",
+  signature = c("formula"),
+  definition = function(object) {
+    PerProduct(Expr(object))
+  }
+)
+
+# ---- Segment ----
+
+#' @describeIn Segments Interpret the supplied numeric value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "numeric",
@@ -251,7 +279,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segment Interpret the supplied character or numeric value as a segment ID.
+#' @describeIn Segments Interpret the supplied character value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "character",
@@ -260,56 +288,24 @@ setMethod(
   }
 )
 
-#' @describeIn Segment Create a non-sequential segment using the supplied
+#' @describeIn Segments Create a non-sequential segment using the supplied
 #'   expressions.
 setMethod(
   f = "Segment",
   signature = "ANY",
-  definition = function(object, ..., scope) {
-    if (missing(scope)) scope <- NA
-    segment_list <- list(object, ...)
-
-    segment_list <- lapply(segment_list, function(segment_def) {
-      tryCatch(
-        {
-          stopifnot(class(segment_def) != "list")
-          as(segment_def, "gaSegmentFilterList")
-        },
-        error = function(e) {
-          segment_def
-        }
-      )
+  definition = function(object, ...) {
+    dyn_segment_def <- list(object, ...)
+    segment_filter_list <- lapply(dyn_segment_def, function(segment_filter_list) {
+      as(segment_filter_list, "gaSegmentFilterList")
     })
-    filter_lists <- sapply(segment_list, is, "gaSegmentFilterList")
-    proper_segments <- sapply(segment_list, is, ".gaSegment")
-
-    segment_list <- c(
-      lapply(
-        unlist(
-          segment_list[!(filter_lists | proper_segments)],
-          recursive = FALSE
-        ),
-        as, ".gaSegment"
-      ),
-      segment_list[proper_segments],
-      if (any(filter_lists)) {
-        list(
-          new(
-            "gaDynSegment",
-            if (!is.na(scope)) {
-              lapply(segment_list[filter_lists], ScopeLevel, scope)
-            } else {
-              segment_list[filter_lists]
-            }
-          )
-        )
-      }
+    new(
+      "gaDynSegment",
+      segment_filter_list
     )
-    new("gaSegmentList", segment_list)
   }
 )
 
-#' @describeIn Segment returns NULL
+#' @describeIn Segments returns NULL
 setMethod(
   f = "Segment",
   signature = "NULL",
@@ -318,62 +314,65 @@ setMethod(
   }
 )
 
-#' @describeIn Segment Change the definition of a dynamic segment.
-setMethod(
-  f = "Segment<-",
-  signature = c("gaDynSegment", "ANY"),
-  definition = function(object, value) {
-    as(value, "gaDynSegment")
-  }
-)
-
-#' @describeIn Segment Change the ID of the supplied segment.
-setMethod(
-  f = "Segment<-",
-  signature = "gaSegmentId",
-  definition = function(object, value) {
-    to <- class(value)
-    as(object, to) <- value
-    object
-  }
-)
-
-
-#' @describeIn Segment Returns itself
-setMethod(
-  f = "Segment",
-  signature = "gaSegmentList",
-  definition = function(object) {
-    object
-  }
-)
-
-#' @describeIn Segment Return the definition of the segment applied to the view.
-setMethod(
-  f = "Segment",
-  signature = "gaQuery",
-  definition = function(object) {
-    object@segments
-  }
-)
-
-#' @describeIn Segment Set the segments to be used witin a query.
-setMethod(
-  f = "Segment<-",
-  signature = c("gaQuery", "ANY"),
-  definition = function(object, value) {
-    object@segments <- as(Segment(value), "gaSegmentList")
-    object
-  }
-)
-
-#' @describeIn Segment Return the segment ID of the supplied GA Management API
+#' @describeIn Segments Return the segment ID of the supplied GA Management API
 #'   user segment.
 setMethod(
   f = "Segment",
   signature = "gaUserSegment",
   definition = function(object) {
     Segment(object$segmentId)
+  }
+)
+
+# ---- Segments, Segments<- ----
+
+#' @describeIn Segments Returns itself
+setMethod(
+  f = "Segments",
+  signature = "gaSegmentList",
+  definition = function(object) {
+    object
+  }
+)
+
+#' @describeIn Segments Return the definition of the segment applied to the view.
+setMethod(
+  f = "Segments",
+  signature = "gaQuery",
+  definition = function(object) {
+    object@segments
+  }
+)
+
+#' @describeIn Segments Coerce an object into a segmentList of length 1.
+setMethod(
+  f = "Segments",
+  signature = "ANY",
+  definition = function(object) {
+    if(inherits(object, c(
+      "gaUserSegment",
+      ".gaSegment",
+      "character",
+      "numeric",
+      "gaSegmentFilterList",
+      ".compoundExpr"
+    ))) {
+      new("gaSegmentList", list(segment = Segment(object)))
+    } else {
+      stopifnot(inherits(object, c("list", "NULL")))
+      new("gaSegmentList", object)
+    }
+  }
+)
+
+#' @describeIn Segments Set the segments to be used witin a query.
+setMethod(
+  f = "Segments<-",
+  signature = c("gaQuery", "ANY"),
+  definition = function(object, value) {
+    # Need to define coercions to .gaSegment from char and numeric
+    object@segments <- Segments(value)
+    object
   }
 )
 

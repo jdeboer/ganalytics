@@ -35,7 +35,8 @@ kGaDimTypes <- list(
     "dateOfSession",
     "ga:date",
     "ga:dateHour",
-    "ga:socialActivityTimestamp"
+    "ga:socialActivityTimestamp"#,
+    #"mcf:conversionDate"
   ),
   orderedIntFactors = c(
     "ga:year",
@@ -56,7 +57,8 @@ kGaDimTypes <- list(
     "ga:screenResolution",
     "ga:userAgeBracket",
     "ga:visitorAgeBracket",
-    "ga:dayOfWeekName"
+    "ga:dayOfWeekName",
+    "rt:goalId"
   ),
   nums = c(
     "ga:latitude",
@@ -78,7 +80,13 @@ kGaDimTypes <- list(
     "ga:nthHour",
     "ga:nthDay",
     "ga:nthWeek",
-    "ga:nthMonth"
+    "ga:nthMonth",
+    #"mcf:pathLengthInInteractionsHistogram",
+    #"mcf:timeLagInDaysHistogram",
+    #"mcf:nthDay",
+    "rt:minutesAgo",
+    "rt:latitude",
+    "rt:longitude"
   ),
   bools = c(
     "ga:isMobile",
@@ -90,7 +98,11 @@ kGaDimTypes <- list(
   )
 )
 
-samplingLevel_levels <- c("DEFAULT", "FASTER", "HIGHER_PRECISION")
+samplingLevel_levels <- c(
+  DEFAULT = "DEFAULT",
+  SMALL = "FASTER",
+  LARGE = "HIGHER_PRECISION"
+)
 
 # Constants
 # ---------
@@ -102,12 +114,9 @@ kGaDateOutFormat <- "%Y%m%d"
 # The earliest valid date is 20050101. There is no upper limit restriction for a start-date.
 kGaDateOrigin <- as.Date("2005-01-01")
 
-# Google Analytics expression comparators
-kGaOps <- list(
-  met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
-  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]")
-)
+kGaSortTypes <- c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")
 
+# Google Analytics expression comparators
 kGa4Ops <- list(
   metric_operators = c(
     "EQUAL" = "==",
@@ -127,8 +136,13 @@ kGa4Ops <- list(
     "NUMERIC_BETWEEN" = "<>"
   ),
   negated_operators = c(
-    "!=", "!~", "!@", ">=", "<="
+    "==" = "!=", "=~" = "!~", "=@" = "!@", "<" = ">=", ">" = "<="
   )
+)
+
+kGaOps <- list(
+  met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
+  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]", "<", ">", "<=", ">=")
 )
 
 kMcfOps <- list(
@@ -152,13 +166,16 @@ kAnyPrefix <- paste0("^(ga|mcf|rt)", kPrefixDelim)
 
 # Maximum dimensions and metrics allowed by Google Analytics Core Reporting API
 kGaMax <- list(
-  dimensions = 7,
-  metrics = 10
+  dimensions = 7L,
+  metrics = 10L
 )
 
 # Maximum results per page and maximum rows accessible in a query.
 kGaMaxResults <- 10000L
 kGaMaxRows <- 1000000L
+
+# Maximum queries per batch
+kGaMaxBatchQueries <- 4L
 
 user_permission_levels <- c(
   "READ_AND_ANALYZE", "COLLABORATE", "EDIT", "MANAGE_USERS"
@@ -224,9 +241,17 @@ user_segment_type_levels <- c(
 )
 
 metadata_path <- get_metadata_path()
-if (nchar(metadata_path) == 0) {
-  GaMetaUpdate()
+if (nchar(metadata_path) == 0L) {
+  if (interactive()) GaMetaUpdate()
   metadata_path <- get_metadata_path()
 }
 assert_that(file.exists(metadata_path))
 load(metadata_path)
+
+metric_data_types <- c(
+  "Integer",
+  "Currency",
+  "Time",
+  "Float",
+  "Percentage"
+)

@@ -3,7 +3,7 @@
 #' @include init-methods.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods setMethod as validObject new
+#' @importFrom methods setMethod as validObject new as<-
 NULL
 
 # -- SortBy ----
@@ -12,9 +12,10 @@ NULL
 setMethod(
   f = "SortBy",
   signature = ".varList",
-  definition = function(object, desc = logical(0)) {
+  definition = function(object, desc, type) {
     vars <- as(object, ".sortBy")
     vars@desc <- desc
+    vars@orderType <- type
     validObject(vars)
     vars
   }
@@ -29,7 +30,7 @@ setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 setMethod(
   f = "SortBy",
   signature = "character",
-  definition = function(object, ..., desc = logical(0)) {
+  definition = function(object, ..., desc, type) {
     varsChar <- sapply(ArgList(object, ...), as.character)
     vars <- as(varsChar, ".sortBy")
     # For any var prefixed with "-", remove the prefix and set the desc flag to TRUE
@@ -48,6 +49,20 @@ setMethod(
     validObject(vars)
     vars
   }
+)
+
+
+#############\/ Transform to method of SortBy and SortBy<- generic functions
+setAs(from = ".query", to = ".sortBy",
+      def = function(from, to) {
+        from@sortBy
+      },
+      replace = function(from, value) {
+        use_class <- class(from@sortBy)
+        from@sortBy <- as(value, use_class)
+        validObject(from)
+        from
+      }
 )
 
 #' @describeIn SortBy Replace the sort by argument of a query.

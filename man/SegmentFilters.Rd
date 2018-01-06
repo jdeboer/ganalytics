@@ -14,21 +14,23 @@ SegmentFilters(object, ..., scope = "sessions")
 \S4method{SegmentFilters}{gaSegmentFilterList,missing}(object)
 }
 \arguments{
-\item{object}{The first condition to be included in the segments definition.}
+\item{object}{The first filter to include in the segment definition.}
 
-\item{...}{Other conditions to be included in the segment definition.}
+\item{...}{Additional filters to include in the segment definition, if needed.}
 
-\item{scope}{The scope of this condition, either 'user' or 'session' level.}
+\item{scope}{The scope of the resulting gaSegmentFilterList, either 'user' or
+'session' level.}
 }
 \value{
 a gaSegmentFilterList object.
 }
 \description{
-Create a new gaSegmentFilterList object
+Combine one or more segment condition filters and/or sequence filters into
+a gaSegmentFilterList that is scoped to either 'user' or 'session' level.
 }
 \details{
-A segment condition is either sequential or non-sequential. Sequential and
-non-sequential conditoins can be combined using this function.
+A segment filter is either sequential or non-sequential conditions. Sequential
+and non-sequential conditoins can be combined using this function.
 }
 \section{Methods (by class)}{
 \itemize{

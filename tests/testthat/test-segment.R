@@ -19,7 +19,7 @@ test_that("segment expressions are correctly coerced to character string", {
           SegmentConditionFilter(GaExpr("deviceCategory", "=", "mobile")),
           scope = "users"
         )
-      )[[1]],
+      ),
       "character"),
     "sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/;users::condition::ga:deviceCategory==mobile")
 })
@@ -46,7 +46,7 @@ test_that("segment expressions can be negated", {
 test_that("segments can be selected by ID and parsed", {
   expect_identical(
     Segment(-1),
-    Segment("gaid::-1"),
+    Segment("gaid::-1")
   )
   expect_identical(
     Segment("gaid::1"),

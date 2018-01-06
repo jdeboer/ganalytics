@@ -6,24 +6,18 @@
 \alias{Exclude,ANY-method}
 \title{Exclude.}
 \usage{
-Exclude(object, ..., scope = "sessions")
+Exclude(object)
 
-\S4method{Exclude}{ANY}(object, ..., scope = "sessions")
+\S4method{Exclude}{ANY}(object)
 }
 \arguments{
-\item{object}{a condition or sequence to exclude}
-
-\item{...}{further conditions or sequences to exclude.}
-
-\item{scope}{the scope of the returned gaSegmentList, either "users" OR
-"sessions".}
+\item{object}{a segment condition or sequence filter to exclude.}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to TRUE.
 }
 \description{
-One or more segment conditions or sequences to exclude from the defined user
-or session segment.
+Set the negation flag of a segment filter to TRUE.
 }
 \section{Methods (by class)}{
 \itemize{

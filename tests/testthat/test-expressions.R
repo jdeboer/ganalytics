@@ -185,12 +185,12 @@ test_that("expressions operands are corrected depending on the type of dimension
     GaExpr("date", "!=", "20140101"),
     "character"), "ga:date!=20140101")
   expect_equal(as(
-    GaExpr("istablet", "=", TRUE),
-    "character"), "ga:isTablet==Yes")
+    GaExpr("javaEnabled", "=", TRUE),
+    "character"), "ga:javaEnabled==Yes")
   expect_equal(as(
-    GaExpr("istablet", "=", "no"),
-    "character"), "ga:isTablet==No")
-  expect_error(Expr("istablet", "==", "maybe"), "invalid .* operand")
+    GaExpr("javaEnabled", "=", "no"),
+    "character"), "ga:javaEnabled==No")
+  expect_error(Expr("javaEnabled", "==", "maybe"), "invalid .*[Oo]perand")
   expect_equal(as(
     GaExpr("usertype", "=", "returning"),
     "character"), "ga:userType==Returning Visitor")

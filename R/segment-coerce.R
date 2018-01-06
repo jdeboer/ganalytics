@@ -1,4 +1,5 @@
 #' @include utils.R
+#' @importFrom methods initialize
 NULL
 
 ### Review the following coercions using "new"
@@ -87,10 +88,6 @@ setAs(from = "gaSegmentFilterList", to = ".gaSegment", def = function(from, to) 
   as(from, "gaDynSegment")
 })
 
-setAs(from = "gaDynSegment", to = ".gaSegment", def = function(from, to) {
-  as(from, "gaDynSegment")
-})
-
 # Coercion to numeric
 
 setAs(
@@ -113,17 +110,5 @@ setAs(
 setAs(from = ".gaSegment", to = "gaSegmentList",
       def = function(from) {
         simpleCoerceToList(from, to)
-      }
-)
-
-#############\/ Transform to method of Segment and Segment<- generic functions
-setAs(from = "gaQuery", to = "gaSegmentList",
-      def = function(from) {
-        from@segments
-      },
-      replace = function(from, value) {
-        from@segments <- as(value, "gaSegmentList") # Need to define coercions to .gaSegment from char and numeric
-        validObject(from)
-        from
       }
 )

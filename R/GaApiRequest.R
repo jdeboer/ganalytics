@@ -7,6 +7,7 @@
 #' @importFrom selectr querySelector querySelectorAll
 #' @importFrom XML xmlParse xmlToList xmlApply
 #' @importFrom plyr laply aaply
+#' @importFrom stats runif
 NULL
 
 # This will be initialised using GoogleApiCreds() at time of package being loaded.
@@ -52,7 +53,7 @@ GoogleApiCreds <- function(
     } else {
       cache <- paste0(userName, "_", cache_generic_file_name)
     }
-    cache <- paste0(cache_default_dir, "/", cache_file_prefix, cache)
+    cache <- file.path(cache_default_dir, paste0(cache_file_prefix, cache))
   }
   creds <- list(
     app = app_oauth_creds(
@@ -70,7 +71,7 @@ GoogleApiCreds <- function(
 }
 
 app_oauth_creds <- function(appname, creds = NULL) {
-  if (typeof(creds) == "character" & length(creds) == 1) {
+  if (typeof(creds) == "character" & length(creds) == 1L) {
     if (jsonlite::validate(creds)) {
       creds <- fromJSON(creds)
     } else if (file.exists(creds)) {
@@ -102,6 +103,13 @@ app_oauth_creds <- function(appname, creds = NULL) {
     if (nchar(creds$client_secret) == 0) {
       creds$client_secret <- Sys.getenv("GANALYTICS_CONSUMER_SECRET")
       if (nchar(creds$client_secret) > 0) appname <- "GANALYTICS"
+    }
+  }
+  if (!isTRUE(nchar(creds$client_id) > 0L | nchar(creds$client_secret) > 0L)) {
+    creds <- dir(pattern = "^client_secret\\b\\.json$")[1]
+    creds <- fromJSON(creds)
+    if ("installed" %in% names(creds)) {
+      creds <- creds$installed
     }
   }
   oauth_app(

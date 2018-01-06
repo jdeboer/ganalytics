@@ -158,7 +158,7 @@ GaSegment <- function(...){
 
 #' GaSegment<-
 #'
-#' Deprecated, use Segment<- instead.
+#' Deprecated, use Segments<- instead.
 #'
 #' @param value passed onto \code{Segment}
 #'
@@ -166,8 +166,8 @@ GaSegment <- function(...){
 #' @keywords internal
 #' @export GaSegment<-
 `GaSegment<-` <- function(..., value){
-  .Deprecated("Segment<-")
-  `Segment<-`(..., value)
+  .Deprecated("Segments<-")
+  `Segments<-`(..., value)
 }
 
 #' GaFilter

@@ -4,7 +4,9 @@
 \name{TableFilter}
 \alias{TableFilter}
 \alias{TableFilter<-}
-\alias{TableFilter,ANY-method}
+\alias{TableFilter,ANY,missing-method}
+\alias{TableFilter,.query,missing-method}
+\alias{TableFilter,.query,ANY-method}
 \alias{TableFilter<-,.query-method}
 \title{TableFilter.}
 \usage{
@@ -12,7 +14,11 @@ TableFilter(object, value)
 
 TableFilter(object) <- value
 
-\S4method{TableFilter}{ANY}(object)
+\S4method{TableFilter}{ANY,missing}(object)
+
+\S4method{TableFilter}{.query,missing}(object)
+
+\S4method{TableFilter}{.query,ANY}(object, value)
 
 \S4method{TableFilter}{.query}(object) <- value
 }
@@ -29,8 +35,12 @@ Set the filter.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ANY}: Return the TableFilter that has been applied to the
-given query, or coerce the given object into a table filter.
+\item \code{object = ANY,value = missing}: Coerce the given object into a table filter.
+
+\item \code{object = .query,value = missing}: Return the TableFilter that has been applied to the
+given query.
+
+\item \code{object = .query,value = ANY}: Method to replace the table filter of a query
 
 \item \code{.query}: Method to replace the table filter of a query
 }}

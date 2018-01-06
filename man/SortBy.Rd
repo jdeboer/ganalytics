@@ -11,15 +11,18 @@
 \alias{SortBy<-,.query-method}
 \title{SortBy.}
 \usage{
-SortBy(object, ..., desc = logical(0))
+SortBy(object, ..., desc = logical(0), type = c("VALUE", "DELTA", "SMART",
+  "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L])
 
 SortBy(object) <- value
 
-\S4method{SortBy}{.varList}(object, desc = logical(0))
+\S4method{SortBy}{.varList}(object, desc, type)
 
 \S4method{SortBy}{`NULL`}(object)
 
-\S4method{SortBy}{character}(object, ..., desc = logical(0))
+\S4method{SortBy}{character}(object, ..., desc = logical(0),
+  type = c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET",
+  "DIMENSION_AS_INTEGER")[0L])
 
 \S4method{SortBy}{.query}(object, value)
 
@@ -39,6 +42,10 @@ query then the replacement list of dimensions or metrics to sort by.}
 \item{desc}{A logical vector, same length as the resulting list of dimension
 or metric variables, indicating which columns of the resulting query
 response should be sorted in decending order.}
+
+\item{type}{A character vector, same length as the vector of variables to sort by,
+indicating the method of sorting to be applied to each variable. Available sort
+types are "VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET" or "DIMENSION_AS_INTEGER".}
 
 \item{value}{The replacement dimensions and metrics for the supplied object.}
 }

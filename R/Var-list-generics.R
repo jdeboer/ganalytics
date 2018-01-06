@@ -82,12 +82,20 @@ setGeneric(
 #' @param desc A logical vector, same length as the resulting list of dimension
 #'   or metric variables, indicating which columns of the resulting query
 #'   response should be sorted in decending order.
+#' @param type A character vector, same length as the vector of variables to sort by,
+#'   indicating the method of sorting to be applied to each variable. Available sort
+#'   types are "VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET" or "DIMENSION_AS_INTEGER".
 #'
 #' @export
 #' @rdname SortBy
 setGeneric(
   "SortBy",
-  function(object, ..., desc = logical(0)) {},
+  function(
+    object,
+    ...,
+    desc = logical(0),
+    type = c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L]
+  ) {},
   valueClass = c(".sortBy", ".query", "NULL"),
   useAsDefault = FALSE
 )
