@@ -248,7 +248,7 @@ setAs(
         metrics <- from@metrics
         dimensions <- from@dimensions
         sortBy <- from@sortBy
-        tableFilter <- from@filter
+        tableFilter <- from@filters
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
@@ -294,7 +294,7 @@ setAs(
         metrics <- from@metrics
         dimensions <- from@dimensions
         sortBy <- from@sortBy
-        tableFilter <- from@filter
+        tableFilter <- from@filters
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),
