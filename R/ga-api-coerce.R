@@ -169,12 +169,12 @@ setAs(
   def = function(from) {
     viewsDatesSegments <- expand.grid(
       list(
-        viewId = as(from, "viewId"),
+        viewId = as(GaView(from), "viewId"),
         dateRange = alply(data.frame(
           startDate = StartDate(from),
           endDate = EndDate(from)
         ), 1),
-        segment = as(from, "gaSegmentList")
+        segment = Segments(from)
       ),
       stringsAsFactors = FALSE,
       KEEP.OUT.ATTRS = FALSE
@@ -191,7 +191,7 @@ setAs(
         metrics <- from@metrics
         dimensions <- from@dimensions
         sortBy <- from@sortBy
-        tableFilter <- from@filter
+        tableFilter <- from@filters
         c(
           "ids" = as(viewId, "character"),
           "start-date" = as.character(startDate),
