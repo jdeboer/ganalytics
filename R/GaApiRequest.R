@@ -72,10 +72,12 @@ GoogleApiCreds <- function(
 
 app_oauth_creds <- function(appname, creds = NULL) {
   if (typeof(creds) == "character" & length(creds) == 1L) {
-    if (jsonlite::validate(creds)) {
-      creds <- fromJSON(creds)
-    } else if (file.exists(creds)) {
-      creds <- fromJSON(creds)
+    if (isTRUE(nchar(creds) > 0L)) {
+      if (jsonlite::validate(creds)) {
+        creds <- fromJSON(creds)
+      } else if (file.exists(creds)) {
+        creds <- fromJSON(creds)
+      }
     } else {
       creds <- NULL
     }
