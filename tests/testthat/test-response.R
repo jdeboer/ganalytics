@@ -1,5 +1,5 @@
 check_api <- function() {
-  if (length(get_creds()) == 0) {
+  if (length(get_creds()$app$key) == 0L | !interactive()) {
     skip("API not available because no API credentials were found.")
   } else {
     tryCatch(

@@ -1,4 +1,5 @@
 #' @include meta.R
+#' @importFrom assertthat assert_that
 NULL
 
 ga_scopes <- c(
@@ -241,11 +242,11 @@ user_segment_type_levels <- c(
 )
 
 metadata_path <- get_metadata_path()
-if (nchar(metadata_path) == 0L) {
-  if (interactive()) GaMetaUpdate()
-  metadata_path <- get_metadata_path()
-}
-assert_that(file.exists(metadata_path))
+# if (nchar(metadata_path) == 0L) {
+#   if (interactive()) GaMetaUpdate()
+#   metadata_path <- get_metadata_path()
+# }
+assertthat::assert_that(file.exists(metadata_path))
 load(metadata_path)
 
 metric_data_types <- c(

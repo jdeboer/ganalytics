@@ -72,10 +72,12 @@ GoogleApiCreds <- function(
 
 app_oauth_creds <- function(appname, creds = NULL) {
   if (typeof(creds) == "character" & length(creds) == 1L) {
-    if (jsonlite::validate(creds)) {
-      creds <- fromJSON(creds)
-    } else if (file.exists(creds)) {
-      creds <- fromJSON(creds)
+    if (isTRUE(nchar(creds) > 0L)) {
+      if (jsonlite::validate(creds)) {
+        creds <- fromJSON(creds)
+      } else if (file.exists(creds)) {
+        creds <- fromJSON(creds)
+      }
     } else {
       creds <- NULL
     }
@@ -107,9 +109,13 @@ app_oauth_creds <- function(appname, creds = NULL) {
   }
   if (!isTRUE(nchar(creds$client_id) > 0L | nchar(creds$client_secret) > 0L)) {
     creds <- dir(pattern = "^client_secret\\b\\.json$")[1]
-    creds <- fromJSON(creds)
-    if ("installed" %in% names(creds)) {
-      creds <- creds$installed
+    if (isTRUE(nchar(creds) > 0L)) {
+      creds <- fromJSON(creds)
+      if ("installed" %in% names(creds)) {
+        creds <- creds$installed
+      }
+    } else {
+      creds <- NULL
     }
   }
   oauth_app(
