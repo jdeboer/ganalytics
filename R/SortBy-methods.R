@@ -6,6 +6,68 @@
 #' @importFrom methods setMethod as validObject new as<-
 NULL
 
+# -- GaMetrics ----
+
+#' @describeIn Metrics Coerce one or more supplied objects to .metrics.
+setMethod(
+  f = "Metrics",
+  signature = "ANY",
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
+    as(vars, ".metrics")
+  }
+)
+
+#' @describeIn Metrics Get the list of metrics for a '.query'.
+setMethod("Metrics", ".query", function(object) {object@metrics})
+
+#' @describeIn Metrics Set the metrics for a '.query' object.
+setMethod(
+  f = "Metrics<-",
+  signature = c(".query", "ANY"),
+  definition = function(object, value) {
+    use_class <- class(object@metrics)
+    object@metrics <- as(value, use_class)
+    object <- updateSortBy(object)
+    validObject(object)
+    object
+  }
+)
+
+# -- Dimensions ----
+
+#' @describeIn Dimensions Coerces the supplied character vector or list into a vector of
+#'   Google Analytics dimensions.
+#' @export
+setMethod(
+  f = "Dimensions",
+  signature = "ANY",
+  definition = function(object, ...) {
+    vars <- ArgList(object, ...)
+    as(vars, ".dimensions")
+  }
+)
+
+#' @describeIn Dimensions Returns the dimensions used within the supplied query.
+#' @export
+setMethod("Dimensions", ".query", function(object) {
+  object@dimensions
+})
+
+#' @describeIn Dimensions Replace the dimensions of the query.
+#' @export
+setMethod(
+  f = "Dimensions<-",
+  signature = c(".query", "ANY"),
+  definition = function(object, value) {
+    use_class <- class(object@dimensions)
+    object@dimensions <- as(value, use_class)
+    object <- updateSortBy(object)
+    validObject(object)
+    object
+  }
+)
+
 # -- SortBy ----
 
 #' @describeIn SortBy Coerce a .varList object to a .sortBy child-class.
