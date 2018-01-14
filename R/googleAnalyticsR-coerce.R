@@ -173,3 +173,7 @@ setAs("gaSegmentFilterList", "segmentDef_ga4", def = function(from, to) {
 setAs("gaSegmentConditionFilter", "segmentDef_ga4", def = function(from, to) {
   as(as(from, "gaSegmentFilterList"), "segmentDef_ga4")
 })
+
+setAs("gaSegmentSequenceFilter", "segmentDef_ga4", def = function(from, to) {
+  as(as(from, "gaSegmentFilterList"), "segmentDef_ga4")
+})
