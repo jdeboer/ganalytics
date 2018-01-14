@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.9.2
+Version: 0.9.2.99
 Date: 2018-01-14
 Authors@R: person(
     given = "Johann",
@@ -20,28 +20,28 @@ License: MIT + file LICENCE
 Depends:
     R(>= 3.1.0)
 Imports:
-    httpuv,
-    methods,
-    httr (>= 1.0.0),
-    plyr,
-    stringr (>= 1.0),
-    jsonlite,
-    XML,
-    xml2,
-    selectr,
-    lubridate,
-    R6,
     assertthat,
     devtools,
-    rvest,
+    googleAnalyticsR,
+    httpuv,
+    httr (>= 1.0.0),
+    jsonlite,
     lazyeval,
+    lubridate,
+    methods,
+    plyr,
+    R6,
+    rvest,
+    stringr (>= 1.0),
+    XML,
+    xml2,
     scales,
-    googleAnalyticsR
+    selectr
 Suggests:
-    testthat,
+    ggplot2,
     knitr,
     rmarkdown,
-    ggplot2
+    testthat
 Collate: 
     'Bool-generics.R'
     'utils.R'
