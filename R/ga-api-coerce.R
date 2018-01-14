@@ -170,6 +170,10 @@ setAs(
   from = "gaQuery",
   to = "matrix",
   def = function(from) {
+    segments <- Segments(from)
+    if(length(segments) == 0L) {
+      segments <- Segments(list(Segment(NULL)))
+    }
     viewsDatesSegments <- expand.grid(
       list(
         viewId = as(GaView(from), "viewId"),
@@ -177,7 +181,7 @@ setAs(
           startDate = StartDate(from),
           endDate = EndDate(from)
         ), 1),
-        segment = Segments(from)
+        segment = segments
       ),
       stringsAsFactors = FALSE,
       KEEP.OUT.ATTRS = FALSE
