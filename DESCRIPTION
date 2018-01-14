@@ -1,7 +1,7 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
 Version: 0.9.1.99
-Date: 2017-12-27
+Date: 2018-01-14
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
@@ -35,7 +35,8 @@ Imports:
     devtools,
     rvest,
     lazyeval,
-    scales
+    scales,
+    googleAnalyticsR
 Suggests:
     testthat,
     knitr,
@@ -95,6 +96,7 @@ Collate:
     'TableFilter-methods.R'
     'deprecated.R'
     'ganalytics-package.R'
+    'googleAnalyticsR-coerce.R'
     'gtm-api-classes.R'
     'sequence.R'
     'zzz.R'
