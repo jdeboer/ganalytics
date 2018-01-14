@@ -26,3 +26,11 @@ NULL
     sep = "\n"
   ))
 }
+
+.onLoad <- function(libname, pkgname) {
+  NULL
+}
+
+.onUnload <- function(libpath) {
+  NULL
+}
