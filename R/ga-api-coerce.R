@@ -114,28 +114,6 @@ setAs(from = "gaSegmentSequenceFilter", to = "json",
       }
 )
 
-setAs(from = "gaSegmentFilterList", to = "character",
-      def = function(from, to) {
-        if (length(from) >= 1L) {
-          paste(
-            from@scope,
-            do.call(
-              paste,
-              c(
-                lapply(from, FUN = function(segmentFilter) {
-                  as(segmentFilter, to)
-                }),
-                sep = ";"
-              )
-            ),
-            sep = "::"
-          )
-        } else {
-          character(0)
-        }
-      }
-)
-
 setAs(from = "gaSegmentFilterList", to = "json",
       def = function(from, to) {
         lapply(from, FUN = function(segmentFilter) {
@@ -152,25 +130,51 @@ select_segment_filters_with_scope <- function(object, scope) {
   dyn_segment <- as(object, "gaDynSegment")
   dyn_segment <- lapply(dyn_segment, function(filter_list) {
     matching_filters <- unlist(lapply(filter_list, ScopeLevel)) %in% scope
-    new("gaSegmentFilterList", filter_list[matching_filters], scope = scope)
+    new("gaSegmentFilterList", filter_list[matching_filters])
   })
   empty_filter_lists <- unlist(lapply(dyn_segment, length)) == 0L
   dyn_segment <- dyn_segment[!empty_filter_lists]
-  new("gaDynSegment", dyn_segment)
+  combined_filter_list <- do.call(c, dyn_segment)
+  if(is.null(combined_filter_list)) combined_filter_list <- list()
+  new("gaSegmentFilterList", combined_filter_list)
+}
+
+scoped_segment_filter_list_to_char <- function(from, scope) {
+  if (length(from) >= 1L) {
+    paste(
+      scope,
+      do.call(
+        paste,
+        c(
+          lapply(from, FUN = function(segmentFilter) {
+            as(segmentFilter, "character")
+          }),
+          sep = ";"
+        )
+      ),
+      sep = "::"
+    )
+  } else {
+    character(0)
+  }
 }
 
 setAs(from = "gaDynSegment", to = "character",
-      def = function(from, to) {
-        do.call(
-          paste,
-          c(
-            lapply(from, FUN = function(segmentFilterList) {
-              as(segmentFilterList, to)
-            }),
-            sep = ";"
-          )
-        )
-      }
+  def = function(from, to) {
+    segment_filter_lists <- list(
+      users = select_segment_filters_with_scope(from, "users"),
+      sessions = select_segment_filters_with_scope(from, "sessions")
+    )
+    contains_empty_list <- unlist(lapply(segment_filter_lists, length)) == 0L
+    segment_filter_lists <- segment_filter_lists[!contains_empty_list]
+    segment_filter_lists <- lapply(names(segment_filter_lists), function(scope) {
+      scoped_segment_filter_list_to_char(
+        segment_filter_lists[[scope]],
+        scope = scope
+      )
+    })
+    paste(unlist(segment_filter_lists), collapse = ";")
+  }
 )
 
 setAs(from = "gaDynSegment", to = "json",
