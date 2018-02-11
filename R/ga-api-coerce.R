@@ -149,8 +149,8 @@ setAs(from = "gaDynSegment", to = "character",
         do.call(
           paste,
           c(
-            lapply(from, FUN = function(segmentCondition) {
-              as(segmentCondition, to)
+            lapply(from, FUN = function(segmentFilterList) {
+              as(segmentFilterList, to)
             }),
             sep = ";"
           )
