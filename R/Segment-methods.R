@@ -40,8 +40,8 @@ setMethod(
   signature = "ANY",
   definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
-    object@negation = FALSE
     if(!missing(scope)) object@scope <- scope
+    object@negation <- FALSE
     validObject(object)
     object
   }
@@ -54,8 +54,8 @@ setMethod(
   signature = "ANY",
   definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
-    object@negation = TRUE
     if(!missing(scope)) object@scope <- scope
+    object@negation <- TRUE
     validObject(object)
     object
   }
