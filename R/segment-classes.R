@@ -144,22 +144,10 @@ setClass(
 #' @export
 setClass(
   "gaSegmentFilterList",
-  slots = c(
-    scope = "character" # obsolete - scope is now determined by the dynSegment slot where this list is applied
-  ),
-  prototype = prototype(
-    scope = "sessions" # obsolete
-  ),
   contains = "list",
   validity = function(object) {
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
-      # ---- obsolete ----
-    } else if (length(object@scope) != 1L) {
-      "Slot 'scope' must be of length 1."
-    } else if (!(object@scope %in% c("users", "sessions"))) {
-      "Slot 'scope' must be either 'users' or 'sessions'."
-      # ---- ----
     } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
       "A maximum of 10 dimension or metric conditions per segment."
     } else {
