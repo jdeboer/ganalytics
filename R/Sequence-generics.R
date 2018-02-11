@@ -106,7 +106,7 @@ setGeneric(
 #' @export
 setGeneric(
   "Sequence",
-  function(object, ..., negation = FALSE) {
+  function(object, ..., negation = FALSE, scope = "sessions") {
     if (!missing(negation)) {
       warning("Argument 'negation' is deprecated. Instead, please wrap the sequence or condtion within an Include or Exclude call.")
     }

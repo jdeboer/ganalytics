@@ -47,9 +47,9 @@ setMethod(
 setMethod(
   f = "Sequence",
   signature = ".compoundExpr",
-  definition = function(object, ..., negation) {
+  definition = function(object, ..., negation, scope) {
     exprList <- list(object, ...)
     exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
-    new("gaSegmentSequenceFilter", exprList, negation = negation)
+    new("gaSegmentSequenceFilter", exprList, negation = negation, scope = scope)
   }
 )
