@@ -157,6 +157,11 @@ setMethod(
   f = "ScopeLevel<-",
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
+    object <- lapply(object, function(segmentFilter) {
+      ScopeLevel(segmentFilter) <- value
+      segmentFilter
+    })
+    object <- new("gaSegmentFilterList", object)
     object@scope <- value
     validObject(object)
     object
