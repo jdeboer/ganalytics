@@ -29,13 +29,13 @@ setAs(from = ".compoundExpr", to = "gaSegmentConditionFilter", def = function(fr
 })
 
 # Coercing to gaSegmentFilterList
-setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, to) {
-  new(to, list(as(from, "gaSegmentConditionFilter")))
-})
 setAs(from = ".gaSegmentFilter", to = "gaSegmentFilterList", def = function(from, to) {
   new(to, list(from))
 })
 
+setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, to) {
+  as(as(from, ".gaSegmentFilter"), to)
+})
 
 # Coercion to gaSegmentId
 setAs(from = "character", to = "gaSegmentId", def = simpleCoerce)
@@ -57,7 +57,7 @@ setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
 
 #Review this coercion method
 setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
-  new(to, list(SegmentFilters(SegmentConditionFilter(from))))
+  new(to, list(as(from, "gaSegmentFilterList")))
 })
 
 setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
