@@ -11,7 +11,7 @@
 #' @export
 setGeneric(
   "SegmentConditionFilter",
-  function(object, ..., negation = FALSE) {},
+  function(object, ..., negation = FALSE, scope = "sessions") {},
   valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
 )
@@ -21,12 +21,13 @@ setGeneric(
 #' Set the negation flag of a segment filter to FALSE.
 #'
 #' @param object a segment condition or sequence filter to include.
+#' @param scope optional scope, "users" or "sessions"
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @export
 setGeneric(
   "Include",
-  function(object) {},
+  function(object, scope = NULL) {},
   valueClass = ".gaSegmentFilter",
   useAsDefault = FALSE
 )
@@ -36,12 +37,13 @@ setGeneric(
 #' Set the negation flag of a segment filter to TRUE.
 #'
 #' @param object a segment condition or sequence filter to exclude.
+#' @param scope optional scope, "users" or "sessions"
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @export
 setGeneric(
   "Exclude",
-  function(object) {},
+  function(object, scope = NULL) {},
   valueClass = ".gaSegmentFilter",
   useAsDefault = TRUE
 )
@@ -89,14 +91,12 @@ setGeneric(
 #'
 #' @param object The first filter to include in the segment definition.
 #' @param ... Additional filters to include in the segment definition, if needed.
-#' @param scope The scope of the resulting gaSegmentFilterList, either 'user' or
-#' 'session' level.
 #' @return a gaSegmentFilterList object.
 #'
 #' @export
 setGeneric(
   "SegmentFilters",
-  function(object, ..., scope = "sessions") {},
+  function(object, ...) {},
   valueClass = "gaSegmentFilterList",
   useAsDefault = FALSE
 )
@@ -145,7 +145,7 @@ setGeneric(
 #' Alternatively, an dimension expression or segment filter to coerce into a session
 #' scoped gaSegmentFilterList.
 #' @param ... Other filters to include in the gaSegmentFilterList.
-#' @return a gaMetExpr or gaSegmentFilterList.
+#' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
 #'
 #' To define a gaSegmentFilterList comprised of a single metric expression,
 #' wrap the metric expression in an \code{Include} or \code{Exclude} call.
@@ -154,7 +154,7 @@ setGeneric(
 setGeneric(
   "PerSession",
   function(object, ...){},
-  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  valueClass = c("gaSegmentFilterList", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
 
@@ -166,7 +166,7 @@ setGeneric(
 #' Alternatively, an dimension expression or segment filter to coerce into a user
 #' scoped gaSegmentFilterList.
 #' @param ... Other filters to include in the gaSegmentFilterList.
-#' @return a gaMetExpr or gaSegmentFilterList.
+#' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
 #'
 #' To define a gaSegmentFilterList comprised of a single metric expression,
 #' wrap the metric expression in an \code{Include} or \code{Exclude} call.
@@ -175,7 +175,7 @@ setGeneric(
 setGeneric(
   "PerUser",
   function(object, ...){},
-  valueClass = c("gaSegmentFilterList", "gaSegMetExpr"),
+  valueClass = c("gaSegmentFilterList", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
 
