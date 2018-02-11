@@ -7,21 +7,23 @@ test_that("segment expressions are correctly coerced to character string", {
     as(
       Segment(
         SegmentFilters(
+          SegmentConditionFilter(
+            GaExpr("deviceCategory", "=", "mobile"),
+            scope = "users"
+          )
+        ),
+        SegmentFilters(
           SegmentConditionFilter(GaExpr("source", "=", "google")),
           Sequence(
             First(GaExpr("pagepath", "=", "/")),
             Then(GaExpr("pagepath", "=", "/products/")),
-            Later(GaExpr("exitPage", "=", "/"))
-          ),
-          scope = "sessions"
-        ),
-        SegmentFilters(
-          SegmentConditionFilter(GaExpr("deviceCategory", "=", "mobile")),
-          scope = "users"
+            Later(GaExpr("exitPage", "=", "/")),
+            scope = "sessions"
+          )
         )
       ),
       "character"),
-    "sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/;users::condition::ga:deviceCategory==mobile")
+    "users::condition::ga:deviceCategory==mobile;sessions::condition::ga:source==google;sequence::^ga:pagePath==/;->ga:pagePath==/products/;->>ga:exitPagePath==/")
 })
 
 test_that("segment expressions can be negated", {
@@ -89,7 +91,7 @@ test_that("Include and Exclude can be used to define segment filters", {
 })
 
 test_that("PerUser and PerSession can be used to scope segment filters", {
-  segment_filter_list <- PerSession(Expr("pagePath", "=", "/"))
+  segment_filter_list <- SegmentFilters(PerSession(Expr("pagePath", "=", "/")))
   expect_equal(as(segment_filter_list, "character"), "sessions::condition::ga:pagePath==/")
 })
 
