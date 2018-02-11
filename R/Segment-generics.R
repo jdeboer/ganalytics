@@ -4,8 +4,9 @@
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
-#' @param negation Logical TRUE or FALSE to match segments where this conditon
-#'   has not been met.
+#' @param negation optional logical TRUE or FALSE to match segments where this conditon
+#'   has not been met. Default is FALSE, i.e. inclusive filter.
+#' @param scope optional scope, "users" or "sessions".
 #' @return a gaSegmentConditionFilter object.
 #'
 #' @export

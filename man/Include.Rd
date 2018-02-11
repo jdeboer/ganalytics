@@ -12,6 +12,8 @@ Include(object, scope = NULL)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to include.}
+
+\item{scope}{optional scope, "users" or "sessions"}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to FALSE.
