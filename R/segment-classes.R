@@ -81,14 +81,17 @@ setClass(
 setClass(
   "gaSegmentSequenceStep",
   slots = c(
+    stepName = "character",
     immediatelyPrecedes = "logical"
   ),
   prototype = prototype(
+    stepName = character(0),
     immediatelyPrecedes = FALSE
   ),
   contains = "gaSegmentCondition",
   validity = function(object) {
     validate_that(
+      length(object@stepName) <= 1L,
       length(object@immediatelyPrecedes) == 1L,
       object@immediatelyPrecedes %in% c(TRUE, FALSE)
     )
