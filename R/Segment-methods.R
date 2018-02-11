@@ -38,9 +38,10 @@ segment_scope_negate <- function(object, ..., scope, negate = NULL) {
 setMethod(
   f = "Include",
   signature = "ANY",
-  definition = function(object) {
+  definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
     object@negation = FALSE
+    if(!missing(scope)) object@scope <- scope
     validObject(object)
     object
   }
@@ -51,9 +52,10 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "ANY",
-  definition = function(object) {
+  definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
     object@negation = TRUE
+    if(!missing(scope)) object@scope <- scope
     validObject(object)
     object
   }
@@ -68,12 +70,12 @@ setMethod(
 setMethod(
   f = "SegmentConditionFilter",
   signature = "ANY",
-  definition = function(object, ..., negation) {
+  definition = function(object, ..., negation, scope) {
     exprList <- list(object, ...)
     nested <- sapply(exprList, is, "gaSegmentConditionFilter")
     exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    new("gaSegmentConditionFilter", exprList, negation = negation)
+    new("gaSegmentConditionFilter", exprList, negation = negation, scope = scope)
   }
 )
 
@@ -103,8 +105,8 @@ setMethod(
 setMethod(
   f = "SegmentFilters",
   signature = "ANY",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope)
+  definition = function(object, ...) {
+    segment_scope_negate(object, ...)
   }
 )
 
@@ -119,12 +121,33 @@ setMethod(
 
 # ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn ScopeLevel Return the scope of the supplied gaSegmentFilterList.
+#' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
+setMethod(
+  f = "ScopeLevel",
+  signature = c(".gaSegmentFilter"),
+  definition = function(object) {
+    object@scope
+  }
+)
+
+#' @describeIn ScopeLevel Returns the scope of the supplied gaSegmentFilterList.
 setMethod(
   f = "ScopeLevel",
   signature = "gaSegmentFilterList",
   definition = function(object) {
     object@scope
+  }
+)
+
+#' @describeIn ScopeLevel Set the scope level of a .gaSegmentFilter to either
+#'   "user" or "session" level.
+setMethod(
+  f = "ScopeLevel<-",
+  signature = c(".gaSegmentFilter", "character"),
+  definition = function(object, value) {
+    object@scope <- value
+    validObject(object)
+    object
   }
 )
 
