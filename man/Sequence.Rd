@@ -9,7 +9,7 @@
 \alias{Sequence,.compoundExpr-method}
 \title{Sequence.}
 \usage{
-Sequence(object, ..., negation = FALSE)
+Sequence(object, ..., negation = FALSE, scope = "sessions")
 
 \S4method{Later}{.compoundExpr}(object)
 
@@ -17,7 +17,8 @@ Sequence(object, ..., negation = FALSE)
 
 \S4method{First}{.compoundExpr}(object)
 
-\S4method{Sequence}{.compoundExpr}(object, ..., negation = FALSE)
+\S4method{Sequence}{.compoundExpr}(object, ..., negation = FALSE,
+  scope = "sessions")
 }
 \arguments{
 \item{object}{A sequence step or another expression that should be coerced to
@@ -28,6 +29,8 @@ they should be applied.}
 
 \item{negation}{Logical TRUE or FALSE to match segments where this sequence
 has not occured.}
+
+\item{scope}{optional scope, "users" or "sessions".}
 }
 \description{
 Create a new gaSequence object

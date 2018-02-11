@@ -6,12 +6,14 @@
 \alias{Include,ANY-method}
 \title{Include.}
 \usage{
-Include(object)
+Include(object, scope = NULL)
 
-\S4method{Include}{ANY}(object)
+\S4method{Include}{ANY}(object, scope = NULL)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to include.}
+
+\item{scope}{optional scope, "users" or "sessions"}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to FALSE.

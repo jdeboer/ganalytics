@@ -65,49 +65,89 @@ setAs(from = "andExpr", to = "character", def = function(from, to) {
   do.call(paste, c(lapply(from, as, to), sep = ";"))
 })
 
-setAs(from = "gaSegmentConditionFilter", to = "character", def = function(from) {
-  paste0(
-    "condition::",
-    if (from@negation) {"!"} else {""},
-    as(as(from, "andExpr"), "character")
-  )
-})
-
-setAs(from = "gaSegmentSequenceFilter", to = "character", def = function(from, to) {
-  if (length(from) >= 1) {
-    paste0(
-      "sequence::",
-      if (from@negation) {"!"} else {""},
-      do.call(
-        paste0,
-        lapply(seq_along(from),
-               FUN = function(sequenceStep) {
-                 paste0(
-                   if (sequenceStep > 1) {
-                     if (from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
-                   } else {
-                     if (from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
-                   },
-                   as(from[[sequenceStep]], to)
-                 )
-               }
+setAs(from = "gaSegmentConditionFilter", to = "character",
+      def = function(from) {
+        paste0(
+          "condition::",
+          if (from@negation) {"!"} else {""},
+          as(as(from, "andExpr"), "character")
         )
-      )
-    )
-  } else {
-    character(0)
-  }
-})
+      }
+)
 
-setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
-  if (length(from) >= 1) {
+setAs(from = "gaSegmentConditionFilter", to = "json",
+      def = function(from) {
+      }
+)
+
+setAs(from = "gaSegmentSequenceFilter", to = "character",
+      def = function(from, to) {
+        if (length(from) >= 1L) {
+          paste0(
+            "sequence::",
+            if (from@negation) {"!"} else {""},
+            do.call(
+              paste0,
+              lapply(seq_along(from),
+                     FUN = function(sequenceStep) {
+                       paste0(
+                         if (sequenceStep > 1L) {
+                           if (from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
+                         } else {
+                           if (from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
+                         },
+                         as(from[[sequenceStep]], to)
+                       )
+                     }
+              )
+            )
+          )
+        } else {
+          character(0)
+        }
+      }
+)
+
+setAs(from = "gaSegmentSequenceFilter", to = "json",
+      def = function(from, to) {
+
+      }
+)
+
+setAs(from = "gaSegmentFilterList", to = "json",
+      def = function(from, to) {
+        lapply(from, FUN = function(segmentFilter) {
+          as(segmentFilter, to)
+        })
+      }
+)
+
+select_segment_filters_with_scope <- function(object, scope) {
+  assert_that(
+    length(scope) == 1L,
+    scope %in% c("sessions", "users")
+  )
+  dyn_segment <- as(object, "gaDynSegment")
+  dyn_segment <- lapply(dyn_segment, function(filter_list) {
+    matching_filters <- unlist(lapply(filter_list, ScopeLevel)) %in% scope
+    new("gaSegmentFilterList", filter_list[matching_filters])
+  })
+  empty_filter_lists <- unlist(lapply(dyn_segment, length)) == 0L
+  dyn_segment <- dyn_segment[!empty_filter_lists]
+  combined_filter_list <- do.call(c, dyn_segment)
+  if(is.null(combined_filter_list)) combined_filter_list <- list()
+  new("gaSegmentFilterList", combined_filter_list)
+}
+
+scoped_segment_filter_list_to_char <- function(from, scope) {
+  if (length(from) >= 1L) {
     paste(
-      from@scope,
+      scope,
       do.call(
         paste,
         c(
-          lapply(from, FUN = function(compoundExpr) {
-            as(compoundExpr, to)
+          lapply(from, FUN = function(segmentFilter) {
+            as(segmentFilter, "character")
           }),
           sep = ";"
         )
@@ -117,19 +157,30 @@ setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
   } else {
     character(0)
   }
-})
+}
 
 setAs(from = "gaDynSegment", to = "character",
+  def = function(from, to) {
+    segment_filter_lists <- list(
+      users = select_segment_filters_with_scope(from, "users"),
+      sessions = select_segment_filters_with_scope(from, "sessions")
+    )
+    contains_empty_list <- unlist(lapply(segment_filter_lists, length)) == 0L
+    segment_filter_lists <- segment_filter_lists[!contains_empty_list]
+    segment_filter_lists <- lapply(names(segment_filter_lists), function(scope) {
+      scoped_segment_filter_list_to_char(
+        segment_filter_lists[[scope]],
+        scope = scope
+      )
+    })
+    paste(unlist(segment_filter_lists), collapse = ";")
+  }
+)
+
+setAs(from = "gaDynSegment", to = "json",
       def = function(from, to) {
-        do.call(
-          paste,
-          c(
-            lapply(from, FUN = function(segmentCondition) {
-              as(segmentCondition, to)
-            }),
-            sep = ";"
-          )
-        )
+        # User-scoped segment filter list
+        # Session-scoped segment filter list
       }
 )
 
@@ -204,16 +255,16 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           },
-          "segment" = if (length(segment) >= 1) {
+          "segment" = if (length(segment) >= 1L) {
             as(segment, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character"),
@@ -261,13 +312,13 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
@@ -305,13 +356,13 @@ setAs(
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           }
         )

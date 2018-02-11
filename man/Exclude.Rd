@@ -6,12 +6,14 @@
 \alias{Exclude,ANY-method}
 \title{Exclude.}
 \usage{
-Exclude(object)
+Exclude(object, scope = NULL)
 
-\S4method{Exclude}{ANY}(object)
+\S4method{Exclude}{ANY}(object, scope = NULL)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to exclude.}
+
+\item{scope}{optional scope, "users" or "sessions"}
 }
 \value{
 a .gaSegmentFilter object with its negate slot set to TRUE.

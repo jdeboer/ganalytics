@@ -7,12 +7,11 @@
 Segment(object, ...)
 }
 \arguments{
-\item{object}{a segment or other object that can be coerced into
-a segment, including dynamic segments, built-in and/or custom
-segments by their ID.}
+\item{object}{a segment or other object that can be coerced into a segment,
+including dynamic segments, built-in and/or custom segments by their ID.}
 
-\item{...}{other segment conditions, filters or filter lists to include
-in the segment's definition (ANDed)}
+\item{...}{other segment conditions, filters or filter lists to include in
+the segment's definition (ANDed)}
 }
 \value{
 an object belonging to the .gaSegment superclass.

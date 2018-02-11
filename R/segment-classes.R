@@ -81,14 +81,17 @@ setClass(
 setClass(
   "gaSegmentSequenceStep",
   slots = c(
+    stepName = "character",
     immediatelyPrecedes = "logical"
   ),
   prototype = prototype(
+    stepName = character(0),
     immediatelyPrecedes = FALSE
   ),
   contains = "gaSegmentCondition",
   validity = function(object) {
     validate_that(
+      length(object@stepName) <= 1L,
       length(object@immediatelyPrecedes) == 1L,
       object@immediatelyPrecedes %in% c(TRUE, FALSE)
     )
@@ -141,22 +144,10 @@ setClass(
 #' @export
 setClass(
   "gaSegmentFilterList",
-  slots = c(
-    scope = "character" # obsolete - scope is now determined by the dynSegment slot where this list is applied
-  ),
-  prototype = prototype(
-    scope = "sessions" # obsolete
-  ),
   contains = "list",
   validity = function(object) {
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
-      # ---- obsolete ----
-    } else if (length(object@scope) != 1L) {
-      "Slot 'scope' must be of length 1."
-    } else if (!(object@scope %in% c("users", "sessions"))) {
-      "Slot 'scope' must be either 'users' or 'sessions'."
-      # ---- ----
     } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
       "A maximum of 10 dimension or metric conditions per segment."
     } else {
@@ -175,28 +166,16 @@ setClass(
 #' @export
 setClass(
   "gaDynSegment",
-  slots = c(
-    sessions = "gaSegmentFilterList",
-    users = "gaSegmentFilterList"
-  ),
-  prototype = prototype(
-    sessions = new("gaSegmentFilterList"),
-    users = new("gaSegmentFilterList")
-  ),
-  contains = "list", # obsolete - now contain 2 lists via slots, one for sessions, another for users
+  contains = "list",
   validity = function(object) {
-    # --- move to validity of gaSegmentFilterList ---
     if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
       return("A maximum of 10 dimension or metric conditions per segment.")
     }
-    # --- ---
-    # --- redundant
     if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
     } else {
       TRUE
     }
-    # ---
   }
 )
 

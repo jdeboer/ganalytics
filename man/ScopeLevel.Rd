@@ -8,7 +8,8 @@
 \alias{ScopeLevel,gaSegMetExpr,missing-method}
 \alias{ScopeLevel,gaSegMetExpr,character-method}
 \alias{ScopeLevel<-,gaMetExpr,character-method}
-\alias{ScopeLevel,gaSegmentFilterList,ANY-method}
+\alias{ScopeLevel,.gaSegmentFilter,ANY-method}
+\alias{ScopeLevel<-,.gaSegmentFilter,character-method}
 \alias{ScopeLevel<-,gaSegmentFilterList,character-method}
 \title{ScopeLevel.}
 \usage{
@@ -22,7 +23,9 @@ ScopeLevel(object) <- value
 
 \S4method{ScopeLevel}{gaMetExpr,character}(object) <- value
 
-\S4method{ScopeLevel}{gaSegmentFilterList,ANY}(object)
+\S4method{ScopeLevel}{.gaSegmentFilter,ANY}(object)
+
+\S4method{ScopeLevel}{.gaSegmentFilter,character}(object) <- value
 
 \S4method{ScopeLevel}{gaSegmentFilterList,character}(object) <- value
 }
@@ -55,7 +58,10 @@ expression.
 be applied to the supplied metric condition for use within a segment
 expression.
 
-\item \code{object = gaSegmentFilterList,value = ANY}: Return the scope of the supplied gaSegmentFilterList.
+\item \code{object = .gaSegmentFilter,value = ANY}: Returns the scope of the supplied .gaSegmentFilter.
+
+\item \code{object = .gaSegmentFilter,value = character}: Set the scope level of a .gaSegmentFilter to either
+"user" or "session" level.
 
 \item \code{object = gaSegmentFilterList,value = character}: Set the scope level of a gaSegmentFilterList to either
 "user" or "session" level.

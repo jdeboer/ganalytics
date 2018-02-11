@@ -9,38 +9,15 @@ NULL
 
 # ---- Include, Exclude ----
 
-# This function takes one or more gaSegmentFilter, expressions or conditions
-# and combines them into a gaSegmentFilterList, which has an overarching scope applied.
-segment_scope_negate <- function(object, ..., scope, negate = NULL) {
-  exprList <- list(object, ...)
-  nested <- sapply(exprList, is, "gaSegmentFilterList")
-  segment_filter_list <- lapply(exprList[!nested], function(expr){
-    expr <- as(expr, ".gaSegmentFilter")
-    if (!is.null(negate)) IsNegated(expr) <- negate
-    expr
-  })
-  nested_segment_filters <- unlist(exprList[nested], recursive = FALSE)
-  if (!is.null(negate)) {
-    nested_segment_filters <- lapply(nested_segment_filters, function(segment_filter) {
-      IsNegated(segment_filter) <- negate
-      segment_filter
-    })
-  }
-  segment_filter_list <- c(
-    segment_filter_list,
-    nested_segment_filters
-  )
-  new("gaSegmentFilterList", segment_filter_list, scope = scope)
-}
-
 #' @describeIn Include Define an include segment filter using the supplied
 #'   expression.
 setMethod(
   f = "Include",
   signature = "ANY",
-  definition = function(object) {
+  definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
-    object@negation = FALSE
+    if(!missing(scope)) object@scope <- scope
+    object@negation <- FALSE
     validObject(object)
     object
   }
@@ -51,9 +28,10 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "ANY",
-  definition = function(object) {
+  definition = function(object, scope) {
     object <- as(object, ".gaSegmentFilter")
-    object@negation = TRUE
+    if(!missing(scope)) object@scope <- scope
+    object@negation <- TRUE
     validObject(object)
     object
   }
@@ -68,16 +46,16 @@ setMethod(
 setMethod(
   f = "SegmentConditionFilter",
   signature = "ANY",
-  definition = function(object, ..., negation) {
+  definition = function(object, ..., negation, scope) {
     exprList <- list(object, ...)
     nested <- sapply(exprList, is, "gaSegmentConditionFilter")
     exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    new("gaSegmentConditionFilter", exprList, negation = negation)
+    new("gaSegmentConditionFilter", exprList, negation = negation, scope = scope)
   }
 )
 
-#' @describeIn IsNegated Test whether a segment filter is negated, i.e. used to
+#' @describeIn IsNegated Tests whether a segment filter is negated, i.e. used to
 #'   define an exclude filter for the segment.
 setMethod(
   f = "IsNegated",
@@ -87,7 +65,7 @@ setMethod(
   }
 )
 
-#' @describeIn IsNegated Set whether a segment filter should be negated, i.e.
+#' @describeIn IsNegated Sets whether a segment filter should be negated, i.e.
 #'   used as an exclude filter in a segment definition.
 setMethod(
   f = "IsNegated<-",
@@ -98,20 +76,30 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters Define a list of filters from one or more
+#' @describeIn SegmentFilters Defines a list of filters from one or more
 #'   expressions applied using the specified scope.
 setMethod(
   f = "SegmentFilters",
   signature = "ANY",
-  definition = function(object, ..., scope) {
-    segment_scope_negate(object, ..., scope = scope)
+  definition = function(object, ...) {
+    exprList <- list(object, ...)
+    nested <- sapply(exprList, is, "gaSegmentFilterList")
+    segment_filter_list <- lapply(exprList[!nested], function(expr){
+      as(expr, ".gaSegmentFilter")
+    })
+    nested_segment_filters <- unlist(exprList[nested], recursive = FALSE)
+    segment_filter_list <- c(
+      segment_filter_list,
+      nested_segment_filters
+    )
+    new("gaSegmentFilterList", segment_filter_list)
   }
 )
 
 #' @describeIn SegmentFilters Returns itself.
 setMethod(
   f = "SegmentFilters",
-  signature = c("gaSegmentFilterList", "missing"),
+  signature = c("gaSegmentFilterList"),
   definition = function(object) {
     object
   }
@@ -119,12 +107,24 @@ setMethod(
 
 # ---- ScopeLevel, ScopeLevel<- ----
 
-#' @describeIn ScopeLevel Return the scope of the supplied gaSegmentFilterList.
+#' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
 setMethod(
   f = "ScopeLevel",
-  signature = "gaSegmentFilterList",
+  signature = c(".gaSegmentFilter"),
   definition = function(object) {
     object@scope
+  }
+)
+
+#' @describeIn ScopeLevel Set the scope level of a .gaSegmentFilter to either
+#'   "user" or "session" level.
+setMethod(
+  f = "ScopeLevel<-",
+  signature = c(".gaSegmentFilter", "character"),
+  definition = function(object, value) {
+    object@scope <- value
+    validObject(object)
+    object
   }
 )
 
@@ -134,7 +134,11 @@ setMethod(
   f = "ScopeLevel<-",
   signature = c("gaSegmentFilterList", "character"),
   definition = function(object, value) {
-    object@scope <- value
+    object <- lapply(object, function(segmentFilter) {
+      ScopeLevel(segmentFilter) <- value
+      segmentFilter
+    })
+    object <- new("gaSegmentFilterList", object)
     validObject(object)
     object
   }
@@ -148,7 +152,7 @@ setMethod(
   f = "PerSession",
   signature = "ANY",
   definition = function(object, ...) {
-    SegmentFilters(object, ..., scope = "sessions")
+    SegmentConditionFilter(object, ..., scope = "sessions")
   }
 )
 
@@ -162,7 +166,7 @@ setMethod(
       ScopeLevel(object) <- "perSession"
       object
     } else {
-      SegmentFilters(object, ..., scope = "sessions")
+      SegmentConditionFilter(object, ..., scope = "sessions")
     }
   }
 )
@@ -183,7 +187,7 @@ setMethod(
   f = "PerUser",
   signature = "ANY",
   definition = function(object, ...) {
-    SegmentFilters(object, ..., scope = "users")
+    SegmentConditionFilter(object, ..., scope = "users")
   }
 )
 
@@ -197,7 +201,7 @@ setMethod(
       ScopeLevel(object) <- "perUser"
       object
     } else {
-      SegmentFilters(object, ..., scope = "users")
+      SegmentConditionFilter(object, ..., scope = "users")
     }
   }
 )

@@ -41,7 +41,7 @@ For a step-by-step guide with examples, run this command: \code{browseVignettes(
 "ganalytics")}
 }
 \references{
-Google Analytics dimensions and metrics reference:
+Google Analytics core reporting API dimensions and metrics reference:
   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
 
 Google Analytics Table Filter expressions:
@@ -50,12 +50,16 @@ Google Analytics Table Filter expressions:
 Google Analytics Custom Segmentation expressions:
   \url{https://developers.google.com/analytics/devguides/reporting/core/v3/segments-feature-reference}
 
-Google Analytics Real-time Reporting API dimensions and metrics
+Google Analytics Real-time Reporting API dimensions and metrics:
+  \url{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}
 
-Google Analytics Multi-Channel Funnel conversions Reporting API
+Google Analytics Multi-Channel Funnel conversions Reporting API dimensions and metrics:
+  \url{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}
 
 Google Analytics Management API collections and resources
+  \url{https://developers.google.com/analytics/devguides/config/mgmt/v3/mgmtReference/}
 
 Google Tag Manager API collection and resources
+  \url{https://developers.google.com/tag-manager/api/v1/reference/}
 }
 \keyword{package}

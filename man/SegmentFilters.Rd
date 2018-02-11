@@ -3,40 +3,38 @@
 \docType{methods}
 \name{SegmentFilters}
 \alias{SegmentFilters}
-\alias{SegmentFilters,ANY,ANY-method}
-\alias{SegmentFilters,gaSegmentFilterList,missing-method}
+\alias{SegmentFilters,ANY-method}
+\alias{SegmentFilters,gaSegmentFilterList-method}
 \title{SegmentFilters.}
 \usage{
-SegmentFilters(object, ..., scope = "sessions")
+SegmentFilters(object, ...)
 
-\S4method{SegmentFilters}{ANY,ANY}(object, ..., scope = "sessions")
+\S4method{SegmentFilters}{ANY}(object, ...)
 
-\S4method{SegmentFilters}{gaSegmentFilterList,missing}(object)
+\S4method{SegmentFilters}{gaSegmentFilterList}(object)
 }
 \arguments{
 \item{object}{The first filter to include in the segment definition.}
 
-\item{...}{Additional filters to include in the segment definition, if needed.}
-
-\item{scope}{The scope of the resulting gaSegmentFilterList, either 'user' or
-'session' level.}
+\item{...}{Additional filters to include in the segment definition, if
+needed.}
 }
 \value{
 a gaSegmentFilterList object.
 }
 \description{
-Combine one or more segment condition filters and/or sequence filters into
-a gaSegmentFilterList that is scoped to either 'user' or 'session' level.
+Combine one or more segment condition filters and/or sequence filters into a
+gaSegmentFilterList that is scoped to either 'user' or 'session' level.
 }
 \details{
-A segment filter is either sequential or non-sequential conditions. Sequential
-and non-sequential conditoins can be combined using this function.
+A segment filter is either sequential or non-sequential conditions.
+Sequential and non-sequential conditoins can be combined using this function.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = ANY,scope = ANY}: Define a list of filters from one or more
+\item \code{ANY}: Defines a list of filters from one or more
 expressions applied using the specified scope.
 
-\item \code{object = gaSegmentFilterList,scope = missing}: Returns itself.
+\item \code{gaSegmentFilterList}: Returns itself.
 }}
 

@@ -2,9 +2,7 @@
 #' @importFrom methods initialize
 NULL
 
-### Review the following coercions using "new"
 # Coercion to custom segment classes
-
 setAs(from = ".compoundExpr", to = "gaSegmentSequenceStep", def = function(from, to) {
   new(to, as(from, "andExpr"))
 })
@@ -31,16 +29,15 @@ setAs(from = ".compoundExpr", to = "gaSegmentConditionFilter", def = function(fr
 })
 
 # Coercing to gaSegmentFilterList
-setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, to) {
-  new(to, list(as(from, "gaSegmentConditionFilter")))
-})
-
 setAs(from = ".gaSegmentFilter", to = "gaSegmentFilterList", def = function(from, to) {
   new(to, list(from))
 })
 
-# Coercion to gaSegmentId
+setAs(from = ".compoundExpr", to = "gaSegmentFilterList", def = function(from, to) {
+  as(as(from, ".gaSegmentFilter"), to)
+})
 
+# Coercion to gaSegmentId
 setAs(from = "character", to = "gaSegmentId", def = simpleCoerce)
 
 setAs(from = "numeric", to = "gaSegmentId", def = function(from, to) {
@@ -52,7 +49,6 @@ setAs(from = "gaUserSegment", to = "gaSegmentId", def = function(from, to) {
 })
 
 # Coercing to gaDynSegment
-
 setAs(from = "gaFilter", to = "gaDynSegment", def = simpleCoerceData)
 
 setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
@@ -61,7 +57,7 @@ setAs(from = "orExpr", to = "gaDynSegment", def = function(from, to) {
 
 #Review this coercion method
 setAs(from = "andExpr", to = "gaDynSegment", def = function(from, to) {
-  new(to, list(SegmentFilters(SegmentConditionFilter(from))))
+  new(to, list(as(from, "gaSegmentFilterList")))
 })
 
 setAs(from = ".expr", to = "gaDynSegment", def = function(from, to) {
@@ -89,7 +85,6 @@ setAs(from = "gaSegmentFilterList", to = ".gaSegment", def = function(from, to) 
 })
 
 # Coercion to numeric
-
 setAs(
   from = "gaSegmentId",
   to = "numeric",
