@@ -19,7 +19,7 @@ test_that(".gaExpr objects coerce to character", {
     "character"), "ga:uniquePageviews>5")
   expect_equal(as(
     GaExpr("pagePath", "~", "[;,\\-].+"),
-    "character"), "ga:pagePath=~[\\;\\,\\\\-].+")
+    "character"), "ga:pagePath=~[\\;\\,\\-].+")
 })
 
 test_that("`Not` can be used to invert an expression", {

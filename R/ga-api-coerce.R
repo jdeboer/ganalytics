@@ -10,8 +10,8 @@ compileOperand <- function(from) {
   unEscapedOperand <- as(Operand(from), "character")
   comparator <- as(Comparator(from), "character")
   compiledOperand <- gsub(
-    pattern = "[,;]", # What about _ and | used within an operand when using <> or [] comparators
-    replacement = "\\\\1",
+    pattern = "([,;])", # What about _ and | used within an operand when using <> or [] comparators
+    replacement = "\\\\\\1",
     x = unEscapedOperand
   )
   if (isTRUE(comparator == "[]")) {
