@@ -79,7 +79,7 @@ setMethod(
   }
 )
 
-#' @describeIn IsNegated Test whether a segment filter is negated, i.e. used to
+#' @describeIn IsNegated Tests whether a segment filter is negated, i.e. used to
 #'   define an exclude filter for the segment.
 setMethod(
   f = "IsNegated",
@@ -89,7 +89,7 @@ setMethod(
   }
 )
 
-#' @describeIn IsNegated Set whether a segment filter should be negated, i.e.
+#' @describeIn IsNegated Sets whether a segment filter should be negated, i.e.
 #'   used as an exclude filter in a segment definition.
 setMethod(
   f = "IsNegated<-",
@@ -100,7 +100,7 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters Define a list of filters from one or more
+#' @describeIn SegmentFilters Defines a list of filters from one or more
 #'   expressions applied using the specified scope.
 setMethod(
   f = "SegmentFilters",

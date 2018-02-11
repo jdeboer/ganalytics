@@ -29,10 +29,10 @@ Sets the negation flag of a segment filter.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.gaSegmentFilter}: Test whether a segment filter is negated, i.e. used to
+\item \code{.gaSegmentFilter}: Tests whether a segment filter is negated, i.e. used to
 define an exclude filter for the segment.
 
-\item \code{object = .gaSegmentFilter,value = logical}: Set whether a segment filter should be negated, i.e.
+\item \code{object = .gaSegmentFilter,value = logical}: Sets whether a segment filter should be negated, i.e.
 used as an exclude filter in a segment definition.
 }}
 

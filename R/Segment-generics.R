@@ -83,14 +83,15 @@ setGeneric(
 
 #' SegmentFilters.
 #'
-#' Combine one or more segment condition filters and/or sequence filters into
-#' a gaSegmentFilterList that is scoped to either 'user' or 'session' level.
+#' Combine one or more segment condition filters and/or sequence filters into a
+#' gaSegmentFilterList that is scoped to either 'user' or 'session' level.
 #'
-#' A segment filter is either sequential or non-sequential conditions. Sequential
-#' and non-sequential conditoins can be combined using this function.
+#' A segment filter is either sequential or non-sequential conditions.
+#' Sequential and non-sequential conditoins can be combined using this function.
 #'
 #' @param object The first filter to include in the segment definition.
-#' @param ... Additional filters to include in the segment definition, if needed.
+#' @param ... Additional filters to include in the segment definition, if
+#'   needed.
 #' @return a gaSegmentFilterList object.
 #'
 #' @export
@@ -119,14 +120,14 @@ setGeneric(
 #' PerHit.
 #'
 #' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
-#' filter to a sequence filter of length one (i.e. a combination of conditions for
-#' matching a single hit).
+#' filter to a sequence filter of length one (i.e. a combination of conditions
+#' for matching a single hit).
 #'
-#' @param object a gaMetExpr object to coerce to hit-level or if multiple expressions
-#' are provided, then the first expression to combine into a single step of sequence
-#' filter.
-#' @param ... Further expressions to be included in the filter definition if defining a
-#' sequence filter of length one.
+#' @param object a gaMetExpr object to coerce to hit-level or if multiple
+#'   expressions are provided, then the first expression to combine into a
+#'   single step of sequence filter.
+#' @param ... Further expressions to be included in the filter definition if
+#'   defining a sequence filter of length one.
 #' @return a gaMetExpr or gaSegmentSequenceFilter.
 #'
 #' @export
@@ -141,14 +142,14 @@ setGeneric(
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
 #'
-#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to session-level.
-#' Alternatively, an dimension expression or segment filter to coerce into a session
-#' scoped gaSegmentFilterList.
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to
+#'   session-level. Alternatively, an dimension expression or segment filter to
+#'   coerce into a session scoped gaSegmentFilterList.
 #' @param ... Other filters to include in the gaSegmentFilterList.
 #' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
 #'
-#' To define a gaSegmentFilterList comprised of a single metric expression,
-#' wrap the metric expression in an \code{Include} or \code{Exclude} call.
+#'   To define a gaSegmentFilterList comprised of a single metric expression,
+#'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -162,14 +163,14 @@ setGeneric(
 #'
 #' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
 #'
-#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to user-level.
-#' Alternatively, an dimension expression or segment filter to coerce into a user
-#' scoped gaSegmentFilterList.
+#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to
+#'   user-level. Alternatively, an dimension expression or segment filter to
+#'   coerce into a user scoped gaSegmentFilterList.
 #' @param ... Other filters to include in the gaSegmentFilterList.
 #' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
 #'
-#' To define a gaSegmentFilterList comprised of a single metric expression,
-#' wrap the metric expression in an \code{Include} or \code{Exclude} call.
+#'   To define a gaSegmentFilterList comprised of a single metric expression,
+#'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
@@ -183,11 +184,10 @@ setGeneric(
 #'
 #' Define a segment for use in a query's segment list.
 #'
-#' @param object a segment or other object that can be coerced into
-#' a segment, including dynamic segments, built-in and/or custom
-#' segments by their ID.
-#' @param ... other segment conditions, filters or filter lists to include
-#' in the segment's definition (ANDed)
+#' @param object a segment or other object that can be coerced into a segment,
+#'   including dynamic segments, built-in and/or custom segments by their ID.
+#' @param ... other segment conditions, filters or filter lists to include in
+#'   the segment's definition (ANDed)
 #' @return an object belonging to the .gaSegment superclass.
 #'
 #' @name Segment
@@ -201,15 +201,14 @@ setGeneric(
 
 #' Segments.
 #'
-#' Get the list of segments from the object or coerce the supplied objects into a
-#' a named list of segments.
+#' Get the list of segments from the object or coerce the supplied objects into
+#' a a named list of segments.
 #'
-#' @param object A query object to get the segment list from or to set the segment
-#' list of.
-#' @param ... Alternatively, provide one or more named arguments
-#' (segments or objects that can be coerced into segments)
-#' including dynamic segments, built-in and/or custom segments by
-#' their ID.
+#' @param object A query object to get the segment list from or to set the
+#'   segment list of.
+#' @param ... Alternatively, provide one or more named arguments (segments or
+#'   objects that can be coerced into segments) including dynamic segments,
+#'   built-in and/or custom segments by their ID.
 #' @return a gaSegmentList
 #'
 #' @export

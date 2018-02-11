@@ -6,9 +6,9 @@
 \alias{Include,ANY-method}
 \title{Include.}
 \usage{
-Include(object)
+Include(object, scope = NULL)
 
-\S4method{Include}{ANY}(object)
+\S4method{Include}{ANY}(object, scope = NULL)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to include.}

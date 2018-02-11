@@ -38,13 +38,12 @@ Segments(object) <- value
 \S4method{Segments}{gaQuery}(object) <- value
 }
 \arguments{
-\item{object}{A query object to get the segment list from or to set the segment
-list of.}
+\item{object}{A query object to get the segment list from or to set the
+segment list of.}
 
-\item{...}{Alternatively, provide one or more named arguments
-(segments or objects that can be coerced into segments)
-including dynamic segments, built-in and/or custom segments by
-their ID.}
+\item{...}{Alternatively, provide one or more named arguments (segments or
+objects that can be coerced into segments) including dynamic segments,
+built-in and/or custom segments by their ID.}
 
 \item{value}{A named list of segments or a single segment.}
 }
@@ -52,8 +51,8 @@ their ID.}
 a gaSegmentList
 }
 \description{
-Get the list of segments from the object or coerce the supplied objects into a
-a named list of segments.
+Get the list of segments from the object or coerce the supplied objects into
+a a named list of segments.
 
 Set the segments of the query object.
 }
