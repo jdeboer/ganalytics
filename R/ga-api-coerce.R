@@ -144,6 +144,21 @@ setAs(from = "gaSegmentFilterList", to = "json",
       }
 )
 
+select_segment_filters_with_scope <- function(object, scope) {
+  assert_that(
+    length(scope) == 1L,
+    scope %in% c("sessions", "users")
+  )
+  dyn_segment <- as(object, "gaDynSegment")
+  dyn_segment <- lapply(dyn_segment, function(filter_list) {
+    matching_filters <- unlist(lapply(filter_list, ScopeLevel)) %in% scope
+    new("gaSegmentFilterList", filter_list[matching_filters], scope = scope)
+  })
+  empty_filter_lists <- unlist(lapply(dyn_segment, length)) == 0L
+  dyn_segment <- dyn_segment[!empty_filter_lists]
+  new("gaDynSegment", dyn_segment)
+}
+
 setAs(from = "gaDynSegment", to = "character",
       def = function(from, to) {
         do.call(
@@ -155,8 +170,6 @@ setAs(from = "gaDynSegment", to = "character",
             sep = ";"
           )
         )
-        # User-scoped segment filter list
-        # Session-scoped segment filter list
       }
 )
 
