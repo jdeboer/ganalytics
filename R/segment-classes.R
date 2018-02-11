@@ -178,28 +178,16 @@ setClass(
 #' @export
 setClass(
   "gaDynSegment",
-  slots = c(
-    sessions = "gaSegmentFilterList",
-    users = "gaSegmentFilterList"
-  ),
-  prototype = prototype(
-    sessions = new("gaSegmentFilterList"),
-    users = new("gaSegmentFilterList")
-  ),
-  contains = "list", # obsolete - now contain 2 lists via slots, one for sessions, another for users
+  contains = "list",
   validity = function(object) {
-    # --- move to validity of gaSegmentFilterList ---
     if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
       return("A maximum of 10 dimension or metric conditions per segment.")
     }
-    # --- ---
-    # --- redundant
     if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
       "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
     } else {
       TRUE
     }
-    # ---
   }
 )
 
