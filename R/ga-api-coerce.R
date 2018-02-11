@@ -65,59 +65,84 @@ setAs(from = "andExpr", to = "character", def = function(from, to) {
   do.call(paste, c(lapply(from, as, to), sep = ";"))
 })
 
-setAs(from = "gaSegmentConditionFilter", to = "character", def = function(from) {
-  paste0(
-    "condition::",
-    if (from@negation) {"!"} else {""},
-    as(as(from, "andExpr"), "character")
-  )
-})
-
-setAs(from = "gaSegmentSequenceFilter", to = "character", def = function(from, to) {
-  if (length(from) >= 1) {
-    paste0(
-      "sequence::",
-      if (from@negation) {"!"} else {""},
-      do.call(
-        paste0,
-        lapply(seq_along(from),
-               FUN = function(sequenceStep) {
-                 paste0(
-                   if (sequenceStep > 1) {
-                     if (from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
-                   } else {
-                     if (from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
-                   },
-                   as(from[[sequenceStep]], to)
-                 )
-               }
+setAs(from = "gaSegmentConditionFilter", to = "character",
+      def = function(from) {
+        paste0(
+          "condition::",
+          if (from@negation) {"!"} else {""},
+          as(as(from, "andExpr"), "character")
         )
-      )
-    )
-  } else {
-    character(0)
-  }
-})
+      }
+)
 
-setAs(from = "gaSegmentFilterList", to = "character", def = function(from, to) {
-  if (length(from) >= 1) {
-    paste(
-      from@scope,
-      do.call(
-        paste,
-        c(
-          lapply(from, FUN = function(compoundExpr) {
-            as(compoundExpr, to)
-          }),
-          sep = ";"
-        )
-      ),
-      sep = "::"
-    )
-  } else {
-    character(0)
-  }
-})
+setAs(from = "gaSegmentConditionFilter", to = "json",
+      def = function(from) {
+      }
+)
+
+setAs(from = "gaSegmentSequenceFilter", to = "character",
+      def = function(from, to) {
+        if (length(from) >= 1L) {
+          paste0(
+            "sequence::",
+            if (from@negation) {"!"} else {""},
+            do.call(
+              paste0,
+              lapply(seq_along(from),
+                     FUN = function(sequenceStep) {
+                       paste0(
+                         if (sequenceStep > 1L) {
+                           if (from[[sequenceStep]]@immediatelyPrecedes) {";->"} else {";->>"}
+                         } else {
+                           if (from[[sequenceStep]]@immediatelyPrecedes) {"^"} else {""}
+                         },
+                         as(from[[sequenceStep]], to)
+                       )
+                     }
+              )
+            )
+          )
+        } else {
+          character(0)
+        }
+      }
+)
+
+setAs(from = "gaSegmentSequenceFilter", to = "json",
+      def = function(from, to) {
+
+      }
+)
+
+setAs(from = "gaSegmentFilterList", to = "character",
+      def = function(from, to) {
+        if (length(from) >= 1L) {
+          paste(
+            from@scope,
+            do.call(
+              paste,
+              c(
+                lapply(from, FUN = function(segmentFilter) {
+                  as(segmentFilter, to)
+                }),
+                sep = ";"
+              )
+            ),
+            sep = "::"
+          )
+        } else {
+          character(0)
+        }
+      }
+)
+
+setAs(from = "gaSegmentFilterList", to = "json",
+      def = function(from, to) {
+        lapply(from, FUN = function(segmentFilter) {
+          as(segmentFilter, to)
+        })
+      }
+)
 
 setAs(from = "gaDynSegment", to = "character",
       def = function(from, to) {
@@ -130,6 +155,15 @@ setAs(from = "gaDynSegment", to = "character",
             sep = ";"
           )
         )
+        # User-scoped segment filter list
+        # Session-scoped segment filter list
+      }
+)
+
+setAs(from = "gaDynSegment", to = "json",
+      def = function(from, to) {
+        # User-scoped segment filter list
+        # Session-scoped segment filter list
       }
 )
 
@@ -204,16 +238,16 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           },
-          "segment" = if (length(segment) >= 1) {
+          "segment" = if (length(segment) >= 1L) {
             as(segment, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character"),
@@ -261,13 +295,13 @@ setAs(
           "start-date" = as.character(startDate),
           "end-date" = as.character(endDate),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           },
           "samplingLevel" = as(from@samplingLevel, "character")
@@ -305,13 +339,13 @@ setAs(
         c(
           "ids" = as(viewId, "character"),
           "metrics" = as(metrics, "character"),
-          "dimensions" = if (length(dimensions) >= 1) {
+          "dimensions" = if (length(dimensions) >= 1L) {
             as(dimensions, "character")
           },
-          "sort" = if (length(sortBy) >= 1) {
+          "sort" = if (length(sortBy) >= 1L) {
             as(sortBy, "character")
           },
-          "filters" = if (length(tableFilter) >= 1) {
+          "filters" = if (length(tableFilter) >= 1L) {
             as(tableFilter, "character")
           }
         )
