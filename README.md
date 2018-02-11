@@ -74,7 +74,7 @@ devtools::install_github("jdeboer/ganalytics")
 * Check you are **signed into Google** with the account you wish to use.
 * Choose **Create Project** from the Google API Console and give your project a name (or choose an existing project if you have one already).
 * From the **APIs** page, enable the **Analytics API**. You may also want to enable the **Tag Manager API** if you wish to try that.
-* You will need to **agree** and **accept** the Google APIs and Analytics API Terms of Service to proceed.
+* You will need to **agree** to and **accept** the Google APIs and Analytics API Terms of Service to proceed.
 * Go to the **Credentials** page, click **Add credentials**, choose **OAuth 2.0 client ID**, then select "Other".
 * Note your **Client ID** and **Client Secret** and download the JSON file to your R working directory.
 
