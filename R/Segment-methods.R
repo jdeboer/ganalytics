@@ -99,7 +99,7 @@ setMethod(
 #' @describeIn SegmentFilters Returns itself.
 setMethod(
   f = "SegmentFilters",
-  signature = c("gaSegmentFilterList", "missing"),
+  signature = c("gaSegmentFilterList"),
   definition = function(object) {
     object
   }
