@@ -22,7 +22,6 @@ Depends:
 Imports:
     assertthat,
     devtools,
-    googleAnalyticsR,
     httpuv,
     httr (>= 1.0.0),
     jsonlite,
