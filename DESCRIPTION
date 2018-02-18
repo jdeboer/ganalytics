@@ -24,6 +24,7 @@ Imports:
     devtools,
     httpuv,
     httr (>= 1.0.0),
+    googleAnalyticsR (>= 0.5.0),
     jsonlite,
     lazyeval,
     lubridate,
