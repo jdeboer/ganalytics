@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.9.3.99
+Version: 0.9.4.00
 Date: 2018-01-14
 Authors@R: person(
     given = "Johann",
@@ -24,6 +24,7 @@ Imports:
     devtools,
     httpuv,
     httr (>= 1.0.0),
+    googleAnalyticsR (>= 0.5.0),
     jsonlite,
     lazyeval,
     lubridate,
