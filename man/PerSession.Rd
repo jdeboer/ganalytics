@@ -17,20 +17,20 @@ PerSession(object, ...)
 \S4method{PerSession}{formula}(object, ...)
 }
 \arguments{
-\item{object}{a gaSegmentFilterList or gaMetExpr object to coerce to
+\item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
 session-level. Alternatively, an dimension expression or segment filter to
-coerce into a session scoped gaSegmentFilterList.}
+coerce into a session scoped gaDynSegment.}
 
-\item{...}{Other filters to include in the gaSegmentFilterList.}
+\item{...}{Other filters to include in the gaDynSegment.}
 }
 \value{
-a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
+a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 
-  To define a gaSegmentFilterList comprised of a single metric expression,
+  To define a gaDynSegment comprised of a single metric expression,
   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \description{
-Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
+Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
 }
 \section{Methods (by class)}{
 \itemize{

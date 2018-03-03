@@ -194,7 +194,7 @@ setMethod(
 
 setMethod(
   "initialize",
-  signature = "gaSegmentFilterList",
+  signature = "gaDynSegment",
   definition = function(.Object, value) {
     if(!missing(value)) {
       .Object@.Data <- value

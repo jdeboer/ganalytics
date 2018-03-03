@@ -92,21 +92,21 @@ setGeneric(
 
 #' ScopeLevel.
 #'
-#' Get the scope level of a gaSegmentFilterList or gaMetExpr.
+#' Get the scope level of a .gaSegmentFilter or gaMetExpr.
 #'
-#' @param object a gaSegmentFilterList or a metric expression.
+#' @param object a .gaSegmentFilter or a metric expression.
 #' @param value New scope level to return an updated copy of the object
-#' with the new scope applied. For gaSegmentFilterLists this can be
+#' with the new scope applied. For .gaSegmentFilters this can be
 #' either 'users' or 'sessions'. For metric expressions use either 'perUser',
 #' 'perSession', 'perHit' or 'perProduct'.
-#' @return the scope level as a character string, a gaSegmentFilterList or gaMetExpr.
+#' @return the scope level as a character string, a .gaSegmentFilter or gaMetExpr.
 #'
 #' @export
 #' @rdname ScopeLevel
 setGeneric(
   "ScopeLevel",
   function(object, value) {},
-  valueClass = c("character", "gaSegmentFilterList", "gaMetExpr"),
+  valueClass = c("character", ".gaSegmentFilter", "gaMetExpr"),
   useAsDefault = FALSE
 )
 

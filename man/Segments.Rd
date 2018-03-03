@@ -4,11 +4,6 @@
 \name{Segments}
 \alias{Segments}
 \alias{Segments<-}
-\alias{Segment,numeric-method}
-\alias{Segment,character-method}
-\alias{Segment,ANY-method}
-\alias{Segment,NULL-method}
-\alias{Segment,gaUserSegment-method}
 \alias{Segments,gaSegmentList-method}
 \alias{Segments,gaQuery-method}
 \alias{Segments,ANY-method}
@@ -18,16 +13,6 @@
 Segments(object, ...)
 
 Segments(object) <- value
-
-\S4method{Segment}{numeric}(object)
-
-\S4method{Segment}{character}(object)
-
-\S4method{Segment}{ANY}(object, ...)
-
-\S4method{Segment}{`NULL`}(object)
-
-\S4method{Segment}{gaUserSegment}(object)
 
 \S4method{Segments}{gaSegmentList}(object)
 
@@ -58,18 +43,6 @@ Set the segments of the query object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{numeric}: Interpret the supplied numeric value as a segment ID.
-
-\item \code{character}: Interpret the supplied character value as a segment ID.
-
-\item \code{ANY}: Create a non-sequential segment using the supplied
-expressions.
-
-\item \code{NULL}: returns NULL
-
-\item \code{gaUserSegment}: Return the segment ID of the supplied GA Management API
-user segment.
-
 \item \code{gaSegmentList}: Returns itself
 
 \item \code{gaQuery}: Return the definition of the segment applied to the view.

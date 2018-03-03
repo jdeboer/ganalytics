@@ -6,20 +6,16 @@ test_that("segment expressions are correctly coerced to character string", {
   expect_equal(
     as(
       Segment(
-        SegmentFilters(
-          SegmentConditionFilter(
-            GaExpr("deviceCategory", "=", "mobile"),
-            scope = "users"
-          )
+        SegmentConditionFilter(
+          GaExpr("deviceCategory", "=", "mobile"),
+          scope = "users"
         ),
-        SegmentFilters(
-          SegmentConditionFilter(GaExpr("source", "=", "google")),
-          Sequence(
-            First(GaExpr("pagepath", "=", "/")),
-            Then(GaExpr("pagepath", "=", "/products/")),
-            Later(GaExpr("exitPage", "=", "/")),
-            scope = "sessions"
-          )
+        SegmentConditionFilter(GaExpr("source", "=", "google")),
+        Sequence(
+          First(GaExpr("pagepath", "=", "/")),
+          Then(GaExpr("pagepath", "=", "/products/")),
+          Later(GaExpr("exitPage", "=", "/")),
+          scope = "sessions"
         )
       ),
       "character"),
@@ -80,10 +76,10 @@ test_that("PerHit returns the expected classes of output given the class of its 
 test_that("Include and Exclude can be used to define segment filters", {
   expr1 <- Expr("EventCategory", "=", "video")
   expr2 <- Expr("EventAction", "=", "play")
-  include_filter <- SegmentFilters(Include(expr1), Include(expr2))
-  exclude_filter <- SegmentFilters(Exclude(expr1), Exclude(expr2))
-  expect_is(include_filter, "gaSegmentFilterList")
-  expect_is(exclude_filter, "gaSegmentFilterList")
+  include_filter <- DynSegment(Include(expr1), Include(expr2))
+  exclude_filter <- DynSegment(Exclude(expr1), Exclude(expr2))
+  expect_is(include_filter, "gaDynSegment")
+  expect_is(exclude_filter, "gaDynSegment")
   expect_equal(length(include_filter), 2)
   expect_equal(length(exclude_filter), 2)
   expect_true(all(sapply(include_filter, function(seg_filter) {!IsNegated(seg_filter)})))
