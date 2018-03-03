@@ -10,7 +10,7 @@
 \alias{ScopeLevel<-,gaMetExpr,character-method}
 \alias{ScopeLevel,.gaSegmentFilter,ANY-method}
 \alias{ScopeLevel<-,.gaSegmentFilter,character-method}
-\alias{ScopeLevel<-,gaSegmentFilterList,character-method}
+\alias{ScopeLevel<-,gaDynSegment,character-method}
 \title{ScopeLevel.}
 \usage{
 ScopeLevel(object, value)
@@ -27,21 +27,21 @@ ScopeLevel(object) <- value
 
 \S4method{ScopeLevel}{.gaSegmentFilter,character}(object) <- value
 
-\S4method{ScopeLevel}{gaSegmentFilterList,character}(object) <- value
+\S4method{ScopeLevel}{gaDynSegment,character}(object) <- value
 }
 \arguments{
-\item{object}{a gaSegmentFilterList or a metric expression.}
+\item{object}{a .gaSegmentFilter or a metric expression.}
 
 \item{value}{New scope level to return an updated copy of the object
-with the new scope applied. For gaSegmentFilterLists this can be
+with the new scope applied. For .gaSegmentFilters this can be
 either 'users' or 'sessions'. For metric expressions use either 'perUser',
 'perSession', 'perHit' or 'perProduct'.}
 }
 \value{
-the scope level as a character string, a gaSegmentFilterList or gaMetExpr.
+the scope level as a character string, a .gaSegmentFilter or gaMetExpr.
 }
 \description{
-Get the scope level of a gaSegmentFilterList or gaMetExpr.
+Get the scope level of a .gaSegmentFilter or gaMetExpr.
 
 Set the scope level of a gaDynSegment or a gaMetExpr
 }
@@ -63,7 +63,7 @@ expression.
 \item \code{object = .gaSegmentFilter,value = character}: Set the scope level of a .gaSegmentFilter to either
 "user" or "session" level.
 
-\item \code{object = gaSegmentFilterList,value = character}: Set the scope level of a gaSegmentFilterList to either
+\item \code{object = gaDynSegment,value = character}: Set the scope level of a gaDynSegment to either
 "user" or "session" level.
 }}
 

@@ -133,32 +133,10 @@ setClass(
   contains = c("gaSegmentCondition", ".gaSegmentFilter")
 )
 
-#' `gaSegmentFilterList` class.
+#' `gaDynSegment` class.
 #'
 #' An S4 class to represent a list of segment filter expressions that belong to a
 #' specified scope.
-#'
-#' @rdname gaSegmentFilterList-class
-#' @keywords internal
-#'
-#' @export
-setClass(
-  "gaSegmentFilterList",
-  contains = "list",
-  validity = function(object) {
-    if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
-      "All conditions within a gaSegmentFilterList list must belong to the superclass '.gaSegmentFilter'."
-    } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      "A maximum of 10 dimension or metric conditions per segment."
-    } else {
-      TRUE
-    }
-  }
-)
-
-#' `gaDynSegment` class.
-#'
-#' An S4 class to represent a list of scoped segment filter lists.
 #'
 #' @rdname gaDynSegment-class
 #' @keywords internal
@@ -168,11 +146,10 @@ setClass(
   "gaDynSegment",
   contains = "list",
   validity = function(object) {
-    if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
-      return("A maximum of 10 dimension or metric conditions per segment.")
-    }
-    if (!all_inherit(object@.Data, "gaSegmentFilterList")) {
-      "All objects with a gaDynSegment list must belong to the class 'gaSegmentFilterList'."
+    if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
+      "All conditions within a gaDynSegment list must belong to the superclass '.gaSegmentFilter'."
+    } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {
+      "A maximum of 10 dimension or metric conditions per segment."
     } else {
       TRUE
     }

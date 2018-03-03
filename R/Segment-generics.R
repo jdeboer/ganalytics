@@ -82,10 +82,10 @@ setGeneric(
   }
 )
 
-#' SegmentFilters.
+#' DynSegment.
 #'
 #' Combine one or more segment condition filters and/or sequence filters into a
-#' gaSegmentFilterList that is scoped to either 'user' or 'session' level.
+#' gaDynSegment that is scoped to either 'user' or 'session' level.
 #'
 #' A segment filter is either sequential or non-sequential conditions.
 #' Sequential and non-sequential conditoins can be combined using this function.
@@ -93,13 +93,13 @@ setGeneric(
 #' @param object The first filter to include in the segment definition.
 #' @param ... Additional filters to include in the segment definition, if
 #'   needed.
-#' @return a gaSegmentFilterList object.
+#' @return a gaDynSegment object.
 #'
 #' @export
 setGeneric(
-  "SegmentFilters",
+  "DynSegment",
   function(object, ...) {},
-  valueClass = "gaSegmentFilterList",
+  valueClass = "gaDynSegment",
   useAsDefault = FALSE
 )
 
@@ -141,43 +141,43 @@ setGeneric(
 
 #' PerSession.
 #'
-#' Set the scope of a gaSegmentFilterList or gaMetExpr object to session-level.
+#' Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
 #'
-#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to
+#' @param object a .gaSegmentFilter or gaMetExpr object to coerce to
 #'   session-level. Alternatively, an dimension expression or segment filter to
-#'   coerce into a session scoped gaSegmentFilterList.
-#' @param ... Other filters to include in the gaSegmentFilterList.
-#' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
+#'   coerce into a session scoped gaDynSegment.
+#' @param ... Other filters to include in the gaDynSegment.
+#' @return a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
-#'   To define a gaSegmentFilterList comprised of a single metric expression,
+#'   To define a gaDynSegment comprised of a single metric expression,
 #'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
   "PerSession",
   function(object, ...){},
-  valueClass = c("gaSegmentFilterList", ".gaSegmentFilter", "gaSegMetExpr"),
+  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
 
 #' PerUser.
 #'
-#' Set the scope of a gaSegmentFilterList or gaMetExpr object to user-level.
+#' Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
 #'
-#' @param object a gaSegmentFilterList or gaMetExpr object to coerce to
+#' @param object a .gaSegmentFilter or gaMetExpr object to coerce to
 #'   user-level. Alternatively, an dimension expression or segment filter to
-#'   coerce into a user scoped gaSegmentFilterList.
-#' @param ... Other filters to include in the gaSegmentFilterList.
-#' @return a gaMetExpr, .gaSegmentFilter or gaSegmentFilterList.
+#'   coerce into a user scoped gaDynSegment.
+#' @param ... Other filters to include in the gaDynSegment.
+#' @return a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
-#'   To define a gaSegmentFilterList comprised of a single metric expression,
+#'   To define a gaDynSegment comprised of a single metric expression,
 #'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @export
 setGeneric(
   "PerUser",
   function(object, ...){},
-  valueClass = c("gaSegmentFilterList", ".gaSegmentFilter", "gaSegMetExpr"),
+  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
 

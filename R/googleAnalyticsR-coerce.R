@@ -162,7 +162,7 @@ setAs("gaSegmentSequenceFilter", "segmentFilter_ga4", def = function(from, to) {
   x
 })
 
-setAs("gaSegmentFilterList", "segmentDef_ga4", def = function(from, to) {
+setAs("gaDynSegment", "segmentDef_ga4", def = function(from, to) {
   x <- list(
     segmentFilters = lapply(from, as, "segmentFilter_ga4")
   )
@@ -171,9 +171,9 @@ setAs("gaSegmentFilterList", "segmentDef_ga4", def = function(from, to) {
 })
 
 setAs("gaSegmentConditionFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaSegmentFilterList"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), "segmentDef_ga4")
 })
 
 setAs("gaSegmentSequenceFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaSegmentFilterList"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), "segmentDef_ga4")
 })

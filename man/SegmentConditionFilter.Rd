@@ -31,7 +31,7 @@ Create a new gaSegmentConditionFilter object
 \itemize{
 \item \code{ANY}: Create a non-sequential segment condition
 filter from one or more expressions. All conditions within the filter must
-hold true within a single session if applied to a gaSegmentFilterList
+hold true within a single session if applied to a gaDynSegment
 scoped at session-level, or to a single hit if scoped at user-level.
 }}
 

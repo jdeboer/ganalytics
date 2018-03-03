@@ -37,11 +37,11 @@ setMethod(
   }
 )
 
-# ---- SegmentConditionFilter, SegmentFilters, IsNegated ----
+# ---- SegmentConditionFilter, DynSegment, IsNegated ----
 
 #' @describeIn SegmentConditionFilter Create a non-sequential segment condition
 #'   filter from one or more expressions. All conditions within the filter must
-#'   hold true within a single session if applied to a gaSegmentFilterList
+#'   hold true within a single session if applied to a gaDynSegment
 #'   scoped at session-level, or to a single hit if scoped at user-level.
 setMethod(
   f = "SegmentConditionFilter",
@@ -76,14 +76,14 @@ setMethod(
   }
 )
 
-#' @describeIn SegmentFilters Defines a list of filters from one or more
+#' @describeIn DynSegment Defines a list of filters from one or more
 #'   expressions applied using the specified scope.
 setMethod(
-  f = "SegmentFilters",
+  f = "DynSegment",
   signature = "ANY",
   definition = function(object, ...) {
     exprList <- list(object, ...)
-    nested <- sapply(exprList, is, "gaSegmentFilterList")
+    nested <- sapply(exprList, is, "gaDynSegment")
     segment_filter_list <- lapply(exprList[!nested], function(expr){
       as(expr, ".gaSegmentFilter")
     })
@@ -92,14 +92,14 @@ setMethod(
       segment_filter_list,
       nested_segment_filters
     )
-    new("gaSegmentFilterList", segment_filter_list)
+    new("gaDynSegment", segment_filter_list)
   }
 )
 
-#' @describeIn SegmentFilters Returns itself.
+#' @describeIn DynSegment Returns itself.
 setMethod(
-  f = "SegmentFilters",
-  signature = c("gaSegmentFilterList"),
+  f = "DynSegment",
+  signature = c("gaDynSegment"),
   definition = function(object) {
     object
   }
@@ -128,17 +128,17 @@ setMethod(
   }
 )
 
-#' @describeIn ScopeLevel Set the scope level of a gaSegmentFilterList to either
+#' @describeIn ScopeLevel Set the scope level of a gaDynSegment to either
 #'   "user" or "session" level.
 setMethod(
   f = "ScopeLevel<-",
-  signature = c("gaSegmentFilterList", "character"),
+  signature = c("gaDynSegment", "character"),
   definition = function(object, value) {
     object <- lapply(object, function(segmentFilter) {
       ScopeLevel(segmentFilter) <- value
       segmentFilter
     })
-    object <- new("gaSegmentFilterList", object)
+    object <- new("gaDynSegment", object)
     validObject(object)
     object
   }
@@ -274,7 +274,7 @@ setMethod(
 
 # ---- Segment ----
 
-#' @describeIn Segments Interpret the supplied numeric value as a segment ID.
+#' @describeIn Segment Interpret the supplied numeric value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "numeric",
@@ -283,7 +283,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments Interpret the supplied character value as a segment ID.
+#' @describeIn Segment Interpret the supplied character value as a segment ID.
 setMethod(
   f = "Segment",
   signature = "character",
@@ -292,7 +292,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments Create a non-sequential segment using the supplied
+#' @describeIn Segment Create a non-sequential segment using the supplied
 #'   expressions.
 setMethod(
   f = "Segment",
@@ -300,7 +300,7 @@ setMethod(
   definition = function(object, ...) {
     dyn_segment_def <- list(object, ...)
     segment_filter_list <- lapply(dyn_segment_def, function(segment_filter_list) {
-      as(segment_filter_list, "gaSegmentFilterList")
+      as(segment_filter_list, ".gaSegmentFilter")
     })
     new(
       "gaDynSegment",
@@ -309,7 +309,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments returns NULL
+#' @describeIn Segment returns NULL
 setMethod(
   f = "Segment",
   signature = "NULL",
@@ -318,7 +318,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments Return the segment ID of the supplied GA Management API
+#' @describeIn Segment Return the segment ID of the supplied GA Management API
 #'   user segment.
 setMethod(
   f = "Segment",
@@ -358,7 +358,7 @@ setMethod(
       ".gaSegment",
       "character",
       "numeric",
-      "gaSegmentFilterList",
+      "gaDynSegment",
       ".compoundExpr"
     ))) {
       new("gaSegmentList", list(segment = Segment(object)))

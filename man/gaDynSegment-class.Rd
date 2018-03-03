@@ -5,6 +5,7 @@
 \alias{gaDynSegment-class}
 \title{`gaDynSegment` class.}
 \description{
-An S4 class to represent a list of scoped segment filter lists.
+An S4 class to represent a list of segment filter expressions that belong to a
+specified scope.
 }
 \keyword{internal}
