@@ -4,7 +4,7 @@
 \name{Segments}
 \alias{Segments}
 \alias{Segments<-}
-\alias{Segments,gaSegmentList-method}
+\alias{Segments,gaSegmentsList-method}
 \alias{Segments,gaQuery-method}
 \alias{Segments,ANY-method}
 \alias{Segments<-,gaQuery-method}
@@ -14,7 +14,7 @@ Segments(object, ...)
 
 Segments(object) <- value
 
-\S4method{Segments}{gaSegmentList}(object)
+\S4method{Segments}{gaSegmentsList}(object)
 
 \S4method{Segments}{gaQuery}(object)
 
@@ -33,7 +33,7 @@ built-in and/or custom segments by their ID.}
 \item{value}{A named list of segments or a single segment.}
 }
 \value{
-a gaSegmentList
+a gaSegmentsList
 }
 \description{
 Get the list of segments from the object or coerce the supplied objects into
@@ -43,7 +43,7 @@ Set the segments of the query object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{gaSegmentList}: Returns itself
+\item \code{gaSegmentsList}: Returns itself
 
 \item \code{gaQuery}: Return the definition of the segment applied to the view.
 

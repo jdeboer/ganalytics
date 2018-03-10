@@ -222,11 +222,11 @@ setMethod(
   }
 )
 
-# -- gaSegmentList ----
+# -- gaSegmentsList ----
 
 setMethod(
   f = "initialize",
-  signature = "gaSegmentList",
+  signature = "gaSegmentsList",
   definition = function(.Object, value) {
     if (!missing(value)) {
       .Object@.Data <- lapply(value, as, ".gaSegment")

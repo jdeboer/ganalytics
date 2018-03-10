@@ -149,7 +149,7 @@ setClass(
     creds = "list",
     dateRange = "dateRange",
     samplingLevel = "character",
-    segments = "gaSegmentList",
+    segments = "gaSegmentsList",
     cohortGroup = "gaCohortGroup"
   ),
   prototype = prototype(
@@ -247,7 +247,7 @@ setClass(
     dimensions = "gaDimensions",
     sortBy = "gaSortBy",
     filters = "gaFilter",
-    segments = "gaSegmentList",
+    segments = "gaSegmentsList",
     buckets = "numeric"
   ),
   prototype = prototype(

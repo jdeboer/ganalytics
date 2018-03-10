@@ -210,14 +210,14 @@ setGeneric(
 #' @param ... Alternatively, provide one or more named arguments (segments or
 #'   objects that can be coerced into segments) including dynamic segments,
 #'   built-in and/or custom segments by their ID.
-#' @return a gaSegmentList
+#' @return a gaSegmentsList
 #'
 #' @export
 #' @rdname Segments
 setGeneric(
   "Segments",
   function(object, ...) {},
-  valueClass = c("gaSegmentList"),
+  valueClass = c("gaSegmentsList"),
   useAsDefault = FALSE
 )
 

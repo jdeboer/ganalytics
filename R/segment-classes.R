@@ -191,16 +191,16 @@ setClass(
 #' @exportClass .gaSegment
 setClassUnion(".gaSegment", c("gaDynSegment", "gaSegmentId"))
 
-#' `gaSegmentList` class.
+#' `gaSegmentsList` class.
 #'
 #' An S4 class to represent a list of segment expressions to query.
 #'
-#' @rdname gaSegmentList-class
+#' @rdname gaSegmentsList-class
 #' @keywords internal
 #'
 #' @export
 setClass(
-  "gaSegmentList",
+  "gaSegmentsList",
   contains = "list",
   validity = function(object) {
     validate_that(all_inherit(object, ".gaSegment"))
