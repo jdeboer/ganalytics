@@ -2,22 +2,12 @@ library(ganalytics)
 library(googleAnalyticsR)
 
 my_segment_list <- list(
-  bounced_sessions = PerSession(Expr(~bounces != 0)),
-  from_google = Expr(~source == "google"),
-  repeat_user_sessions = PerUser(Expr(~sessions > 1))
-)
+    bounced_sessions = PerSession(Expr(~bounces != 0)),
+    from_google = Expr(~source == "google"),
+    repeat_user_sessions = Include(PerUser(Expr(~sessions > 1)), scope = "users")
+  )
 
-my_segment_list <- lapply(names(my_segment_list), function(segment_name) {
-  segment_def <- my_segment_list[[segment_name]]
-  segment_def <- as(
-    SegmentConditionFilter(segment_def),
-    "segmentFilter_ga4"
-  )
-  segment_ga4(
-    name = segment_name,
-    session_segment = segment_def
-  )
-})
+my_segment_list <- as(Segments(my_segment_list), "segment_ga4")
 
 google_analytics(
   viewId = 157157785,
@@ -26,3 +16,6 @@ google_analytics(
   dimensions = c("segment", "date"),
   segments = my_segment_list
 )
+
+
+
