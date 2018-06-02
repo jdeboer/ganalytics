@@ -5,6 +5,9 @@
 #' @importFrom methods setAs
 NULL
 
+setClass("segment_ga4")
+setClass("dynamicSegment_ga4")
+
 get_expression_details <- function(from, var_operators) {
   varName <- as.character(Var(from))
   names(varName) <- sub("^ga:", "", varName)
@@ -176,4 +179,30 @@ setAs("gaSegmentConditionFilter", "segmentDef_ga4", def = function(from, to) {
 
 setAs("gaSegmentSequenceFilter", "segmentDef_ga4", def = function(from, to) {
   as(as(from, "gaDynSegment"), "segmentDef_ga4")
+})
+
+setAs("gaDynSegment", "dynamicSegment_ga4", def = function(from, to) {
+  dyn_segment <- list(
+    name = from@name,
+    userSegment = as(select_segment_filters_with_scope(from, scope = "users"), "segmentDef_ga4"),
+    sessionSegment = as(select_segment_filters_with_scope(from, scope = "sessions"), "segmentDef_ga4")
+  )
+  class(dyn_segment) <- "dynamicSegment_ga4"
+  dyn_segment
+})
+
+setAs("gaSegmentList", "segment_ga4", def = function(from, to) {
+  segment_list <- lapply(seq_along(from), function(segment_i) {
+    segment_name <- names(from)[segment_i]
+    segment <- from[[segment_i]]
+    switch (class(segment),
+      gaDynSegment = {
+        segment@name = segment_name
+        list(dynamicSegment = as(segment, "dynamicSegment_ga4"))
+      },
+      gaSegmentId = list(segmentId = as(segment, "character"))
+    )
+  })
+  class(segment_list) <- to
+  segment_list
 })
