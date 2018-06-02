@@ -7,9 +7,9 @@
 \alias{DynSegment,gaDynSegment-method}
 \title{DynSegment.}
 \usage{
-DynSegment(object, ...)
+DynSegment(object, ..., name = character(0))
 
-\S4method{DynSegment}{ANY}(object, ...)
+\S4method{DynSegment}{ANY}(object, ..., name = character(0))
 
 \S4method{DynSegment}{gaDynSegment}(object)
 }

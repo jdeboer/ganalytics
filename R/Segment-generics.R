@@ -98,7 +98,7 @@ setGeneric(
 #' @export
 setGeneric(
   "DynSegment",
-  function(object, ...) {},
+  function(object, ..., name = character(0)) {},
   valueClass = "gaDynSegment",
   useAsDefault = FALSE
 )

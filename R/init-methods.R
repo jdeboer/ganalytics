@@ -195,11 +195,14 @@ setMethod(
 setMethod(
   "initialize",
   signature = "gaDynSegment",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, name) {
     if(!missing(value)) {
       .Object@.Data <- value
-      validObject(.Object)
     }
+    if(!missing(name)) {
+      .Object@name <- name
+    }
+    validObject(.Object)
     return(.Object)
   }
 )
