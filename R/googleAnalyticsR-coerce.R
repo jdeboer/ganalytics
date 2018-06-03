@@ -194,6 +194,7 @@ setAs("gaDynSegment", "dynamicSegment_ga4", def = function(from, to) {
 setAs("gaSegmentList", "segment_ga4", def = function(from, to) {
   segment_list <- lapply(seq_along(from), function(segment_i) {
     segment_name <- names(from)[segment_i]
+    if(is.null(segment_name)) segment_name <- character(0)
     segment <- from[[segment_i]]
     switch (class(segment),
       gaDynSegment = {
@@ -206,3 +207,4 @@ setAs("gaSegmentList", "segment_ga4", def = function(from, to) {
   class(segment_list) <- to
   segment_list
 })
+
