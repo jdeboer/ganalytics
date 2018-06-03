@@ -9,13 +9,15 @@ my_segment_list <- list(
 
 my_segment_list <- as(Segments(my_segment_list), "segment_ga4")
 
+my_dim_table_filter <- Expr(~medium == "(none)")
+my_dim_table_filter <- as(TableFilter(my_dim_table_filter), ".filter_clauses_ga4")
+
 google_analytics(
   viewId = 157157785,
   date_range = c("7daysAgo", "yesterday"),
   metrics = c("users", "sessions"),
-  dimensions = c("segment", "date"),
-  segments = my_segment_list
+  dimensions = c("segment", "medium"),
+  segments = my_segment_list,
+  dim_filters = my_dim_table_filter
 )
-
-
 

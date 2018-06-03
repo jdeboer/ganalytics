@@ -7,6 +7,7 @@ NULL
 
 setClass("segment_ga4")
 setClass("dynamicSegment_ga4")
+setClass(".filter_clauses_ga4")
 
 get_expression_details <- function(from, var_operators) {
   varName <- as.character(Var(from))
@@ -62,6 +63,24 @@ setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
   )
   class(x) <- "met_fil_ga4"
   x
+})
+
+setAs("gaFilter", ".filter_clauses_ga4", def = function(from, to) {
+  exprs <- unlist(from)
+  if(all_inherit(exprs, ".dimExpr")) {
+    type <- "dim_fil_ga4"
+  } else if(all_inherit(exprs, ".metExpr")) {
+    type <- "met_fil_ga4"
+  } else {
+    stop("From gaFilter must contain either all .dimExpr or all .metExpr")
+  }
+  lapply(
+    from,
+    function(or_filters) {
+      or_filters <- lapply(or_filters, as, type)
+      googleAnalyticsR::filter_clause_ga4(or_filters, operator = "OR")
+    }
+  )
 })
 
 setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
