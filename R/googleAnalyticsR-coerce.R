@@ -49,7 +49,7 @@ setAs("gaDimExpr", "dim_fil_ga4", def = function(from, to) {
     expressions = as.list(as.character(Operand(from))),
     caseSensitive = FALSE
   )
-  class(x) <- "dim_fil_ga4"
+  class(x) <- to
   x
 })
 
@@ -61,7 +61,7 @@ setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
     operator = met_operation$operator_name,
     comparisonValue = as.character(Operand(from))
   )
-  class(x) <- "met_fil_ga4"
+  class(x) <- to
   x
 })
 
@@ -99,7 +99,7 @@ setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
     dimensionFilter = segmentDimensionFilter,
     metricFilter = NULL
   )
-  class(x) <- "segmentFilterClause_ga4"
+  class(x) <- to
   x
 })
 
@@ -110,7 +110,12 @@ setAs("gaMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
 
 setAs("gaSegMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
   exp_details <- get_expression_details(from, kGa4Ops$metric_operators)
-  scope <- c("perHit" = "HIT", "perSession" = "SESSION", "perUser" = "USER")[[ScopeLevel(from)]]
+  scope <- c(
+    "perProduct" = "PRODUCT",
+    "perHit" = "HIT",
+    "perSession" = "SESSION",
+    "perUser" = "USER"
+  )[[ScopeLevel(from)]]
   segmentMetricFilter <- list(
     scope = scope,
     metricName = exp_details$varName,
@@ -124,7 +129,7 @@ setAs("gaSegMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
     dimensionFilter = NULL,
     metricFilter = segmentMetricFilter
   )
-  class(x) <- "segmentFilterClause_ga4"
+  class(x) <- to
   x
 })
 
@@ -132,7 +137,7 @@ setAs("orExpr", "orFiltersForSegment_ga4", def = function(from, to) {
   x <- list(
     segmentFilterClauses = lapply(from, as, "segmentFilterClause_ga4")
   )
-  class(x) <- "orFiltersForSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -140,7 +145,7 @@ setAs("andExpr", "simpleSegment_ga4", def = function(from, to) {
   x <- list(
     orFiltersForSegment = lapply(from, as, "orFiltersForSegment_ga4")
   )
-  class(x) <- "simpleSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -150,7 +155,7 @@ setAs("gaSegmentSequenceStep", "segmentSequenceStep_ga4", def = function(from, t
     as(as(from@.Data, "andExpr"), "simpleSegment_ga4"),
     list(matchType = matchType)
   )
-  class(x) <- "segmentSequenceStep_ga4"
+  class(x) <- to
   x
 })
 
@@ -160,7 +165,7 @@ setAs("gaSegmentSequenceFilter", "sequenceSegment_ga4", def = function(from, to)
     segmentSequenceSteps = segmentSequenceSteps,
     firstStepShouldMatchFirstHit = from[[1]]@immediatelyPrecedes
   )
-  class(x) <- "sequenceSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -170,8 +175,12 @@ setAs("gaSegmentConditionFilter", "segmentFilter_ga4", def = function(from, to) 
     simpleSegment = as(from, "simpleSegment_ga4"),
     sequenceSegment = NULL
   )
-  class(x) <- "segmentFilter_ga4"
+  class(x) <- to
   x
+})
+
+setAs(".compoundExpr", "segmentFilter_ga4", def = function(from, to) {
+  as(as(from, "gaSegmentConditionFilter"), to)
 })
 
 setAs("gaSegmentSequenceFilter", "segmentFilter_ga4", def = function(from, to) {
@@ -180,7 +189,7 @@ setAs("gaSegmentSequenceFilter", "segmentFilter_ga4", def = function(from, to) {
     simpleSegment = NULL,
     sequenceSegment = as(from, "sequenceSegment_ga4")
   )
-  class(x) <- "segmentFilter_ga4"
+  class(x) <- to
   x
 })
 
@@ -188,16 +197,16 @@ setAs("gaDynSegment", "segmentDef_ga4", def = function(from, to) {
   x <- list(
     segmentFilters = lapply(from, as, "segmentFilter_ga4")
   )
-  class(x) <- "segmentDef_ga4"
+  class(x) <- to
   x
 })
 
 setAs("gaSegmentConditionFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaDynSegment"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), to)
 })
 
 setAs("gaSegmentSequenceFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaDynSegment"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), to)
 })
 
 setAs("gaDynSegment", "dynamicSegment_ga4", def = function(from, to) {
@@ -225,5 +234,9 @@ setAs("gaSegmentList", "segment_ga4", def = function(from, to) {
   })
   class(segment_list) <- to
   segment_list
+})
+
+setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
+  as(as(from, "gaDynSegment"), to)
 })
 

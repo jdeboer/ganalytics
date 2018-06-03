@@ -2,6 +2,16 @@ library(ganalytics)
 
 context("Segmentation queries are correctly formatted for API requests")
 
+test_that("conditional logic structures of expressions are retained", {
+  expr1 <- Expr(~source == "google")
+  expr2 <- Expr(~medium == "organic")
+  expr3 <- Expr(~bounces < 1)
+  expect_equal(
+    expr1 & (expr2 | expr3),
+    as(SegmentConditionFilter(expr1 & (expr2 | expr3)), ".compoundExpr")
+  )
+})
+
 test_that("segment expressions are correctly coerced to character string", {
   expect_equal(
     as(

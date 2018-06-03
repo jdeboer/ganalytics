@@ -132,18 +132,15 @@ setMethod(
   signature = ".compoundExpr",
   definition = function(object, ...) {
     exprList <- list(object, ...)
-    exprList <- lapply(
-      X = exprList,
+    nested <- sapply(exprList, is, "andExpr")
+    andExpr <- unlist(exprList[nested], recursive = FALSE)
+    orExprList <- lapply(
+      exprList[!nested],
       FUN = function(expr) {
-        if (is(expr, "andExpr")) {
-          expr <- unlist(expr, recursive = FALSE)
-          expr <- lapply(expr, as, "orExpr")
-        } else {
-          list(as(expr, "orExpr"))
-        }
+        as(expr, "orExpr")
       }
     )
-    new("andExpr", unlist(exprList, recursive = FALSE))
+    new("andExpr", c(andExpr, orExprList))
   }
 )
 

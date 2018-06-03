@@ -86,7 +86,7 @@ test_that("Expressions can be ANDed to give the correct character output", {
     GaExpr("pageviews", ">", 100) &
       (GaExpr("timeOnPage", "<", 2000) &
          GaExpr("bounceRate", "=", 100)),
-    "character"), "ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
+    "character"), "ga:timeOnPage<2000;ga:bounceRate==100;ga:pageviews>100")
 })
 
 test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed", {
@@ -143,7 +143,7 @@ test_that("ORed expressions can be ANDed, but ANDed expressions cannot be ORed",
         )
       )
     ),
-    "character"), "ga:eventValue<50,ga:keyword=@contact;ga:deviceCategory==mobile;ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100")
+    "character"), "ga:pageviews>100;ga:timeOnPage<2000;ga:bounceRate==100;ga:deviceCategory==mobile;ga:eventValue<50,ga:keyword=@contact")
 })
 
 test_that("ORed expressions can be NOTed", {
