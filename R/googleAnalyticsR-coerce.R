@@ -74,13 +74,15 @@ setAs("gaFilter", ".filter_clauses_ga4", def = function(from, to) {
   } else {
     stop("From gaFilter must contain either all .dimExpr or all .metExpr")
   }
-  lapply(
+  filter_clauses <- lapply(
     from,
     function(or_filters) {
       or_filters <- lapply(or_filters, as, type)
       googleAnalyticsR::filter_clause_ga4(or_filters, operator = "OR")
     }
   )
+  class(filter_clauses) <- type
+  filter_clauses
 })
 
 setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
