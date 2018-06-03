@@ -93,6 +93,7 @@ setGeneric(
 #' @param object The first filter to include in the segment definition.
 #' @param ... Additional filters to include in the segment definition, if
 #'   needed.
+#' @param name An optional name given to the dynamic segment.
 #' @return a gaDynSegment object.
 #'
 #' @export
