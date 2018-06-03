@@ -195,11 +195,14 @@ setMethod(
 setMethod(
   "initialize",
   signature = "gaDynSegment",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, name) {
     if(!missing(value)) {
       .Object@.Data <- value
-      validObject(.Object)
     }
+    if(!missing(name)) {
+      .Object@name <- name
+    }
+    validObject(.Object)
     return(.Object)
   }
 )
@@ -229,7 +232,20 @@ setMethod(
   signature = "gaSegmentList",
   definition = function(.Object, value) {
     if (!missing(value)) {
-      .Object@.Data <- lapply(value, as, ".gaSegment")
+      segment_names <- names(value)
+      .Object@.Data <- lapply(seq_along(value), function(i) {
+        value[[i]] <- as(value[[i]], ".gaSegment")
+        if(is(value[[i]], "gaDynSegment")) {
+          segment_name <- segment_names[i]
+          if(is.null(segment_name)) {
+            segment_name <- character(0)
+          }
+          value[[i]]@name <- segment_name
+        }
+        value[[i]]
+      })
+      names(.Object) <- segment_names
+      validObject(.Object)
     }
     .Object
   }

@@ -1,4 +1,6 @@
-2018-02-18 Added as methods to support the coercion of a range of ganalytics classes into googleAnalyticsR classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the googleAnalyticsR package.
+2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the googleAnalyticsR package. Dynamic Segments objects now have a name property.
+
+2018-02-18 Added methods for coercing a range of ganalytics classes into googleAnalyticsR classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the googleAnalyticsR package.
 
 2018-02-12 Scope and negation of segment conditions can now be defined at the filter level. Fixed bug where backslashes were being escaped incorrectly in expression operands. The methods of the Segment generic function are now split into two generic functions, Segment and Segments. Segments is used to set or get a named list segments, whereas Segment is for defining a single segment to be added to a Segments list.
 

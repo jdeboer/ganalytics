@@ -122,16 +122,6 @@ setAs(from = "gaDynSegment", to = "json",
       }
 )
 
-select_segment_filters_with_scope <- function(object, scope) {
-  assert_that(
-    length(scope) == 1L,
-    scope %in% c("sessions", "users")
-  )
-  dyn_segment <- as(object, "gaDynSegment")
-  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
-  new("gaDynSegment", dyn_segment[matching_filters])
-}
-
 scoped_segment_filter_list_to_char <- function(from, scope) {
   if (length(from) >= 1L) {
     paste(

@@ -144,8 +144,15 @@ setClass(
 #' @export
 setClass(
   "gaDynSegment",
+  slots = c(
+    name = "character"
+  ),
+  prototype = prototype(
+    name = character(0)
+  ),
   contains = "list",
   validity = function(object) {
+    validate_that(length(object@name) <= 1L)
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaDynSegment list must belong to the superclass '.gaSegmentFilter'."
     } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {

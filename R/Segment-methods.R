@@ -81,7 +81,7 @@ setMethod(
 setMethod(
   f = "DynSegment",
   signature = "ANY",
-  definition = function(object, ...) {
+  definition = function(object, ..., name = character(0)) {
     exprList <- list(object, ...)
     nested <- sapply(exprList, is, "gaDynSegment")
     segment_filter_list <- lapply(exprList[!nested], function(expr){
@@ -92,7 +92,7 @@ setMethod(
       segment_filter_list,
       nested_segment_filters
     )
-    new("gaDynSegment", segment_filter_list)
+    new("gaDynSegment", segment_filter_list, name = name)
   }
 )
 
@@ -380,3 +380,25 @@ setMethod(
   }
 )
 
+#' select_segment_filters_with_scope.
+#'
+#' Given a Dynamic Segment object, or an object that can be coerced to a
+#' gaDynSegment, returns segment filters within object that are of the specified
+#' scope ('sessions' or 'users').
+#'
+#' @param object a Dynamic Segment object, or an object that can be coerced to a
+#'   gaDynSegment.
+#' @param scope either 'sessions' or 'users' to specify which segment filters to
+#'   return as a dynamic segment subset.
+#' @return a gaDynSegment object.
+#'
+#' @keywords internal
+select_segment_filters_with_scope <- function(object, scope) {
+  assert_that(
+    length(scope) == 1L,
+    scope %in% c("sessions", "users")
+  )
+  dyn_segment <- as(object, "gaDynSegment")
+  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
+  new("gaDynSegment", dyn_segment[matching_filters])
+}
