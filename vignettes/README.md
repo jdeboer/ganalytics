@@ -1,7 +1,7 @@
 ---
 title: "Interactively querying Google Analytics reports"
 author: "Johann de Boer"
-date: "2018-03-03"
+date: "2018-06-01"
 output:
   html_vignette:
     keep_md: yes
