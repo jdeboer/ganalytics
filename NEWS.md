@@ -1,4 +1,4 @@
-2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the googleAnalyticsR package. Dynamic Segments objects now have a name property.
+2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the googleAnalyticsR package. Dynamic Segments objects now have a name property. Updated `googleAnalyticsR-demo` and examples in the readme file.
 
 2018-02-18 Added methods for coercing a range of ganalytics classes into googleAnalyticsR classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the googleAnalyticsR package.
 

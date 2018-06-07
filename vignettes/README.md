@@ -1,7 +1,7 @@
 ---
 title: "Interactively querying Google Analytics reports"
 author: "Johann de Boer"
-date: "2018-06-01"
+date: "2018-06-07"
 output:
   html_vignette:
     keep_md: yes
@@ -24,12 +24,16 @@ ganalytics
 
 Interact with **Google Analytics** using **R**
 
-Classes and methods for interactive use of the Google Analytics core reporting, real-time, multi-channel funnel reporting, metadata, configuration management, and Google Tag Manager APIs using R.
+Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs using R.
 
-This package provides functions for querying the Google Analytics core reporting, real-time, multi-channel funnel and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the management and Google Tag Manager APIs so that you can change tag, property or view settings, for example. Define reporting queries using natural R expressions instead of being concerned as much about API technical intricacies like query syntax, character code escaping, and API limitations.
+The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.
+
+This package provides functions for querying the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the Google Analytics Management and Google Tag Manager APIs so that you can, for example, change tag, property or view settings.
 
 Updates
 -------
+Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the `google_analytics` function in GoogleAnalyticsR by using `as()`, supplying the appropriate GoogleAnalyticsR class names, which are `"segment_ga4"` for segments and `".filter_clauses_ga4"` for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using `as()`.
+
 Many new functions have been provided for writing segmentation expressions:
 
 * `Segments(...)` - define a list of segments dynamically based on one or more expressions and/or a selection of built-in and/or custom segments by their IDs.
@@ -43,25 +47,17 @@ Many new functions have been provided for writing segmentation expressions:
 * `Later(condition)` - similar to `Then()` but means that a condition can happen any point after the preceding condition - this is how conditions are treated by default in a sequence if not explicitly set.
 * `First(condition)` - similar to `Then()` but means that a condition must be the first interaction (hit) by the user within the specified date-range. Using `First()` is optional. Without using `First()` at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use `First()` anywhere else in the sequence other than at the start, if used at all.
 
-Function names have changed, however the old function names are still supported for backwards compatibility. This has been done to generalise the functions for use across a wider range of Google Analytics related APIs.
+Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to process the response from these queries - stay tuned for updates on this.
 
-Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to be done to process the response from these queries - stay tuned for updates on this.
+Instead of using `Or`, `And`, and `Not`, it is now possible to use familiar R language Boolean operators, `|` (`Or`), `&` (`And`), and `!` (`Not`) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires `Or` to have precedence over `And`, which is the opposite to the natural precedence given by R when using the `|` and `&` operators. Therefore, remember to use parentheses `(` `)` to enforce the correct order of operation to your Boolean expressions. For example `my_filter <- !bounced & (completed_goal | transacted)` is a valid structure for a Google Analytics reporting API filter expression.
 
-Instead of using `GaOr`, `GaAnd`, and `GaNot` (now called `Or`, `And`, and `Not`, respectively), it is now possible to use familiar R language Boolean operators, `|` (`Or`), `&` (`And`), and `!` (`Not`) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires `Or` to have precedence over `And`, which is the opposite to the natural precedence given by R when using the `|` and `&` operators. Therefore, remember to use parentheses `()` to force the order of operation applied to your Boolean expressions.
+You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are *write* methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the "INSERT", "UPDATE" and "DELETE" methods.
 
-There is now support for user and session level condition based segments as well as sequential segmentation.
-
-Also recently added is Google Management API support (still a work in progress) - so now you can get details in R about what goals you have defined, accounts, properties, views, etc. There are *write* methods in there too, but these have not been fully tested so perhaps try them under a test login if you want, otherwise just avoid using the "INSERT", "UPDATE" and "DELETE" methods.
-
-There is also some basic support for the Google Tag Manager API, but again, still work in progress.
+There is also some basic support for the Google Tag Manager API, but again, this is a work in progress so take care with the write methods above.
 
 Installation
 ------------
-### 1. Install the necessary packages into R
-
-#### Warning
-* The ganalytics package is currently under development.
-* The installation procedure below installs directly from the GitHub repository.
+### 1. Install the necessary packages into R via the GitHub repository
 
 #### Prerequisites
 * Ensure you have installed the latest version of [R](http://cran.r-project.org/)
@@ -77,9 +73,6 @@ install.packages("devtools")
 devtools::install_github("jdeboer/ganalytics")
 # End
 ```
-
-#### Now, restart R.
-* This is important to ensure you have a clean workspace to avoid possible errors.
 
 ### 2. Prepare your Google API application _(you only need to do this once)_
 * Browse to [**Google API Console**] (https://code.google.com/apis/console/)
@@ -102,11 +95,11 @@ _Note: For further information about Google APIs, please refer to the [Reference
 
   * To do this in Windows:
     * Search for and select **"Edit Environment Variables For Your Account"** from the Start menu.
-    * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the above table.
+    * Within the **Environment Variables** window, add the above **User Variables** by selecting **New** and entering the **Variable Name** and **Variable Value**, then click **OK**. Do this for both variables listed in the table above.
     * Click **OK**.
     * **Restart** your computer for the new environment variables to take effect.
-  * There is also free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
-  * Another method that works across platforms is to create an `.Renviron` file that is structured like this:
+  * There is also a free open source utility to set environment variables on Mac OS called [EnvPane](https://github.com/hschmidt/EnvPane)
+  * Another method that works across platforms is to create an `.Renviron` file within your active R working directory that is structured like this:
   
 ```
 GOOGLE_APIS_CONSUMER_ID = <Your client ID>
@@ -128,11 +121,11 @@ Sys.setenv(
 * ganalytics needs to know the ID of the Google Analytics **view** that you wish to query. You can obtain this in a number of ways:
   * Using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
   * From the **Admin page** in Google Analytics under **View Settings**, or
-  * The browser's address bar when viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
+  * The browser's address bar while viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
 * **Alternatively, ganalytics can look up the view ID for you:**
-  * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you.
-  * Otherwise it will select the default view of the first property from the first account it finds in the list of accounts you have access to.
+  * If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you from that property.
+  * Otherwise it will select the default view of the first property from the first account that it finds in the list of accounts that you have access to.
 
 * Return to R and execute the following to load the ganalytics package:
 
@@ -140,7 +133,7 @@ Sys.setenv(
   library(ganalytics)
   ```
 
-* If you successfully set your system environment variables in step 3 above, then execute the following, optionally providing the email address you use to sign-in to Google Analytics:
+* If you have successfully set your system environment variables in step 3 above, then you can execute the following, optionally providing the email address you use to sign-in to Google Analytics:
 
   ```r
   my_creds <- GoogleApiCreds("you@domain.com")
@@ -152,7 +145,7 @@ Sys.setenv(
     ```r
     my_creds <- GoogleApiCreds("you@domain.com", "client_secret.json")
     ```
-  * Instead of a file you can supply the `client_id` and `client_secret` directly:
+  * Or, instead of a file you can supply the `client_id` and `client_secret` directly:
 
     ```r
     my_creds <- GoogleApiCreds(
@@ -164,14 +157,14 @@ Sys.setenv(
 * Now formulate and run your Google Analytics query, remembering to substitute `view_id` with the view ID you wish to use:
 
   ```r
-  myQuery <- GaQuery( view_id, my_creds )
+  myQuery <- GaQuery( view_id, creds = my_creds ) # view_id is optional
   GetGaData(myQuery)
   ```
 
 * You should then be directed to *accounts.google.com* within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.
 * Make sure you are signed into the Google account you wish to use, then grant access by selecting **"Allow access"**. You can then close the page and return back to R.
 
-If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days, for example:
+If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days. For example:
 
 ```
         date sessions
@@ -185,15 +178,15 @@ If you have successfully executed all of the above R commands you should see the
 8 2015-04-03     1552
 ```
 
-_Note: A small file will be saved to your home directory ('My Documents' in Windows) containing your new reusable authentication token._
+_Note: A small file will be saved to your home directory ('My Documents' in Windows) to cache your new reusable authentication token._
 
 Examples
 --------
 
 As demonstrated in the installation steps above, before executing any of the following examples:
 
-1. load the ganalytics package
-2. generate a `gaQuery` object with a Google Analytics view ID and API app credentials assigned to it.
+1. Load the ganalytics package
+2. Generate a `gaQuery` object using the `GaQuery()` function and assigning the object to a variable name such as `myQuery`.
 
 ### Asumptions
 
@@ -241,7 +234,7 @@ summary(myData)
 
 ```r
 # Similar to metrics, but for dimensions
-Dimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
+Dimensions(myQuery) <- c("year", "week", "dayOfWeekName", "hour")
 
 # Lets set a wider date range
 DateRange(myQuery) <- c("2012-10-01", "2013-03-31")
@@ -268,7 +261,7 @@ tail(myData)
 
 ```r
 # Filter for Sunday sessions only
-sundayExpr <- Expr("dayofweek", "=", "0")
+sundayExpr <- Expr(~dayOfWeekName == "Sunday")
 TableFilter(myQuery) <- sundayExpr
 
 myData <- GetGaData(myQuery)
@@ -286,9 +279,9 @@ head(myData)
 
 ```r
 # Expression to define Sunday sessions
-sundayExpr <- Expr("dayofweek", "=", "0")
+sundayExpr <- Expr(~dayOfWeekName == "Sunday")
 # Expression to define organic search sessions
-organicExpr <- Expr("medium", "=", "organic")
+organicExpr <- Expr(~medium == "organic")
 # Expression to define organic search sessions made on a Sunday
 sundayOrganic <- sundayExpr & organicExpr
 TableFilter(myQuery) <- sundayOrganic
@@ -308,8 +301,8 @@ head(myData)
 
 ```r
 # In a similar way to AND
-loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- !Expr(~sessionCount %matches% "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr(~daysSinceLastSession %matches% "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- loyalExpr | recentExpr
 TableFilter(myQuery) <- loyalOrRecent
 
@@ -321,10 +314,10 @@ summary(myData)
 ### Example 8 - Filters that combine ORs with ANDs
 
 ```r
-loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- !Expr(~sessionCount %matches% "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr(~daysSinceLastSession %matches% "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- loyalExpr | recentExpr
-sundayExpr <- Expr("dayOfWeek", "=", "0")
+sundayExpr <- Expr(~dayOfWeekName == "Sunday")
 loyalOrRecent_Sunday <- loyalOrRecent & sundayExpr
 TableFilter(myQuery) <- loyalOrRecent_Sunday
 
@@ -353,10 +346,10 @@ SortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
 myData <- GetGaData(myQuery)
 head(myData)
 
-# Notice that Google Analytics' Core Reporting API doesn't recognise 'numerical' dimensions as
-# ordered factors when sorting. We can use R to sort instead, using a plyr::arrange function.
-library(plyr)
-myData <- arrange(myData, desc(sessionCount), daysSinceLastSession)
+# Notice that the Google Analytics Core Reporting API doesn't recognise 'numerical' dimensions as
+# ordered factors when sorting. We can use R to sort instead, such as using dplyr.
+library(dplyr)
+myData <- myData %>% arrange(desc(sessionCount), daysSinceLastSession)
 head(myData)
 tail(myData)
 # End
@@ -367,7 +360,7 @@ tail(myData)
 ```r
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
-thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
+thankyouExpr <- Expr(~pagePath %matches% "thank\\-?you|success")
 Segments(myQuery) <- thankyouExpr
 
 # Reset the filter
@@ -387,31 +380,43 @@ head(myData)
 ### Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
 
 ```r
-# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the years 2016 and 2017:
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
-Dimensions(myQuery) <- c("date", "dayOfWeek", "hour")
-# Let's allow a maximum of 17544 rows (default is 10000)
-MaxResults(myQuery) <- 17544
+Dimensions(myQuery) <- c("date", "dayOfWeekName", "hour")
+# Let's allow a maximum of 20000 rows (default is 10000)
+MaxResults(myQuery) <- 20000
 
 myData <- GetGaData(myQuery)
 nrow(myData)
 
-## Let's use plyr::ddply to analyse the data
-library(plyr)
+## Let's use dplyr to analyse the data
+library(dplyr)
 
 # Sessions by day of week
-sessions_by_dayOfWeek <- ddply(myData, ~dayOfWeek, summarise, sessions = sum(sessions))
-with(sessions_by_dayOfWeek, barplot(sessions, names.arg=dayOfWeek))
+sessions_by_dayOfWeek <- myData %>%
+  count(dayOfWeekName, wt = sessions) %>% 
+  mutate(dayOfWeekName = factor(dayOfWeekName, levels = c(
+    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+  ), labels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"), ordered = TRUE)) %>% 
+  arrange(dayOfWeekName)
+with(
+  sessions_by_dayOfWeek,
+  barplot(n, names.arg = dayOfWeekName, xlab = "day of week", ylab = "sessions")
+)
 
 # Sessions by hour of day
-sessions_by_hour <- ddply(myData, ~hour, summarise, sessions = sum(sessions))
-with(sessions_by_hour, barplot(sessions, names.arg=hour))
+sessions_by_hour <- myData %>%
+  count(hour, wt = sessions)
+with(
+  sessions_by_hour,
+  barplot(n, names.arg = hour, xlab = "hour", ylab = "sessions")
+)
 # End
 ```
 
@@ -426,32 +431,30 @@ Once installed, then run the following example.
 
 ```r
 library(ggplot2)
-library(plyr)
+library(dplyr)
 
-# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the years 2016 and 2017:
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
-Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
+Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "deviceCategory")
 # Let's allow a maximum of 40000 rows (default is 10000)
 MaxResults(myQuery) <- 40000
 
 myData <- GetGaData(myQuery)
 
 # Sessions by hour of day and day of week
-avg_sessions_by_hour_wday_mobile <- ddply(
-  myData,
-  ~hour + dayOfWeek + isMobile,
-  summarise,
-  sessions = mean(sessions)
-)
+avg_sessions_by_hour_wday_device <- myData %>% 
+  group_by(hour, dayOfWeek, deviceCategory) %>% 
+  summarise(sessions = mean(sessions)) %>% 
+  ungroup()
 
 # Relabel the days of week
-levels(avg_sessions_by_hour_wday_mobile$dayOfWeek) <- c(
+levels(avg_sessions_by_hour_wday_device$dayOfWeek) <- c(
   "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
 )
 
@@ -459,12 +462,10 @@ levels(avg_sessions_by_hour_wday_mobile$dayOfWeek) <- c(
 qplot(
   x = hour,
   y = sessions,
-  data = avg_sessions_by_hour_wday_mobile,
+  data = avg_sessions_by_hour_wday_device,
   facets = ~dayOfWeek,
-  fill = isMobile,
-  geom = "bar",
-  position = "stack",
-  stat = "identity"
+  fill = deviceCategory,
+  geom = "col"
 )
 
 # End
@@ -472,7 +473,8 @@ qplot(
 
 Thanks to:
 ----------
-* Hadley Wickham
+* Hadley Wickham @hadley
+* Mark Edmondson @MarkEdmondson1234
 * RStudio team
 * R Core team
 

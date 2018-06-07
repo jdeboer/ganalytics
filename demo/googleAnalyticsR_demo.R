@@ -1,7 +1,9 @@
 library(ganalytics)
 library(googleAnalyticsR)
 
-my_dim_table_filter <- Expr(~medium == "organic") & Expr(~source == "google")
+my_dim_table_filter <- TableFilter(
+  Expr(~medium == "organic") & Expr(~source == "google")
+)
 
 my_segment_list <- list(
   bounced_sessions = PerSession(Expr(~bounces != 0)),
@@ -20,7 +22,7 @@ results <- lapply(segment_chunks, function(chunk) {
     metrics = c("users", "sessions"),
     dimensions = c("segment", "medium"),
     segments = Segments(chunk),
-    dim_filters = TableFilter(my_dim_table_filter)
+    dim_filters = my_dim_table_filter
   )
 })
 
