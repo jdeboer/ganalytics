@@ -7,6 +7,14 @@
 #' @importFrom methods new setMethod
 NULL
 
+setSegmentFilterScopeNegation <- function(object, negation, scope) {
+  object <- as(object, ".gaSegmentFilter")
+  if(!missing(scope)) object@scope <- scope
+  if(!missing(negation)) object@negation <- negation
+  validObject(object)
+  object
+}
+
 # ---- Include, Exclude ----
 
 #' @describeIn Include Define an include segment filter using the supplied
@@ -14,12 +22,13 @@ NULL
 setMethod(
   f = "Include",
   signature = "ANY",
-  definition = function(object, scope) {
-    object <- as(object, ".gaSegmentFilter")
-    if(!missing(scope)) object@scope <- scope
-    object@negation <- FALSE
-    validObject(object)
-    object
+  definition = function(object, ..., scope) {
+    negation <- FALSE
+    if(missing(scope)) {
+      SegmentConditionFilter(object, ..., negation = negation)
+    } else {
+      SegmentConditionFilter(object, ..., negation = negation, scope = scope)
+    }
   }
 )
 
@@ -28,12 +37,13 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "ANY",
-  definition = function(object, scope) {
-    object <- as(object, ".gaSegmentFilter")
-    if(!missing(scope)) object@scope <- scope
-    object@negation <- TRUE
-    validObject(object)
-    object
+  definition = function(object, ..., scope) {
+    negation <- TRUE
+    if(missing(scope)) {
+      SegmentConditionFilter(object, ..., negation = negation)
+    } else {
+      SegmentConditionFilter(object, ..., negation = negation, scope = scope)
+    }
   }
 )
 
@@ -49,7 +59,15 @@ setMethod(
   definition = function(object, ..., negation, scope) {
     exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    new("gaSegmentConditionFilter", exprList, negation = negation, scope = scope)
+    x <- if(missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(object)
+    } else if (!missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(object, negation = negation)
+    } else if (missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(object, scope = scope)
+    } else if (!missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(object, negation = negation, scope = scope)
+    }
   }
 )
 
