@@ -160,7 +160,7 @@ setMethod(
 #'   session-level.
 setMethod(
   f = "PerSession",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perSession"
@@ -175,7 +175,7 @@ setMethod(
 #'   metric condition to session-level.
 setMethod(
   f = "PerSession",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerSession(Expr(object), ...)
   }
@@ -195,7 +195,7 @@ setMethod(
 #'   user-level.
 setMethod(
   f = "PerUser",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perUser"
@@ -210,7 +210,7 @@ setMethod(
 #'   metric condition to user-level.
 setMethod(
   f = "PerUser",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerUser(Expr(object), ...)
   }
@@ -230,7 +230,7 @@ setMethod(
 #'   hit-level.
 setMethod(
   f = "PerHit",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perHit"
@@ -245,7 +245,7 @@ setMethod(
 #'   metric condition to hit-level.
 setMethod(
   f = "PerHit",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerHit(Expr(object), ...)
   }
@@ -255,7 +255,7 @@ setMethod(
 #'   product-level.
 setMethod(
   f = "PerProduct",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object) {
     ScopeLevel(object) <- "perProduct"
     object
@@ -266,7 +266,7 @@ setMethod(
 #'   metric condition to product-level.
 setMethod(
   f = "PerProduct",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object) {
     PerProduct(Expr(object))
   }
