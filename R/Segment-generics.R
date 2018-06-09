@@ -12,7 +12,7 @@
 #' @export
 setGeneric(
   "SegmentConditionFilter",
-  function(object, ..., negation = FALSE, scope = "sessions") {},
+  function(object, ..., negation, scope) {},
   valueClass = "gaSegmentConditionFilter",
   useAsDefault = FALSE
 )
