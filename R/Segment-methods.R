@@ -97,7 +97,7 @@ setMethod(
 #' @describeIn DynSegment Returns itself.
 setMethod(
   f = "DynSegment",
-  signature = c("gaDynSegment"),
+  signature = "gaDynSegment",
   definition = function(object) {
     object
   }
@@ -108,7 +108,7 @@ setMethod(
 #' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
 setMethod(
   f = "ScopeLevel",
-  signature = c(".gaSegmentFilter"),
+  signature = ".gaSegmentFilter",
   definition = function(object) {
     object@scope
   }
