@@ -8,13 +8,13 @@
 \alias{PerUser,formula-method}
 \title{PerUser.}
 \usage{
-PerUser(object, ...)
+PerUser(object, ..., negation)
 
-\S4method{PerUser}{ANY}(object, ...)
+\S4method{PerUser}{ANY}(object, ..., negation)
 
-\S4method{PerUser}{gaMetExpr}(object, ...)
+\S4method{PerUser}{gaMetExpr}(object, ..., negation)
 
-\S4method{PerUser}{formula}(object, ...)
+\S4method{PerUser}{formula}(object, ..., negation)
 }
 \arguments{
 \item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
@@ -22,6 +22,8 @@ user-level. Alternatively, an dimension expression or segment filter to
 coerce into a user scoped gaDynSegment.}
 
 \item{...}{Other filters to include in the gaDynSegment.}
+
+\item{negation}{boolean value indicating whether to negate the condition.}
 }
 \value{
 a gaMetExpr, .gaSegmentFilter or gaDynSegment.

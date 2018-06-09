@@ -7,7 +7,7 @@
 \alias{PerProduct,formula-method}
 \title{PerProduct.}
 \usage{
-PerProduct(object)
+PerProduct(object, negation)
 
 \S4method{PerProduct}{gaMetExpr}(object)
 
@@ -15,6 +15,8 @@ PerProduct(object)
 }
 \arguments{
 \item{object}{a gaMetExpr object to coerce to hit-level}
+
+\item{negation}{boolean value indicating whether to negate the condition.}
 }
 \value{
 a gaMetExpr object.

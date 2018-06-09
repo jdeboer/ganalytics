@@ -22,6 +22,7 @@ setGeneric(
 #' Set the negation flag of a segment filter to FALSE.
 #'
 #' @param object a segment condition or sequence filter to include.
+#' @param ... additional segment conditions to include.
 #' @param scope optional scope, "users" or "sessions"
 #' @return a .gaSegmentFilter object with its negate slot set to FALSE.
 #'
@@ -38,6 +39,7 @@ setGeneric(
 #' Set the negation flag of a segment filter to TRUE.
 #'
 #' @param object a segment condition or sequence filter to exclude.
+#' @param ... additional segment conditions to add to the exclude filter.
 #' @param scope optional scope, "users" or "sessions"
 #' @return a .gaSegmentFilter object with its negate slot set to TRUE.
 #'
@@ -109,12 +111,13 @@ setGeneric(
 #' Set the scope of a gaMetExpr object to product-level.
 #'
 #' @param object a gaMetExpr object to coerce to hit-level
+#' @param negation boolean value indicating whether to negate the condition.
 #' @return a gaMetExpr object.
 #'
 #' @export
 setGeneric(
   "PerProduct",
-  function(object){},
+  function(object, negation){},
   valueClass = "gaSegMetExpr",
   useAsDefault = FALSE
 )
@@ -130,12 +133,13 @@ setGeneric(
 #'   single step of sequence filter.
 #' @param ... Further expressions to be included in the filter definition if
 #'   defining a sequence filter of length one.
+#' @param negation boolean value indicating whether to negate the condition.
 #' @return a gaMetExpr or gaSegmentSequenceFilter.
 #'
 #' @export
 setGeneric(
   "PerHit",
-  function(object, ...){},
+  function(object, ..., negation){},
   valueClass = c("gaSegMetExpr", "gaSegmentSequenceFilter"),
   useAsDefault = FALSE
 )
@@ -148,6 +152,7 @@ setGeneric(
 #'   session-level. Alternatively, an dimension expression or segment filter to
 #'   coerce into a session scoped gaDynSegment.
 #' @param ... Other filters to include in the gaDynSegment.
+#' @param negation boolean value indicating whether to negate the condition.
 #' @return a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
 #'   To define a gaDynSegment comprised of a single metric expression,
@@ -169,6 +174,7 @@ setGeneric(
 #'   user-level. Alternatively, an dimension expression or segment filter to
 #'   coerce into a user scoped gaDynSegment.
 #' @param ... Other filters to include in the gaDynSegment.
+#' @param negation boolean value indicating whether to negate the condition.
 #' @return a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
 #'   To define a gaDynSegment comprised of a single metric expression,

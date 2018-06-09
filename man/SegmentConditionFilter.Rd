@@ -6,10 +6,9 @@
 \alias{SegmentConditionFilter,ANY-method}
 \title{SegmentConditionFilter.}
 \usage{
-SegmentConditionFilter(object, ..., negation = FALSE, scope = "sessions")
+SegmentConditionFilter(object, ..., negation, scope)
 
-\S4method{SegmentConditionFilter}{ANY}(object, ..., negation = FALSE,
-  scope = "sessions")
+\S4method{SegmentConditionFilter}{ANY}(object, ..., negation, scope)
 }
 \arguments{
 \item{object}{An expression to be used as a non-sequential segment condition.}
