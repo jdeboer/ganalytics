@@ -28,7 +28,7 @@ setGeneric(
 #' @export
 setGeneric(
   "Include",
-  function(object, scope = NULL) {},
+  function(object, ..., scope) {},
   valueClass = ".gaSegmentFilter",
   useAsDefault = FALSE
 )
@@ -44,7 +44,7 @@ setGeneric(
 #' @export
 setGeneric(
   "Exclude",
-  function(object, scope = NULL) {},
+  function(object, ..., scope) {},
   valueClass = ".gaSegmentFilter",
   useAsDefault = TRUE
 )
@@ -156,7 +156,7 @@ setGeneric(
 #' @export
 setGeneric(
   "PerSession",
-  function(object, ...){},
+  function(object, ..., negation){},
   valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
@@ -177,7 +177,7 @@ setGeneric(
 #' @export
 setGeneric(
   "PerUser",
-  function(object, ...){},
+  function(object, ..., negation){},
   valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
   useAsDefault = FALSE
 )
