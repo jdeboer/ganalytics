@@ -47,9 +47,7 @@ setMethod(
   f = "SegmentConditionFilter",
   signature = "ANY",
   definition = function(object, ..., negation, scope) {
-    exprList <- list(object, ...)
-    nested <- sapply(exprList, is, "gaSegmentConditionFilter")
-    exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
+    exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
     new("gaSegmentConditionFilter", exprList, negation = negation, scope = scope)
   }
