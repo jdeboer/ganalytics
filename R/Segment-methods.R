@@ -97,7 +97,7 @@ setMethod(
 setMethod(
   f = "DynSegment",
   signature = "ANY",
-  definition = function(object, ..., name = character(0)) {
+  definition = function(object, ..., name) {
     exprList <- list(object, ...)
     nested <- sapply(exprList, is, "gaDynSegment")
     segment_filter_list <- lapply(exprList[!nested], function(expr){
