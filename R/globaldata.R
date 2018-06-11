@@ -61,6 +61,14 @@ kGaDimTypes <- list(
     "ga:dayOfWeekName",
     "rt:goalId"
   ),
+  versions = c(
+    "ga:browserVersion",
+    "ga:operatingSystemVersion",
+    "ga:flashVersion",
+    "ga:appVersion",
+    "ga:dcmClickCreativeVersion",
+    "ga:dcmLastEventCreativeVersion"
+  ),
   nums = c(
     "ga:latitude",
     "ga:longitude",

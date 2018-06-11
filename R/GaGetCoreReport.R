@@ -126,6 +126,7 @@ GaListToDataframe <- function(gaData, queryClass) {
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$orderedIntFactors, asFun = FactorInt)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$nums, asFun = as.numeric)
     gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$bools, asFun = YesNoToLogical)
+    gaData$rows <- ColTypes(df = gaData$rows, colNames = kGaDimTypes$versions, asFun = numeric_version, strict = FALSE)
     metric_cols <- gaData$columnHeaders$name[gaData$columnHeaders$columnType == "METRIC"]
     gaData$rows[metric_cols] <- data.frame(llply(gaData$rows[metric_cols], as.numeric))
     #gaData$rows <- as.numeric(gaData$rows[metric_cols])
