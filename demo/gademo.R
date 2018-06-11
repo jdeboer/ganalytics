@@ -9,7 +9,7 @@ readline("Press enter to continue.")
 # Example 1 - Setting the date range
 
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
-DateRange(myQuery) <- c("2013-01-01", "2013-05-31")
+DateRange(myQuery) <- DateRange("2013-01-01", "2013-05-31")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -46,7 +46,7 @@ readline("Press enter to continue.")
 Dimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
 
 # Lets set a wider date range
-DateRange(myQuery) <- c("2012-10-01", "2013-03-31")
+DateRange(myQuery) <- DateRange("2012-10-01", "2013-03-31")
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -66,7 +66,7 @@ readline("Press enter to continue.")
 # Example 5 - Row filters
 
 # Filter for Sunday sessions only
-sundayExpr <- Expr("dayofweek", "=", "0")
+sundayExpr <- Expr(~dayofweek == "0")
 TableFilter(myQuery) <- sundayExpr
 
 myData <- GetGaData(myQuery)
@@ -82,9 +82,9 @@ readline("Press enter to continue.")
 # Example 6 - Combining filters with AND
 
 # Expression to define Sunday sessions
-sundayExpr <- Expr("dayofweek", "=", "0")
+sundayExpr <- Expr(~dayofweek == "0")
 # Expression to define organic search sessions
-organicExpr <- Expr("medium", "=", "organic")
+organicExpr <- Expr(~medium == "organic")
 # Expression to define organic search sessions made on a Sunday
 sundayOrganic <- sundayExpr & organicExpr
 TableFilter(myQuery) <- sundayOrganic
@@ -102,8 +102,8 @@ readline("Press enter to continue.")
 # Example 7 - Combining filters with OR
 
 # In a similar way to AND
-loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- !Expr(~sessionCount %matches% "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr(~daysSinceLastSession %matches% "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- loyalExpr | recentExpr
 TableFilter(myQuery) <- loyalOrRecent
 
@@ -113,10 +113,10 @@ summary(myData)
 readline("Press enter to continue.")
 # Example 8 - Filters that combine ORs with ANDs
 
-loyalExpr <- Expr("sessionCount", "!~", "^[0-3]$") # Made more than 3 sessions
-recentExpr <- Expr("daysSinceLastSession", "~", "^[0-6]$") # Visited sometime within the past 7 days.
+loyalExpr <- !Expr(~sessionCount %matches% "^[0-3]$") # Made more than 3 sessions
+recentExpr <- Expr(~daysSinceLastSession %matches% "^[0-6]$") # Visited sometime within the past 7 days.
 loyalOrRecent <- loyalExpr | recentExpr
-sundayExpr <- Expr("dayOfWeek", "=", "0")
+sundayExpr <- Expr(~dayOfWeek == "0")
 loyalOrRecent_Sunday <- loyalOrRecent & sundayExpr
 TableFilter(myQuery) <- loyalOrRecent_Sunday
 
@@ -144,9 +144,9 @@ myData <- GetGaData(myQuery)
 head(myData)
 
 # Notice that Google Analytics' Core Reporting API doesn't recognise 'numerical' dimensions as
-# ordered factors when sorting. We can use R to sort instead, using a plyr::arrange function.
-library(plyr)
-myData <- arrange(myData, desc(sessionCount), daysSinceLastSession)
+# ordered factors when sorting. We can use R to sort instead, using a dplyr::arrange function.
+library(dplyr)
+myData <- myData %>% arrange(desc(sessionCount), daysSinceLastSession)
 head(myData)
 tail(myData)
 
@@ -155,7 +155,7 @@ readline("Press enter to continue.")
 
 # Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
 # Define a segment for sessions where a "thank-you", "thankyou" or "success" page was viewed.
-thankyouExpr <- Expr("pagePath", "~", "thank\\-?you|success")
+thankyouExpr <- Expr(~pagePath %matches% "thank\\-?you|success")
 Segments(myQuery) <- list(thankyou = thankyouExpr)
 
 # Reset the filter
@@ -178,7 +178,7 @@ readline("Press enter to continue.")
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- DateRange("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour")
@@ -192,11 +192,17 @@ nrow(myData)
 library(plyr)
 
 # Sessions by day of week
-sessions_by_dayOfWeek <- ddply(myData, ~dayOfWeek, summarise, sessions = sum(sessions))
+sessions_by_dayOfWeek <- myData %>%
+  groupby(dayOfWeek) %>%
+  summarise(sessions = sum(sessions)) %>%
+  ungroup()
 with(sessions_by_dayOfWeek, barplot(sessions, names.arg = dayOfWeek))
 
 # Sessions by hour of day
-sessions_by_hour <- ddply(myData, ~hour, summarise, sessions = sum(sessions))
+sessions_by_hour <- myData %>%
+  groupby(hour) %>%
+  summarise(sessions = sum(sessions)) %>%
+  ungroup()
 with(sessions_by_hour, barplot(sessions, names.arg = hour))
 
 readline("Press enter to continue.")
@@ -210,7 +216,7 @@ library(plyr)
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- DateRange("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
@@ -220,12 +226,10 @@ MaxResults(myQuery) <- 40000
 myData <- GetGaData(myQuery)
 
 # Sessions by hour of day and day of week
-avg_sessions_by_hour_wday_mobile <- ddply(
-  myData,
-  ~hour + dayOfWeek + isMobile,
-  summarise,
-  sessions = mean(sessions)
-)
+avg_sessions_by_hour_wday_mobile <- myData %>%
+  groupby(hour, dayOfWeek, isMobile) %>%
+  summarise(sessions = mean(sessions)) %>%
+  ungroup()
 
 # Relabel the days of week
 levels(avg_sessions_by_hour_wday_mobile$dayOfWeek) <- c(
@@ -239,9 +243,7 @@ qplot(
   data = avg_sessions_by_hour_wday_mobile,
   facets = ~dayOfWeek,
   fill = isMobile,
-  geom = "bar",
-  position = "stack",
-  stat = "identity"
+  geom = "col"
 )
 
 readline("Press enter to continue.")
