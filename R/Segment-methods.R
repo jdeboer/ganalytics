@@ -385,7 +385,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments Set the segments to be used witin a query.
+#' @describeIn Segments Set the segments to be used within a query.
 setMethod(
   f = "Segments<-",
   signature = c("gaQuery", "ANY"),

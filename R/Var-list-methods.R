@@ -87,8 +87,8 @@ setMethod(
 setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 
 #' @describeIn SortBy Return a sortBy object given by the variables named within
-#'   a character vector, optionally denoted with - or + to indicate decending or
-#'   acending sorting for each variable respectively in order of precednece.
+#'   a character vector, optionally denoted with - or + to indicate descending or
+#'   ascending sorting for each variable respectively in order of precedence.
 setMethod(
   f = "SortBy",
   signature = "character",

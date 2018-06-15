@@ -27,7 +27,7 @@ Checks for a regular expression.
 \item \code{.dimComparator}: Test whether the supplied comparator is for a regular
 expression.
 
-\item \code{.expr}: Test whether a conditional epxression is using regular
+\item \code{.expr}: Test whether a conditional expression is using regular
 expression match.
 }}
 

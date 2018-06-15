@@ -6,8 +6,8 @@
 #' reporting, real-time reporting, multi-channel funnel reporting, metadata,
 #' configuration management and Google Tag Manager APIs using R.
 #'
-#' To use this package with these APIs, it is neccessary to provide OAuth
-#' credentials for a Google APIs project with the neccessary APIs enabled.
+#' To use this package with these APIs, it is necessary to provide OAuth
+#' credentials for a Google APIs project with the necessary APIs enabled.
 #'
 #' Features:
 #'
@@ -18,7 +18,7 @@
 #' * Minimise the effect of sampling by splitting the date range of queries
 #' using the SplitDateRange function.
 #'
-#' * When sampling has occured, the output data.frame includes the sample and
+#' * When sampling has occurred, the output data.frame includes the sample and
 #' total sizes as attributes.
 #'
 #' To report bugs, please run the following command:

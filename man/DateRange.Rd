@@ -128,7 +128,7 @@ the supplied object into a dateRange.
 \item \code{.standardQuery}: Modify the date range of the given query.
 
 \item \code{object = gaView,endDate = ANY}: Returns the maximum date range of when a view has been
-recieving hits.
+receiving hits.
 
 \item \code{ANY}: Change the date range of the date range object using
 the dates supplied in a vector of length 2, where the first element is the

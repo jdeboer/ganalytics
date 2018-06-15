@@ -4,7 +4,7 @@
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
 #' @param ... Other expressions to be ANDed to the first expression provided.
-#' @param negation optional logical TRUE or FALSE to match segments where this conditon
+#' @param negation optional logical TRUE or FALSE to match segments where this condition
 #'   has not been met. Default is FALSE, i.e. inclusive filter.
 #' @param scope optional scope, "users" or "sessions".
 #' @return a gaSegmentConditionFilter object.
@@ -90,7 +90,7 @@ setGeneric(
 #' gaDynSegment that is scoped to either 'user' or 'session' level.
 #'
 #' A segment filter is either sequential or non-sequential conditions.
-#' Sequential and non-sequential conditoins can be combined using this function.
+#' Sequential and non-sequential conditions can be combined using this function.
 #'
 #' @param object The first filter to include in the segment definition.
 #' @param ... Additional filters to include in the segment definition, if

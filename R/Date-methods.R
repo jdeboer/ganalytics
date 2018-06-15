@@ -203,7 +203,7 @@ setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
 })
 
 #' @describeIn DateRange Returns the maximum date range of when a view has been
-#'   recieving hits.
+#'   receiving hits.
 setMethod("DateRange", "gaView", function(object) {
   start_date <- as.Date(object$created)
   end_date <- today()

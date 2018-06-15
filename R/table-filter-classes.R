@@ -8,7 +8,7 @@ NULL
 
 #' `.tableFilter` class.
 #'
-#' An S4 class to represent a query table filter epxression.
+#' An S4 class to represent a query table filter expression.
 #'
 #' @rdname tableFilter-class
 #' @keywords internal

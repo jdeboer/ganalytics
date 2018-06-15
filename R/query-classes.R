@@ -40,7 +40,7 @@ setClass(
     } else if (all(object@startDate > object@endDate)) {
       "endDate cannot be before startDate"
     } else if (all(object@startDate < kGaDateOrigin)) {
-      paste("Start date cannot preceed Google Analytics launch date:", kGaDateOrigin)
+      paste("Start date cannot preced Google Analytics launch date:", kGaDateOrigin)
     } else TRUE
   }
 )
@@ -62,7 +62,7 @@ setClass(
     if (all(str_detect(object, "^ga:[0-9]+$"))) {
       TRUE
     } else {
-      "viewId must be an string of digits preceeded by 'ga:'"
+      "viewId must be an string of digits preceded by 'ga:'"
     }
   }
 )

@@ -141,7 +141,7 @@ setMethod("IsRegEx", ".dimComparator", function(object) {
   object %in% c("=~", "!~")
 })
 
-#' @describeIn IsRegEx Test whether a conditional epxression is using regular
+#' @describeIn IsRegEx Test whether a conditional expression is using regular
 #'   expression match.
 setMethod("IsRegEx", ".expr", function(object) {
   IsRegEx(Comparator(object))

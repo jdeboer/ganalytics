@@ -7,7 +7,7 @@
 Then(object, ...)
 }
 \arguments{
-\item{object}{The expression that should \bold{immediately} preceed others in
+\item{object}{The expression that should \bold{immediately} precede others in
 the sequence.}
 
 \item{...}{Any other expressions that should \bold{immediately} follow the

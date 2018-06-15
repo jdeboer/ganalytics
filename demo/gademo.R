@@ -138,7 +138,7 @@ readline("Press enter to continue.")
 loyalAndRecent_Sunday <- loyalExpr & recentExpr & sundayExpr
 TableFilter(myQuery) <- loyalAndRecent_Sunday
 
-# Sort by decending visit count and ascending days since last visit.
+# Sort by descending visit count and ascending days since last visit.
 SortBy(myQuery) <- c("-sessionCount", "+daysSinceLastSession")
 myData <- GetGaData(myQuery)
 head(myData)
@@ -164,7 +164,7 @@ TableFilter(myQuery) <- NULL
 # Split by traffic source and medium
 Dimensions(myQuery) <- c("source", "medium")
 
-# Sort by decending number of sessions
+# Sort by descending number of sessions
 SortBy(myQuery) <- "-sessions"
 
 myData <- GetGaData(myQuery)

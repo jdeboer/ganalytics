@@ -84,7 +84,7 @@ setGeneric(
 
 #' @section \%between\%:
 #' A condition where the var (LHS) is within the lower and
-#'   uppoer bounds specified by first and second vector value (respectively) of
+#'   upper bounds specified by first and second vector value (respectively) of
 #'   the operand (RHS).
 #' @rdname Comparator
 #' @export
@@ -97,7 +97,7 @@ setGeneric(
 
 #' @section \%in\%:
 #' A condition where the dimension (LHS) matches one of the
-#'   values in the vecotr specified by the operand (RHS).
+#'   values in the vector specified by the operand (RHS).
 #' @rdname Comparator
 #' @param x Dimension or metric object
 #' @param table Operand object

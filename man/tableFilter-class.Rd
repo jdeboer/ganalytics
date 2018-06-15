@@ -5,6 +5,6 @@
 \alias{.tableFilter-class}
 \title{`.tableFilter` class.}
 \description{
-An S4 class to represent a query table filter epxression.
+An S4 class to represent a query table filter expression.
 }
 \keyword{internal}

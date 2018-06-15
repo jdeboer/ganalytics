@@ -15,7 +15,7 @@ SegmentConditionFilter(object, ..., negation, scope)
 
 \item{...}{Other expressions to be ANDed to the first expression provided.}
 
-\item{negation}{optional logical TRUE or FALSE to match segments where this conditon
+\item{negation}{optional logical TRUE or FALSE to match segments where this condition
 has not been met. Default is FALSE, i.e. inclusive filter.}
 
 \item{scope}{optional scope, "users" or "sessions".}

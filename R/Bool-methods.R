@@ -144,7 +144,7 @@ setMethod(
   }
 )
 
-#' @describeIn And AND two expresisons.
+#' @describeIn And AND two expressions.
 #' @param e1 first expression
 #' @param e2 second expression
 #' @export

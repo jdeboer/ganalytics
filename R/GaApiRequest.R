@@ -343,7 +343,7 @@ parse_field_list <- function(field_list) {
       if (field_length > 1) {
         sub_fields <- paste0("(", sub_fields, ")")
       }
-      # the sub fields are returned with a preceeding "/"
+      # the sub fields are returned with a preceding "/"
       return(paste0(
         field_name, "/", sub_fields
       ))
