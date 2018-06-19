@@ -108,10 +108,6 @@ setClass(
 )
 
 setClass(
-  "gaDimFilters"
-)
-
-setClass(
   "gaPivot",
   slots = c(
     dimensions = "gaDimensions",

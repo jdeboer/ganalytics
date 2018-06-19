@@ -69,6 +69,24 @@ setClass(
   }
 )
 
+#' `gaDimFilter` class.
+#'
+#' An S4 class to represent a Core Reporting query table dimension filter expression.
+#'
+#' @rdname gaDimFilter-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  "gaDimFilter",
+  contains = "gaFilter",
+  validity = function(object) {
+    validate_that(
+      all_inherit(unlist(object@.Data), ".dimExpr")
+    )
+  }
+)
+
 #' `mcfFilter` class.
 #'
 #' An S4 class to represent Multi-Channel Funnel query table filter expression.
