@@ -101,3 +101,36 @@ setGeneric(
     object
   }
 )
+
+#' Cohort.
+#'
+#' Get or define a cohort.
+#'
+#' @param object
+#' @param value
+#'
+#' @family date range functions
+#' @export
+#' @rdname Cohort
+setGeneric(
+  "Cohort",
+  function(object, value, type) {}
+  valueClass = "gaCohort",
+  useAsDefault = FALSE
+)
+
+#' Cohort<-.
+#'
+#' Set a cohort of a query.
+#'
+#' @export
+#' @rdname Cohort
+setGeneric(
+  "Cohort<-",
+  function(object, value) {
+    object <- standardGeneric("Cohort<-")
+    validObject(object)
+    object
+  }
+)
+
