@@ -31,8 +31,8 @@ setClass(
     endDate = "Date"
   ),
   prototype = prototype(
-    startDate = Sys.Date() - 8,
-    endDate = Sys.Date() - 2
+    startDate = Sys.Date() - 8L,
+    endDate = Sys.Date() - 2L
   ),
   validity = function(object) {
     if (length(object@startDate) != length(object@endDate)) {
@@ -40,7 +40,7 @@ setClass(
     } else if (all(object@startDate > object@endDate)) {
       "endDate cannot be before startDate"
     } else if (all(object@startDate < kGaDateOrigin)) {
-      paste("Start date cannot preced Google Analytics launch date:", kGaDateOrigin)
+      paste("Start date cannot precede Google Analytics launch date:", kGaDateOrigin)
     } else TRUE
   }
 )
@@ -49,7 +49,7 @@ setClass(
 
 #' `viewId` class.
 #'
-#' An S4 class to represent a Google Analytics view's ID.
+#' An S4 class to represent a Google Analytics view ID.
 #'
 #' @rdname viewId-class
 #' @keywords internal

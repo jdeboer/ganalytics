@@ -19,10 +19,8 @@ NULL
 #'   single days.
 #'
 #' @export
-SplitDateRange <- function(dateRange, N) {
+SplitDateRange <- function(dateRange, N = 0L) {
   # TO DO
-  # Assert:
-  # length(dateRange) == 1L
   #
   # If N = 0 then split date range into single days
   # If N = 1, then the date range returned will be of length 1

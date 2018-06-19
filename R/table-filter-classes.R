@@ -21,7 +21,7 @@ setClass(
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
     if (all(sapply(object@.Data, function(orExpr) {
-      length(unique(sapply(orExpr, class))) == 1
+      length(unique(sapply(orExpr, class))) == 1L
     }))) {
       TRUE
     } else {
@@ -64,7 +64,7 @@ setClass(
     if (!any(sapply(unlist(object@.Data), GaVar) %in% c("<>", "[]"))) {
       TRUE
     } else {
-      return("Filters do not support <> and [] comparators.")
+      return("Filters do not support between <> and in [] comparators.")
     }
   }
 )
