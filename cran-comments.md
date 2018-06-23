@@ -4,7 +4,18 @@
 * win-builder (x86_64-w64-mingw32) running R version 3.5.1 (r-devel 2018-06-21 r74927)
 
 ## R CMD check results
-0 errors | 0 warnings | 0 notes
+There were no ERRORs or WARNINGs. 
+
+There was 1 NOTE:
+
+* New submission
 
 ## Downstream dependencies
 There are no downstream dependencies as this is a first-time submission to CRAN.
+
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Updated README.md with corrected URLs and a few other updates to the user instructions.
+
+* Reduced LICENCE to keep only the first two lines of the file.
