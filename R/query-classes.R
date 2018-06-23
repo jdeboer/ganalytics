@@ -3,7 +3,7 @@
 #' @include table-filter-classes.R
 #' @include segment-classes.R
 #' @importFrom methods setClass setClassUnion prototype new
-#' @importFrom assertthat validate_that
+#' @importFrom assertthat validate_that noNA
 #' @importFrom stringr str_detect
 NULL
 

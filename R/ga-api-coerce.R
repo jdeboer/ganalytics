@@ -1,5 +1,4 @@
 #' @include utils.R
-#' @include init-methods.R
 #' @importFrom methods setAs validObject
 #' @importFrom plyr ldply alply
 NULL
