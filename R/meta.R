@@ -69,14 +69,14 @@ GaMetaUpdate <- function(creds = get_creds()) {
     allowedInFilters = FALSE
   ))
 
-  mcf_var_ref <- "http://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
+  mcf_var_ref <- "https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
   mcf_ref_html <- read_html(mcf_var_ref)
   kMcfVars <- list(
     dims = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  rt_var_ref <- "http://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
+  rt_var_ref <- "https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
   rt_ref_html <- read_html(rt_var_ref)
   kRtVars <- list(
     dims = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.dim > div.line > a"))),

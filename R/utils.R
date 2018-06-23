@@ -91,7 +91,7 @@ unnest_objects <- function(..., class) {
 #'
 #' @return a list
 #'
-#' @references \url{http://stackoverflow.com/a/8139959/1007029}
+#' @references \url{https://stackoverflow.com/a/8139959/1007029}
 #'
 #' @keywords internal
 flatten <- function(x) {

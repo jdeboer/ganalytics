@@ -67,8 +67,8 @@ Installation
 
 #### Prerequisites
 * Ensure you have installed the latest version of [R](http://cran.r-project.org/)
-* If using Windows, you will also need the latest version of [RTools](http://cran.r-project.org/bin/windows/Rtools/)
-* For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/blob/master/README.md)
+* If using Windows, you will also need the latest version of [RTools](https://cran.r-project.org/bin/windows/Rtools/)
+* For other operating systems, please refer to [installation instructions for devtools](httpss://github.com/hadley/devtools/blob/master/README.md)
 
 #### Execute the following statements in R to install ganalytics:
 
@@ -124,7 +124,7 @@ Sys.setenv(
 
 ### 4. Authenticate and attempt your first query with ganalytics
 * ganalytics needs to know the ID of the Google Analytics **view** that you wish to query. You can obtain this in a number of ways:
-  * Using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
+  * Using the [Google Analytics Query Explorer tool](https://ga-dev-tools.appspot.com/explorer/)
   * From the **Admin page** in Google Analytics under **View Settings**, or
   * The browser's address bar while viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
