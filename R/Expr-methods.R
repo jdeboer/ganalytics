@@ -1,5 +1,4 @@
 #' @include expr-classes.R
-#' @include init-methods.R
 #' @include Expr-generics.R
 #' @include expr-coerce.R
 #' @include Var-methods.R
@@ -9,6 +8,39 @@
 #' @importFrom methods setMethod new validObject as
 #' @importFrom assertthat assert_that
 NULL
+
+setMethod(
+  f = "initialize",
+  signature = ".dimExpr",
+  definition = function(.Object, var, comparator, operand) {
+    .Object@var <- var
+    .Object@comparator <- comparator
+    var <- as.character(var)
+    if (comparator %in% c("!=", "==", "[]", "<>")) {
+      if (var %in% kGaDimTypes$bools) {
+        operand <- as(as(operand, "logical"), class(operand))
+      } else if (var %in% c("ga:visitorType", "ga:userType")) {
+        visitorType <- c("New Visitor", "Returning Visitor")
+        index <- pmatch(x = tolower(operand), table = tolower(visitorType))
+        if (is.na(index)) {
+          stop(paste(var, "Invalid operand", operand, sep = ": "))
+        } else {
+          operand <- as(visitorType[index], class(operand))
+        }
+      } else if (var == "ga:date") {
+        operand <- as(format(ymd(operand), format = "%Y%m%d"), class(operand))
+      } else if (var == "dateOfSession") {
+        operand <- as(format(ymd(operand), format = "%Y-%m-%d"), class(operand))
+      }
+    }
+    if (IsRegEx(.Object)) {
+      operand <- tolower(operand)
+    }
+    Operand(.Object) <- operand
+    validObject(.Object)
+    .Object
+  }
+)
 
 #' @describeIn Expr Returns itself.
 setMethod("Expr", ".expr", function(object) {object})

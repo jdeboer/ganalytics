@@ -69,13 +69,12 @@ Collate:
     'date-coerce.R'
     'ga-api-classes.R'
     'management-api-classes.R'
-    'Var-list-generics.R'
-    'Var-generics.R'
-    'init-methods.R'
     'Date-methods.R'
     'operand-coerce.R'
     'Operand-generics.R'
     'Operand-methods.R'
+    'Var-list-generics.R'
+    'Var-generics.R'
     'var-list-coerce.R'
     'var-coerce.R'
     'Var-methods.R'
@@ -103,3 +102,5 @@ Collate:
 VignetteBuilder: knitr
 LazyData: TRUE
 RoxygenNote: 6.0.1
+Remotes: 
+    markedmondson1234/googleAnalyticsR

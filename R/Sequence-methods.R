@@ -1,5 +1,4 @@
 #' @include segment-classes.R
-#' @include init-methods.R
 #' @include Sequence-generics.R
 #' @include Segment-generics.R
 #' @include segment-coerce.R

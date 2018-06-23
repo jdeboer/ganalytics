@@ -2,7 +2,6 @@
 #' @include query-classes.R
 #' @include management-api-classes.R
 #' @include GaApiRequest.R
-#' @include init-methods.R
 #' @include Query-generics.R
 #' @importFrom methods new as
 NULL

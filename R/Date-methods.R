@@ -1,6 +1,5 @@
 #' @include Date-generics.R
 #' @include query-classes.R
-#' @include init-methods.R
 #' @include management-api-classes.R
 #' @include date-coerce.R
 #' @importFrom plyr adply
@@ -8,6 +7,40 @@
 #' @importFrom lubridate today
 #' @importFrom methods setMethod new as as<-
 NULL
+
+# setMethod(
+#   f = "initialize",
+#   signature = "dateRange",
+#   definition = function(.Object, startDate, endDate) {
+#     # If startDate and endDate are provided then
+#     # bind every combination of startDate and endDate
+#     # into a data.frame, keep only the unique rows,
+#     # and use these start and end dates for this object.
+#     if (!(missing(startDate) || missing(endDate))) {
+#       dates <- do.call(
+#         what = rbind,
+#         args = mapply(
+#           FUN = function(startDate, endDate) {
+#             data.frame(
+#               startDate = startDate,
+#               endDate = endDate,
+#               stringsAsFactors = FALSE
+#             )
+#           },
+#           startDate,
+#           endDate,
+#           SIMPLIFY = FALSE,
+#           USE.NAMES = FALSE
+#         )
+#       )
+#       dates <- unique(dates)
+#       .Object@startDate <- dates$startDate
+#       .Object@endDate <- dates$endDate
+#       validObject(.Object)
+#     }
+#     .Object
+#   }
+# )
 
 #' SplitDateRange
 #'

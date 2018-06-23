@@ -1,5 +1,4 @@
 #' @include segment-classes.R
-#' @include init-methods.R
 #' @include Sequence-generics.R
 #' @include Segment-generics.R
 #' @include segment-coerce.R
@@ -89,6 +88,21 @@ setMethod(
   definition = function(object, value) {
     object@negation <- value
     object
+  }
+)
+
+setMethod(
+  "initialize",
+  signature = "gaDynSegment",
+  definition = function(.Object, value, name) {
+    if(!missing(value)) {
+      .Object@.Data <- value
+    }
+    if(!missing(name)) {
+      .Object@name <- name
+    }
+    validObject(.Object)
+    return(.Object)
   }
 )
 
@@ -290,6 +304,22 @@ setMethod(
 
 # ---- Segment ----
 
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentId",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "gaid::", value)
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
+        value <- paste("gaid", value, sep = "::")
+      }
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
 #' @describeIn Segment Interpret the supplied numeric value as a segment ID.
 setMethod(
   f = "Segment",
@@ -345,6 +375,31 @@ setMethod(
 )
 
 # ---- Segments, Segments<- ----
+
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentList",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      segment_names <- names(value)
+      .Object@.Data <- lapply(seq_along(value), function(i) {
+        value[[i]] <- as(value[[i]], ".gaSegment")
+        if(is(value[[i]], "gaDynSegment")) {
+          segment_name <- segment_names[i]
+          if(is.null(segment_name)) {
+            segment_name <- character(0)
+          }
+          value[[i]]@name <- segment_name
+        }
+        value[[i]]
+      })
+      names(.Object) <- segment_names
+      validObject(.Object)
+    }
+    .Object
+  }
+)
 
 #' @describeIn Segments Returns itself
 setMethod(
