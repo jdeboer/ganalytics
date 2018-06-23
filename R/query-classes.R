@@ -27,26 +27,6 @@ setClass(
     tzone = "UTC"
   ),
   validity = function(object) {
-
-# ---- View ID ----
-
-#' `viewId` class.
-#'
-#' An S4 class to represent a Google Analytics view ID.
-#'
-#' @rdname viewId-class
-#' @keywords internal
-#'
-#' @export
-setClass(
-  "viewId",
-  contains = "character",
-  validity = function(object) {
-    if (all(str_detect(object, "^ga:[0-9]+$"))) {
-      TRUE
-    } else {
-      "viewId must be an string of digits preceded by 'ga:'"
-    }
     validations <- list(
       validate_that(all(object@.Data >= 0), msg = "End date cannot be before start date."),
       validate_that(
@@ -94,8 +74,25 @@ setClass(
   )
 )
 
+# ---- View ID ----
+
+#' `viewId` class.
+#'
+#' An S4 class to represent a Google Analytics view ID.
+#'
+#' @rdname viewId-class
+#' @keywords internal
+#'
+#' @export
 setClass(
+  "viewId",
+  contains = "character",
   validity = function(object) {
+    if (all(str_detect(object, "^ga:[0-9]+$"))) {
+      TRUE
+    } else {
+      "viewId must be an string of digits preceded by 'ga:'"
+    }
   }
 )
 
@@ -105,8 +102,8 @@ setClass(
     dimensions = "gaDimensions",
     metrics = "gaMetrics",
     sortBy = "gaSortBy",
-    filters = "gaFilter"
     pivot = "gaPivot",
+    tableFilter = "gaFilter"
   )
 )
 

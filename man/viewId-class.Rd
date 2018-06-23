@@ -5,6 +5,6 @@
 \alias{viewId-class}
 \title{`viewId` class.}
 \description{
-An S4 class to represent a Google Analytics view's ID.
+An S4 class to represent a Google Analytics view ID.
 }
 \keyword{internal}
