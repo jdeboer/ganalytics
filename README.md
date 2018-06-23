@@ -40,12 +40,12 @@ Installation
 ### 1. Install the necessary packages into R via the GitHub repository
 
 #### Prerequisites
-* Ensure you have installed the latest version of [R](http://cran.r-project.org/)
+* Ensure you have installed the latest version of [R](https://cran.r-project.org/)
 
 #### Execute the following statements in R to install ganalytics:
 
 ```r
-# Install the latest version of devtools via CRAN
+# Install the latest version of remotes via CRAN
 install.packages("remotes")
 # Install ganalytics via the GitHub repository.
 remotes::install_github("jdeboer/ganalytics")
@@ -97,7 +97,7 @@ Sys.setenv(
 
 ### 4. Authenticate and attempt your first query with ganalytics
 * ganalytics needs to know the ID of the Google Analytics **view** that you wish to query. You can obtain this in a number of ways:
-  * Using the [Google Analytics Query Explorer tool](http://ga-dev-tools.appspot.com/explorer/)
+  * Using the [Google Analytics Query Explorer tool](https://ga-dev-tools.appspot.com/explorer/)
   * From the **Admin page** in Google Analytics under **View Settings**, or
   * The browser's address bar while viewing a report in Google Analytics - look for the digits between the letter **'p'** and trailing **'/'**, e.g. `.../a11111111w22222222p33333333/` shows a view ID of `33333333`.
 
@@ -363,7 +363,7 @@ head(myData)
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
+DateRange(myQuery) <- c("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeekName", "hour")
@@ -416,7 +416,7 @@ library(dplyr)
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
+DateRange(myQuery) <- c("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "deviceCategory")

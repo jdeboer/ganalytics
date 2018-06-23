@@ -67,16 +67,14 @@ Installation
 
 #### Prerequisites
 * Ensure you have installed the latest version of [R](https://cran.r-project.org/)
-* If using Windows, you will also need the latest version of [RTools](https://cran.r-project.org/bin/windows/Rtools/)
-* For other operating systems, please refer to [installation instructions for devtools](https://github.com/hadley/devtools/blob/master/README.md)
 
 #### Execute the following statements in R to install ganalytics:
 
 ```r
-# Install the latest version of devtools via CRAN
-install.packages("devtools")
+# Install the latest version of remotes via CRAN
+install.packages("remotes")
 # Install ganalytics via the GitHub repository.
-devtools::install_github("jdeboer/ganalytics")
+remotes::install_github("jdeboer/ganalytics")
 # End
 ```
 
