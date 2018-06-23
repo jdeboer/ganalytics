@@ -5,7 +5,7 @@
 #' @importFrom methods setClass setClassUnion prototype new
 #' @importFrom assertthat validate_that noNA
 #' @importFrom stringr str_detect
-#' @importFrom lubridate interval int_start int_end int_start<- int_end<- int_standardize
+#' @importFrom lubridate interval int_start int_end int_start<- int_end<- int_standardize int_length
 NULL
 
 # ---- dateRange ----
@@ -28,10 +28,10 @@ setClass(
   ),
   validity = function(object) {
     validations <- list(
-      validate_that(all(object@.Data >= 0), msg = "End date cannot be before start date."),
+      validate_that(all(int_length(object) >= 0), msg = "End date cannot be before start date."),
       validate_that(
         noNA(object),
-        start >= as.POSIXct(kGaDateOrigin)
+        all(object@start >= as.POSIXct(kGaDateOrigin))
       )
     )
     invalids <- !sapply(validations, function(x) {is.logical(x) && length(x) == 1L && !is.na(x) && x})
