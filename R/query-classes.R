@@ -5,16 +5,10 @@
 #' @importFrom methods setClass setClassUnion prototype new
 #' @importFrom assertthat validate_that noNA
 #' @importFrom stringr str_detect
+#' @importFrom lubridate interval int_start int_end int_start<- int_end<- int_standardize
 NULL
 
 # ---- dateRange ----
-
-# Consider changing the definition of dateRange to be inheriting from or
-# extending a lubridate interval class. This would require rounding the start
-# and end to the nearest day, possibly checking that the timezone is aligned
-# with the view it is being applied to (or forcing the timezone to be UTC or the
-# system's local timezone). Also making sure that the interval is positive, i.e
-# the start is not after the end.
 
 #' `dateRange` class.
 #'
@@ -26,24 +20,13 @@ NULL
 #' @export
 setClass(
   "dateRange",
-  slots = c(
-    startDate = "Date",
-    endDate = "Date"
-  ),
+  contains = getClass("Interval", where = "lubridate"),
   prototype = prototype(
-    startDate = Sys.Date() - 8L,
-    endDate = Sys.Date() - 2L
+    as.numeric(as.POSIXct(Sys.Date() - 2L)) - as.numeric(as.POSIXct(Sys.Date() - 8L)),
+    start = as.POSIXct(Sys.Date() - 8L),
+    tzone = "UTC"
   ),
   validity = function(object) {
-    if (length(object@startDate) != length(object@endDate)) {
-      "startDate and endDate must be the same length"
-    } else if (all(object@startDate > object@endDate)) {
-      "endDate cannot be before startDate"
-    } else if (all(object@startDate < kGaDateOrigin)) {
-      paste("Start date cannot precede Google Analytics launch date:", kGaDateOrigin)
-    } else TRUE
-  }
-)
 
 # ---- View ID ----
 
@@ -64,6 +47,15 @@ setClass(
     } else {
       "viewId must be an string of digits preceded by 'ga:'"
     }
+    validations <- list(
+      validate_that(all(object@.Data >= 0), msg = "End date cannot be before start date."),
+      validate_that(
+        noNA(object),
+        start >= as.POSIXct(kGaDateOrigin)
+      )
+    )
+    invalids <- !sapply(validations, function(x) {is.logical(x) && length(x) == 1L && !is.na(x) && x})
+    if(any(invalids)) as.character(validations[invalids])
   }
 )
 

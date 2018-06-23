@@ -4,7 +4,7 @@
 #' @include date-coerce.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
-#' @importFrom lubridate today
+#' @importFrom lubridate today interval int_start int_end
 #' @importFrom methods setMethod new as as<-
 NULL
 
@@ -62,7 +62,8 @@ SplitDateRange <- function(dateRange, N = 0L) {
   # Set new start dates
   assert_that(
     N >= 0L,
-    class(dateRange) == "dateRange"
+    length(N) == 1L,
+    is(dateRange, "dateRange")
   )
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
   if (N <= 0L | N > maxN) {
@@ -108,10 +109,10 @@ setMethod("EndDate", "character", function(object) {
 })
 
 #' @describeIn DateRange Return the start dates of a date range vector
-setMethod("StartDate", "dateRange", function(object) {object@startDate})
+setMethod("StartDate", "dateRange", function(object) {as.Date(int_start(object))})
 
 #' @describeIn DateRange Return the end dates of a date range vector
-setMethod("EndDate", "dateRange", function(object) {object@endDate})
+setMethod("EndDate", "dateRange", function(object) {as.Date(int_end(object))})
 
 #' @describeIn DateRange Return the start dates of a date range vector
 setMethod("StartDate", "Interval", function(object) {StartDate(DateRange(object))})
@@ -211,7 +212,7 @@ setMethod(
   definition = function(object, endDate) {
     startDate <- as(object, "Date")
     endDate <- as(endDate, "Date")
-    new("dateRange", startDate, endDate)
+    as(interval(start = startDate, end = endDate), "dateRange")
   }
 )
 
@@ -266,8 +267,7 @@ setMethod(
     } else {
       startDate <- as(value[1L], "Date")
       endDate <- as(value[2L], "Date")
-      new("dateRange", startDate, endDate)
-      newDateRange <- new("dateRange", startDate, endDate)
+      newDateRange <- DateRange(startDate, endDate)
       DateRange(object) <- newDateRange
       object
     }

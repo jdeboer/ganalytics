@@ -20,19 +20,9 @@ setAs(from = "Date", to = "dateRange",
         assert_that(length(from) == 2L)
         startDate = from[1L]
         endDate = from[2L]
-        new("dateRange", startDate, endDate)
+        DateRange(startDate, endDate)
       }
 )
 
-setAs(from = "Interval", to = "dateRange",
-      def = function(from, to) {
-        date_range_char <- str_split_fixed(as.character(from), "--", 2L)
-        start_date <- as.Date(date_range_char[, 1L])
-        end_date <- as.Date(date_range_char[, 2L])
-        if (start_date <= end_date) {
-          new(to, start_date, end_date)
-        } else {
-          new(to, end_date, start_date)
-        }
-      }
-)
+setAs(from = "Interval", to = "dateRange", def = simpleCoerce)
+

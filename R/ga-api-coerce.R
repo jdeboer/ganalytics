@@ -267,8 +267,8 @@ setAs(
   def = function(from) {
     views <- as(GaView(from), "viewId")
     dateRange <- from@dateRange
-    startDates <- dateRange@startDate
-    endDates <- dateRange@endDate
+    startDates <- StartDate(dateRange)
+    endDates <- EndDate(dateRange)
     viewsDates <- do.call(
       what = rbind,
       args = lapply(

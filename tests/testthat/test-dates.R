@@ -30,8 +30,6 @@ test_that("functions DateRange, StartDate, EndDate, and their replacement versio
 test_that("lubridate date Interval objects can be used with DateRange", {
   date_range <- interval(as.Date("2010-01-01"), as.Date("2010-01-31"))
   expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
-  date_range <- interval(as.Date("2010-01-31"), as.Date("2010-01-01"))
-  expect_equal(DateRange(date_range), DateRange("2010-01-01", "2010-01-31"))
   query <- GaQuery(view = 0)
   DateRange(query) <- date_range
   expect_equal(StartDate(query), StartDate(date_range))
