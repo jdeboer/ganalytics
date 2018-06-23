@@ -2,7 +2,6 @@
 #' @include utils.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
-#' @importFrom devtools use_data
 #' @importFrom rvest html_nodes html_text
 #' @importFrom xml2 read_html
 NULL
@@ -108,6 +107,6 @@ GaMetaUpdate <- function(creds = get_creds()) {
 
   save(kGaVars, kGaVars_df, kMcfVars, kRtVars, file = metadata_path)
 
-  # use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  # devtools::use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
 
 }
