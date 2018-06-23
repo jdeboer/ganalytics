@@ -412,7 +412,7 @@ myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="co"># Define our date range</span>
-<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">DateRange</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)
 <span class="co"># Define our metrics and dimensions</span>
 <span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span>
 <span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeekName&quot;</span>, <span class="st">&quot;hour&quot;</span>)
@@ -459,7 +459,7 @@ sessions_by_hour &lt;-<span class="st"> </span>myData <span class="op">%&gt;%</s
 <span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="co"># Define our date range</span>
-<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">DateRange</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)
+<span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)
 <span class="co"># Define our metrics and dimensions</span>
 <span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span>
 <span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;hour&quot;</span>, <span class="st">&quot;deviceCategory&quot;</span>)

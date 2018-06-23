@@ -22,9 +22,6 @@ test_that("functions DateRange, StartDate, EndDate, and their replacement versio
   date_range <- as.Date(c("2010-01-01", "2010-01-31"))
   DateRange(query) <- date_range
   expect_equivalent(DateRange(query), DateRange("2010-01-01", "2010-01-31"))
-  #date_range1 <- DateRange(as.Date("2012-01-01"), as.Date("2012-01-31"))
-  #date_range2 <- DateRange("2012-01-01", as.Date("2012-01-31"))
-  #date_range3 <- DateRange(as.Date("2012-01-01"), "2012-01-31")
 })
 
 test_that("lubridate date Interval objects can be used with DateRange", {

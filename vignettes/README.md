@@ -385,7 +385,7 @@ head(myData)
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
+DateRange(myQuery) <- c("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeekName", "hour")
@@ -438,7 +438,7 @@ library(dplyr)
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2016-01-01", "2017-12-31")
+DateRange(myQuery) <- c("2016-01-01", "2017-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "deviceCategory")

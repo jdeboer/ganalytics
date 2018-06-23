@@ -9,7 +9,7 @@ readline("Press enter to continue.")
 # Example 1 - Setting the date range
 
 # Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
-DateRange(myQuery) <- DateRange("2013-01-01", "2013-05-31")
+DateRange(myQuery) <- c("2013-01-01", "2013-05-31")
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -46,7 +46,7 @@ readline("Press enter to continue.")
 Dimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
 
 # Lets set a wider date range
-DateRange(myQuery) <- DateRange("2012-10-01", "2013-03-31")
+DateRange(myQuery) <- c("2012-10-01", "2013-03-31")
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -178,7 +178,7 @@ readline("Press enter to continue.")
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour")
@@ -188,19 +188,16 @@ MaxResults(myQuery) <- 17544
 myData <- GetGaData(myQuery)
 nrow(myData)
 
-# Let's use plyr::ddply to analyse the data
-library(plyr)
-
 # Sessions by day of week
 sessions_by_dayOfWeek <- myData %>%
-  groupby(dayOfWeek) %>%
+  group_by(dayOfWeek) %>%
   summarise(sessions = sum(sessions)) %>%
   ungroup()
 with(sessions_by_dayOfWeek, barplot(sessions, names.arg = dayOfWeek))
 
 # Sessions by hour of day
 sessions_by_hour <- myData %>%
-  groupby(hour) %>%
+  group_by(hour) %>%
   summarise(sessions = sum(sessions)) %>%
   ungroup()
 with(sessions_by_hour, barplot(sessions, names.arg = hour))
@@ -209,17 +206,16 @@ readline("Press enter to continue.")
 # Example 12 - Using ggplot2
 
 library(ggplot2)
-library(plyr)
 
 # Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- DateRange("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
-Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "isMobile")
+Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "deviceCategory")
 # Let's allow a maximum of 40000 rows (default is 10000)
 MaxResults(myQuery) <- 40000
 
@@ -227,7 +223,7 @@ myData <- GetGaData(myQuery)
 
 # Sessions by hour of day and day of week
 avg_sessions_by_hour_wday_mobile <- myData %>%
-  groupby(hour, dayOfWeek, isMobile) %>%
+  group_by(hour, dayOfWeek, deviceCategory) %>%
   summarise(sessions = mean(sessions)) %>%
   ungroup()
 
@@ -242,12 +238,14 @@ qplot(
   y = sessions,
   data = avg_sessions_by_hour_wday_mobile,
   facets = ~dayOfWeek,
-  fill = isMobile,
+  fill = deviceCategory,
   geom = "col"
 )
 
 readline("Press enter to continue.")
 # Real-time reporting API
+
+my_creds <- GoogleApiCreds(userName = "johanndeboer@gmail.com", appCreds = "~/client_secret.json")
 
 rt_query <- RtQuery(view = "ga:987654321", creds = my_creds)
 Dimensions(rt_query) <- "rt:minutesAgo"
