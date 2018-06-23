@@ -26,3 +26,9 @@ setAs(from = "Date", to = "dateRange",
 
 setAs(from = "Interval", to = "dateRange", def = simpleCoerce)
 
+setAs(from = "character", to = "dateRange", def = function(from, to) {
+  assert_that(length(from) == 2L)
+  start_date <- as(from[1L], "Date")
+  end_date <- as(from[2L], "Date")
+  DateRange(start_date, end_date)
+})
