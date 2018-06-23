@@ -70,39 +70,16 @@ setClass(
 # -- GA report requests --
 setClass(
   "gaCohort",
+  contains = "dateRange",
   slots = c(
-    name = "character",
-    type = "character",
-    dateRange = "dateRange"
+    type = "character"
   ),
   prototype = prototype(
-    name = NA_character_,
-    type = "FIRST_VISIT_DATE",
-    dateRange = new("dateRange")
+    type = "FIRST_VISIT_DATE"
   ),
   validity = function(object) {
     validate_that(
-      legnth(name) <= 1L,
-      length(type) == 1L,
-      type %in% c("FIRST_VISIT_DATE")
-    )
-  }
-)
-
-setClass(
-  "gaCohortGroup",
-  slots = c(
-    lifetimeValue = "logical"
-  ),
-  prototype = prototype(
-    lifetimeValue = FALSE
-  ),
-  contains = "list",
-  validity = function(object) {
-    validate_that(
-      all_inherit(object, "gaCohort"),
-      length(lifetimeValue) == 1L,
-      lifetimeValue %in% c(TRUE, FALSE)
+      all(type %in% c("FIRST_VISIT_DATE"))
     )
   }
 )
@@ -143,14 +120,14 @@ setClass(
   slots = c(
     viewId = "viewId",
     creds = "list",
-    dateRange = "dateRange",
+    dateRanges = "dateRange",
     samplingLevel = "character",
     segments = "gaSegmentList",
-    cohortGroup = "gaCohortGroup"
+    cohorts = "gaCohort"
   ),
   prototype = prototype(
     creds = list(),
-    dateRange = new("dateRange"),
+    dateRanges = new("dateRange"),
     samplingLevel = "DEFAULT"
   ),
   validity = function(object) {
@@ -244,14 +221,22 @@ setClass(
     sortBy = "gaSortBy",
     filters = "gaFilter",
     segments = "gaSegmentList",
-    buckets = "numeric"
+    buckets = "numeric",
+    lifetimeValue = "logical"
   ),
   prototype = prototype(
     metrics = new("gaMetrics"),
     dimensions = new("gaDimensions"),
-    sortBy = new("gaSortBy")
+    sortBy = new("gaSortBy"),
+    lifetimeValue = FALSE
   ),
-  contains = ".standardQuery"
+  contains = ".standardQuery",
+  validity = function(object) {
+    validate_that(
+      length(object@lifetimeValue) == 1L,
+      object@lifetimeValue %in% c(TRUE, FALSE)
+    )
+  }
 )
 
 #' `mcfQuery` class.

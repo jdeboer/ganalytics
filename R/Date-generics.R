@@ -106,15 +106,16 @@ setGeneric(
 #'
 #' Get or define a cohort.
 #'
-#' @param object
-#' @param value
+#' @param object to get or set the cohorts of.
+#' @param value to set the object's cohorts to.
+#' @param type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.
 #'
 #' @family date range functions
 #' @export
 #' @rdname Cohort
 setGeneric(
   "Cohort",
-  function(object, value, type) {}
+  function(object, value, type) {},
   valueClass = "gaCohort",
   useAsDefault = FALSE
 )
