@@ -3,21 +3,22 @@ library(ganalytics)
 # Assumes app creds can be found in environment variables (default prefix) or in a JSON file (default filename)
 # Selects default view of first property in first account returned by the Management API.
 myQuery <- GaQuery()
+GaView(myQuery) <- 117987738
 GetGaData(myQuery)
 
 readline("Press enter to continue.")
 # Example 1 - Setting the date range
 
-# Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format "YYYY-MM-DD".)
-DateRange(myQuery) <- c("2013-01-01", "2013-05-31")
+# Set the date range to last 180 days.
+DateRange(myQuery) <- c(Sys.Date() - 180L, Sys.Date() - 1L)
 
 myData <- GetGaData(myQuery)
 summary(myData)
 
-# Adjust the start date to 1 March 2013:
-StartDate(myQuery) <- "2013-03-01"
-# Adjust the end date to 31 March 2013:
-EndDate(myQuery) <- "2013-03-31"
+# Adjust the start date to 60 days ago:
+StartDate(myQuery) <- Sys.Date() - 60L
+# Adjust the end date to 30 days ago:
+EndDate(myQuery) <- Sys.Date() - 30L
 
 myData <- GetGaData(myQuery)
 summary(myData)
@@ -46,7 +47,7 @@ readline("Press enter to continue.")
 Dimensions(myQuery) <- c("year", "week", "dayOfWeek", "hour")
 
 # Lets set a wider date range
-DateRange(myQuery) <- c("2012-10-01", "2013-03-31")
+DateRange(myQuery) <- c(Sys.Date() - 180L, Sys.Date() - 1L)
 
 myData <- GetGaData(myQuery)
 head(myData)
@@ -173,17 +174,17 @@ head(myData)
 readline("Press enter to continue.")
 # Example 11 - Using automatic pagination to get more than 10,000 rows of data per query
 
-# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the past two years.
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c(Sys.Date() - 730L, Sys.Date() - 1L)
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour")
 # Let's allow a maximum of 17544 rows (default is 10000)
-MaxResults(myQuery) <- 17544
+MaxResults(myQuery) <- 17545
 
 myData <- GetGaData(myQuery)
 nrow(myData)
@@ -207,12 +208,12 @@ readline("Press enter to continue.")
 
 library(ggplot2)
 
-# Sessions by date and hour for the years 2011 (leap year) and 2012: 2 * 365.5 * 24 = 17544 rows
+# Sessions by date and hour for the past two years
 # First let's clear any filters or segments defined previously
 TableFilter(myQuery) <- NULL
 Segments(myQuery) <- NULL
 # Define our date range
-DateRange(myQuery) <- c("2011-01-01", "2012-12-31")
+DateRange(myQuery) <- c(Sys.Date() - 730L, Sys.Date() - 1L)
 # Define our metrics and dimensions
 Metrics(myQuery) <- "sessions"
 Dimensions(myQuery) <- c("date", "dayOfWeek", "hour", "deviceCategory")
@@ -258,3 +259,20 @@ GetGaData(rt_query)
 # saved your Google APIs Project OAuth application credentials JSON file (which
 # you can download from the Google APIs Console). Also set view to the ID of the
 # Google Analytics view of which you wish to get real-time reporting data for.
+
+readline("Press enter to continue.")
+# Querying more than 10 metrics
+
+Dimensions(myQuery) <- c("date", "dayofweekname")
+TableFilter(myQuery) <- NULL
+Segments(myQuery) <- NULL
+DateRange(myQuery) <- c(Sys.Date() - 7L, Sys.Date() - 1L)
+
+Metrics(myQuery) <- c(
+  "pageviews", "entrances", "bounces", "exits", "timeonpage",
+  "totalEvents", "transactionRevenue", "goalCompletionsAll", "transactions", "uniqueEvents",
+  "uniquePageviews"
+)
+
+GetGaData(myQuery)
+

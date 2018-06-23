@@ -1,6 +1,7 @@
 #' @include globaldata.R
 #' @importFrom methods setClass setClassUnion setValidity
 #' @importFrom assertthat validate_that
+#' @importFrom stringr regex
 NULL
 
 # ---- expression operands ----
@@ -58,7 +59,20 @@ setOldClass("regex")
 #' @export
 setClass(
   ".regexDimOperand",
-  contains = "character"
+  contains = ".dimOperand",
+  slots = c(
+    ignore_case = "logical"
+  ),
+  prototype = prototype(
+    #stringr::regex(".*", ignore_case = TRUE),
+    ignore_case = TRUE
+  ),
+  validity = function(object) {
+    validate_that(
+      length(object@case_sensitive) == 1L,
+      assertthat::noNA(object@case_sensitive)
+    )
+  }
 )
 
 #' `gaMetOperand` class.

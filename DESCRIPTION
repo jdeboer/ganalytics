@@ -1,7 +1,7 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.10.3.00
-Date: 2018-06-01
+Version: 0.10.4
+Date: 2018-06-23
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
@@ -102,5 +102,3 @@ Collate:
 VignetteBuilder: knitr
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Remotes: 
-    markedmondson1234/googleAnalyticsR

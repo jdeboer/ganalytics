@@ -104,8 +104,32 @@ kGaDimTypes <- list(
     "ga:searchUsed",
     "ga:isTrueViewVideoAd",
     "ga:hasSocialSourceReferral"
+  ),
+  cohort_dimensions = c(
+    "ga:cohort",
+    "ga:cohortNthDay",
+    "ga:cohortNthMonth",
+    "ga:cohortNthWeek",
+    "ga:acquisitionTrafficChannel",
+    "ga:acquisitionSource",
+    "ga:acquisitionMedium",
+    "ga:acquisitionSourceMedium",
+    "ga:acquisitionCampaign"
+  ),
+  cohort_metrics = c(
+    "ga:cohortActiveUsers",
+    "ga:cohortTotalUsers",
+    "ga:cohortAppviewsPerUser",
+    "ga:cohortGoalCompletionsPerUser",
+    "ga:cohortPageviewsPerUser",
+    "ga:cohortRetentionRate",
+    "ga:cohortRevenuePerUser",
+    "ga:cohortVisitDurationPerUser",
+    "ga:cohortSessionsPerUser"
   )
 )
+
+# calculated_metrics_regex <- "^avg|^percent|Rate$|^CPC$|^CTR$|^CPM$|^RPC$|^ROI$|^ROAS$|Per"
 
 samplingLevel_levels <- c(
   DEFAULT = "DEFAULT",

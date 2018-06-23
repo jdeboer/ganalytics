@@ -11,3 +11,4 @@ logo.xcf
 inst/doc
 .GOOGLE_APIS_auth.RDS
 client_secret.json
+R/WIP

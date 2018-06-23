@@ -93,16 +93,17 @@ setMethod("GetGaData", ".query", function(
 
   join_by_vars <- c("viewId"[addViewId], "segment"[addSegmentId], sub(kAnyPrefix, "", as.character(Dimensions(query))))
 
-  if (length(join_by_vars) == 0) {
+  if (length(join_by_vars) == 0L) {
     # However, if ViewID or SegmentID are not present, then we cannot be sure
     # that row numbers will be the same metric metric group repsonses.
-    if (length(data_by_metric_group) > 1) {
+    if (length(data_by_metric_group) > 1L) {
       # Error in data.frame(..., check.names = FALSE) :
       # arguments imply differing number of rows: 1, 0
-      required_rows <- 1:max(lapply(data_by_metric_group, nrow))
-      data <- Reduce(function(x, y) {cbind(x[required_rows, ], y[required_rows, ])}, data_by_metric_group)
+      data <- Reduce(function(x, y) {
+        merge(x, y, by = join_by_vars, all = TRUE)
+      }, data_by_metric_group)
     } else {
-      data <- data_by_metric_group[[1]]
+      data <- data_by_metric_group[[1L]]
     }
 
   } else {
