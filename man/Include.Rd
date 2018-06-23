@@ -6,12 +6,14 @@
 \alias{Include,ANY-method}
 \title{Include.}
 \usage{
-Include(object, scope = NULL)
+Include(object, ..., scope)
 
-\S4method{Include}{ANY}(object, scope = NULL)
+\S4method{Include}{ANY}(object, ..., scope)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to include.}
+
+\item{...}{additional segment conditions to include.}
 
 \item{scope}{optional scope, "users" or "sessions"}
 }

@@ -2,7 +2,6 @@
 #' @include query-classes.R
 #' @include management-api-classes.R
 #' @include GaApiRequest.R
-#' @include init-methods.R
 #' @include Query-generics.R
 #' @importFrom methods new as
 NULL
@@ -20,6 +19,7 @@ NULL
 #' @param sortBy a sort by object
 #' @param filters a filters object
 #' @param segments a segment object or list of segments
+#' @param cohorts a cohort object or a list of cohorts
 #' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
 #' @param maxResults the maximum number of results to return,
 #' @param profileId Deprecated, use view instead.
@@ -36,6 +36,7 @@ GaQuery <- function(
   sortBy = NULL,
   filters = NULL,
   segments = NULL,
+  cohorts = NULL,
   samplingLevel = "DEFAULT",
   maxResults = kGaMaxResults,
   profileId = NA

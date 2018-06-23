@@ -4,7 +4,7 @@
 \alias{SplitDateRange}
 \title{SplitDateRange}
 \usage{
-SplitDateRange(dateRange, N)
+SplitDateRange(dateRange, N = 0L)
 }
 \arguments{
 \item{dateRange}{the gaDateRange object to be split}

@@ -31,7 +31,7 @@ SortBy(object) <- value
 \arguments{
 \item{object}{A character vector or list of dimensions or metrics to sort by.
 If character, then prefixing the dimension name with a "+" means ascending
-order or "-" for decending order. By default metrics are sorted in
+order or "-" for descending order. By default metrics are sorted in
 descending order, while dimensions are by default in ascending order.
 Alternatively, supply a query object and replacement dimensions and metrics
 or sort by.}
@@ -41,7 +41,7 @@ query then the replacement list of dimensions or metrics to sort by.}
 
 \item{desc}{A logical vector, same length as the resulting list of dimension
 or metric variables, indicating which columns of the resulting query
-response should be sorted in decending order.}
+response should be sorted in descending order.}
 
 \item{type}{A character vector, same length as the vector of variables to sort by,
 indicating the method of sorting to be applied to each variable. Available sort
@@ -61,8 +61,8 @@ Set the order of rows returned by Google Analytics.
 \item \code{NULL}: Returns NULL
 
 \item \code{character}: Return a sortBy object given by the variables named within
-a character vector, optionally denoted with - or + to indicate decending or
-acending sorting for each variable respectively in order of precednece.
+a character vector, optionally denoted with - or + to indicate descending or
+ascending sorting for each variable respectively in order of precedence.
 
 \item \code{.query}: Replace the sort by argument of a query.
 

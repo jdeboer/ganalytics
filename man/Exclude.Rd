@@ -6,12 +6,14 @@
 \alias{Exclude,ANY-method}
 \title{Exclude.}
 \usage{
-Exclude(object, scope = NULL)
+Exclude(object, ..., scope)
 
-\S4method{Exclude}{ANY}(object, scope = NULL)
+\S4method{Exclude}{ANY}(object, ..., scope)
 }
 \arguments{
 \item{object}{a segment condition or sequence filter to exclude.}
+
+\item{...}{additional segment conditions to add to the exclude filter.}
 
 \item{scope}{optional scope, "users" or "sessions"}
 }

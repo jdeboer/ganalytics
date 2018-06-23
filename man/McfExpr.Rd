@@ -19,7 +19,7 @@ to an .expr object.}
 \item{operand}{The operand to use for the expression.}
 }
 \description{
-Create a Multi-Chanel Funnel Reporting API expression.
+Create a Multi-Channel Funnel Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{

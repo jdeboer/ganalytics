@@ -1,6 +1,5 @@
 #' @include var-list-classes.R
 #' @include query-classes.R
-#' @include init-methods.R
 #' @include Var-list-generics.R
 #' @include utils.R
 #' @importFrom methods setMethod as validObject new as<-
@@ -70,6 +69,16 @@ setMethod(
 
 # -- SortBy ----
 
+setMethod(
+  f = "initialize",
+  signature = ".sortBy",
+  definition = function(.Object, value = list(), desc = logical(length(value))) {
+    .Object@.Data <- value
+    .Object@desc <- desc
+    .Object
+  }
+)
+
 #' @describeIn SortBy Coerce a .varList object to a .sortBy child-class.
 setMethod(
   f = "SortBy",
@@ -87,8 +96,8 @@ setMethod(
 setMethod("SortBy", "NULL", function(object) {new(".sortBy")})
 
 #' @describeIn SortBy Return a sortBy object given by the variables named within
-#'   a character vector, optionally denoted with - or + to indicate decending or
-#'   acending sorting for each variable respectively in order of precednece.
+#'   a character vector, optionally denoted with - or + to indicate descending or
+#'   ascending sorting for each variable respectively in order of precedence.
 setMethod(
   f = "SortBy",
   signature = "character",

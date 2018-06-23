@@ -73,7 +73,7 @@ setGeneric(
 #'
 #' @param object A character vector or list of dimensions or metrics to sort by.
 #'   If character, then prefixing the dimension name with a "+" means ascending
-#'   order or "-" for decending order. By default metrics are sorted in
+#'   order or "-" for descending order. By default metrics are sorted in
 #'   descending order, while dimensions are by default in ascending order.
 #'   Alternatively, supply a query object and replacement dimensions and metrics
 #'   or sort by.
@@ -81,7 +81,7 @@ setGeneric(
 #'   query then the replacement list of dimensions or metrics to sort by.
 #' @param desc A logical vector, same length as the resulting list of dimension
 #'   or metric variables, indicating which columns of the resulting query
-#'   response should be sorted in decending order.
+#'   response should be sorted in descending order.
 #' @param type A character vector, same length as the vector of variables to sort by,
 #'   indicating the method of sorting to be applied to each variable. Available sort
 #'   types are "VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET" or "DIMENSION_AS_INTEGER".

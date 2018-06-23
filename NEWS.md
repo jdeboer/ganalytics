@@ -1,4 +1,6 @@
-2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the googleAnalyticsR package. Dynamic Segments objects now have a name property.
+2018-06-23 Version type dimensions, e.g. ga:appVersion, are now coerced to `numeric_version` class, so that version numbers (e.g. ‘2.4.7’, ‘2.5.13’, ‘2.32.1’, etc...) can be correctly sorted and compared as if they were numeric values. Updated gademo.R. The dateRange class now inherits lubridate interval as its superclass.
+
+2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the googleAnalyticsR package. Dynamic Segments objects now have a name property. Updated `googleAnalyticsR-demo` and examples in the readme file.
 
 2018-02-18 Added methods for coercing a range of ganalytics classes into googleAnalyticsR classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the googleAnalyticsR package.
 

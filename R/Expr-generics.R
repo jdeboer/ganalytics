@@ -44,7 +44,7 @@ setGeneric(
 
 #' McfExpr.
 #'
-#' Create a Multi-Chanel Funnel Reporting API expression.
+#' Create a Multi-Channel Funnel Reporting API expression.
 #'
 #' @examples
 #' \dontrun{

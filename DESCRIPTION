@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.10.2
+Version: 0.10.3.00
 Date: 2018-06-01
 Authors@R: person(
     given = "Johann",
@@ -20,8 +20,7 @@ License: MIT + file LICENCE
 Depends:
     R(>= 3.1.0)
 Imports:
-    assertthat,
-    devtools,
+    assertthat (>= 0.2.0),
     httpuv,
     httr (>= 1.0.0),
     googleAnalyticsR (>= 0.5.0),
@@ -38,6 +37,7 @@ Imports:
     scales,
     selectr
 Suggests:
+    devtools,
     ggplot2,
     knitr,
     rmarkdown,
@@ -69,13 +69,12 @@ Collate:
     'date-coerce.R'
     'ga-api-classes.R'
     'management-api-classes.R'
-    'Var-list-generics.R'
-    'Var-generics.R'
-    'init-methods.R'
     'Date-methods.R'
     'operand-coerce.R'
     'Operand-generics.R'
     'Operand-methods.R'
+    'Var-list-generics.R'
+    'Var-generics.R'
     'var-list-coerce.R'
     'var-coerce.R'
     'Var-methods.R'
@@ -101,5 +100,7 @@ Collate:
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr
-LazyData: true
+LazyData: TRUE
 RoxygenNote: 6.0.1
+Remotes: 
+    markedmondson1234/googleAnalyticsR

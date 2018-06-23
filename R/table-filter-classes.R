@@ -8,7 +8,7 @@ NULL
 
 #' `.tableFilter` class.
 #'
-#' An S4 class to represent a query table filter epxression.
+#' An S4 class to represent a query table filter expression.
 #'
 #' @rdname tableFilter-class
 #' @keywords internal
@@ -21,7 +21,7 @@ setClass(
     ## Check that single expressions within each OR expression exclusively
     ## belong to one class, i.e. either Metrics or Dimensions
     if (all(sapply(object@.Data, function(orExpr) {
-      length(unique(sapply(orExpr, class))) == 1
+      length(unique(sapply(orExpr, class))) == 1L
     }))) {
       TRUE
     } else {
@@ -64,8 +64,26 @@ setClass(
     if (!any(sapply(unlist(object@.Data), GaVar) %in% c("<>", "[]"))) {
       TRUE
     } else {
-      return("Filters do not support <> and [] comparators.")
+      return("Filters do not support between <> and in [] comparators.")
     }
+  }
+)
+
+#' `gaDimFilter` class.
+#'
+#' An S4 class to represent a Core Reporting query table dimension filter expression.
+#'
+#' @rdname gaDimFilter-class
+#' @keywords internal
+#'
+#' @export
+setClass(
+  "gaDimFilter",
+  contains = "gaFilter",
+  validity = function(object) {
+    validate_that(
+      all_inherit(unlist(object@.Data), ".dimExpr")
+    )
   }
 )
 

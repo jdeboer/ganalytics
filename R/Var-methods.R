@@ -4,12 +4,101 @@
 #' @include var-list-classes.R
 #' @include var-list-coerce.R
 #' @include query-classes.R
-#' @include init-methods.R
 #' @include Var-generics.R
 #' @include Var-list-generics.R
 #' @include utils.R
 #' @importFrom methods new setMethod as<-
 NULL
+
+setMethod(
+  f = "initialize",
+  signature = ".gaVar",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      tmp <- as.character(tolower(value))
+      ## Substitute ga; ga- ga. ga_ with ga:
+      ## Check var name starts with ga:
+      ## Put ga: at start of GA var name
+      tmp <- sub(kGaPrefix, "ga:", tmp)
+      tmp <- sub("^(ga:)?([a-z0-9]+)$", "ga:\\2", tmp)
+      if (str_detect(as.character(value), regex("dateofsession", ignore_case = TRUE))) {
+        tmp <- "dateOfSession"
+      }
+      ## Replace GA Var with correct casing of valid Var Name
+      ## Partial matches are accepted
+      allVars <- tolower(union(kGaVars$allVars, "dateOfSession"))
+      allVars_short <- union(kGaVars_df$id, "dateOfSession")
+      varIndex <- charmatch(tmp, allVars)
+      matches <- union(kGaVars$allVars, "dateOfSession")[varIndex]
+      if (identical(any(varIndex == 0), TRUE)) {
+        stop(paste0(
+          "Ambiguous var name: ", paste0(value[varIndex == 0], collapse = ", "), ". Did you mean any of these?:\n",
+          paste(allVars_short[str_detect(allVars_short, regex(paste0("^", tmp[varIndex == 0]), ignore_case = TRUE))], collapse = ", ")
+        ))
+      } else if (any(is.na(varIndex))) {
+        possible_matches <- allVars_short[str_detect(allVars_short, regex(value[is.na(varIndex)], ignore_case = TRUE))]
+        if (length(possible_matches) == 1) {
+          matches <- possible_matches
+        } else {
+          stop(paste0(
+            "No matching var name: ", paste0(value[is.na(varIndex)], collapse = ", "),
+            if (length(possible_matches) > 0) {
+              paste(
+                ". Did you mean any of these?:\n",
+                paste(possible_matches, collapse = ", ")
+              )
+            }
+          ))
+        }
+      }
+      .Object@.Data <- matches
+      ## If a match was not found, use the var name supplied to
+      ## let validation fail through the validObject method
+      ## is.na can only work with a vector of length 1.
+      if (is.na(.Object@.Data[1])) {
+        .Object@.Data <- value
+      }
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
+setMethod(
+  f = "initialize",
+  signature = ".mcfVar",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      tmp <- as.character(tolower(value))
+      tmp <- sub(kMcfPrefix, "mcf:", tmp)
+      tmp <- sub("^(mcf:)?(.*)", "mcf:\\2", tmp)
+      allVars <- with(kMcfVars, union(dims, mets))
+      varIndex <- charmatch(tmp, tolower(allVars))
+      tmp <- allVars[varIndex]
+      .Object@.Data <- tmp
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
+setMethod(
+  f = "initialize",
+  signature = ".rtVar",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      tmp <- as.character(tolower(value))
+      tmp <- sub(kRtPrefix, "rt:", tmp)
+      tmp <- sub("^(rt:)?(.*)", "rt:\\2", tmp)
+      allVars <- with(kRtVars, union(dims, mets))
+      varIndex <- charmatch(tmp, tolower(allVars))
+      tmp <- allVars[varIndex]
+      .Object@.Data <- tmp
+      validObject(.Object)
+    }
+    .Object
+  }
+)
 
 #' @describeIn Var Coerce a character to '.var'.
 setMethod(

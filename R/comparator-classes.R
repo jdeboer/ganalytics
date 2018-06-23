@@ -89,7 +89,7 @@ setClass(
 
 #' `mcfMetComparator` class.
 #'
-#' An S4 class representing Multi-Channel Funnel metric condtion comparison
+#' An S4 class representing Multi-Channel Funnel metric condition comparison
 #' operators.
 #'
 #' @rdname mcfMetComparator-class

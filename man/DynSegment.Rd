@@ -30,7 +30,7 @@ gaDynSegment that is scoped to either 'user' or 'session' level.
 }
 \details{
 A segment filter is either sequential or non-sequential conditions.
-Sequential and non-sequential conditoins can be combined using this function.
+Sequential and non-sequential conditions can be combined using this function.
 }
 \section{Methods (by class)}{
 \itemize{

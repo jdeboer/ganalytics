@@ -7,12 +7,12 @@ NULL
 #' Create a sequence using R non-standard evaluation syntax.
 #'
 #' Steps must be separated by commas (\code{,}). \code{...} denotes zero or more
-#' interactions may preceed the step that follows, otherwise without \code{...} then
+#' interactions may precede the step that follows, otherwise without \code{...} then
 #' the there must not be any interactions between the adjacent steps in order for the
 #' results to the sequence.
 #'
 #' @param steps a list of expressions (of one or more conditions), each
-#'   repreating a step in the sequence.
+#'   repeating a step in the sequence.
 #'
 #' @examples
 #' a <- Expr(~pagePath == "/home")

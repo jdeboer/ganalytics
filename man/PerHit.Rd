@@ -8,13 +8,13 @@
 \alias{PerHit,formula-method}
 \title{PerHit.}
 \usage{
-PerHit(object, ...)
+PerHit(object, ..., negation)
 
-\S4method{PerHit}{.compoundExpr}(object, ...)
+\S4method{PerHit}{.compoundExpr}(object, ..., negation)
 
-\S4method{PerHit}{gaMetExpr}(object, ...)
+\S4method{PerHit}{gaMetExpr}(object, ..., negation)
 
-\S4method{PerHit}{formula}(object, ...)
+\S4method{PerHit}{formula}(object, ..., negation)
 }
 \arguments{
 \item{object}{a gaMetExpr object to coerce to hit-level or if multiple
@@ -23,6 +23,8 @@ single step of sequence filter.}
 
 \item{...}{Further expressions to be included in the filter definition if
 defining a sequence filter of length one.}
+
+\item{negation}{boolean value indicating whether to negate the condition.}
 }
 \value{
 a gaMetExpr or gaSegmentSequenceFilter.

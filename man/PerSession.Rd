@@ -8,13 +8,13 @@
 \alias{PerSession,formula-method}
 \title{PerSession.}
 \usage{
-PerSession(object, ...)
+PerSession(object, ..., negation)
 
-\S4method{PerSession}{ANY}(object, ...)
+\S4method{PerSession}{ANY}(object, ..., negation)
 
-\S4method{PerSession}{gaMetExpr}(object, ...)
+\S4method{PerSession}{gaMetExpr}(object, ..., negation)
 
-\S4method{PerSession}{formula}(object, ...)
+\S4method{PerSession}{formula}(object, ..., negation)
 }
 \arguments{
 \item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
@@ -22,6 +22,8 @@ session-level. Alternatively, an dimension expression or segment filter to
 coerce into a session scoped gaDynSegment.}
 
 \item{...}{Other filters to include in the gaDynSegment.}
+
+\item{negation}{boolean value indicating whether to negate the condition.}
 }
 \value{
 a gaMetExpr, .gaSegmentFilter or gaDynSegment.

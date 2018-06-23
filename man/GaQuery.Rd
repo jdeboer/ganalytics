@@ -7,8 +7,8 @@
 GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 2, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL,
-  segments = NULL, samplingLevel = "DEFAULT", maxResults = kGaMaxResults,
-  profileId = NA)
+  segments = NULL, cohorts = NULL, samplingLevel = "DEFAULT",
+  maxResults = kGaMaxResults, profileId = NA)
 }
 \arguments{
 \item{view}{view id to use}
@@ -28,6 +28,8 @@ GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
 \item{filters}{a filters object}
 
 \item{segments}{a segment object or list of segments}
+
+\item{cohorts}{a cohort object or a list of cohorts}
 
 \item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
 

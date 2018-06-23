@@ -49,6 +49,6 @@ Set the segments of the query object.
 
 \item \code{ANY}: Coerce an object into a segmentList of length 1.
 
-\item \code{gaQuery}: Set the segments to be used witin a query.
+\item \code{gaQuery}: Set the segments to be used within a query.
 }}
 

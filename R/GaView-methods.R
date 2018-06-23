@@ -5,6 +5,25 @@
 #' @importFrom methods setMethod as as<-
 NULL
 
+setMethod(
+  f = "initialize",
+  signature = "viewId",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "ga:", value)
+      value <- sapply(value, function(x) {
+        if (!grepl("^ga:[0-9]+$", x)) {
+          x <- paste("ga", x, sep = ":")
+        }
+        x
+      })
+      .Object@.Data <- unique(value)
+      validObject(.Object)
+    }
+    .Object
+  }
+)
+
 #' @describeIn GaView Select the default view of the property
 setMethod(
   "GaView",
