@@ -12,3 +12,4 @@
 ^revdep$
 ^CONDUCT\.md$
 ^.*\.o$
+client_secret.json
