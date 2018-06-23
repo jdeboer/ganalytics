@@ -95,10 +95,7 @@ setClass(
 )
 
 setClass(
-  "gaPivots",
-  contains = "list",
   validity = function(object) {
-    all_inherit(object, "gaPivot")
   }
 )
 
@@ -108,8 +105,8 @@ setClass(
     dimensions = "gaDimensions",
     metrics = "gaMetrics",
     sortBy = "gaSortBy",
-    pivots = "gaPivots",
     filters = "gaFilter"
+    pivot = "gaPivot",
   )
 )
 
