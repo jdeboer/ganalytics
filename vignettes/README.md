@@ -60,7 +60,7 @@ Installation
 ### 1. Install the necessary packages into R via the GitHub repository
 
 #### Prerequisites
-* Ensure you have installed the latest version of [R](http://cran.r-project.org/)
+* Ensure you have installed the latest version of [R](https://cran.r-project.org/)
 * If using Windows, you will also need the latest version of [RTools](https://cran.r-project.org/bin/windows/Rtools/)
 * For other operating systems, please refer to [installation instructions for devtools](httpss://github.com/hadley/devtools/blob/master/README.md)
 
