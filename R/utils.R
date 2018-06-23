@@ -1,7 +1,7 @@
 #' @importFrom lubridate ymd
 #' @importFrom stringr regex str_replace str_detect
 #' @importFrom plyr llply
-#' @importFrom methods slot
+#' @importFrom methods slot .valueClassTest
 NULL
 
 #' IsVarMatch.
