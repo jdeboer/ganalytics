@@ -58,7 +58,19 @@ setOldClass("regex")
 #' @export
 setClass(
   ".regexDimOperand",
-  contains = "character"
+  contains = "character",
+  slots = c(
+    case_sensitive = "logical"
+  ),
+  prototype = prototype(
+    case_sensitive = FALSE
+  ),
+  validity = function(object) {
+    validate_that(
+      length(object@case_sensitive) == 1L,
+      assertthat::noNA(object@case_sensitive)
+    )
+  }
 )
 
 #' `gaMetOperand` class.
