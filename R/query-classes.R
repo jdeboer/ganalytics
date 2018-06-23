@@ -88,10 +88,17 @@ setClass(
   "gaPivot",
   slots = c(
     dimensions = "gaDimensions",
-    dimensionFilters = "gaDimFilters",
+    dimensionFilters = "gaDimFilter",
     metrics = "gaMetrics",
     startGroup = "integer",
     maxGroupCount = "integer"
+  ),
+  prototype = prototype(
+    dimensions = new("gaDimensions", list()),
+    dimensionFilters = new("gaDimFilter"),
+    metrics = new("gaMetrics", list()),
+    startGroup = 1L,
+    maxGroupCount = 5L
   )
 )
 
