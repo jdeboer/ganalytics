@@ -74,10 +74,11 @@ setAs(from = "gaSegmentConditionFilter", to = "character",
       }
 )
 
-setAs(from = "gaSegmentConditionFilter", to = "json",
-      def = function(from) {
-      }
-)
+# setAs(from = "gaSegmentConditionFilter", to = "gaSegmentConditionFilter_json",
+#       def = function(from) {
+#         jsonlite::toJSON(as(from, "segmentFilter_ga4"))
+#       }
+# )
 
 setAs(from = "gaSegmentSequenceFilter", to = "character",
       def = function(from, to) {

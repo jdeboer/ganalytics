@@ -239,3 +239,27 @@ setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
   as(as(from, "gaDynSegment"), to)
 })
 
+# setAs("gaQuery", "ga4_req", def = function(from, to) {
+#   list(
+#     viewId = id,
+#     dateRanges = list(
+#       date_list_one,
+#       date_list_two
+#     ),
+#     samplingLevel = samplingLevel,
+#     dimensions = dim_list,
+#     metrics = met_list,
+#     dimensionFilterClauses = dim_filters,
+#     metricFilterClauses = met_filters,
+#     filtersExpression = filtersExpression,
+#     orderBys = order,
+#     segments = segments,
+#     pivots = pivots,
+#     cohortGroup=cohorts,
+#     pageToken=as.character(pageToken),
+#     pageSize = pageSize,
+#     includeEmptyRows = TRUE
+#   )
+#   class() <- to
+# })
+

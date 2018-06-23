@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with Google Analytics using R
-Version: 0.10.3.99
+Version: 0.10.3.9999
 Date: 2018-06-01
 Authors@R: person(
     given = "Johann",
