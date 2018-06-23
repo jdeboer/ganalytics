@@ -258,3 +258,21 @@ GetGaData(rt_query)
 # saved your Google APIs Project OAuth application credentials JSON file (which
 # you can download from the Google APIs Console). Also set view to the ID of the
 # Google Analytics view of which you wish to get real-time reporting data for.
+
+readline("Press enter to continue.")
+# Querying more than 10 metrics
+
+Dimensions(myQuery) <- c("date", "dayofweekname")
+TableFilter(myQuery) <- NULL
+Segments(myQuery) <- NULL
+DateRange(myQuery) <- c(Sys.Date() - 7L, Sys.Date() - 1L)
+GaView(myQuery) <- 117987738
+
+Metrics(myQuery) <- c(
+  "pageviews", "entrances", "bounces", "exits", "timeonpage",
+  "totalEvents", "transactionRevenue", "goalCompletionsAll", "transactions", "uniqueEvents",
+  "uniquePageviews"
+)
+
+GetGaData(myQuery)
+
