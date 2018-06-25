@@ -19,3 +19,10 @@ This is a resubmission. In this version I have:
 * Updated README.md with corrected URLs and a few other updates to the user instructions.
 
 * Reduced LICENCE to keep only the first two lines of the file.
+
+* Omitted the redundant "using R" in the package title.
+
+* Placed single quotes around package and software names in Title and Description.
+
+* Replaced \dontrun{} by \donttest{} in the Rd-files.
+

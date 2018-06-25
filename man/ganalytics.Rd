@@ -12,7 +12,7 @@ A Google Analytics and Google Tag Manager API client for R
 \details{
 Classes and methods for interactive use of the Google Analytics core
 reporting, real-time reporting, multi-channel funnel reporting, metadata,
-configuration management and Google Tag Manager APIs using R.
+configuration management and Google Tag Manager APIs.
 
 To use this package with these APIs, it is necessary to provide OAuth
 credentials for a Google APIs project with the necessary APIs enabled.

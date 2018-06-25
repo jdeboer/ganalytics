@@ -4,7 +4,7 @@ NULL
 
 #' sequential_segment.
 #'
-#' Create a sequence using R non-standard evaluation syntax.
+#' Create a sequence non-standard evaluation syntax.
 #'
 #' Steps must be separated by commas (\code{,}). \code{...} denotes zero or more
 #' interactions may precede the step that follows, otherwise without \code{...} then
