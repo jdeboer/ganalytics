@@ -1,5 +1,5 @@
 Package: ganalytics
-Title: Interact with Google Analytics using R
+Title: Interact with 'Google Analytics'
 Version: 0.10.4
 Date: 2018-06-23
 Authors@R: person(
@@ -7,10 +7,10 @@ Authors@R: person(
     family = "de Boer",
     role = c("aut", "cre"),
     email = "johanndeboer@gmail.com")
-Description: Functions for querying the Google Analytics core reporting,
-    real-time, multi-channel funnel and management APIs, as well as the Google
-    Tag Manager API. Write methods are also provided for the management and
-    Google Tag Manager APIs so that you can change tag, property or view
+Description: Functions for querying the 'Google Analytics' core reporting,
+    real-time, multi-channel funnel and management APIs, as well as the 'Google
+    Tag Manager' (GTM) API. Write methods are also provided for the management and
+    GTM APIs so that you can change tag, property or view
     settings, for example. Define reporting queries using natural R expressions
     instead of being concerned as much about API technical intricacies like
     query syntax, character code escaping, and API limitations.

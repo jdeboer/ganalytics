@@ -11,7 +11,7 @@ sequential_segment(steps)
 repeating a step in the sequence.}
 }
 \description{
-Create a sequence using R non-standard evaluation syntax.
+Create a sequence non-standard evaluation syntax.
 }
 \details{
 Steps must be separated by commas (\code{,}). \code{...} denotes zero or more

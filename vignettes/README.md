@@ -16,13 +16,7 @@ vignette: >
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
+
 
 ganalytics
 ==========
@@ -109,7 +103,8 @@ GOOGLE_APIS_CONSUMER_SECRET = <Your client secret>
 ```
 
 **Alternatively** you can temporarily set your environment variables straight from R using this command:
-```{r}
+
+```r
 Sys.setenv(
   GOOGLE_APIS_CONSUMER_ID = "<Your client ID>",
   GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>"
