@@ -3,18 +3,12 @@
 #' @include table-filter-classes.R
 #' @include segment-classes.R
 #' @importFrom methods setClass setClassUnion prototype new
-#' @importFrom assertthat validate_that
+#' @importFrom assertthat validate_that noNA
 #' @importFrom stringr str_detect
+#' @importFrom lubridate interval int_start int_end int_start<- int_end<- int_standardize int_length
 NULL
 
 # ---- dateRange ----
-
-# Consider changing the definition of dateRange to be inheriting from or
-# extending a lubridate interval class. This would require rounding the start
-# and end to the nearest day, possibly checking that the timezone is aligned
-# with the view it is being applied to (or forcing the timezone to be UTC or the
-# system's local timezone). Also making sure that the interval is positive, i.e
-# the start is not after the end.
 
 #' `dateRange` class.
 #'
@@ -26,30 +20,65 @@ NULL
 #' @export
 setClass(
   "dateRange",
-  slots = c(
-    startDate = "Date",
-    endDate = "Date"
-  ),
+  contains = getClass("Interval", where = "lubridate"),
   prototype = prototype(
-    startDate = Sys.Date() - 8,
-    endDate = Sys.Date() - 2
+    as.numeric(as.POSIXct(Sys.Date() - 2L)) - as.numeric(as.POSIXct(Sys.Date() - 8L)),
+    start = as.POSIXct(Sys.Date() - 8L),
+    tzone = "UTC"
   ),
   validity = function(object) {
-    if (length(object@startDate) != length(object@endDate)) {
-      "startDate and endDate must be the same length"
-    } else if (all(object@startDate > object@endDate)) {
-      "endDate cannot be before startDate"
-    } else if (all(object@startDate < kGaDateOrigin)) {
-      paste("Start date cannot preceed Google Analytics launch date:", kGaDateOrigin)
-    } else TRUE
+    validations <- list(
+      validate_that(all(int_length(object) >= 0), msg = "End date cannot be before start date."),
+      validate_that(
+        noNA(object),
+        all(object@start >= as.POSIXct(kGaDateOrigin))
+      )
+    )
+    invalids <- !sapply(validations, function(x) {is.logical(x) && length(x) == 1L && !is.na(x) && x})
+    if(any(invalids)) as.character(validations[invalids])
   }
+)
+
+# -- GA report requests --
+setClass(
+  "gaCohort",
+  contains = "dateRange",
+  slots = c(
+    type = "character"
+  ),
+  prototype = prototype(
+    type = "FIRST_VISIT_DATE"
+  ),
+  validity = function(object) {
+    validate_that(
+      all(type %in% c("FIRST_VISIT_DATE"))
+    )
+  }
+)
+
+setClass(
+  "gaPivot",
+  slots = c(
+    dimensions = "gaDimensions",
+    dimensionFilters = "gaDimFilter",
+    metrics = "gaMetrics",
+    startGroup = "integer",
+    maxGroupCount = "integer"
+  ),
+  prototype = prototype(
+    dimensions = new("gaDimensions", list()),
+    dimensionFilters = new("gaDimFilter"),
+    metrics = new("gaMetrics", list()),
+    startGroup = 1L,
+    maxGroupCount = 5L
+  )
 )
 
 # ---- View ID ----
 
 #' `viewId` class.
 #'
-#' An S4 class to represent a Google Analytics view's ID.
+#' An S4 class to represent a Google Analytics view ID.
 #'
 #' @rdname viewId-class
 #' @keywords internal
@@ -62,71 +91,8 @@ setClass(
     if (all(str_detect(object, "^ga:[0-9]+$"))) {
       TRUE
     } else {
-      "viewId must be an string of digits preceeded by 'ga:'"
+      "viewId must be an string of digits preceded by 'ga:'"
     }
-  }
-)
-
-# -- GA report requests --
-setClass(
-  "gaCohort",
-  slots = c(
-    name = "character",
-    type = "character",
-    dateRange = "dateRange"
-  ),
-  prototype = prototype(
-    name = NA_character_,
-    type = "FIRST_VISIT_DATE",
-    dateRange = new("dateRange")
-  ),
-  validity = function(object) {
-    validate_that(
-      legnth(name) <= 1L,
-      length(type) == 1L,
-      type %in% c("FIRST_VISIT_DATE")
-    )
-  }
-)
-
-setClass(
-  "gaCohortGroup",
-  slots = c(
-    lifetimeValue = "logical"
-  ),
-  prototype = prototype(
-    lifetimeValue = FALSE
-  ),
-  contains = "list",
-  validity = function(object) {
-    validate_that(
-      all_inherit(object, "gaCohort"),
-      length(lifetimeValue) == 1L,
-      lifetimeValue %in% c(TRUE, FALSE)
-    )
-  }
-)
-
-setClass(
-  "gaDimFilters"
-)
-
-setClass(
-  "gaPivot",
-  slots = c(
-    dimensions = "gaDimensions",
-    dimensionFilters = "gaDimFilters",
-    metrics = "gaMetrics",
-    startGroup = "integer",
-    maxGroupCount = "integer"
-  )
-)
-
-setClass(
-  "gaPivots",
-  contains = "list",
-  validity = function(object) {
-    all_inherit(object, "gaPivot")
   }
 )
 
@@ -136,8 +102,8 @@ setClass(
     dimensions = "gaDimensions",
     metrics = "gaMetrics",
     sortBy = "gaSortBy",
-    pivots = "gaPivots",
-    filters = "gaFilter"
+    pivot = "gaPivot",
+    tableFilter = "gaFilter"
   )
 )
 
@@ -147,14 +113,14 @@ setClass(
   slots = c(
     viewId = "viewId",
     creds = "list",
-    dateRange = "dateRange",
+    dateRanges = "dateRange",
     samplingLevel = "character",
     segments = "gaSegmentsList",
     cohortGroup = "gaCohortGroup"
   ),
   prototype = prototype(
     creds = list(),
-    dateRange = new("dateRange"),
+    dateRanges = new("dateRange"),
     samplingLevel = "DEFAULT"
   ),
   validity = function(object) {
@@ -253,9 +219,16 @@ setClass(
   prototype = prototype(
     metrics = new("gaMetrics"),
     dimensions = new("gaDimensions"),
-    sortBy = new("gaSortBy")
+    sortBy = new("gaSortBy"),
+    lifetimeValue = FALSE
   ),
-  contains = ".standardQuery"
+  contains = ".standardQuery",
+  validity = function(object) {
+    validate_that(
+      length(object@lifetimeValue) == 1L,
+      object@lifetimeValue %in% c(TRUE, FALSE)
+    )
+  }
 )
 
 #' `mcfQuery` class.
