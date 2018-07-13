@@ -5,7 +5,7 @@
 \alias{mcfMetComparator-class}
 \title{`mcfMetComparator` class.}
 \description{
-An S4 class representing Multi-Channel Funnel metric condtion comparison
+An S4 class representing Multi-Channel Funnel metric condition comparison
 operators.
 }
 \keyword{internal}

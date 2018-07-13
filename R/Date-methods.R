@@ -1,13 +1,46 @@
 #' @include Date-generics.R
 #' @include query-classes.R
-#' @include init-methods.R
 #' @include management-api-classes.R
 #' @include date-coerce.R
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
-#' @importFrom lubridate today
+#' @importFrom lubridate today interval int_start int_end
 #' @importFrom methods setMethod new as as<-
 NULL
+
+# setMethod(
+#   f = "initialize",
+#   signature = "dateRange",
+#   definition = function(.Object, startDate, endDate) {
+#     # If startDate and endDate are provided then
+#     # bind every combination of startDate and endDate
+#     # into a data.frame, keep only the unique rows,
+#     # and use these start and end dates for this object.
+#     if (!(missing(startDate) || missing(endDate))) {
+#       dates <- do.call(
+#         what = rbind,
+#         args = mapply(
+#           FUN = function(startDate, endDate) {
+#             data.frame(
+#               startDate = startDate,
+#               endDate = endDate,
+#               stringsAsFactors = FALSE
+#             )
+#           },
+#           startDate,
+#           endDate,
+#           SIMPLIFY = FALSE,
+#           USE.NAMES = FALSE
+#         )
+#       )
+#       dates <- unique(dates)
+#       .Object@startDate <- dates$startDate
+#       .Object@endDate <- dates$endDate
+#       validObject(.Object)
+#     }
+#     .Object
+#   }
+# )
 
 #' SplitDateRange
 #'
@@ -19,10 +52,8 @@ NULL
 #'   single days.
 #'
 #' @export
-SplitDateRange <- function(dateRange, N) {
+SplitDateRange <- function(dateRange, N = 0L) {
   # TO DO
-  # Assert:
-  # length(dateRange) == 1L
   #
   # If N = 0 then split date range into single days
   # If N = 1, then the date range returned will be of length 1
@@ -31,7 +62,8 @@ SplitDateRange <- function(dateRange, N) {
   # Set new start dates
   assert_that(
     N >= 0L,
-    class(dateRange) == "dateRange"
+    length(N) == 1L,
+    is(dateRange, "dateRange")
   )
   maxN <- as.numeric(max(EndDate(dateRange)) - min(StartDate(dateRange))) + 1
   if (N <= 0L | N > maxN) {
@@ -77,10 +109,10 @@ setMethod("EndDate", "character", function(object) {
 })
 
 #' @describeIn DateRange Return the start dates of a date range vector
-setMethod("StartDate", "dateRange", function(object) {object@startDate})
+setMethod("StartDate", "dateRange", function(object) {as.Date(int_start(object))})
 
 #' @describeIn DateRange Return the end dates of a date range vector
-setMethod("EndDate", "dateRange", function(object) {object@endDate})
+setMethod("EndDate", "dateRange", function(object) {as.Date(int_end(object))})
 
 #' @describeIn DateRange Return the start dates of a date range vector
 setMethod("StartDate", "Interval", function(object) {StartDate(DateRange(object))})
@@ -180,7 +212,7 @@ setMethod(
   definition = function(object, endDate) {
     startDate <- as(object, "Date")
     endDate <- as(endDate, "Date")
-    new("dateRange", startDate, endDate)
+    as(interval(start = startDate, end = endDate), "dateRange")
   }
 )
 
@@ -203,7 +235,7 @@ setMethod("DateRange<-", c(".standardQuery", "ANY"), function(object, value) {
 })
 
 #' @describeIn DateRange Returns the maximum date range of when a view has been
-#'   recieving hits.
+#'   receiving hits.
 setMethod("DateRange", "gaView", function(object) {
   start_date <- as.Date(object$created)
   end_date <- today()
@@ -235,8 +267,7 @@ setMethod(
     } else {
       startDate <- as(value[1L], "Date")
       endDate <- as(value[2L], "Date")
-      new("dateRange", startDate, endDate)
-      newDateRange <- new("dateRange", startDate, endDate)
+      newDateRange <- DateRange(startDate, endDate)
       DateRange(object) <- newDateRange
       object
     }

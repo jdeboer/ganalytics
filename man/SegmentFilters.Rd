@@ -12,6 +12,7 @@ SegmentFilters(..., scope = "sessions")
 \item{scope}{used to select either PerUser or PerSession.}
 }
 \description{
-Deprecated, use \code{PerSession} or \code{PerUser} instead.
+Deprecated, use \code{DynSegment}, \code{Include}, \code{Exclude},
+\code{PerSession} or \code{PerUser} instead.
 }
 \keyword{internal}

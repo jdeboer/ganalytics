@@ -431,7 +431,8 @@ GaCondition <- function(..., negation = FALSE) {
 
 #' SegmentFilters
 #'
-#' Deprecated, use \code{PerSession} or \code{PerUser} instead.
+#' Deprecated, use \code{DynSegment}, \code{Include}, \code{Exclude},
+#' \code{PerSession} or \code{PerUser} instead.
 #'
 #' @param ... passed onto \code{PerSession} or \code{PerUser}
 #' @param scope used to select either PerUser or PerSession.

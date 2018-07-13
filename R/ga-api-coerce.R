@@ -1,5 +1,4 @@
 #' @include utils.R
-#' @include init-methods.R
 #' @importFrom methods setAs validObject
 #' @importFrom plyr ldply alply
 NULL
@@ -75,10 +74,11 @@ setAs(from = "gaSegmentConditionFilter", to = "character",
       }
 )
 
-setAs(from = "gaSegmentConditionFilter", to = "json",
-      def = function(from) {
-      }
-)
+# setAs(from = "gaSegmentConditionFilter", to = "gaSegmentConditionFilter_json",
+#       def = function(from) {
+#         jsonlite::toJSON(as(from, "segmentFilter_ga4"))
+#       }
+# )
 
 setAs(from = "gaSegmentSequenceFilter", to = "character",
       def = function(from, to) {
@@ -121,16 +121,6 @@ setAs(from = "gaDynSegment", to = "json",
         })
       }
 )
-
-select_segment_filters_with_scope <- function(object, scope) {
-  assert_that(
-    length(scope) == 1L,
-    scope %in% c("sessions", "users")
-  )
-  dyn_segment <- as(object, "gaDynSegment")
-  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
-  new("gaDynSegment", dyn_segment[matching_filters])
-}
 
 scoped_segment_filter_list_to_char <- function(from, scope) {
   if (length(from) >= 1L) {
@@ -278,8 +268,8 @@ setAs(
   def = function(from) {
     views <- as(GaView(from), "viewId")
     dateRange <- from@dateRange
-    startDates <- dateRange@startDate
-    endDates <- dateRange@endDate
+    startDates <- StartDate(dateRange)
+    endDates <- EndDate(dateRange)
     viewsDates <- do.call(
       what = rbind,
       args = lapply(

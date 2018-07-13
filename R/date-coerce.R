@@ -17,22 +17,18 @@ setAs(from = "character", to = "Date",
 # Coercion to dateRange
 setAs(from = "Date", to = "dateRange",
       def = function(from, to) {
-        assert_that(length(from) == 2)
-        startDate = from[1]
-        endDate = from[2]
-        new("dateRange", startDate, endDate)
+        assert_that(length(from) == 2L)
+        startDate = from[1L]
+        endDate = from[2L]
+        DateRange(startDate, endDate)
       }
 )
 
-setAs(from = "Interval", to = "dateRange",
-      def = function(from, to) {
-        date_range_char <- str_split_fixed(as.character(from), "--", 2)
-        start_date <- as.Date(date_range_char[, 1])
-        end_date <- as.Date(date_range_char[, 2])
-        if (start_date <= end_date) {
-          new(to, start_date, end_date)
-        } else {
-          new(to, end_date, start_date)
-        }
-      }
-)
+setAs(from = "Interval", to = "dateRange", def = simpleCoerce)
+
+setAs(from = "character", to = "dateRange", def = function(from, to) {
+  assert_that(length(from) == 2L)
+  start_date <- as(from[1L], "Date")
+  end_date <- as(from[2L], "Date")
+  DateRange(start_date, end_date)
+})

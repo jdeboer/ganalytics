@@ -28,11 +28,10 @@ describing the variable, comparator and operand.
 }}
 
 \examples{
-\dontrun{
+\donttest{
   myQuery <- RtQuery(view = 123456789)
   source_matches_google <- RtExpr("rt:source", "~", "google")
   TableFilter(myQuery) <- source_matches_google
-  GetData(myQuery)
 }
 
 }

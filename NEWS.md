@@ -1,4 +1,8 @@
-2018-02-18 Added as methods to support the coercion of a range of ganalytics classes into googleAnalyticsR classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the googleAnalyticsR package.
+2018-06-23 Version type dimensions, e.g. ga:appVersion, are now coerced to `numeric_version` class, so that version numbers (e.g. ‘2.4.7’, ‘2.5.13’, ‘2.32.1’, etc...) can be correctly sorted and compared as if they were numeric values. Updated gademo.R. The dateRange class now inherits 'lubridate' interval as its superclass. It is now possible to query more than 10 metrics with just one query.
+
+2018-05-30 Additional methods to coerce ganalytics segment classes and table filters for use with the 'googleAnalyticsR' package. Dynamic Segments objects now have a name property. Updated `googleAnalyticsR-demo` and examples in the readme file.
+
+2018-02-18 Added methods for coercing a range of ganalytics classes into 'googleAnalyticsR' classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the 'googleAnalyticsR' package.
 
 2018-02-12 Scope and negation of segment conditions can now be defined at the filter level. Fixed bug where backslashes were being escaped incorrectly in expression operands. The methods of the Segment generic function are now split into two generic functions, Segment and Segments. Segments is used to set or get a named list segments, whereas Segment is for defining a single segment to be added to a Segments list.
 
@@ -34,7 +38,7 @@ Added IsNegated generic function and method for testing whether a segment filter
 
 2015-08-17 Update to latest dimension and metrics metadata and added support for custom dimensions and device category as view filter fields. Changed default metric for real-time queries to rt:pageviews.
 2015-08-14 Added demos. Added support for new alphanumeric segment IDs. Foundations to support multiple segments within a single query.
-2015-06-05 Support the use of a lubridate interval object as a dateRange object for GA Reporting API queries.
+2015-06-05 Support the use of a 'lubridate' interval object as a dateRange object for GA Reporting API queries.
 
 2015-05-04 Added support for real-time and multi-channel-funnels reporting APIs - both formulating queries and processing the query responses.
 

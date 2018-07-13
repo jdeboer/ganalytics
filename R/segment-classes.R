@@ -16,8 +16,8 @@ NULL
 #'
 #' @export
 setClass(
-  "gaSegmentCondition",
-  contains = "andExpr",
+  ".gaSegmentCondition",
+  contains = c("andExpr"), # Including "VIRTUAL" results in attributes being added upon coercion to superclass
   validity = function(object) {
     if (sum(rapply(object, is, class2 = ".gaExpr")) > 10L) {
       return("A maximum of 10 expressions per segment condition filter.")
@@ -88,7 +88,7 @@ setClass(
     stepName = character(0),
     immediatelyPrecedes = FALSE
   ),
-  contains = "gaSegmentCondition",
+  contains = ".gaSegmentCondition",
   validity = function(object) {
     validate_that(
       length(object@stepName) <= 1L,
@@ -130,7 +130,7 @@ setClass(
 #' @export
 setClass(
   "gaSegmentConditionFilter",
-  contains = c("gaSegmentCondition", ".gaSegmentFilter")
+  contains = c(".gaSegmentCondition", ".gaSegmentFilter")
 )
 
 #' `gaDynSegment` class.
@@ -144,8 +144,15 @@ setClass(
 #' @export
 setClass(
   "gaDynSegment",
+  slots = c(
+    name = "character"
+  ),
+  prototype = prototype(
+    name = character(0)
+  ),
   contains = "list",
   validity = function(object) {
+    validate_that(length(object@name) <= 1L)
     if (!all_inherit(object@.Data, ".gaSegmentFilter")) {
       "All conditions within a gaDynSegment list must belong to the superclass '.gaSegmentFilter'."
     } else if (sum(rapply(object, is, class2 = ".gaExpr")) > 10) {

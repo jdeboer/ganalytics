@@ -7,7 +7,7 @@
 Later(object, ...)
 }
 \arguments{
-\item{object}{The expression that should preceed others in the sequence.}
+\item{object}{The expression that should precede others in the sequence.}
 
 \item{...}{Any other expressions that should follow the first one but before
 any others in the sequence.}

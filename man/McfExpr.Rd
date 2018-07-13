@@ -19,7 +19,7 @@ to an .expr object.}
 \item{operand}{The operand to use for the expression.}
 }
 \description{
-Create a Multi-Chanel Funnel Reporting API expression.
+Create a Multi-Channel Funnel Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -28,11 +28,10 @@ supplied arguments describing the variable, comparator and operator.
 }}
 
 \examples{
-\dontrun{
+\donttest{
   myQuery <- McfQuery(view = 123456789)
   source_matches_google <- McfExpr("mcf:source", "~", "google")
   TableFilter(myQuery) <- source_matches_google
-  GetData(myQuery)
 }
 
 }

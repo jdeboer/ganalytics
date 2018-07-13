@@ -1,14 +1,13 @@
 #' ganalytics
 #'
-#' A Google Analytics and Google Tag Manager client for R
+#' A Google Analytics and Google Tag Manager API client for R
 #'
 #' Classes and methods for interactive use of the Google Analytics core
-#' reporting, real-time, multi-channel funnel reporting, metadata, configuration
-#' management, and Google Tag Manager APIs using R.
+#' reporting, real-time reporting, multi-channel funnel reporting, metadata,
+#' configuration management and Google Tag Manager APIs.
 #'
-#' To use this package with the Google Analytics Reporting and Google Tag
-#' Manager APIs, it is neccessary to provide details for a Google APIs project
-#' that has the neccessary APIs enabled.
+#' To use this package with these APIs, it is necessary to provide OAuth
+#' credentials for a Google APIs project with the necessary APIs enabled.
 #'
 #' Features:
 #'
@@ -19,20 +18,22 @@
 #' * Minimise the effect of sampling by splitting the date range of queries
 #' using the SplitDateRange function.
 #'
-#' * When sampling has occured, the output data.frame includes the sample and
+#' * When sampling has occurred, the output data.frame includes the sample and
 #' total sizes as attributes.
 #'
-#' Run this command to report any bugs: \code{utils::bug.report(package = "ganalytics")}
+#' To report bugs, please run the following command:
+#' \code{utils::bug.report(package = "ganalytics")}
 #'
 #' When posting a bug, please try rerun any API queries wrapped within a call to
 #' \code{httr::with_verbose} and include the output in the bug report (taking
 #' care not to include any private data). For example:
-#' httr::with_verbose(GetGaData(my_query))
+#' \code{httr::with_verbose(GetGaData(my_query))}
 #'
-#' For a step-by-step guide with examples, run this command: \code{browseVignettes(package =
-#' "ganalytics")}
+#' For a step-by-step guide with examples, run this command:
+#' \code{browseVignettes(package = "ganalytics")}
 #'
-#' @references Google Analytics core reporting API dimensions and metrics reference:
+#' @references Google Analytics core reporting API dimensions and metrics
+#'   reference:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
 #'
 #' @references Google Analytics Table Filter expressions:
@@ -44,7 +45,8 @@
 #' @references Google Analytics Real-time Reporting API dimensions and metrics:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}
 #'
-#' @references Google Analytics Multi-Channel Funnel conversions Reporting API dimensions and metrics:
+#' @references Google Analytics Multi-Channel Funnel conversions Reporting API
+#'   dimensions and metrics:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}
 #'
 #' @references Google Analytics Management API collections and resources
@@ -54,7 +56,6 @@
 #'   \url{https://developers.google.com/tag-manager/api/v1/reference/}
 #'
 #' @keywords package
-
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package

@@ -1,11 +1,18 @@
 #' @include segment-classes.R
-#' @include init-methods.R
 #' @include Sequence-generics.R
 #' @include Segment-generics.R
 #' @include segment-coerce.R
 #' @include management-api-classes.R
 #' @importFrom methods new setMethod
 NULL
+
+setSegmentFilterScopeNegation <- function(object, negation, scope) {
+  object <- as(object, ".gaSegmentFilter")
+  if(!missing(scope)) object@scope <- scope
+  if(!missing(negation)) object@negation <- negation
+  validObject(object)
+  object
+}
 
 # ---- Include, Exclude ----
 
@@ -14,12 +21,13 @@ NULL
 setMethod(
   f = "Include",
   signature = "ANY",
-  definition = function(object, scope) {
-    object <- as(object, ".gaSegmentFilter")
-    if(!missing(scope)) object@scope <- scope
-    object@negation <- FALSE
-    validObject(object)
-    object
+  definition = function(object, ..., scope) {
+    negation <- FALSE
+    if(missing(scope)) {
+      SegmentConditionFilter(object, ..., negation = negation)
+    } else {
+      SegmentConditionFilter(object, ..., negation = negation, scope = scope)
+    }
   }
 )
 
@@ -28,12 +36,13 @@ setMethod(
 setMethod(
   f = "Exclude",
   signature = "ANY",
-  definition = function(object, scope) {
-    object <- as(object, ".gaSegmentFilter")
-    if(!missing(scope)) object@scope <- scope
-    object@negation <- TRUE
-    validObject(object)
-    object
+  definition = function(object, ..., scope) {
+    negation <- TRUE
+    if(missing(scope)) {
+      SegmentConditionFilter(object, ..., negation = negation)
+    } else {
+      SegmentConditionFilter(object, ..., negation = negation, scope = scope)
+    }
   }
 )
 
@@ -47,11 +56,17 @@ setMethod(
   f = "SegmentConditionFilter",
   signature = "ANY",
   definition = function(object, ..., negation, scope) {
-    exprList <- list(object, ...)
-    nested <- sapply(exprList, is, "gaSegmentConditionFilter")
-    exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
+    exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    new("gaSegmentConditionFilter", exprList, negation = negation, scope = scope)
+    x <- if(missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(object)
+    } else if (!missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(object, negation = negation)
+    } else if (missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(object, scope = scope)
+    } else if (!missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(object, negation = negation, scope = scope)
+    }
   }
 )
 
@@ -76,12 +91,27 @@ setMethod(
   }
 )
 
+setMethod(
+  "initialize",
+  signature = "gaDynSegment",
+  definition = function(.Object, value, name) {
+    if(!missing(value)) {
+      .Object@.Data <- value
+    }
+    if(!missing(name)) {
+      .Object@name <- name
+    }
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
 #' @describeIn DynSegment Defines a list of filters from one or more
 #'   expressions applied using the specified scope.
 setMethod(
   f = "DynSegment",
   signature = "ANY",
-  definition = function(object, ...) {
+  definition = function(object, ..., name) {
     exprList <- list(object, ...)
     nested <- sapply(exprList, is, "gaDynSegment")
     segment_filter_list <- lapply(exprList[!nested], function(expr){
@@ -92,14 +122,14 @@ setMethod(
       segment_filter_list,
       nested_segment_filters
     )
-    new("gaDynSegment", segment_filter_list)
+    new("gaDynSegment", segment_filter_list, name = name)
   }
 )
 
 #' @describeIn DynSegment Returns itself.
 setMethod(
   f = "DynSegment",
-  signature = c("gaDynSegment"),
+  signature = "gaDynSegment",
   definition = function(object) {
     object
   }
@@ -110,7 +140,7 @@ setMethod(
 #' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
 setMethod(
   f = "ScopeLevel",
-  signature = c(".gaSegmentFilter"),
+  signature = ".gaSegmentFilter",
   definition = function(object) {
     object@scope
   }
@@ -160,7 +190,7 @@ setMethod(
 #'   session-level.
 setMethod(
   f = "PerSession",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perSession"
@@ -175,7 +205,7 @@ setMethod(
 #'   metric condition to session-level.
 setMethod(
   f = "PerSession",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerSession(Expr(object), ...)
   }
@@ -195,7 +225,7 @@ setMethod(
 #'   user-level.
 setMethod(
   f = "PerUser",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perUser"
@@ -210,7 +240,7 @@ setMethod(
 #'   metric condition to user-level.
 setMethod(
   f = "PerUser",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerUser(Expr(object), ...)
   }
@@ -230,7 +260,7 @@ setMethod(
 #'   hit-level.
 setMethod(
   f = "PerHit",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
       ScopeLevel(object) <- "perHit"
@@ -245,7 +275,7 @@ setMethod(
 #'   metric condition to hit-level.
 setMethod(
   f = "PerHit",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object, ...) {
     PerHit(Expr(object), ...)
   }
@@ -255,7 +285,7 @@ setMethod(
 #'   product-level.
 setMethod(
   f = "PerProduct",
-  signature = c("gaMetExpr"),
+  signature = "gaMetExpr",
   definition = function(object) {
     ScopeLevel(object) <- "perProduct"
     object
@@ -266,13 +296,29 @@ setMethod(
 #'   metric condition to product-level.
 setMethod(
   f = "PerProduct",
-  signature = c("formula"),
+  signature = "formula",
   definition = function(object) {
     PerProduct(Expr(object))
   }
 )
 
 # ---- Segment ----
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentId",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "gaid::", value)
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
+        value <- paste("gaid", value, sep = "::")
+      }
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
 
 #' @describeIn Segment Interpret the supplied numeric value as a segment ID.
 setMethod(
@@ -330,6 +376,31 @@ setMethod(
 
 # ---- Segments, Segments<- ----
 
+
+setMethod(
+  f = "initialize",
+  signature = "gaSegmentList",
+  definition = function(.Object, value) {
+    if (!missing(value)) {
+      segment_names <- names(value)
+      .Object@.Data <- lapply(seq_along(value), function(i) {
+        value[[i]] <- as(value[[i]], ".gaSegment")
+        if(is(value[[i]], "gaDynSegment")) {
+          segment_name <- segment_names[i]
+          if(is.null(segment_name)) {
+            segment_name <- character(0)
+          }
+          value[[i]]@name <- segment_name
+        }
+        value[[i]]
+      })
+      names(.Object) <- segment_names
+      validObject(.Object)
+    }
+    .Object
+  }
+)
+
 #' @describeIn Segments Returns itself
 setMethod(
   f = "Segments",
@@ -369,7 +440,7 @@ setMethod(
   }
 )
 
-#' @describeIn Segments Set the segments to be used witin a query.
+#' @describeIn Segments Set the segments to be used within a query.
 setMethod(
   f = "Segments<-",
   signature = c("gaQuery", "ANY"),
@@ -380,3 +451,25 @@ setMethod(
   }
 )
 
+#' select_segment_filters_with_scope.
+#'
+#' Given a Dynamic Segment object, or an object that can be coerced to a
+#' gaDynSegment, returns segment filters within object that are of the specified
+#' scope ('sessions' or 'users').
+#'
+#' @param object a Dynamic Segment object, or an object that can be coerced to a
+#'   gaDynSegment.
+#' @param scope either 'sessions' or 'users' to specify which segment filters to
+#'   return as a dynamic segment subset.
+#' @return a gaDynSegment object.
+#'
+#' @keywords internal
+select_segment_filters_with_scope <- function(object, scope) {
+  assert_that(
+    length(scope) == 1L,
+    scope %in% c("sessions", "users")
+  )
+  dyn_segment <- as(object, "gaDynSegment")
+  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
+  new("gaDynSegment", dyn_segment[matching_filters])
+}

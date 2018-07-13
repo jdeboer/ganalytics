@@ -24,11 +24,10 @@ setGeneric(
 #' Create a Core Reporting API expression.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   myQuery <- GaQuery(view = 123456789)
 #'   source_matches_google <- GaExpr("source", "~", "google")
 #'   TableFilter(myQuery) <- source_matches_google
-#'   GetGaData(myQuery)
 #' }
 #' @inheritParams Expr
 #'
@@ -44,14 +43,13 @@ setGeneric(
 
 #' McfExpr.
 #'
-#' Create a Multi-Chanel Funnel Reporting API expression.
+#' Create a Multi-Channel Funnel Reporting API expression.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   myQuery <- McfQuery(view = 123456789)
 #'   source_matches_google <- McfExpr("mcf:source", "~", "google")
 #'   TableFilter(myQuery) <- source_matches_google
-#'   GetData(myQuery)
 #' }
 #'
 #' @inheritParams Expr
@@ -71,11 +69,10 @@ setGeneric(
 #' Create a Real-Time Reporting API expression.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'   myQuery <- RtQuery(view = 123456789)
 #'   source_matches_google <- RtExpr("rt:source", "~", "google")
 #'   TableFilter(myQuery) <- source_matches_google
-#'   GetData(myQuery)
 #' }
 #'
 #' @inheritParams Expr

@@ -4,7 +4,7 @@
 #' steps in the sequence, i.e. 'later'. 'Later' means 'followed by', but not
 #' necessarily immediately.
 #'
-#' @param object The expression that should preceed others in the sequence.
+#' @param object The expression that should precede others in the sequence.
 #' @param ... Any other expressions that should follow the first one but before
 #'   any others in the sequence.
 #'
@@ -25,7 +25,7 @@ setGeneric(
 #' Treat a step within a sequence as happening immediately after any preceding
 #' steps in the sequence, i.e. 'immediately following'.
 #'
-#' @param object The expression that should \bold{immediately} preceed others in
+#' @param object The expression that should \bold{immediately} precede others in
 #'   the sequence.
 #' @param ... Any other expressions that should \bold{immediately} follow the
 #'   first one but before any others in the sequence.
@@ -73,7 +73,7 @@ setGeneric(
 #' @param ... Other steps within the sequence condition, in the order in which
 #'   they should be applied.
 #' @param negation Logical TRUE or FALSE to match segments where this sequence
-#'   has not occured.
+#'   has not occurred.
 #' @param scope optional scope, "users" or "sessions".
 #'
 #' @examples

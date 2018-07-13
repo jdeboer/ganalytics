@@ -1,7 +1,7 @@
 #' @importFrom lubridate ymd
 #' @importFrom stringr regex str_replace str_detect
 #' @importFrom plyr llply
-#' @importFrom methods slot
+#' @importFrom methods slot .valueClassTest
 NULL
 
 #' IsVarMatch.
@@ -66,6 +66,21 @@ ArgList <- function(...) {
   )
 }
 
+#' unnest_objects.
+#'
+#' Concatenate objects of class \code{class} with lists of objects into a flattened list.
+#'
+#' @param ... objects to be concatenated, including lists of objects.
+#' @param class the class of the objects considered as nested.
+#'
+#' @keywords internal
+unnest_objects <- function(..., class) {
+  exprList <- list(...)
+  nested <- sapply(exprList, is, class)
+  exprList <- c(exprList[!nested], unlist(exprList[nested], recursive = FALSE))
+  exprList
+}
+
 #' flatten.
 #'
 #' Flatten a nested list while preserving the class of each element
@@ -76,7 +91,7 @@ ArgList <- function(...) {
 #'
 #' @return a list
 #'
-#' @references \url{http://stackoverflow.com/a/8139959/1007029}
+#' @references \url{https://stackoverflow.com/a/8139959/1007029}
 #'
 #' @keywords internal
 flatten <- function(x) {

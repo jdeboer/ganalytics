@@ -2,7 +2,6 @@
 #' @include utils.R
 #' @importFrom plyr mutate alply dlply rbind.fill rename
 #' @importFrom stringr str_replace str_trim
-#' @importFrom devtools use_data
 #' @importFrom rvest html_nodes html_text
 #' @importFrom xml2 read_html
 NULL
@@ -70,14 +69,14 @@ GaMetaUpdate <- function(creds = get_creds()) {
     allowedInFilters = FALSE
   ))
 
-  mcf_var_ref <- "http://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
+  mcf_var_ref <- "https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
   mcf_ref_html <- read_html(mcf_var_ref)
   kMcfVars <- list(
     dims = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
     mets = str_trim(html_text(html_nodes(mcf_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  rt_var_ref <- "http://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
+  rt_var_ref <- "https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/"
   rt_ref_html <- read_html(rt_var_ref)
   kRtVars <- list(
     dims = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.dim > div.line > a"))),
@@ -108,6 +107,6 @@ GaMetaUpdate <- function(creds = get_creds()) {
 
   save(kGaVars, kGaVars_df, kMcfVars, kRtVars, file = metadata_path)
 
-  # use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
+  # devtools::use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
 
 }

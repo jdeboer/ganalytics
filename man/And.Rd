@@ -37,7 +37,7 @@ A single list of objects is also accepted.
 \itemize{
 \item \code{.compoundExpr}: AND two or more expressions.
 
-\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expresisons.
+\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expressions.
 }}
 
 \seealso{

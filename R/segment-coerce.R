@@ -11,7 +11,7 @@ setAs(from = ".compoundExpr", to = ".gaSegmentFilter", def = function(from, to) 
   as(from, "gaSegmentConditionFilter")
 })
 
-setAs(from = "gaSegmentCondition", to = ".gaSegmentFilter", def = function(from, to) {
+setAs(from = ".gaSegmentCondition", to = ".gaSegmentFilter", def = function(from, to) {
   as(from, "gaSegmentConditionFilter")
 })
 

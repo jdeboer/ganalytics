@@ -28,7 +28,7 @@ a sequence condition.}
 they should be applied.}
 
 \item{negation}{Logical TRUE or FALSE to match segments where this sequence
-has not occured.}
+has not occurred.}
 
 \item{scope}{optional scope, "users" or "sessions".}
 }
@@ -39,16 +39,16 @@ Create a new gaSequence object
 \itemize{
 \item \code{.compoundExpr}: Defines a sequence step using the supplied expression that does
 not need to be immediately at the start nor immediately following any
-preceeding step.
+preceding step.
 
-\item \code{.compoundExpr}: Defines a sequencial step using the supplied expression
+\item \code{.compoundExpr}: Defines a sequential step using the supplied expression
 that should immediately follow any preceding step or be the very first
 required interaction in any sequences being matched to this sequential
 segment definition.
 
 \item \code{.compoundExpr}: Alias to Then.
 
-\item \code{.compoundExpr}: Return a seuqnece of of just one step using the
+\item \code{.compoundExpr}: Return a sequence of of just one step using the
 supplied expression to define that step, where that step can occur anywhere
 within the sequences of interactions being matched.
 }}

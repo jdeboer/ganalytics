@@ -8,14 +8,14 @@ sequential_segment(steps)
 }
 \arguments{
 \item{steps}{a list of expressions (of one or more conditions), each
-repreating a step in the sequence.}
+repeating a step in the sequence.}
 }
 \description{
-Create a sequence using R non-standard evaluation syntax.
+Create a sequence non-standard evaluation syntax.
 }
 \details{
 Steps must be separated by commas (\code{,}). \code{...} denotes zero or more
-interactions may preceed the step that follows, otherwise without \code{...} then
+interactions may precede the step that follows, otherwise without \code{...} then
 the there must not be any interactions between the adjacent steps in order for the
 results to the sequence.
 }

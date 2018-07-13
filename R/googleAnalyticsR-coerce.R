@@ -1,8 +1,9 @@
+#' @importFrom methods setAs
 #' @importClassesFrom googleAnalyticsR dim_fil_ga4 met_fil_ga4 orFiltersForSegment_ga4
 #' @importClassesFrom googleAnalyticsR segmentDef_ga4 segmentFilterClause_ga4
 #' @importClassesFrom googleAnalyticsR segmentFilter_ga4 segmentSequenceStep_ga4
 #' @importClassesFrom googleAnalyticsR sequenceSegment_ga4 simpleSegment_ga4
-#' @importFrom methods setAs
+# @importClassesFrom googleAnalyticsR segment_ga4 dynamicSegment_ga4 .filter_clauses_ga4
 NULL
 
 get_expression_details <- function(from, var_operators) {
@@ -45,21 +46,41 @@ setAs("gaDimExpr", "dim_fil_ga4", def = function(from, to) {
     expressions = as.list(as.character(Operand(from))),
     caseSensitive = FALSE
   )
-  class(x) <- "dim_fil_ga4"
+  class(x) <- to
   x
 })
 
-setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
-  met_operation <- get_expression_details(from, kGa4Ops$metric_operators)
-  x <- list(
-    metricName = met_operation$varName,
-    not = met_operation$negated,
-    operator = met_operation$operator_name,
-    comparisonValue = as.character(Operand(from))
-  )
-  class(x) <- "met_fil_ga4"
-  x
-})
+# setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
+#   met_operation <- get_expression_details(from, kGa4Ops$metric_operators)
+#   x <- list(
+#     metricName = met_operation$varName,
+#     not = met_operation$negated,
+#     operator = met_operation$operator_name,
+#     comparisonValue = as.character(Operand(from))
+#   )
+#   class(x) <- to
+#   x
+# })
+#
+# setAs("gaFilter", ".filter_clauses_ga4", def = function(from, to) {
+#   exprs <- unlist(from)
+#   if(all_inherit(exprs, ".dimExpr")) {
+#     type <- "dim_fil_ga4"
+#   } else if(all_inherit(exprs, ".metExpr")) {
+#     type <- "met_fil_ga4"
+#   } else {
+#     stop("From gaFilter must contain either all .dimExpr or all .metExpr")
+#   }
+#   filter_clauses <- lapply(
+#     from,
+#     function(or_filters) {
+#       or_filters <- lapply(or_filters, as, type)
+#       googleAnalyticsR::filter_clause_ga4(or_filters, operator = "OR")
+#     }
+#   )
+#   class(filter_clauses) <- type
+#   filter_clauses
+# })
 
 setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
   exp_details <- get_expression_details(from, kGa4Ops$dimension_operators)
@@ -77,7 +98,7 @@ setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
     dimensionFilter = segmentDimensionFilter,
     metricFilter = NULL
   )
-  class(x) <- "segmentFilterClause_ga4"
+  class(x) <- to
   x
 })
 
@@ -88,7 +109,12 @@ setAs("gaMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
 
 setAs("gaSegMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
   exp_details <- get_expression_details(from, kGa4Ops$metric_operators)
-  scope <- c("perHit" = "HIT", "perSession" = "SESSION", "perUser" = "USER")[[ScopeLevel(from)]]
+  scope <- c(
+    "perProduct" = "PRODUCT",
+    "perHit" = "HIT",
+    "perSession" = "SESSION",
+    "perUser" = "USER"
+  )[[ScopeLevel(from)]]
   segmentMetricFilter <- list(
     scope = scope,
     metricName = exp_details$varName,
@@ -102,7 +128,7 @@ setAs("gaSegMetExpr", "segmentFilterClause_ga4", def = function(from, to) {
     dimensionFilter = NULL,
     metricFilter = segmentMetricFilter
   )
-  class(x) <- "segmentFilterClause_ga4"
+  class(x) <- to
   x
 })
 
@@ -110,7 +136,7 @@ setAs("orExpr", "orFiltersForSegment_ga4", def = function(from, to) {
   x <- list(
     segmentFilterClauses = lapply(from, as, "segmentFilterClause_ga4")
   )
-  class(x) <- "orFiltersForSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -118,7 +144,7 @@ setAs("andExpr", "simpleSegment_ga4", def = function(from, to) {
   x <- list(
     orFiltersForSegment = lapply(from, as, "orFiltersForSegment_ga4")
   )
-  class(x) <- "simpleSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -128,7 +154,7 @@ setAs("gaSegmentSequenceStep", "segmentSequenceStep_ga4", def = function(from, t
     as(as(from@.Data, "andExpr"), "simpleSegment_ga4"),
     list(matchType = matchType)
   )
-  class(x) <- "segmentSequenceStep_ga4"
+  class(x) <- to
   x
 })
 
@@ -138,7 +164,7 @@ setAs("gaSegmentSequenceFilter", "sequenceSegment_ga4", def = function(from, to)
     segmentSequenceSteps = segmentSequenceSteps,
     firstStepShouldMatchFirstHit = from[[1]]@immediatelyPrecedes
   )
-  class(x) <- "sequenceSegment_ga4"
+  class(x) <- to
   x
 })
 
@@ -148,8 +174,12 @@ setAs("gaSegmentConditionFilter", "segmentFilter_ga4", def = function(from, to) 
     simpleSegment = as(from, "simpleSegment_ga4"),
     sequenceSegment = NULL
   )
-  class(x) <- "segmentFilter_ga4"
+  class(x) <- to
   x
+})
+
+setAs(".compoundExpr", "segmentFilter_ga4", def = function(from, to) {
+  as(as(from, "gaSegmentConditionFilter"), to)
 })
 
 setAs("gaSegmentSequenceFilter", "segmentFilter_ga4", def = function(from, to) {
@@ -158,7 +188,7 @@ setAs("gaSegmentSequenceFilter", "segmentFilter_ga4", def = function(from, to) {
     simpleSegment = NULL,
     sequenceSegment = as(from, "sequenceSegment_ga4")
   )
-  class(x) <- "segmentFilter_ga4"
+  class(x) <- to
   x
 })
 
@@ -166,14 +196,70 @@ setAs("gaDynSegment", "segmentDef_ga4", def = function(from, to) {
   x <- list(
     segmentFilters = lapply(from, as, "segmentFilter_ga4")
   )
-  class(x) <- "segmentDef_ga4"
+  class(x) <- to
   x
 })
 
 setAs("gaSegmentConditionFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaDynSegment"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), to)
 })
 
 setAs("gaSegmentSequenceFilter", "segmentDef_ga4", def = function(from, to) {
-  as(as(from, "gaDynSegment"), "segmentDef_ga4")
+  as(as(from, "gaDynSegment"), to)
 })
+
+# setAs("gaDynSegment", "dynamicSegment_ga4", def = function(from, to) {
+#   dyn_segment <- list(
+#     name = from@name,
+#     userSegment = as(select_segment_filters_with_scope(from, scope = "users"), "segmentDef_ga4"),
+#     sessionSegment = as(select_segment_filters_with_scope(from, scope = "sessions"), "segmentDef_ga4")
+#   )
+#   class(dyn_segment) <- "dynamicSegment_ga4"
+#   dyn_segment
+# })
+#
+# setAs("gaSegmentList", "segment_ga4", def = function(from, to) {
+#   segment_list <- lapply(seq_along(from), function(segment_i) {
+#     segment_name <- names(from)[segment_i]
+#     if(is.null(segment_name)) segment_name <- character(0)
+#     segment <- from[[segment_i]]
+#     switch (class(segment),
+#       gaDynSegment = {
+#         segment@name = segment_name
+#         list(dynamicSegment = as(segment, "dynamicSegment_ga4"))
+#       },
+#       gaSegmentId = list(segmentId = as(segment, "character"))
+#     )
+#   })
+#   class(segment_list) <- to
+#   segment_list
+# })
+
+setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
+  as(as(from, "gaDynSegment"), to)
+})
+
+# setAs("gaQuery", "ga4_req", def = function(from, to) {
+#   list(
+#     viewId = id,
+#     dateRanges = list(
+#       date_list_one,
+#       date_list_two
+#     ),
+#     samplingLevel = samplingLevel,
+#     dimensions = dim_list,
+#     metrics = met_list,
+#     dimensionFilterClauses = dim_filters,
+#     metricFilterClauses = met_filters,
+#     filtersExpression = filtersExpression,
+#     orderBys = order,
+#     segments = segments,
+#     pivots = pivots,
+#     cohortGroup=cohorts,
+#     pageToken=as.character(pageToken),
+#     pageSize = pageSize,
+#     includeEmptyRows = TRUE
+#   )
+#   class() <- to
+# })
+

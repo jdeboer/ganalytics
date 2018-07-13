@@ -128,7 +128,7 @@ the supplied object into a dateRange.
 \item \code{.standardQuery}: Modify the date range of the given query.
 
 \item \code{object = gaView,endDate = ANY}: Returns the maximum date range of when a view has been
-recieving hits.
+receiving hits.
 
 \item \code{ANY}: Change the date range of the date range object using
 the dates supplied in a vector of length 2, where the first element is the
@@ -136,6 +136,6 @@ start date and second being the end date.
 }}
 
 \seealso{
-Other date range functions: \code{\link{EndDate}},
-  \code{\link{StartDate}}
+Other date range functions: \code{\link{Cohort}},
+  \code{\link{EndDate}}, \code{\link{StartDate}}
 }

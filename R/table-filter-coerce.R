@@ -37,4 +37,4 @@ setAs(from = ".expr", to = "mcfFilter", def = coerceViaAnd)
 setAs(from = ".expr", to = "rtFilter", def = coerceViaAnd)
 setAs(from = ".expr", to = ".tableFilter", def = coerceViaAnd)
 
-setAs(from = "gaSegmentCondition", to = ".tableFilter", def = simpleCoerceData)
+setAs(from = ".gaSegmentCondition", to = ".tableFilter", def = simpleCoerceData)

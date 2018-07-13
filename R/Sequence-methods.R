@@ -1,5 +1,4 @@
 #' @include segment-classes.R
-#' @include init-methods.R
 #' @include Sequence-generics.R
 #' @include Segment-generics.R
 #' @include segment-coerce.R
@@ -11,7 +10,7 @@ NULL
 
 #' @describeIn Sequence Defines a sequence step using the supplied expression that does
 #'   not need to be immediately at the start nor immediately following any
-#'   preceeding step.
+#'   preceding step.
 setMethod(
   f = "Later",
   signature = ".compoundExpr",
@@ -20,7 +19,7 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence Defines a sequencial step using the supplied expression
+#' @describeIn Sequence Defines a sequential step using the supplied expression
 #'   that should immediately follow any preceding step or be the very first
 #'   required interaction in any sequences being matched to this sequential
 #'   segment definition.
@@ -41,7 +40,7 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence Return a seuqnece of of just one step using the
+#' @describeIn Sequence Return a sequence of of just one step using the
 #'   supplied expression to define that step, where that step can occur anywhere
 #'   within the sequences of interactions being matched.
 setMethod(
