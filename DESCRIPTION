@@ -7,10 +7,10 @@ Authors@R: person(
     family = "de Boer",
     role = c("aut", "cre"),
     email = "johanndeboer@gmail.com")
-Description: Functions for querying the Google Analytics core reporting,
-    real-time, multi-channel funnel and management APIs, as well as the Google
-    Tag Manager API. Write methods are also provided for the management and
-    Google Tag Manager APIs so that you can change tag, property or view
+Description: Functions for querying the 'Google Analytics' core reporting,
+    real-time, multi-channel funnel and management APIs, as well as the 'Google
+    Tag Manager' (GTM) API. Write methods are also provided for the management and
+    GTM APIs so that you can change tag, property or view
     settings, for example. Define reporting queries using natural R expressions
     instead of being concerned as much about API technical intricacies like
     query syntax, character code escaping, and API limitations.
@@ -20,8 +20,7 @@ License: MIT + file LICENCE
 Depends:
     R(>= 3.1.0)
 Imports:
-    assertthat,
-    devtools,
+    assertthat (>= 0.2.0),
     httpuv,
     httr (>= 1.0.0),
     googleAnalyticsR (>= 0.5.0),
@@ -38,6 +37,7 @@ Imports:
     scales,
     selectr
 Suggests:
+    devtools,
     ggplot2,
     knitr,
     rmarkdown,
@@ -69,13 +69,12 @@ Collate:
     'date-coerce.R'
     'ga-api-classes.R'
     'management-api-classes.R'
-    'Var-list-generics.R'
-    'Var-generics.R'
-    'init-methods.R'
     'Date-methods.R'
     'operand-coerce.R'
     'Operand-generics.R'
     'Operand-methods.R'
+    'Var-list-generics.R'
+    'Var-generics.R'
     'var-list-coerce.R'
     'var-coerce.R'
     'Var-methods.R'
@@ -101,5 +100,5 @@ Collate:
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr
-LazyData: true
+LazyData: TRUE
 RoxygenNote: 6.0.1
