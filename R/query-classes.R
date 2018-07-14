@@ -115,8 +115,8 @@ setClass(
     creds = "list",
     dateRanges = "dateRange",
     samplingLevel = "character",
-    segments = "gaSegmentsList",
-    cohortGroup = "gaCohortGroup"
+    segments = "gaSegmentList",
+    cohorts = "gaCohort"
   ),
   prototype = prototype(
     creds = list(),
@@ -213,8 +213,9 @@ setClass(
     dimensions = "gaDimensions",
     sortBy = "gaSortBy",
     filters = "gaFilter",
-    segments = "gaSegmentsList",
-    buckets = "numeric"
+    segments = "gaSegmentList",
+    buckets = "numeric",
+    lifetimeValue = "logical"
   ),
   prototype = prototype(
     metrics = new("gaMetrics"),
