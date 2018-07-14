@@ -97,6 +97,7 @@ Collate:
     'ganalytics-package.R'
     'googleAnalyticsR-coerce.R'
     'gtm-api-classes.R'
+    'init-methods.R'
     'sequence.R'
     'zzz.R'
 VignetteBuilder: knitr
