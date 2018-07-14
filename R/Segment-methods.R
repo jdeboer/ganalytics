@@ -404,7 +404,7 @@ setMethod(
 #' @describeIn Segments Returns itself
 setMethod(
   f = "Segments",
-  signature = "gaSegmentsList",
+  signature = "gaSegmentList",
   definition = function(object) {
     object
   }
@@ -432,10 +432,10 @@ setMethod(
       "gaDynSegment",
       ".compoundExpr"
     ))) {
-      new("gaSegmentsList", list(segment = Segment(object)))
+      new("gaSegmentList", list(segment = Segment(object)))
     } else {
       stopifnot(inherits(object, c("list", "NULL")))
-      new("gaSegmentsList", object)
+      new("gaSegmentList", object)
     }
   }
 )
