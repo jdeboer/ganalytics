@@ -18,9 +18,7 @@ vignette: >
 
 
 
-![](C:/Users/Johann/Documents/GitHub/ganalytics/inst/figures/hexicon.png)<!-- -->
-
-![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon.png)
+![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-medium.png)
 
 ganalytics
 ==========
