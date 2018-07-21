@@ -50,37 +50,37 @@ setAs("gaDimExpr", "dim_fil_ga4", def = function(from, to) {
   x
 })
 
-# setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
-#   met_operation <- get_expression_details(from, kGa4Ops$metric_operators)
-#   x <- list(
-#     metricName = met_operation$varName,
-#     not = met_operation$negated,
-#     operator = met_operation$operator_name,
-#     comparisonValue = as.character(Operand(from))
-#   )
-#   class(x) <- to
-#   x
-# })
-#
-# setAs("gaFilter", ".filter_clauses_ga4", def = function(from, to) {
-#   exprs <- unlist(from)
-#   if(all_inherit(exprs, ".dimExpr")) {
-#     type <- "dim_fil_ga4"
-#   } else if(all_inherit(exprs, ".metExpr")) {
-#     type <- "met_fil_ga4"
-#   } else {
-#     stop("From gaFilter must contain either all .dimExpr or all .metExpr")
-#   }
-#   filter_clauses <- lapply(
-#     from,
-#     function(or_filters) {
-#       or_filters <- lapply(or_filters, as, type)
-#       googleAnalyticsR::filter_clause_ga4(or_filters, operator = "OR")
-#     }
-#   )
-#   class(filter_clauses) <- type
-#   filter_clauses
-# })
+setAs("gaMetExpr", "met_fil_ga4", def = function(from, to) {
+  met_operation <- get_expression_details(from, kGa4Ops$metric_operators)
+  x <- list(
+    metricName = met_operation$varName,
+    not = met_operation$negated,
+    operator = met_operation$operator_name,
+    comparisonValue = as.character(Operand(from))
+  )
+  class(x) <- to
+  x
+})
+
+setAs("gaFilter", ".filter_clauses_ga4", def = function(from, to) {
+  exprs <- unlist(from)
+  if(all_inherit(exprs, ".dimExpr")) {
+    type <- "dim_fil_ga4"
+  } else if(all_inherit(exprs, ".metExpr")) {
+    type <- "met_fil_ga4"
+  } else {
+    stop("From gaFilter must contain either all .dimExpr or all .metExpr")
+  }
+  filter_clauses <- lapply(
+    from,
+    function(or_filters) {
+      or_filters <- lapply(or_filters, as, type)
+      googleAnalyticsR::filter_clause_ga4(or_filters, operator = "OR")
+    }
+  )
+  class(filter_clauses) <- type
+  filter_clauses
+})
 
 setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
   exp_details <- get_expression_details(from, kGa4Ops$dimension_operators)
