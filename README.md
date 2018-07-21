@@ -1,10 +1,16 @@
+
+
+<!-- README.md is generated from README.rmd. Please edit that file -->
+
+
+
+![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
+
 ganalytics
 ==========
 [![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
 
-Interact with **Google Analytics** using **R**
-
-Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs using R.
+Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.
 
 The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.
 
@@ -12,7 +18,7 @@ This package provides functions for querying the Google Analytics core reporting
 
 Updates
 -------
-Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the `google_analytics` function in GoogleAnalyticsR by using `as()`, supplying the appropriate 'GoogleAnalyticsR' class names, which are `"segment_ga4"` for segments and `".filter_clauses_ga4"` for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using `as()`.
+Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the `google_analytics` function in GoogleAnalyticsR by using `as()`, supplying the appropriate GoogleAnalyticsR class names, which are `"segment_ga4"` for segments and `".filter_clauses_ga4"` for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using `as()`.
 
 Many new functions have been provided for writing segmentation expressions:
 
