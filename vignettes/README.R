@@ -5,6 +5,11 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 
+## ---- echo = FALSE-------------------------------------------------------
+logo_img <- htmltools::img(knitr::image_uri(devtools::package_file("inst", "figures", "hexicon.png")), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0; padding:10px;')
+
 ## ------------------------------------------------------------------------
 Sys.setenv(
   GOOGLE_APIS_CONSUMER_ID = "<Your client ID>",
