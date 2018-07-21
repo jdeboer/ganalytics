@@ -20,6 +20,8 @@ vignette: >
 
 ![](C:/Users/Johann/Documents/GitHub/ganalytics/inst/figures/hexicon.png)<!-- -->
 
+![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon.png)
+
 ganalytics
 ==========
 [![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
