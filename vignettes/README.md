@@ -18,7 +18,7 @@ vignette: >
 
 
 
-![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-medium.png)
+![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
 
 ganalytics
 ==========
