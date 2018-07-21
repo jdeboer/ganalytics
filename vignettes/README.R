@@ -5,6 +5,11 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 
+## ----echo = FALSE--------------------------------------------------------
+knitr::include_graphics(
+  devtools::package_file("inst", "figures", "hexicon.png")
+)
+
 ## ------------------------------------------------------------------------
 Sys.setenv(
   GOOGLE_APIS_CONSUMER_ID = "<Your client ID>",

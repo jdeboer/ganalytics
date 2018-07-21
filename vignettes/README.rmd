@@ -24,7 +24,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-![logo](`r knitr::image_uri(devtools::package_file("inst", "figures", "hexicon.png"))`)
+```{r echo = FALSE}
+knitr::include_graphics(
+  devtools::package_file("inst", "figures", "hexicon.png")
+)
+```
 
 ganalytics
 ==========
