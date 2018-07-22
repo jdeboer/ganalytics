@@ -4,12 +4,12 @@ NULL
 
 #' sequential_segment.
 #'
-#' Create a sequence non-standard evaluation syntax.
+#' Create a sequence using non-standard evaluation syntax.
 #'
 #' Steps must be separated by commas (\code{,}). \code{...} denotes zero or more
 #' interactions may precede the step that follows, otherwise without \code{...} then
 #' the there must not be any interactions between the adjacent steps in order for the
-#' results to the sequence.
+#' results to match the sequence.
 #'
 #' @param steps a list of expressions (of one or more conditions), each
 #'   repeating a step in the sequence.

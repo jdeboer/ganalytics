@@ -104,12 +104,13 @@ flatten <- function(x) {
 
 #' CheckVectorBounds
 #'
-#' Check the length of each named slot within object is within the lower and
-#' upper bounds specified.
+#' Check that the length of each named slot within \code{object} is within the
+#' specified lower and upper bounds.
 #'
-#' @param object an object with slots that match the names of slot_vector_bound_list
-#' @param slot_vector_bound_list a named list of vectors specifying the upper
-#' and lower bounds for the length of each slot of object.
+#' @param object an object with slots that match the names of
+#'   slot_vector_bound_list
+#' @param slot_vector_bound_list a named list of length 2 vectors specifying the
+#'   upper and lower bounds for the length of each slot of object.
 #'
 #' @keywords internal
 CheckVectorBounds <- function(object, slot_vector_bound_list) {
@@ -122,7 +123,7 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
     slot_bounds <- slot_vector_bounds[[slot_name]]
     names(slot_bounds) <- row.names(slot_vector_bounds)
     if (slot_length < slot_bounds['lower'] | slot_length > slot_bounds['upper']) {
-      if (as.numeric(slot_bounds['lower'][1]) == as.numeric(slot_bounds['upper'][1])) {
+      if (as.numeric(slot_bounds['lower'][1L]) == as.numeric(slot_bounds['upper'][1L])) {
         slot_bounds <- slot_bounds['lower']
         paste0("Slot '", slot_name, "' must be of length ", slot_bounds)
       } else {
@@ -136,7 +137,7 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
     }
   })
   ret <- unlist(ret[sapply(ret, is.character)])
-  if (length(ret) == 0) {
+  if (length(ret) == 0L) {
     ret <- TRUE
   }
   return(ret)
@@ -144,8 +145,8 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
 
 #' checkDataFrameClasses
 #'
-#' Test whether the class for each column of a data.frame match a list of
-#' expected classes.
+#' Test whether the classes of each column in a data.frame match the supplied
+#' list of expected class names.
 #'
 #' @keywords internal
 checkDataFrameClasses <- function(object, matchClasses) {
@@ -167,7 +168,7 @@ checkDataFrameClasses <- function(object, matchClasses) {
 
 #' split_permissions
 #'
-#' Take a list of character vector describing the permissions for each user and
+#' Take a list of character vectors describing the permissions for each user and
 #' transform into a nested list of users and their list of permissions.
 #'
 #' @keywords internal

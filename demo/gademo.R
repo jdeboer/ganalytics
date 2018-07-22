@@ -3,7 +3,8 @@ library(ganalytics)
 # Assumes app creds can be found in environment variables (default prefix) or in a JSON file (default filename)
 # Selects default view of first property in first account returned by the Management API.
 myQuery <- GaQuery()
-GaView(myQuery) <- 117987738
+
+GaView(myQuery) <- ga_view_selector()
 GetGaData(myQuery)
 
 readline("Press enter to continue.")

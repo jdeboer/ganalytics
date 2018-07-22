@@ -7,7 +7,7 @@
 split_permissions(permissions)
 }
 \description{
-Take a list of character vector describing the permissions for each user and
+Take a list of character vectors describing the permissions for each user and
 transform into a nested list of users and their list of permissions.
 }
 \keyword{internal}

@@ -52,21 +52,21 @@ GaMetaUpdate <- function(creds = get_creds()) {
     ret
   }, .expand = FALSE), use.names = FALSE)
 
-  kGaVars$dims <- c(kGaVars$dims, "dateOfSession")
-  kGaVars$allVars <- c(kGaVars$allVars, "dateOfSession")
+  kGaVars$dims <- c(kGaVars$dims, "dateOfSession", "segment")
+  kGaVars$allVars <- c(kGaVars$allVars, "dateOfSession", "segment")
 
   kGaVars_df$allowedInFilters <- TRUE
 
   kGaVars_df <- rbind.fill(kGaVars_df, data.frame(
-    id = "dateOfSession",
-    type = "DIMENSION",
-    dataType = "STRING",
-    group = "Session",
-    status = "PUBLIC",
-    uiName = "Date of Session",
-    description = "Only for use in segments.",
-    allowedInSegments = TRUE,
-    allowedInFilters = FALSE
+    id = c("dateOfSession", "segment"),
+    type = c("DIMENSION", "DIMENSION"),
+    dataType = c("STRING", "STRING"),
+    group = c("Session", "Custom Variables or Columns"),
+    status = c("PUBLIC", "PUBLIC"),
+    uiName = c("Date of Session", "Segment Name"),
+    description = c("Only for use in segments.", "Only for use with segments."),
+    allowedInSegments = c(TRUE, FALSE),
+    allowedInFilters = c(FALSE, FALSE)
   ))
 
   mcf_var_ref <- "https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/"
