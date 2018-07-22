@@ -33,9 +33,7 @@ GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
 
 \item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
 
-\item{maxResults}{the maximum number of results to return,}
-
-\item{profileId}{Deprecated, use view instead.
+\item{maxResults}{the maximum number of results to return,
 up to 1,000,000}
 }
 \description{
