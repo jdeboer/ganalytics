@@ -6,7 +6,7 @@
 \title{GetGaData Execute a ganalytics query.}
 \usage{
 \S4method{GetGaData}{.query}(query, creds = NULL, .progress = "time",
-  use_oob = FALSE, addViewId = FALSE, addSegmentId = FALSE)
+  addViewId = FALSE, addSegmentId = FALSE)
 }
 \arguments{
 \item{query}{the query to execute.}
@@ -14,8 +14,6 @@
 \item{creds}{the Google APIs Project OAuth 2.0 credentials to use.}
 
 \item{.progress}{progress bar to display. use .progress = "none" to turn off.}
-
-\item{use_oob}{httr argument}
 
 \item{addViewId}{logical value indicating whether to add a viewID column for
 when more than one view has been provided.}

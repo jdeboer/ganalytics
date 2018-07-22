@@ -7,13 +7,14 @@
 CheckVectorBounds(object, slot_vector_bound_list)
 }
 \arguments{
-\item{object}{an object with slots that match the names of slot_vector_bound_list}
+\item{object}{an object with slots that match the names of
+slot_vector_bound_list}
 
-\item{slot_vector_bound_list}{a named list of vectors specifying the upper
-and lower bounds for the length of each slot of object.}
+\item{slot_vector_bound_list}{a named list of length 2 vectors specifying the
+upper and lower bounds for the length of each slot of object.}
 }
 \description{
-Check the length of each named slot within object is within the lower and
-upper bounds specified.
+Check that the length of each named slot within \code{object} is within the
+specified lower and upper bounds.
 }
 \keyword{internal}

@@ -8,7 +8,7 @@ GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
   endDate = Sys.Date() - 2, metrics = "ga:sessions",
   dimensions = "ga:date", sortBy = NULL, filters = NULL,
   segments = NULL, cohorts = NULL, samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults, profileId = NA)
+  maxResults = kGaMaxResults)
 }
 \arguments{
 \item{view}{view id to use}

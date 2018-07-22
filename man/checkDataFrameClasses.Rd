@@ -7,7 +7,7 @@
 checkDataFrameClasses(object, matchClasses)
 }
 \description{
-Test whether the class for each column of a data.frame match a list of
-expected classes.
+Test whether the classes of each column in a data.frame match the supplied
+list of expected class names.
 }
 \keyword{internal}
