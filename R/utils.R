@@ -123,7 +123,7 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
     slot_bounds <- slot_vector_bounds[[slot_name]]
     names(slot_bounds) <- row.names(slot_vector_bounds)
     if (slot_length < slot_bounds['lower'] | slot_length > slot_bounds['upper']) {
-      if (as.numeric(slot_bounds['lower'][1]) == as.numeric(slot_bounds['upper'][1])) {
+      if (as.numeric(slot_bounds['lower'][1L]) == as.numeric(slot_bounds['upper'][1L])) {
         slot_bounds <- slot_bounds['lower']
         paste0("Slot '", slot_name, "' must be of length ", slot_bounds)
       } else {
@@ -137,7 +137,7 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
     }
   })
   ret <- unlist(ret[sapply(ret, is.character)])
-  if (length(ret) == 0) {
+  if (length(ret) == 0L) {
     ret <- TRUE
   }
   return(ret)
@@ -168,7 +168,7 @@ checkDataFrameClasses <- function(object, matchClasses) {
 
 #' split_permissions
 #'
-#' Take a list of character vector describing the permissions for each user and
+#' Take a list of character vectors describing the permissions for each user and
 #' transform into a nested list of users and their list of permissions.
 #'
 #' @keywords internal
