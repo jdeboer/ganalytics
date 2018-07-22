@@ -1,6 +1,8 @@
 library(ganalytics)
 library(googleAnalyticsR)
 
+view_id <- ga_view_selector()$id
+
 my_dim_table_filter <- TableFilter(
   Expr(~medium == "organic") & Expr(~source == "google")
 )
@@ -17,7 +19,7 @@ segment_chunks <- split(my_segment_list, (seq_along(my_segment_list) - 1) %/% 4)
 
 results <- lapply(segment_chunks, function(chunk) {
   google_analytics(
-    viewId = 157157785,
+    viewId = view_id,
     date_range = c("7daysAgo", "yesterday"),
     metrics = c("users", "sessions"),
     dimensions = c("segment", "medium"),
