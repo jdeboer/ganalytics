@@ -58,7 +58,7 @@ GaMetaUpdate <- function(creds = get_creds()) {
   kGaVars_df$allowedInFilters <- TRUE
 
   kGaVars_df <- rbind.fill(kGaVars_df, data.frame(
-    id = c("ga:dateOfSession", "ga:segment"),
+    id = c("dateOfSession", "segment"),
     type = c("DIMENSION", "DIMENSION"),
     dataType = c("STRING", "STRING"),
     group = c("Session", "Custom Variables or Columns"),
