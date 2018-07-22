@@ -104,12 +104,13 @@ flatten <- function(x) {
 
 #' CheckVectorBounds
 #'
-#' Check the length of each named slot within object is within the lower and
-#' upper bounds specified.
+#' Check that the length of each named slot within \code{object} is within the
+#' specified lower and upper bounds.
 #'
-#' @param object an object with slots that match the names of slot_vector_bound_list
-#' @param slot_vector_bound_list a named list of vectors specifying the upper
-#' and lower bounds for the length of each slot of object.
+#' @param object an object with slots that match the names of
+#'   slot_vector_bound_list
+#' @param slot_vector_bound_list a named list of length 2 vectors specifying the
+#'   upper and lower bounds for the length of each slot of object.
 #'
 #' @keywords internal
 CheckVectorBounds <- function(object, slot_vector_bound_list) {
@@ -144,8 +145,8 @@ CheckVectorBounds <- function(object, slot_vector_bound_list) {
 
 #' checkDataFrameClasses
 #'
-#' Test whether the class for each column of a data.frame match a list of
-#' expected classes.
+#' Test whether the classes of each column in a data.frame match the supplied
+#' list of expected class names.
 #'
 #' @keywords internal
 checkDataFrameClasses <- function(object, matchClasses) {
