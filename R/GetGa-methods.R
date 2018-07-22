@@ -44,7 +44,7 @@ setMethod("GetGaData", ".query", function(
     segmentNames <- NULL
   }
 
-  if (length(segmentNames) == 0) {
+  if (length(segmentNames) == 0L) {
     addSegmentId <- FALSE
   }
 

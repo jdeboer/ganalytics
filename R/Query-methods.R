@@ -179,6 +179,8 @@ modify_query <- function(
   creds = NA,
   start_date = NA,
   end_date = NA,
+  date_range = NA,
+  cohorts = NA,
   metrics = NA,
   dimensions = NA,
   sort_by = NA
@@ -217,6 +219,8 @@ modify_query <- function(
   # periods
   # columns
   # creds
+  # cohorts
+  # dateRange
 }
 
 #' @describeIn MaxResults Return the maximum number of rows a query is allowed to return.
