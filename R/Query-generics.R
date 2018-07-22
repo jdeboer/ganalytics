@@ -1,4 +1,5 @@
 #' @importFrom assertthat assert_that
+#' @importFrom utils menu
 NULL
 
 #' ga_view_selector.
