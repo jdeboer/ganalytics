@@ -15,14 +15,18 @@ my_segment_list <- list(
   new_desktop_users = Expr(~deviceCategory == "desktop") & Expr(~userType == "new")
 )
 
-segment_chunks <- split(my_segment_list, (seq_along(my_segment_list) - 1) %/% 4)
+# The API can only query 4 segments at a time, so we need to break our list
+# of segments into chunks. Because the segments are indexed from 1, instead of
+# 0, we need to subtract 1 from the numerator in the integer division.
+segment_chunks <- split(my_segment_list, (seq_along(my_segment_list) - 1L) %/% 4L)
 
+# Query each chunk and bind the results into a single data.frame
 results <- lapply(segment_chunks, function(chunk) {
   google_analytics(
     viewId = view_id,
     date_range = c("7daysAgo", "yesterday"),
     metrics = c("users", "sessions"),
-    dimensions = c("segment", "medium"),
+    dimensions = c("segment", "channelGrouping"),
     segments = Segments(chunk),
     dim_filters = my_dim_table_filter
   )
@@ -30,4 +34,5 @@ results <- lapply(segment_chunks, function(chunk) {
 
 results <- do.call(rbind, results)
 rownames(results) <- NULL
-results
+
+print(results)
