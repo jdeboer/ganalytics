@@ -102,4 +102,4 @@ Collate:
 VignetteBuilder: knitr
 LazyData: TRUE
 RoxygenNote: 6.0.1
-Remotes: github::MarkEdmondson1234/googleAnalyticsR
+Remotes: github::jdeboer/googleAnalyticsR_public

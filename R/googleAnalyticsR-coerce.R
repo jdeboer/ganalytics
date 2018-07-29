@@ -4,6 +4,7 @@
 #' @importClassesFrom googleAnalyticsR segmentFilter_ga4 segmentSequenceStep_ga4
 #' @importClassesFrom googleAnalyticsR sequenceSegment_ga4 simpleSegment_ga4
 #' @importClassesFrom googleAnalyticsR segment_ga4 dynamicSegment_ga4 .filter_clauses_ga4
+#' @importClassesFrom googleAnalyticsR dim_ga4 met_ga4
 NULL
 
 get_expression_details <- function(from, var_operators) {
