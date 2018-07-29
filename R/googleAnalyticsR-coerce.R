@@ -263,3 +263,18 @@ setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
 #   class() <- to
 # })
 
+setAs("gaSortBy", "order_bys_ga4", def = function(from, to) {
+  sort_order <- c("ASCENDING", "DESCENDING")[as.integer(from@desc) + 1L]
+  order_bys_ga4 <- lapply(seq_along(from), function(field_i) {
+    order_type_ga4 <- list(
+      fieldName = from[field_i],
+      orderType = from@orderType,
+      sortOrder = sort_order[field_i]
+    )
+    class(order_type_ga4) <- "order_type_ga4"
+    order_type_ga4
+  })
+  class(order_bys_ga4) <- to
+  order_bys_ga4
+})
+
