@@ -9,7 +9,7 @@
 \alias{Sequence,ANY-method}
 \title{Sequence.}
 \usage{
-Sequence(object, ..., negation = FALSE, scope = "sessions")
+Sequence(object, ..., negation, scope)
 
 \S4method{Later}{.compoundExpr}(object)
 
@@ -17,7 +17,7 @@ Sequence(object, ..., negation = FALSE, scope = "sessions")
 
 \S4method{First}{.compoundExpr}(object)
 
-\S4method{Sequence}{ANY}(object, ..., negation = FALSE, scope = "sessions")
+\S4method{Sequence}{ANY}(object, ..., negation, scope)
 }
 \arguments{
 \item{object}{A sequence step or another expression that should be coerced to
