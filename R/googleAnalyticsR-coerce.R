@@ -263,6 +263,28 @@ setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
 #   )
 #   class() <- to
 # })
+setAs("gaDimensions", "dim_ga4", def = function(from, to) {
+  dim_ga4 <- lapply(from, function(dim_var) {
+    list(
+      name = as.character(dim_var),
+      histogramBuckets = dim_var@histogramBuckets
+    )
+  })
+  class(dim_ga4) <- to
+  dim_ga4
+})
+
+setAs("gaMetrics", "met_ga4", def = function(from, to) {
+  met_ga4 <- lapply(from, function(met_var) {
+    list(
+      expression = as.character(met_var),
+      alias = met_var@alias,
+      formattingType = met_var@formattingType
+    )
+  })
+  class(met_ga4) <- to
+  met_ga4
+})
 
 setAs("gaSortBy", "order_bys_ga4", def = function(from, to) {
   sort_order <- c("ASCENDING", "DESCENDING")[as.integer(from@desc) + 1L]
