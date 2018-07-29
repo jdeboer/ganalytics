@@ -58,14 +58,14 @@ setMethod(
   definition = function(object, ..., negation, scope) {
     exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
     exprList <- do.call("And", lapply(exprList, function(expr){as(expr, ".compoundExpr")}))
-    x <- if(missing(negation) & missing(scope)) {
-      setSegmentFilterScopeNegation(object)
+    if(missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(exprList)
     } else if (!missing(negation) & missing(scope)) {
-      setSegmentFilterScopeNegation(object, negation = negation)
+      setSegmentFilterScopeNegation(exprList, negation = negation)
     } else if (missing(negation) & !missing(scope)) {
-      setSegmentFilterScopeNegation(object, scope = scope)
+      setSegmentFilterScopeNegation(exprList, scope = scope)
     } else if (!missing(negation) & !missing(scope)) {
-      setSegmentFilterScopeNegation(object, negation = negation, scope = scope)
+      setSegmentFilterScopeNegation(exprList, negation = negation, scope = scope)
     }
   }
 )
@@ -186,6 +186,26 @@ setMethod(
   }
 )
 
+#' @describeIn PerSession Create a session-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerSession",
+  signature = "gaSegmentSequenceStep",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "sessions")
+  }
+)
+
+#' @describeIn PerSession Create a session-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerSession",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "sessions")
+  }
+)
+
 #' @describeIn PerSession Set the scope of the supplied metric condition to
 #'   session-level.
 setMethod(
@@ -218,6 +238,26 @@ setMethod(
   signature = "ANY",
   definition = function(object, ...) {
     SegmentConditionFilter(object, ..., scope = "users")
+  }
+)
+
+#' @describeIn PerUser Create a user-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerUser",
+  signature = "gaSegmentSequenceStep",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "users")
+  }
+)
+
+#' @describeIn PerUser Create a user-level segment sequence filter from the supplied
+#'   sequence expression.
+setMethod(
+  f = "PerUser",
+  signature = "gaSegmentSequenceFilter",
+  definition = function(object, ...) {
+    Sequence(object, ..., scope = "users")
   }
 )
 
