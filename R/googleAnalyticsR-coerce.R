@@ -240,29 +240,6 @@ setAs(".compoundExpr", "segmentDef_ga4", def = function(from, to) {
   as(as(from, "gaDynSegment"), to)
 })
 
-# setAs("gaQuery", "ga4_req", def = function(from, to) {
-#   list(
-#     viewId = id,
-#     dateRanges = list(
-#       date_list_one,
-#       date_list_two
-#     ),
-#     samplingLevel = samplingLevel,
-#     dimensions = dim_list,
-#     metrics = met_list,
-#     dimensionFilterClauses = dim_filters,
-#     metricFilterClauses = met_filters,
-#     filtersExpression = filtersExpression,
-#     orderBys = order,
-#     segments = segments,
-#     pivots = pivots,
-#     cohortGroup=cohorts,
-#     pageToken=as.character(pageToken),
-#     pageSize = pageSize,
-#     includeEmptyRows = TRUE
-#   )
-#   class() <- to
-# })
 setAs("gaDimensions", "dim_ga4", def = function(from, to) {
   dim_ga4 <- lapply(from, function(dim_var) {
     list(
@@ -299,5 +276,40 @@ setAs("gaSortBy", "order_bys_ga4", def = function(from, to) {
   })
   class(order_bys_ga4) <- to
   order_bys_ga4
+})
+
+setAs("gaQuery", "ga4_req", def = function(from, to) {
+  assert_that(
+    length(from@dateRange) <= 2L
+  )
+  if (all_inherit(unlist(from@tableFilter), "gaDimExpr")) {
+    dim_filters <- from@tableFilter
+    met_filters <- NULL
+  } else if (all_inherit(unlist(from@tableFilter), "gaMetExpr")) {
+    dim_filters <- NULL
+    met_filters <- from@tableFilter
+  } else {
+    stop("Unrecognised type of table filter.")
+  }
+  request <- list(
+    viewId = from@viewId,
+    dateRanges = list(
+      list(startDate = StartDate(from)[1L], endDate = EndDate(from)[1L]),
+      list(startDate = StartDate(from)[2L], endDate = EndDate(from)[2L])
+    ),
+    samplingLevel = names(from@samplingLevel == samplingLevel_levels),
+    dimensions = as(from@dimensions, "dim_ga4"),
+    metrics = as(from@metrics, "met_ga4"),
+    dimensionFilterClauses = as(dim_filters, ".filter_clauses_ga4"),
+    metricFilterClauses = as(met_filters, ".filter_clauses_ga4"),
+    orderBys = as(from@sortBy, "order_bys_ga4"),
+    segments = as(from@segments, "segment_ga4"),
+    pivots = from@pivots,
+    cohortGroup = from@cohorts #,
+    # pageToken = as.character(pageToken),
+    # pageSize = pageSize,
+    # includeEmptyRows = TRUE
+  )
+  class(request) <- to
 })
 
