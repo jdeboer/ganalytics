@@ -47,3 +47,4 @@ comparator and operand arguments.
 Other expression generators: \code{\link{GaExpr}},
   \code{\link{McfExpr}}, \code{\link{RtExpr}}
 }
+\concept{expression generators}

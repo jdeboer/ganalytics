@@ -10,6 +10,8 @@ ganalytics
 ==========
 [![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
 
+[![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
+
 Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.
 
 The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.

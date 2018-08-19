@@ -19,9 +19,11 @@ GaCreds(object) <- value
 
 \S4method{GaCreds}{.query,ANY}(object)
 
-\S4method{GaCreds}{character,ANY}(object = "GANALYTICS", value = NULL, ...)
+\S4method{GaCreds}{character,ANY}(object = "GANALYTICS", value = NULL,
+  ...)
 
-\S4method{GaCreds}{missing,ANY}(object = "GANALYTICS", value = NULL, ...)
+\S4method{GaCreds}{missing,ANY}(object = "GANALYTICS", value = NULL,
+  ...)
 
 \S4method{GaCreds}{.query,list}(object) <- value
 }
@@ -34,8 +36,6 @@ GaCreds(object) <- value
 }
 \description{
 Get or set the authentication credentials for a Google Analytics query object.
-
-Set the authentication credentials for a Google Analytics query object.
 }
 \section{Methods (by class)}{
 \itemize{

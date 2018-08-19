@@ -103,3 +103,4 @@ VignetteBuilder: knitr
 LazyData: TRUE
 RoxygenNote: 6.1.0
 Remotes: github::jdeboer/googleAnalyticsR_public
+Encoding: UTF-8

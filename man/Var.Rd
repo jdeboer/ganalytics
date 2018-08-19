@@ -84,24 +84,6 @@ real-time reporting API.
 
 \code{Var<-} sets the value of an object belonging to the superclass '.var'
 or sets the var slot of an expression object belonging to superclass '.expr'
-
-\code{GaVar} Gets or creates an object from the superclass .gaVar
-
-\code{GaVar<-} replaces a '.var' object or sets the var slot of '.expr'
-object to a Google Analytics Core Reporting API dimension or metric
-that inherits from the class '.gaVar'.
-
-\code{McfVar} Gets or creates an object from the superclass .mcfVar
-
-\code{McfVar<-} replaces a '.var' object or sets the var slot of '.expr'
-object to a Multi Channel Funnel Reporting API dimension or metric
-that inherits from the class '.mcfVar'.
-
-\code{RtVar} Gets or creates an object from the superclass .rtVar
-
-\code{RtVar<-} replaces a '.var' object or sets the var slot of '.expr'
-object to a Google Analytics Real Time Reporting API dimension or metric
-that inherits from the class '.rtVar'.
 }
 \details{
 Use \code{Var} to lookup a dimension or metric from the Google Analytics core
@@ -163,3 +145,4 @@ Var(expr1) <- "uniquePageviews"
   \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
    Reporting API dimensions and metrics} }
 }
+\concept{Var var functions}

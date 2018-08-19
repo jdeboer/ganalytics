@@ -4,7 +4,6 @@
 \name{ganalytics}
 \alias{ganalytics}
 \alias{ganalytics-package}
-\alias{ganalytics-package}
 \title{ganalytics}
 \description{
 A Google Analytics and Google Tag Manager API client for R
