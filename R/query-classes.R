@@ -128,6 +128,8 @@ setClass(
   }
 )
 
+setClass("ga4_req")
+
 # -- GA query construct ----
 
 #' `.query` class.

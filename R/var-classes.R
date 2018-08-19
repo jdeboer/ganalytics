@@ -81,8 +81,14 @@ setClass(
 #' @export
 setClass(
   "gaDimVar",
-  prototype = prototype("ga:date"),
   contains = ".var",
+  slots = c(
+    histogramBuckets = "numeric"
+  ),
+  prototype = prototype(
+    "ga:date",
+    histogramBuckets = numeric(0L)
+  ),
   validity = function(object) {
     if (IsVarMatch(object@.Data, kGaVars$dims)) {
       TRUE

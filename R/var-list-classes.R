@@ -198,6 +198,16 @@ setClass(
 #' @export
 setClass("gaSortBy", contains = ".sortBy")
 
+#' `order_bys_ga4` class.
+#'
+#' An S4 class to represent GA version 4 sorting lists.
+#'
+#' @rdname order_bys_ga4-class
+#' @keywords internal
+#'
+#' @export
+setClass("order_bys_ga4")
+
 #' `mcfSortBy` class.
 #'
 #' An S4 class to represent Multi-Channel Funnel sorting lists.

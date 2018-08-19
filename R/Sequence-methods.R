@@ -40,15 +40,25 @@ setMethod(
   }
 )
 
-#' @describeIn Sequence Return a sequence of of just one step using the
-#'   supplied expression to define that step, where that step can occur anywhere
-#'   within the sequences of interactions being matched.
+#' @describeIn Sequence Return a sequence of one or more steps using the
+#'   supplied expression(s) define the steps, where those step can occur
+#'   anywhere within the sequences of interactions being matched, but in the
+#'   order specified.
 setMethod(
   f = "Sequence",
-  signature = ".compoundExpr",
+  signature = "ANY",
   definition = function(object, ..., negation, scope) {
-    exprList <- list(object, ...)
-    exprList <- lapply(exprList, function(expr){as(expr, "gaSegmentSequenceStep")})
-    new("gaSegmentSequenceFilter", exprList, negation = negation, scope = scope)
+    exprList <- unnest_objects(object, ..., class = "gaSegmentSequenceFilter")
+    exprList <- lapply(exprList, as, "gaSegmentSequenceStep")
+    exprList <- new("gaSegmentSequenceFilter", exprList)
+    if(missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(exprList)
+    } else if (!missing(negation) & missing(scope)) {
+      setSegmentFilterScopeNegation(exprList, negation = negation)
+    } else if (missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(exprList, scope = scope)
+    } else if (!missing(negation) & !missing(scope)) {
+      setSegmentFilterScopeNegation(exprList, negation = negation, scope = scope)
+    }
   }
 )

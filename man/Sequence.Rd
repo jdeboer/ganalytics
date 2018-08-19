@@ -6,10 +6,10 @@
 \alias{Later,.compoundExpr-method}
 \alias{Then,.compoundExpr-method}
 \alias{First,.compoundExpr-method}
-\alias{Sequence,.compoundExpr-method}
+\alias{Sequence,ANY-method}
 \title{Sequence.}
 \usage{
-Sequence(object, ..., negation = FALSE, scope = "sessions")
+Sequence(object, ..., negation, scope)
 
 \S4method{Later}{.compoundExpr}(object)
 
@@ -17,8 +17,7 @@ Sequence(object, ..., negation = FALSE, scope = "sessions")
 
 \S4method{First}{.compoundExpr}(object)
 
-\S4method{Sequence}{.compoundExpr}(object, ..., negation = FALSE,
-  scope = "sessions")
+\S4method{Sequence}{ANY}(object, ..., negation, scope)
 }
 \arguments{
 \item{object}{A sequence step or another expression that should be coerced to
@@ -48,9 +47,10 @@ segment definition.
 
 \item \code{.compoundExpr}: Alias to Then.
 
-\item \code{.compoundExpr}: Return a sequence of of just one step using the
-supplied expression to define that step, where that step can occur anywhere
-within the sequences of interactions being matched.
+\item \code{ANY}: Return a sequence of one or more steps using the
+supplied expression(s) define the steps, where those step can occur
+anywhere within the sequences of interactions being matched, but in the
+order specified.
 }}
 
 \examples{

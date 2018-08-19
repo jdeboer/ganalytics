@@ -129,6 +129,38 @@ kGaDimTypes <- list(
   )
 )
 
+time_series_dimensions <- c(
+  "dateOfSession",
+  "ga:cohortNthDay",
+  "ga:cohortNthMonth",
+  "ga:cohortNthWeek",
+  "ga:date",
+  "ga:dateHour",
+  "ga:year",
+  "ga:isoYear",
+  "ga:month",
+  "ga:week",
+  "ga:isoWeek",
+  "ga:day",
+  "ga:dayOfWeek",
+  "ga:hour",
+  "ga:minute",
+  "ga:yearMonth",
+  "ga:yearWeek",
+  "ga:isoYearIsoWeek",
+  "ga:dayOfWeekName",
+  "ga:daysSinceLastVisit",
+  "ga:daysSinceLastSession",
+  "ga:daysToTransaction",
+  "ga:nthMinute",
+  "ga:nthHour",
+  "ga:nthDay",
+  "ga:nthWeek",
+  "ga:nthMonth",
+  "mcf:nthDay",
+  "rt:minutesAgo"
+)
+
 # calculated_metrics_regex <- "^avg|^percent|Rate$|^CPC$|^CTR$|^CPM$|^RPC$|^ROI$|^ROAS$|Per"
 
 samplingLevel_levels <- c(
