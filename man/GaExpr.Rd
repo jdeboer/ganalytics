@@ -42,3 +42,4 @@ variable, operator and operand.
 Other expression generators: \code{\link{Expr}},
   \code{\link{McfExpr}}, \code{\link{RtExpr}}
 }
+\concept{expression generators}

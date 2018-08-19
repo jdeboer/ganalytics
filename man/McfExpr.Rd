@@ -39,3 +39,4 @@ supplied arguments describing the variable, comparator and operator.
 Other expression generators: \code{\link{Expr}},
   \code{\link{GaExpr}}, \code{\link{RtExpr}}
 }
+\concept{expression generators}
