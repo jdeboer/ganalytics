@@ -12,7 +12,7 @@ devtools::install_github("MarkEdmondson1234/googleAnalyticsR")
 devtools::install_github("jdeboer/ganalytics")
 ```
 
-Once installed, load the these packages. Please refer to the `googleAnalyticsR` package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.
+Once installed, load these packages. Please refer to the `googleAnalyticsR` package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.
 
 ```{r setup}
 library(googleAnalyticsR)
