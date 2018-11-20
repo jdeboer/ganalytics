@@ -172,7 +172,7 @@ setClass(
     dimensions = ".dimensions",
     sortBy = ".sortBy",
     filters = ".tableFilter",
-    maxResults = "numeric",
+    maxResults = "integer",
     creds = "list"
   ),
   prototype = prototype(
@@ -181,9 +181,9 @@ setClass(
   ),
   validity = function(object) {
     valid <- validate_that(
-      length(object@maxResults) == 1,
-      object@maxResults >= 1,
-      length(object@metrics) >= 1
+      length(object@maxResults) == 1L,
+      object@maxResults >= 1L,
+      length(object@metrics) >= 1L
     )
     if (valid == TRUE) {
       if (object@maxResults > kGaMaxRows) {
@@ -218,7 +218,7 @@ setClass(
   ),
   contains = ".query",
   validity = function(object) {
-    valid <- validate_that(length(object@samplingLevel) == 1)
+    valid <- validate_that(length(object@samplingLevel) == 1L)
     if (valid == TRUE) {
       if (!(object@samplingLevel %in% samplingLevel_levels)) {
         paste("samplingLevel must be one of:", paste(samplingLevel_levels, collapse = ", "))

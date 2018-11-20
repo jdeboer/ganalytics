@@ -9,7 +9,7 @@ GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery", s
   gaPage <- GaGetCoreReport(
     query = query,
     creds = creds,
-    startIndex = 1,
+    startIndex = 1L,
     maxResults = min(maxRequestedRows, kGaMaxResults),
     queryClass = queryClass
   )
@@ -23,14 +23,14 @@ GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery", s
   maxRows <- min(gaPage$totalResults, maxRequestedRows)
   # How many pages would that be?
   totalPages <- ceiling(maxRows / kGaMaxResults)
-  if (totalPages > 1) {
+  if (totalPages > 1L) {
     # Step through each of the pages
-    for (page in 2:totalPages) {
+    for (page in 2L:totalPages) {
       message(paste0("Fetching page ", page, " of ", totalPages, "..."))
       # What row am I up to?
-      startIndex <- kGaMaxResults * (page - 1) + 1
+      startIndex <- kGaMaxResults * (page - 1L) + 1L
       # How many rows can I request for what I need?
-      maxResults <- min(kGaMaxResults, (maxRows - startIndex) + 1)
+      maxResults <- min(kGaMaxResults, (maxRows - startIndex) + 1L)
       # Get the rows of data for this page...
       gaPage <- GaGetCoreReport(
         query,
@@ -56,7 +56,7 @@ GaPaginate <- function(query, maxRequestedRows, creds, queryClass = "gaQuery", s
   )
 }
 
-GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, queryClass = "gaQuery") {
+GaGetCoreReport <- function(query, creds, startIndex = 1L, maxResults = 10000L, queryClass = "gaQuery") {
   request <- switch(
     queryClass,
     "gaQuery" = "data/ga",
@@ -70,7 +70,7 @@ GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, qu
     "max-results" = maxResults
   )
   data.ga <- ga_api_request(creds = creds, request = request, scope = scope, queries = query)
-  if (length(data.ga$error) > 1) {
+  if (length(data.ga$error) > 1L) {
     stop(with(
         data.ga$error,
         paste("Google Analytics error", code, message, sep = " : ")
@@ -81,7 +81,7 @@ GaGetCoreReport <- function(query, creds, startIndex = 1, maxResults = 10000, qu
 }
 
 YesNoToLogical <- function(char) {
-  if (length(char) > 0) {
+  if (length(char) > 0L) {
     char[char == "Yes"] <- "TRUE"
     char[char == "No"] <- "FALSE"
   }
@@ -105,7 +105,7 @@ FactorInt <- function(x) {
 }
 
 GaListToDataframe <- function(gaData, queryClass) {
-  if (gaData$totalResults > 0) {
+  if (gaData$totalResults > 0L) {
     if (queryClass == "mcfQuery") {
       gaData$rows <- llply(gaData$rows, function(row) {
         primitiveValues <- which(!is.na(row[['primitiveValue']]))
@@ -136,14 +136,14 @@ GaListToDataframe <- function(gaData, queryClass) {
   } else {
     cols <- as.list(gaData$columnHeaders$name)
     names(cols) <- as.character(cols)
-    gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0, , drop = FALSE]
+    gaData$rows <- data.frame(cols, stringsAsFactors = FALSE)[0L, , drop = FALSE]
     names(gaData$rows) <- gaData$columnHeaders$name
   }
   names(gaData$rows) <- sub("^(ga|rt|mcf)[:\\.]", "", names(gaData$rows))
   return(
     list(
       data = gaData$rows,
-      totalResults = max(gaData$totalResults, 1),
+      totalResults = max(gaData$totalResults, 1L),
       sampled = gaData$containsSampledData,
       sampleSize = gaData$sampleSize,
       sampleSpace = gaData$sampleSpace,
