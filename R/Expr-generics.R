@@ -24,11 +24,9 @@ setGeneric(
 #' Create a Core Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- GaQuery(view = 123456789)
-#'   source_matches_google <- GaExpr("source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- GaQuery(view = 123456789)
+#' source_matches_google <- GaExpr("source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #' @inheritParams Expr
 #'
 #' @family expression generators
@@ -46,11 +44,9 @@ setGeneric(
 #' Create a Multi-Channel Funnel Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- McfQuery(view = 123456789)
-#'   source_matches_google <- McfExpr("mcf:source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- McfQuery(view = 123456789)
+#' source_matches_google <- McfExpr("mcf:source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #'
 #' @inheritParams Expr
 #'
@@ -69,11 +65,9 @@ setGeneric(
 #' Create a Real-Time Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- RtQuery(view = 123456789)
-#'   source_matches_google <- RtExpr("rt:source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- RtQuery(view = 123456789)
+#' source_matches_google <- RtExpr("rt:source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #'
 #' @inheritParams Expr
 #'
