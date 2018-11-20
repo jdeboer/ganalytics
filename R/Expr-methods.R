@@ -50,9 +50,13 @@ setMethod("Expr", ".expr", function(object) {object})
 #'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod(
   f = "Expr",
-  signature = "formula",
-  definition = function(object) {
-    as(object, ".expr")
+  signature = c("formula", "ANY"),
+  definition = function(object, metricScope) {
+    object <- as(object, ".expr")
+    if(!missing(metricScope) && metricScope != "") {
+      ScopeLevel(object) <- metricScope
+    }
+    object
   }
 )
 
@@ -60,7 +64,7 @@ setMethod(
 #'   comparator and operand arguments.
 setMethod(
   f = "Expr",
-  signature = c("character", "character", "ANY"),
+  signature = c("character", "character", "ANY", "ANY"),
   definition = function(object, comparator, operand, metricScope) {
     var <- Var(object)
     if (is(var, ".gaVar")) {
