@@ -41,7 +41,10 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    dplyr,
+    purrr,
+    tidyr
 Collate: 
     'Bool-generics.R'
     'utils.R'
@@ -101,7 +104,7 @@ Collate:
     'zzz.R'
 VignetteBuilder: knitr
 LazyData: TRUE
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Remotes: github::jdeboer/googleAnalyticsR_public
 Encoding: UTF-8

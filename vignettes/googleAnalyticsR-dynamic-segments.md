@@ -33,7 +33,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-09-11 10:09:15> No environment argument found, looked in GA_AUTH_FILE
+## 2018-11-20 13:27:23> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r
@@ -44,6 +44,12 @@ library(dplyr)
 ```
 ## 
 ## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:ganalytics':
+## 
+##     mutate, rename
 ```
 
 ```
@@ -196,9 +202,10 @@ new_desktop_users           sessions      933
 ggplot(results_long) +
   aes(segment, count, fill = metric) +
   geom_col(position = "dodge") +
+  guides(fill = guide_legend(reverse = TRUE)) +
   coord_flip() +
-  guides(fill = guide_legend(reverse = TRUE))
+  theme(axis.text.y.left = element_text(hjust = 0))
 ```
 
-![](googleAnalyticsR-dynamic-segments_files/figure-html/visualize-long-results-1.png)<!-- -->
+![](googleAnalyticsR-dynamic-segments_files/figure-html/visualize-results-1.png)<!-- -->
 

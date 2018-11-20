@@ -1,5 +1,17 @@
 ---
 title: "Advanced dynamic segment examples"
+author: "Johann de Boer"
+date: "2018-09-09"
+output:
+  html_vignette:
+    keep_md: yes
+  md_document:
+    variant:
+      markdown_github
+vignette: >
+  %\VignetteIndexEntry{DYNAMICSEGMENTS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.
@@ -17,6 +29,17 @@ Once installed, load these packages. Please refer to the `googleAnalyticsR` pack
 ```{r setup}
 library(googleAnalyticsR)
 library(ganalytics)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(purrr)
+library(knitr)
+
+ga_auth(file.path("~", "ga.oauth"))
+
+view_id <- "117987738"
+start_date <- "2018-05-01"
+end_date <- "2018-06-30"
 ```
 
 # Pull the Data
@@ -85,11 +108,12 @@ results_long <- results %>%
 kable(results_long)
 ```
 
-```{r visualize-long-results}
+```{r visualize-results, fig.height=5, fig.width=10}
 ggplot(results_long) +
   aes(segment, count, fill = metric) +
   geom_col(position = "dodge") +
+  guides(fill = guide_legend(reverse = TRUE)) +
   coord_flip() +
-  guides(fill = guide_legend(reverse = TRUE))
+  theme(axis.text.y.left = element_text(hjust = 0))
 ```
 
