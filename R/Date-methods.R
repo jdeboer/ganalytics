@@ -5,7 +5,7 @@
 #' @importFrom plyr adply
 #' @importFrom stringr str_split_fixed
 #' @importFrom lubridate today interval int_start int_end
-#' @importFrom methods setMethod new as as<-
+#' @importFrom methods setMethod new as as<- callNextMethod
 NULL
 
 # setMethod(

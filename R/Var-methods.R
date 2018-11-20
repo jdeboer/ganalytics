@@ -7,7 +7,7 @@
 #' @include Var-generics.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods new setMethod as<-
+#' @importFrom methods new setMethod as<- callNextMethod
 NULL
 
 setMethod(

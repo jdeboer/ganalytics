@@ -2,7 +2,7 @@
 #' @include management-api-classes.R
 #' @include view-coerce.R
 #' @include Query-generics.R
-#' @importFrom methods setMethod as as<-
+#' @importFrom methods setMethod as as<- callNextMethod
 NULL
 
 setMethod(

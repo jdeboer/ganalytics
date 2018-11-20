@@ -5,7 +5,7 @@
 #' @include Comparator-methods.R
 #' @include Operand-methods.R
 #' @include utils.R
-#' @importFrom methods setMethod new validObject as
+#' @importFrom methods setMethod new validObject as callNextMethod
 #' @importFrom assertthat assert_that
 NULL
 

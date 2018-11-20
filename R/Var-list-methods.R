@@ -2,7 +2,7 @@
 #' @include query-classes.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods setMethod as validObject new as<-
+#' @importFrom methods setMethod as validObject new as<- callNextMethod
 NULL
 
 # -- GaMetrics ----

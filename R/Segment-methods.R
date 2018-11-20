@@ -3,7 +3,7 @@
 #' @include Segment-generics.R
 #' @include segment-coerce.R
 #' @include management-api-classes.R
-#' @importFrom methods new setMethod
+#' @importFrom methods new setMethod callNextMethod
 NULL
 
 setSegmentFilterScopeNegation <- function(object, negation, scope) {
