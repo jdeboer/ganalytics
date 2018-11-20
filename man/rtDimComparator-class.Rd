@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtDimComparator-class}
 \alias{rtDimComparator-class}
-\title{`rtDimComparator` class.}
+\title{\code{rtDimComparator} class.}
 \description{
 An S4 class to represent Real-Time dimension condition comparator operators.
 }

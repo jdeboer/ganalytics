@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaMetrics-class}
 \alias{gaMetrics-class}
-\title{`gaMetrics` class.}
+\title{\code{gaMetrics} class.}
 \description{
 An S4 class to represent a list of Core Reporting metrics.
 }

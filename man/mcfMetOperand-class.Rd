@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfMetOperand-class}
 \alias{mcfMetOperand-class}
-\title{`mcfMetOperand` class.}
+\title{\code{mcfMetOperand} class.}
 \description{
 An S4 class to represent Multi-Channel metric condition operand.
 }

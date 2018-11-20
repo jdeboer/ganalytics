@@ -3,6 +3,7 @@
 \docType{methods}
 \name{Not}
 \alias{Not}
+\alias{`!`}
 \alias{Not,.comparator-method}
 \alias{!,.comparator-method}
 \alias{Not,.expr-method}
@@ -60,6 +61,14 @@ include <-> exclude
 include <-> exclude
 }}
 
-\seealso{
-\code{\link{And}} \code{\link{Or}} \code{\link{xor}}
+\examples{
+source_matches_google <- Expr(~source \%matches\% "google")
+source_not_matching_google <- Not(source_matches_google)
+identical(source_not_matching_google, !source_matches_google)
+
 }
+\seealso{
+Other boolean functions: \code{\link{And}},
+  \code{\link{Or}}, \code{\link{xor}}
+}
+\concept{boolean functions}

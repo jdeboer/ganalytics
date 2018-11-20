@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimOperand-class}
 \alias{gaDimOperand-class}
-\title{`gaDimOperand` class.}
+\title{\code{gaDimOperand} class.}
 \description{
 An S4 class to represent a Core-Reporting dimension operand.
 }

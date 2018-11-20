@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegmentId-class}
 \alias{gaSegmentId-class}
-\title{`gaSegmentId` class.}
+\title{\code{gaSegmentId} class.}
 \description{
 An S4 class to represent a pre-defined custom or built-in segment by its ID.
 }

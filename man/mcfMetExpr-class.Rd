@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfMetExpr-class}
 \alias{mcfMetExpr-class}
-\title{`mcfMetExpr` class.}
+\title{\code{mcfMetExpr} class.}
 \description{
 An S4 class to represent a Multi-Channel Funnel metric condition expression.
 }

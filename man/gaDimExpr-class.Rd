@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimExpr-class}
 \alias{gaDimExpr-class}
-\title{`gaDimExpr` class.}
+\title{\code{gaDimExpr} class.}
 \description{
 An S4 class to represent a Core-Reporting dimension condition expression.
 }

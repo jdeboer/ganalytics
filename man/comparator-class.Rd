@@ -3,7 +3,7 @@
 \docType{class}
 \name{.comparator-class}
 \alias{.comparator-class}
-\title{`.comparator` class.}
+\title{\code{.comparator} class.}
 \description{
 An S4 class to represent a condition's comparator operator.
 }

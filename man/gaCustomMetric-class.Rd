@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaCustomMetric-class}
 \alias{gaCustomMetric-class}
-\title{`gaCustomMetric` class}
+\title{\code{gaCustomMetric} class}
 \description{
 An R6 class representing a defined Google Analytics custom metric.
 }

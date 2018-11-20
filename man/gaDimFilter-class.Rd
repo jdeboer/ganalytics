@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimFilter-class}
 \alias{gaDimFilter-class}
-\title{`gaDimFilter` class.}
+\title{\code{gaDimFilter} class.}
 \description{
 An S4 class to represent a Core Reporting query table dimension filter expression.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{.rtExpr-class}
 \alias{.rtExpr-class}
-\title{`rtExpr` class.}
+\title{\code{rtExpr} class.}
 \description{
 An S4 class to represent a Real-Time API condition expression.
 }

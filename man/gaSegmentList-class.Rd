@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegmentList-class}
 \alias{gaSegmentList-class}
-\title{`gaSegmentList` class.}
+\title{\code{gaSegmentList} class.}
 \description{
 An S4 class to represent a list of segment expressions to query.
 }

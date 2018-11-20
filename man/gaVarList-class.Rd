@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaVarList-class}
 \alias{.gaVarList-class}
-\title{`.gaVarList` class.}
+\title{\code{.gaVarList} class.}
 \description{
 An S4 class to represent Core Reporting variable lists.
 }

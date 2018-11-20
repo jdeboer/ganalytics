@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtMetrics-class}
 \alias{rtMetrics-class}
-\title{`rtMetrics` class.}
+\title{\code{rtMetrics} class.}
 \description{
 An S4 class to represent a list of Real-time metrics.
 }

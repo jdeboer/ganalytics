@@ -32,11 +32,9 @@ variable, operator and operand.
 }}
 
 \examples{
-\donttest{
-  myQuery <- GaQuery(view = 123456789)
-  source_matches_google <- GaExpr("source", "~", "google")
-  TableFilter(myQuery) <- source_matches_google
-}
+myQuery <- GaQuery(view = 123456789)
+source_matches_google <- GaExpr("source", "~", "google")
+TableFilter(myQuery) <- source_matches_google
 }
 \seealso{
 Other expression generators: \code{\link{Expr}},

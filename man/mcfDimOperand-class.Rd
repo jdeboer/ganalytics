@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfDimOperand-class}
 \alias{mcfDimOperand-class}
-\title{`mcfDimOperand` class.}
+\title{\code{mcfDimOperand} class.}
 \description{
 An S4 class to represent a Multi-Channel dimension condition operand.
 }

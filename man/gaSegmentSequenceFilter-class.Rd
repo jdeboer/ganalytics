@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegmentSequenceFilter-class}
 \alias{gaSegmentSequenceFilter-class}
-\title{`gaSegmentSequenceFilter` class.}
+\title{\code{gaSegmentSequenceFilter} class.}
 \description{
 An S4 class to represent a sequence expression as a segment filter.
 }

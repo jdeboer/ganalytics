@@ -3,6 +3,7 @@
 \docType{methods}
 \name{Or}
 \alias{Or}
+\alias{`|`}
 \alias{Or,.compoundExpr-method}
 \alias{|,.compoundExpr,.compoundExpr-method}
 \title{Or.}
@@ -35,6 +36,13 @@ OR two or more expressions.
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: OR two expressions.
 }}
 
-\seealso{
-\code{\link{And}} \code{\link{xor}} \code{\link{Not}}
+\examples{
+mobile_or_tablet <- Expr(~deviceCategory == "mobile") | Expr(~deviceCategory == "tablet")
+converted <- Expr(~goalCompletionsAll > 0) | Expr(~transactions > 0)
+
 }
+\seealso{
+Other boolean functions: \code{\link{And}},
+  \code{\link{Not}}, \code{\link{xor}}
+}
+\concept{boolean functions}

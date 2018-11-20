@@ -3,7 +3,7 @@
 \docType{class}
 \name{order_bys_ga4-class}
 \alias{order_bys_ga4-class}
-\title{`order_bys_ga4` class.}
+\title{\code{order_bys_ga4} class.}
 \description{
 An S4 class to represent GA version 4 sorting lists.
 }

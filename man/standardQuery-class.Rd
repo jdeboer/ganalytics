@@ -3,8 +3,16 @@
 \docType{class}
 \name{.standardQuery-class}
 \alias{.standardQuery-class}
-\title{`.standardQuery` class.}
+\title{\code{.standardQuery} class.}
 \description{
 An S4 class to represent a standard reporting API query.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{dateRange}}{The date range for the query as a dateRange object}
+
+\item{\code{samplingLevel}}{The sampling level of the query as a character string.}
+}}
+
 \keyword{internal}

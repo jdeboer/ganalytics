@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaProperty-class}
 \alias{gaProperty-class}
-\title{`gaProperty` class}
+\title{\code{gaProperty} class}
 \description{
 An R6 class representing a Google Analytics property.
 }

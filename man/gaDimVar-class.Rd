@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimVar-class}
 \alias{gaDimVar-class}
-\title{`gaDimVar` class.}
+\title{\code{gaDimVar} class.}
 \description{
 An S4 class to represent a valid Google Analytics Core Reporting API dimension
 name.

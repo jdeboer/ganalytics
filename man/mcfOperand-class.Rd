@@ -3,7 +3,7 @@
 \docType{class}
 \name{.mcfOperand-class}
 \alias{.mcfOperand-class}
-\title{`.mcfOperand` class.}
+\title{\code{.mcfOperand} class.}
 \description{
 An S4 class union representing Multi-Channel Funnel condition operands.
 }

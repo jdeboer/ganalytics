@@ -12,7 +12,7 @@ Expr(object, comparator, operand, metricScope = "")
 
 \S4method{Expr}{.expr,ANY}(object)
 
-\S4method{Expr}{formula,ANY}(object)
+\S4method{Expr}{formula,ANY}(object, metricScope)
 
 \S4method{Expr}{character,character}(object, comparator, operand,
   metricScope = "")
@@ -37,7 +37,7 @@ Define a Google Analytics expression.
 
 \item \code{object = formula,comparator = ANY}: Use non-standard formula evaluation to define an expression.
 Accepts a formula in the form of: \code{~ <variable> <comparator>
-<operand>} where only the \code{<operand>} is evaluated.
+  <operand>} where only the \code{<operand>} is evaluated.
 
 \item \code{object = character,comparator = character}: Return an expression based on the described variable,
 comparator and operand arguments.

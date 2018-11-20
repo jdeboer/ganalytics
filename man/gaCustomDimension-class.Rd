@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaCustomDimension-class}
 \alias{gaCustomDimension-class}
-\title{`gaCustomDimension` class}
+\title{\code{gaCustomDimension} class}
 \description{
 An R6 class representing a defined Google Analytics custom dimension.
 }

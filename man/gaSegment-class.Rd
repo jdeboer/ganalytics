@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaSegment-class}
 \alias{.gaSegment-class}
-\title{`.gaSegment` class.}
+\title{\code{.gaSegment} class.}
 \description{
 An S4 class union representing dynamic and pre-defined segment expressions.
 }

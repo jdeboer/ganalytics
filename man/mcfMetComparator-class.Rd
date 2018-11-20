@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfMetComparator-class}
 \alias{mcfMetComparator-class}
-\title{`mcfMetComparator` class.}
+\title{\code{mcfMetComparator} class.}
 \description{
 An S4 class representing Multi-Channel Funnel metric condition comparison
 operators.

@@ -3,7 +3,7 @@
 \docType{class}
 \name{.tableFilter-class}
 \alias{.tableFilter-class}
-\title{`.tableFilter` class.}
+\title{\code{.tableFilter} class.}
 \description{
 An S4 class to represent a query table filter expression.
 }

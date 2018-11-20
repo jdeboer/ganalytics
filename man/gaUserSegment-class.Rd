@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaUserSegment-class}
 \alias{gaUserSegment-class}
-\title{`gaUserSegment` class}
+\title{\code{gaUserSegment} class}
 \description{
 An R6 class representing a default or custom segment available with the
 credentials provided.

@@ -3,7 +3,7 @@
 \docType{class}
 \name{.sortBy-class}
 \alias{.sortBy-class}
-\title{`.sortBy` class.}
+\title{\code{.sortBy} class.}
 \description{
 An S4 class to represent a list of variables to sort by.
 }

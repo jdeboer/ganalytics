@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSortBy-class}
 \alias{gaSortBy-class}
-\title{`gaSortBy` class.}
+\title{\code{gaSortBy} class.}
 \description{
 An S4 class to represent Core Reporting sorting lists.
 }

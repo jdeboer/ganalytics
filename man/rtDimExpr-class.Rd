@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtDimExpr-class}
 \alias{rtDimExpr-class}
-\title{`rtDimExpr` class.}
+\title{\code{rtDimExpr} class.}
 \description{
 An S4 class to represent Real-Time dimension condition expression.
 }

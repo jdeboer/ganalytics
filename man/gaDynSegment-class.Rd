@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDynSegment-class}
 \alias{gaDynSegment-class}
-\title{`gaDynSegment` class.}
+\title{\code{gaDynSegment} class.}
 \description{
 An S4 class to represent a list of segment filter expressions that belong to a
 specified scope.

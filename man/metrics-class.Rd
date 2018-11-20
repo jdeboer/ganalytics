@@ -3,7 +3,7 @@
 \docType{class}
 \name{.metrics-class}
 \alias{.metrics-class}
-\title{`.metrics` class.}
+\title{\code{.metrics} class.}
 \description{
 An S4 class to represent a list of metrics.
 }

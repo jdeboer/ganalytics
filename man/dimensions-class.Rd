@@ -3,7 +3,7 @@
 \docType{class}
 \name{.dimensions-class}
 \alias{.dimensions-class}
-\title{`.dimensions` class.}
+\title{\code{.dimensions} class.}
 \description{
 An S4 class to represent a list of dimensions.
 }

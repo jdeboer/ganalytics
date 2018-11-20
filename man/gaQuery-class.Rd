@@ -3,8 +3,18 @@
 \docType{class}
 \name{gaQuery-class}
 \alias{gaQuery-class}
-\title{`gaQuery` class.}
+\title{\code{gaQuery} class.}
 \description{
 An S4 class to represent a Core Reporting API query.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{segments}}{A gaSegmentList giving one or more segments to query.}
+
+\item{\code{buckets}}{A numeric vector of breakpoints for histogram buckets.}
+
+\item{\code{lifetimeValue}}{A logical flag of whether to perform life-time value analysis.}
+}}
+
 \keyword{internal}

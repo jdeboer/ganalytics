@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtDimensions-class}
 \alias{rtDimensions-class}
-\title{`rtDimensions` class.}
+\title{\code{rtDimensions} class.}
 \description{
 An S4 class to represent a list of Real-Time reporting dimensions.
 }

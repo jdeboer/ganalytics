@@ -3,7 +3,7 @@
 \docType{class}
 \name{.dimComparator-class}
 \alias{.dimComparator-class}
-\title{`.dimComparator` class.}
+\title{\code{.dimComparator} class.}
 \description{
 An S4 class union representing dimension condition comparator operators.
 }

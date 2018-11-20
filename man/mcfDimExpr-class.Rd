@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfDimExpr-class}
 \alias{mcfDimExpr-class}
-\title{`mcfDimExpr` class.}
+\title{\code{mcfDimExpr} class.}
 \description{
 An S4 class to represent a Multi-Channel Funnel dimension condition
 expression.

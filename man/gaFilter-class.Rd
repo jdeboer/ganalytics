@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaFilter-class}
 \alias{gaFilter-class}
-\title{`gaFilter` class.}
+\title{\code{gaFilter} class.}
 \description{
 An S4 class to represent a Core Reporting query table filter expression.
 }

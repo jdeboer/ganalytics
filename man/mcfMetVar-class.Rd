@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfMetVar-class}
 \alias{mcfMetVar-class}
-\title{`mcfMetVar` class.}
+\title{\code{mcfMetVar} class.}
 \description{
 An S4 class to represent a Multi-Channel Funnel metric.
 }

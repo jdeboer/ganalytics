@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaMetExpr-class}
 \alias{gaMetExpr-class}
-\title{`gaMetExpr` class.}
+\title{\code{gaMetExpr} class.}
 \description{
 An S4 class to represent a Core-Reporting metric condition expression.
 }

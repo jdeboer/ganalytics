@@ -1,9 +1,9 @@
 #' Comparator.
 #'
-#' Get or create a comparator used in / for an expression.
+#' Get a comparator used in an expression or create a comparator object.
 #'
-#' @param object The object to be coerced to a '.Comparator' subclass or to obtain the
-#'   comparator from.
+#' @param object The object to be coerced to a '.Comparator' subclass or the
+#'   expression object of which to obtain its comparator.
 #' @param ... Used by certain methods.
 #'
 #' @export
@@ -17,7 +17,7 @@ setGeneric(
 
 #' Comparator<-.
 #'
-#' Set the comparator used in an expression.
+#' Set the comparator of an expression.
 #'
 #' @param value The value to set the comparator to.
 #'
@@ -38,6 +38,7 @@ setGeneric(
 #' @rdname Comparator
 #' @param var dimension object
 #' @param operand operand object
+#' @family comparators
 #' @export
 setGeneric(
   "%starts_with%",
@@ -50,6 +51,7 @@ setGeneric(
 #' A condition where the dimension (LHS) matches values that end with
 #'   the character string given by the operand (RHS).
 #' @rdname Comparator
+#' @family comparators
 #' @export
 setGeneric(
   "%ends_with%",
@@ -62,6 +64,7 @@ setGeneric(
 #' A condition where the dimension (LHS) matches values that contain
 #'   the character string given by the operand (RHS).
 #' @rdname Comparator
+#' @family comparators
 #' @export
 setGeneric(
   "%contains%",
@@ -74,6 +77,7 @@ setGeneric(
 #' A condition where the dimension (LHS) matches a regular
 #'   expression given by the operand (RHS).
 #' @rdname Comparator
+#' @family comparators
 #' @export
 setGeneric(
   "%matches%",
@@ -87,6 +91,7 @@ setGeneric(
 #'   upper bounds specified by first and second vector value (respectively) of
 #'   the operand (RHS).
 #' @rdname Comparator
+#' @family comparators
 #' @export
 setGeneric(
   "%between%",
@@ -101,6 +106,7 @@ setGeneric(
 #' @rdname Comparator
 #' @param x Dimension or metric object
 #' @param table Operand object
+#' @family comparators
 #' @export
 setGeneric("%in%")
 

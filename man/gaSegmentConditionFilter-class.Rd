@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegmentConditionFilter-class}
 \alias{gaSegmentConditionFilter-class}
-\title{`gaSegmentConditionFilter` class.}
+\title{\code{gaSegmentConditionFilter} class.}
 \description{
 An S4 class to represent a non-sequential condition-based segment filter
 expression.

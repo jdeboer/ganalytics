@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimensions-class}
 \alias{gaDimensions-class}
-\title{`gaDimensions` class.}
+\title{\code{gaDimensions} class.}
 \description{
 An S4 class to represent a list of Core Reporting dimensions.
 }

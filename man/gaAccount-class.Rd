@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaAccount-class}
 \alias{gaAccount-class}
-\title{`gaAccount` class}
+\title{\code{gaAccount} class}
 \description{
 An R6 class representing a Google Analytics account.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{orExpr-class}
 \alias{orExpr-class}
-\title{`orExpr` class.}
+\title{\code{orExpr} class.}
 \description{
 An S4 class to represent an expression of ORed conditions.
 }

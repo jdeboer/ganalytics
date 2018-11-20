@@ -34,8 +34,8 @@ coerce into a user scoped gaDynSegment.}
 \value{
 a gaMetExpr, .gaSegmentFilter or gaDynSegment.
 
-  To define a gaDynSegment comprised of a single metric expression,
-  wrap the metric expression in an \code{Include} or \code{Exclude} call.
+To define a gaDynSegment comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \description{
 Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.

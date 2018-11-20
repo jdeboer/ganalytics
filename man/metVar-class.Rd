@@ -3,7 +3,7 @@
 \docType{class}
 \name{.metVar-class}
 \alias{.metVar-class}
-\title{`.metVar` class.}
+\title{\code{.metVar} class.}
 \description{
 An S4 class to represent a metric.
 }
