@@ -159,7 +159,8 @@ gaCollection <- setClass(
   }
 )
 
-setMethod("initialize", "gaCollection", function(.Object) {
+setMethod("initialize", "gaCollection", function(.Object, ...) {
+  .Object <- callNextMethod(.Object, ...)
   .Object@summary <- ldply(.Object, function(entity) {
     as.data.frame(entity$entity_field_values)
   })
@@ -205,7 +206,8 @@ gaAccounts <- setClass(
   contains = "gaCollection"
 )
 
-setMethod("initialize", "gaAccounts", function(.Object) {
+setMethod("initialize", "gaAccounts", function(.Object, ...) {
+  .Object <- callNextMethod(.Object, ...)
   .Object@parent_entity <- NULL
   .Object@entity_class_generator <- gaAccount
   .Object@collection_name <- "accounts"
