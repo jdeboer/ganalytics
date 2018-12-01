@@ -25,6 +25,8 @@ setGeneric(
 #'
 #' @param value The replacement date range.
 #'
+#' @family date range functions
+#'
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -57,6 +59,8 @@ setGeneric(
 #' StartDate<-.
 #'
 #' Set the start date.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname StartDate
@@ -91,6 +95,8 @@ setGeneric(
 #'
 #' Set the endDate of the date range.
 #'
+#' @family date range functions
+#'
 #' @export
 #' @rdname EndDate
 setGeneric(
@@ -123,6 +129,8 @@ setGeneric(
 #' Cohort<-.
 #'
 #' Set a cohort of a query.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname Cohort
