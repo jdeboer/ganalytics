@@ -19,3 +19,4 @@ after_success:
   - Rscript -e 'covr::codecov()'
 r_check_args:
   "--no-vignettes"
+  "--no-build-vignettes"
