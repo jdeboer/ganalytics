@@ -5,7 +5,6 @@ warnings_are_errors: true
 env:
  global:
    - CRAN: http://cran.rstudio.com
-   - r_check_args="--no-vignettes --no-build-vignettes"
 
 before_install: echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
 
@@ -18,3 +17,6 @@ r_github_packages:
   - jimhester/covr
 after_success:
   - Rscript -e 'covr::codecov()'
+
+r_build_args: --no-build-vignettes
+r_check_args: --no-vignettes --no-build-vignettes
