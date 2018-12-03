@@ -9,7 +9,7 @@ output:
     variant:
       markdown_github
 vignette: >
-  %\VignetteIndexEntry{DYNAMICSEGMENTS}
+  %\VignetteIndexEntry{DYNAMIC SEGMENTS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -21,6 +21,13 @@ Generate an expression that gives the EXCLUSIVE-OR of two expressions.
 \item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
 }}
 
+\examples{
+either_enquired_or_downloaded <- xor(
+  Expr(~eventCategory == "enquiry"),
+  Expr(~eventCategory == "download")
+)
+
+}
 \seealso{
 Other boolean functions: \code{\link{And}},
   \code{\link{Not}}, \code{\link{Or}}

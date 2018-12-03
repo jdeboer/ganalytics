@@ -285,8 +285,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <p><code>ganalytics</code> provides functions that makes it easy to define filters using natural R language operators. This example shows how to use <code>ganalytics</code> to define dimension or metric filters that can be used by the <code>googleAnalyticsR</code> package. The current development version of <code>googleAnalyticsR</code> supports filters defined with <code>ganalytics</code>.</p>
-<div id="setupconfig" class="section level1">
-<h1>Setup/Config</h1>
+<div id="setupconfig" class="section level2">
+<h2>Setup/Config</h2>
 <p>Note that this example requires the current development versions of the <code>googleAnalyticsR</code> (&gt;=0.5.0.9000) and <code>ganalytics</code> (&gt;=0.10.4.9000) R packages available from GitHub. To install these, run the following code in R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;MarkEdmondson1234/googleAnalyticsR&quot;</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jdeboer/ganalytics&quot;</span>)</a></code></pre></div>
@@ -305,8 +305,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <a class="sourceLine" id="cb4-2" data-line-number="2">start_date &lt;-<span class="st"> &quot;2018-05-01&quot;</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">end_date &lt;-<span class="st"> &quot;2018-06-30&quot;</span></a></code></pre></div>
 </div>
-<div id="pull-the-data" class="section level1">
-<h1>Pull the Data</h1>
+<div id="pull-the-data" class="section level2">
+<h2>Pull the Data</h2>
 <p>In this example, we’ll define the following filters: * Device category is desktop or tablet - a dimension filter using an OR condition. * New visitors using either a desktop or tablet device - a dimension filter involving both an AND and an OR condition. * At least one goal completion or transaction - a metric filter using an OR condition.</p>
 <p>The above list of filters will be defined using <code>ganalytics</code> expressions as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Device category is desktop or tablet - a dimension filter using an OR condition.</span></a>

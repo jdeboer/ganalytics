@@ -9,14 +9,14 @@ output:
     variant:
       markdown_github
 vignette: >
-  %\VignetteIndexEntry{ADVANCEDFILTERS}
+  %\VignetteIndexEntry{ADVANCED FILTERS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters using natural R language operators. This example shows how to use `ganalytics` to define dimension or metric filters that can be used by the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports filters defined with `ganalytics`.
 
-# Setup/Config
+## Setup/Config
 
 Note that this example requires the current development versions of the `googleAnalyticsR` (>=0.5.0.9000) and `ganalytics` (>=0.10.4.9000) R packages available from GitHub. To install these, run the following code in R:
 
@@ -50,7 +50,7 @@ start_date <- "2018-05-01"
 end_date <- "2018-06-30"
 ```
 
-# Pull the Data
+## Pull the Data
 
 In this example, we'll define the following filters:
 * Device category is desktop or tablet - a dimension filter using an OR condition.

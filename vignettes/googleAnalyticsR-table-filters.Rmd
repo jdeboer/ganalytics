@@ -9,7 +9,7 @@ output:
     variant:
       markdown_github
 vignette: >
-  %\VignetteIndexEntry{ADVANCEDFILTERS}
+  %\VignetteIndexEntry{ADVANCED FILTERS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

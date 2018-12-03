@@ -36,6 +36,10 @@ AND two or more ganalytics expressions together.
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expressions.
 }}
 
+\examples{
+purchased_on_mobile <- Expr(~deviceCategory == "mobile") & Expr(~transactions > 0)
+
+}
 \seealso{
 Other boolean functions: \code{\link{Not}},
   \code{\link{Or}}, \code{\link{xor}}

@@ -9,14 +9,14 @@ output:
     variant:
       markdown_github
 vignette: >
-  %\VignetteIndexEntry{DYNAMICSEGMENTS}
+  %\VignetteIndexEntry{DYNAMIC SEGMENTS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.
 
-# Setup/Config
+## Setup/Config
 
 Note that this example requires the current development versions of the `googleAnalyticsR` (>=0.5.0.9000) and `ganalytics` (>=0.10.4.9000) R packages available on GitHub. To install these, run the following code in R:
 
@@ -33,7 +33,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-11-20 13:27:23> No environment argument found, looked in GA_AUTH_FILE
+## 2018-12-03 20:56:47> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r
@@ -88,6 +88,22 @@ ga_auth(file.path("~", "ga.oauth"))
 ```
 
 ```
+## 2018-12-03 20:56:47> No httr_oauth_cache file found at ~/ga.oauth - creating new file.
+```
+
+```
+## Waiting for authentication in browser...
+```
+
+```
+## Press Esc/Ctrl + C to abort
+```
+
+```
+## Authentication complete.
+```
+
+```
 ## Token cache file: ~/ga.oauth
 ```
 
@@ -97,7 +113,7 @@ start_date <- "2018-05-01"
 end_date <- "2018-06-30"
 ```
 
-# Pull the Data
+## Pull the Data
 
 In this example, we'll define a list of six segments:
 * Bounced sessions: Sessions where the bounces metric is not zero.
@@ -165,7 +181,7 @@ multi_session_users              0          0
 bounced_before_converting      667        950
 new_desktop_users              962        933
 
-# Data Munging and Visualization
+## Data Munging and Visualization
 
 We will compare users and sessions for each segment using a horizontal column chart. To do this we need to transform the results table into long format in which the count of users and sessions for each segment are on separate rows.
 
