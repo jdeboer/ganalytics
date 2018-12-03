@@ -1,17 +1,12 @@
 language: r
-sudo: required
-warnings_are_errors: true
 
 env:
  global:
    - CRAN: http://cran.rstudio.com
 
 before_install: echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
+sudo: required
 
-notifications:
-  email:
-    on_success: change
-    on_failure: change
 
 r_github_packages:
   - jimhester/covr
@@ -20,3 +15,10 @@ after_success:
 
 r_build_args: --no-build-vignettes
 r_check_args: --no-vignettes --no-build-vignettes
+warnings_are_errors: true
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+
