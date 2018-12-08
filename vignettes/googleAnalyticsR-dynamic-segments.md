@@ -12,7 +12,6 @@ vignette: >
   %\VignetteIndexEntry{DYNAMIC SEGMENTS}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
-  \usepackage[UTF-8]{inputenc}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.
@@ -34,7 +33,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-12-09 09:40:38> No environment argument found, looked in GA_AUTH_FILE
+## 2018-12-09 09:43:53> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r

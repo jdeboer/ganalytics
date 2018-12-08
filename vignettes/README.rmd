@@ -12,7 +12,6 @@ vignette: >
   %\VignetteIndexEntry{README}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
-  \usepackage[UTF-8]{inputenc}
 ---
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
