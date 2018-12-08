@@ -10,8 +10,9 @@ output:
       markdown_github
 vignette: >
   %\VignetteIndexEntry{DYNAMIC SEGMENTS}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
+  \usepackage[UTF-8]{inputenc}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.

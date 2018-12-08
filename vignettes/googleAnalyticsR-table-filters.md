@@ -10,8 +10,9 @@ output:
       markdown_github
 vignette: >
   %\VignetteIndexEntry{ADVANCED FILTERS}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
+  \usepackage[UTF-8]{inputenc}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters using natural R language operators. This example shows how to use `ganalytics` to define dimension or metric filters that can be used by the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports filters defined with `ganalytics`.
@@ -92,8 +93,8 @@ kable(results)
 
 
 
-deviceCategory   userType       users   sessions   goalCompletionsAll   transactions
----------------  ------------  ------  ---------  -------------------  -------------
-desktop          New Visitor      962        933                  777              0
-tablet           New Visitor       39         39                   38              0
+|deviceCategory |userType    | users| sessions| goalCompletionsAll| transactions|
+|:--------------|:-----------|-----:|--------:|------------------:|------------:|
+|desktop        |New Visitor |   962|      933|                777|            0|
+|tablet         |New Visitor |    39|       39|                 38|            0|
 

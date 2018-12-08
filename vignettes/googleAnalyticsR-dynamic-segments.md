@@ -10,8 +10,9 @@ output:
       markdown_github
 vignette: >
   %\VignetteIndexEntry{DYNAMIC SEGMENTS}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
+  \usepackage[UTF-8]{inputenc}
 ---
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.
@@ -33,7 +34,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-12-03 20:56:47> No environment argument found, looked in GA_AUTH_FILE
+## 2018-12-09 09:01:16> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r
@@ -85,22 +86,6 @@ library(purrr)
 library(knitr)
 
 ga_auth(file.path("~", "ga.oauth"))
-```
-
-```
-## 2018-12-03 20:56:47> No httr_oauth_cache file found at ~/ga.oauth - creating new file.
-```
-
-```
-## Waiting for authentication in browser...
-```
-
-```
-## Press Esc/Ctrl + C to abort
-```
-
-```
-## Authentication complete.
 ```
 
 ```
@@ -172,14 +157,14 @@ kable(results)
 
 
 
-segment                      users   sessions
---------------------------  ------  ---------
-bounced_sessions               839        991
-converters                    1066       1388
-mobile_or_tablet               322        437
-multi_session_users              0          0
-bounced_before_converting      667        950
-new_desktop_users              962        933
+|segment                   | users| sessions|
+|:-------------------------|-----:|--------:|
+|bounced_sessions          |   839|      991|
+|converters                |  1066|     1388|
+|mobile_or_tablet          |   322|      437|
+|multi_session_users       |     0|        0|
+|bounced_before_converting |   667|      950|
+|new_desktop_users         |   962|      933|
 
 ## Data Munging and Visualization
 
@@ -198,20 +183,20 @@ kable(results_long)
 
 
 
-segment                     metric      count
---------------------------  ---------  ------
-bounced_sessions            users         839
-converters                  users        1066
-mobile_or_tablet            users         322
-multi_session_users         users           0
-bounced_before_converting   users         667
-new_desktop_users           users         962
-bounced_sessions            sessions      991
-converters                  sessions     1388
-mobile_or_tablet            sessions      437
-multi_session_users         sessions        0
-bounced_before_converting   sessions      950
-new_desktop_users           sessions      933
+|segment                   |metric   | count|
+|:-------------------------|:--------|-----:|
+|bounced_sessions          |users    |   839|
+|converters                |users    |  1066|
+|mobile_or_tablet          |users    |   322|
+|multi_session_users       |users    |     0|
+|bounced_before_converting |users    |   667|
+|new_desktop_users         |users    |   962|
+|bounced_sessions          |sessions |   991|
+|converters                |sessions |  1388|
+|mobile_or_tablet          |sessions |   437|
+|multi_session_users       |sessions |     0|
+|bounced_before_converting |sessions |   950|
+|new_desktop_users         |sessions |   933|
 
 
 ```r
@@ -223,5 +208,5 @@ ggplot(results_long) +
   theme(axis.text.y.left = element_text(hjust = 0))
 ```
 
-![](googleAnalyticsR-dynamic-segments_files/figure-html/visualize-results-1.png)<!-- -->
+![plot of chunk visualize-results](figure/visualize-results-1.png)
 
