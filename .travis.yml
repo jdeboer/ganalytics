@@ -1,12 +1,9 @@
 language: r
 
-env:
- global:
-   - CRAN: http://cran.rstudio.com
 
-before_install: echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
 sudo: required
 
+cran: http://cran.rstudio.com
 
 r_github_packages:
   - jimhester/covr
