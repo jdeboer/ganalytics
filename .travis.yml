@@ -5,13 +5,14 @@ sudo: required
 
 cran: http://cran.rstudio.com
 
+r_build_args: "--no-build-vignettes"
+r_check_args: "--no-vignettes --no-build-vignettes --as-cran"
+
 r_github_packages:
   - jimhester/covr
 after_success:
   - Rscript -e 'covr::codecov()'
 
-r_build_args: --no-build-vignettes
-r_check_args: --no-vignettes --no-build-vignettes
 warnings_are_errors: true
 
 notifications:
