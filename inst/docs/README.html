@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>ganalytics</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!-- README.md is generated from README.rmd. Please edit that file -->
+
+<p><img src="https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png" alt="logo"/></p>
+
+<h1>ganalytics</h1>
+
+<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="https://travis-ci.org/jdeboer/ganalytics.png?branch=master" alt="Travis-CI Build Status"/></a></p>
+
+<p><a href="http://www.rdocumentation.org/packages/ganalytics"><img src="http://www.rdocumentation.org/badges/version/ganalytics" alt="Rdoc"/></a></p>
+
+<p>Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.</p>
+
+<p>The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.</p>
+
+<p>This package provides functions for querying the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the Google Analytics Management and Google Tag Manager APIs so that you can, for example, change tag, property or view settings.</p>
+
+<h2>Updates</h2>
+
+<p>Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the <code>google_analytics</code> function in GoogleAnalyticsR by using <code>as()</code>, supplying the appropriate GoogleAnalyticsR class names, which are <code>&quot;segment_ga4&quot;</code> for segments and <code>&quot;.filter_clauses_ga4&quot;</code> for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using <code>as()</code>.</p>
+
+<p>Many new functions have been provided for writing segmentation expressions:</p>
+
+<ul>
+<li><code>Segments(...)</code> - define a list of segments dynamically based on one or more expressions and/or a selection of built-in and/or custom segments by their IDs.</li>
+<li><code>Include(...)</code> - expressions (conditions or sequences) defining users or sessions to include in the segment</li>
+<li><code>Exclude(...)</code> - expressions (conditions or sequences) defining users or sessions to exclude from the segment</li>
+<li><code>PerUser(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to user-level.</li>
+<li><code>PerSession(...)</code> - set the scope of one or more segment conditions or sequences to user-level, or set the scope of a metric condition to session-level.</li>
+<li><code>PerHit(...)</code> - specify that a set of logically combined conditions must all be met for a single hit, or set the scope of a metric condition to hit-level.</li>
+<li><code>Sequence(...)</code> - define a sequence of one or more conditions to use in a dynamic segment definition.</li>
+<li><code>Then(condition)</code> - used within a <code>Sequence()</code> to specify that this condition must immediately follow the preceding condition, as opposed to the default of loosely following at some point later.</li>
+<li><code>Later(condition)</code> - similar to <code>Then()</code> but means that a condition can happen any point after the preceding condition - this is how conditions are treated by default in a sequence if not explicitly set.</li>
+<li><code>First(condition)</code> - similar to <code>Then()</code> but means that a condition must be the first interaction (hit) by the user within the specified date-range. Using <code>First()</code> is optional. Without using <code>First()</code> at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use <code>First()</code> anywhere else in the sequence other than at the start, if used at all.</li>
+</ul>
+
+<p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to process the response from these queries - stay tuned for updates on this.</p>
+
+<p>Instead of using <code>Or</code>, <code>And</code>, and <code>Not</code>, it is now possible to use familiar R language Boolean operators, <code>|</code> (<code>Or</code>), <code>&amp;</code> (<code>And</code>), and <code>!</code> (<code>Not</code>) instead (thanks to @hadley for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires <code>Or</code> to have precedence over <code>And</code>, which is the opposite to the natural precedence given by R when using the <code>|</code> and <code>&amp;</code> operators. Therefore, remember to use parentheses <code>(</code> <code>)</code> to enforce the correct order of operation to your Boolean expressions. For example <code>my_filter &lt;- !bounced &amp; (completed_goal | transacted)</code> is a valid structure for a Google Analytics reporting API filter expression.</p>
+
+<p>You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are <em>write</em> methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the &ldquo;INSERT&rdquo;, &ldquo;UPDATE&rdquo; and &ldquo;DELETE&rdquo; methods.</p>
+
+<p>There is also some basic support for the Google Tag Manager API, but again, this is a work in progress so take care with the write methods above.</p>
+
+<h2>Installation</h2>
+
+<h3>1. Install the necessary packages into R via the GitHub repository</h3>
+
+<h4>Prerequisites</h4>
+
+<ul>
+<li>Ensure you have installed the latest version of <a href="https://cran.r-project.org/">R</a></li>
+</ul>
+
+<h4>Execute the following statements in R to install ganalytics:</h4>
+
+<pre><code class="r"># Install the latest version of remotes via CRAN
+install.packages(&quot;remotes&quot;)
+# Install ganalytics via the GitHub repository.
+remotes::install_github(&quot;jdeboer/ganalytics&quot;)
+# End
+</code></pre>
+
+<h3>2. Prepare your Google API application <em>(you only need to do this once)</em></h3>
+
+<ul>
+<li>Browse to <a href="https://code.google.com/apis/console/"><strong>Google API Console</strong></a></li>
+<li>Check you are <strong>signed into Google</strong> with the account you wish to use.</li>
+<li>Choose <strong>Create Project</strong> from the Google API Console and give your project a name (or choose an existing project if you have one already).</li>
+<li>From the <strong>APIs</strong> page, enable the <strong>Analytics API</strong>. You may also want to enable the <strong>Tag Manager API</strong> if you wish to try that.</li>
+<li>You will need to <strong>agree</strong> and <strong>accept</strong> the Google APIs and Analytics API Terms of Service to proceed.</li>
+<li>Go to the <strong>Credentials</strong> page, click <strong>Add credentials</strong>, choose <strong>OAuth 2.0 client ID</strong>, then select &ldquo;Other&rdquo;.</li>
+<li>Note your <strong>Client ID</strong> and <strong>Client Secret</strong> and download the JSON file to your R working directory.</li>
+</ul>
+
+<p><em>Note: For further information about Google APIs, please refer to the <a href="https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references">References section</a> at the end of this document.</em></p>
+
+<h3>3. Set your system environment variables <em>(this is optional but recommended)</em></h3>
+
+<ul>
+<li><p>Add the following two user variables:</p>
+
+<table><thead>
+<tr>
+<th></th>
+<th>Variable name</th>
+<th>Variable value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td><code>GOOGLE_APIS_CONSUMER_ID</code></td>
+<td><code>&lt;Your client ID&gt;</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>GOOGLE_APIS_CONSUMER_SECRET</code></td>
+<td><code>&lt;Your client secret&gt;</code></td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>To do this in Windows:</li>
+<li>Search for and select <strong>&ldquo;Edit Environment Variables For Your Account&rdquo;</strong> from the Start menu.</li>
+<li>Within the <strong>Environment Variables</strong> window, add the above <strong>User Variables</strong> by selecting <strong>New</strong> and entering the <strong>Variable Name</strong> and <strong>Variable Value</strong>, then click <strong>OK</strong>. Do this for both variables listed in the table above.</li>
+<li>Click <strong>OK</strong>.</li>
+<li><strong>Restart</strong> your computer for the new environment variables to take effect.</li>
+<li>There is also a free open source utility to set environment variables on Mac OS called <a href="https://github.com/hschmidt/EnvPane">EnvPane</a></li>
+<li>Another method that works across platforms is to create an <code>.Renviron</code> file within your active R working directory that is structured like this:</li>
+</ul></li>
+</ul>
+
+<pre><code>GOOGLE_APIS_CONSUMER_ID = &lt;Your client ID&gt;
+GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;
+</code></pre>
+
+<p><strong>Alternatively</strong> you can temporarily set your environment variables straight from R using this command:</p>
+
+<pre><code class="r">Sys.setenv(
+  GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;,
+  GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;
+)
+</code></pre>
+
+<p><em>Note: For other operating systems please refer to the Reference section at the end of this document.</em></p>
+
+<h3>4. Authenticate and attempt your first query with ganalytics</h3>
+
+<ul>
+<li><p>ganalytics needs to know the ID of the Google Analytics <strong>view</strong> that you wish to query. You can obtain this in a number of ways:</p>
+
+<ul>
+<li>Using the <a href="https://ga-dev-tools.appspot.com/explorer/">Google Analytics Query Explorer tool</a></li>
+<li>From the <strong>Admin page</strong> in Google Analytics under <strong>View Settings</strong>, or</li>
+<li>The browser&#39;s address bar while viewing a report in Google Analytics - look for the digits between the letter <strong>&#39;p&#39;</strong> and trailing <strong>&#39;/&#39;</strong>, e.g. <code>.../a11111111w22222222p33333333/</code> shows a view ID of <code>33333333</code>.</li>
+</ul></li>
+<li><p><strong>Alternatively, ganalytics can look up the view ID for you:</strong></p>
+
+<ul>
+<li>If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you from that property.</li>
+<li>Otherwise it will select the default view of the first property from the first account that it finds in the list of accounts that you have access to.</li>
+</ul></li>
+<li><p>Return to R and execute the following to load the ganalytics package:</p>
+
+<pre><code class="r">library(ganalytics)
+</code></pre></li>
+<li><p>If you have successfully set your system environment variables in step 3 above, then you can execute the following, optionally providing the email address you use to sign-in to Google Analytics:</p>
+
+<pre><code class="r">my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;)
+</code></pre></li>
+<li><p>Otherwise do one of the following:</p>
+
+<ul>
+<li>If you downloaded the JSON file containing your Google API app credentials, then provide the file path:</li>
+</ul>
+
+<pre><code class="r">my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;, &quot;client_secret.json&quot;)
+</code></pre>
+
+<ul>
+<li>Or, instead of a file you can supply the <code>client_id</code> and <code>client_secret</code> directly:</li>
+</ul>
+
+<pre><code class="r">my_creds &lt;- GoogleApiCreds(
+  &quot;you@domain.com&quot;,
+  list(client_id = &quot;&lt;client id&gt;&quot;, client_secret = &quot;&lt;client secret&gt;&quot;)
+)
+</code></pre></li>
+<li><p>Now formulate and run your Google Analytics query, remembering to substitute <code>view_id</code> with the view ID you wish to use:</p>
+
+<pre><code class="r">myQuery &lt;- GaQuery( view_id, creds = my_creds ) # view_id is optional
+GetGaData(myQuery)
+</code></pre></li>
+<li><p>You should then be directed to <em>accounts.google.com</em> within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.</p></li>
+<li><p>Make sure you are signed into the Google account you wish to use, then grant access by selecting <strong>&ldquo;Allow access&rdquo;</strong>. You can then close the page and return back to R.</p></li>
+</ul>
+
+<p>If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days. For example:</p>
+
+<pre><code>        date sessions
+1 2015-03-27     2988
+2 2015-03-28     1594
+3 2015-03-29     1912
+4 2015-03-30     3061
+5 2015-03-31     2609
+6 2015-04-01     2762
+7 2015-04-02     2179
+8 2015-04-03     1552
+</code></pre>
+
+<p><em>Note: A small file will be saved to your home directory (&#39;My Documents&#39; in Windows) to cache your new reusable authentication token.</em></p>
+
+<h2>Examples</h2>
+
+<p>As demonstrated in the installation steps above, before executing any of the following examples:</p>
+
+<ol>
+<li>Load the ganalytics package</li>
+<li>Generate a <code>gaQuery</code> object using the <code>GaQuery()</code> function and assigning the object to a variable name such as <code>myQuery</code>.</li>
+</ol>
+
+<h3>Asumptions</h3>
+
+<p><strong>The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: <code>myQuery</code>.</strong></p>
+
+<h3>Example 1 - Setting the date range</h3>
+
+<pre><code class="r"># Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format &quot;YYYY-MM-DD&quot;.)
+DateRange(myQuery) &lt;- c(&quot;2013-01-01&quot;, &quot;2013-05-31&quot;)
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+
+# Adjust the start date to 1 March 2013:
+StartDate(myQuery) &lt;- &quot;2013-03-01&quot;
+# Adjust the end date to 31 March 2013:
+EndDate(myQuery) &lt;- &quot;2013-03-31&quot;
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+# End
+</code></pre>
+
+<h3>Example 2 - Choosing what metrics to report</h3>
+
+<pre><code class="r"># Report number of page views instead
+Metrics(myQuery) &lt;- &quot;pageviews&quot;
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+
+# Report both pageviews and sessions
+Metrics(myQuery) &lt;- c(&quot;pageviews&quot;, &quot;sessions&quot;)
+# These variations are also acceptable
+Metrics(myQuery) &lt;- c(&quot;ga:pageviews&quot;, &quot;ga.sessions&quot;)
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+# End
+</code></pre>
+
+<h3>Example 3 - Selecting what dimensions to split your metrics by</h3>
+
+<pre><code class="r"># Similar to metrics, but for dimensions
+Dimensions(myQuery) &lt;- c(&quot;year&quot;, &quot;week&quot;, &quot;dayOfWeekName&quot;, &quot;hour&quot;)
+
+# Lets set a wider date range
+DateRange(myQuery) &lt;- c(&quot;2012-10-01&quot;, &quot;2013-03-31&quot;)
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+tail(myData)
+# End
+</code></pre>
+
+<h3>Example 4 - Sort by</h3>
+
+<pre><code class="r"># Sort by descending number of pageviews
+SortBy(myQuery) &lt;- &quot;-pageviews&quot;
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+tail(myData)
+# End
+</code></pre>
+
+<h3>Example 5 - Row filters</h3>
+
+<pre><code class="r"># Filter for Sunday sessions only
+sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
+TableFilter(myQuery) &lt;- sundayExpr
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+
+# Remove the filter
+TableFilter(myQuery) &lt;- NULL
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+# End
+</code></pre>
+
+<h3>Example 6 - Combining filters with AND</h3>
+
+<pre><code class="r"># Expression to define Sunday sessions
+sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
+# Expression to define organic search sessions
+organicExpr &lt;- Expr(~medium == &quot;organic&quot;)
+# Expression to define organic search sessions made on a Sunday
+sundayOrganic &lt;- sundayExpr &amp; organicExpr
+TableFilter(myQuery) &lt;- sundayOrganic
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+
+# Let&#39;s concatenate medium to the dimensions for our query
+Dimensions(myQuery) &lt;- c(Dimensions(myQuery), &quot;medium&quot;)
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+# End
+</code></pre>
+
+<h3>Example 7 - Combining filters with OR</h3>
+
+<pre><code class="r"># In a similar way to AND
+loyalExpr &lt;- !Expr(~sessionCount %matches% &quot;^[0-3]$&quot;) # Made more than 3 sessions
+recentExpr &lt;- Expr(~daysSinceLastSession %matches% &quot;^[0-6]$&quot;) # Visited sometime within the past 7 days.
+loyalOrRecent &lt;- loyalExpr | recentExpr
+TableFilter(myQuery) &lt;- loyalOrRecent
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+# End
+</code></pre>
+
+<h3>Example 8 - Filters that combine ORs with ANDs</h3>
+
+<pre><code class="r">loyalExpr &lt;- !Expr(~sessionCount %matches% &quot;^[0-3]$&quot;) # Made more than 3 sessions
+recentExpr &lt;- Expr(~daysSinceLastSession %matches% &quot;^[0-6]$&quot;) # Visited sometime within the past 7 days.
+loyalOrRecent &lt;- loyalExpr | recentExpr
+sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
+loyalOrRecent_Sunday &lt;- loyalOrRecent &amp; sundayExpr
+TableFilter(myQuery) &lt;- loyalOrRecent_Sunday
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+
+# Perform the same query but change which dimensions to view
+Dimensions(myQuery) &lt;- c(&quot;sessionCount&quot;, &quot;daysSinceLastSession&quot;, &quot;dayOfWeek&quot;)
+
+myData &lt;- GetGaData(myQuery)
+summary(myData)
+# End
+</code></pre>
+
+<h3>Example 9 - Sorting &#39;numeric&#39; dimensions (continuing from example 8)</h3>
+
+<pre><code class="r"># Continuing from example 8...
+
+# Change filter to loyal session AND recent sessions AND visited on Sunday
+loyalAndRecent_Sunday &lt;- loyalExpr &amp; recentExpr &amp; sundayExpr
+TableFilter(myQuery) &lt;- loyalAndRecent_Sunday
+
+# Sort by decending visit count and ascending days since last visit.
+SortBy(myQuery) &lt;- c(&quot;-sessionCount&quot;, &quot;+daysSinceLastSession&quot;)
+myData &lt;- GetGaData(myQuery)
+head(myData)
+
+# Notice that the Google Analytics Core Reporting API doesn&#39;t recognise &#39;numerical&#39; dimensions as
+# ordered factors when sorting. We can use R to sort instead, such as using dplyr.
+library(dplyr)
+myData &lt;- myData %&gt;% arrange(desc(sessionCount), daysSinceLastSession)
+head(myData)
+tail(myData)
+# End
+</code></pre>
+
+<h3>Example 10 - Session segmentation</h3>
+
+<pre><code class="r"># Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
+# Define a segment for sessions where a &quot;thank-you&quot;, &quot;thankyou&quot; or &quot;success&quot; page was viewed.
+thankyouExpr &lt;- Expr(~pagePath %matches% &quot;thank\\-?you|success&quot;)
+Segments(myQuery) &lt;- thankyouExpr
+
+# Reset the filter
+TableFilter(myQuery) &lt;- NULL
+
+# Split by traffic source and medium
+Dimensions(myQuery) &lt;- c(&quot;source&quot;, &quot;medium&quot;)
+
+# Sort by decending number of sessions
+SortBy(myQuery) &lt;- &quot;-sessions&quot;
+
+myData &lt;- GetGaData(myQuery)
+head(myData)
+# End
+</code></pre>
+
+<h3>Example 11 - Using automatic pagination to get more than 10,000 rows of data per query</h3>
+
+<pre><code class="r"># Sessions by date and hour for the years 2016 and 2017:
+# First let&#39;s clear any filters or segments defined previously
+TableFilter(myQuery) &lt;- NULL
+Segments(myQuery) &lt;- NULL
+# Define our date range
+DateRange(myQuery) &lt;- c(&quot;2016-01-01&quot;, &quot;2017-12-31&quot;)
+# Define our metrics and dimensions
+Metrics(myQuery) &lt;- &quot;sessions&quot;
+Dimensions(myQuery) &lt;- c(&quot;date&quot;, &quot;dayOfWeekName&quot;, &quot;hour&quot;)
+# Let&#39;s allow a maximum of 20000 rows (default is 10000)
+MaxResults(myQuery) &lt;- 20000
+
+myData &lt;- GetGaData(myQuery)
+nrow(myData)
+
+## Let&#39;s use dplyr to analyse the data
+library(dplyr)
+
+# Sessions by day of week
+sessions_by_dayOfWeek &lt;- myData %&gt;%
+  count(dayOfWeekName, wt = sessions) %&gt;% 
+  mutate(dayOfWeekName = factor(dayOfWeekName, levels = c(
+    &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;
+  ), labels = c(&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;), ordered = TRUE)) %&gt;% 
+  arrange(dayOfWeekName)
+with(
+  sessions_by_dayOfWeek,
+  barplot(n, names.arg = dayOfWeekName, xlab = &quot;day of week&quot;, ylab = &quot;sessions&quot;)
+)
+
+# Sessions by hour of day
+sessions_by_hour &lt;- myData %&gt;%
+  count(hour, wt = sessions)
+with(
+  sessions_by_hour,
+  barplot(n, names.arg = hour, xlab = &quot;hour&quot;, ylab = &quot;sessions&quot;)
+)
+# End
+</code></pre>
+
+<h3>Example 12 - Using ggplot2</h3>
+
+<p>To run this example first install ggplot2 if you haven&#39;t already.</p>
+
+<pre><code class="r">install.packages(&quot;ggplot2&quot;)
+</code></pre>
+
+<p>Once installed, then run the following example.</p>
+
+<pre><code class="r">library(ggplot2)
+library(dplyr)
+
+# Sessions by date and hour for the years 2016 and 2017:
+# First let&#39;s clear any filters or segments defined previously
+TableFilter(myQuery) &lt;- NULL
+Segments(myQuery) &lt;- NULL
+# Define our date range
+DateRange(myQuery) &lt;- c(&quot;2016-01-01&quot;, &quot;2017-12-31&quot;)
+# Define our metrics and dimensions
+Metrics(myQuery) &lt;- &quot;sessions&quot;
+Dimensions(myQuery) &lt;- c(&quot;date&quot;, &quot;dayOfWeek&quot;, &quot;hour&quot;, &quot;deviceCategory&quot;)
+# Let&#39;s allow a maximum of 40000 rows (default is 10000)
+MaxResults(myQuery) &lt;- 40000
+
+myData &lt;- GetGaData(myQuery)
+
+# Sessions by hour of day and day of week
+avg_sessions_by_hour_wday_device &lt;- myData %&gt;% 
+  group_by(hour, dayOfWeek, deviceCategory) %&gt;% 
+  summarise(sessions = mean(sessions)) %&gt;% 
+  ungroup()
+
+# Relabel the days of week
+levels(avg_sessions_by_hour_wday_device$dayOfWeek) &lt;- c(
+  &quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;
+)
+
+# Plot the summary data
+qplot(
+  x = hour,
+  y = sessions,
+  data = avg_sessions_by_hour_wday_device,
+  facets = ~dayOfWeek,
+  fill = deviceCategory,
+  geom = &quot;col&quot;
+)
+
+# End
+</code></pre>
+
+<h2>Thanks to:</h2>
+
+<ul>
+<li>Hadley Wickham @hadley</li>
+<li>Mark Edmondson @MarkEdmondson1234</li>
+<li>RStudio team</li>
+<li>R Core team</li>
+</ul>
+
+<h2>Useful references</h2>
+
+<ol>
+<li><a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference">Google Analytics Core Reporting API reference guide</a></li>
+<li><a href="https://developers.google.com/analytics/devguides/reporting/core/dimsmets">Google Analytics Dimensions and Metrics reference</a></li>
+<li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Creating a Google API project</a></li>
+<li><a href="https://developers.google.com/console/help/#generatingoauth2">Generating an OAuth 2.0 client ID for Google APIs</a></li>
+<li><a href="https://developers.google.com/accounts/docs/OAuth2InstalledApp">Using OAuth 2.0 for Installed Applications</a></li>
+<li><a href="https://github.com/hschmidt/EnvPane">EnvPane utility for setting environment variables in OSX</a></li>
+<li><a href="https://help.ubuntu.com/community/EnvironmentVariables">Setting environment variables in Ubuntu Linux</a></li>
+</ol>
+
+<h2>Notes</h2>
+
+<p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+
+<p>Google Analytics and Google Tag Manager are trademarks of Google.</p>
+
+</body>
+
+</html>
