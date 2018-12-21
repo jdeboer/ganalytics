@@ -33,7 +33,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-12-22 09:16:39> No environment argument found, looked in GA_AUTH_FILE
+## 2018-12-22 10:50:58> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r

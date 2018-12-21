@@ -5,12 +5,10 @@ date: "2018-06-07"
 output:
   html_vignette:
     keep_md: yes
-  md_document:
-    variant:
-      markdown_github
+  github_document:
 vignette: >
   %\VignetteIndexEntry{README}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -64,7 +62,17 @@ Installation
 #### Prerequisites
 * Ensure you have installed the latest version of [R](https://cran.r-project.org/)
 
-#### Execute the following statements in R to install ganalytics:
+#### Current stable release from CRAN
+
+You can install the released version of ganalytics from [CRAN](https://CRAN.R-project.org) with:
+
+```r
+install.packages("ganalytics")
+```
+
+#### Current development release from GitHub
+
+Alternatively, you can execute the following statements in R to install the current stable development version of ganalytics from GitHub:
 
 ```r
 # Install the latest version of remotes via CRAN

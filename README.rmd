@@ -5,9 +5,7 @@ date: "2018-06-07"
 output:
   html_vignette:
     keep_md: yes
-  md_document:
-    variant:
-      markdown_github
+  github_document:
 vignette: >
   %\VignetteIndexEntry{README}
   %\VignetteEngine{knitr::knitr}
@@ -16,7 +14,14 @@ vignette: >
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
-
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 ![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
 
@@ -64,7 +69,17 @@ Installation
 #### Prerequisites
 * Ensure you have installed the latest version of [R](https://cran.r-project.org/)
 
-#### Execute the following statements in R to install ganalytics:
+#### Current stable release from CRAN
+
+You can install the released version of ganalytics from [CRAN](https://CRAN.R-project.org) with:
+
+```r
+install.packages("ganalytics")
+```
+
+#### Current development release from GitHub
+
+Alternatively, you can execute the following statements in R to install the current stable development version of ganalytics from GitHub:
 
 ```r
 # Install the latest version of remotes via CRAN
@@ -107,8 +122,7 @@ GOOGLE_APIS_CONSUMER_SECRET = <Your client secret>
 ```
 
 **Alternatively** you can temporarily set your environment variables straight from R using this command:
-
-```r
+```{r}
 Sys.setenv(
   GOOGLE_APIS_CONSUMER_ID = "<Your client ID>",
   GOOGLE_APIS_CONSUMER_SECRET = "<Your client secret>"
