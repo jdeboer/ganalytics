@@ -57,6 +57,9 @@ setGeneric(
 #'
 #' @return an object of class \code{andExpr}
 #'
+#' @examples
+#' purchased_on_mobile <- Expr(~deviceCategory == "mobile") & Expr(~transactions > 0)
+#'
 #' @family boolean functions
 #'
 #' @aliases `&`
@@ -73,6 +76,12 @@ setGeneric(
 #' Generate an expression that gives the EXCLUSIVE-OR of two expressions.
 #'
 #' @param x,y Conditions for an EXCLUSIVE-OR expression.
+#'
+#' @examples
+#' either_enquired_or_downloaded <- xor(
+#'   Expr(~eventCategory == "enquiry"),
+#'   Expr(~eventCategory == "download")
+#' )
 #'
 #' @family boolean functions
 #'
