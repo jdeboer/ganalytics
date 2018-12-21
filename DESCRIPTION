@@ -23,7 +23,7 @@ Imports:
     assertthat (>= 0.2.0),
     httpuv,
     httr (>= 1.0.0),
-    googleAnalyticsR (>= 0.5.0),
+    googleAnalyticsR (>= 0.6.0),
     jsonlite,
     lazyeval,
     lubridate,
@@ -106,5 +106,4 @@ VignetteBuilder: knitr
 LazyData: TRUE
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
-Remotes: github::jdeboer/googleAnalyticsR_public
 Encoding: UTF-8
