@@ -1,4 +1,10 @@
+2018-09-08 Added vignettes with examples of using ganalytics custom segments and custom filters with googleAnalyticsR.
+
+2018-07-29 Documentation improvements. Methods to coerce ganalytics dimensions and metrics lists to googleAnalyticsR equivalent classes in order to further integrate the two packages.
+
 2018-07-22 Added new function `ga_view_selector()` which provides a user-interactive way to select a view from the available Google Analytics accounts and properties within those accounts. Demos have been updated to use this new function. And lastly, ganalytics now has a logo.
+
+2018-07-01 Released ganalytics to CRAN.
 
 2018-06-23 Version type dimensions, e.g. ga:appVersion, are now coerced to `numeric_version` class, so that version numbers (e.g. ‘2.4.7’, ‘2.5.13’, ‘2.32.1’, etc...) can be correctly sorted and compared as if they were numeric values. Updated gademo.R. The dateRange class now inherits 'lubridate' interval as its superclass. It is now possible to query more than 10 metrics with just one query.
 
