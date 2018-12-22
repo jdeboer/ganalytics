@@ -14,11 +14,10 @@
 #' @export
 setGeneric(
   "Expr",
-  valueClass = ".expr",
-  useAsDefault = FALSE
   function(object, comparator, operand, metricScope = "") {
     standardGeneric("Expr")
   },
+  valueClass = ".expr"
 )
 
 #' GaExpr.
@@ -36,11 +35,10 @@ setGeneric(
 #' @export
 setGeneric(
   "GaExpr",
-  valueClass = ".gaExpr",
-  useAsDefault = FALSE
   function(object, comparator, operand, metricScope = "") {
     standardGeneric("GaExpr")
   },
+  valueClass = ".gaExpr"
 )
 
 #' McfExpr.
@@ -59,9 +57,8 @@ setGeneric(
 #' @export
 setGeneric(
   "McfExpr",
-  valueClass = ".mcfExpr",
-  useAsDefault = FALSE
   function(object, comparator, operand) {standardGeneric("McfExpr")},
+  valueClass = ".mcfExpr"
 )
 
 #' RtExpr.
@@ -80,9 +77,8 @@ setGeneric(
 #' @export
 setGeneric(
   "RtExpr",
-  valueClass = ".rtExpr",
-  useAsDefault = FALSE
   function(object, comparator, operand) {standardGeneric("RtExpr")},
+  valueClass = ".rtExpr"
 )
 
 #' ScopeLevel.
@@ -100,9 +96,8 @@ setGeneric(
 #' @rdname ScopeLevel
 setGeneric(
   "ScopeLevel",
-  valueClass = c("character", ".gaSegmentFilter", "gaMetExpr"),
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("ScopeLevel")},
+  valueClass = c("character", ".gaSegmentFilter", "gaMetExpr")
 )
 
 #' ScopeLevel<-.

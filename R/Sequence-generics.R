@@ -15,9 +15,8 @@
 #' @export
 setGeneric(
   "Later",
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("Later")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' Then.
@@ -36,9 +35,8 @@ setGeneric(
 #' @seealso \code{\link{Sequence}}
 setGeneric(
   "Then",
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("Then")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' First.
@@ -59,9 +57,8 @@ setGeneric(
 #' @seealso \code{\link{Sequence}}
 setGeneric(
   "First",
-  valueClass = "gaSegmentSequenceStep",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("First")},
+  valueClass = "gaSegmentSequenceStep"
 )
 
 #' Sequence.
@@ -113,6 +110,5 @@ setGeneric(
     }
     standardGeneric("Sequence")
   },
-  valueClass = "gaSegmentSequenceFilter",
-  useAsDefault = FALSE
+  valueClass = "gaSegmentSequenceFilter"
 )

@@ -14,9 +14,8 @@
 #' @rdname DateRange
 setGeneric(
   "DateRange",
-  valueClass = "dateRange",
-  useAsDefault = FALSE
   function(object, endDate) {standardGeneric("DateRange")},
+  valueClass = "dateRange"
 )
 
 #' DateRange<-.
@@ -51,9 +50,8 @@ setGeneric(
 #' @rdname StartDate
 setGeneric(
   "StartDate",
-  valueClass = "Date",
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("StartDate")},
+  valueClass = "Date"
 )
 
 #' StartDate<-.
@@ -86,9 +84,8 @@ setGeneric(
 #' @rdname EndDate
 setGeneric(
   "EndDate",
-  valueClass = "Date",
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("EndDate")},
+  valueClass = "Date"
 )
 
 #' EndDate<-.
@@ -121,9 +118,8 @@ setGeneric(
 #' @rdname Cohort
 setGeneric(
   "Cohort",
-  valueClass = "gaCohort",
-  useAsDefault = FALSE
   function(object, value, type) {standardGeneric("Cohort")},
+  valueClass = "gaCohort"
 )
 
 #' Cohort<-.

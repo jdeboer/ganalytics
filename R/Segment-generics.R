@@ -12,9 +12,8 @@
 #' @export
 setGeneric(
   "SegmentConditionFilter",
-  valueClass = "gaSegmentConditionFilter",
-  useAsDefault = FALSE
   function(object, ..., negation, scope) {standardGeneric("SegmentConditionFilter")},
+  valueClass = "gaSegmentConditionFilter"
 )
 
 #' Include.
@@ -29,9 +28,8 @@ setGeneric(
 #' @export
 setGeneric(
   "Include",
-  valueClass = ".gaSegmentFilter",
-  useAsDefault = FALSE
   function(object, ..., scope) {standardGeneric("Include")},
+  valueClass = ".gaSegmentFilter"
 )
 
 #' Exclude.
@@ -46,9 +44,8 @@ setGeneric(
 #' @export
 setGeneric(
   "Exclude",
-  valueClass = ".gaSegmentFilter",
-  useAsDefault = TRUE
   function(object, ..., scope) {standardGeneric("Exclude")},
+  valueClass = ".gaSegmentFilter"
 )
 
 #' IsNegated.
@@ -61,9 +58,8 @@ setGeneric(
 #' @export
 setGeneric(
   "IsNegated",
-  valueClass = "logical",
-  useAsDefault = FALSE
   function(object) {standardGeneric("IsNegated")},
+  valueClass = "logical"
 )
 
 #' IsNegated<-.
@@ -101,9 +97,8 @@ setGeneric(
 #' @export
 setGeneric(
   "DynSegment",
-  valueClass = "gaDynSegment",
-  useAsDefault = FALSE
   function(object, ..., name = character(0)) {standardGeneric("DynSegment")},
+  valueClass = "gaDynSegment"
 )
 
 #' PerProduct.
@@ -117,9 +112,8 @@ setGeneric(
 #' @export
 setGeneric(
   "PerProduct",
-  valueClass = "gaSegMetExpr",
-  useAsDefault = FALSE
   function(object, negation){standardGeneric("PerProduct")},
+  valueClass = "gaSegMetExpr"
 )
 
 #' PerHit.
@@ -139,9 +133,8 @@ setGeneric(
 #' @export
 setGeneric(
   "PerHit",
-  valueClass = c("gaSegMetExpr", "gaSegmentSequenceFilter"),
-  useAsDefault = FALSE
   function(object, ..., negation){standardGeneric("PerHit")},
+  valueClass = c("gaSegMetExpr", "gaSegmentSequenceFilter")
 )
 
 #' PerSession.
@@ -161,9 +154,8 @@ setGeneric(
 #' @export
 setGeneric(
   "PerSession",
-  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
-  useAsDefault = FALSE
   function(object, ..., negation){standardGeneric("PerSession")},
+  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr")
 )
 
 #' PerUser.
@@ -183,9 +175,8 @@ setGeneric(
 #' @export
 setGeneric(
   "PerUser",
-  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr"),
-  useAsDefault = FALSE
   function(object, ..., negation){standardGeneric("PerUser")},
+  valueClass = c("gaDynSegment", ".gaSegmentFilter", "gaSegMetExpr")
 )
 
 #' Segment.
@@ -202,9 +193,8 @@ setGeneric(
 #' @export
 setGeneric(
   "Segment",
-  valueClass = ".gaSegment",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("Segment")},
+  valueClass = ".gaSegment"
 )
 
 #' Segments.
@@ -223,9 +213,8 @@ setGeneric(
 #' @rdname Segments
 setGeneric(
   "Segments",
-  valueClass = c("gaSegmentList"),
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("Segments")},
+  valueClass = c("gaSegmentList")
 )
 
 #' Segments<-.

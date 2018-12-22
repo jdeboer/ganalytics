@@ -79,9 +79,8 @@ ga_view_selector <- function(creds = GoogleApiCreds(), with_gui = FALSE) {
 #' @rdname GaView
 setGeneric(
   "GaView",
-  valueClass = c("viewId", "gaView", ".query"),
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("GaView")},
+  valueClass = c("viewId", "gaView", ".query")
 )
 
 #' GaView<-.
@@ -110,9 +109,8 @@ setGeneric(
 #' @rdname MaxResults
 setGeneric(
   "MaxResults",
-  valueClass = "numeric",
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("MaxResults")},
+  valueClass = "numeric"
 )
 
 #' MaxResults<-.
@@ -142,9 +140,8 @@ setGeneric(
 #' @rdname SamplingLevel
 setGeneric(
   "SamplingLevel",
-  valueClass = c("character", "list"),
-  useAsDefault = FALSE
   function(object, value) {standardGeneric("SamplingLevel")},
+  valueClass = c("character", "list")
 )
 
 #' SamplingLevel<-.

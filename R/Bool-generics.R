@@ -17,9 +17,8 @@
 #' @rdname Not
 setGeneric(
   "Not",
-  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter"),
-  useAsDefault = FALSE
   function(object) {standardGeneric("Not")},
+  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter")
 )
 
 #' Or.
@@ -43,9 +42,8 @@ setGeneric(
 #' @rdname Or
 setGeneric(
   "Or",
-  valueClass = "orExpr",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("Or")},
+  valueClass = "orExpr"
 )
 
 #' And.
@@ -68,9 +66,8 @@ setGeneric(
 #' @rdname And
 setGeneric(
   "And",
-  valueClass = "andExpr",
-  useAsDefault = FALSE
   function(object, ...) {standardGeneric("And")},
+  valueClass = "andExpr"
 )
 
 #' Generate an expression that gives the EXCLUSIVE-OR of two expressions.

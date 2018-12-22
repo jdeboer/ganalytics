@@ -169,7 +169,7 @@ setMethod("initialize", "gaCollection", function(.Object, ...) {
 
 setGeneric("req_path", function(object) {
   standardGeneric("req_path")
-}, valueClass = "character", useAsDefault = FALSE)
+}, valueClass = "character")
 
 setMethod("req_path", "gaCollection", function(object) {
   c(
