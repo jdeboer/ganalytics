@@ -4,26 +4,20 @@ author: "Johann de Boer"
 date: "2018-09-09"
 output:
   html_vignette:
-    keep_md: yes
+    keep_md: true
   md_document:
-    variant:
-      markdown_github
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{DYNAMIC SEGMENTS}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::knitr_notangle}
   %\VignetteEncoding{UTF-8}
 ---
+
+
 
 `ganalytics` provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the `ganalytics` package and using those segments with the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports segments and filters defined with `ganalytics`.
 
 ## Setup/Config
-
-Note that this example requires the current development versions of the `googleAnalyticsR` (>=0.5.0.9000) and `ganalytics` (>=0.10.4.9000) R packages available on GitHub. To install these, run the following code in R:
-
-```r
-devtools::install_github("MarkEdmondson1234/googleAnalyticsR")
-devtools::install_github("jdeboer/ganalytics")
-```
 
 Once installed, load these packages. Please refer to the `googleAnalyticsR` package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.
 
@@ -33,7 +27,7 @@ library(googleAnalyticsR)
 ```
 
 ```
-## 2018-12-22 10:50:58> No environment argument found, looked in GA_AUTH_FILE
+## 2018-12-22 19:26:56> No environment argument found, looked in GA_AUTH_FILE
 ```
 
 ```r

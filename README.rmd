@@ -3,9 +3,7 @@ title: "Interactively querying Google Analytics reports"
 author: "Johann de Boer"
 date: "2018-06-07"
 output:
-  html_vignette:
-    keep_md: yes
-  github_document:
+  github_document: default
 vignette: >
   %\VignetteIndexEntry{README}
   %\VignetteEngine{knitr::knitr}

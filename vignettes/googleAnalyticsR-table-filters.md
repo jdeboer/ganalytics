@@ -4,37 +4,78 @@ author: "Johann de Boer"
 date: "2018-09-09"
 output:
   html_vignette:
-    keep_md: yes
+    keep_md: true
   md_document:
-    variant:
-      markdown_github
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{ADVANCED FILTERS}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::knitr_notangle}
   %\VignetteEncoding{UTF-8}
 ---
+
+
 
 `ganalytics` provides functions that makes it easy to define filters using natural R language operators. This example shows how to use `ganalytics` to define dimension or metric filters that can be used by the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports filters defined with `ganalytics`.
 
 ## Setup/Config
-
-Note that this example requires the current development versions of the `googleAnalyticsR` (>=0.5.0.9000) and `ganalytics` (>=0.10.4.9000) R packages available from GitHub. To install these, run the following code in R:
-
-```r
-devtools::install_github("MarkEdmondson1234/googleAnalyticsR")
-devtools::install_github("jdeboer/ganalytics")
-```
 
 Once installed, load these packages. Please refer to the `googleAnalyticsR` package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.
 
 
 ```r
 library(googleAnalyticsR)
+```
+
+```
+## 2018-12-22 19:26:26> No environment argument found, looked in GA_AUTH_FILE
+```
+
+```r
 library(ganalytics)
 library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:ganalytics':
+## 
+##     mutate, rename
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 library(tidyr)
 library(ggplot2)
 library(purrr)
+```
+
+```
+## 
+## Attaching package: 'purrr'
+```
+
+```
+## The following object is masked from 'package:ganalytics':
+## 
+##     flatten
+```
+
+```r
 library(knitr)
 
 ga_auth(file.path("~", "ga.oauth"))
