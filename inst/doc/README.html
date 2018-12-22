@@ -1,228 +1,327 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>ganalytics</title>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Johann de Boer" />
+
+<meta name="date" content="2018-06-07" />
+
+<title>Interactively querying Google Analytics reports</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-};
-</script>
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
 </style>
-
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
 
 
 
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
 }
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
+#header {
+text-align: center;
 }
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
 }
-
-h1 {
-   font-size:2.2em;
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
 }
-
-h2 {
-   font-size:1.8em;
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
 }
-
-h3 {
-   font-size:1.4em;
+#TOC ul ul {
+margin-left: -2em;
 }
-
-h4 {
-   font-size:1.0em;
+#TOC li {
+line-height: 16px;
 }
-
-h5 {
-   font-size:0.9em;
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
 }
-
-h6 {
-   font-size:0.8em;
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
 }
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
 }
-
-pre, img {
-  max-width: 100%;
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
 }
 pre {
-  overflow-x: auto;
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
 }
-pre code {
-   display: block; padding: 0.5em;
+pre:not([class]) {
+background-color: #f7f7f7;
 }
-
 code {
-  font-size: 92%;
-  border: 1px solid #ccc;
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
 }
-
-code[class] {
-  background-color: #F8F8F8;
+p > code, li > code {
+padding: 2px 0px;
 }
-
-table, td, th {
-  border: none;
+div.figure {
+text-align: center;
 }
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
 }
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
 }
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
 }
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
-
-
 
 </head>
 
 <body>
+
+
+
+
+<h1 class="title toc-ignore">Interactively querying Google Analytics reports</h1>
+<h4 class="author"><em>Johann de Boer</em></h4>
+<h4 class="date"><em>2018-06-07</em></h4>
+
+
+
 <!-- README.md is generated from README.rmd. Please edit that file -->
-
-<p><img src="https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png" alt="logo"/></p>
-
+<div class="figure">
+<img src="data:image/png;base64,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" alt="logo" />
+<p class="caption">logo</p>
+</div>
+<div id="ganalytics" class="section level1">
 <h1>ganalytics</h1>
-
-<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="https://travis-ci.org/jdeboer/ganalytics.png?branch=master" alt="Travis-CI Build Status"/></a></p>
-
-<p><a href="http://www.rdocumentation.org/packages/ganalytics"><img src="http://www.rdocumentation.org/badges/version/ganalytics" alt="Rdoc"/></a></p>
-
+<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAAUCAYAAAAN+ioeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAABQBJREFUWIXdmH1ME2cAxp/76FF6DBhYIESgbHNJFRlMqIAIcWMjbhNs1pj0Dwgmi+jm4j70Dz/mHKvZnBl1cYBLE9YYCJNNggs6s/hFNGBjthCJHyPqFkFCVAKDtZSud+/+YDto7cdJmVSf5E3vvd/d0+d9cndpjzIYDJEcx5kVCoURQDTCQH++c36+I8yNXDQhg/wV+8h4IctxnJll2WpCyHzHkhROWUKSQqCQNpahIlEXWIZhjOG2sHDLE6qoJMcSlhASFo+LmXrSiiacm2LDcVHhmClU0YQQ+BtNTU1+mdwRyGMu/B+XEbBoALMybW5uluUxW///e3QU3J5zz6CPjmDcl4qLi5GcnCzLwxebzXfOpXL3L4A6XzmnnkGvaKPRCKvVCpPJBLVaLbGWlhaPY2fOOzs7fV61arUaJpMJVqsVRqPRgwUaJwoHsF6zHW35fTjwQgcSI1Ie4McL+9GY04Xs2CJpf0H8ajS8eBrHCm7BmnsRpYlGWezStvse3saULfg+7xoO515CztOrJJYUkYqvso6jLb8P6zXbcaJwwO8aghZtt9uh1+ths9lQUVHh97afOfe3XVlZie7ubuj1ejidTtlFA4BjZBKldYvR3XcOGzR7PPiyffHQfZGAPR2bUa2pkfZveXY/PvtpK1aaU/FW0xt4js2Wxbzzi+M0VtctwZendmKD5hOJVWtqcP76KZTWLYZz1B1wPUGLPnr0KHieR1tbG7RabUhFa7VatLe3g+d5tLa2PlTRLdfqEZExiZabX2NpTJ7EsmOL8MPmC+jeOohDhh+xkE+X2LHLzfiwZC92GfdBm/U89p7dIot55z/ca4Zy6d+wuU4iWaWR2JIYHVpvTuVqvnowtKJVKpXH539MFEVQFAVCCBQKhayiA/kFyxGZwAA0QWQCA0Kmz/tgUS0OnvkUheYUrKxNAU0xEmu48jG2tVfhRn8fKtO3wfT6IVnMOzOd6AZoAjZWBE3R04wAyqTpXCEVvWbNGiiVSpSXl6Onp0dig4OD0Ol04DgOZWVlsoru6enx8HuYog2pGxFJ81iX9jZ+7e+SGAclhBg7EnJ4vG/Y7eG54xUzotM5tP/eCPPZj7AsZpUs5p0f1L9Z4LWeOza8mVKNSJqHIW1TaEWLogiLxYKMjAw0NDRIrK6uDlVVVbBYLJiYmJBVdH19PTIzM2GxWOB2B36meecgDhpHVvQi66kimG07JFZ7bidq8hrxbV4XhoeHPTwv3/oFn+d8h5/X/YFdrx5Azcl3ZTF/+b3n5os7kBtTgiMresE5VXC47H7XQOn1er+/pYaGhsDzPBwOB1iWRWxsLBhm6haZnJzE2NgYRFFEVFQUxsfHkZSUJJ3na1sQBIyOjsLtdkOlUsFut0tsprzf3p1++R7yrXGYGBLARlKIWsSCiaCmctwTYb8tABSgTKQxMSAgfjkHAHDeFTExKEB0ETBKCqqFDLg4Oigbtrkkj5nb3nPBSTB+ww3apUBF8UasTH4NW38r89kltXbt2rD7v+td9JmS+3jp1IJ5ShNYZ0ruQyQCbo1ex+6TmzCkvurzuMfiXUemKRrxyxXzlCawMk3RAAWwKgr8MwxYQvk8jiWE/AUg6tHGCyzvouN07AP7wkVxOtZj7isn7WIJS9N0syAI1Y8qmByFa6mzFXs3ppceGRl5j2GYbyiKGpvvQE+aaBdLIu4suEzuiUX/AG3EJVuesFjhAAAAAElFTkSuQmCC" alt="Travis-CI Build Status" /></a></p>
+<p><a href="http://www.rdocumentation.org/packages/ganalytics"><img src="data:image/svg+xml; charset=utf-8;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjIwIj4KICA8bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiYmIiIHN0b3Atb3BhY2l0eT0iLjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPG1hc2sgaWQ9ImEiPgogICAgPHJlY3Qgd2lkdGg9IjE3NiIgaGVpZ2h0PSIyMCIgcng9IjMiIGZpbGw9IiNmZmYiLz4KICA8L21hc2s+CiAgPGcgbWFzaz0idXJsKCNhKSI+CiAgICA8cGF0aCBmaWxsPSIjNTU1IiBkPSJNMCAwaDExMHYyMEgweiIvPgogICAgPHBhdGggZmlsbD0iIzMzYWFjYyIgZD0iTTEwOCAwaDc2djIwSDExMHoiLz4KICAgIDxwYXRoIGZpbGw9InVybCgjYikiIGQ9Ik0wIDBoMTc2djIwSDB6Ii8+CiAgPC9nPgogIDxnIGZpbGw9IiNmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiCiAgICAgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPgogICAgPHRleHQgeD0iNTUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj4KICAgICAgcmRvY3VtZW50YXRpb24KICAgIDwvdGV4dD4KICAgIDx0ZXh0IHg9IjU1IiB5PSIxNCI+CiAgICAgIHJkb2N1bWVudGF0aW9uCiAgICA8L3RleHQ+CiAgICA8dGV4dCB4PSIxMzgiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj4KICAgICAgMC4xMC40CiAgICA8L3RleHQ+CiAgICA8dGV4dCB4PSIxMzgiIHk9IjE0Ij4KICAgICAgIDAuMTAuNAogICAgPC90ZXh0PgogIDwvZz4KPC9zdmc+" alt="Rdoc" /></a></p>
 <p>Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.</p>
-
 <p>The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.</p>
-
 <p>This package provides functions for querying the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the Google Analytics Management and Google Tag Manager APIs so that you can, for example, change tag, property or view settings.</p>
-
+<div id="updates" class="section level2">
 <h2>Updates</h2>
-
-<p>Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the <code>google_analytics</code> function in GoogleAnalyticsR by using <code>as()</code>, supplying the appropriate GoogleAnalyticsR class names, which are <code>&quot;segment_ga4&quot;</code> for segments and <code>&quot;.filter_clauses_ga4&quot;</code> for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using <code>as()</code>.</p>
-
+<p>Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the <code>google_analytics</code> function in GoogleAnalyticsR by using <code>as()</code>, supplying the appropriate GoogleAnalyticsR class names, which are <code>&quot;segment_ga4&quot;</code> for segments and <code>&quot;.filter_clauses_ga4&quot;</code> for table filters. Soon GoogleanalyticsR will implicitly coerce ganalytics segments and table filters so that you do not need to explicitly coerce using <code>as()</code>.</p>
 <p>Many new functions have been provided for writing segmentation expressions:</p>
-
 <ul>
 <li><code>Segments(...)</code> - define a list of segments dynamically based on one or more expressions and/or a selection of built-in and/or custom segments by their IDs.</li>
 <li><code>Include(...)</code> - expressions (conditions or sequences) defining users or sessions to include in the segment</li>
@@ -235,150 +334,130 @@ hr {
 <li><code>Later(condition)</code> - similar to <code>Then()</code> but means that a condition can happen any point after the preceding condition - this is how conditions are treated by default in a sequence if not explicitly set.</li>
 <li><code>First(condition)</code> - similar to <code>Then()</code> but means that a condition must be the first interaction (hit) by the user within the specified date-range. Using <code>First()</code> is optional. Without using <code>First()</code> at the start of a sequence, then the first condition does not need to match the first interaction by the user. It does not make sense to use <code>First()</code> anywhere else in the sequence other than at the start, if used at all.</li>
 </ul>
-
 <p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to process the response from these queries - stay tuned for updates on this.</p>
-
-<p>Instead of using <code>Or</code>, <code>And</code>, and <code>Not</code>, it is now possible to use familiar R language Boolean operators, <code>|</code> (<code>Or</code>), <code>&amp;</code> (<code>And</code>), and <code>!</code> (<code>Not</code>) instead (thanks to @hadley for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires <code>Or</code> to have precedence over <code>And</code>, which is the opposite to the natural precedence given by R when using the <code>|</code> and <code>&amp;</code> operators. Therefore, remember to use parentheses <code>(</code> <code>)</code> to enforce the correct order of operation to your Boolean expressions. For example <code>my_filter &lt;- !bounced &amp; (completed_goal | transacted)</code> is a valid structure for a Google Analytics reporting API filter expression.</p>
-
-<p>You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are <em>write</em> methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the &ldquo;INSERT&rdquo;, &ldquo;UPDATE&rdquo; and &ldquo;DELETE&rdquo; methods.</p>
-
+<p>Instead of using <code>Or</code>, <code>And</code>, and <code>Not</code>, it is now possible to use familiar R language Boolean operators, <code>|</code> (<code>Or</code>), <code>&amp;</code> (<code>And</code>), and <code>!</code> (<code>Not</code>) instead (thanks to <span class="citation">@hadley</span> for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires <code>Or</code> to have precedence over <code>And</code>, which is the opposite to the natural precedence given by R when using the <code>|</code> and <code>&amp;</code> operators. Therefore, remember to use parentheses <code>(</code> <code>)</code> to enforce the correct order of operation to your Boolean expressions. For example <code>my_filter &lt;- !bounced &amp; (completed_goal | transacted)</code> is a valid structure for a Google Analytics reporting API filter expression.</p>
+<p>You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are <em>write</em> methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the “INSERT”, “UPDATE” and “DELETE” methods.</p>
 <p>There is also some basic support for the Google Tag Manager API, but again, this is a work in progress so take care with the write methods above.</p>
-
+</div>
+<div id="installation" class="section level2">
 <h2>Installation</h2>
-
+<div id="install-the-necessary-packages-into-r-via-the-github-repository" class="section level3">
 <h3>1. Install the necessary packages into R via the GitHub repository</h3>
-
+<div id="prerequisites" class="section level4">
 <h4>Prerequisites</h4>
-
 <ul>
 <li>Ensure you have installed the latest version of <a href="https://cran.r-project.org/">R</a></li>
 </ul>
-
-<h4>Execute the following statements in R to install ganalytics:</h4>
-
-<pre><code class="r"># Install the latest version of remotes via CRAN
-install.packages(&quot;remotes&quot;)
-# Install ganalytics via the GitHub repository.
-remotes::install_github(&quot;jdeboer/ganalytics&quot;)
-# End
-</code></pre>
-
+</div>
+<div id="current-stable-release-from-cran" class="section level4">
+<h4>Current stable release from CRAN</h4>
+<p>You can install the released version of ganalytics from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ganalytics&quot;</span>)</a></code></pre></div>
+</div>
+<div id="current-development-release-from-github" class="section level4">
+<h4>Current development release from GitHub</h4>
+<p>Alternatively, you can execute the following statements in R to install the current stable development version of ganalytics from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Install the latest version of remotes via CRAN</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Install ganalytics via the GitHub repository.</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;jdeboer/ganalytics&quot;</span>)</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"># End</span></a></code></pre></div>
+</div>
+</div>
+<div id="prepare-your-google-api-application-you-only-need-to-do-this-once" class="section level3">
 <h3>2. Prepare your Google API application <em>(you only need to do this once)</em></h3>
-
 <ul>
-<li>Browse to <a href="https://code.google.com/apis/console/"><strong>Google API Console</strong></a></li>
+<li>Browse to [<strong>Google API Console</strong>] (<a href="https://code.google.com/apis/console/" class="uri">https://code.google.com/apis/console/</a>)</li>
 <li>Check you are <strong>signed into Google</strong> with the account you wish to use.</li>
 <li>Choose <strong>Create Project</strong> from the Google API Console and give your project a name (or choose an existing project if you have one already).</li>
 <li>From the <strong>APIs</strong> page, enable the <strong>Analytics API</strong>. You may also want to enable the <strong>Tag Manager API</strong> if you wish to try that.</li>
 <li>You will need to <strong>agree</strong> and <strong>accept</strong> the Google APIs and Analytics API Terms of Service to proceed.</li>
-<li>Go to the <strong>Credentials</strong> page, click <strong>Add credentials</strong>, choose <strong>OAuth 2.0 client ID</strong>, then select &ldquo;Other&rdquo;.</li>
+<li>Go to the <strong>Credentials</strong> page, click <strong>Add credentials</strong>, choose <strong>OAuth 2.0 client ID</strong>, then select “Other”.</li>
 <li>Note your <strong>Client ID</strong> and <strong>Client Secret</strong> and download the JSON file to your R working directory.</li>
 </ul>
-
 <p><em>Note: For further information about Google APIs, please refer to the <a href="https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references">References section</a> at the end of this document.</em></p>
-
+</div>
+<div id="set-your-system-environment-variables-this-is-optional-but-recommended" class="section level3">
 <h3>3. Set your system environment variables <em>(this is optional but recommended)</em></h3>
-
 <ul>
 <li><p>Add the following two user variables:</p>
-
-<table><thead>
-<tr>
+<table>
+<thead>
+<tr class="header">
 <th></th>
 <th>Variable name</th>
 <th>Variable value</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td>1</td>
 <td><code>GOOGLE_APIS_CONSUMER_ID</code></td>
 <td><code>&lt;Your client ID&gt;</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>2</td>
 <td><code>GOOGLE_APIS_CONSUMER_SECRET</code></td>
 <td><code>&lt;Your client secret&gt;</code></td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <ul>
-<li>To do this in Windows:</li>
-<li>Search for and select <strong>&ldquo;Edit Environment Variables For Your Account&rdquo;</strong> from the Start menu.</li>
+<li>To do this in Windows:
+<ul>
+<li>Search for and select <strong>“Edit Environment Variables For Your Account”</strong> from the Start menu.</li>
 <li>Within the <strong>Environment Variables</strong> window, add the above <strong>User Variables</strong> by selecting <strong>New</strong> and entering the <strong>Variable Name</strong> and <strong>Variable Value</strong>, then click <strong>OK</strong>. Do this for both variables listed in the table above.</li>
 <li>Click <strong>OK</strong>.</li>
 <li><strong>Restart</strong> your computer for the new environment variables to take effect.</li>
+</ul></li>
 <li>There is also a free open source utility to set environment variables on Mac OS called <a href="https://github.com/hschmidt/EnvPane">EnvPane</a></li>
 <li>Another method that works across platforms is to create an <code>.Renviron</code> file within your active R working directory that is structured like this:</li>
 </ul></li>
 </ul>
-
 <pre><code>GOOGLE_APIS_CONSUMER_ID = &lt;Your client ID&gt;
-GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;
-</code></pre>
-
+GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;</code></pre>
 <p><strong>Alternatively</strong> you can temporarily set your environment variables straight from R using this command:</p>
-
-<pre><code class="r">Sys.setenv(
-  GOOGLE_APIS_CONSUMER_ID = &quot;&lt;Your client ID&gt;&quot;,
-  GOOGLE_APIS_CONSUMER_SECRET = &quot;&lt;Your client secret&gt;&quot;
-)
-</code></pre>
-
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">Sys.setenv</span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">GOOGLE_APIS_CONSUMER_ID =</span> <span class="st">&quot;&lt;Your client ID&gt;&quot;</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">GOOGLE_APIS_CONSUMER_SECRET =</span> <span class="st">&quot;&lt;Your client secret&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">)</a></code></pre></div>
 <p><em>Note: For other operating systems please refer to the Reference section at the end of this document.</em></p>
-
+</div>
+<div id="authenticate-and-attempt-your-first-query-with-ganalytics" class="section level3">
 <h3>4. Authenticate and attempt your first query with ganalytics</h3>
-
 <ul>
-<li><p>ganalytics needs to know the ID of the Google Analytics <strong>view</strong> that you wish to query. You can obtain this in a number of ways:</p>
-
+<li>ganalytics needs to know the ID of the Google Analytics <strong>view</strong> that you wish to query. You can obtain this in a number of ways:
 <ul>
 <li>Using the <a href="https://ga-dev-tools.appspot.com/explorer/">Google Analytics Query Explorer tool</a></li>
 <li>From the <strong>Admin page</strong> in Google Analytics under <strong>View Settings</strong>, or</li>
-<li>The browser&#39;s address bar while viewing a report in Google Analytics - look for the digits between the letter <strong>&#39;p&#39;</strong> and trailing <strong>&#39;/&#39;</strong>, e.g. <code>.../a11111111w22222222p33333333/</code> shows a view ID of <code>33333333</code>.</li>
+<li>The browser’s address bar while viewing a report in Google Analytics - look for the digits between the letter <strong>‘p’</strong> and trailing <strong>‘/’</strong>, e.g. <code>.../a11111111w22222222p33333333/</code> shows a view ID of <code>33333333</code>.</li>
 </ul></li>
-<li><p><strong>Alternatively, ganalytics can look up the view ID for you:</strong></p>
-
+<li><strong>Alternatively, ganalytics can look up the view ID for you:</strong>
 <ul>
 <li>If you have access to only one Google Analytics account, with one property, then ganalytics will automatically select the default view for you from that property.</li>
 <li>Otherwise it will select the default view of the first property from the first account that it finds in the list of accounts that you have access to.</li>
 </ul></li>
 <li><p>Return to R and execute the following to load the ganalytics package:</p>
-
-<pre><code class="r">library(ganalytics)
-</code></pre></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(ganalytics)</a></code></pre></div></li>
 <li><p>If you have successfully set your system environment variables in step 3 above, then you can execute the following, optionally providing the email address you use to sign-in to Google Analytics:</p>
-
-<pre><code class="r">my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;)
-</code></pre></li>
-<li><p>Otherwise do one of the following:</p>
-
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(<span class="st">&quot;you@domain.com&quot;</span>)</a></code></pre></div></li>
+<li>Otherwise do one of the following:
 <ul>
-<li>If you downloaded the JSON file containing your Google API app credentials, then provide the file path:</li>
-</ul>
-
-<pre><code class="r">my_creds &lt;- GoogleApiCreds(&quot;you@domain.com&quot;, &quot;client_secret.json&quot;)
-</code></pre>
-
-<ul>
-<li>Or, instead of a file you can supply the <code>client_id</code> and <code>client_secret</code> directly:</li>
-</ul>
-
-<pre><code class="r">my_creds &lt;- GoogleApiCreds(
-  &quot;you@domain.com&quot;,
-  list(client_id = &quot;&lt;client id&gt;&quot;, client_secret = &quot;&lt;client secret&gt;&quot;)
-)
-</code></pre></li>
+<li><p>If you downloaded the JSON file containing your Google API app credentials, then provide the file path:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(<span class="st">&quot;you@domain.com&quot;</span>, <span class="st">&quot;client_secret.json&quot;</span>)</a></code></pre></div></li>
+<li><p>Or, instead of a file you can supply the <code>client_id</code> and <code>client_secret</code> directly:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">my_creds &lt;-<span class="st"> </span><span class="kw">GoogleApiCreds</span>(</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="st">&quot;you@domain.com&quot;</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="kw">list</span>(<span class="dt">client_id =</span> <span class="st">&quot;&lt;client id&gt;&quot;</span>, <span class="dt">client_secret =</span> <span class="st">&quot;&lt;client secret&gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">)</a></code></pre></div></li>
+</ul></li>
 <li><p>Now formulate and run your Google Analytics query, remembering to substitute <code>view_id</code> with the view ID you wish to use:</p>
-
-<pre><code class="r">myQuery &lt;- GaQuery( view_id, creds = my_creds ) # view_id is optional
-GetGaData(myQuery)
-</code></pre></li>
-<li><p>You should then be directed to <em>accounts.google.com</em> within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.</p></li>
-<li><p>Make sure you are signed into the Google account you wish to use, then grant access by selecting <strong>&ldquo;Allow access&rdquo;</strong>. You can then close the page and return back to R.</p></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">myQuery &lt;-<span class="st"> </span><span class="kw">GaQuery</span>( view_id, <span class="dt">creds =</span> my_creds ) <span class="co"># view_id is optional</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">GetGaData</span>(myQuery)</a></code></pre></div></li>
+<li>You should then be directed to <em>accounts.google.com</em> within your default web browser asking you to sign-in to your Google account if you are not already. Once signed-in you will be asked to grant read-only access to your Google Analytics account for the Google API project you created in step 1.</li>
+<li><p>Make sure you are signed into the Google account you wish to use, then grant access by selecting <strong>“Allow access”</strong>. You can then close the page and return back to R.</p></li>
 </ul>
-
 <p>If you have successfully executed all of the above R commands you should see the output of the default ganalytics query; sessions by day for the past 7 days. For example:</p>
-
 <pre><code>        date sessions
 1 2015-03-27     2988
 2 2015-03-28     1594
@@ -387,303 +466,285 @@ GetGaData(myQuery)
 5 2015-03-31     2609
 6 2015-04-01     2762
 7 2015-04-02     2179
-8 2015-04-03     1552
-</code></pre>
-
-<p><em>Note: A small file will be saved to your home directory (&#39;My Documents&#39; in Windows) to cache your new reusable authentication token.</em></p>
-
+8 2015-04-03     1552</code></pre>
+<p><em>Note: A small file will be saved to your home directory (‘My Documents’ in Windows) to cache your new reusable authentication token.</em></p>
+</div>
+</div>
+<div id="examples" class="section level2">
 <h2>Examples</h2>
-
 <p>As demonstrated in the installation steps above, before executing any of the following examples:</p>
-
-<ol>
+<ol style="list-style-type: decimal">
 <li>Load the ganalytics package</li>
 <li>Generate a <code>gaQuery</code> object using the <code>GaQuery()</code> function and assigning the object to a variable name such as <code>myQuery</code>.</li>
 </ol>
-
-<h3>Asumptions</h3>
-
+<div id="assumptions" class="section level3">
+<h3>Assumptions</h3>
 <p><strong>The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: <code>myQuery</code>.</strong></p>
-
+</div>
+<div id="example-1---setting-the-date-range" class="section level3">
 <h3>Example 1 - Setting the date range</h3>
-
-<pre><code class="r"># Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format &quot;YYYY-MM-DD&quot;.)
-DateRange(myQuery) &lt;- c(&quot;2013-01-01&quot;, &quot;2013-05-31&quot;)
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-
-# Adjust the start date to 1 March 2013:
-StartDate(myQuery) &lt;- &quot;2013-03-01&quot;
-# Adjust the end date to 31 March 2013:
-EndDate(myQuery) &lt;- &quot;2013-03-31&quot;
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Set the date range from 1 January 2013 to 31 May 2013: (Dates are specified in the format &quot;YYYY-MM-DD&quot;.)</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2013-01-01&quot;</span>, <span class="st">&quot;2013-05-31&quot;</span>)</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co"># Adjust the start date to 1 March 2013:</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="kw">StartDate</span>(myQuery) &lt;-<span class="st"> &quot;2013-03-01&quot;</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co"># Adjust the end date to 31 March 2013:</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="kw">EndDate</span>(myQuery) &lt;-<span class="st"> &quot;2013-03-31&quot;</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-2---choosing-what-metrics-to-report" class="section level3">
 <h3>Example 2 - Choosing what metrics to report</h3>
-
-<pre><code class="r"># Report number of page views instead
-Metrics(myQuery) &lt;- &quot;pageviews&quot;
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-
-# Report both pageviews and sessions
-Metrics(myQuery) &lt;- c(&quot;pageviews&quot;, &quot;sessions&quot;)
-# These variations are also acceptable
-Metrics(myQuery) &lt;- c(&quot;ga:pageviews&quot;, &quot;ga.sessions&quot;)
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># Report number of page views instead</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;pageviews&quot;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co"># Report both pageviews and sessions</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pageviews&quot;</span>, <span class="st">&quot;sessions&quot;</span>)</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co"># These variations are also acceptable</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ga:pageviews&quot;</span>, <span class="st">&quot;ga.sessions&quot;</span>)</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-3---selecting-what-dimensions-to-split-your-metrics-by" class="section level3">
 <h3>Example 3 - Selecting what dimensions to split your metrics by</h3>
-
-<pre><code class="r"># Similar to metrics, but for dimensions
-Dimensions(myQuery) &lt;- c(&quot;year&quot;, &quot;week&quot;, &quot;dayOfWeekName&quot;, &quot;hour&quot;)
-
-# Lets set a wider date range
-DateRange(myQuery) &lt;- c(&quot;2012-10-01&quot;, &quot;2013-03-31&quot;)
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-tail(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Similar to metrics, but for dimensions</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;week&quot;</span>, <span class="st">&quot;dayOfWeekName&quot;</span>, <span class="st">&quot;hour&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co"># Lets set a wider date range</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2012-10-01&quot;</span>, <span class="st">&quot;2013-03-31&quot;</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw">tail</span>(myData)</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-4---sort-by" class="section level3">
 <h3>Example 4 - Sort by</h3>
-
-<pre><code class="r"># Sort by descending number of pageviews
-SortBy(myQuery) &lt;- &quot;-pageviews&quot;
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-tail(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># Sort by descending number of pageviews</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> &quot;-pageviews&quot;</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">tail</span>(myData)</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-5---row-filters" class="section level3">
 <h3>Example 5 - Row filters</h3>
-
-<pre><code class="r"># Filter for Sunday sessions only
-sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
-TableFilter(myQuery) &lt;- sundayExpr
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-
-# Remove the filter
-TableFilter(myQuery) &lt;- NULL
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Filter for Sunday sessions only</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>dayOfWeekName <span class="op">==</span><span class="st"> &quot;Sunday&quot;</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>sundayExpr</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co"># Remove the filter</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-6---combining-filters-with-and" class="section level3">
 <h3>Example 6 - Combining filters with AND</h3>
-
-<pre><code class="r"># Expression to define Sunday sessions
-sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
-# Expression to define organic search sessions
-organicExpr &lt;- Expr(~medium == &quot;organic&quot;)
-# Expression to define organic search sessions made on a Sunday
-sundayOrganic &lt;- sundayExpr &amp; organicExpr
-TableFilter(myQuery) &lt;- sundayOrganic
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-
-# Let&#39;s concatenate medium to the dimensions for our query
-Dimensions(myQuery) &lt;- c(Dimensions(myQuery), &quot;medium&quot;)
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># Expression to define Sunday sessions</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>dayOfWeekName <span class="op">==</span><span class="st"> &quot;Sunday&quot;</span>)</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co"># Expression to define organic search sessions</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">organicExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>medium <span class="op">==</span><span class="st"> &quot;organic&quot;</span>)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co"># Expression to define organic search sessions made on a Sunday</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">sundayOrganic &lt;-<span class="st"> </span>sundayExpr <span class="op">&amp;</span><span class="st"> </span>organicExpr</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>sundayOrganic</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co"># Let's concatenate medium to the dimensions for our query</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">Dimensions</span>(myQuery), <span class="st">&quot;medium&quot;</span>)</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb16-17" data-line-number="17"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-7---combining-filters-with-or" class="section level3">
 <h3>Example 7 - Combining filters with OR</h3>
-
-<pre><code class="r"># In a similar way to AND
-loyalExpr &lt;- !Expr(~sessionCount %matches% &quot;^[0-3]$&quot;) # Made more than 3 sessions
-recentExpr &lt;- Expr(~daysSinceLastSession %matches% &quot;^[0-6]$&quot;) # Visited sometime within the past 7 days.
-loyalOrRecent &lt;- loyalExpr | recentExpr
-TableFilter(myQuery) &lt;- loyalOrRecent
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># In a similar way to AND</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">loyalExpr &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">Expr</span>(<span class="op">~</span>sessionCount <span class="op">%matches%</span><span class="st"> &quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>daysSinceLastSession <span class="op">%matches%</span><span class="st"> &quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">loyalOrRecent &lt;-<span class="st"> </span>loyalExpr <span class="op">|</span><span class="st"> </span>recentExpr</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-8---filters-that-combine-ors-with-ands" class="section level3">
 <h3>Example 8 - Filters that combine ORs with ANDs</h3>
-
-<pre><code class="r">loyalExpr &lt;- !Expr(~sessionCount %matches% &quot;^[0-3]$&quot;) # Made more than 3 sessions
-recentExpr &lt;- Expr(~daysSinceLastSession %matches% &quot;^[0-6]$&quot;) # Visited sometime within the past 7 days.
-loyalOrRecent &lt;- loyalExpr | recentExpr
-sundayExpr &lt;- Expr(~dayOfWeekName == &quot;Sunday&quot;)
-loyalOrRecent_Sunday &lt;- loyalOrRecent &amp; sundayExpr
-TableFilter(myQuery) &lt;- loyalOrRecent_Sunday
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-
-# Perform the same query but change which dimensions to view
-Dimensions(myQuery) &lt;- c(&quot;sessionCount&quot;, &quot;daysSinceLastSession&quot;, &quot;dayOfWeek&quot;)
-
-myData &lt;- GetGaData(myQuery)
-summary(myData)
-# End
-</code></pre>
-
-<h3>Example 9 - Sorting &#39;numeric&#39; dimensions (continuing from example 8)</h3>
-
-<pre><code class="r"># Continuing from example 8...
-
-# Change filter to loyal session AND recent sessions AND visited on Sunday
-loyalAndRecent_Sunday &lt;- loyalExpr &amp; recentExpr &amp; sundayExpr
-TableFilter(myQuery) &lt;- loyalAndRecent_Sunday
-
-# Sort by decending visit count and ascending days since last visit.
-SortBy(myQuery) &lt;- c(&quot;-sessionCount&quot;, &quot;+daysSinceLastSession&quot;)
-myData &lt;- GetGaData(myQuery)
-head(myData)
-
-# Notice that the Google Analytics Core Reporting API doesn&#39;t recognise &#39;numerical&#39; dimensions as
-# ordered factors when sorting. We can use R to sort instead, such as using dplyr.
-library(dplyr)
-myData &lt;- myData %&gt;% arrange(desc(sessionCount), daysSinceLastSession)
-head(myData)
-tail(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">loyalExpr &lt;-<span class="st"> </span><span class="op">!</span><span class="kw">Expr</span>(<span class="op">~</span>sessionCount <span class="op">%matches%</span><span class="st"> &quot;^[0-3]$&quot;</span>) <span class="co"># Made more than 3 sessions</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">recentExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>daysSinceLastSession <span class="op">%matches%</span><span class="st"> &quot;^[0-6]$&quot;</span>) <span class="co"># Visited sometime within the past 7 days.</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">loyalOrRecent &lt;-<span class="st"> </span>loyalExpr <span class="op">|</span><span class="st"> </span>recentExpr</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">sundayExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>dayOfWeekName <span class="op">==</span><span class="st"> &quot;Sunday&quot;</span>)</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">loyalOrRecent_Sunday &lt;-<span class="st"> </span>loyalOrRecent <span class="op">&amp;</span><span class="st"> </span>sundayExpr</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalOrRecent_Sunday</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co"># Perform the same query but change which dimensions to view</span></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;sessionCount&quot;</span>, <span class="st">&quot;daysSinceLastSession&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>)</a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="kw">summary</span>(myData)</a>
+<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-9---sorting-numeric-dimensions-continuing-from-example-8" class="section level3">
+<h3>Example 9 - Sorting ‘numeric’ dimensions (continuing from example 8)</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># Continuing from example 8...</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co"># Change filter to loyal session AND recent sessions AND visited on Sunday</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">loyalAndRecent_Sunday &lt;-<span class="st"> </span>loyalExpr <span class="op">&amp;</span><span class="st"> </span>recentExpr <span class="op">&amp;</span><span class="st"> </span>sundayExpr</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span>loyalAndRecent_Sunday</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co"># Sort by decending visit count and ascending days since last visit.</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;-sessionCount&quot;</span>, <span class="st">&quot;+daysSinceLastSession&quot;</span>)</a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb19-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12"><span class="co"># Notice that the Google Analytics Core Reporting API doesn't recognise 'numerical' dimensions as</span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13"><span class="co"># ordered factors when sorting. We can use R to sort instead, such as using dplyr.</span></a>
+<a class="sourceLine" id="cb19-14" data-line-number="14"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb19-15" data-line-number="15">myData &lt;-<span class="st"> </span>myData <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(<span class="kw">desc</span>(sessionCount), daysSinceLastSession)</a>
+<a class="sourceLine" id="cb19-16" data-line-number="16"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb19-17" data-line-number="17"><span class="kw">tail</span>(myData)</a>
+<a class="sourceLine" id="cb19-18" data-line-number="18"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-10---session-segmentation" class="section level3">
 <h3>Example 10 - Session segmentation</h3>
-
-<pre><code class="r"># Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.
-# Define a segment for sessions where a &quot;thank-you&quot;, &quot;thankyou&quot; or &quot;success&quot; page was viewed.
-thankyouExpr &lt;- Expr(~pagePath %matches% &quot;thank\\-?you|success&quot;)
-Segments(myQuery) &lt;- thankyouExpr
-
-# Reset the filter
-TableFilter(myQuery) &lt;- NULL
-
-# Split by traffic source and medium
-Dimensions(myQuery) &lt;- c(&quot;source&quot;, &quot;medium&quot;)
-
-# Sort by decending number of sessions
-SortBy(myQuery) &lt;- &quot;-sessions&quot;
-
-myData &lt;- GetGaData(myQuery)
-head(myData)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># Visit segmentation is expressed similarly to row filters and supports AND and OR combinations.</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co"># Define a segment for sessions where a &quot;thank-you&quot;, &quot;thankyou&quot; or &quot;success&quot; page was viewed.</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">thankyouExpr &lt;-<span class="st"> </span><span class="kw">Expr</span>(<span class="op">~</span>pagePath <span class="op">%matches%</span><span class="st"> &quot;thank</span><span class="ch">\\</span><span class="st">-?you|success&quot;</span>)</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span>thankyouExpr</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co"># Reset the filter</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co"># Split by traffic source and medium</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;source&quot;</span>, <span class="st">&quot;medium&quot;</span>)</a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co"># Sort by decending number of sessions</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="kw">SortBy</span>(myQuery) &lt;-<span class="st"> &quot;-sessions&quot;</span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="kw">head</span>(myData)</a>
+<a class="sourceLine" id="cb20-17" data-line-number="17"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-11---using-automatic-pagination-to-get-more-than-10000-rows-of-data-per-query" class="section level3">
 <h3>Example 11 - Using automatic pagination to get more than 10,000 rows of data per query</h3>
-
-<pre><code class="r"># Sessions by date and hour for the years 2016 and 2017:
-# First let&#39;s clear any filters or segments defined previously
-TableFilter(myQuery) &lt;- NULL
-Segments(myQuery) &lt;- NULL
-# Define our date range
-DateRange(myQuery) &lt;- c(&quot;2016-01-01&quot;, &quot;2017-12-31&quot;)
-# Define our metrics and dimensions
-Metrics(myQuery) &lt;- &quot;sessions&quot;
-Dimensions(myQuery) &lt;- c(&quot;date&quot;, &quot;dayOfWeekName&quot;, &quot;hour&quot;)
-# Let&#39;s allow a maximum of 20000 rows (default is 10000)
-MaxResults(myQuery) &lt;- 20000
-
-myData &lt;- GetGaData(myQuery)
-nrow(myData)
-
-## Let&#39;s use dplyr to analyse the data
-library(dplyr)
-
-# Sessions by day of week
-sessions_by_dayOfWeek &lt;- myData %&gt;%
-  count(dayOfWeekName, wt = sessions) %&gt;% 
-  mutate(dayOfWeekName = factor(dayOfWeekName, levels = c(
-    &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;
-  ), labels = c(&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;), ordered = TRUE)) %&gt;% 
-  arrange(dayOfWeekName)
-with(
-  sessions_by_dayOfWeek,
-  barplot(n, names.arg = dayOfWeekName, xlab = &quot;day of week&quot;, ylab = &quot;sessions&quot;)
-)
-
-# Sessions by hour of day
-sessions_by_hour &lt;- myData %&gt;%
-  count(hour, wt = sessions)
-with(
-  sessions_by_hour,
-  barplot(n, names.arg = hour, xlab = &quot;hour&quot;, ylab = &quot;sessions&quot;)
-)
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># Sessions by date and hour for the years 2016 and 2017:</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co"># First let's clear any filters or segments defined previously</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co"># Define our date range</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co"># Define our metrics and dimensions</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeekName&quot;</span>, <span class="st">&quot;hour&quot;</span>)</a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co"># Let's allow a maximum of 20000 rows (default is 10000)</span></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="kw">MaxResults</span>(myQuery) &lt;-<span class="st"> </span><span class="dv">20000</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="kw">nrow</span>(myData)</a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16">## Let's use dplyr to analyse the data</a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb21-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb21-19" data-line-number="19"><span class="co"># Sessions by day of week</span></a>
+<a class="sourceLine" id="cb21-20" data-line-number="20">sessions_by_dayOfWeek &lt;-<span class="st"> </span>myData <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-21" data-line-number="21"><span class="st">  </span><span class="kw">count</span>(dayOfWeekName, <span class="dt">wt =</span> sessions) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dayOfWeekName =</span> <span class="kw">factor</span>(dayOfWeekName, <span class="dt">levels =</span> <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb21-23" data-line-number="23">    <span class="st">&quot;Monday&quot;</span>, <span class="st">&quot;Tuesday&quot;</span>, <span class="st">&quot;Wednesday&quot;</span>, <span class="st">&quot;Thursday&quot;</span>, <span class="st">&quot;Friday&quot;</span>, <span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span></a>
+<a class="sourceLine" id="cb21-24" data-line-number="24">  ), <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span>, <span class="st">&quot;Sun&quot;</span>), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-25" data-line-number="25"><span class="st">  </span><span class="kw">arrange</span>(dayOfWeekName)</a>
+<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="kw">with</span>(</a>
+<a class="sourceLine" id="cb21-27" data-line-number="27">  sessions_by_dayOfWeek,</a>
+<a class="sourceLine" id="cb21-28" data-line-number="28">  <span class="kw">barplot</span>(n, <span class="dt">names.arg =</span> dayOfWeekName, <span class="dt">xlab =</span> <span class="st">&quot;day of week&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;sessions&quot;</span>)</a>
+<a class="sourceLine" id="cb21-29" data-line-number="29">)</a>
+<a class="sourceLine" id="cb21-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="co"># Sessions by hour of day</span></a>
+<a class="sourceLine" id="cb21-32" data-line-number="32">sessions_by_hour &lt;-<span class="st"> </span>myData <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-33" data-line-number="33"><span class="st">  </span><span class="kw">count</span>(hour, <span class="dt">wt =</span> sessions)</a>
+<a class="sourceLine" id="cb21-34" data-line-number="34"><span class="kw">with</span>(</a>
+<a class="sourceLine" id="cb21-35" data-line-number="35">  sessions_by_hour,</a>
+<a class="sourceLine" id="cb21-36" data-line-number="36">  <span class="kw">barplot</span>(n, <span class="dt">names.arg =</span> hour, <span class="dt">xlab =</span> <span class="st">&quot;hour&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;sessions&quot;</span>)</a>
+<a class="sourceLine" id="cb21-37" data-line-number="37">)</a>
+<a class="sourceLine" id="cb21-38" data-line-number="38"><span class="co"># End</span></a></code></pre></div>
+</div>
+<div id="example-12---using-ggplot2" class="section level3">
 <h3>Example 12 - Using ggplot2</h3>
-
-<p>To run this example first install ggplot2 if you haven&#39;t already.</p>
-
-<pre><code class="r">install.packages(&quot;ggplot2&quot;)
-</code></pre>
-
+<p>To run this example first install ggplot2 if you haven’t already.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>Once installed, then run the following example.</p>
-
-<pre><code class="r">library(ggplot2)
-library(dplyr)
-
-# Sessions by date and hour for the years 2016 and 2017:
-# First let&#39;s clear any filters or segments defined previously
-TableFilter(myQuery) &lt;- NULL
-Segments(myQuery) &lt;- NULL
-# Define our date range
-DateRange(myQuery) &lt;- c(&quot;2016-01-01&quot;, &quot;2017-12-31&quot;)
-# Define our metrics and dimensions
-Metrics(myQuery) &lt;- &quot;sessions&quot;
-Dimensions(myQuery) &lt;- c(&quot;date&quot;, &quot;dayOfWeek&quot;, &quot;hour&quot;, &quot;deviceCategory&quot;)
-# Let&#39;s allow a maximum of 40000 rows (default is 10000)
-MaxResults(myQuery) &lt;- 40000
-
-myData &lt;- GetGaData(myQuery)
-
-# Sessions by hour of day and day of week
-avg_sessions_by_hour_wday_device &lt;- myData %&gt;% 
-  group_by(hour, dayOfWeek, deviceCategory) %&gt;% 
-  summarise(sessions = mean(sessions)) %&gt;% 
-  ungroup()
-
-# Relabel the days of week
-levels(avg_sessions_by_hour_wday_device$dayOfWeek) &lt;- c(
-  &quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;
-)
-
-# Plot the summary data
-qplot(
-  x = hour,
-  y = sessions,
-  data = avg_sessions_by_hour_wday_device,
-  facets = ~dayOfWeek,
-  fill = deviceCategory,
-  geom = &quot;col&quot;
-)
-
-# End
-</code></pre>
-
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="co"># Sessions by date and hour for the years 2016 and 2017:</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co"># First let's clear any filters or segments defined previously</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="kw">TableFilter</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="kw">Segments</span>(myQuery) &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co"># Define our date range</span></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="kw">DateRange</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;2016-01-01&quot;</span>, <span class="st">&quot;2017-12-31&quot;</span>)</a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"><span class="co"># Define our metrics and dimensions</span></a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="kw">Metrics</span>(myQuery) &lt;-<span class="st"> &quot;sessions&quot;</span></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12"><span class="kw">Dimensions</span>(myQuery) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;dayOfWeek&quot;</span>, <span class="st">&quot;hour&quot;</span>, <span class="st">&quot;deviceCategory&quot;</span>)</a>
+<a class="sourceLine" id="cb23-13" data-line-number="13"><span class="co"># Let's allow a maximum of 40000 rows (default is 10000)</span></a>
+<a class="sourceLine" id="cb23-14" data-line-number="14"><span class="kw">MaxResults</span>(myQuery) &lt;-<span class="st"> </span><span class="dv">40000</span></a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb23-16" data-line-number="16">myData &lt;-<span class="st"> </span><span class="kw">GetGaData</span>(myQuery)</a>
+<a class="sourceLine" id="cb23-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb23-18" data-line-number="18"><span class="co"># Sessions by hour of day and day of week</span></a>
+<a class="sourceLine" id="cb23-19" data-line-number="19">avg_sessions_by_hour_wday_device &lt;-<span class="st"> </span>myData <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-20" data-line-number="20"><span class="st">  </span><span class="kw">group_by</span>(hour, dayOfWeek, deviceCategory) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-21" data-line-number="21"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sessions =</span> <span class="kw">mean</span>(sessions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-22" data-line-number="22"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb23-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb23-24" data-line-number="24"><span class="co"># Relabel the days of week</span></a>
+<a class="sourceLine" id="cb23-25" data-line-number="25"><span class="kw">levels</span>(avg_sessions_by_hour_wday_device<span class="op">$</span>dayOfWeek) &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb23-26" data-line-number="26">  <span class="st">&quot;Sun&quot;</span>, <span class="st">&quot;Mon&quot;</span>, <span class="st">&quot;Tue&quot;</span>, <span class="st">&quot;Wed&quot;</span>, <span class="st">&quot;Thu&quot;</span>, <span class="st">&quot;Fri&quot;</span>, <span class="st">&quot;Sat&quot;</span></a>
+<a class="sourceLine" id="cb23-27" data-line-number="27">)</a>
+<a class="sourceLine" id="cb23-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb23-29" data-line-number="29"><span class="co"># Plot the summary data</span></a>
+<a class="sourceLine" id="cb23-30" data-line-number="30"><span class="kw">qplot</span>(</a>
+<a class="sourceLine" id="cb23-31" data-line-number="31">  <span class="dt">x =</span> hour,</a>
+<a class="sourceLine" id="cb23-32" data-line-number="32">  <span class="dt">y =</span> sessions,</a>
+<a class="sourceLine" id="cb23-33" data-line-number="33">  <span class="dt">data =</span> avg_sessions_by_hour_wday_device,</a>
+<a class="sourceLine" id="cb23-34" data-line-number="34">  <span class="dt">facets =</span> <span class="op">~</span>dayOfWeek,</a>
+<a class="sourceLine" id="cb23-35" data-line-number="35">  <span class="dt">fill =</span> deviceCategory,</a>
+<a class="sourceLine" id="cb23-36" data-line-number="36">  <span class="dt">geom =</span> <span class="st">&quot;col&quot;</span></a>
+<a class="sourceLine" id="cb23-37" data-line-number="37">)</a>
+<a class="sourceLine" id="cb23-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb23-39" data-line-number="39"><span class="co"># End</span></a></code></pre></div>
+</div>
+</div>
+<div id="thanks-to" class="section level2">
 <h2>Thanks to:</h2>
-
 <ul>
-<li>Hadley Wickham @hadley</li>
-<li>Mark Edmondson @MarkEdmondson1234</li>
+<li>Hadley Wickham <span class="citation">@hadley</span></li>
+<li>Mark Edmondson <span class="citation">@MarkEdmondson1234</span></li>
 <li>RStudio team</li>
 <li>R Core team</li>
 </ul>
-
+</div>
+<div id="useful-references" class="section level2">
 <h2>Useful references</h2>
-
-<ol>
+<ol style="list-style-type: decimal">
 <li><a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference">Google Analytics Core Reporting API reference guide</a></li>
 <li><a href="https://developers.google.com/analytics/devguides/reporting/core/dimsmets">Google Analytics Dimensions and Metrics reference</a></li>
 <li><a href="https://developers.google.com/console/help/#creatingdeletingprojects">Creating a Google API project</a></li>
@@ -692,13 +753,25 @@ qplot(
 <li><a href="https://github.com/hschmidt/EnvPane">EnvPane utility for setting environment variables in OSX</a></li>
 <li><a href="https://help.ubuntu.com/community/EnvironmentVariables">Setting environment variables in Ubuntu Linux</a></li>
 </ol>
-
+</div>
+<div id="notes" class="section level2">
 <h2>Notes</h2>
-
 <p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
-
 <p>Google Analytics and Google Tag Manager are trademarks of Google.</p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>
