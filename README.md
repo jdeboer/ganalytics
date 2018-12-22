@@ -1,17 +1,3 @@
----
-title: "Interactively querying Google Analytics reports"
-author: "Johann de Boer"
-date: "2018-06-07"
-output:
-  html_vignette:
-    keep_md: yes
-  github_document:
-vignette: >
-  %\VignetteIndexEntry{README}
-  %\VignetteEngine{knitr::knitr}
-  %\VignetteEncoding{UTF-8}
----
-
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
 
