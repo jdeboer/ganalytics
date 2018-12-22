@@ -8,9 +8,6 @@ sudo: required
 
 cran: http://cran.rstudio.com
 
-cache:
-  packages: true
-
 r_build_args: "--no-build-vignettes"
 r_check_args: "--as-cran --no-build-vignettes --no-vignettes"
 
