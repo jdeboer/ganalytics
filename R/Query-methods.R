@@ -49,7 +49,7 @@ GaQuery <- function(
   if (missing(creds) & is(view, "gaResource")) {
     creds <- view$creds
   }
-  if (is(creds, "character")) {creds <- GaCreds(cache = creds)}
+  if (is(creds, "character")) {creds <- GoogleApiCreds(appname = creds)}
   new("gaQuery",
       viewId = GaView(view),
       dateRange = DateRange(
