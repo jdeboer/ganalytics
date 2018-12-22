@@ -82,7 +82,7 @@ Added IsNegated generic function and method for testing whether a segment filter
 2014-09-16 Include sample size and sample space as attributes in the returned dataframe from a reporting API request.
 2014-08-09 Support for defining unified segment expressions. Added optional argument to set the sampling level of a query.
 
-2014-06-21 Query from multiple views with a binded response
+2014-06-21 Query from multiple views with a the responses bound into a single data frame.
 
 2014-06-05 Upgrade to using Meta Data API for updating available dimensions and metrics
 2014-06-04 Warning given for queries resulting in a sampled report being returned

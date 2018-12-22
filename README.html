@@ -320,7 +320,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>This package provides functions for querying the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the Google Analytics Management and Google Tag Manager APIs so that you can, for example, change tag, property or view settings.</p>
 <div id="updates" class="section level2">
 <h2>Updates</h2>
-<p>Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the <code>google_analytics</code> function in GoogleAnalyticsR by using <code>as()</code>, supplying the appropriate GoogleAnalyticsR class names, which are <code>&quot;segment_ga4&quot;</code> for segments and <code>&quot;.filter_clauses_ga4&quot;</code> for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using <code>as()</code>.</p>
+<p>Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the <code>google_analytics</code> function in GoogleAnalyticsR by using <code>as()</code>, supplying the appropriate GoogleAnalyticsR class names, which are <code>&quot;segment_ga4&quot;</code> for segments and <code>&quot;.filter_clauses_ga4&quot;</code> for table filters. Soon GoogleanalyticsR will implicitly coerce ganalytics segments and table filters so that you do not need to explicitly coerce using <code>as()</code>.</p>
 <p>Many new functions have been provided for writing segmentation expressions:</p>
 <ul>
 <li><code>Segments(...)</code> - define a list of segments dynamically based on one or more expressions and/or a selection of built-in and/or custom segments by their IDs.</li>
@@ -477,8 +477,8 @@ GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;</code></pre>
 <li>Load the ganalytics package</li>
 <li>Generate a <code>gaQuery</code> object using the <code>GaQuery()</code> function and assigning the object to a variable name such as <code>myQuery</code>.</li>
 </ol>
-<div id="asumptions" class="section level3">
-<h3>Asumptions</h3>
+<div id="assumptions" class="section level3">
+<h3>Assumptions</h3>
 <p><strong>The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: <code>myQuery</code>.</strong></p>
 </div>
 <div id="example-1---setting-the-date-range" class="section level3">
