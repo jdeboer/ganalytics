@@ -13,12 +13,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-# source: https://stackoverflow.com/a/46482580/1007029
-is_check <- ("CheckExEnv" %in% search()) || any(c("_R_CHECK_TIMINGS_",
-             "_R_CHECK_LICENSE_", "TRAVIS") %in% names(Sys.getenv()))
-knitr::opts_chunk$set(eval = !is_check, purl = !is_check)
-```
+
 
 `ganalytics` provides functions that makes it easy to define filters using natural R language operators. This example shows how to use `ganalytics` to define dimension or metric filters that can be used by the `googleAnalyticsR` package. The current development version of `googleAnalyticsR` supports filters defined with `ganalytics`.
 
@@ -26,17 +21,71 @@ knitr::opts_chunk$set(eval = !is_check, purl = !is_check)
 
 Once installed, load these packages. Please refer to the `googleAnalyticsR` package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.
 
-```{r setup}
+
+```r
 library(googleAnalyticsR)
+```
+
+```
+## 2018-12-22 19:26:26> No environment argument found, looked in GA_AUTH_FILE
+```
+
+```r
 library(ganalytics)
 library(dplyr)
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:ganalytics':
+## 
+##     mutate, rename
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 library(tidyr)
 library(ggplot2)
 library(purrr)
+```
+
+```
+## 
+## Attaching package: 'purrr'
+```
+
+```
+## The following object is masked from 'package:ganalytics':
+## 
+##     flatten
+```
+
+```r
 library(knitr)
 
 ga_auth(file.path("~", "ga.oauth"))
+```
 
+```
+## Token cache file: ~/ga.oauth
+```
+
+```r
 view_id <- "117987738"
 start_date <- "2018-05-01"
 end_date <- "2018-06-30"
@@ -51,7 +100,8 @@ In this example, we'll define the following filters:
 
 The above list of filters will be defined using `ganalytics` expressions as follows:
 
-```{r define-filters}
+
+```r
 # Device category is desktop or tablet - a dimension filter using an OR condition.
 desktop_or_mobile <- Expr(~deviceCategory == "desktop") | Expr(~deviceCategory == "tablet")
 
@@ -64,7 +114,8 @@ at_least_one_conversion <- Expr(~goalCompletionsAll > 0) | Expr(~transactions > 
 
 We can now use `googleAnalyticsR` to 
 
-```{r pull-data, message=FALSE}
+
+```r
 results <- google_analytics(
   viewId = view_id,
   date_range = c(start_date, end_date),
@@ -75,7 +126,15 @@ results <- google_analytics(
 )
 ```
 
-```{r display-pulled-data}
+
+```r
 kable(results)
 ```
+
+
+
+|deviceCategory |userType    | users| sessions| goalCompletionsAll| transactions|
+|:--------------|:-----------|-----:|--------:|------------------:|------------:|
+|desktop        |New Visitor |   962|      933|                777|            0|
+|tablet         |New Visitor |    39|       39|                 38|            0|
 
