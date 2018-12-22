@@ -11,7 +11,8 @@ NULL
 # setMethod(
 #   f = "initialize",
 #   signature = "dateRange",
-#   definition = function(.Object, startDate, endDate) {
+#   definition = function(.Object, startDate, endDate, ...) {
+#     .Object <- callNextMethod(.Object, ...)
 #     # If startDate and endDate are provided then
 #     # bind every combination of startDate and endDate
 #     # into a data.frame, keep only the unique rows,

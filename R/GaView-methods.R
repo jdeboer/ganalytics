@@ -8,7 +8,8 @@ NULL
 setMethod(
   f = "initialize",
   signature = "viewId",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       value <- sub(kGaPrefix, "ga:", value)
       value <- sapply(value, function(x) {

@@ -12,7 +12,8 @@ NULL
 setMethod(
   f = "initialize",
   signature = ".dimExpr",
-  definition = function(.Object, var, comparator, operand) {
+  definition = function(.Object, var, comparator, operand, ...) {
+    .Object <- callNextMethod(.Object, ...)
     .Object@var <- var
     .Object@comparator <- comparator
     var <- as.character(var)

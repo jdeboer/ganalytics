@@ -72,7 +72,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".sortBy",
-  definition = function(.Object, value = list(), desc = logical(length(value))) {
+  definition = function(.Object, value = list(), desc = logical(length(value)), ...) {
+    .Object <- callNextMethod(.Object, ...)
     .Object@.Data <- value
     .Object@desc <- desc
     .Object
