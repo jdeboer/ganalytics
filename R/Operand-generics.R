@@ -9,9 +9,9 @@
 #' @rdname Operand
 setGeneric(
   "Operand",
-  function(object, value) {},
   valueClass = ".operand",
   useAsDefault = FALSE
+  function(object, value) {standardGeneric("Operand")},
 )
 
 #' Operand<-.

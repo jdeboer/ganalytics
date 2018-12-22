@@ -47,9 +47,9 @@
 #' @rdname Var
 setGeneric(
   "Var",
-  function(object, ...) {},
   valueClass = ".var",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Var")},
 )
 
 #' Var<-.
@@ -80,9 +80,9 @@ setGeneric(
 #' @rdname Var
 setGeneric(
   "GaVar",
-  function(object, ...) {},
   valueClass = ".gaVar",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("GaVar")},
 )
 
 #' \code{GaVar<-} replaces a '.var' object or sets the var slot of '.expr'
@@ -106,9 +106,9 @@ setGeneric(
 #' @rdname Var
 setGeneric(
   "McfVar",
-  function(object, ...) {},
   valueClass = ".mcfVar",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("McfVar")},
 )
 
 #' \code{McfVar<-} replaces a '.var' object or sets the var slot of '.expr'
@@ -132,9 +132,9 @@ setGeneric(
 #' @rdname Var
 setGeneric(
   "RtVar",
-  function(object, ...) {},
   valueClass = ".rtVar",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("RtVar")},
 )
 
 #' \code{RtVar<-} replaces a '.var' object or sets the var slot of '.expr'

@@ -10,9 +10,9 @@
 #' @rdname Comparator
 setGeneric(
   "Comparator",
-  function(object, ...) {},
   valueClass = ".comparator",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Comparator")},
 )
 
 #' Comparator<-.
@@ -42,9 +42,9 @@ setGeneric(
 #' @export
 setGeneric(
   "%starts_with%",
-  function(var, operand) {},
   valueClass = ".dimExpr",
   useAsDefault = FALSE
+  function(var, operand) {standardGeneric("%starts_with%")},
 )
 
 #' @section \%ends_with\%:
@@ -55,9 +55,9 @@ setGeneric(
 #' @export
 setGeneric(
   "%ends_with%",
-  function(var, operand) {},
   valueClass = ".dimExpr",
   useAsDefault = FALSE
+  function(var, operand) {standardGeneric("%ends_with%")},
 )
 
 #' @section \%contains\%:
@@ -68,9 +68,9 @@ setGeneric(
 #' @export
 setGeneric(
   "%contains%",
-  function(var, operand) {},
   valueClass = ".dimExpr",
   useAsDefault = FALSE
+  function(var, operand) {standardGeneric("%contains%")},
 )
 
 #' @section \%matches\%:
@@ -81,9 +81,9 @@ setGeneric(
 #' @export
 setGeneric(
   "%matches%",
-  function(var, operand) {},
   valueClass = ".dimExpr",
   useAsDefault = FALSE
+  function(var, operand) {standardGeneric("%matches%")},
 )
 
 #' @section \%between\%:
@@ -95,9 +95,9 @@ setGeneric(
 #' @export
 setGeneric(
   "%between%",
-  function(var, operand) {},
   valueClass = ".expr",
   useAsDefault = FALSE
+  function(var, operand) {standardGeneric("%between%")},
 )
 
 #' @section \%in\%:
@@ -121,7 +121,7 @@ setGeneric("%in%")
 #' @export
 setGeneric(
   "IsRegEx",
-  function(object) {},
   valueClass = "logical",
   useAsDefault = FALSE
+  function(object) {standardGeneric("IsRegEx")},
 )

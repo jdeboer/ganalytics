@@ -11,9 +11,9 @@
 #' @rdname Metrics
 setGeneric(
   "Metrics",
-  function(object, ...) {},
   valueClass = ".metrics",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Metrics")},
 )
 
 #' Metrics<-.
@@ -45,9 +45,9 @@ setGeneric(
 #' @rdname Dimensions
 setGeneric(
   "Dimensions",
-  function(object, ...) {},
   valueClass = ".dimensions",
   useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Dimensions")},
 )
 
 #' Dimensions<-.
@@ -95,9 +95,9 @@ setGeneric(
     ...,
     desc = logical(0),
     type = c("VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L]
-  ) {},
   valueClass = c(".sortBy", ".query", "NULL"),
   useAsDefault = FALSE
+  ) {standardGeneric("SortBy")},
 )
 
 #' SortBy<-.
