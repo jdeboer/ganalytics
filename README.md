@@ -1,8 +1,13 @@
+Interactively querying Google Analytics reports
+================
+Johann de Boer
+2018-06-07
+
 <!-- README.md is generated from README.rmd. Please edit that file -->
+
 ![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
 
-ganalytics
-==========
+# ganalytics
 
 [![Travis-CI Build
 Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
@@ -25,8 +30,7 @@ are also provided for the Google Analytics Management and Google Tag
 Manager APIs so that you can, for example, change tag, property or view
 settings.
 
-Updates
--------
+## Updates
 
 Support for GoogleAnalyticsR integration is now available for segments
 and table filter objects. You can supply these objects to the
@@ -40,32 +44,32 @@ using `as()`.
 Many new functions have been provided for writing segmentation
 expressions:
 
--   `Segments(...)` - define a list of segments dynamically based on one
+  - `Segments(...)` - define a list of segments dynamically based on one
     or more expressions and/or a selection of built-in and/or custom
     segments by their IDs.
--   `Include(...)` - expressions (conditions or sequences) defining
+  - `Include(...)` - expressions (conditions or sequences) defining
     users or sessions to include in the segment
--   `Exclude(...)` - expressions (conditions or sequences) defining
+  - `Exclude(...)` - expressions (conditions or sequences) defining
     users or sessions to exclude from the segment
--   `PerUser(...)` - set the scope of one or more segment conditions or
+  - `PerUser(...)` - set the scope of one or more segment conditions or
     sequences to user-level, or set the scope of a metric condition to
     user-level.
--   `PerSession(...)` - set the scope of one or more segment conditions
+  - `PerSession(...)` - set the scope of one or more segment conditions
     or sequences to user-level, or set the scope of a metric condition
     to session-level.
--   `PerHit(...)` - specify that a set of logically combined conditions
+  - `PerHit(...)` - specify that a set of logically combined conditions
     must all be met for a single hit, or set the scope of a metric
     condition to hit-level.
--   `Sequence(...)` - define a sequence of one or more conditions to use
+  - `Sequence(...)` - define a sequence of one or more conditions to use
     in a dynamic segment definition.
--   `Then(condition)` - used within a `Sequence()` to specify that this
+  - `Then(condition)` - used within a `Sequence()` to specify that this
     condition must immediately follow the preceding condition, as
     opposed to the default of loosely following at some point later.
--   `Later(condition)` - similar to `Then()` but means that a condition
+  - `Later(condition)` - similar to `Then()` but means that a condition
     can happen any point after the preceding condition - this is how
     conditions are treated by default in a sequence if not explicitly
     set.
--   `First(condition)` - similar to `Then()` but means that a condition
+  - `First(condition)` - similar to `Then()` but means that a condition
     must be the first interaction (hit) by the user within the specified
     date-range. Using `First()` is optional. Without using `First()` at
     the start of a sequence, then the first condition does not need to
@@ -85,9 +89,9 @@ to keep in mind however that Google Analytics requires `Or` to have
 precedence over `And`, which is the opposite to the natural precedence
 given by R when using the `|` and `&` operators. Therefore, remember to
 use parentheses `(` `)` to enforce the correct order of operation to
-your Boolean expressions. For example
-`my_filter <- !bounced & (completed_goal | transacted)` is a valid
-structure for a Google Analytics reporting API filter expression.
+your Boolean expressions. For example `my_filter <- !bounced &
+(completed_goal | transacted)` is a valid structure for a Google
+Analytics reporting API filter expression.
 
 You can use query the Google Analytics Management API to obtain details
 in R about the configuration of your accounts, properties and views,
@@ -101,14 +105,13 @@ There is also some basic support for the Google Tag Manager API, but
 again, this is a work in progress so take care with the write methods
 above.
 
-Installation
-------------
+## Installation
 
-### 1. Install the necessary packages into R via the GitHub repository
+### 1\. Install the necessary packages into R via the GitHub repository
 
 #### Prerequisites
 
--   Ensure you have installed the latest version of
+  - Ensure you have installed the latest version of
     [R](https://cran.r-project.org/)
 
 #### Current stable release from CRAN
@@ -133,56 +136,58 @@ remotes::install_github("jdeboer/ganalytics")
 # End
 ```
 
-### 2. Prepare your Google API application *(you only need to do this once)*
+### 2\. Prepare your Google API application *(you only need to do this once)*
 
--   Browse to \[**Google API Console**\]
+  - Browse to \[**Google API Console**\]
     (<https://code.google.com/apis/console/>)
--   Check you are **signed into Google** with the account you wish to
+  - Check you are **signed into Google** with the account you wish to
     use.
--   Choose **Create Project** from the Google API Console and give your
+  - Choose **Create Project** from the Google API Console and give your
     project a name (or choose an existing project if you have one
     already).
--   From the **APIs** page, enable the **Analytics API**. You may also
+  - From the **APIs** page, enable the **Analytics API**. You may also
     want to enable the **Tag Manager API** if you wish to try that.
--   You will need to **agree** and **accept** the Google APIs and
+  - You will need to **agree** and **accept** the Google APIs and
     Analytics API Terms of Service to proceed.
--   Go to the **Credentials** page, click **Add credentials**, choose
+  - Go to the **Credentials** page, click **Add credentials**, choose
     **OAuth 2.0 client ID**, then select “Other”.
--   Note your **Client ID** and **Client Secret** and download the JSON
+  - Note your **Client ID** and **Client Secret** and download the JSON
     file to your R working directory.
 
 *Note: For further information about Google APIs, please refer to the
 [References
 section](https://github.com/jdeboer/ganalytics/blob/master/README.md#useful-references)
-at the end of this document.*
+at the end of this
+document.*
 
-### 3. Set your system environment variables *(this is optional but recommended)*
+### 3\. Set your system environment variables *(this is optional but recommended)*
 
--   Add the following two user variables:
+  - Add the following two user variables:
+    
+    |   | Variable name                 | Variable value         |
+    | - | ----------------------------- | ---------------------- |
+    | 1 | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
+    | 2 | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
+    
 
-    |     | Variable name                 | Variable value         |
-    |-----|-------------------------------|------------------------|
-    | 1   | `GOOGLE_APIS_CONSUMER_ID`     | `<Your client ID>`     |
-    | 2   | `GOOGLE_APIS_CONSUMER_SECRET` | `<Your client secret>` |
-
-    -   To do this in Windows:
-        -   Search for and select **“Edit Environment Variables For Your
+      - To do this in Windows:
+          - Search for and select **“Edit Environment Variables For Your
             Account”** from the Start menu.
-        -   Within the **Environment Variables** window, add the above
+          - Within the **Environment Variables** window, add the above
             **User Variables** by selecting **New** and entering the
             **Variable Name** and **Variable Value**, then click **OK**.
             Do this for both variables listed in the table above.
-        -   Click **OK**.
-        -   **Restart** your computer for the new environment variables
+          - Click **OK**.
+          - **Restart** your computer for the new environment variables
             to take effect.
-    -   There is also a free open source utility to set environment
+      - There is also a free open source utility to set environment
         variables on Mac OS called
         [EnvPane](https://github.com/hschmidt/EnvPane)
-    -   Another method that works across platforms is to create an
+      - Another method that works across platforms is to create an
         `.Renviron` file within your active R working directory that is
         structured like this:
 
-<!-- -->
+<!-- end list -->
 
     GOOGLE_APIS_CONSUMER_ID = <Your client ID>
     GOOGLE_APIS_CONSUMER_SECRET = <Your client secret>
@@ -200,51 +205,57 @@ Sys.setenv(
 *Note: For other operating systems please refer to the Reference section
 at the end of this document.*
 
-### 4. Authenticate and attempt your first query with ganalytics
+### 4\. Authenticate and attempt your first query with ganalytics
 
--   ganalytics needs to know the ID of the Google Analytics **view**
+  - ganalytics needs to know the ID of the Google Analytics **view**
     that you wish to query. You can obtain this in a number of ways:
-    -   Using the [Google Analytics Query Explorer
+    
+      - Using the [Google Analytics Query Explorer
         tool](https://ga-dev-tools.appspot.com/explorer/)
-    -   From the **Admin page** in Google Analytics under **View
+      - From the **Admin page** in Google Analytics under **View
         Settings**, or
-    -   The browser’s address bar while viewing a report in Google
+      - The browser’s address bar while viewing a report in Google
         Analytics - look for the digits between the letter **‘p’** and
         trailing **‘/’**, e.g. `.../a11111111w22222222p33333333/` shows
         a view ID of `33333333`.
--   **Alternatively, ganalytics can look up the view ID for you:**
-    -   If you have access to only one Google Analytics account, with
+
+  - **Alternatively, ganalytics can look up the view ID for you:**
+    
+      - If you have access to only one Google Analytics account, with
         one property, then ganalytics will automatically select the
         default view for you from that property.
-    -   Otherwise it will select the default view of the first property
+      - Otherwise it will select the default view of the first property
         from the first account that it finds in the list of accounts
         that you have access to.
--   Return to R and execute the following to load the ganalytics
-    package:
 
+  - Return to R and execute the following to load the ganalytics
+    package:
+    
     ``` r
     library(ganalytics)
     ```
 
--   If you have successfully set your system environment variables in
+  - If you have successfully set your system environment variables in
     step 3 above, then you can execute the following, optionally
     providing the email address you use to sign-in to Google Analytics:
-
+    
     ``` r
     my_creds <- GoogleApiCreds("you@domain.com")
     ```
 
--   Otherwise do one of the following:
-    -   If you downloaded the JSON file containing your Google API app
-        credentials, then provide the file path:
-
+  - Otherwise do one of the following:
+    
+      - If you downloaded the JSON file containing your Google API app
+        credentials, then provide the file
+        path:
+        
         ``` r
         my_creds <- GoogleApiCreds("you@domain.com", "client_secret.json")
         ```
-
-    -   Or, instead of a file you can supply the `client_id` and
+    
+      - Or, instead of a file you can supply the `client_id` and
         `client_secret` directly:
-
+        
         ``` r
         my_creds <- GoogleApiCreds(
           "you@domain.com",
@@ -252,20 +263,22 @@ at the end of this document.*
         )
         ```
 
--   Now formulate and run your Google Analytics query, remembering to
-    substitute `view_id` with the view ID you wish to use:
-
+  - Now formulate and run your Google Analytics query, remembering to
+    substitute `view_id` with the view ID you wish to
+    use:
+    
     ``` r
     myQuery <- GaQuery( view_id, creds = my_creds ) # view_id is optional
     GetGaData(myQuery)
     ```
 
--   You should then be directed to *accounts.google.com* within your
+  - You should then be directed to *accounts.google.com* within your
     default web browser asking you to sign-in to your Google account if
     you are not already. Once signed-in you will be asked to grant
     read-only access to your Google Analytics account for the Google API
     project you created in step 1.
--   Make sure you are signed into the Google account you wish to use,
+
+  - Make sure you are signed into the Google account you wish to use,
     then grant access by selecting **“Allow access”**. You can then
     close the page and return back to R.
 
@@ -273,21 +286,22 @@ If you have successfully executed all of the above R commands you should
 see the output of the default ganalytics query; sessions by day for the
 past 7 days. For example:
 
-            date sessions
-    1 2015-03-27     2988
-    2 2015-03-28     1594
-    3 2015-03-29     1912
-    4 2015-03-30     3061
-    5 2015-03-31     2609
-    6 2015-04-01     2762
-    7 2015-04-02     2179
-    8 2015-04-03     1552
+``` 
+        date sessions
+1 2015-03-27     2988
+2 2015-03-28     1594
+3 2015-03-29     1912
+4 2015-03-30     3061
+5 2015-03-31     2609
+6 2015-04-01     2762
+7 2015-04-02     2179
+8 2015-04-03     1552
+```
 
 *Note: A small file will be saved to your home directory (‘My Documents’
 in Windows) to cache your new reusable authentication token.*
 
-Examples
---------
+## Examples
 
 As demonstrated in the installation steps above, before executing any of
 the following examples:
@@ -582,16 +596,14 @@ qplot(
 # End
 ```
 
-Thanks to:
-----------
+## Thanks to:
 
--   Hadley Wickham @hadley
--   Mark Edmondson @MarkEdmondson1234
--   RStudio team
--   R Core team
+  - Hadley Wickham @hadley
+  - Mark Edmondson @MarkEdmondson1234
+  - RStudio team
+  - R Core team
 
-Useful references
------------------
+## Useful references
 
 1.  [Google Analytics Core Reporting API reference
     guide](https://developers.google.com/analytics/devguides/reporting/core/v3/reference)
@@ -608,8 +620,7 @@ Useful references
 7.  [Setting environment variables in Ubuntu
     Linux](https://help.ubuntu.com/community/EnvironmentVariables)
 
-Notes
------
+## Notes
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to
