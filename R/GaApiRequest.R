@@ -97,14 +97,22 @@ app_oauth_creds <- function(appname, creds = NULL) {
     creds$client_id <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_ID"))
     if (nchar(creds$client_id) == 0) {
       creds$client_id <- Sys.getenv("GANALYTICS_CONSUMER_ID")
-      if (nchar(creds$client_id) > 0) appname <- "GANALYTICS"
+      if (nchar(creds$client_id) > 0) {
+        appname <- "GANALYTICS"
+      } else {
+        creds$client_id <- Sys.getenv("GA_CLIENT_ID")
+      }
     }
   }
   if (is.null(creds$client_secret)) {
     creds$client_secret <- Sys.getenv(str_c(toupper(appname), "_CONSUMER_SECRET"))
     if (nchar(creds$client_secret) == 0) {
       creds$client_secret <- Sys.getenv("GANALYTICS_CONSUMER_SECRET")
-      if (nchar(creds$client_secret) > 0) appname <- "GANALYTICS"
+      if (nchar(creds$client_secret) > 0) {
+        appname <- "GANALYTICS"
+      } else {
+        creds$client_secret <- Sys.getenv("GA_CLIENT_SECRET")
+      }
     }
   }
   if (!isTRUE(nchar(creds$client_id) > 0L | nchar(creds$client_secret) > 0L)) {
