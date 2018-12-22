@@ -4,13 +4,12 @@ author: "Johann de Boer"
 date: "2018-09-09"
 output:
   html_vignette:
-    keep_md: yes
+    keep_md: true
   md_document:
-    variant:
-      markdown_github
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{ADVANCED FILTERS}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::knitr_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 
