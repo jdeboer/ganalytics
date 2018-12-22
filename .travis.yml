@@ -8,7 +8,8 @@ sudo: required
 
 cran: http://cran.rstudio.com
 
-r_check_args: "--as-cran"
+r_build_args: "--no-build-vignettes"
+r_check_args: "--as-cran --no-build-vignettes --no-vignettes"
 
 r_github_packages:
   - jimhester/covr
