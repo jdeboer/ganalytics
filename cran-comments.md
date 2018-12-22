@@ -8,11 +8,8 @@
 * Fedora Linux, R-devel, clang, gfortran
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.
+There were no ERRORs, WARNINGs or NOTEs.
 
-There is 1 NOTE:
-> Package has a VignetteBuilder field but no prebuilt vignette index
-  
 The vignettes cannot be rebuilt remotely as they require an interactive session. This is because the examples in the vignettes obtain data from a specific Google Analytics account. An interactive session is required for authorised users to authenticate with Google Analytics.
 
 ## Downstream dependencies
