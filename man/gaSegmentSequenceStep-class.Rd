@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegmentSequenceStep-class}
 \alias{gaSegmentSequenceStep-class}
-\title{`gaSegmentSequenceStep` class.}
+\title{\code{gaSegmentSequenceStep} class.}
 \description{
 An S4 class to represent a step within a sequence expression.
 }

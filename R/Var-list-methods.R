@@ -2,7 +2,7 @@
 #' @include query-classes.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods setMethod as validObject new as<-
+#' @importFrom methods setMethod as validObject new as<- callNextMethod
 NULL
 
 # -- GaMetrics ----
@@ -72,7 +72,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".sortBy",
-  definition = function(.Object, value = list(), desc = logical(length(value))) {
+  definition = function(.Object, value = list(), desc = logical(length(value)), ...) {
+    .Object <- callNextMethod(.Object, ...)
     .Object@.Data <- value
     .Object@desc <- desc
     .Object

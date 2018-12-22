@@ -3,7 +3,7 @@
 \docType{class}
 \name{dateRange-class}
 \alias{dateRange-class}
-\title{`dateRange` class.}
+\title{\code{dateRange} class.}
 \description{
 An S4 class to represent a date range.
 }

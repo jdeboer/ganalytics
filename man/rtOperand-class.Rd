@@ -3,7 +3,7 @@
 \docType{class}
 \name{.rtOperand-class}
 \alias{.rtOperand-class}
-\title{`.rtOperand` class.}
+\title{\code{.rtOperand} class.}
 \description{
 An S4 class union representing Real-Time condition operands.
 }

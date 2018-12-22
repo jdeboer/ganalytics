@@ -3,7 +3,7 @@
 \docType{class}
 \name{.dimOperand-class}
 \alias{.dimOperand-class}
-\title{`.dimOperand` class.}
+\title{\code{.dimOperand} class.}
 \description{
 An S4 class to represent the operand value of a dimension condition expression.
 }

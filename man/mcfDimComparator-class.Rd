@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfDimComparator-class}
 \alias{mcfDimComparator-class}
-\title{`mcfDimComparator` class.}
+\title{\code{mcfDimComparator} class.}
 \description{
 An S4 class representing Multi-Channel Funnel dimension conditional comparator
 operators.

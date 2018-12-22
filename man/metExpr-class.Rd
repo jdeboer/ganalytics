@@ -3,7 +3,7 @@
 \docType{class}
 \name{.metExpr-class}
 \alias{.metExpr-class}
-\title{`.metExpr` class.}
+\title{\code{.metExpr} class.}
 \description{
 An S4 class to represent a metric condition expression.
 }

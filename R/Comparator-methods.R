@@ -3,7 +3,7 @@
 #' @include Comparator-generics.R
 #' @include comparator-coerce.R
 #' @include utils.R
-#' @importFrom methods as
+#' @importFrom methods as callNextMethod
 NULL
 
 # ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
@@ -11,7 +11,8 @@ NULL
 setMethod(
   f = "initialize",
   signature = ".comparator",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       value <- toupper(value)
       if (value %in% c("=", "EXACT", "EQUAL")) value <- "=="

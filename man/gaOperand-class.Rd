@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaOperand-class}
 \alias{.gaOperand-class}
-\title{`.gaOperand` class.}
+\title{\code{.gaOperand} class.}
 \description{
 An S4 class union representing Core-reporting condition operands.
 }

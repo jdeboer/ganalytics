@@ -3,7 +3,7 @@
 \docType{class}
 \name{.metComparator-class}
 \alias{.metComparator-class}
-\title{`.metComparator` class.}
+\title{\code{.metComparator} class.}
 \description{
 An S4 class union representing metric condition comparator operators.
 }

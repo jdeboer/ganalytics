@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaDimComparator-class}
 \alias{gaDimComparator-class}
-\title{`gaDimComparator` class.}
+\title{\code{gaDimComparator} class.}
 \description{
 An S4 class to represent a Core Reporting comparator operator for a dimension
 condition.

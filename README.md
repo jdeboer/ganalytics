@@ -1,4 +1,16 @@
-
+---
+title: "Interactively querying Google Analytics reports"
+author: "Johann de Boer"
+date: "2018-06-07"
+output:
+  html_vignette:
+    keep_md: yes
+  github_document:
+vignette: >
+  %\VignetteIndexEntry{README}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
@@ -20,7 +32,7 @@ This package provides functions for querying the Google Analytics core reporting
 
 Updates
 -------
-Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the `google_analytics` function in GoogleAnalyticsR by using `as()`, supplying the appropriate GoogleAnalyticsR class names, which are `"segment_ga4"` for segments and `".filter_clauses_ga4"` for table filters. Soon GoogleanalyticsR will implictly coerce ganalytics segments and table filters so that you do not need to explictly coerce using `as()`.
+Support for GoogleAnalyticsR integration is now available for segments and table filter objects. You can supply these objects to the `google_analytics` function in GoogleAnalyticsR by using `as()`, supplying the appropriate GoogleAnalyticsR class names, which are `"segment_ga4"` for segments and `".filter_clauses_ga4"` for table filters. Soon GoogleanalyticsR will implicitly coerce ganalytics segments and table filters so that you do not need to explicitly coerce using `as()`.
 
 Many new functions have been provided for writing segmentation expressions:
 
@@ -50,7 +62,17 @@ Installation
 #### Prerequisites
 * Ensure you have installed the latest version of [R](https://cran.r-project.org/)
 
-#### Execute the following statements in R to install ganalytics:
+#### Current stable release from CRAN
+
+You can install the released version of ganalytics from [CRAN](https://CRAN.R-project.org) with:
+
+```r
+install.packages("ganalytics")
+```
+
+#### Current development release from GitHub
+
+Alternatively, you can execute the following statements in R to install the current stable development version of ganalytics from GitHub:
 
 ```r
 # Install the latest version of remotes via CRAN
@@ -174,7 +196,7 @@ As demonstrated in the installation steps above, before executing any of the fol
 1. Load the ganalytics package
 2. Generate a `gaQuery` object using the `GaQuery()` function and assigning the object to a variable name such as `myQuery`.
 
-### Asumptions
+### Assumptions
 
 **The following examples assume you have successfully completed the above steps and have named your Google Analytics query object: `myQuery`.**
 

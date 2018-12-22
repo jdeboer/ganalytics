@@ -14,9 +14,8 @@
 #' @rdname DateRange
 setGeneric(
   "DateRange",
-  function(object, endDate) {},
-  valueClass = "dateRange",
-  useAsDefault = FALSE
+  function(object, endDate) {standardGeneric("DateRange")},
+  valueClass = "dateRange"
 )
 
 #' DateRange<-.
@@ -24,6 +23,8 @@ setGeneric(
 #' Set the date range.
 #'
 #' @param value The replacement date range.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname DateRange
@@ -49,14 +50,15 @@ setGeneric(
 #' @rdname StartDate
 setGeneric(
   "StartDate",
-  function(object, value) {},
-  valueClass = "Date",
-  useAsDefault = FALSE
+  function(object, value) {standardGeneric("StartDate")},
+  valueClass = "Date"
 )
 
 #' StartDate<-.
 #'
 #' Set the start date.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname StartDate
@@ -82,14 +84,15 @@ setGeneric(
 #' @rdname EndDate
 setGeneric(
   "EndDate",
-  function(object, value) {},
-  valueClass = "Date",
-  useAsDefault = FALSE
+  function(object, value) {standardGeneric("EndDate")},
+  valueClass = "Date"
 )
 
 #' EndDate<-.
 #'
 #' Set the endDate of the date range.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname EndDate
@@ -115,14 +118,15 @@ setGeneric(
 #' @rdname Cohort
 setGeneric(
   "Cohort",
-  function(object, value, type) {},
-  valueClass = "gaCohort",
-  useAsDefault = FALSE
+  function(object, value, type) {standardGeneric("Cohort")},
+  valueClass = "gaCohort"
 )
 
 #' Cohort<-.
 #'
 #' Set a cohort of a query.
+#'
+#' @family date range functions
 #'
 #' @export
 #' @rdname Cohort

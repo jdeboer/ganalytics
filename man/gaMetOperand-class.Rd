@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaMetOperand-class}
 \alias{gaMetOperand-class}
-\title{`gaMetOperand` class.}
+\title{\code{gaMetOperand} class.}
 \description{
 An S4 class to represent a Core-Reporting metric operand.
 }

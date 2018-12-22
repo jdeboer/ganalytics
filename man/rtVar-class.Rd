@@ -3,7 +3,7 @@
 \docType{class}
 \name{.rtVar-class}
 \alias{.rtVar-class}
-\title{`.rtVar` class.}
+\title{\code{.rtVar} class.}
 \description{
 An S4 class to represent a Real-Time reporting variable.
 }

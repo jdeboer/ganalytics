@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtQuery-class}
 \alias{rtQuery-class}
-\title{`rtQuery` class.}
+\title{\code{rtQuery} class.}
 \description{
 An S4 class to represent a Real-Time Reporting API query.
 }

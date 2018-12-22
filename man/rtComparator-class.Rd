@@ -3,7 +3,7 @@
 \docType{class}
 \name{.rtComparator-class}
 \alias{.rtComparator-class}
-\title{`.rtComparator` class.}
+\title{\code{.rtComparator} class.}
 \description{
 An S4 class union representing Real-Time condition comparator operators.
 }

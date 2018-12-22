@@ -3,7 +3,7 @@
 \docType{class}
 \name{.operand-class}
 \alias{.operand-class}
-\title{`.operand` class.}
+\title{\code{.operand} class.}
 \description{
 An S4 class union representing condition operands.
 }

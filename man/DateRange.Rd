@@ -138,5 +138,8 @@ start date and second being the end date.
 \seealso{
 Other date range functions: \code{\link{Cohort}},
   \code{\link{EndDate}}, \code{\link{StartDate}}
+
+Other date range functions: \code{\link{Cohort}},
+  \code{\link{EndDate}}, \code{\link{StartDate}}
 }
 \concept{date range functions}

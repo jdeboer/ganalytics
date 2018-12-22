@@ -3,7 +3,7 @@
 \docType{class}
 \name{.dimExpr-class}
 \alias{.dimExpr-class}
-\title{`.dimExpr` class.}
+\title{\code{.dimExpr} class.}
 \description{
 An S4 class to represent a dimension condition expression.
 }

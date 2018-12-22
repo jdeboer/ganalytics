@@ -28,11 +28,9 @@ describing the variable, comparator and operand.
 }}
 
 \examples{
-\donttest{
-  myQuery <- RtQuery(view = 123456789)
-  source_matches_google <- RtExpr("rt:source", "~", "google")
-  TableFilter(myQuery) <- source_matches_google
-}
+myQuery <- RtQuery(view = 123456789)
+source_matches_google <- RtExpr("rt:source", "~", "google")
+TableFilter(myQuery) <- source_matches_google
 
 }
 \seealso{

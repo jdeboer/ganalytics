@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtDimVar-class}
 \alias{rtDimVar-class}
-\title{`rtDimVar` class.}
+\title{\code{rtDimVar} class.}
 \description{
 An S4 class to represent a Real-Time reporting dimension.
 }

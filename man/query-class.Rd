@@ -3,8 +3,26 @@
 \docType{class}
 \name{.query-class}
 \alias{.query-class}
-\title{`.query` class.}
+\title{\code{.query} class.}
 \description{
 An S4 class to represent a generalised reporting API query.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{viewId}}{The view ID of the query, as a viewId object}
+
+\item{\code{metrics}}{The metrics to query, an object belonging to the .metrics superclass.}
+
+\item{\code{dimensions}}{The dimensions of the query, an object belonging to the .dimensions superclass.}
+
+\item{\code{sortBy}}{The order and direction of metrics/dimensions to sort by, an object belonging to the .sortBy superclass.}
+
+\item{\code{filters}}{Dimension or metrics conditions to filter the rows by, an object belonging to the .tableFilter superclass.}
+
+\item{\code{maxResults}}{An interger giving the maximum number of rows to return.}
+
+\item{\code{creds}}{The API credentials to use for the query.}
+}}
+
 \keyword{internal}

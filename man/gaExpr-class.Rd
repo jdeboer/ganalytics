@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaExpr-class}
 \alias{.gaExpr-class}
-\title{`gaExpr` class.}
+\title{\code{gaExpr} class.}
 \description{
 An S4 class to represent a Core Reporting API condition expression.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{viewId-class}
 \alias{viewId-class}
-\title{`viewId` class.}
+\title{\code{viewId} class.}
 \description{
 An S4 class to represent a Google Analytics view ID.
 }

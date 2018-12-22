@@ -4,7 +4,7 @@
 \name{.logicalDimOperand-class}
 \alias{.logicalDimOperand-class}
 \alias{.regexDimOperand-class}
-\title{`.logicalDimOperand` class.}
+\title{\code{.logicalDimOperand} class.}
 \description{
 An S4 class to represent the operand value of a logical dimension condition
 expression.

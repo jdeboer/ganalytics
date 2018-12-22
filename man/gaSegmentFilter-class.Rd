@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaSegmentFilter-class}
 \alias{.gaSegmentFilter-class}
-\title{`.gaSegmentFilter` class.}
+\title{\code{.gaSegmentFilter} class.}
 \description{
 An S4 superclass to represent a negatable filter expression for a custom
 segment.

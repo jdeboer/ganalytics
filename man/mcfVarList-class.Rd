@@ -3,7 +3,7 @@
 \docType{class}
 \name{.mcfVarList-class}
 \alias{.mcfVarList-class}
-\title{`mcfVarList` class.}
+\title{\code{mcfVarList} class.}
 \description{
 An S4 class to represent Multi-Channel Funnel variable lists.
 }

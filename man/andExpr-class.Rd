@@ -3,7 +3,7 @@
 \docType{class}
 \name{andExpr-class}
 \alias{andExpr-class}
-\title{`andExpr` class.}
+\title{\code{andExpr} class.}
 \description{
 An S4 class to represent an expression of ANDed 'OR' expression.
 }

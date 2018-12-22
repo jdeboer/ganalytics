@@ -71,8 +71,8 @@ x \%in\% table
 \S4method{Comparator}{.expr}(object) <- value
 }
 \arguments{
-\item{object}{The object to be coerced to a '.Comparator' subclass or to obtain the
-comparator from.}
+\item{object}{The object to be coerced to a '.Comparator' subclass or the
+expression object of which to obtain its comparator.}
 
 \item{...}{Used by certain methods.}
 
@@ -91,9 +91,9 @@ comparator from.}
 \item{e2}{Operand object}
 }
 \description{
-Get or create a comparator used in / for an expression.
+Get a comparator used in an expression or create a comparator object.
 
-Set the comparator used in an expression.
+Set the comparator of an expression.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -107,37 +107,38 @@ conditional expression.
 \section{\%starts_with\%}{
 
 A condition where the dimension (LHS) matches values that start with
-  the character string given by the operand (RHS).
+the character string given by the operand (RHS).
 }
 
 \section{\%ends_with\%}{
 
 A condition where the dimension (LHS) matches values that end with
-  the character string given by the operand (RHS).
+the character string given by the operand (RHS).
 }
 
 \section{\%contains\%}{
 
 A condition where the dimension (LHS) matches values that contain
-  the character string given by the operand (RHS).
+the character string given by the operand (RHS).
 }
 
 \section{\%matches\%}{
 
 A condition where the dimension (LHS) matches a regular
-  expression given by the operand (RHS).
+expression given by the operand (RHS).
 }
 
 \section{\%between\%}{
 
 A condition where the var (LHS) is within the lower and
-  upper bounds specified by first and second vector value (respectively) of
-  the operand (RHS).
+upper bounds specified by first and second vector value (respectively) of
+the operand (RHS).
 }
 
 \section{\%in\%}{
 
 A condition where the dimension (LHS) matches one of the
-  values in the vector specified by the operand (RHS).
+values in the vector specified by the operand (RHS).
 }
 
+\concept{comparators}

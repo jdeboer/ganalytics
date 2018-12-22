@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfFilter-class}
 \alias{mcfFilter-class}
-\title{`mcfFilter` class.}
+\title{\code{mcfFilter} class.}
 \description{
 An S4 class to represent Multi-Channel Funnel query table filter expression.
 }

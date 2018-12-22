@@ -32,6 +32,11 @@
 #' For a step-by-step guide with examples, run this command:
 #' \code{browseVignettes(package = "ganalytics")}
 #'
+#' @section Package options:
+#' GOOGLE_APIS_USER
+#' GOOGLE_APIS_CONSUMER_ID
+#' GOOGLE_APIS_CONSUMER_SECRET
+#'
 #' @references Google Analytics core reporting API dimensions and metrics
 #'   reference:
 #'   \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
@@ -55,11 +60,11 @@
 #' @references Google Tag Manager API collection and resources
 #'   \url{https://developers.google.com/tag-manager/api/v1/reference/}
 #'
-#' @keywords package
+#' @keywords package internal
 #' @docType package
 #' @name ganalytics
 #' @aliases ganalytics ganalytics-package
 #' @include globaldata.R
-NULL
+"_PACKAGE"
 
 

@@ -3,7 +3,7 @@
 #' @include Segment-generics.R
 #' @include segment-coerce.R
 #' @include management-api-classes.R
-#' @importFrom methods new setMethod
+#' @importFrom methods new setMethod callNextMethod
 NULL
 
 setSegmentFilterScopeNegation <- function(object, negation, scope) {
@@ -92,9 +92,10 @@ setMethod(
 )
 
 setMethod(
-  "initialize",
+  f = "initialize",
   signature = "gaDynSegment",
-  definition = function(.Object, value, name) {
+  definition = function(.Object, value, name, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if(!missing(value)) {
       .Object@.Data <- value
     }
@@ -347,7 +348,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = "gaSegmentId",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       value <- sub(kGaPrefix, "gaid::", value)
       if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
@@ -420,7 +422,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = "gaSegmentList",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       segment_names <- names(value)
       .Object@.Data <- lapply(seq_along(value), function(i) {

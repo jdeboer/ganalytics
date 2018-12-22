@@ -28,11 +28,9 @@ supplied arguments describing the variable, comparator and operator.
 }}
 
 \examples{
-\donttest{
-  myQuery <- McfQuery(view = 123456789)
-  source_matches_google <- McfExpr("mcf:source", "~", "google")
-  TableFilter(myQuery) <- source_matches_google
-}
+myQuery <- McfQuery(view = 123456789)
+source_matches_google <- McfExpr("mcf:source", "~", "google")
+TableFilter(myQuery) <- source_matches_google
 
 }
 \seealso{

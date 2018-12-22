@@ -14,9 +14,10 @@
 #' @export
 setGeneric(
   "Expr",
-  function(object, comparator, operand, metricScope = "") {},
-  valueClass = ".expr",
-  useAsDefault = FALSE
+  function(object, comparator, operand, metricScope = "") {
+    standardGeneric("Expr")
+  },
+  valueClass = ".expr"
 )
 
 #' GaExpr.
@@ -24,11 +25,9 @@ setGeneric(
 #' Create a Core Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- GaQuery(view = 123456789)
-#'   source_matches_google <- GaExpr("source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- GaQuery(view = 123456789)
+#' source_matches_google <- GaExpr("source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #' @inheritParams Expr
 #'
 #' @family expression generators
@@ -36,9 +35,10 @@ setGeneric(
 #' @export
 setGeneric(
   "GaExpr",
-  function(object, comparator, operand, metricScope = "") {},
-  valueClass = ".gaExpr",
-  useAsDefault = FALSE
+  function(object, comparator, operand, metricScope = "") {
+    standardGeneric("GaExpr")
+  },
+  valueClass = ".gaExpr"
 )
 
 #' McfExpr.
@@ -46,11 +46,9 @@ setGeneric(
 #' Create a Multi-Channel Funnel Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- McfQuery(view = 123456789)
-#'   source_matches_google <- McfExpr("mcf:source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- McfQuery(view = 123456789)
+#' source_matches_google <- McfExpr("mcf:source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #'
 #' @inheritParams Expr
 #'
@@ -59,9 +57,8 @@ setGeneric(
 #' @export
 setGeneric(
   "McfExpr",
-  function(object, comparator, operand) {},
-  valueClass = ".mcfExpr",
-  useAsDefault = FALSE
+  function(object, comparator, operand) {standardGeneric("McfExpr")},
+  valueClass = ".mcfExpr"
 )
 
 #' RtExpr.
@@ -69,11 +66,9 @@ setGeneric(
 #' Create a Real-Time Reporting API expression.
 #'
 #' @examples
-#' \donttest{
-#'   myQuery <- RtQuery(view = 123456789)
-#'   source_matches_google <- RtExpr("rt:source", "~", "google")
-#'   TableFilter(myQuery) <- source_matches_google
-#' }
+#' myQuery <- RtQuery(view = 123456789)
+#' source_matches_google <- RtExpr("rt:source", "~", "google")
+#' TableFilter(myQuery) <- source_matches_google
 #'
 #' @inheritParams Expr
 #'
@@ -82,9 +77,8 @@ setGeneric(
 #' @export
 setGeneric(
   "RtExpr",
-  function(object, comparator, operand) {},
-  valueClass = ".rtExpr",
-  useAsDefault = FALSE
+  function(object, comparator, operand) {standardGeneric("RtExpr")},
+  valueClass = ".rtExpr"
 )
 
 #' ScopeLevel.
@@ -102,9 +96,8 @@ setGeneric(
 #' @rdname ScopeLevel
 setGeneric(
   "ScopeLevel",
-  function(object, value) {},
-  valueClass = c("character", ".gaSegmentFilter", "gaMetExpr"),
-  useAsDefault = FALSE
+  function(object, value) {standardGeneric("ScopeLevel")},
+  valueClass = c("character", ".gaSegmentFilter", "gaMetExpr")
 )
 
 #' ScopeLevel<-.

@@ -1,19 +1,25 @@
 language: r
+r:
+  - 3.3.0
+  - release
+  - devel
+
 sudo: required
+
+cran: http://cran.rstudio.com
+
+r_build_args: "--no-build-vignettes"
+r_check_args: "--as-cran --no-build-vignettes --no-vignettes"
+
+r_github_packages:
+  - jimhester/covr
+after_success:
+  - Rscript -e 'covr::codecov()'
+
 warnings_are_errors: true
-
-env:
- global:
-   - CRAN: http://cran.rstudio.com
-
-before_install: echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
 
 notifications:
   email:
     on_success: change
     on_failure: change
 
-r_github_packages:
-  - jimhester/covr
-after_success:
-  - Rscript -e 'covr::codecov()'

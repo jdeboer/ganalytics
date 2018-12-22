@@ -3,7 +3,7 @@
 \docType{class}
 \name{.metOperand-class}
 \alias{.metOperand-class}
-\title{`.metOperand` class.}
+\title{\code{.metOperand} class.}
 \description{
 An S4 class to represent the numerical value of a metric condition expression.
 }

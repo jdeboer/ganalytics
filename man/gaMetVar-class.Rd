@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaMetVar-class}
 \alias{gaMetVar-class}
-\title{`gaMetVar` class.}
+\title{\code{gaMetVar} class.}
 \description{
 An S4 class to represent a valid Google Analytics Core Reporting API metric
 name.

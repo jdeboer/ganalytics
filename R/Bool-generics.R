@@ -1,19 +1,24 @@
-
 #' Not.
 #'
 #' Invert an expression, i.e. NOT.
 #'
 #' @param object An object to get the logical inverse of.
 #'
-#' @seealso \code{\link{And}} \code{\link{Or}} \code{\link{xor}}
+#' @examples
+#' source_matches_google <- Expr(~source %matches% "google")
+#' source_not_matching_google <- Not(source_matches_google)
+#' identical(source_not_matching_google, !source_matches_google)
+#'
+#' @family boolean functions
+#'
+#' @aliases `!`
 #'
 #' @export
 #' @rdname Not
 setGeneric(
   "Not",
-  function(object) {},
-  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter"),
-  useAsDefault = FALSE
+  function(object) {standardGeneric("Not")},
+  valueClass = c(".comparator", ".compoundExpr", ".gaSegmentFilter")
 )
 
 #' Or.
@@ -25,46 +30,57 @@ setGeneric(
 #'
 #' @return An object of class orExpr.
 #'
-#' @seealso \code{\link{And}} \code{\link{xor}} \code{\link{Not}}
+#' @examples
+#' mobile_or_tablet <- Expr(~deviceCategory == "mobile") | Expr(~deviceCategory == "tablet")
+#' converted <- Expr(~goalCompletionsAll > 0) | Expr(~transactions > 0)
+#'
+#' @family boolean functions
+#'
+#' @aliases `|`
 #'
 #' @export
 #' @rdname Or
 setGeneric(
   "Or",
-  function(object, ...) {},
-  valueClass = "orExpr",
-  useAsDefault = FALSE
+  function(object, ...) {standardGeneric("Or")},
+  valueClass = "orExpr"
 )
 
 #' And.
 #'
 #' AND two or more ganalytics expressions together.
 #'
-#' Create a new AND expression from one or more arguments
-#' Valid types are either AND, OR, or single expressions.
-#' A single list of objects is also accepted.
-#'
 #' @param object The first object within the AND expression
 #' @param ... Additional objects to include within the AND expression.
 #'
 #' @return an object of class \code{andExpr}
 #'
-#' @seealso \code{\link{Or}} \code{\link{xor}} \code{\link{Not}}
+#' @examples
+#' purchased_on_mobile <- Expr(~deviceCategory == "mobile") & Expr(~transactions > 0)
+#'
+#' @family boolean functions
+#'
+#' @aliases `&`
 #'
 #' @export
 #' @rdname And
 setGeneric(
   "And",
-  function(object, ...) {},
-  valueClass = "andExpr",
-  useAsDefault = FALSE
+  function(object, ...) {standardGeneric("And")},
+  valueClass = "andExpr"
 )
 
-#' Generate an expression that gives the Exclusive-OR of two expressions.
+#' Generate an expression that gives the EXCLUSIVE-OR of two expressions.
 #'
-#' @param x,y Conditions for an exclusive-or expression.
+#' @param x,y Conditions for an EXCLUSIVE-OR expression.
 #'
-#' @seealso \code{\link{Or}} \code{\link{And}} \code{\link{Not}}
+#' @examples
+#' either_enquired_or_downloaded <- xor(
+#'   Expr(~eventCategory == "enquiry"),
+#'   Expr(~eventCategory == "download")
+#' )
+#'
+#' @family boolean functions
 #'
 #' @export
 #' @rdname xor

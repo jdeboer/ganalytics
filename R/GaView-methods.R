@@ -2,13 +2,14 @@
 #' @include management-api-classes.R
 #' @include view-coerce.R
 #' @include Query-generics.R
-#' @importFrom methods setMethod as as<-
+#' @importFrom methods setMethod as as<- callNextMethod
 NULL
 
 setMethod(
   f = "initialize",
   signature = "viewId",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       value <- sub(kGaPrefix, "ga:", value)
       value <- sapply(value, function(x) {

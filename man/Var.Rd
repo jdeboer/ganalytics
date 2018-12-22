@@ -138,11 +138,11 @@ Var(expr1) <- "uniquePageviews"
 }
 \seealso{
 \itemize{ \item
-  \href{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}{Core
-   Reporting API dimensions and metrics} \item
-  \href{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}{Multi-Channel-Funnel
-   Reporting API dimensions and metrics} \item
-  \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
-   Reporting API dimensions and metrics} }
+\href{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}{Core
+Reporting API dimensions and metrics} \item
+\href{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}{Multi-Channel-Funnel
+Reporting API dimensions and metrics} \item
+\href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
+Reporting API dimensions and metrics} }
 }
 \concept{Var var functions}

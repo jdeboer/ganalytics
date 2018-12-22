@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtMetOperand-class}
 \alias{rtMetOperand-class}
-\title{`rtMetOperand` class.}
+\title{\code{rtMetOperand} class.}
 \description{
 An S4 class to represent a Real-Time metric condition operand.
 }

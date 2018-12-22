@@ -3,7 +3,7 @@
 \docType{class}
 \name{.varList-class}
 \alias{.varList-class}
-\title{`.varList` class.}
+\title{\code{.varList} class.}
 \description{
 An S4 class to represent .
 }

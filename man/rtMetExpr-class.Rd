@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtMetExpr-class}
 \alias{rtMetExpr-class}
-\title{`rtMetExpr` class.}
+\title{\code{rtMetExpr} class.}
 \description{
 An S4 class to represent a Real-Time metric condition expression.
 }

@@ -5,14 +5,15 @@
 #' @include Comparator-methods.R
 #' @include Operand-methods.R
 #' @include utils.R
-#' @importFrom methods setMethod new validObject as
+#' @importFrom methods setMethod new validObject as callNextMethod
 #' @importFrom assertthat assert_that
 NULL
 
 setMethod(
   f = "initialize",
   signature = ".dimExpr",
-  definition = function(.Object, var, comparator, operand) {
+  definition = function(.Object, var, comparator, operand, ...) {
+    .Object <- callNextMethod(.Object, ...)
     .Object@var <- var
     .Object@comparator <- comparator
     var <- as.character(var)
@@ -50,9 +51,13 @@ setMethod("Expr", ".expr", function(object) {object})
 #'   <operand>} where only the \code{<operand>} is evaluated.
 setMethod(
   f = "Expr",
-  signature = "formula",
-  definition = function(object) {
-    as(object, ".expr")
+  signature = c("formula", "ANY"),
+  definition = function(object, metricScope) {
+    object <- as(object, ".expr")
+    if(!missing(metricScope) && metricScope != "") {
+      ScopeLevel(object) <- metricScope
+    }
+    object
   }
 )
 
@@ -60,7 +65,7 @@ setMethod(
 #'   comparator and operand arguments.
 setMethod(
   f = "Expr",
-  signature = c("character", "character", "ANY"),
+  signature = c("character", "character", "ANY", "ANY"),
   definition = function(object, comparator, operand, metricScope) {
     var <- Var(object)
     if (is(var, ".gaVar")) {

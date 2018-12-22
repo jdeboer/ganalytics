@@ -3,7 +3,7 @@
 \docType{class}
 \name{.compoundExpr-class}
 \alias{.compoundExpr-class}
-\title{`.compoundExpr` class.}
+\title{\code{.compoundExpr} class.}
 \description{
 An S4 class representing an expression containing one or more conditions.
 }

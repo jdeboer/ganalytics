@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfQuery-class}
 \alias{mcfQuery-class}
-\title{`mcfQuery` class.}
+\title{\code{mcfQuery} class.}
 \description{
 An S4 class to represent a Multi-Channel Funnel Reporting API query.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfDimensions-class}
 \alias{mcfDimensions-class}
-\title{`mcfDimensions` class.}
+\title{\code{mcfDimensions} class.}
 \description{
 An S4 class to represent a list of Multi-Channel Funnel dimensions.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaSegmentCondition-class}
 \alias{.gaSegmentCondition-class}
-\title{`gaSegmentCondition` class.}
+\title{\code{gaSegmentCondition} class.}
 \description{
 An S4 class to represent an expression for a custom segment.
 }

@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaSegMetExpr-class}
 \alias{gaSegMetExpr-class}
-\title{`gaSegMetExpr` class.}
+\title{\code{gaSegMetExpr} class.}
 \description{
 An S4 class to represent a Core-Reporting metric condition for use in segment
 expressions.

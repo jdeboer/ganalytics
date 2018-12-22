@@ -22,5 +22,8 @@ Set the start date.
 \seealso{
 Other date range functions: \code{\link{Cohort}},
   \code{\link{DateRange}}, \code{\link{EndDate}}
+
+Other date range functions: \code{\link{Cohort}},
+  \code{\link{DateRange}}, \code{\link{EndDate}}
 }
 \concept{date range functions}

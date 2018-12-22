@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{gaGoal-class}
 \alias{gaGoal-class}
-\title{`gaGoal` class}
+\title{\code{gaGoal} class}
 \description{
 An R6 class representing a defined Google Analytics goal.
 }

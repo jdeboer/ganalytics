@@ -3,6 +3,7 @@
 \docType{package}
 \name{ganalytics}
 \alias{ganalytics}
+\alias{_PACKAGE}
 \alias{ganalytics-package}
 \title{ganalytics}
 \description{
@@ -17,16 +18,14 @@ To use this package with these APIs, it is necessary to provide OAuth
 credentials for a Google APIs project with the necessary APIs enabled.
 
 Features:
-
-* Auto-pagination to return up to 1,000,000 rows per query.
-
-* Ability to query more than 10 metrics at once. (TBC)
-
-* Minimise the effect of sampling by splitting the date range of queries
+\itemize{
+\item Auto-pagination to return up to 1,000,000 rows per query.
+\item Ability to query more than 10 metrics at once. (TBC)
+\item Minimise the effect of sampling by splitting the date range of queries
 using the SplitDateRange function.
-
-* When sampling has occurred, the output data.frame includes the sample and
+\item When sampling has occurred, the output data.frame includes the sample and
 total sizes as attributes.
+}
 
 To report bugs, please run the following command:
 \code{utils::bug.report(package = "ganalytics")}
@@ -39,28 +38,48 @@ care not to include any private data). For example:
 For a step-by-step guide with examples, run this command:
 \code{browseVignettes(package = "ganalytics")}
 }
+\section{Package options}{
+
+GOOGLE_APIS_USER
+GOOGLE_APIS_CONSUMER_ID
+GOOGLE_APIS_CONSUMER_SECRET
+}
+
 \references{
 Google Analytics core reporting API dimensions and metrics
-  reference:
-  \url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
+reference:
+\url{https://developers.google.com/analytics/devguides/reporting/core/dimsmets}
 
 Google Analytics Table Filter expressions:
-  \url{https://developers.google.com/analytics/devguides/reporting/core/v3/reference#filters}
+\url{https://developers.google.com/analytics/devguides/reporting/core/v3/reference#filters}
 
 Google Analytics Custom Segmentation expressions:
-  \url{https://developers.google.com/analytics/devguides/reporting/core/v3/segments-feature-reference}
+\url{https://developers.google.com/analytics/devguides/reporting/core/v3/segments-feature-reference}
 
 Google Analytics Real-time Reporting API dimensions and metrics:
-  \url{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}
+\url{https://developers.google.com/analytics/devguides/reporting/realtime/dimsmets/}
 
 Google Analytics Multi-Channel Funnel conversions Reporting API
-  dimensions and metrics:
-  \url{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}
+dimensions and metrics:
+\url{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}
 
 Google Analytics Management API collections and resources
-  \url{https://developers.google.com/analytics/devguides/config/mgmt/v3/mgmtReference/}
+\url{https://developers.google.com/analytics/devguides/config/mgmt/v3/mgmtReference/}
 
 Google Tag Manager API collection and resources
-  \url{https://developers.google.com/tag-manager/api/v1/reference/}
+\url{https://developers.google.com/tag-manager/api/v1/reference/}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/jdeboer/ganalytics}
+  \item Report bugs at \url{https://github.com/jdeboer/ganalytics/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Johann de Boer \email{johanndeboer@gmail.com}
+
+}
+\keyword{internal}
 \keyword{package}

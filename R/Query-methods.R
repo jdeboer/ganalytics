@@ -62,7 +62,7 @@ GaQuery <- function(
       filters = as(filters, "gaFilter"),
       segments = as(Segments(segments), "gaSegmentList"),
       samplingLevel = samplingLevel,
-      maxResults = maxResults,
+      maxResults = as.integer(maxResults),
       creds = creds
   )
 }
@@ -113,7 +113,7 @@ McfQuery <- function(
       sortBy = as(sortBy, "mcfSortBy"),
       filters = as(filters, "mcfFilter"),
       samplingLevel = samplingLevel,
-      maxResults = maxResults,
+      maxResults = as.integer(maxResults),
       creds = creds
   )
 }
@@ -153,7 +153,7 @@ RtQuery <- function(
       dimensions = as(dimensions, "rtDimensions"),
       sortBy = as(sortBy, "rtSortBy"),
       filters = as(filters, "rtFilter"),
-      maxResults = maxResults,
+      maxResults = as.integer(maxResults),
       creds = creds
   )
 }
@@ -228,7 +228,7 @@ setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),
   definition = function(object, value) {
-    object@maxResults <- as.numeric(value)
+    object@maxResults <- as.integer(value)
     object
   }
 )

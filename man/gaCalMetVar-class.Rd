@@ -3,7 +3,7 @@
 \docType{class}
 \name{gaCalMetVar-class}
 \alias{gaCalMetVar-class}
-\title{`gaCalMetVar` class.}
+\title{\code{gaCalMetVar} class.}
 \description{
 An S4 class to represent a valid Google Analytics Core Reporting API
 calculated metric equation.

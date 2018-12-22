@@ -10,9 +10,8 @@
 #' @rdname TableFilter
 setGeneric(
   "TableFilter",
-  function(object, value) {},
-  valueClass = c(".tableFilter", ".query"),
-  useAsDefault = FALSE
+  function(object, value) {standardGeneric("TableFilter")},
+  valueClass = c(".tableFilter", ".query")
 )
 
 #' TableFilter<-.

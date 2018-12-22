@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfDimVar-class}
 \alias{mcfDimVar-class}
-\title{`mcfDimVar` class.}
+\title{\code{mcfDimVar} class.}
 \description{
 An S4 class to represent a Multi-Channel Funnel dimension.
 }

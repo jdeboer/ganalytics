@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaComparator-class}
 \alias{.gaComparator-class}
-\title{`.gaComparator` class.}
+\title{\code{.gaComparator} class.}
 \description{
 An S4 class union represent conditional comparator operators.
 }

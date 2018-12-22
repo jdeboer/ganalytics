@@ -3,7 +3,7 @@
 \docType{class}
 \name{.gaVar-class}
 \alias{.gaVar-class}
-\title{`.gaVar` class.}
+\title{\code{.gaVar} class.}
 \description{
 An S4 class union to represent a Core Reporting variable.
 }

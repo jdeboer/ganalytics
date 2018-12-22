@@ -3,7 +3,7 @@
 \docType{class}
 \name{.var-class}
 \alias{.var-class}
-\title{`.var` class.}
+\title{\code{.var} class.}
 \description{
 An S4 class to represent the name of a single Google Analytics dimension or
 metric variable.

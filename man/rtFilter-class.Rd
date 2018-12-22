@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtFilter-class}
 \alias{rtFilter-class}
-\title{`rtFilter` class.}
+\title{\code{rtFilter} class.}
 \description{
 An S4 class to represent Real-Time query table filter expression.
 }

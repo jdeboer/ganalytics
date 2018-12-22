@@ -40,6 +40,13 @@ setClass(
 )
 
 # -- GA report requests --
+
+#' An S4 class to represent a cohort of users over a specific date range
+#'
+#' @slot type A length-one character vector representing the type of cohort. At
+#'   this time only FIRST_VISIT_DATE is supported by the Google Analytics
+#'   Reporting API.
+#' @keywords internal
 setClass(
   "gaCohort",
   contains = "dateRange",
@@ -56,6 +63,15 @@ setClass(
   }
 )
 
+#' An S4 class to represent a pivot report configuration
+#'
+#' @slot dimensions A list of dimensions to pivot into columns.
+#' @slot dimensionFilters A filter for one or more of the dimensions.
+#' @slot metrics A list of metrics to aggregate.
+#' @slot startGroup The starting index of the group of dimension values to pivot.
+#' @slot maxGroupCount The maximum number of dimension value groups to pivot over.
+#'
+#' @keywords internal
 setClass(
   "gaPivot",
   slots = c(
@@ -136,6 +152,14 @@ setClass("ga4_req")
 #'
 #' An S4 class to represent a generalised reporting API query.
 #'
+#' @slot viewId The view ID of the query, as a viewId object
+#' @slot metrics The metrics to query, an object belonging to the .metrics superclass.
+#' @slot dimensions The dimensions of the query, an object belonging to the .dimensions superclass.
+#' @slot sortBy The order and direction of metrics/dimensions to sort by, an object belonging to the .sortBy superclass.
+#' @slot filters Dimension or metrics conditions to filter the rows by, an object belonging to the .tableFilter superclass.
+#' @slot maxResults An interger giving the maximum number of rows to return.
+#' @slot creds The API credentials to use for the query.
+#'
 #' @rdname query-class
 #' @keywords internal
 #'
@@ -148,7 +172,7 @@ setClass(
     dimensions = ".dimensions",
     sortBy = ".sortBy",
     filters = ".tableFilter",
-    maxResults = "numeric",
+    maxResults = "integer",
     creds = "list"
   ),
   prototype = prototype(
@@ -157,9 +181,9 @@ setClass(
   ),
   validity = function(object) {
     valid <- validate_that(
-      length(object@maxResults) == 1,
-      object@maxResults >= 1,
-      length(object@metrics) >= 1
+      length(object@maxResults) == 1L,
+      object@maxResults >= 1L,
+      length(object@metrics) >= 1L
     )
     if (valid == TRUE) {
       if (object@maxResults > kGaMaxRows) {
@@ -174,6 +198,9 @@ setClass(
 #' `.standardQuery` class.
 #'
 #' An S4 class to represent a standard reporting API query.
+#'
+#' @slot dateRange The date range for the query as a dateRange object
+#' @slot samplingLevel The sampling level of the query as a character string.
 #'
 #' @rdname standardQuery-class
 #' @keywords internal
@@ -191,7 +218,7 @@ setClass(
   ),
   contains = ".query",
   validity = function(object) {
-    valid <- validate_that(length(object@samplingLevel) == 1)
+    valid <- validate_that(length(object@samplingLevel) == 1L)
     if (valid == TRUE) {
       if (!(object@samplingLevel %in% samplingLevel_levels)) {
         paste("samplingLevel must be one of:", paste(samplingLevel_levels, collapse = ", "))
@@ -203,6 +230,10 @@ setClass(
 #' `gaQuery` class.
 #'
 #' An S4 class to represent a Core Reporting API query.
+#'
+#' @slot segments A gaSegmentList giving one or more segments to query.
+#' @slot buckets A numeric vector of breakpoints for histogram buckets.
+#' @slot lifetimeValue A logical flag of whether to perform life-time value analysis.
 #'
 #' @rdname gaQuery-class
 #' @keywords internal

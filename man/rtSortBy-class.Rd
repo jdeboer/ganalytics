@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtSortBy-class}
 \alias{rtSortBy-class}
-\title{`rtSortBy` class.}
+\title{\code{rtSortBy} class.}
 \description{
 An S4 class to represent Real-Time variable sorting lists.
 }

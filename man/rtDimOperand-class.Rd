@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtDimOperand-class}
 \alias{rtDimOperand-class}
-\title{`rtDimOperand` class.}
+\title{\code{rtDimOperand} class.}
 \description{
 An S4 class to represent a Real-Time dimension condition operand.
 }

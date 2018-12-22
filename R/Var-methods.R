@@ -7,13 +7,14 @@
 #' @include Var-generics.R
 #' @include Var-list-generics.R
 #' @include utils.R
-#' @importFrom methods new setMethod as<-
+#' @importFrom methods new setMethod as<- callNextMethod
 NULL
 
 setMethod(
   f = "initialize",
   signature = ".gaVar",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       tmp <- as.character(tolower(value))
       ## Substitute ga; ga- ga. ga_ with ga:
@@ -67,7 +68,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".mcfVar",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       tmp <- as.character(tolower(value))
       tmp <- sub(kMcfPrefix, "mcf:", tmp)
@@ -85,7 +87,8 @@ setMethod(
 setMethod(
   f = "initialize",
   signature = ".rtVar",
-  definition = function(.Object, value) {
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
     if (!missing(value)) {
       tmp <- as.character(tolower(value))
       tmp <- sub(kRtPrefix, "rt:", tmp)

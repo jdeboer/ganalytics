@@ -1,0 +1,4 @@
+*.html
+*.R
+.httr-oauth
+~/ga.oauth

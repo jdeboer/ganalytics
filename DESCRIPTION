@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with 'Google Analytics'
-Version: 0.10.4.9000
+Version: 0.10.5.0000
 Date: 2018-06-23
 Authors@R: person(
     given = "Johann",
@@ -18,12 +18,12 @@ URL: https://github.com/jdeboer/ganalytics
 BugReports: https://github.com/jdeboer/ganalytics/issues
 License: MIT + file LICENCE
 Depends:
-    R(>= 3.1.0)
+    R(>= 3.3.0)
 Imports:
     assertthat (>= 0.2.0),
     httpuv,
     httr (>= 1.0.0),
-    googleAnalyticsR (>= 0.5.0),
+    googleAnalyticsR (>= 0.6.0),
     jsonlite,
     lazyeval,
     lubridate,
@@ -41,7 +41,10 @@ Suggests:
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    dplyr,
+    purrr,
+    tidyr
 Collate: 
     'Bool-generics.R'
     'utils.R'
@@ -101,6 +104,6 @@ Collate:
     'zzz.R'
 VignetteBuilder: knitr
 LazyData: TRUE
-RoxygenNote: 6.1.0
-Remotes: github::jdeboer/googleAnalyticsR_public
+RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

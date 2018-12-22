@@ -3,7 +3,7 @@
 \docType{class}
 \name{.expr-class}
 \alias{.expr-class}
-\title{`.expr` class.}
+\title{\code{.expr} class.}
 \description{
 An S4 class union representing condition expressions.
 }

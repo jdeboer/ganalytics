@@ -3,7 +3,7 @@
 \docType{class}
 \name{.mcfExpr-class}
 \alias{.mcfExpr-class}
-\title{`mcfExpr` class.}
+\title{\code{mcfExpr} class.}
 \description{
 An S4 class to represent a Multi-Channel funnel condition expression.
 }

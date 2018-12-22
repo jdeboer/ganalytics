@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Setup/Config</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p><code>ganalytics</code> provides functions that makes it easy to define filters and segments using natural R language comparison and logical operators. This example demonstrates how to define dynamic segments using functions from the <code>ganalytics</code> package and using those segments with the <code>googleAnalyticsR</code> package. The current development version of <code>googleAnalyticsR</code> supports segments and filters defined with <code>ganalytics</code>.</p>
+
+<h2>Setup/Config</h2>
+
+<p>Note that this example requires the current development versions of the <code>googleAnalyticsR</code> (&gt;=0.5.0.9000) and <code>ganalytics</code> (&gt;=0.10.4.9000) R packages available on GitHub. To install these, run the following code in R:</p>
+
+<pre><code class="r">devtools::install_github(&quot;MarkEdmondson1234/googleAnalyticsR&quot;)
+devtools::install_github(&quot;jdeboer/ganalytics&quot;)
+</code></pre>
+
+<p>Once installed, load these packages. Please refer to the <code>googleAnalyticsR</code> package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.</p>
+
+<pre><code class="r">library(googleAnalyticsR)
+</code></pre>
+
+<pre><code>## 2018-12-22 09:16:39&gt; No environment argument found, looked in GA_AUTH_FILE
+</code></pre>
+
+<pre><code class="r">library(ganalytics)
+library(dplyr)
+</code></pre>
+
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;
+</code></pre>
+
+<pre><code>## The following objects are masked from &#39;package:ganalytics&#39;:
+## 
+##     mutate, rename
+</code></pre>
+
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag
+</code></pre>
+
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union
+</code></pre>
+
+<pre><code class="r">library(tidyr)
+library(ggplot2)
+library(purrr)
+</code></pre>
+
+<pre><code>## 
+## Attaching package: &#39;purrr&#39;
+</code></pre>
+
+<pre><code>## The following object is masked from &#39;package:ganalytics&#39;:
+## 
+##     flatten
+</code></pre>
+
+<pre><code class="r">library(knitr)
+
+ga_auth(file.path(&quot;~&quot;, &quot;ga.oauth&quot;))
+</code></pre>
+
+<pre><code>## Token cache file: ~/ga.oauth
+</code></pre>
+
+<pre><code class="r">view_id &lt;- &quot;117987738&quot;
+start_date &lt;- &quot;2018-05-01&quot;
+end_date &lt;- &quot;2018-06-30&quot;
+</code></pre>
+
+<h2>Pull the Data</h2>
+
+<p>In this example, we&#39;ll define a list of six segments:</p>
+
+<ul>
+<li>Bounced sessions: Sessions where the bounces metric is not zero.</li>
+<li>Mobile or tablet sessions: Sessions by mobile and tablet users.</li>
+<li>Converters: Users who performed any type of conversion during the defined date range.</li>
+<li>Multi-session users: Users who have visited more than once during the defined date range.</li>
+<li>New desktop users: Sessions by new visitors using a desktop device.</li>
+<li>Bounced before converting = Users who bounced in one session before converting later.</li>
+</ul>
+
+<p>The above list of dynamic segments is defined using <code>ganalytics</code> expressions as follows:</p>
+
+<pre><code class="r">bounces &lt;- Expr(~bounces != 0)
+conversions &lt;- Expr(~goalCompletionsAll &gt; 0) | Expr(~transactions &gt; 0)
+mobile_or_tablet &lt;- Expr(~deviceCategory %in% c(&quot;mobile&quot;, &quot;tablet&quot;))
+multi_session_users &lt;- Include(PerUser(Expr(~sessions &gt; 1)), scope = &quot;users&quot;)
+new_desktop_users &lt;- Expr(~deviceCategory == &quot;desktop&quot;) &amp; Expr(~userType == &quot;new&quot;)
+
+my_segment_list &lt;- list(
+  bounced_sessions = PerSession(bounces),
+  mobile_or_tablet = mobile_or_tablet,
+  converters = PerUser(conversions),
+  multi_session_users = multi_session_users,
+  new_desktop_users = new_desktop_users,
+  bounced_before_converting = Sequence(bounces, conversions, scope = &quot;users&quot;)
+)
+</code></pre>
+
+<p>Because the Google Analytics Reporting API can only be used to query 4 segments at a time, we need to break our list segments into chunks.</p>
+
+<pre><code class="r">segment_chunks &lt;- split(my_segment_list, (seq_along(my_segment_list) - 1L) %/% 4L)
+</code></pre>
+
+<p>We can now use <code>googleAnalyticsR</code> to query each chunk of segments and bind the results into a single <code>data.frame</code>. For each segment, we will request a count of users and sessions.</p>
+
+<pre><code class="r">results &lt;- map_df(segment_chunks, function(chunk) {
+  google_analytics(
+    viewId = view_id,
+    date_range = c(start_date, end_date),
+    metrics = c(&quot;users&quot;, &quot;sessions&quot;),
+    dimensions = c(&quot;segment&quot;),
+    segments = Segments(chunk)
+  )
+})
+</code></pre>
+
+<pre><code class="r">kable(results)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">segment</th>
+<th align="right">users</th>
+<th align="right">sessions</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">bounced_sessions</td>
+<td align="right">839</td>
+<td align="right">991</td>
+</tr>
+<tr>
+<td align="left">converters</td>
+<td align="right">1066</td>
+<td align="right">1388</td>
+</tr>
+<tr>
+<td align="left">mobile_or_tablet</td>
+<td align="right">322</td>
+<td align="right">437</td>
+</tr>
+<tr>
+<td align="left">multi_session_users</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">bounced_before_converting</td>
+<td align="right">667</td>
+<td align="right">950</td>
+</tr>
+<tr>
+<td align="left">new_desktop_users</td>
+<td align="right">962</td>
+<td align="right">933</td>
+</tr>
+</tbody></table>
+
+<h2>Data Munging and Visualization</h2>
+
+<p>We will compare users and sessions for each segment using a horizontal column chart. To do this we need to transform the results table into long format in which the count of users and sessions for each segment are on separate rows.</p>
+
+<pre><code class="r">results_long &lt;- results %&gt;%
+  gather(metric, count, users, sessions)
+</code></pre>
+
+<pre><code class="r">kable(results_long)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">segment</th>
+<th align="left">metric</th>
+<th align="right">count</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">bounced_sessions</td>
+<td align="left">users</td>
+<td align="right">839</td>
+</tr>
+<tr>
+<td align="left">converters</td>
+<td align="left">users</td>
+<td align="right">1066</td>
+</tr>
+<tr>
+<td align="left">mobile_or_tablet</td>
+<td align="left">users</td>
+<td align="right">322</td>
+</tr>
+<tr>
+<td align="left">multi_session_users</td>
+<td align="left">users</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">bounced_before_converting</td>
+<td align="left">users</td>
+<td align="right">667</td>
+</tr>
+<tr>
+<td align="left">new_desktop_users</td>
+<td align="left">users</td>
+<td align="right">962</td>
+</tr>
+<tr>
+<td align="left">bounced_sessions</td>
+<td align="left">sessions</td>
+<td align="right">991</td>
+</tr>
+<tr>
+<td align="left">converters</td>
+<td align="left">sessions</td>
+<td align="right">1388</td>
+</tr>
+<tr>
+<td align="left">mobile_or_tablet</td>
+<td align="left">sessions</td>
+<td align="right">437</td>
+</tr>
+<tr>
+<td align="left">multi_session_users</td>
+<td align="left">sessions</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">bounced_before_converting</td>
+<td align="left">sessions</td>
+<td align="right">950</td>
+</tr>
+<tr>
+<td align="left">new_desktop_users</td>
+<td align="left">sessions</td>
+<td align="right">933</td>
+</tr>
+</tbody></table>
+
+<pre><code class="r">ggplot(results_long) +
+  aes(segment, count, fill = metric) +
+  geom_col(position = &quot;dodge&quot;) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  coord_flip() +
+  theme(axis.text.y.left = element_text(hjust = 0))
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk visualize-results"/></p>
+
+</body>
+
+</html>

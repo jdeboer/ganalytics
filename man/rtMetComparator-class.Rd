@@ -3,7 +3,7 @@
 \docType{class}
 \name{rtMetComparator-class}
 \alias{rtMetComparator-class}
-\title{`rtMetComparator` class.}
+\title{\code{rtMetComparator} class.}
 \description{
 An S4 class representing Real-Time metric condition comparator operators.
 }

@@ -3,6 +3,7 @@
 \docType{methods}
 \name{And}
 \alias{And}
+\alias{`&`}
 \alias{And,.compoundExpr-method}
 \alias{&,.compoundExpr,.compoundExpr-method}
 \title{And.}
@@ -28,11 +29,6 @@ an object of class \code{andExpr}
 \description{
 AND two or more ganalytics expressions together.
 }
-\details{
-Create a new AND expression from one or more arguments
-Valid types are either AND, OR, or single expressions.
-A single list of objects is also accepted.
-}
 \section{Methods (by class)}{
 \itemize{
 \item \code{.compoundExpr}: AND two or more expressions.
@@ -40,6 +36,12 @@ A single list of objects is also accepted.
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expressions.
 }}
 
-\seealso{
-\code{\link{Or}} \code{\link{xor}} \code{\link{Not}}
+\examples{
+purchased_on_mobile <- Expr(~deviceCategory == "mobile") & Expr(~transactions > 0)
+
 }
+\seealso{
+Other boolean functions: \code{\link{Not}},
+  \code{\link{Or}}, \code{\link{xor}}
+}
+\concept{boolean functions}

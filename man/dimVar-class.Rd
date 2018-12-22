@@ -3,7 +3,7 @@
 \docType{class}
 \name{.dimVar-class}
 \alias{.dimVar-class}
-\title{`.dimVar` class.}
+\title{\code{.dimVar} class.}
 \description{
 An S4 class to represent a dimension.
 }

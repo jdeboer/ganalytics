@@ -3,7 +3,7 @@
 \docType{class}
 \name{.rtVarList-class}
 \alias{.rtVarList-class}
-\title{`.rtVarList` class.}
+\title{\code{.rtVarList} class.}
 \description{
 An S4 class union of Real-Time variable lists.
 }

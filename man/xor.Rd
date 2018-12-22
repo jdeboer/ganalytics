@@ -4,23 +4,32 @@
 \name{xor}
 \alias{xor}
 \alias{xor,.compoundExpr,.compoundExpr-method}
-\title{Generate an expression that gives the Exclusive-OR of two expressions.}
+\title{Generate an expression that gives the EXCLUSIVE-OR of two expressions.}
 \usage{
 xor(x, y)
 
 \S4method{xor}{.compoundExpr,.compoundExpr}(x, y)
 }
 \arguments{
-\item{x, y}{Conditions for an exclusive-or expression.}
+\item{x, y}{Conditions for an EXCLUSIVE-OR expression.}
 }
 \description{
-Generate an expression that gives the Exclusive-OR of two expressions.
+Generate an expression that gives the EXCLUSIVE-OR of two expressions.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
 }}
 
-\seealso{
-\code{\link{Or}} \code{\link{And}} \code{\link{Not}}
+\examples{
+either_enquired_or_downloaded <- xor(
+  Expr(~eventCategory == "enquiry"),
+  Expr(~eventCategory == "download")
+)
+
 }
+\seealso{
+Other boolean functions: \code{\link{And}},
+  \code{\link{Not}}, \code{\link{Or}}
+}
+\concept{boolean functions}

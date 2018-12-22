@@ -3,7 +3,7 @@
 \docType{class}
 \name{.mcfComparator-class}
 \alias{.mcfComparator-class}
-\title{`.mcfComparator` class.}
+\title{\code{.mcfComparator} class.}
 \description{
 An S4 class union representing Multi-Channel Funnel condition comparator
 operators.

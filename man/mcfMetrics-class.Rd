@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfMetrics-class}
 \alias{mcfMetrics-class}
-\title{`mcfMetrics` class.}
+\title{\code{mcfMetrics} class.}
 \description{
 An S4 class to represent a list of Multi-channel funnel metrics.
 }

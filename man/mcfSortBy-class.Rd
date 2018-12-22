@@ -3,7 +3,7 @@
 \docType{class}
 \name{mcfSortBy-class}
 \alias{mcfSortBy-class}
-\title{`mcfSortBy` class.}
+\title{\code{mcfSortBy} class.}
 \description{
 An S4 class to represent Multi-Channel Funnel sorting lists.
 }
