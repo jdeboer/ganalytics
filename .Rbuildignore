@@ -1,5 +1,5 @@
 ^Meta$
-^doc$
+^docs$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.httr-oauth$
