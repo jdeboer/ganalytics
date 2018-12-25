@@ -9,14 +9,11 @@ Johann de Boer
 
 [![Travis-CI Build
 Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
-
 [![Coverage
 status](https://codecov.io/gh/jdeboer/ganalytics/branch/master/graph/badge.svg)](https://codecov.io/github/jdeboer/ganalytics?branch=master)
-
-[![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
-
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ganalytics)](https://cran.r-project.org/package=ganalytics)
+[![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
 
 Classes and methods for interactive use of the Google Analytics core
 reporting, real-time reporting, multi-channel funnel reporting,
