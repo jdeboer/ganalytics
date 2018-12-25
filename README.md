@@ -32,6 +32,8 @@ are also provided for the Google Analytics Management and Google Tag
 Manager APIs so that you can, for example, change tag, property or view
 settings.
 
+Visit the 'ganalytics' website at: http://jdeboer.github.io/ganalytics/index.html
+
 ## Updates
 
 Support for GoogleAnalyticsR integration is now available for segments
