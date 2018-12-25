@@ -7,10 +7,6 @@ Johann de Boer
 
 # ganalytics <img src="man/figures/logo.png" align="right" height=140/>
 
-![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
-
-# ganalytics
-
 [![Travis-CI Build
 Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
 
@@ -31,8 +27,6 @@ management APIs, as well as the Google Tag Manager API. Write methods
 are also provided for the Google Analytics Management and Google Tag
 Manager APIs so that you can, for example, change tag, property or view
 settings.
-
-Visit the 'ganalytics' website at: http://jdeboer.github.io/ganalytics/index.html
 
 ## Updates
 
