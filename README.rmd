@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+# ganalytics <img src="man/figures/logo.png" align="right" height=140/>
 
 ![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
 

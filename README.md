@@ -5,6 +5,8 @@ Johann de Boer
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
+# ganalytics <img src="man/figures/logo.png" align="right" height=140/>
+
 ![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
 
 # ganalytics

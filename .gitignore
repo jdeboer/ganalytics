@@ -7,8 +7,6 @@ Read-and-delete-me
 *-Ex.R
 .httr-oauth
 app_oauth_creds.json
-logo.png
-logo.xcf
 .app_oauth_creds.json
 .GOOGLE_APIS_auth.RDS
 client_secret.json
