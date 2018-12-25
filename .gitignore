@@ -12,3 +12,5 @@ app_oauth_creds.json
 client_secret.json
 R/WIP
 ~/.google_apis_auth.RDS
+revdep/.cache.rds
+revdep/data.sqlite
