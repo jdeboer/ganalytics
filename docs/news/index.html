@@ -32,6 +32,9 @@
 
 <meta property="og:title" content="Changelog" />
 
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -60,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.5.9000</span>
       </span>
     </div>
 
@@ -118,12 +121,538 @@
       <small>Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="ganalytics-0-10-5-9000" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-0-10-5-9000" class="anchor"></a>ganalytics 0.10.5.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-09-08" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-09-08" class="anchor"></a>ganalytics 2018-09-08<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added vignettes with examples of using ganalytics custom segments and custom filters with googleAnalyticsR.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-07-29" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-07-29" class="anchor"></a>ganalytics 2018-07-29<small> Unreleased </small>
+</h1>
+<ul>
+<li>Documentation improvements. Methods to coerce ganalytics dimensions and metrics lists to googleAnalyticsR equivalent classes in order to further integrate the two packages.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-07-22" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-07-22" class="anchor"></a>ganalytics 2018-07-22<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added new function <code><a href="../reference/GaView.html">ga_view_selector()</a></code> which provides a user-interactive way to select a view from the available Google Analytics accounts and properties within those accounts. * Demos have been updated to use this new function. And lastly, ganalytics now has a logo.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-07-01" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-07-01" class="anchor"></a>ganalytics 2018-07-01<small> Unreleased </small>
+</h1>
+<ul>
+<li>Released ganalytics to CRAN.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-06-23" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-06-23" class="anchor"></a>ganalytics 2018-06-23<small> Unreleased </small>
+</h1>
+<ul>
+<li>Version type dimensions, e.g. ga:appVersion, are now coerced to <code>numeric_version</code> class, so that version numbers (e.g. ‘2.4.7’, ‘2.5.13’, ‘2.32.1’, etc…) can be correctly sorted and compared as if they were numeric values. Updated gademo.R.</li>
+<li>The dateRange class now inherits ‘lubridate’ interval as its superclass.</li>
+<li>It is now possible to query more than 10 metrics with just one query.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-05-30" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-05-30" class="anchor"></a>ganalytics 2018-05-30<small> Unreleased </small>
+</h1>
+<ul>
+<li>Additional methods to coerce ganalytics segment classes and table filters for use with the ‘googleAnalyticsR’ package.</li>
+<li>Dynamic Segments objects now have a name property.</li>
+<li>Updated <code>googleAnalyticsR-demo</code> and examples in the readme file.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-02-18" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-02-18" class="anchor"></a>ganalytics 2018-02-18<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added methods for coercing a range of ganalytics classes into ‘googleAnalyticsR’ classes, so that ganalytics segments, filters and expressions can be used by the google_analytics function of the ‘googleAnalyticsR’ package.</li>
+</ul>
+</div>
+    <div id="ganalytics-2018-02-12" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2018-02-12" class="anchor"></a>ganalytics 2018-02-12<small> Unreleased </small>
+</h1>
+<ul>
+<li>Scope and negation of segment conditions can now be defined at the filter level.</li>
+<li>Fixed bug where backslashes were being escaped incorrectly in expression operands.</li>
+<li>The methods of the Segment generic function are now split into two generic functions, Segment and Segments.</li>
+<li>Segments is used to set or get a named list segments, whereas Segment is for defining a single segment to be added to a Segments list.</li>
+</ul>
+</div>
+    <div id="ganalytics-2017-12-27" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2017-12-27" class="anchor"></a>ganalytics 2017-12-27<small> Unreleased </small>
+</h1>
+<ul>
+<li>Support for %starts_with% and %ends_with% operators in addition to %contains% which was incorrectly described as %starts_with% previously.</li>
+<li>Added PerProduct method for setting metric scope for dynamic segmentation.</li>
+<li>ganalytics now searches the working directory for a json file containing the API client ID and secret supplied by Google Cloud Console credentials manager.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-12-19" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-12-19" class="anchor"></a>ganalytics 2015-12-19<small> Unreleased </small>
+</h1>
+<ul>
+<li>Username (email address) for Google API authentication can now be set using via a system environment variable with a key named as [APPNAME]_USER, where [APPNAME] is ‘GOOGLE_APIS’ default, e.g. GOOGLE_APIS_USER = <a href="mailto:me@example-domain.com">me@example-domain.com</a>
+</li>
+<li>Updates to support recent API additions, including Management API view bot filtering flag.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-12-12" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-12-12" class="anchor"></a>ganalytics 2015-12-12<small> Unreleased </small>
+</h1>
+<ul>
+<li>Ability to query past 10 metrics by automatically joining API results by there dimensions.</li>
+<li>Added methods for NOTing one-of-in-list ‘[]’ dimension and within-range ‘&lt;&gt;’ metric expressions.</li>
+<li>Default date range has been pushed back 1 day to ensure complete data is returned by MCF queries.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-11-27" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-11-27" class="anchor"></a>ganalytics 2015-11-27<small> Unreleased </small>
+</h1>
+<ul>
+<li>Support multiple segments being applied to a query.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-11-25" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-11-25" class="anchor"></a>ganalytics 2015-11-25<small> Unreleased </small>
+</h1>
+<ul>
+<li>profileId argument for Query generators is deprecated.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-10-06" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-10-06" class="anchor"></a>ganalytics 2015-10-06<small> Unreleased </small>
+</h1>
+<ul>
+<li>[] and [[]] operators now supported by Management API collection objects, so get a single entity resource from collection such as Accounts, Properties, Views, Goals, etc.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-25" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-25" class="anchor"></a>ganalytics 2015-09-25<small> Unreleased </small>
+</h1>
+<ul>
+<li>gaGoal objects now include goal configuration details.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-20" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-20" class="anchor"></a>ganalytics 2015-09-20<small> Unreleased </small>
+</h1>
+<ul>
+<li>Comparators are now generic functions with methods for supplying a .var (LHS) and .operand (RHS)</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-18" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-18" class="anchor"></a>ganalytics 2015-09-18<small> Unreleased </small>
+</h1>
+<ul>
+<li>PerUser and PerSession can now be used instead of SegmentFilters to create a scoped segment filter list. Also, Include and Exclude have been added to add include and exclude (i.e negate) filters to a segment definition, rather than needing to use the negate argument of the Sequence and SegmentConditionFilter functions.</li>
+<li>Added function for generating a segment definition from a list where … can be used to mean ‘followed-by / Later’ prior to the next step in the sequence. Note this function uses non-standard evaluation.</li>
+<li>PerHit can be used to transform a condition filter into a sequence of length one, which offers a powerful form of segmentation where all conditions must be met for a single hit rather than scoped across sessions or users.</li>
+<li>Expr can now be used with a formula denoted by the prefix <code>~</code>. This uses non-standard evaluation so that variable names and condition operators do not need to be surrounded by quotation marks.</li>
+<li>Added IsNegated generic function and method for testing whether a segment filter’s negated slot is set to TRUE.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-16" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-16" class="anchor"></a>ganalytics 2015-09-16<small> Unreleased </small>
+</h1>
+<ul>
+<li>Renamed segmentation functions: GaSequenceCondition -&gt; Sequence; GaNonSequenceCondition -&gt; SegmentConditionFilter; GaSegmentCondition -&gt; SegmentFilters</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-15" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-15" class="anchor"></a>ganalytics 2015-09-15<small> Unreleased </small>
+</h1>
+<ul>
+<li>Renamed GaSequence to Sequence. Added PerUser, PerSession and PerHit generic functions for setting the scope of segment filters, and metrics conditions used within segments. Also, renamed GaScopeLevel and GaScopeLevel&lt;- functions to ScopeLevel and ScopeLevel&lt;- respectively.</li>
+<li>Sampling warnings are now more informative by notifying you of the total sample size and space with a sampling rate percentage too.</li>
+<li>Authentication credentials are remembered between commands without the need for the user to store them in a local variable.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-09-01" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-09-01" class="anchor"></a>ganalytics 2015-09-01<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added Domain Specific Language (DSL) functions utilising Non-standard Evaluation (NSE) for defining conditions and sequences.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-08-20" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-08-20" class="anchor"></a>ganalytics 2015-08-20<small> Unreleased </small>
+</h1>
+<ul>
+<li>Renamed segmentation functions: GaStartsWith -&gt; First, GaPreceeds -&gt; Later, GaImmediatelyPreceeds -&gt; Then . Renamed operator to comparator.</li>
+<li>Added functions to set scope of segment filters and segment metric expressions.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-08-17" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-08-17" class="anchor"></a>ganalytics 2015-08-17<small> Unreleased </small>
+</h1>
+<ul>
+<li>Update to latest dimension and metrics metadata and added support for custom dimensions and device category as view filter fields.</li>
+<li>Changed default metric for real-time queries to rt:pageviews.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-08-14" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-08-14" class="anchor"></a>ganalytics 2015-08-14<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added demos.</li>
+<li>Added support for new alphanumeric segment IDs.</li>
+<li>Foundations to support multiple segments within a single query.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-06-05" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-06-05" class="anchor"></a>ganalytics 2015-06-05<small> Unreleased </small>
+</h1>
+<ul>
+<li>Support the use of a ‘lubridate’ interval object as a dateRange object for GA Reporting API queries.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-05-04" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-05-04" class="anchor"></a>ganalytics 2015-05-04<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for real-time and multi-channel-funnels reporting APIs - both formulating queries and processing the query responses.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-05-02" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-05-02" class="anchor"></a>ganalytics 2015-05-02<small> Unreleased </small>
+</h1>
+<ul>
+<li>Renaming of many functions by removing the Ga prefix in the name, with backwards compatibility for the old function names via aliases.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-04-26" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-04-26" class="anchor"></a>ganalytics 2015-04-26<small> Unreleased </small>
+</h1>
+<ul>
+<li>Support for base R logical expression operators for defining GA query expressions.</li>
+<li>Added validity check for dimension and metric names of MCF and RT expressions.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-04-06" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-04-06" class="anchor"></a>ganalytics 2015-04-06<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added function for setting or getting the scope level of segments and expressions.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-04-05" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-04-05" class="anchor"></a>ganalytics 2015-04-05<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for dateOfSession dimension when used for segmentation.</li>
+<li>Suggest valid dimension and metric names to the user if a partial match is found.</li>
+<li>Automatic handling of date formatting for API requests and responses.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-04-04" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-04-04" class="anchor"></a>ganalytics 2015-04-04<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for list and range comparator operators when used for segment expressions.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-03-22" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-03-22" class="anchor"></a>ganalytics 2015-03-22<small> Unreleased </small>
+</h1>
+<ul>
+<li>Ability to update and delete existing resource entities such as user links.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-03-21" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-03-21" class="anchor"></a>ganalytics 2015-03-21<small> Unreleased </small>
+</h1>
+<ul>
+<li>Query view filter definitions. Ability to insert new resource entities where supported by the Management API, e.g. adding new user links. Also, ability to query definitions of custom dimensions and metrics via the management API</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-02-12" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-02-12" class="anchor"></a>ganalytics 2015-02-12<small> Unreleased </small>
+</h1>
+<ul>
+<li>Ability to query user permissions for accounts, properties and views via the Management API.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-02-09" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-02-09" class="anchor"></a>ganalytics 2015-02-09<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added Google Tag Manager classes and methods.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-01-29" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-01-29" class="anchor"></a>ganalytics 2015-01-29<small> Unreleased </small>
+</h1>
+<ul>
+<li>Extend GaSegment methods to accept a gaUserSegment class object in addition to already accepted expressions and segment IDs.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-01-26" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-01-26" class="anchor"></a>ganalytics 2015-01-26<small> Unreleased </small>
+</h1>
+<ul>
+<li>Automatically select view from a given gaProperty or gaAccount class object.</li>
+<li>Extend GaQuery methods to accept a gaView class object in addition to already accepted view IDs.</li>
+<li>Ability to request user defined segments via the Management API.</li>
+<li>If no OAuth app creds provided, then use JSON file in current directory called “.app_oauth_creds.json” if exists.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-01-25" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-01-25" class="anchor"></a>ganalytics 2015-01-25<small> Unreleased </small>
+</h1>
+<ul>
+<li>Query the Google Tag Manager API</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-01-12" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-01-12" class="anchor"></a>ganalytics 2015-01-12<small> Unreleased </small>
+</h1>
+<ul>
+<li>Values for various class properties defined as factors with appropriate levels.</li>
+</ul>
+</div>
+    <div id="ganalytics-2015-01-11" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2015-01-11" class="anchor"></a>ganalytics 2015-01-11<small> Unreleased </small>
+</h1>
+<ul>
+<li>Ability to automatically select the default view of a given property</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-12-27" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-12-27" class="anchor"></a>ganalytics 2014-12-27<small> Unreleased </small>
+</h1>
+<ul>
+<li>Functions to retrieve details about available Google Analytics accounts, properties and views that can be queried.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-12-20" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-12-20" class="anchor"></a>ganalytics 2014-12-20<small> Unreleased </small>
+</h1>
+<ul>
+<li>Implemented exponential back off algorithm to improve reliability of fetching reporting API data in case of intermittent network outages.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-11-22" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-11-22" class="anchor"></a>ganalytics 2014-11-22<small> Unreleased </small>
+</h1>
+<ul>
+<li>Optionally supply a username to use for the OAuth2.0 user authentication dance with Google.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-11-21" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-11-21" class="anchor"></a>ganalytics 2014-11-21<small> Unreleased </small>
+</h1>
+<ul>
+<li>Optionally supply a JSON file from the Google APIs console that contains the client ID and secret to use for OAuth2.0 authentication.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-09-30" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-09-30" class="anchor"></a>ganalytics 2014-09-30<small> Unreleased </small>
+</h1>
+<ul>
+<li>Ability to negate a segment expression using R’s NOT (!) operator.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-09-16" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-09-16" class="anchor"></a>ganalytics 2014-09-16<small> Unreleased </small>
+</h1>
+<ul>
+<li>Include sample size and sample space as attributes in the returned dataframe from a reporting API request.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-08-09" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-08-09" class="anchor"></a>ganalytics 2014-08-09<small> Unreleased </small>
+</h1>
+<ul>
+<li>Support for defining unified segment expressions.</li>
+<li>Added optional argument to set the sampling level of a query.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-06-21" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-06-21" class="anchor"></a>ganalytics 2014-06-21<small> Unreleased </small>
+</h1>
+<ul>
+<li>Query from multiple views with a the responses bound into a single data frame.</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-06-05" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-06-05" class="anchor"></a>ganalytics 2014-06-05<small> Unreleased </small>
+</h1>
+<ul>
+<li>Upgrade to using Meta Data API for updating available dimensions and metrics</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-06-04" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-06-04" class="anchor"></a>ganalytics 2014-06-04<small> Unreleased </small>
+</h1>
+<ul>
+<li>Warning given for queries resulting in a sampled report being returned</li>
+</ul>
+</div>
+    <div id="ganalytics-2014-05-23" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2014-05-23" class="anchor"></a>ganalytics 2014-05-23<small> Unreleased </small>
+</h1>
+<ul>
+<li>Upgrade to OAuth2.0 functionality built into httr</li>
+</ul>
+</div>
+    <div id="ganalytics-2013-09-16" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2013-09-16" class="anchor"></a>ganalytics 2013-09-16<small> Unreleased </small>
+</h1>
+<ul>
+<li>Implemented function to split a date range into N or daily increments</li>
+</ul>
+</div>
+    <div id="ganalytics-2013-06-10" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2013-06-10" class="anchor"></a>ganalytics 2013-06-10<small> Unreleased </small>
+</h1>
+<ul>
+<li>Automate update of available dimensions and metrics.</li>
+<li>Abstraction of Google APIs request as a generalised function</li>
+</ul>
+</div>
+    <div id="ganalytics-2013-05-31" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2013-05-31" class="anchor"></a>ganalytics 2013-05-31<small> Unreleased </small>
+</h1>
+<ul>
+<li>Implemented OAuth2.0 reference classes</li>
+</ul>
+</div>
+    <div id="ganalytics-2013-05-25" class="section level1">
+<h1 class="page-header">
+<a href="#ganalytics-2013-05-25" class="anchor"></a>ganalytics 2013-05-25<small> Unreleased </small>
+</h1>
+<ul>
+<li>Initial version released via GitHub</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#ganalytics-0-10-5-9000">0.10.5.9000</a></li>
+        <li><a href="#ganalytics-2018-09-08">2018-09-08</a></li>
+        <li><a href="#ganalytics-2018-07-29">2018-07-29</a></li>
+        <li><a href="#ganalytics-2018-07-22">2018-07-22</a></li>
+        <li><a href="#ganalytics-2018-07-01">2018-07-01</a></li>
+        <li><a href="#ganalytics-2018-06-23">2018-06-23</a></li>
+        <li><a href="#ganalytics-2018-05-30">2018-05-30</a></li>
+        <li><a href="#ganalytics-2018-02-18">2018-02-18</a></li>
+        <li><a href="#ganalytics-2018-02-12">2018-02-12</a></li>
+        <li><a href="#ganalytics-2017-12-27">2017-12-27</a></li>
+        <li><a href="#ganalytics-2015-12-19">2015-12-19</a></li>
+        <li><a href="#ganalytics-2015-12-12">2015-12-12</a></li>
+        <li><a href="#ganalytics-2015-11-27">2015-11-27</a></li>
+        <li><a href="#ganalytics-2015-11-25">2015-11-25</a></li>
+        <li><a href="#ganalytics-2015-10-06">2015-10-06</a></li>
+        <li><a href="#ganalytics-2015-09-25">2015-09-25</a></li>
+        <li><a href="#ganalytics-2015-09-20">2015-09-20</a></li>
+        <li><a href="#ganalytics-2015-09-18">2015-09-18</a></li>
+        <li><a href="#ganalytics-2015-09-16">2015-09-16</a></li>
+        <li><a href="#ganalytics-2015-09-15">2015-09-15</a></li>
+        <li><a href="#ganalytics-2015-09-01">2015-09-01</a></li>
+        <li><a href="#ganalytics-2015-08-20">2015-08-20</a></li>
+        <li><a href="#ganalytics-2015-08-17">2015-08-17</a></li>
+        <li><a href="#ganalytics-2015-08-14">2015-08-14</a></li>
+        <li><a href="#ganalytics-2015-06-05">2015-06-05</a></li>
+        <li><a href="#ganalytics-2015-05-04">2015-05-04</a></li>
+        <li><a href="#ganalytics-2015-05-02">2015-05-02</a></li>
+        <li><a href="#ganalytics-2015-04-26">2015-04-26</a></li>
+        <li><a href="#ganalytics-2015-04-06">2015-04-06</a></li>
+        <li><a href="#ganalytics-2015-04-05">2015-04-05</a></li>
+        <li><a href="#ganalytics-2015-04-04">2015-04-04</a></li>
+        <li><a href="#ganalytics-2015-03-22">2015-03-22</a></li>
+        <li><a href="#ganalytics-2015-03-21">2015-03-21</a></li>
+        <li><a href="#ganalytics-2015-02-12">2015-02-12</a></li>
+        <li><a href="#ganalytics-2015-02-09">2015-02-09</a></li>
+        <li><a href="#ganalytics-2015-01-29">2015-01-29</a></li>
+        <li><a href="#ganalytics-2015-01-26">2015-01-26</a></li>
+        <li><a href="#ganalytics-2015-01-25">2015-01-25</a></li>
+        <li><a href="#ganalytics-2015-01-12">2015-01-12</a></li>
+        <li><a href="#ganalytics-2015-01-11">2015-01-11</a></li>
+        <li><a href="#ganalytics-2014-12-27">2014-12-27</a></li>
+        <li><a href="#ganalytics-2014-12-20">2014-12-20</a></li>
+        <li><a href="#ganalytics-2014-11-22">2014-11-22</a></li>
+        <li><a href="#ganalytics-2014-11-21">2014-11-21</a></li>
+        <li><a href="#ganalytics-2014-09-30">2014-09-30</a></li>
+        <li><a href="#ganalytics-2014-09-16">2014-09-16</a></li>
+        <li><a href="#ganalytics-2014-08-09">2014-08-09</a></li>
+        <li><a href="#ganalytics-2014-06-21">2014-06-21</a></li>
+        <li><a href="#ganalytics-2014-06-05">2014-06-05</a></li>
+        <li><a href="#ganalytics-2014-06-04">2014-06-04</a></li>
+        <li><a href="#ganalytics-2014-05-23">2014-05-23</a></li>
+        <li><a href="#ganalytics-2013-09-16">2013-09-16</a></li>
+        <li><a href="#ganalytics-2013-06-10">2013-06-10</a></li>
+        <li><a href="#ganalytics-2013-05-31">2013-05-31</a></li>
+        <li><a href="#ganalytics-2013-05-25">2013-05-25</a></li>
       </ul>
     </div>
   </div>
