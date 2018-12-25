@@ -44,7 +44,9 @@ Suggests:
     testthat,
     dplyr,
     purrr,
-    tidyr
+    tidyr,
+    spelling,
+    covr
 Collate: 
     'Bool-generics.R'
     'utils.R'
@@ -107,3 +109,4 @@ LazyData: TRUE
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
+Language: en-AU
