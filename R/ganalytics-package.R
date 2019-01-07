@@ -1,3 +1,6 @@
+#' @importFrom tibble tibble
+NULL
+
 #' ganalytics
 #'
 #' A Google Analytics and Google Tag Manager API client for R

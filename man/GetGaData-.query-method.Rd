@@ -22,7 +22,7 @@ when more than one view has been provided.}
 segment for when more than one segment has been queried.}
 }
 \value{
-a dataframe
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 GetGaData Execute a ganalytics query.

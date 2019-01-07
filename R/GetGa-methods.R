@@ -15,7 +15,7 @@ NULL
 #'   when more than one view has been provided.
 #' @param addSegmentId logical value indicating whether to add the name of the
 #'   segment for when more than one segment has been queried.
-#' @return a dataframe
+#' @return a [tibble][tibble::tibble-package]
 setMethod("GetGaData", ".query", function(
   query,
   creds = NULL,
