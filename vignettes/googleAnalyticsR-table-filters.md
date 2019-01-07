@@ -24,58 +24,11 @@ Once installed, load these packages. Please refer to the `googleAnalyticsR` pack
 
 ```r
 library(googleAnalyticsR)
-```
-
-```
-## 2018-12-22 19:26:26> No environment argument found, looked in GA_AUTH_FILE
-```
-
-```r
 library(ganalytics)
 library(dplyr)
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-```
-
-```
-## The following objects are masked from 'package:ganalytics':
-## 
-##     mutate, rename
-```
-
-```
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-```
-
-```
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 library(tidyr)
 library(ggplot2)
 library(purrr)
-```
-
-```
-## 
-## Attaching package: 'purrr'
-```
-
-```
-## The following object is masked from 'package:ganalytics':
-## 
-##     flatten
-```
-
-```r
 library(knitr)
 
 ga_auth(file.path("~", "ga.oauth"))

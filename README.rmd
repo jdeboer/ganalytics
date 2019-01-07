@@ -20,14 +20,10 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
-![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
-
-ganalytics
+ganalytics <img src="man/figures/logo.png" align="right" height=140/>
 ==========
-[![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
 
-[![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
+[![Travis-CI Build Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics) [![Coverage status](https://codecov.io/gh/jdeboer/ganalytics/branch/master/graph/badge.svg)](https://codecov.io/github/jdeboer/ganalytics?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/ganalytics)](https://cran.r-project.org/package=ganalytics) [![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
 
 Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.
 
@@ -56,7 +52,7 @@ Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, bu
 
 Instead of using `Or`, `And`, and `Not`, it is now possible to use familiar R language Boolean operators, `|` (`Or`), `&` (`And`), and `!` (`Not`) instead (thanks to @hadley for suggestion [#2](https://github.com/jdeboer/ganalytics/issues/2)). It is important to keep in mind however that Google Analytics requires `Or` to have precedence over `And`, which is the opposite to the natural precedence given by R when using the `|` and `&` operators. Therefore, remember to use parentheses `(` `)` to enforce the correct order of operation to your Boolean expressions. For example `my_filter <- !bounced & (completed_goal | transacted)` is a valid structure for a Google Analytics reporting API filter expression.
 
-You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are *write* methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the "INSERT", "UPDATE" and "DELETE" methods.
+You can now query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are *write* methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the "INSERT", "UPDATE" and "DELETE" methods.
 
 There is also some basic support for the Google Tag Manager API, but again, this is a work in progress so take care with the write methods above.
 

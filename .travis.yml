@@ -1,24 +1,22 @@
 language: r
 r:
-  - 3.3.0
-  - release
-  - devel
-
+- 3.3.0
+- release
+- devel
 sudo: required
-
 cran: http://cran.rstudio.com
-
 r_check_args: "--as-cran"
-
 r_github_packages:
-  - jimhester/covr
+- jimhester/covr
 after_success:
-  - Rscript -e 'covr::codecov()'
-
+- Rscript -e 'covr::codecov()'
 warnings_are_errors: true
-
 notifications:
   email:
     on_success: change
     on_failure: change
-
+env:
+  global:
+    - GA_CLIENT_ID="91043842526.apps.googleusercontent.com"
+    - GA_VIEW_ID="ga:117987738"
+    - secure: CK3nmlKebLuxjR9pw2J4cw1c4fHyxOmns/mRHWv5muyntg4hQCL1Q+V90BkaIajpTpBie/9KaT5MctpYRdZeHRM8TcbfokD7Ux7bGee8ERqVvOQ1w9/Z8TyMtfAP5u4/wBsKFhDkGQYrfs3LuPBJD6YoSEQa7KcwQej1sKYs0wk=

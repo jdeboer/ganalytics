@@ -5,13 +5,14 @@ Johann de Boer
 
 <!-- README.md is generated from README.rmd. Please edit that file -->
 
-![logo](https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png)
-
-# ganalytics
+# ganalytics <img src="man/figures/logo.png" align="right" height=140/>
 
 [![Travis-CI Build
 Status](https://travis-ci.org/jdeboer/ganalytics.png?branch=master)](https://travis-ci.org/jdeboer/ganalytics)
-
+[![Coverage
+status](https://codecov.io/gh/jdeboer/ganalytics/branch/master/graph/badge.svg)](https://codecov.io/github/jdeboer/ganalytics?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ganalytics)](https://cran.r-project.org/package=ganalytics)
 [![Rdoc](http://www.rdocumentation.org/badges/version/ganalytics)](http://www.rdocumentation.org/packages/ganalytics)
 
 Classes and methods for interactive use of the Google Analytics core
@@ -29,8 +30,6 @@ management APIs, as well as the Google Tag Manager API. Write methods
 are also provided for the Google Analytics Management and Google Tag
 Manager APIs so that you can, for example, change tag, property or view
 settings.
-
-Visit the 'ganalytics' website at: http://jdeboer.github.io/ganalytics/index.html
 
 ## Updates
 
@@ -95,7 +94,7 @@ your Boolean expressions. For example `my_filter <- !bounced &
 (completed_goal | transacted)` is a valid structure for a Google
 Analytics reporting API filter expression.
 
-You can use query the Google Analytics Management API to obtain details
+You can now query the Google Analytics Management API to obtain details
 in R about the configuration of your accounts, properties and views,
 such as goals you have defined. There are *write* methods available too,
 but these have not been fully tested so use with extreme care. If you
