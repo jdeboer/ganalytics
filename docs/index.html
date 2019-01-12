@@ -17,6 +17,7 @@
     settings, for example. Define reporting queries using natural R expressions
     instead of being concerned as much about API technical intricacies like
     query syntax, character code escaping, and API limitations.">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
       </span>
     </div>
 
@@ -93,14 +94,11 @@
     
     
 <!-- README.md is generated from README.rmd. Please edit that file -->
-<div class="figure">
-<img src="https://raw.githubusercontent.com/jdeboer/ganalytics/dev/inst/figures/hexicon-small.png" alt="logo"><p class="caption">logo</p>
-</div>
 <div id="ganalytics" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ganalytics" class="anchor"></a>ganalytics</h1></div>
-<p><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="https://travis-ci.org/jdeboer/ganalytics.png?branch=master" alt="Travis-CI Build Status"></a></p>
-<p><a href="http://www.rdocumentation.org/packages/ganalytics"><img src="http://www.rdocumentation.org/badges/version/ganalytics" alt="Rdoc"></a></p>
+<a href="#ganalytics" class="anchor"></a>ganalytics <img src="reference/figures/logo.png" align="right" height="140/">
+</h1></div>
+
 <p>Classes and methods for interactive use of the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting, metadata, configuration management and Google Tag Manager APIs.</p>
 <p>The aim of this package is to support R users in defining reporting queries using natural R expressions instead of being concerned about API technical intricacies like query syntax, character code escaping and API limitations.</p>
 <p>This package provides functions for querying the Google Analytics core reporting, real-time reporting, multi-channel funnel reporting and management APIs, as well as the Google Tag Manager API. Write methods are also provided for the Google Analytics Management and Google Tag Manager APIs so that you can, for example, change tag, property or view settings.</p>
@@ -133,7 +131,7 @@
 </ul>
 <p>Multi-channel funnel (MCF) and real-time (RT) queries can now be constructed, but work is still needed to process the response from these queries - stay tuned for updates on this.</p>
 <p>Instead of using <code>Or</code>, <code>And</code>, and <code>Not</code>, it is now possible to use familiar R language Boolean operators, <code>|</code> (<code>Or</code>), <code>&amp;</code> (<code>And</code>), and <code>!</code> (<code>Not</code>) instead (thanks to <span class="citation">@hadley</span> for suggestion <a href="https://github.com/jdeboer/ganalytics/issues/2">#2</a>). It is important to keep in mind however that Google Analytics requires <code>Or</code> to have precedence over <code>And</code>, which is the opposite to the natural precedence given by R when using the <code>|</code> and <code>&amp;</code> operators. Therefore, remember to use parentheses <code>(</code> <code>)</code> to enforce the correct order of operation to your Boolean expressions. For example <code>my_filter &lt;- !bounced &amp; (completed_goal | transacted)</code> is a valid structure for a Google Analytics reporting API filter expression.</p>
-<p>You can use query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are <em>write</em> methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the “INSERT”, “UPDATE” and “DELETE” methods.</p>
+<p>You can now query the Google Analytics Management API to obtain details in R about the configuration of your accounts, properties and views, such as goals you have defined. There are <em>write</em> methods available too, but these have not been fully tested so use with extreme care. If you wish to use these functions, it is recommended that you test these using test login, otherwise avoid using the “INSERT”, “UPDATE” and “DELETE” methods.</p>
 <p>There is also some basic support for the Google Tag Manager API, but again, this is a work in progress so take care with the write methods above.</p>
 </div>
 <div id="installation" class="section level2">
@@ -633,7 +631,16 @@ GOOGLE_APIS_CONSUMER_SECRET = &lt;Your client secret&gt;</code></pre>
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/jdeboer/ganalytics"><img src="https://travis-ci.org/jdeboer/ganalytics.png?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://codecov.io/github/jdeboer/ganalytics?branch=master"><img src="https://codecov.io/gh/jdeboer/ganalytics/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://cran.r-project.org/package=ganalytics"><img src="https://www.r-pkg.org/badges/version/ganalytics" alt="CRAN status"></a></li>
+<li><a href="http://www.rdocumentation.org/packages/ganalytics"><img src="http://www.rdocumentation.org/badges/version/ganalytics" alt="Rdoc"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 
