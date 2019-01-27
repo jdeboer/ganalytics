@@ -41,7 +41,7 @@ setMethod(
 )
 
 #' @describeIn Sequence Return a sequence of one or more steps using the
-#'   supplied expression(s) define the steps, where those step can occur
+#'   supplied expression(s) that define the steps, where those step can occur
 #'   anywhere within the sequences of interactions being matched, but in the
 #'   order specified.
 setMethod(

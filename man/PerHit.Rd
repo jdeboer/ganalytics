@@ -6,7 +6,7 @@
 \alias{PerHit,.compoundExpr-method}
 \alias{PerHit,gaMetExpr-method}
 \alias{PerHit,formula-method}
-\title{PerHit.}
+\title{PerHit}
 \usage{
 PerHit(object, ..., negation)
 
@@ -17,17 +17,17 @@ PerHit(object, ..., negation)
 \S4method{PerHit}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{a gaMetExpr object to coerce to hit-level or if multiple
+\item{object}{A gaMetExpr object to coerce to hit-level or if multiple
 expressions are provided, then the first expression to combine into a
 single step of sequence filter.}
 
 \item{...}{Further expressions to be included in the filter definition if
 defining a sequence filter of length one.}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr or gaSegmentSequenceFilter.
+A gaMetExpr or gaSegmentSequenceFilter.
 }
 \description{
 Set the scope of a gaMetExpr object to hit-level, or transforms a condition
@@ -46,3 +46,13 @@ hit-level.
 metric condition to hit-level.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

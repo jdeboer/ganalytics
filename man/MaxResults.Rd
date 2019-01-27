@@ -6,7 +6,7 @@
 \alias{MaxResults<-}
 \alias{MaxResults,.query-method}
 \alias{MaxResults<-,.query-method}
-\title{MaxResults.}
+\title{MaxResults}
 \usage{
 MaxResults(object, value)
 
@@ -17,9 +17,9 @@ MaxResults(object) <- value
 \S4method{MaxResults}{.query}(object) <- value
 }
 \arguments{
-\item{object}{a query object.}
+\item{object}{A query object.}
 
-\item{value}{replacement value for the max-results parameter of the query.}
+\item{value}{Replacement value for the max-results parameter of the query.}
 }
 \description{
 Get the value set for MaxResults.
@@ -33,3 +33,13 @@ Set the maximum rows returned by a ganalytics query.
 \item \code{.query}: Set the maximum number of rows a query is allowed to return.
 }}
 
+\seealso{
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{Metrics}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{Metrics}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+}
+\concept{query object functions}

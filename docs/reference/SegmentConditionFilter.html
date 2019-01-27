@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SegmentConditionFilter. — SegmentConditionFilter • ganalytics</title>
+<title>SegmentConditionFilter — SegmentConditionFilter • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="SegmentConditionFilter. — SegmentConditionFilter" />
+<meta property="og:title" content="SegmentConditionFilter — SegmentConditionFilter" />
 
 <meta property="og:description" content="Create a new gaSegmentConditionFilter object" />
 
@@ -49,6 +49,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -65,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -119,7 +129,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>SegmentConditionFilter.</h1>
+    <h1>SegmentConditionFilter</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-generics.R'><code>R/Segment-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-methods.R'><code>R/Segment-methods.R</code></a></small>
     <div class="hidden name"><code>SegmentConditionFilter.Rd</code></div>
     </div>
@@ -148,18 +158,18 @@
     </tr>
     <tr>
       <th>negation</th>
-      <td><p>optional logical TRUE or FALSE to match segments where this condition
+      <td><p>Optional logical TRUE or FALSE to match segments where this condition
 has not been met. Default is FALSE, i.e. inclusive filter.</p></td>
     </tr>
     <tr>
       <th>scope</th>
-      <td><p>optional scope, "users" or "sessions".</p></td>
+      <td><p>Optional scope, "users" or "sessions".</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a gaSegmentConditionFilter object.</p>
+    <p>A gaSegmentConditionFilter object.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
@@ -169,6 +179,15 @@ filter from one or more expressions. All conditions within the filter must
 hold true within a single session if applied to a gaDynSegment
 scoped at session-level, or to a single hit if scoped at user-level.</p></li>
 </ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other dynamic segment functions: <code><a href='DynSegment.html'>DynSegment</a></code>,
+  <code><a href='Exclude.html'>Exclude</a></code>, <code><a href='Include.html'>Include</a></code>,
+  <code><a href='IsNegated.html'>IsNegated</a></code>, <code><a href='PerHit.html'>PerHit</a></code>,
+  <code><a href='PerProduct.html'>PerProduct</a></code>, <code><a href='PerSession.html'>PerSession</a></code>,
+  <code><a href='PerUser.html'>PerUser</a></code>, <code><a href='ScopeLevel.html'>ScopeLevel</a></code>,
+  <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
     
 
   </div>
@@ -180,6 +199,8 @@ scoped at session-level, or to a single hit if scoped at user-level.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

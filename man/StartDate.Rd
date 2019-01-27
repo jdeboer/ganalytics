@@ -3,7 +3,7 @@
 \name{StartDate}
 \alias{StartDate}
 \alias{StartDate<-}
-\title{StartDate.}
+\title{StartDate}
 \usage{
 StartDate(object, value)
 
@@ -12,7 +12,7 @@ StartDate(object) <- value
 \arguments{
 \item{object}{Object to get start date of.}
 
-\item{value}{value to set start date of object to.}
+\item{value}{Value to set start date of object to.}
 }
 \description{
 Get the start date.

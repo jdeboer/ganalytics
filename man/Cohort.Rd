@@ -3,18 +3,18 @@
 \name{Cohort}
 \alias{Cohort}
 \alias{Cohort<-}
-\title{Cohort.}
+\title{Cohort}
 \usage{
 Cohort(object, value, type)
 
 Cohort(object) <- value
 }
 \arguments{
-\item{object}{to get or set the cohorts of.}
+\item{object}{The object to get or set the cohorts of.}
 
-\item{value}{to set the object's cohorts to.}
+\item{value}{The value to set the object's cohorts to.}
 
-\item{type}{of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.}
+\item{type}{The type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.}
 }
 \description{
 Get or define a cohort.

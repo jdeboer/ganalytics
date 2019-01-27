@@ -1,4 +1,4 @@
-#' DateRange.
+#' DateRange
 #'
 #' Get the date range.
 #'
@@ -18,7 +18,7 @@ setGeneric(
   valueClass = "dateRange"
 )
 
-#' DateRange<-.
+#' DateRange<-
 #'
 #' Set the date range.
 #'
@@ -37,12 +37,12 @@ setGeneric(
   }
 )
 
-#' StartDate.
+#' StartDate
 #'
 #' Get the start date.
 #'
 #' @param object Object to get start date of.
-#' @param value value to set start date of object to.
+#' @param value Value to set start date of object to.
 #'
 #' @family date range functions
 #'
@@ -54,7 +54,7 @@ setGeneric(
   valueClass = "Date"
 )
 
-#' StartDate<-.
+#' StartDate<-
 #'
 #' Set the start date.
 #'
@@ -71,12 +71,12 @@ setGeneric(
   }
 )
 
-#' EndDate.
+#' EndDate
 #'
 #' Get the end date of the date range.
 #'
 #' @param object Object to get end date of.
-#' @param value value to set end date of object to.
+#' @param value Value to set end date of object to.
 #'
 #' @family date range functions
 #'
@@ -88,7 +88,7 @@ setGeneric(
   valueClass = "Date"
 )
 
-#' EndDate<-.
+#' EndDate<-
 #'
 #' Set the endDate of the date range.
 #'
@@ -105,13 +105,13 @@ setGeneric(
   }
 )
 
-#' Cohort.
+#' Cohort
 #'
 #' Get or define a cohort.
 #'
-#' @param object to get or set the cohorts of.
-#' @param value to set the object's cohorts to.
-#' @param type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.
+#' @param object The object to get or set the cohorts of.
+#' @param value The value to set the object's cohorts to.
+#' @param type The type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.
 #'
 #' @family date range functions
 #' @export
@@ -122,7 +122,7 @@ setGeneric(
   valueClass = "gaCohort"
 )
 
-#' Cohort<-.
+#' Cohort<-
 #'
 #' Set a cohort of a query.
 #'

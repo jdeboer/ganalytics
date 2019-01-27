@@ -4,7 +4,7 @@
 \name{SegmentConditionFilter}
 \alias{SegmentConditionFilter}
 \alias{SegmentConditionFilter,ANY-method}
-\title{SegmentConditionFilter.}
+\title{SegmentConditionFilter}
 \usage{
 SegmentConditionFilter(object, ..., negation, scope)
 
@@ -15,13 +15,13 @@ SegmentConditionFilter(object, ..., negation, scope)
 
 \item{...}{Other expressions to be ANDed to the first expression provided.}
 
-\item{negation}{optional logical TRUE or FALSE to match segments where this condition
+\item{negation}{Optional logical TRUE or FALSE to match segments where this condition
 has not been met. Default is FALSE, i.e. inclusive filter.}
 
-\item{scope}{optional scope, "users" or "sessions".}
+\item{scope}{Optional scope, "users" or "sessions".}
 }
 \value{
-a gaSegmentConditionFilter object.
+A gaSegmentConditionFilter object.
 }
 \description{
 Create a new gaSegmentConditionFilter object
@@ -34,3 +34,12 @@ hold true within a single session if applied to a gaDynSegment
 scoped at session-level, or to a single hit if scoped at user-level.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}}, \code{\link{ScopeLevel}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

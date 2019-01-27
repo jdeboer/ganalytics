@@ -4,7 +4,7 @@
 \name{RtExpr}
 \alias{RtExpr}
 \alias{RtExpr,character,character-method}
-\title{RtExpr.}
+\title{RtExpr}
 \usage{
 RtExpr(object, comparator, operand)
 

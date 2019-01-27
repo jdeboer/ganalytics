@@ -5,7 +5,7 @@
 \alias{IsRegEx}
 \alias{IsRegEx,.dimComparator-method}
 \alias{IsRegEx,.expr-method}
-\title{IsRegEx.}
+\title{IsRegEx}
 \usage{
 IsRegEx(object)
 
@@ -17,7 +17,7 @@ IsRegEx(object)
 \item{object}{An object to check if whether a regular expression.}
 }
 \value{
-TRUE or FALSE
+\code{TRUE} or \code{FALSE}
 }
 \description{
 Checks for a regular expression.

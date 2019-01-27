@@ -4,21 +4,21 @@
 \name{Exclude}
 \alias{Exclude}
 \alias{Exclude,ANY-method}
-\title{Exclude.}
+\title{Exclude}
 \usage{
 Exclude(object, ..., scope)
 
 \S4method{Exclude}{ANY}(object, ..., scope)
 }
 \arguments{
-\item{object}{a segment condition or sequence filter to exclude.}
+\item{object}{A segment condition or sequence filter to exclude.}
 
-\item{...}{additional segment conditions to add to the exclude filter.}
+\item{...}{Additional segment conditions to add to the exclude filter.}
 
-\item{scope}{optional scope, "users" or "sessions"}
+\item{scope}{Optional scope, "users" or "sessions"}
 }
 \value{
-a .gaSegmentFilter object with its negate slot set to TRUE.
+A .gaSegmentFilter object with its negate slot set to TRUE.
 }
 \description{
 Set the negation flag of a segment filter to TRUE.
@@ -29,3 +29,13 @@ Set the negation flag of a segment filter to TRUE.
 expressions.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Include}}, \code{\link{IsNegated}},
+  \code{\link{PerHit}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

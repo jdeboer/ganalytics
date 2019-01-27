@@ -6,7 +6,7 @@
 \alias{`|`}
 \alias{Or,.compoundExpr-method}
 \alias{|,.compoundExpr,.compoundExpr-method}
-\title{Or.}
+\title{Or}
 \usage{
 Or(object, ...)
 
@@ -15,19 +15,19 @@ Or(object, ...)
 \S4method{|}{.compoundExpr,.compoundExpr}(e1, e2)
 }
 \arguments{
-\item{object}{The first object to include within the OR expression.}
+\item{object}{An object to include within the ORed expression.}
 
-\item{...}{Additional objects to include within the OR expression.}
+\item{...}{Additional objects to include within the ORed expression.}
 
 \item{e1}{first expression}
 
 \item{e2}{second expression}
 }
 \value{
-An object of class orExpr.
+An object of class \code{orExpr}.
 }
 \description{
-OR two or more expressions.
+Logical OR of two or more expressions.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -36,6 +36,11 @@ OR two or more expressions.
 \item \code{e1 = .compoundExpr,e2 = .compoundExpr}: OR two expressions.
 }}
 
+\note{
+Google Analytics does not support ORing of ANDed expressions -- Only
+ANDing of ORed expresisons are supported. Consider De Morgan's laws for
+possible ways to work around this limitation.
+}
 \examples{
 mobile_or_tablet <- Expr(~deviceCategory == "mobile") | Expr(~deviceCategory == "tablet")
 converted <- Expr(~goalCompletionsAll > 0) | Expr(~transactions > 0)

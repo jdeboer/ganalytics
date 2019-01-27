@@ -2,7 +2,7 @@
 % Please edit documentation in R/Sequence-generics.R
 \name{First}
 \alias{First}
-\title{First.}
+\title{First}
 \usage{
 First(object, ...)
 }
@@ -14,7 +14,7 @@ expression.}
 expression.}
 }
 \value{
-a gaSegmentSequenceStep object, with the immediate flag set.
+A \code{gaSegmentSequenceStep} object, with the immediate flag set.
 }
 \description{
 If used at the beginning of a sequence, indicates that this step must match
@@ -23,4 +23,8 @@ range. First expressly means 'first interaction' within the date range.
 }
 \seealso{
 \code{\link{Sequence}}
+
+Other sequence segment functions: \code{\link{Later}},
+  \code{\link{Sequence}}, \code{\link{Then}}
 }
+\concept{sequence segment functions}

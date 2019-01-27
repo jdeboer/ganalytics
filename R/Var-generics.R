@@ -1,30 +1,34 @@
-# Var
-
+#' Var
+#'
 #' Google Analytics dimension and metric variables.
 #'
-#' \code{Var} returns a '.var' object which is valid Google Analytics dimension
-#' or metric for use with the core reporting, multi-channel-funnel reporting or
-#' real-time reporting API.
+#' \code{Var} returns a \code{.var} object which is valid Google Analytics
+#' dimension or metric for use with the core reporting, multi-channel-funnel
+#' reporting or real-time reporting API.
 #'
 #' Use \code{Var} to lookup a dimension or metric from the Google Analytics core
 #' reporting, multi-channel-funnel reporting, or real-time reporting APIs, for
-#' use in defining expressions (of superclass '.expr') or (to be implemented)
-#' variable lists (of superclass '.varList') such as query dimensions, metrics
-#' or sortBy parameters.
+#' use in defining expressions (of superclass \code{.expr}) or (to be
+#' implemented) variable lists (of superclass \code{.varList}) such as query
+#' dimensions, metrics or sortBy parameters.
 #'
-#' \code{Var} accepts either a character, '.var', or '.expr' object. A character
-#' object will be coerced to a '.var' object by looking for a matching dimension
-#' or metric from the Core Reporting, Multi-Channel Funnel Reporting, and
-#' Real-Time Reporting APIs. Providing an '.expr' object will return the
-#' dimension or metric used within that Google Analytics expression.
+#' \code{Var} accepts either a character, \code{.var}, or \code{.expr} object. A
+#' character object will be coerced to a \code{.var} object by looking for a
+#' matching dimension or metric from the Core Reporting, Multi-Channel Funnel
+#' Reporting, and Real-Time Reporting APIs. Providing an \code{.expr} object
+#' will return the dimension or metric used within that Google Analytics
+#' expression.
 #'
-#' @param object an object that inherits from or extends the class '.var',
-#'   including 'gaDimVar', 'gaMetVar', 'mcfDimVar', 'mcfMetVar', 'rtDimVar',
-#'   'rtMetVar', 'gaExpr', 'mcfExpr', 'rtExpr', 'gaDimensions', 'gaMetrics',
-#'   'mcfDimensions', 'mcfMetrics', 'rtDimensions' and 'rtMetrics'.
-#' @param ... A replacement value for \code{object} coerced to class '.var'.
+#' @param object An object that inherits from or extends the class \code{.var},
+#'   including \code{gaDimVar}, \code{gaMetVar}, \code{mcfDimVar},
+#'   \code{mcfMetVar}, \code{rtDimVar}, \code{rtMetVar}, \code{gaExpr},
+#'   \code{mcfExpr}, \code{rtExpr}, \code{gaDimensions}, \code{gaMetrics},
+#'   \code{mcfDimensions}, \code{mcfMetrics}, \code{rtDimensions} and
+#'   \code{rtMetrics}.
+#' @param ... A replacement value for \code{object} coerced to class
+#'   \code{.var}.
 #'
-#' @return An object inheriting from the superclass '.var'
+#' @return An object inheriting from the superclass \code{.var}
 #'
 #' @examples
 #' Var("source")
@@ -41,7 +45,7 @@
 #'   \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
 #'    Reporting API dimensions and metrics} }
 #'
-#' @family Var var functions
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -51,16 +55,18 @@ setGeneric(
   valueClass = ".var"
 )
 
-#' Var<-.
+#' Var<-
 #'
-#' \code{Var<-} sets the value of an object belonging to the superclass '.var'
-#' or sets the var slot of an expression object belonging to superclass '.expr'
+#' \code{Var<-} sets the value of an object belonging to the superclass \code{.var}
+#' or sets the var slot of an expression object belonging to superclass \code{.expr}
 #'
 #' @param value any object that can be coerced to a valid \code{object} class.
 #'
 #' @examples
 #' expr1 <- Expr("pageviews", '>', 10)
 #' Var(expr1) <- "uniquePageviews"
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -73,7 +79,9 @@ setGeneric(
   }
 )
 
-#' \code{GaVar} Gets or creates an object from the superclass .gaVar
+#' \code{GaVar} Gets or creates an object from the superclass \code{.gaVar}
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -83,9 +91,11 @@ setGeneric(
   valueClass = ".gaVar"
 )
 
-#' \code{GaVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' \code{GaVar<-} replaces a \code{.var} object or sets the var slot of \code{.expr}
 #' object to a Google Analytics Core Reporting API dimension or metric
-#' that inherits from the class '.gaVar'.
+#' that inherits from the class \code{.gaVar}.
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -98,7 +108,9 @@ setGeneric(
   }
 )
 
-#' \code{McfVar} Gets or creates an object from the superclass .mcfVar
+#' \code{McfVar} Gets or creates an object from the superclass \code{.mcfVar}
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -108,9 +120,11 @@ setGeneric(
   valueClass = ".mcfVar"
 )
 
-#' \code{McfVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' \code{McfVar<-} replaces a \code{.var} object or sets the var slot of \code{.expr}
 #' object to a Multi Channel Funnel Reporting API dimension or metric
-#' that inherits from the class '.mcfVar'.
+#' that inherits from the class \code{.mcfVar}.
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -123,7 +137,9 @@ setGeneric(
   }
 )
 
-#' \code{RtVar} Gets or creates an object from the superclass .rtVar
+#' \code{RtVar} gets or creates an object from the superclass \code{.rtVar}
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var
@@ -133,9 +149,11 @@ setGeneric(
   valueClass = ".rtVar"
 )
 
-#' \code{RtVar<-} replaces a '.var' object or sets the var slot of '.expr'
+#' \code{RtVar<-} replaces a \code{.var} object or sets the var slot of \code{.expr}
 #' object to a Google Analytics Real Time Reporting API dimension or metric
-#' that inherits from the class '.rtVar'.
+#' that inherits from the class \code{.rtVar}.
+#'
+#' @family vars
 #'
 #' @export
 #' @rdname Var

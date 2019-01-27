@@ -7,7 +7,7 @@
 \alias{Dimensions,ANY-method}
 \alias{Dimensions,.query-method}
 \alias{Dimensions<-,.query-method}
-\title{Dimensions.}
+\title{Dimensions}
 \usage{
 Dimensions(object, ...)
 
@@ -42,3 +42,13 @@ Google Analytics dimensions.
 \item \code{.query}: Replace the dimensions of the query.
 }}
 
+\seealso{
+Other query object functions: \code{\link{MaxResults}},
+  \code{\link{Metrics}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+
+Other query object functions: \code{\link{MaxResults}},
+  \code{\link{Metrics}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+}
+\concept{query object functions}

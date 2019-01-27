@@ -24,7 +24,7 @@
 \alias{DateRange<-,.standardQuery-method}
 \alias{DateRange,gaView,ANY-method}
 \alias{DateRange<-,ANY-method}
-\title{DateRange.}
+\title{DateRange}
 \usage{
 DateRange(object, endDate)
 

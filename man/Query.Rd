@@ -2,7 +2,7 @@
 % Please edit documentation in R/Query-generics.R
 \name{GetGaData}
 \alias{GetGaData}
-\title{GetGaData.}
+\title{GetGaData}
 \usage{
 GetGaData(query, creds = NULL, ...)
 }

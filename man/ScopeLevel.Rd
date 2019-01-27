@@ -11,7 +11,7 @@
 \alias{ScopeLevel,.gaSegmentFilter,ANY-method}
 \alias{ScopeLevel<-,.gaSegmentFilter,character-method}
 \alias{ScopeLevel<-,gaDynSegment,character-method}
-\title{ScopeLevel.}
+\title{ScopeLevel}
 \usage{
 ScopeLevel(object, value)
 
@@ -30,7 +30,7 @@ ScopeLevel(object) <- value
 \S4method{ScopeLevel}{gaDynSegment,character}(object) <- value
 }
 \arguments{
-\item{object}{a .gaSegmentFilter or a metric expression.}
+\item{object}{A .gaSegmentFilter or a metric expression.}
 
 \item{value}{New scope level to return an updated copy of the object
 with the new scope applied. For .gaSegmentFilters this can be
@@ -38,7 +38,7 @@ either 'users' or 'sessions'. For metric expressions use either 'perUser',
 'perSession', 'perHit' or 'perProduct'.}
 }
 \value{
-the scope level as a character string, a .gaSegmentFilter or gaMetExpr.
+The scope level as a character string, a .gaSegmentFilter or gaMetExpr.
 }
 \description{
 Get the scope level of a .gaSegmentFilter or gaMetExpr.
@@ -67,3 +67,21 @@ expression.
 "user" or "session" level.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>IsNegated. — IsNegated • ganalytics</title>
+<title>IsNegated — IsNegated • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="IsNegated. — IsNegated" />
+<meta property="og:title" content="IsNegated — IsNegated" />
 
 <meta property="og:description" content="Tests whether a segment filter is negated.
 Sets the negation flag of a segment filter." />
@@ -50,6 +50,16 @@ Sets the negation flag of a segment filter." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ Sets the negation flag of a segment filter." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,7 +130,7 @@ Sets the negation flag of a segment filter." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>IsNegated.</h1>
+    <h1>IsNegated</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-generics.R'><code>R/Segment-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-methods.R'><code>R/Segment-methods.R</code></a></small>
     <div class="hidden name"><code>IsNegated.Rd</code></div>
     </div>
@@ -147,11 +157,11 @@ Sets the negation flag of a segment filter." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>an object belonging to the superclass <code>.gaSegmentFilter</code>.</p></td>
+      <td><p>An object belonging to the superclass <code>.gaSegmentFilter</code>.</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>the value of the negation slot, either <code>TRUE</code> or
+      <td><p>The value of the negation slot, either <code>TRUE</code> or
 <code>FALSE</code>.</p></td>
     </tr>
     </table>
@@ -165,6 +175,23 @@ define an exclude filter for the segment.</p></li>
 used as an exclude filter in a segment definition.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other dynamic segment functions: <code><a href='DynSegment.html'>DynSegment</a></code>,
+  <code><a href='Exclude.html'>Exclude</a></code>, <code><a href='Include.html'>Include</a></code>,
+  <code><a href='PerHit.html'>PerHit</a></code>, <code><a href='PerProduct.html'>PerProduct</a></code>,
+  <code><a href='PerSession.html'>PerSession</a></code>, <code><a href='PerUser.html'>PerUser</a></code>,
+  <code><a href='ScopeLevel.html'>ScopeLevel</a></code>,
+  <code><a href='SegmentConditionFilter.html'>SegmentConditionFilter</a></code>,
+  <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p>
+<p>Other dynamic segment functions: <code><a href='DynSegment.html'>DynSegment</a></code>,
+  <code><a href='Exclude.html'>Exclude</a></code>, <code><a href='Include.html'>Include</a></code>,
+  <code><a href='PerHit.html'>PerHit</a></code>, <code><a href='PerProduct.html'>PerProduct</a></code>,
+  <code><a href='PerSession.html'>PerSession</a></code>, <code><a href='PerUser.html'>PerUser</a></code>,
+  <code><a href='ScopeLevel.html'>ScopeLevel</a></code>,
+  <code><a href='SegmentConditionFilter.html'>SegmentConditionFilter</a></code>,
+  <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -173,6 +200,8 @@ used as an exclude filter in a segment definition.</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

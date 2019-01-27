@@ -7,7 +7,7 @@
 \alias{Metrics,ANY-method}
 \alias{Metrics,.query-method}
 \alias{Metrics<-,.query-method}
-\title{Metrics.}
+\title{Metrics}
 \usage{
 Metrics(object, ...)
 
@@ -42,3 +42,13 @@ Set the metrics of the object.
 \item \code{.query}: Set the metrics for a '.query' object.
 }}
 
+\seealso{
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{SamplingLevel}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+}
+\concept{query object functions}

@@ -11,7 +11,7 @@
 \alias{GaView,.query,missing-method}
 \alias{GaView,.query,ANY-method}
 \alias{GaView<-,.query-method}
-\title{ga_view_selector.}
+\title{ga_view_selector}
 \usage{
 ga_view_selector(creds = GoogleApiCreds(), with_gui = FALSE)
 
@@ -45,7 +45,7 @@ view of the first web property in a Google Analytics account.}
 in which case GaView will return the modified query.}
 }
 \value{
-a gaView object.
+A gaView object.
 }
 \description{
 GaView A menu user-interface for selecting a Google Analytics view.

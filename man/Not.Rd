@@ -12,7 +12,7 @@
 \alias{!,orExpr-method}
 \alias{Not,.gaSegmentFilter-method}
 \alias{!,.gaSegmentFilter-method}
-\title{Not.}
+\title{Not}
 \usage{
 Not(object)
 
@@ -38,7 +38,7 @@ Not(object)
 \item{x}{the object to return the logical inverse of.}
 }
 \description{
-Invert an expression, i.e. NOT.
+\code{Not} inverts an expression, i.e. logical NOT.
 }
 \section{Methods (by class)}{
 \itemize{

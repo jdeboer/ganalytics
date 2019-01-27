@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Comparator. — Comparator • ganalytics</title>
+<title>Comparator — Comparator • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Comparator. — Comparator" />
+<meta property="og:title" content="Comparator — Comparator" />
 
-<meta property="og:description" content="Get a comparator used in an expression or create a comparator object.
+<meta property="og:description" content="Get the comparator used in an expression or create a comparator object.
 Set the comparator of an expression." />
 
 <meta property="og:image" content="/logo.png" />
@@ -50,6 +50,16 @@ Set the comparator of an expression." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ Set the comparator of an expression." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,14 +130,14 @@ Set the comparator of an expression." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Comparator.</h1>
+    <h1>Comparator</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Comparator-generics.R'><code>R/Comparator-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Comparator-methods.R'><code>R/Comparator-methods.R</code></a></small>
     <div class="hidden name"><code>Comparator.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Get a comparator used in an expression or create a comparator object.</p>
+    <p>Get the comparator used in an expression or create a comparator object.</p>
 <p>Set the comparator of an expression.</p>
     
     </div>
@@ -195,7 +205,7 @@ Comparator(object) <- value</pre>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>The object to be coerced to a '.Comparator' subclass or the
+      <td><p>The object to be coerced to a '.comparator' subclass or the
 expression object of which to obtain its comparator.</p></td>
     </tr>
     <tr>
@@ -208,11 +218,11 @@ expression object of which to obtain its comparator.</p></td>
     </tr>
     <tr>
       <th>var</th>
-      <td><p>dimension object</p></td>
+      <td><p>Dimension object</p></td>
     </tr>
     <tr>
       <th>operand</th>
-      <td><p>operand object</p></td>
+      <td><p>Operand object</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -232,9 +242,35 @@ expression object of which to obtain its comparator.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object belonging to the superclass <code>.comparator</code></p>
+    
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
     <ul>
+<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left match the
+regular expression on the right.</p></li>
+<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left start with
+the character substring on the right.</p></li>
+<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left end with
+the character substring on the right.</p></li>
+<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left contain
+the character substring on the right.</p></li>
+<li><p><code>var = .var,operand = .operand</code>: Is the value on the left in between the values of the
+first and second elements of the vector on the right.</p></li>
+<li><p><code>x = .var,table = .operand</code>: Does the vector on the right contain an element that
+matches the value on the left.</p></li>
+<li><p><code>e1 = .var,e2 = .operand</code>: Do the values on the left and right match exactly.</p></li>
+<li><p><code>e1 = .var,e2 = .operand</code>: Do the values on the left and right not match.</p></li>
+<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left greater than the value on the
+right.</p></li>
+<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left less than the value on the
+right.</p></li>
+<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left greater than or equal to the
+value on the right.</p></li>
+<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left less than or equal to the
+value on the right.</p></li>
 <li><p><code>.expr</code>: Return the comparator used within the supplied
 conditional expression.</p></li>
 <li><p><code>.expr</code>: Replace the comparator of the supplied
@@ -285,6 +321,8 @@ values in the vector specified by the operand (RHS).</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
 
       <li><a href="#-starts-with-">%starts_with%</a></li>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cohort. — Cohort • ganalytics</title>
+<title>Cohort — Cohort • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Cohort. — Cohort" />
+<meta property="og:title" content="Cohort — Cohort" />
 
 <meta property="og:description" content="Get or define a cohort.
 Set a cohort of a query." />
@@ -50,6 +50,16 @@ Set a cohort of a query." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ Set a cohort of a query." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,7 +130,7 @@ Set a cohort of a query." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Cohort.</h1>
+    <h1>Cohort</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Date-generics.R'><code>R/Date-generics.R</code></a></small>
     <div class="hidden name"><code>Cohort.Rd</code></div>
     </div>
@@ -141,15 +151,15 @@ Set a cohort of a query." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>to get or set the cohorts of.</p></td>
+      <td><p>The object to get or set the cohorts of.</p></td>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>to set the object's cohorts to.</p></td>
+      <td><p>The value to set the object's cohorts to.</p></td>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.</p></td>
+      <td><p>The type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.</p></td>
     </tr>
     </table>
     

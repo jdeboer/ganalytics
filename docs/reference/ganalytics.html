@@ -49,6 +49,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -65,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -139,12 +149,12 @@ configuration management and Google Tag Manager APIs.</p>
 <p>To use this package with these APIs, it is necessary to provide OAuth
 credentials for a Google APIs project with the necessary APIs enabled.</p>
 <p>Features:</p><ul>
-<li><p>Auto-pagination to return up to 1,000,000 rows per query.</p></li>
-<li><p>Ability to query more than 10 metrics at once. (TBC)</p></li>
-<li><p>Minimise the effect of sampling by splitting the date range of queries
-using the SplitDateRange function.</p></li>
-<li><p>When sampling has occurred, the output data.frame includes the sample and
-total sizes as attributes.</p></li>
+<li><p>Auto-pagination to return up to 1 million rows per query.</p></li>
+<li><p>Ability to query more than 10 metrics at once.</p></li>
+<li><p>Minimise the effect of sampling by splitting the date range of
+queries using the <code>SplitDateRange</code> function.</p></li>
+<li><p>When sampling has occurred, the output <code>data.frame</code> includes
+the sample and total sizes as attributes.</p></li>
 </ul>
     <p>To report bugs, please run the following command:
 <code><a href='https://www.rdocumentation.org/packages/utils/topics/bug.report'>utils::bug.report(package = "ganalytics")</a></code></p>
@@ -154,12 +164,19 @@ care not to include any private data). For example:
 <code><a href='https://www.rdocumentation.org/packages/httr/topics/with_config'>httr::with_verbose(GetGaData(my_query))</a></code></p>
 <p>For a step-by-step guide with examples, run this command:
 <code><a href='https://www.rdocumentation.org/packages/utils/topics/browseVignettes'>browseVignettes(package = "ganalytics")</a></code></p>
+<p>Important functions to be familiar with in this package are:</p><ul>
+<li><p><code><a href='GaQuery.html'>GaQuery</a></code> : This function is used to define a Google Analytics query
+object that can be interactively manipulated and executed to aid exploratory
+querying and analysis of Google Analytics data.</p></li>
+<li><p><code><a href='Expr.html'>Expr</a></code> : This is used to define expressions involving Google Analytics
+dimensions and/or metrics used for use in segments and filters.</p></li>
+<li><p><code><a href='Sequence.html'>Sequence</a></code> : This function takes one or more expressions to construct
+a sequence-based segment.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="package-options"><a class="anchor" href="#package-options"></a>Package options</h2>
 
-    
-    <p>GOOGLE_APIS_USER
-GOOGLE_APIS_CONSUMER_ID
+    <p>GOOGLE_APIS_USER GOOGLE_APIS_CONSUMER_ID
 GOOGLE_APIS_CONSUMER_SECRET</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>

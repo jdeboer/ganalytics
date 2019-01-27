@@ -1,6 +1,6 @@
-# ganalytics 0.10.5.9000
+# ganalytics 0.10.6
 
-* Added a `NEWS.md` file to track changes to the package.
+* Update released to CRAN.
 
 # ganalytics 2018-09-08
 
@@ -12,7 +12,8 @@
 
 # ganalytics 2018-07-22
 
-* Added new function `ga_view_selector()` which provides a user-interactive way to select a view from the available Google Analytics accounts and properties within those accounts. * Demos have been updated to use this new function. And lastly, ganalytics now has a logo.
+* Added new function `ga_view_selector()` which provides a user-interactive way to select a view from the available Google Analytics accounts and properties within those accounts.
+* Demos have been updated to use this new function. And lastly, ganalytics now has a logo.
 
 # ganalytics 2018-07-01
 
