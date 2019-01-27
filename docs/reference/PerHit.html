@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PerHit. — PerHit • ganalytics</title>
+<title>PerHit — PerHit • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="PerHit. — PerHit" />
+<meta property="og:title" content="PerHit — PerHit" />
 
 <meta property="og:description" content="Set the scope of a gaMetExpr object to hit-level, or transforms a condition
 filter to a sequence filter of length one (i.e. a combination of conditions
@@ -51,6 +51,16 @@ for matching a single hit)." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -67,7 +77,7 @@ for matching a single hit)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -121,7 +131,7 @@ for matching a single hit)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>PerHit.</h1>
+    <h1>PerHit</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-generics.R'><code>R/Segment-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-methods.R'><code>R/Segment-methods.R</code></a></small>
     <div class="hidden name"><code>PerHit.Rd</code></div>
     </div>
@@ -150,7 +160,7 @@ for matching a single hit).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>a gaMetExpr object to coerce to hit-level or if multiple
+      <td><p>A gaMetExpr object to coerce to hit-level or if multiple
 expressions are provided, then the first expression to combine into a
 single step of sequence filter.</p></td>
     </tr>
@@ -161,13 +171,13 @@ defining a sequence filter of length one.</p></td>
     </tr>
     <tr>
       <th>negation</th>
-      <td><p>boolean value indicating whether to negate the condition.</p></td>
+      <td><p>Boolean value indicating whether to negate the condition.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a gaMetExpr or gaSegmentSequenceFilter.</p>
+    <p>A gaMetExpr or gaSegmentSequenceFilter.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
@@ -180,6 +190,16 @@ hit-level.</p></li>
 metric condition to hit-level.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other dynamic segment functions: <code><a href='DynSegment.html'>DynSegment</a></code>,
+  <code><a href='Exclude.html'>Exclude</a></code>, <code><a href='Include.html'>Include</a></code>,
+  <code><a href='IsNegated.html'>IsNegated</a></code>, <code><a href='PerProduct.html'>PerProduct</a></code>,
+  <code><a href='PerSession.html'>PerSession</a></code>, <code><a href='PerUser.html'>PerUser</a></code>,
+  <code><a href='ScopeLevel.html'>ScopeLevel</a></code>,
+  <code><a href='SegmentConditionFilter.html'>SegmentConditionFilter</a></code>,
+  <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -190,6 +210,8 @@ metric condition to hit-level.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

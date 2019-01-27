@@ -8,7 +8,7 @@
 \alias{PerUser,gaSegmentSequenceFilter-method}
 \alias{PerUser,gaMetExpr-method}
 \alias{PerUser,formula-method}
-\title{PerUser.}
+\title{PerUser}
 \usage{
 PerUser(object, ..., negation)
 
@@ -29,13 +29,10 @@ coerce into a user scoped gaDynSegment.}
 
 \item{...}{Other filters to include in the gaDynSegment.}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr, .gaSegmentFilter or gaDynSegment.
-
-To define a gaDynSegment comprised of a single metric expression,
-wrap the metric expression in an \code{Include} or \code{Exclude} call.
+A gaMetExpr, .gaSegmentFilter or gaDynSegment.
 }
 \description{
 Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
@@ -58,3 +55,17 @@ user-level.
 metric condition to user-level.
 }}
 
+\note{
+To define a gaDynSegment comprised of a single metric expression,
+wrap the metric expression in an \code{Include} or \code{Exclude} call.
+}
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

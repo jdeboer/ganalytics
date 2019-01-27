@@ -1,4 +1,4 @@
-#' Metrics.
+#' Metrics
 #'
 #' Get the metrics of the object.
 #'
@@ -6,6 +6,8 @@
 #'   replace the metrics of.
 #' @param ... Further metrics to add to the resulting list or the replacement
 #'   value for the metrics of the query object (if supplied).
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname Metrics
@@ -15,11 +17,13 @@ setGeneric(
   valueClass = ".metrics"
 )
 
-#' Metrics<-.
+#' Metrics<-
 #'
 #' Set the metrics of the object.
 #'
 #' @param value The replacement dimensions for the supplied object.
+#'
+#' @family query object functions
 #'
 #' @rdname Metrics
 #' @export
@@ -32,13 +36,15 @@ setGeneric(
   }
 )
 
-#' Dimensions.
+#' Dimensions
 #'
 #' Get the dimensions of the object.
 #'
 #' @param object An object to be coerced to a list of dimensions.
 #' @param ... Other dimensions to add to the returned list, or if \code{object}
 #'   is a query object, the replacement dimensions.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname Dimensions
@@ -48,11 +54,13 @@ setGeneric(
   valueClass = ".dimensions"
 )
 
-#' Dimensions<-.
+#' Dimensions<-
 #'
 #' Set the dimensions for the object.
 #'
 #' @param value The replacement dimensions for the supplied object.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname Dimensions
@@ -65,7 +73,7 @@ setGeneric(
   }
 )
 
-#' SortBy.
+#' SortBy
 #'
 #' Get the sortBy order of the query.
 #'
@@ -75,7 +83,7 @@ setGeneric(
 #'   descending order, while dimensions are by default in ascending order.
 #'   Alternatively, supply a query object and replacement dimensions and metrics
 #'   or sort by.
-#' @param ... further dimensions or metrics to sort by, or if \code{object} is a
+#' @param ... Further dimensions or metrics to sort by, or if \code{object} is a
 #'   query then the replacement list of dimensions or metrics to sort by.
 #' @param desc A logical vector, same length as the resulting list of dimension
 #'   or metric variables, indicating which columns of the resulting query
@@ -83,6 +91,8 @@ setGeneric(
 #' @param type A character vector, same length as the vector of variables to sort by,
 #'   indicating the method of sorting to be applied to each variable. Available sort
 #'   types are "VALUE", "DELTA", "SMART", "HISTOGRAM_BUCKET" or "DIMENSION_AS_INTEGER".
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname SortBy
@@ -97,11 +107,13 @@ setGeneric(
   valueClass = c(".sortBy", ".query", "NULL")
 )
 
-#' SortBy<-.
+#' SortBy<-
 #'
 #' Set the order of rows returned by Google Analytics.
 #'
 #' @param value The replacement dimensions and metrics for the supplied object.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname SortBy

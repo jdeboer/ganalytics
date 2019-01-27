@@ -8,7 +8,7 @@
 \alias{Segment,ANY-method}
 \alias{Segment,NULL-method}
 \alias{Segment,gaUserSegment-method}
-\title{Segment.}
+\title{Segment}
 \usage{
 Segment(object, ...)
 
@@ -23,14 +23,14 @@ Segment(object, ...)
 \S4method{Segment}{gaUserSegment}(object)
 }
 \arguments{
-\item{object}{a segment or other object that can be coerced into a segment,
+\item{object}{A segment or other object that can be coerced into a segment,
 including dynamic segments, built-in and/or custom segments by their ID.}
 
-\item{...}{other segment conditions, filters or filter lists to include in
+\item{...}{Other segment conditions, filters or filter lists to include in
 the segment's definition (ANDed)}
 }
 \value{
-an object belonging to the .gaSegment superclass.
+An object belonging to the .gaSegment superclass.
 }
 \description{
 Define a segment for use in a query's segment list.
@@ -50,3 +50,13 @@ expressions.
 user segment.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}}, \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}
+}
+\concept{dynamic segment functions}

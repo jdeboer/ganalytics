@@ -6,7 +6,7 @@
 \alias{Operand<-}
 \alias{Operand,.expr-method}
 \alias{Operand<-,.expr-method}
-\title{Operand.}
+\title{Operand}
 \usage{
 Operand(object, value)
 

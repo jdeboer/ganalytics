@@ -1,3 +1,6 @@
+#' @importFrom tibble tibble
+NULL
+
 #' ganalytics
 #'
 #' A Google Analytics and Google Tag Manager API client for R
@@ -10,16 +13,14 @@
 #' credentials for a Google APIs project with the necessary APIs enabled.
 #'
 #' Features:
-#'
-#' * Auto-pagination to return up to 1,000,000 rows per query.
-#'
-#' * Ability to query more than 10 metrics at once. (TBC)
-#'
-#' * Minimise the effect of sampling by splitting the date range of queries
-#' using the SplitDateRange function.
-#'
-#' * When sampling has occurred, the output data.frame includes the sample and
-#' total sizes as attributes.
+#' \itemize{
+#'   \item Auto-pagination to return up to 1 million rows per query.
+#'   \item Ability to query more than 10 metrics at once.
+#'   \item Minimise the effect of sampling by splitting the date range of
+#'   queries using the \code{SplitDateRange} function.
+#'   \item When sampling has occurred, the output \code{data.frame} includes
+#'   the sample and total sizes as attributes.
+#' }
 #'
 #' To report bugs, please run the following command:
 #' \code{utils::bug.report(package = "ganalytics")}
@@ -32,10 +33,20 @@
 #' For a step-by-step guide with examples, run this command:
 #' \code{browseVignettes(package = "ganalytics")}
 #'
-#' @section Package options:
-#' GOOGLE_APIS_USER
-#' GOOGLE_APIS_CONSUMER_ID
-#' GOOGLE_APIS_CONSUMER_SECRET
+#' Important functions to be familiar with in this package are:
+#'
+#' * \code{\link{GaQuery}} : This function is used to define a Google Analytics query
+#' object that can be interactively manipulated and executed to aid exploratory
+#' querying and analysis of Google Analytics data.
+#'
+#' * \code{\link{Expr}} : This is used to define expressions involving Google Analytics
+#' dimensions and/or metrics used for use in segments and filters.
+#'
+#' * \code{\link{Sequence}} : This function takes one or more expressions to construct
+#' a sequence-based segment.
+#'
+#' @section Package options: GOOGLE_APIS_USER GOOGLE_APIS_CONSUMER_ID
+#'   GOOGLE_APIS_CONSUMER_SECRET
 #'
 #' @references Google Analytics core reporting API dimensions and metrics
 #'   reference:

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>And. — And • ganalytics</title>
+<title>And — And • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="And. — And" />
+<meta property="og:title" content="And — And" />
 
-<meta property="og:description" content="AND two or more ganalytics expressions together." />
+<meta property="og:description" content="Logical AND of two or more expressions." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -48,6 +48,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
 
   </head>
 
@@ -65,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -119,14 +129,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>And.</h1>
+    <h1>And</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Bool-generics.R'><code>R/Bool-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Bool-methods.R'><code>R/Bool-methods.R</code></a></small>
     <div class="hidden name"><code>And.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>AND two or more ganalytics expressions together.</p>
+    <p>Logical AND of two or more expressions.</p>
     
     </div>
 
@@ -143,11 +153,11 @@ And(object, ...)
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>The first object within the AND expression</p></td>
+      <td><p>An object to include within the ANDed expression.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional objects to include within the AND expression.</p></td>
+      <td><p>Additional objects to include within the ANDed expression.</p></td>
     </tr>
     <tr>
       <th>e1</th>
@@ -161,7 +171,7 @@ And(object, ...)
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an object of class <code>andExpr</code></p>
+    <p>An object of class <code>andExpr</code></p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 

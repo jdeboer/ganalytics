@@ -6,7 +6,7 @@
 \alias{IsNegated<-}
 \alias{IsNegated,.gaSegmentFilter-method}
 \alias{IsNegated<-,.gaSegmentFilter,logical-method}
-\title{IsNegated.}
+\title{IsNegated}
 \usage{
 IsNegated(object)
 
@@ -17,9 +17,9 @@ IsNegated(object) <- value
 \S4method{IsNegated}{.gaSegmentFilter,logical}(object) <- value
 }
 \arguments{
-\item{object}{an object belonging to the superclass \code{.gaSegmentFilter}.}
+\item{object}{An object belonging to the superclass \code{.gaSegmentFilter}.}
 
-\item{value}{the value of the negation slot, either \code{TRUE} or
+\item{value}{The value of the negation slot, either \code{TRUE} or
 \code{FALSE}.}
 }
 \description{
@@ -36,3 +36,21 @@ define an exclude filter for the segment.
 used as an exclude filter in a segment definition.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{PerHit}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{PerHit}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

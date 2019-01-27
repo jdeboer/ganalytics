@@ -2,7 +2,7 @@
 #' @importFrom utils menu
 NULL
 
-#' ga_view_selector.
+#' ga_view_selector
 #'
 #' GaView A menu user-interface for selecting a Google Analytics view.
 #'
@@ -10,7 +10,7 @@ NULL
 #' @param with_gui Optional. Boolean value indicating whether to use a GUI for
 #'   the menu. Default is FALSE.
 #'
-#' @return a gaView object.
+#' @return A gaView object.
 #'
 #' @export
 #' @rdname GaView
@@ -65,7 +65,7 @@ ga_view_selector <- function(creds = GoogleApiCreds(), with_gui = FALSE) {
   ga_views[[ga_view_index]]
 }
 
-#' GaView.
+#' GaView
 #'
 #' Get the viewId of the query
 #'
@@ -83,7 +83,7 @@ setGeneric(
   valueClass = c("viewId", "gaView", ".query")
 )
 
-#' GaView<-.
+#' GaView<-
 #'
 #' Set the viewId for the query.
 #'
@@ -98,12 +98,14 @@ setGeneric(
   }
 )
 
-#' MaxResults.
+#' MaxResults
 #'
 #' Get the value set for MaxResults.
 #'
-#' @param object a query object.
-#' @param value replacement value for the max-results parameter of the query.
+#' @param object A query object.
+#' @param value Replacement value for the max-results parameter of the query.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname MaxResults
@@ -113,9 +115,11 @@ setGeneric(
   valueClass = "numeric"
 )
 
-#' MaxResults<-.
+#' MaxResults<-
 #'
 #' Set the maximum rows returned by a ganalytics query.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname MaxResults
@@ -128,13 +132,15 @@ setGeneric(
   }
 )
 
-#' SamplingLevel.
+#' SamplingLevel
 #'
 #' Get the sampling level.
 #'
-#' @param object the query or response to check the sampling level of.
-#' @param value if \code{object} is a query, then use  value to set the sampling
+#' @param object The query or response to check the sampling level of.
+#' @param value If \code{object} is a query, then use  value to set the sampling
 #'   level to of that query.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname SamplingLevel
@@ -144,9 +150,11 @@ setGeneric(
   valueClass = c("character", "list")
 )
 
-#' SamplingLevel<-.
+#' SamplingLevel<-
 #'
 #' Set the sampling level for a ganalytics query.
+#'
+#' @family query object functions
 #'
 #' @export
 #' @rdname SamplingLevel
@@ -159,7 +167,7 @@ setGeneric(
   }
 )
 
-#' GetGaData.
+#' GetGaData
 #'
 #' Fetch the data for the Google Analytics API query.
 #'
@@ -204,3 +212,4 @@ setGeneric(
     object
   }
 )
+

@@ -22,7 +22,7 @@
 \alias{GaVar,.gaVarList-method}
 \alias{McfVar,ANY-method}
 \alias{RtVar,ANY-method}
-\title{Google Analytics dimension and metric variables.}
+\title{Var}
 \usage{
 Var(object, ...)
 
@@ -65,38 +65,44 @@ RtVar(object) <- value
 \S4method{RtVar}{ANY}(object)
 }
 \arguments{
-\item{object}{an object that inherits from or extends the class '.var',
-including 'gaDimVar', 'gaMetVar', 'mcfDimVar', 'mcfMetVar', 'rtDimVar',
-'rtMetVar', 'gaExpr', 'mcfExpr', 'rtExpr', 'gaDimensions', 'gaMetrics',
-'mcfDimensions', 'mcfMetrics', 'rtDimensions' and 'rtMetrics'.}
+\item{object}{An object that inherits from or extends the class \code{.var},
+including \code{gaDimVar}, \code{gaMetVar}, \code{mcfDimVar},
+\code{mcfMetVar}, \code{rtDimVar}, \code{rtMetVar}, \code{gaExpr},
+\code{mcfExpr}, \code{rtExpr}, \code{gaDimensions}, \code{gaMetrics},
+\code{mcfDimensions}, \code{mcfMetrics}, \code{rtDimensions} and
+\code{rtMetrics}.}
 
-\item{...}{A replacement value for \code{object} coerced to class '.var'.}
+\item{...}{A replacement value for \code{object} coerced to class
+\code{.var}.}
 
 \item{value}{any object that can be coerced to a valid \code{object} class.}
 }
 \value{
-An object inheriting from the superclass '.var'
+An object inheriting from the superclass \code{.var}
 }
 \description{
-\code{Var} returns a '.var' object which is valid Google Analytics dimension
-or metric for use with the core reporting, multi-channel-funnel reporting or
-real-time reporting API.
+Google Analytics dimension and metric variables.
 
-\code{Var<-} sets the value of an object belonging to the superclass '.var'
-or sets the var slot of an expression object belonging to superclass '.expr'
+\code{Var<-} sets the value of an object belonging to the superclass \code{.var}
+or sets the var slot of an expression object belonging to superclass \code{.expr}
 }
 \details{
+\code{Var} returns a \code{.var} object which is valid Google Analytics
+dimension or metric for use with the core reporting, multi-channel-funnel
+reporting or real-time reporting API.
+
 Use \code{Var} to lookup a dimension or metric from the Google Analytics core
 reporting, multi-channel-funnel reporting, or real-time reporting APIs, for
-use in defining expressions (of superclass '.expr') or (to be implemented)
-variable lists (of superclass '.varList') such as query dimensions, metrics
-or sortBy parameters.
+use in defining expressions (of superclass \code{.expr}) or (to be
+implemented) variable lists (of superclass \code{.varList}) such as query
+dimensions, metrics or sortBy parameters.
 
-\code{Var} accepts either a character, '.var', or '.expr' object. A character
-object will be coerced to a '.var' object by looking for a matching dimension
-or metric from the Core Reporting, Multi-Channel Funnel Reporting, and
-Real-Time Reporting APIs. Providing an '.expr' object will return the
-dimension or metric used within that Google Analytics expression.
+\code{Var} accepts either a character, \code{.var}, or \code{.expr} object. A
+character object will be coerced to a \code{.var} object by looking for a
+matching dimension or metric from the Core Reporting, Multi-Channel Funnel
+Reporting, and Real-Time Reporting APIs. Providing an \code{.expr} object
+will return the dimension or metric used within that Google Analytics
+expression.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -145,4 +151,4 @@ Reporting API dimensions and metrics} \item
 \href{https://developers.google.com/analytics/devguides/reporting/mcf/dimsmets/}{Real-Time
 Reporting API dimensions and metrics} }
 }
-\concept{Var var functions}
+\concept{vars}

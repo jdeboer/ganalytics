@@ -1,4 +1,4 @@
-#' Expr.
+#' Expr
 #'
 #' Define a Google Analytics expression.
 #'
@@ -20,7 +20,7 @@ setGeneric(
   valueClass = ".expr"
 )
 
-#' GaExpr.
+#' GaExpr
 #'
 #' Create a Core Reporting API expression.
 #'
@@ -41,7 +41,7 @@ setGeneric(
   valueClass = ".gaExpr"
 )
 
-#' McfExpr.
+#' McfExpr
 #'
 #' Create a Multi-Channel Funnel Reporting API expression.
 #'
@@ -61,7 +61,7 @@ setGeneric(
   valueClass = ".mcfExpr"
 )
 
-#' RtExpr.
+#' RtExpr
 #'
 #' Create a Real-Time Reporting API expression.
 #'
@@ -81,16 +81,18 @@ setGeneric(
   valueClass = ".rtExpr"
 )
 
-#' ScopeLevel.
+#' ScopeLevel
 #'
 #' Get the scope level of a .gaSegmentFilter or gaMetExpr.
 #'
-#' @param object a .gaSegmentFilter or a metric expression.
+#' @param object A .gaSegmentFilter or a metric expression.
 #' @param value New scope level to return an updated copy of the object
 #' with the new scope applied. For .gaSegmentFilters this can be
 #' either 'users' or 'sessions'. For metric expressions use either 'perUser',
 #' 'perSession', 'perHit' or 'perProduct'.
-#' @return the scope level as a character string, a .gaSegmentFilter or gaMetExpr.
+#' @return The scope level as a character string, a .gaSegmentFilter or gaMetExpr.
+#'
+#' @family dynamic segment functions
 #'
 #' @export
 #' @rdname ScopeLevel
@@ -100,9 +102,11 @@ setGeneric(
   valueClass = c("character", ".gaSegmentFilter", "gaMetExpr")
 )
 
-#' ScopeLevel<-.
+#' ScopeLevel<-
 #'
 #' Set the scope level of a gaDynSegment or a gaMetExpr
+#'
+#' @family dynamic segment functions
 #'
 #' @export
 #' @rdname ScopeLevel

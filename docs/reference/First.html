@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>First. — First • ganalytics</title>
+<title>First — First • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="First. — First" />
+<meta property="og:title" content="First — First" />
 
 <meta property="og:description" content="If used at the beginning of a sequence, indicates that this step must match
 the first interaction of included sessions and users within the select date
@@ -51,6 +51,16 @@ range. First expressly means 'first interaction' within the date range." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -67,7 +77,7 @@ range. First expressly means 'first interaction' within the date range." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -121,7 +131,7 @@ range. First expressly means 'first interaction' within the date range." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>First.</h1>
+    <h1>First</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Sequence-generics.R'><code>R/Sequence-generics.R</code></a></small>
     <div class="hidden name"><code>First.Rd</code></div>
     </div>
@@ -153,11 +163,13 @@ expression.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a gaSegmentSequenceStep object, with the immediate flag set.</p>
+    <p>A <code>gaSegmentSequenceStep</code> object, with the immediate flag set.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='Sequence.html'>Sequence</a></code></p></div>
+    <div class='dont-index'><p><code><a href='Sequence.html'>Sequence</a></code></p>
+<p>Other sequence segment functions: <code><a href='Later.html'>Later</a></code>,
+  <code><a href='Sequence.html'>Sequence</a></code>, <code><a href='Then.html'>Then</a></code></p></div>
     
 
   </div>

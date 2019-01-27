@@ -6,8 +6,6 @@
 #' @importFrom methods as callNextMethod
 NULL
 
-# ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
-
 setMethod(
   f = "initialize",
   signature = ".comparator",
@@ -57,7 +55,10 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+# ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
+
+#' @describeIn Comparator Does the value of the dimension on the left match the
+#'   regular expression on the right.
 setMethod(
   f = "%matches%",
   signature = c(".var", ".dimOperand"),
@@ -66,7 +67,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Does the value of the dimension on the left start with
+#'   the character substring on the right.
 setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
@@ -75,7 +77,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Does the value of the dimension on the left end with
+#'   the character substring on the right.
 setMethod(
   f = "%ends_with%",
   signature = c(".var", ".dimOperand"),
@@ -84,7 +87,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Does the value of the dimension on the left contain
+#'   the character substring on the right.
 setMethod(
   f = "%contains%",
   signature = c(".var", ".dimOperand"),
@@ -93,7 +97,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Is the value on the left in between the values of the
+#'   first and second elements of the vector on the right.
 setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
@@ -102,7 +107,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Does the vector on the right contain an element that
+#'   matches the value on the left.
 setMethod(
   f = "%in%",
   signature = c(".var", ".operand"),
@@ -111,7 +117,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Do the values on the left and right match exactly.
 #' @param e1 Dimension or metric object
 #' @param e2 Operand object
 setMethod(
@@ -122,7 +128,7 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Do the values on the left and right not match.
 setMethod(
   f = "!=",
   signature = c(".var", ".operand"),
@@ -131,7 +137,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Is the value on the left greater than the value on the
+#'   right.
 setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
@@ -140,7 +147,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Is the value on the left less than the value on the
+#'   right.
 setMethod(
   f = "<",
   signature = c(".var", ".metOperand"),
@@ -149,7 +157,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Is the value on the left greater than or equal to the
+#'   value on the right.
 setMethod(
   f = ">=",
   signature = c(".var", ".metOperand"),
@@ -158,7 +167,8 @@ setMethod(
   }
 )
 
-#' @rdname Comparator
+#' @describeIn Comparator Is the value on the left less than or equal to the
+#'   value on the right.
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),

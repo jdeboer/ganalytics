@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>StartDate. — StartDate • ganalytics</title>
+<title>StartDate — StartDate • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="StartDate. — StartDate" />
+<meta property="og:title" content="StartDate — StartDate" />
 
 <meta property="og:description" content="Get the start date.
 Set the start date." />
@@ -50,6 +50,16 @@ Set the start date." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ Set the start date." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,7 +130,7 @@ Set the start date." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>StartDate.</h1>
+    <h1>StartDate</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Date-generics.R'><code>R/Date-generics.R</code></a></small>
     <div class="hidden name"><code>StartDate.Rd</code></div>
     </div>
@@ -145,7 +155,7 @@ Set the start date." />
     </tr>
     <tr>
       <th>value</th>
-      <td><p>value to set start date of object to.</p></td>
+      <td><p>Value to set start date of object to.</p></td>
     </tr>
     </table>
     

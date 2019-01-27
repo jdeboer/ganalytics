@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TableFilter. — TableFilter • ganalytics</title>
+<title>TableFilter — TableFilter • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="TableFilter. — TableFilter" />
+<meta property="og:title" content="TableFilter — TableFilter" />
 
 <meta property="og:description" content="Get the filter.
 Set the filter." />
@@ -50,6 +50,16 @@ Set the filter." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ Set the filter." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,7 +130,7 @@ Set the filter." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>TableFilter.</h1>
+    <h1>TableFilter</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/TableFilter-generics.R'><code>R/TableFilter-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/TableFilter-methods.R'><code>R/TableFilter-methods.R</code></a></small>
     <div class="hidden name"><code>TableFilter.Rd</code></div>
     </div>
@@ -172,6 +182,15 @@ given query.</p></li>
 <li><p><code>.query</code>: Method to replace the table filter of a query</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other query object functions: <code><a href='Dimensions.html'>Dimensions</a></code>,
+  <code><a href='MaxResults.html'>MaxResults</a></code>, <code><a href='Metrics.html'>Metrics</a></code>,
+  <code><a href='SamplingLevel.html'>SamplingLevel</a></code>, <code><a href='SortBy.html'>SortBy</a></code></p>
+<p>Other query object functions: <code><a href='Dimensions.html'>Dimensions</a></code>,
+  <code><a href='MaxResults.html'>MaxResults</a></code>, <code><a href='Metrics.html'>Metrics</a></code>,
+  <code><a href='SamplingLevel.html'>SamplingLevel</a></code>, <code><a href='SortBy.html'>SortBy</a></code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -180,6 +199,8 @@ given query.</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

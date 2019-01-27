@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DynSegment. — DynSegment • ganalytics</title>
+<title>DynSegment — DynSegment • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="DynSegment. — DynSegment" />
+<meta property="og:title" content="DynSegment — DynSegment" />
 
 <meta property="og:description" content="Combine one or more segment condition filters and/or sequence filters into a
 gaDynSegment that is scoped to either 'user' or 'session' level." />
@@ -50,6 +50,16 @@ gaDynSegment that is scoped to either 'user' or 'session' level." />
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -66,7 +76,7 @@ gaDynSegment that is scoped to either 'user' or 'session' level." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -120,7 +130,7 @@ gaDynSegment that is scoped to either 'user' or 'session' level." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>DynSegment.</h1>
+    <h1>DynSegment</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-generics.R'><code>R/Segment-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-methods.R'><code>R/Segment-methods.R</code></a></small>
     <div class="hidden name"><code>DynSegment.Rd</code></div>
     </div>
@@ -160,7 +170,7 @@ needed.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a gaDynSegment object.</p>
+    <p>A gaDynSegment object.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -175,6 +185,16 @@ expressions applied using the specified scope.</p></li>
 <li><p><code>gaDynSegment</code>: Returns itself.</p></li>
 </ul>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other dynamic segment functions: <code><a href='Exclude.html'>Exclude</a></code>,
+  <code><a href='Include.html'>Include</a></code>, <code><a href='IsNegated.html'>IsNegated</a></code>,
+  <code><a href='PerHit.html'>PerHit</a></code>, <code><a href='PerProduct.html'>PerProduct</a></code>,
+  <code><a href='PerSession.html'>PerSession</a></code>, <code><a href='PerUser.html'>PerUser</a></code>,
+  <code><a href='ScopeLevel.html'>ScopeLevel</a></code>,
+  <code><a href='SegmentConditionFilter.html'>SegmentConditionFilter</a></code>,
+  <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -187,6 +207,8 @@ expressions applied using the specified scope.</p></li>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

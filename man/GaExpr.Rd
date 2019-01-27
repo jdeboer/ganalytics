@@ -4,7 +4,7 @@
 \name{GaExpr}
 \alias{GaExpr}
 \alias{GaExpr,character,character-method}
-\title{GaExpr.}
+\title{GaExpr}
 \usage{
 GaExpr(object, comparator, operand, metricScope = "")
 

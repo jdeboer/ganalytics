@@ -24,7 +24,7 @@
 \alias{<=,.var,.metOperand-method}
 \alias{Comparator,.expr-method}
 \alias{Comparator<-,.expr-method}
-\title{Comparator.}
+\title{Comparator}
 \usage{
 Comparator(object, ...)
 
@@ -71,16 +71,16 @@ x \%in\% table
 \S4method{Comparator}{.expr}(object) <- value
 }
 \arguments{
-\item{object}{The object to be coerced to a '.Comparator' subclass or the
+\item{object}{The object to be coerced to a '.comparator' subclass or the
 expression object of which to obtain its comparator.}
 
 \item{...}{Used by certain methods.}
 
 \item{value}{The value to set the comparator to.}
 
-\item{var}{dimension object}
+\item{var}{Dimension object}
 
-\item{operand}{operand object}
+\item{operand}{Operand object}
 
 \item{x}{Dimension or metric object}
 
@@ -90,13 +90,50 @@ expression object of which to obtain its comparator.}
 
 \item{e2}{Operand object}
 }
+\value{
+An object belonging to the superclass \code{.comparator}
+}
 \description{
-Get a comparator used in an expression or create a comparator object.
+Get the comparator used in an expression or create a comparator object.
 
 Set the comparator of an expression.
 }
 \section{Methods (by class)}{
 \itemize{
+\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left match the
+regular expression on the right.
+
+\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left start with
+the character substring on the right.
+
+\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left end with
+the character substring on the right.
+
+\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left contain
+the character substring on the right.
+
+\item \code{var = .var,operand = .operand}: Is the value on the left in between the values of the
+first and second elements of the vector on the right.
+
+\item \code{x = .var,table = .operand}: Does the vector on the right contain an element that
+matches the value on the left.
+
+\item \code{e1 = .var,e2 = .operand}: Do the values on the left and right match exactly.
+
+\item \code{e1 = .var,e2 = .operand}: Do the values on the left and right not match.
+
+\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left greater than the value on the
+right.
+
+\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left less than the value on the
+right.
+
+\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left greater than or equal to the
+value on the right.
+
+\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left less than or equal to the
+value on the right.
+
 \item \code{.expr}: Return the comparator used within the supplied
 conditional expression.
 
@@ -141,4 +178,5 @@ A condition where the dimension (LHS) matches one of the
 values in the vector specified by the operand (RHS).
 }
 
-\concept{comparators}
+\concept{comparator functions}
+\concept{comparators functions}

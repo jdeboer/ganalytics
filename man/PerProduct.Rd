@@ -5,7 +5,7 @@
 \alias{PerProduct}
 \alias{PerProduct,gaMetExpr-method}
 \alias{PerProduct,formula-method}
-\title{PerProduct.}
+\title{PerProduct}
 \usage{
 PerProduct(object, negation)
 
@@ -14,12 +14,12 @@ PerProduct(object, negation)
 \S4method{PerProduct}{formula}(object)
 }
 \arguments{
-\item{object}{a gaMetExpr object to coerce to hit-level}
+\item{object}{A gaMetExpr object to coerce to hit-level}
 
-\item{negation}{boolean value indicating whether to negate the condition.}
+\item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-a gaMetExpr object.
+A gaMetExpr object.
 }
 \description{
 Set the scope of a gaMetExpr object to product-level.
@@ -33,3 +33,13 @@ product-level.
 metric condition to product-level.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

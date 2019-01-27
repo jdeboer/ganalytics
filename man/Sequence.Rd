@@ -7,7 +7,7 @@
 \alias{Then,.compoundExpr-method}
 \alias{First,.compoundExpr-method}
 \alias{Sequence,ANY-method}
-\title{Sequence.}
+\title{Sequence}
 \usage{
 Sequence(object, ..., negation, scope)
 
@@ -29,7 +29,7 @@ they should be applied.}
 \item{negation}{Logical TRUE or FALSE to match segments where this sequence
 has not occurred.}
 
-\item{scope}{optional scope, "users" or "sessions".}
+\item{scope}{Optional scope, "users" or "sessions".}
 }
 \description{
 Create a new gaSequence object
@@ -48,7 +48,7 @@ segment definition.
 \item \code{.compoundExpr}: Alias to Then.
 
 \item \code{ANY}: Return a sequence of one or more steps using the
-supplied expression(s) define the steps, where those step can occur
+supplied expression(s) that define the steps, where those step can occur
 anywhere within the sequences of interactions being matched, but in the
 order specified.
 }}
@@ -82,3 +82,8 @@ Segment(
 )
 
 }
+\seealso{
+Other sequence segment functions: \code{\link{First}},
+  \code{\link{Later}}, \code{\link{Then}}
+}
+\concept{sequence segment functions}

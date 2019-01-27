@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sequence. — Sequence • ganalytics</title>
+<title>Sequence — Sequence • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Sequence. — Sequence" />
+<meta property="og:title" content="Sequence — Sequence" />
 
 <meta property="og:description" content="Create a new gaSequence object" />
 
@@ -49,6 +49,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
+
   </head>
 
   <body>
@@ -65,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -119,7 +129,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sequence.</h1>
+    <h1>Sequence</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Sequence-generics.R'><code>R/Sequence-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Sequence-methods.R'><code>R/Sequence-methods.R</code></a></small>
     <div class="hidden name"><code>Sequence.Rd</code></div>
     </div>
@@ -164,7 +174,7 @@ has not occurred.</p></td>
     </tr>
     <tr>
       <th>scope</th>
-      <td><p>optional scope, "users" or "sessions".</p></td>
+      <td><p>Optional scope, "users" or "sessions".</p></td>
     </tr>
     </table>
     
@@ -180,10 +190,15 @@ required interaction in any sequences being matched to this sequential
 segment definition.</p></li>
 <li><p><code>.compoundExpr</code>: Alias to Then.</p></li>
 <li><p><code>ANY</code>: Return a sequence of one or more steps using the
-supplied expression(s) define the steps, where those step can occur
+supplied expression(s) that define the steps, where those step can occur
 anywhere within the sequences of interactions being matched, but in the
 order specified.</p></li>
 </ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other sequence segment functions: <code><a href='First.html'>First</a></code>,
+  <code><a href='Later.html'>Later</a></code>, <code><a href='Then.html'>Then</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -569,6 +584,8 @@ order specified.</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

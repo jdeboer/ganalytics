@@ -5,7 +5,7 @@
 \alias{DynSegment}
 \alias{DynSegment,ANY-method}
 \alias{DynSegment,gaDynSegment-method}
-\title{DynSegment.}
+\title{DynSegment}
 \usage{
 DynSegment(object, ..., name = character(0))
 
@@ -22,7 +22,7 @@ needed.}
 \item{name}{An optional name given to the dynamic segment.}
 }
 \value{
-a gaDynSegment object.
+A gaDynSegment object.
 }
 \description{
 Combine one or more segment condition filters and/or sequence filters into a
@@ -40,3 +40,13 @@ expressions applied using the specified scope.
 \item \code{gaDynSegment}: Returns itself.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{Exclude}},
+  \code{\link{Include}}, \code{\link{IsNegated}},
+  \code{\link{PerHit}}, \code{\link{PerProduct}},
+  \code{\link{PerSession}}, \code{\link{PerUser}},
+  \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segments}}, \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

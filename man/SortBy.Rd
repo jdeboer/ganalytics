@@ -9,7 +9,7 @@
 \alias{SortBy,character-method}
 \alias{SortBy,.query-method}
 \alias{SortBy<-,.query-method}
-\title{SortBy.}
+\title{SortBy}
 \usage{
 SortBy(object, ..., desc = logical(0), type = c("VALUE", "DELTA",
   "SMART", "HISTOGRAM_BUCKET", "DIMENSION_AS_INTEGER")[0L])
@@ -36,7 +36,7 @@ descending order, while dimensions are by default in ascending order.
 Alternatively, supply a query object and replacement dimensions and metrics
 or sort by.}
 
-\item{...}{further dimensions or metrics to sort by, or if \code{object} is a
+\item{...}{Further dimensions or metrics to sort by, or if \code{object} is a
 query then the replacement list of dimensions or metrics to sort by.}
 
 \item{desc}{A logical vector, same length as the resulting list of dimension
@@ -69,3 +69,13 @@ ascending sorting for each variable respectively in order of precedence.
 \item \code{.query}: Replace the sort by argument of a query.
 }}
 
+\seealso{
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SamplingLevel}}, \code{\link{TableFilter}}
+
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SamplingLevel}}, \code{\link{TableFilter}}
+}
+\concept{query object functions}

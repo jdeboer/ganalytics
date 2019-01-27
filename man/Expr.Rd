@@ -6,7 +6,7 @@
 \alias{Expr,.expr,ANY-method}
 \alias{Expr,formula,ANY-method}
 \alias{Expr,character,character-method}
-\title{Expr.}
+\title{Expr}
 \usage{
 Expr(object, comparator, operand, metricScope = "")
 

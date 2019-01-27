@@ -7,7 +7,7 @@
 \alias{SamplingLevel,.standardQuery-method}
 \alias{SamplingLevel<-,.standardQuery-method}
 \alias{SamplingLevel,data.frame-method}
-\title{SamplingLevel.}
+\title{SamplingLevel}
 \usage{
 SamplingLevel(object, value)
 
@@ -20,9 +20,9 @@ SamplingLevel(object) <- value
 \S4method{SamplingLevel}{data.frame}(object)
 }
 \arguments{
-\item{object}{the query or response to check the sampling level of.}
+\item{object}{The query or response to check the sampling level of.}
 
-\item{value}{if \code{object} is a query, then use  value to set the sampling
+\item{value}{If \code{object} is a query, then use  value to set the sampling
 level to of that query.}
 }
 \description{
@@ -41,3 +41,13 @@ has been set to.
 in the response of the query.
 }}
 
+\seealso{
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SortBy}}, \code{\link{TableFilter}}
+}
+\concept{query object functions}

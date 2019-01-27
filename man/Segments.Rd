@@ -8,7 +8,7 @@
 \alias{Segments,gaQuery-method}
 \alias{Segments,ANY-method}
 \alias{Segments<-,gaQuery-method}
-\title{Segments.}
+\title{Segments}
 \usage{
 Segments(object, ...)
 
@@ -33,7 +33,7 @@ built-in and/or custom segments by their ID.}
 \item{value}{A named list of segments or a single segment.}
 }
 \value{
-a gaSegmentList
+A \code{gaSegmentList}
 }
 \description{
 Get the list of segments from the object or coerce the supplied objects into
@@ -52,3 +52,21 @@ Set the segments of the query object.
 \item \code{gaQuery}: Set the segments to be used within a query.
 }}
 
+\seealso{
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}}, \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segment}}
+
+Other dynamic segment functions: \code{\link{DynSegment}},
+  \code{\link{Exclude}}, \code{\link{Include}},
+  \code{\link{IsNegated}}, \code{\link{PerHit}},
+  \code{\link{PerProduct}}, \code{\link{PerSession}},
+  \code{\link{PerUser}}, \code{\link{ScopeLevel}},
+  \code{\link{SegmentConditionFilter}},
+  \code{\link{Segment}}
+}
+\concept{dynamic segment functions}

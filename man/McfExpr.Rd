@@ -4,7 +4,7 @@
 \name{McfExpr}
 \alias{McfExpr}
 \alias{McfExpr,character,character-method}
-\title{McfExpr.}
+\title{McfExpr}
 \usage{
 McfExpr(object, comparator, operand)
 

@@ -1,6 +1,6 @@
 Package: ganalytics
 Title: Interact with 'Google Analytics'
-Version: 0.10.6
+Version: 0.10.6.9000
 Date: 2018-12-22
 Authors@R: person(
     given = "Johann",
@@ -35,7 +35,8 @@ Imports:
     XML,
     xml2,
     scales,
-    selectr
+    selectr,
+    tibble
 Suggests:
     devtools,
     ggplot2,

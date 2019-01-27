@@ -1,4 +1,4 @@
-#' Operand.
+#' Operand
 #'
 #' Get the operand of an expression.
 #'
@@ -13,7 +13,7 @@ setGeneric(
   valueClass = ".operand"
 )
 
-#' Operand<-.
+#' Operand<-
 #'
 #' Set the operand of an expression.
 #'

@@ -8,7 +8,7 @@
 \alias{TableFilter,.query,missing-method}
 \alias{TableFilter,.query,ANY-method}
 \alias{TableFilter<-,.query-method}
-\title{TableFilter.}
+\title{TableFilter}
 \usage{
 TableFilter(object, value)
 
@@ -45,3 +45,13 @@ given query.
 \item \code{.query}: Method to replace the table filter of a query
 }}
 
+\seealso{
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SamplingLevel}}, \code{\link{SortBy}}
+
+Other query object functions: \code{\link{Dimensions}},
+  \code{\link{MaxResults}}, \code{\link{Metrics}},
+  \code{\link{SamplingLevel}}, \code{\link{SortBy}}
+}
+\concept{query object functions}

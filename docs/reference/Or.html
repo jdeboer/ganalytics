@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Or. — Or • ganalytics</title>
+<title>Or — Or • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Or. — Or" />
+<meta property="og:title" content="Or — Or" />
 
-<meta property="og:description" content="OR two or more expressions." />
+<meta property="og:description" content="Logical OR of two or more expressions." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -48,6 +48,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40538674-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-40538674-2');
+</script>
 
   </head>
 
@@ -65,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ganalytics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.6.9000</span>
       </span>
     </div>
 
@@ -119,14 +129,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Or.</h1>
+    <h1>Or</h1>
     <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Bool-generics.R'><code>R/Bool-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Bool-methods.R'><code>R/Bool-methods.R</code></a></small>
     <div class="hidden name"><code>Or.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>OR two or more expressions.</p>
+    <p>Logical OR of two or more expressions.</p>
     
     </div>
 
@@ -143,11 +153,11 @@ Or(object, ...)
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>The first object to include within the OR expression.</p></td>
+      <td><p>An object to include within the ORed expression.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional objects to include within the OR expression.</p></td>
+      <td><p>Additional objects to include within the ORed expression.</p></td>
     </tr>
     <tr>
       <th>e1</th>
@@ -161,7 +171,7 @@ Or(object, ...)
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class orExpr.</p>
+    <p>An object of class <code>orExpr</code>.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
@@ -169,6 +179,12 @@ Or(object, ...)
 <li><p><code>.compoundExpr</code>: OR two or more expressions.</p></li>
 <li><p><code>e1 = .compoundExpr,e2 = .compoundExpr</code>: OR two expressions.</p></li>
 </ul>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Google Analytics does not support ORing of ANDed expressions -- Only
+ANDing of ORed expresisons are supported. Consider De Morgan's laws for
+possible ways to work around this limitation.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -188,6 +204,8 @@ Or(object, ...)
       <li><a href="#value">Value</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
+
+      <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
