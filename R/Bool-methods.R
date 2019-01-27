@@ -97,7 +97,7 @@ setMethod(
 #' @export
 setMethod("!", ".gaSegmentFilter", function(x) {Not(x)})
 
-#' @describeIn Or OR two or more expressions.
+#' @describeIn Or Logical-OR of two or more expressions.
 setMethod(
   f = "Or",
   signature = ".compoundExpr",
@@ -120,13 +120,13 @@ setMethod(
   }
 )
 
-#' @describeIn Or OR two expressions.
+#' @describeIn Or Logical-OR of two expressions.
 #' @param e1 first expression
 #' @param e2 second expression
 #' @export
 setMethod("|", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {Or(e1, e2)})
 
-#' @describeIn And AND two or more expressions.
+#' @describeIn And Logical-AND of two or more expressions.
 setMethod(
   f = "And",
   signature = ".compoundExpr",
@@ -144,12 +144,12 @@ setMethod(
   }
 )
 
-#' @describeIn And AND two expressions.
+#' @describeIn And Logical-AND of two expressions.
 #' @param e1 first expression
 #' @param e2 second expression
 #' @export
 setMethod("&", c(".compoundExpr", ".compoundExpr"), function(e1, e2) {And(e1, e2)})
 
-#' @describeIn xor Exclusive-OR two expressions.
+#' @describeIn xor Exclusive-OR of two expressions.
 #' @export
 setMethod("xor", c(".compoundExpr", ".compoundExpr"), function(x, y) {(x | y) & (!x | !y)})

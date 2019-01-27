@@ -61,7 +61,7 @@ setMethod(
   }
 )
 
-#' @describeIn Expr Return an expression based on the described variable,
+#' @describeIn Expr Return an expression composed of the supplied variable,
 #'   comparator and operand arguments.
 setMethod(
   f = "Expr",
@@ -78,7 +78,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaExpr Return a Google Analytics expression using the described
+#' @describeIn GaExpr Return a Google Analytics expression using the supplied
 #'   variable, operator and operand.
 setMethod(
   f = "GaExpr",
@@ -112,7 +112,7 @@ setMethod(
   }
 )
 
-#' @describeIn McfExpr Return a Multi-channel Funnel condition based on the
+#' @describeIn McfExpr Return a Multi-channel Funnel condition composed of the
 #'   supplied arguments describing the variable, comparator and operator.
 setMethod(
   f = "McfExpr",

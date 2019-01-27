@@ -4,24 +4,6 @@
 \name{Comparator}
 \alias{Comparator}
 \alias{Comparator<-}
-\alias{\%starts_with\%}
-\alias{\%ends_with\%}
-\alias{\%contains\%}
-\alias{\%matches\%}
-\alias{\%between\%}
-\alias{\%in\%}
-\alias{\%matches\%,.var,.dimOperand-method}
-\alias{\%starts_with\%,.var,.dimOperand-method}
-\alias{\%ends_with\%,.var,.dimOperand-method}
-\alias{\%contains\%,.var,.dimOperand-method}
-\alias{\%between\%,.var,.operand-method}
-\alias{\%in\%,.var,.operand-method}
-\alias{==,.var,.operand-method}
-\alias{!=,.var,.operand-method}
-\alias{>,.var,.metOperand-method}
-\alias{<,.var,.metOperand-method}
-\alias{>=,.var,.metOperand-method}
-\alias{<=,.var,.metOperand-method}
 \alias{Comparator,.expr-method}
 \alias{Comparator<-,.expr-method}
 \title{Comparator}
@@ -29,42 +11,6 @@
 Comparator(object, ...)
 
 Comparator(object) <- value
-
-var \%starts_with\% operand
-
-var \%ends_with\% operand
-
-var \%contains\% operand
-
-var \%matches\% operand
-
-var \%between\% operand
-
-x \%in\% table
-
-\S4method{\%matches\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%starts_with\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%ends_with\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%contains\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%between\%}{.var,.operand}(var, operand)
-
-\S4method{\%in\%}{.var,.operand}(x, table)
-
-\S4method{==}{.var,.operand}(e1, e2)
-
-\S4method{!=}{.var,.operand}(e1, e2)
-
-\S4method{>}{.var,.metOperand}(e1, e2)
-
-\S4method{<}{.var,.metOperand}(e1, e2)
-
-\S4method{>=}{.var,.metOperand}(e1, e2)
-
-\S4method{<=}{.var,.metOperand}(e1, e2)
 
 \S4method{Comparator}{.expr}(object)
 
@@ -77,18 +23,6 @@ expression object of which to obtain its comparator.}
 \item{...}{Used by certain methods.}
 
 \item{value}{The value to set the comparator to.}
-
-\item{var}{Dimension object}
-
-\item{operand}{Operand object}
-
-\item{x}{Dimension or metric object}
-
-\item{table}{Operand object}
-
-\item{e1}{Dimension or metric object}
-
-\item{e2}{Operand object}
 }
 \value{
 An object belonging to the superclass \code{.comparator}
@@ -100,40 +34,6 @@ Set the comparator of an expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left match the
-regular expression on the right.
-
-\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left start with
-the character substring on the right.
-
-\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left end with
-the character substring on the right.
-
-\item \code{var = .var,operand = .dimOperand}: Does the value of the dimension on the left contain
-the character substring on the right.
-
-\item \code{var = .var,operand = .operand}: Is the value on the left in between the values of the
-first and second elements of the vector on the right.
-
-\item \code{x = .var,table = .operand}: Does the vector on the right contain an element that
-matches the value on the left.
-
-\item \code{e1 = .var,e2 = .operand}: Do the values on the left and right match exactly.
-
-\item \code{e1 = .var,e2 = .operand}: Do the values on the left and right not match.
-
-\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left greater than the value on the
-right.
-
-\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left less than the value on the
-right.
-
-\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left greater than or equal to the
-value on the right.
-
-\item \code{e1 = .var,e2 = .metOperand}: Is the value on the left less than or equal to the
-value on the right.
-
 \item \code{.expr}: Return the comparator used within the supplied
 conditional expression.
 
@@ -141,42 +41,25 @@ conditional expression.
 conditional expression.
 }}
 
-\section{\%starts_with\%}{
+\seealso{
+Other comparator_functions: \code{\link{<,.var,.metOperand-method}},
+  \code{\link{<=,.var,.metOperand-method}},
+  \code{\link{==,.var,.operand-method}},
+  \code{\link{>,.var,.metOperand-method}},
+  \code{\link{>=,.var,.metOperand-method}},
+  \code{\link{\%between\%}}, \code{\link{\%contains\%}},
+  \code{\link{\%ends_with\%}}, \code{\link{\%in\%}},
+  \code{\link{\%matches\%}}, \code{\link{\%starts_with\%}},
+  \code{\link{not-equals}}
 
-A condition where the dimension (LHS) matches values that start with
-the character string given by the operand (RHS).
+Other comparator_functions: \code{\link{<,.var,.metOperand-method}},
+  \code{\link{<=,.var,.metOperand-method}},
+  \code{\link{==,.var,.operand-method}},
+  \code{\link{>,.var,.metOperand-method}},
+  \code{\link{>=,.var,.metOperand-method}},
+  \code{\link{\%between\%}}, \code{\link{\%contains\%}},
+  \code{\link{\%ends_with\%}}, \code{\link{\%in\%}},
+  \code{\link{\%matches\%}}, \code{\link{\%starts_with\%}},
+  \code{\link{not-equals}}
 }
-
-\section{\%ends_with\%}{
-
-A condition where the dimension (LHS) matches values that end with
-the character string given by the operand (RHS).
-}
-
-\section{\%contains\%}{
-
-A condition where the dimension (LHS) matches values that contain
-the character string given by the operand (RHS).
-}
-
-\section{\%matches\%}{
-
-A condition where the dimension (LHS) matches a regular
-expression given by the operand (RHS).
-}
-
-\section{\%between\%}{
-
-A condition where the var (LHS) is within the lower and
-upper bounds specified by first and second vector value (respectively) of
-the operand (RHS).
-}
-
-\section{\%in\%}{
-
-A condition where the dimension (LHS) matches one of the
-values in the vector specified by the operand (RHS).
-}
-
-\concept{comparator functions}
-\concept{comparators functions}
+\concept{comparator_functions}

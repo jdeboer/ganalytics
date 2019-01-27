@@ -11,6 +11,11 @@ NULL
 #'
 #' Set to "==" (exact match) by default.
 #'
+#' @slot .Data A length-one character string for a valid comparator symbol.
+#' @slot negated A length-one logical of either \code{TRUE} or \code{FALSE}
+#'   indicating whether the comparator is a negated comparator such as in the
+#'   case of 'not equal to' \code{!=}.
+#'
 #' @rdname comparator-class
 #' @keywords internal
 #'

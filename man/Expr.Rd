@@ -39,7 +39,7 @@ Define a Google Analytics expression.
 Accepts a formula in the form of: \code{~ <variable> <comparator>
   <operand>} where only the \code{<operand>} is evaluated.
 
-\item \code{object = character,comparator = character}: Return an expression based on the described variable,
+\item \code{object = character,comparator = character}: Return an expression composed of the supplied variable,
 comparator and operand arguments.
 }}
 

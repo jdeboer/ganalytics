@@ -31,9 +31,9 @@ Logical OR of two or more expressions.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: OR two or more expressions.
+\item \code{.compoundExpr}: Logical-OR of two or more expressions.
 
-\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: OR two expressions.
+\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: Logical-OR of two expressions.
 }}
 
 \note{

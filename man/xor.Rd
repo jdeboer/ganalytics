@@ -18,7 +18,7 @@ xor(x, y)
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR two expressions.
+\item \code{x = .compoundExpr,y = .compoundExpr}: Exclusive-OR of two expressions.
 }}
 
 \examples{

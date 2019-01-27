@@ -31,9 +31,9 @@ Logical AND of two or more expressions.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.compoundExpr}: AND two or more expressions.
+\item \code{.compoundExpr}: Logical-AND of two or more expressions.
 
-\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: AND two expressions.
+\item \code{e1 = .compoundExpr,e2 = .compoundExpr}: Logical-AND of two expressions.
 }}
 
 \examples{

@@ -57,8 +57,9 @@ setMethod(
 
 # ---- %matches%, %between%, %starts_with%, %in%, ==, !=, >, <, >=, <= ----
 
-#' @describeIn Comparator Does the value of the dimension on the left match the
-#'   regular expression on the right.
+#' Does the value of the dimension on the left match the regular expression on
+#' the right.
+#' @rdname grapes-matches-grapes
 setMethod(
   f = "%matches%",
   signature = c(".var", ".dimOperand"),
@@ -67,8 +68,9 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Does the value of the dimension on the left start with
-#'   the character substring on the right.
+#' Does the value of the dimension on the left start with the character
+#' substring on the right.
+#' @rdname grapes-starts_with-grapes
 setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
@@ -77,8 +79,9 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Does the value of the dimension on the left end with
-#'   the character substring on the right.
+#' Does the value of the dimension on the left end with the character substring
+#' on the right.
+#' @rdname grapes-ends_with-grapes
 setMethod(
   f = "%ends_with%",
   signature = c(".var", ".dimOperand"),
@@ -87,8 +90,9 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Does the value of the dimension on the left contain
-#'   the character substring on the right.
+#' Does the value of the dimension on the left contain the character substring
+#' on the right.
+#' @rdname grapes-contains-grapes
 setMethod(
   f = "%contains%",
   signature = c(".var", ".dimOperand"),
@@ -97,8 +101,9 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Is the value on the left in between the values of the
-#'   first and second elements of the vector on the right.
+#' Is the value on the left in between the values of the first and second
+#' elements of the vector on the right.
+#' @rdname grapes-between-grapes
 setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
@@ -107,8 +112,9 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Does the vector on the right contain an element that
-#'   matches the value on the left.
+#' Does the vector on the right contain an element that matches the value on the
+#' left.
+#' @rdname grapes-in-grapes
 setMethod(
   f = "%in%",
   signature = c(".var", ".operand"),
@@ -117,9 +123,16 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Do the values on the left and right match exactly.
+#' Equals to
+#'
+#' Do the values on the left and right match exactly.
+#'
 #' @param e1 Dimension or metric object
 #' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @rdname equals
 setMethod(
   f = "==",
   signature = c(".var", ".operand"),
@@ -128,7 +141,19 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Do the values on the left and right not match.
+#' Not equals to
+#'
+#' Expr Do the values on the left and right not match.
+#'
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @name not-equals
+NULL
+
+#' @rdname not-equals
 setMethod(
   f = "!=",
   signature = c(".var", ".operand"),
@@ -137,8 +162,16 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Is the value on the left greater than the value on the
-#'   right.
+#' Greater than
+#'
+#' Is the value on the left greater than the value on the right.
+#'
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @rdname greater-than
 setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
@@ -147,8 +180,16 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Is the value on the left less than the value on the
-#'   right.
+#' Less than
+#'
+#' Is the value on the left less than the value on the right.
+#'
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @rdname less-than
 setMethod(
   f = "<",
   signature = c(".var", ".metOperand"),
@@ -157,8 +198,16 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Is the value on the left greater than or equal to the
-#'   value on the right.
+#' Greater or equals to
+#'
+#' Is the value on the left greater than or equal to the value on the right.
+#'
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @rdname greater-than-or-equal-to
 setMethod(
   f = ">=",
   signature = c(".var", ".metOperand"),
@@ -167,8 +216,16 @@ setMethod(
   }
 )
 
-#' @describeIn Comparator Is the value on the left less than or equal to the
-#'   value on the right.
+#' Less than or equals to
+#'
+#' Is the value on the left less than or equal to the value on the right.
+#'
+#' @param e1 Dimension or metric object
+#' @param e2 Operand object
+#'
+#' @family comparator_functions
+#'
+#' @rdname less-than-or-equal-to
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),

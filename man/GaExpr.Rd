@@ -27,7 +27,7 @@ Create a Core Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = character,comparator = character}: Return a Google Analytics expression using the described
+\item \code{object = character,comparator = character}: Return a Google Analytics expression using the supplied
 variable, operator and operand.
 }}
 

@@ -10,4 +10,14 @@ An S4 class to represent a condition's comparator operator.
 \details{
 Set to "==" (exact match) by default.
 }
+\section{Slots}{
+
+\describe{
+\item{\code{.Data}}{A length-one character string for a valid comparator symbol.}
+
+\item{\code{negated}}{A length-one logical of either \code{TRUE} or \code{FALSE}
+indicating whether the comparator is a negated comparator such as in the
+case of 'not equal to' \code{!=}.}
+}}
+
 \keyword{internal}

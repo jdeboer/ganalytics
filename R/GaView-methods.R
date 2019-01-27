@@ -1,7 +1,7 @@
 #' @include query-classes.R
 #' @include management-api-classes.R
 #' @include view-coerce.R
-#' @include Query-generics.R
+#' @include GaView-generics.R
 #' @importFrom methods setMethod as as<- callNextMethod
 NULL
 

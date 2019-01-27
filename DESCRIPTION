@@ -9,11 +9,11 @@ Authors@R: person(
     email = "johanndeboer@gmail.com")
 Description: Functions for querying the 'Google Analytics' core reporting,
     real-time, multi-channel funnel and management APIs, as well as the 'Google
-    Tag Manager' (GTM) API. Write methods are also provided for the management and
-    GTM APIs so that you can change tag, property or view
-    settings, for example. Define reporting queries using natural R expressions
-    instead of being concerned as much about API technical intricacies like
-    query syntax, character code escaping, and API limitations.
+    Tag Manager' (GTM) API. Write methods are also provided for the management
+    and GTM APIs so that you can change tag, property or view settings, for
+    example. Define reporting queries using natural R expressions instead of
+    being concerned as much about API technical intricacies like query syntax,
+    character code escaping, and API limitations.
 URL: https://github.com/jdeboer/ganalytics
 BugReports: https://github.com/jdeboer/ganalytics/issues
 License: MIT + file LICENCE
@@ -87,6 +87,7 @@ Collate:
     'expr-coerce.R'
     'Expr-methods.R'
     'GaGetCoreReport.R'
+    'GaView-generics.R'
     'view-coerce.R'
     'GaView-methods.R'
     'ga-api-coerce.R'

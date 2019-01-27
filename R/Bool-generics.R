@@ -14,7 +14,6 @@
 #' @aliases `!`
 #'
 #' @export
-#' @rdname Not
 setGeneric(
   "Not",
   function(object) {standardGeneric("Not")},
@@ -43,7 +42,6 @@ setGeneric(
 #' @aliases `|`
 #'
 #' @export
-#' @rdname Or
 setGeneric(
   "Or",
   function(object, ...) {standardGeneric("Or")},
@@ -67,7 +65,6 @@ setGeneric(
 #' @aliases `&`
 #'
 #' @export
-#' @rdname And
 setGeneric(
   "And",
   function(object, ...) {standardGeneric("And")},
@@ -89,6 +86,5 @@ setGeneric(
 #' @family boolean functions
 #'
 #' @export
-#' @rdname xor
 setGeneric("xor")
 

@@ -23,7 +23,7 @@ Create a Multi-Channel Funnel Reporting API expression.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = character,comparator = character}: Return a Multi-channel Funnel condition based on the
+\item \code{object = character,comparator = character}: Return a Multi-channel Funnel condition composed of the
 supplied arguments describing the variable, comparator and operator.
 }}
 

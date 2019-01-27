@@ -1,7 +1,7 @@
 #' @importFrom tibble tibble
 NULL
 
-#' ganalytics
+#' ganalytics.
 #'
 #' A Google Analytics and Google Tag Manager API client for R
 #'
@@ -34,16 +34,16 @@ NULL
 #' \code{browseVignettes(package = "ganalytics")}
 #'
 #' Important functions to be familiar with in this package are:
-#'
-#' * \code{\link{GaQuery}} : This function is used to define a Google Analytics query
+#' \describe{
+#'   \item{\code{\link{GaQuery}}}{This function is used to define a Google Analytics query
 #' object that can be interactively manipulated and executed to aid exploratory
-#' querying and analysis of Google Analytics data.
-#'
-#' * \code{\link{Expr}} : This is used to define expressions involving Google Analytics
-#' dimensions and/or metrics used for use in segments and filters.
-#'
-#' * \code{\link{Sequence}} : This function takes one or more expressions to construct
-#' a sequence-based segment.
+#' querying and analysis of Google Analytics data.}
+#'   \item{\code{\link{GetGaData}}}{This function will execute the supplied query object.}
+#'   \item{\code{\link{Expr}}}{This is used to define expressions involving Google Analytics
+#' dimensions and/or metrics used for use in segments and filters.}
+#'   \item{\code{\link{Sequence}}}{This function takes one or more expressions to construct
+#' a sequence-based segment.}
+#' }
 #'
 #' @section Package options: GOOGLE_APIS_USER GOOGLE_APIS_CONSUMER_ID
 #'   GOOGLE_APIS_CONSUMER_SECRET
@@ -73,7 +73,6 @@ NULL
 #'
 #' @keywords package internal
 #' @docType package
-#' @name ganalytics
 #' @aliases ganalytics ganalytics-package
 #' @include globaldata.R
 "_PACKAGE"
