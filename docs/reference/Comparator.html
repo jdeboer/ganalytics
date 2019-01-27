@@ -142,63 +142,15 @@ Set the comparator of an expression." />
     
     </div>
 
-    <pre class="usage">Comparator(object, ...)
+    <pre class="usage"><span class='fu'>Comparator</span>(<span class='no'>object</span>, <span class='no'>...</span>)
 
-Comparator(object) <- value
+<span class='fu'>Comparator</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
 
-var %starts_with% operand
+<span class='co'># S4 method for .expr</span>
+<span class='fu'>Comparator</span>(<span class='no'>object</span>)
 
-var %ends_with% operand
-
-var %contains% operand
-
-var %matches% operand
-
-var %between% operand
-
-x %in% table
-
-# S4 method for .var,.dimOperand
-%matches%(var, operand)
-
-# S4 method for .var,.dimOperand
-%starts_with%(var, operand)
-
-# S4 method for .var,.dimOperand
-%ends_with%(var, operand)
-
-# S4 method for .var,.dimOperand
-%contains%(var, operand)
-
-# S4 method for .var,.operand
-%between%(var, operand)
-
-# S4 method for .var,.operand
-%in%(x, table)
-
-# S4 method for .var,.operand
-==(e1, e2)
-
-# S4 method for .var,.operand
-!=(e1, e2)
-
-# S4 method for .var,.metOperand
-&gt;(e1, e2)
-
-# S4 method for .var,.metOperand
-&lt;(e1, e2)
-
-# S4 method for .var,.metOperand
-&gt;=(e1, e2)
-
-# S4 method for .var,.metOperand
-&lt;=(e1, e2)
-
-# S4 method for .expr
-Comparator(object)
-
-# S4 method for .expr
-Comparator(object) <- value</pre>
+<span class='co'># S4 method for .expr</span>
+<span class='fu'>Comparator</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span></pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,30 +168,6 @@ expression object of which to obtain its comparator.</p></td>
       <th>value</th>
       <td><p>The value to set the comparator to.</p></td>
     </tr>
-    <tr>
-      <th>var</th>
-      <td><p>Dimension object</p></td>
-    </tr>
-    <tr>
-      <th>operand</th>
-      <td><p>Operand object</p></td>
-    </tr>
-    <tr>
-      <th>x</th>
-      <td><p>Dimension or metric object</p></td>
-    </tr>
-    <tr>
-      <th>table</th>
-      <td><p>Operand object</p></td>
-    </tr>
-    <tr>
-      <th>e1</th>
-      <td><p>Dimension or metric object</p></td>
-    </tr>
-    <tr>
-      <th>e2</th>
-      <td><p>Operand object</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -249,70 +177,32 @@ expression object of which to obtain its comparator.</p></td>
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
     <ul>
-<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left match the
-regular expression on the right.</p></li>
-<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left start with
-the character substring on the right.</p></li>
-<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left end with
-the character substring on the right.</p></li>
-<li><p><code>var = .var,operand = .dimOperand</code>: Does the value of the dimension on the left contain
-the character substring on the right.</p></li>
-<li><p><code>var = .var,operand = .operand</code>: Is the value on the left in between the values of the
-first and second elements of the vector on the right.</p></li>
-<li><p><code>x = .var,table = .operand</code>: Does the vector on the right contain an element that
-matches the value on the left.</p></li>
-<li><p><code>e1 = .var,e2 = .operand</code>: Do the values on the left and right match exactly.</p></li>
-<li><p><code>e1 = .var,e2 = .operand</code>: Do the values on the left and right not match.</p></li>
-<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left greater than the value on the
-right.</p></li>
-<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left less than the value on the
-right.</p></li>
-<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left greater than or equal to the
-value on the right.</p></li>
-<li><p><code>e1 = .var,e2 = .metOperand</code>: Is the value on the left less than or equal to the
-value on the right.</p></li>
 <li><p><code>.expr</code>: Return the comparator used within the supplied
 conditional expression.</p></li>
 <li><p><code>.expr</code>: Replace the comparator of the supplied
 conditional expression.</p></li>
 </ul>
     
-    <h2 class="hasAnchor" id="-starts-with-"><a class="anchor" href="#-starts-with-"></a>%starts_with%</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    
-    <p>A condition where the dimension (LHS) matches values that start with
-the character string given by the operand (RHS).</p>
-    
-    <h2 class="hasAnchor" id="-ends-with-"><a class="anchor" href="#-ends-with-"></a>%ends_with%</h2>
-
-    
-    <p>A condition where the dimension (LHS) matches values that end with
-the character string given by the operand (RHS).</p>
-    
-    <h2 class="hasAnchor" id="-contains-"><a class="anchor" href="#-contains-"></a>%contains%</h2>
-
-    
-    <p>A condition where the dimension (LHS) matches values that contain
-the character string given by the operand (RHS).</p>
-    
-    <h2 class="hasAnchor" id="-matches-"><a class="anchor" href="#-matches-"></a>%matches%</h2>
-
-    
-    <p>A condition where the dimension (LHS) matches a regular
-expression given by the operand (RHS).</p>
-    
-    <h2 class="hasAnchor" id="-between-"><a class="anchor" href="#-between-"></a>%between%</h2>
-
-    
-    <p>A condition where the var (LHS) is within the lower and
-upper bounds specified by first and second vector value (respectively) of
-the operand (RHS).</p>
-    
-    <h2 class="hasAnchor" id="-in-"><a class="anchor" href="#-in-"></a>%in%</h2>
-
-    
-    <p>A condition where the dimension (LHS) matches one of the
-values in the vector specified by the operand (RHS).</p>
+    <div class='dont-index'><p>Other comparator_functions: <code>&lt;,.var,.metOperand-method</code>,
+  <code>&lt;=,.var,.metOperand-method</code>,
+  <code><a href='equals.html'>==,.var,.operand-method</a></code>,
+  <code>&gt;,.var,.metOperand-method</code>,
+  <code>&gt;=,.var,.metOperand-method</code>,
+  <code><a href='grapes-between-grapes.html'>%between%</a></code>, <code><a href='grapes-contains-grapes.html'>%contains%</a></code>,
+  <code><a href='grapes-ends_with-grapes.html'>%ends_with%</a></code>, <code><a href='grapes-in-grapes.html'>%in%</a></code>,
+  <code><a href='grapes-matches-grapes.html'>%matches%</a></code>, <code><a href='grapes-starts_with-grapes.html'>%starts_with%</a></code>,
+  <code><a href='not-equals.html'>not-equals</a></code></p>
+<p>Other comparator_functions: <code>&lt;,.var,.metOperand-method</code>,
+  <code>&lt;=,.var,.metOperand-method</code>,
+  <code><a href='equals.html'>==,.var,.operand-method</a></code>,
+  <code>&gt;,.var,.metOperand-method</code>,
+  <code>&gt;=,.var,.metOperand-method</code>,
+  <code><a href='grapes-between-grapes.html'>%between%</a></code>, <code><a href='grapes-contains-grapes.html'>%contains%</a></code>,
+  <code><a href='grapes-ends_with-grapes.html'>%ends_with%</a></code>, <code><a href='grapes-in-grapes.html'>%in%</a></code>,
+  <code><a href='grapes-matches-grapes.html'>%matches%</a></code>, <code><a href='grapes-starts_with-grapes.html'>%starts_with%</a></code>,
+  <code><a href='not-equals.html'>not-equals</a></code></p></div>
     
 
   </div>
@@ -325,17 +215,7 @@ values in the vector specified by the operand (RHS).</p>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
 
-      <li><a href="#-starts-with-">%starts_with%</a></li>
-
-      <li><a href="#-ends-with-">%ends_with%</a></li>
-
-      <li><a href="#-contains-">%contains%</a></li>
-
-      <li><a href="#-matches-">%matches%</a></li>
-
-      <li><a href="#-between-">%between%</a></li>
-
-      <li><a href="#-in-">%in%</a></li>
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
   </div>

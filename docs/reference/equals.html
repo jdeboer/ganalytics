@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Expr — Expr • ganalytics</title>
+<title>Equals to — ==,.var,.operand-method • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Expr — Expr" />
+<meta property="og:title" content="Equals to — ==,.var,.operand-method" />
 
-<meta property="og:description" content="Define a Google Analytics expression." />
+<meta property="og:description" content="Do the values on the left and right match exactly." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,67 +129,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Expr</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Expr-generics.R'><code>R/Expr-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Expr-methods.R'><code>R/Expr-methods.R</code></a></small>
-    <div class="hidden name"><code>Expr.Rd</code></div>
+    <h1>Equals to</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Comparator-methods.R'><code>R/Comparator-methods.R</code></a></small>
+    <div class="hidden name"><code>equals.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Define a Google Analytics expression.</p>
+    <p>Do the values on the left and right match exactly.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>Expr</span>(<span class='no'>object</span>, <span class='no'>comparator</span>, <span class='no'>operand</span>, <span class='kw'>metricScope</span> <span class='kw'>=</span> <span class='st'>""</span>)
-
-<span class='co'># S4 method for .expr,ANY</span>
-<span class='fu'>Expr</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for formula,ANY</span>
-<span class='fu'>Expr</span>(<span class='no'>object</span>, <span class='no'>metricScope</span>)
-
-<span class='co'># S4 method for character,character</span>
-<span class='fu'>Expr</span>(<span class='no'>object</span>, <span class='no'>comparator</span>, <span class='no'>operand</span>,
-  <span class='kw'>metricScope</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"># S4 method for .var,.operand
+==(e1, e2)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>A dimension or metric variable, or another object to be coerced
-to an .expr object.</p></td>
+      <th>e1</th>
+      <td><p>Dimension or metric object</p></td>
     </tr>
     <tr>
-      <th>comparator</th>
-      <td><p>The comparator to use for the expression.</p></td>
-    </tr>
-    <tr>
-      <th>operand</th>
-      <td><p>The operand to use for the expression.</p></td>
-    </tr>
-    <tr>
-      <th>metricScope</th>
-      <td><p>Optional scope to use for segmentation if using a metric.
-Possible values include "perUser" or "perSession".</p></td>
+      <th>e2</th>
+      <td><p>Operand object</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
-
-    <ul>
-<li><p><code>object = .expr,comparator = ANY</code>: Returns itself.</p></li>
-<li><p><code>object = formula,comparator = ANY</code>: Use non-standard formula evaluation to define an expression.
-Accepts a formula in the form of: <code>~ &lt;variable&gt; &lt;comparator&gt;
-  &lt;operand&gt;</code> where only the <code>&lt;operand&gt;</code> is evaluated.</p></li>
-<li><p><code>object = character,comparator = character</code>: Return an expression composed of the supplied variable,
-comparator and operand arguments.</p></li>
-</ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other expression generators: <code><a href='GaExpr.html'>GaExpr</a></code>,
-  <code><a href='McfExpr.html'>McfExpr</a></code>, <code><a href='RtExpr.html'>RtExpr</a></code></p></div>
+    <div class='dont-index'><p>Other comparator_functions: <code>&lt;,.var,.metOperand-method</code>,
+  <code>&lt;=,.var,.metOperand-method</code>,
+  <code>&gt;,.var,.metOperand-method</code>,
+  <code>&gt;=,.var,.metOperand-method</code>,
+  <code><a href='Comparator.html'>Comparator</a></code>, <code><a href='grapes-between-grapes.html'>%between%</a></code>,
+  <code><a href='grapes-contains-grapes.html'>%contains%</a></code>, <code><a href='grapes-ends_with-grapes.html'>%ends_with%</a></code>,
+  <code><a href='grapes-in-grapes.html'>%in%</a></code>, <code><a href='grapes-matches-grapes.html'>%matches%</a></code>,
+  <code><a href='grapes-starts_with-grapes.html'>%starts_with%</a></code>, <code><a href='not-equals.html'>not-equals</a></code></p></div>
     
 
   </div>
@@ -198,8 +174,6 @@ comparator and operand arguments.</p></li>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#methods-by-class-">Methods (by class)</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 
