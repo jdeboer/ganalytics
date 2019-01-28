@@ -190,8 +190,8 @@ kGa4Ops <- list(
     "BETWEEN" = "<>"
   ),
   dimension_operators = c(
-    "BEGINS_WITH" = NA,
-    "ENDS_WITH" = NA,
+    "BEGINS_WITH" = "BEGINS_WITH",
+    "ENDS_WITH" = "ENDS_WITH",
     "REGEXP" = "=~",
     "PARTIAL" = "=@",
     "EXACT" = "==",
@@ -207,7 +207,7 @@ kGa4Ops <- list(
 
 kGaOps <- list(
   met = c("==", "!=", "<", ">", "<=", ">=", "<>"),
-  dim = c("==", "!=", "=~", "!~", "=@", "!@", "<>", "[]", "<", ">", "<=", ">=")
+  dim = c("BEGINS_WITH", "ENDS_WITH", "==", "!=", "=~", "!~", "=@", "!@", "<>", "[]", "<", ">", "<=", ">=")
 )
 
 kMcfOps <- list(
