@@ -72,6 +72,15 @@ setMethod(
 #' substring on the right.
 #' @rdname grapes-starts_with-grapes
 setMethod(
+  f = "%matches%",
+  signature = c(".var", "character"),
+  function(var, operand) {
+    Expr(var, "=~", operand)
+  }
+)
+
+#' @rdname comparators
+setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
@@ -82,6 +91,15 @@ setMethod(
 #' Does the value of the dimension on the left end with the character substring
 #' on the right.
 #' @rdname grapes-ends_with-grapes
+setMethod(
+  f = "%starts_with%",
+  signature = c(".var", "character"),
+  function(var, operand) {
+    Expr(var, "BEGINS_WITH", operand)
+  }
+)
+
+#' @rdname comparators
 setMethod(
   f = "%ends_with%",
   signature = c(".var", ".dimOperand"),
@@ -94,6 +112,15 @@ setMethod(
 #' on the right.
 #' @rdname grapes-contains-grapes
 setMethod(
+  f = "%ends_with%",
+  signature = c(".var", "character"),
+  function(var, operand) {
+    Expr(var, "ENDS_WITH", operand)
+  }
+)
+
+#' @rdname comparators
+setMethod(
   f = "%contains%",
   signature = c(".var", ".dimOperand"),
   function(var, operand) {
@@ -104,6 +131,15 @@ setMethod(
 #' Is the value on the left in between the values of the first and second
 #' elements of the vector on the right.
 #' @rdname grapes-between-grapes
+setMethod(
+  f = "%contains%",
+  signature = c(".var", "character"),
+  function(var, operand) {
+    Expr(var, "=@", operand)
+  }
+)
+
+#' @rdname comparators
 setMethod(
   f = "%between%",
   signature = c(".var", ".operand"),
@@ -182,6 +218,22 @@ setMethod(
 
 #' Less than
 #'
+setMethod(
+  f = ">",
+  signature = c(".var", "numeric"),
+  function(e1, e2) {
+    Expr(e1, ">", e2)
+  }
+)
+
+setMethod(
+  f = ">",
+  signature = c(".var", "integer"),
+  function(e1, e2) {
+    Expr(e1, ">", e2)
+  }
+)
+
 #' Is the value on the left less than the value on the right.
 #'
 #' @param e1 Dimension or metric object
@@ -200,6 +252,22 @@ setMethod(
 
 #' Greater or equals to
 #'
+setMethod(
+  f = "<",
+  signature = c(".var", "numeric"),
+  function(e1, e2) {
+    Expr(e1, "<", e2)
+  }
+)
+
+setMethod(
+  f = "<",
+  signature = c(".var", "integer"),
+  function(e1, e2) {
+    Expr(e1, "<", e2)
+  }
+)
+
 #' Is the value on the left greater than or equal to the value on the right.
 #'
 #' @param e1 Dimension or metric object
@@ -218,6 +286,22 @@ setMethod(
 
 #' Less than or equals to
 #'
+setMethod(
+  f = ">=",
+  signature = c(".var", "numeric"),
+  function(e1, e2) {
+    Expr(e1, ">=", e2)
+  }
+)
+
+setMethod(
+  f = ">=",
+  signature = c(".var", "integer"),
+  function(e1, e2) {
+    Expr(e1, ">=", e2)
+  }
+)
+
 #' Is the value on the left less than or equal to the value on the right.
 #'
 #' @param e1 Dimension or metric object
@@ -229,6 +313,22 @@ setMethod(
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),
+  function(e1, e2) {
+    Expr(e1, "<=", e2)
+  }
+)
+
+setMethod(
+  f = "<=",
+  signature = c(".var", "numeric"),
+  function(e1, e2) {
+    Expr(e1, "<=", e2)
+  }
+)
+
+setMethod(
+  f = "<=",
+  signature = c(".var", "integer"),
   function(e1, e2) {
     Expr(e1, "<=", e2)
   }
