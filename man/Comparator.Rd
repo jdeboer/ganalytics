@@ -42,24 +42,8 @@ conditional expression.
 }}
 
 \seealso{
-Other comparator_functions: \code{\link{<,.var,.metOperand-method}},
-  \code{\link{<=,.var,.metOperand-method}},
-  \code{\link{==,.var,.operand-method}},
-  \code{\link{>,.var,.metOperand-method}},
-  \code{\link{>=,.var,.metOperand-method}},
-  \code{\link{\%between\%}}, \code{\link{\%contains\%}},
-  \code{\link{\%ends_with\%}}, \code{\link{\%in\%}},
-  \code{\link{\%matches\%}}, \code{\link{\%starts_with\%}},
-  \code{\link{not-equals}}
+Other comparator functions: \code{\link{comparators}}
 
-Other comparator_functions: \code{\link{<,.var,.metOperand-method}},
-  \code{\link{<=,.var,.metOperand-method}},
-  \code{\link{==,.var,.operand-method}},
-  \code{\link{>,.var,.metOperand-method}},
-  \code{\link{>=,.var,.metOperand-method}},
-  \code{\link{\%between\%}}, \code{\link{\%contains\%}},
-  \code{\link{\%ends_with\%}}, \code{\link{\%in\%}},
-  \code{\link{\%matches\%}}, \code{\link{\%starts_with\%}},
-  \code{\link{not-equals}}
+Other comparator functions: \code{\link{comparators}}
 }
-\concept{comparator_functions}
+\concept{comparator functions}

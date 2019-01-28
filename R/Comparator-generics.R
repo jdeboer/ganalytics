@@ -8,7 +8,7 @@
 #'
 #' @return An object belonging to the superclass \code{.comparator}
 #'
-#' @family comparator_functions
+#' @family comparator functions
 #'
 #' @export
 #' @rdname Comparator
@@ -24,7 +24,7 @@ setGeneric(
 #'
 #' @param value The value to set the comparator to.
 #'
-#' @family comparator_functions
+#' @family comparator functions
 #'
 #' @export
 #' @rdname Comparator
@@ -37,110 +37,91 @@ setGeneric(
   }
 )
 
-#' \%starts_with\%
+#' Comparison operators
 #'
-#' A condition where the dimension (LHS) matches values that start with
-#'   the character string given by the operand (RHS).
+#' Binary operators used to define Google Analytics filters and segments.
 #'
-#' @param var Dimension object
-#' @param operand Operand dimension object or a length-one character string
+#' @param var The name of a single Google Analytics dimension or metric, as a
+#'   character string or a \code{.var} object generated with \code{\link{Var}}.
+#' @param operand An operand appropriate to the selected \code{var} and
+#'   comparison operator of length-one, or exactly length-two in the case of
+#'   \code{\%between\%}, or at least length-two in the case of \code{\%in\%}.
+#'   Usually either a character string or numeric value.
 #'
-#' @family comparator_functions
+#' @return an \code{expr} object.
 #'
+#' @family comparator functions
+#'
+#' @name comparators
+NULL
+
+#' @section \%starts_with\%:
+#' A condition where the dimension (LHS) matches values that start with the
+#' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %starts_with% "/products")
+#' @rdname comparators
 #' @export
-#' @rdname grapes-starts_with-grapes
 setGeneric(
   "%starts_with%",
   function(var, operand) {standardGeneric("%starts_with%")},
   valueClass = ".dimExpr"
 )
 
-#' \%ends_with\%
-#'
-#' A condition where the dimension (LHS) matches values that end with
-#'   the character string given by the operand (RHS).
-#'
-#' @param var Dimension object
-#' @param operand Operand dimension object or a length-one character string
-#'
-#' @family comparator_functions
-#'
+# Base R functions: `startsWith` and `endsWith`
+
+#' @section \%ends_with\%:
+#' A condition where the dimension (LHS) matches values that end with the
+#' character string given by the operand (RHS).
+#' @rdname comparators
 #' @export
-#' @rdname grapes-ends_with-grapes
 setGeneric(
   "%ends_with%",
   function(var, operand) {standardGeneric("%ends_with%")},
   valueClass = ".dimExpr"
 )
 
-#' \%contains\%
-#'
-#' A condition where the dimension (LHS) matches values that contain
-#'   the character string given by the operand (RHS).
-#'
-#' @param var Dimension object
-#' @param operand Operand dimension object or a length-one character string
-#'
-#' @family comparator_functions
-#'
+#' @section \%contains\%:
+#' A condition where the dimension (LHS) matches values that contain the
+#' character string given by the operand (RHS).
+#' @rdname comparators
 #' @export
-#' @rdname grapes-contains-grapes
 setGeneric(
   "%contains%",
   function(var, operand) {standardGeneric("%contains%")},
   valueClass = ".dimExpr"
 )
 
-#' \%matches\%
-#'
-#' A condition where the dimension (LHS) matches a regular
-#'   expression given by the operand (RHS).
-#'
-#' @param var A dimension object.
-#' @param operand A regular expression string.
-#'
-#' @family comparator_functions
-#'
+#' @section \%matches\%:
+#' A condition where the dimension (LHS) matches a regular expression given by
+#' the operand (RHS).
+#' @rdname comparators
 #' @export
-#' @rdname grapes-matches-grapes
 setGeneric(
   "%matches%",
   function(var, operand) {standardGeneric("%matches%")},
   valueClass = ".dimExpr"
 )
 
-#' \%between\%
-#'
+# Base R function `grepl`
+
+#' @section \%between\%:
 #' A condition where the var (LHS) is within the lower and upper bounds
 #' specified by first and second vector value (respectively) of the operand
 #' (RHS).
-#'
-#' @param var A metric object or an interval dimension object.
-#' @param operand A vector of length-two given the lower and upper bounds of the
-#'   range.
-#'
-#' @family comparator_functions
-#'
+#' @rdname comparators
 #' @export
-#' @rdname grapes-between-grapes
 setGeneric(
   "%between%",
   function(var, operand) {standardGeneric("%between%")},
   valueClass = ".expr"
 )
 
-#' \%in\%
-#'
-#' A condition where the dimension (LHS) matches one of the
-#'   values in the vector specified by the operand (RHS).
-#'
-#' @param x Dimension or metric object
-#' @param table Operand object
-#'
-#' @family comparator_functions
-#'
+#' @section \%in\%:
+#' A condition where the dimension (LHS) matches one of the values in the vector
+#' specified by the operand (RHS).
+#' @rdname comparators
 #' @export
-#' @rdname grapes-in-grapes
 setGeneric("%in%")
 
 #' IsRegEx
