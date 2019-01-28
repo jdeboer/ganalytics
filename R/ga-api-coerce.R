@@ -37,7 +37,7 @@ setAs(from = ".metOperand", to = "character",
 # Coercing GA expressions to GA API compatible character strings
 setAs(from = ".expr", to = "character", def = function(from, to) {
   operand_class <- class(from@operand)
-  if(inherits(from, "gaExpr")) {
+  if(inherits(from, ".gaExpr")) {
     if(from@comparator@operator == "BEGINS_WITH") {
       from@operand <- as(paste("^", quotemeta(from@operand), sep = ""), operand_class)
       Comparator(from) <- "=~"
