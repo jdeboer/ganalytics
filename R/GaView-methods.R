@@ -26,6 +26,12 @@ setMethod(
 )
 
 #' @describeIn GaView Select the default view of the property.
+#' @examples
+#' \dontrun{
+#'    my_ga_account <- GaAccounts()[['60253332']]
+#'    my_website_property <- my_ga_account$properties[['UA-60253332-2']]
+#'    my_default_view <- GaView(my_website_property)
+#' }
 setMethod(
   "GaView",
   signature = c("gaProperty", "missing"),
@@ -40,6 +46,11 @@ setMethod(
 
 #' @describeIn GaView Select the default view of the first listed property of
 #'   the account.
+#' @examples
+#' \dontrun{
+#'    my_ga_account <- GaAccounts()[['60253332']]
+#'    my_default_view <- GaView(my_ga_account)
+#' }
 setMethod(
   "GaView",
   signature = c("gaAccount", "missing"),

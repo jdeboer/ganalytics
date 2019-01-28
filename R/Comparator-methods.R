@@ -117,6 +117,9 @@ setMethod(
 #' Do the values on the left and right match exactly.
 #' @param e1 A dimension or metric.
 #' @param e2 An operand object of length-one.
+#' @examples
+#' Expr(~productName == "apple")
+#' Expr(~bounces == 0)
 #' @rdname comparators
 setMethod(
   f = "==",
@@ -128,6 +131,9 @@ setMethod(
 
 #' @section Not equal-to (\code{!=}):
 #' Do the values on the left and right not match.
+#' @examples
+#' Expr(~deviceCategory != "tablet")
+#' Expr(~sessionDuration != 0)
 #' @rdname comparators
 setMethod(
   f = "!=",
@@ -152,6 +158,8 @@ setMethod(
 
 #' @section Less-than (\code{<}):
 #' Is the value on the left less than the value on the right.
+#' @examples
+#' Expr(~exits < 100)
 #' @rdname comparators
 setMethod(
   f = "<",

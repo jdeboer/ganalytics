@@ -98,6 +98,13 @@ setGeneric(
 #'   \code{.gaSegmentFilter} or \code{gaMetExpr} object with the newly set
 #'   scope.
 #'
+#' @examples
+#' sessions_with_value <- Expr(~eventValue > 0, metricScope = "perSession")
+#' ScopeLevel(sessions_with_value)
+#' users_with_value_sessions <- Include(sessions_with_value)
+#' ScopeLevel(users_with_value_sessions) <- "users"
+#' sessions_with_value_segment <- ScopeLevel(users_with_value_sessions, "sessions")
+#'
 #' @family dynamic segment functions
 #'
 #' @export

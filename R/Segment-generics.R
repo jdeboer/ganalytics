@@ -12,6 +12,13 @@
 #'
 #' @return A \code{gaSegmentConditionFilter} object.
 #'
+#' @examples
+#' bounced_sessions <- SegmentConditionFilter(Expr(~bounces > 0))
+#' return_shoppers <- SegmentConditionFilter(
+#'   Expr(~transactions > 1, metricScope = "perUser"),
+#'   scope = "users"
+#' )
+#'
 #' @family dynamic segment functions
 #'
 #' @export
@@ -30,6 +37,11 @@ setGeneric(
 #' @param scope Optional scope, "users" or "sessions" (default).
 #'
 #' @return A .gaSegmentFilter object with its negate slot set to FALSE.
+#'
+#' return_shoppers <- Include(
+#'   Expr(~transactions > 1, metricScope = "perUser"),
+#'   scope = "users"
+#' )
 #'
 #' @family dynamic segment functions
 #'
@@ -50,6 +62,12 @@ setGeneric(
 #'
 #' @return A .gaSegmentFilter object with its negate slot set to TRUE.
 #'
+#' @examples
+#' exclude_one_time_shoppers <- Exclude(
+#'   Expr(~transactions == 1, metricScope = "perUser"),
+#'   scope = "users"
+#' )
+#'
 #' @family dynamic segment functions
 #'
 #' @export
@@ -64,6 +82,13 @@ setGeneric(
 #' Tests whether a segment filter is negated.
 #'
 #' @param object An object belonging to the superclass \code{.gaSegmentFilter}.
+#'
+#' @examples
+#' exclude_one_time_shoppers <- Exclude(
+#'   Expr(~transactions == 1, metricScope = "perUser"),
+#'   scope = "users"
+#' )
+#' IsNegated(exclude_one_time_shoppers) # TRUE
 #'
 #' @rdname IsNegated
 #'
@@ -111,6 +136,16 @@ setGeneric(
 #' @param name An optional name given to the dynamic segment.
 #'
 #' @return A \code{gaDynSegment} object.
+#'
+#' @examples
+#' return_shoppers <- SegmentConditionFilter(
+#'   Expr(~transactions > 1, metricScope = "perUser"),
+#'   scope = "users"
+#' )
+#' watched_video_then_purchased <- Sequence(
+#'   Expr(~eventCategory == "video") & Expr(~eventAction == "play"),
+#'   Later(Expr(~transactions > 0))
+#' )
 #'
 #' @family dynamic segment functions
 #'
@@ -172,7 +207,6 @@ setGeneric(
 #'   to coerce into a session scoped \code{gaDynSegment}.
 #' @param ... Other filters to include in the \code{gaDynSegment}.
 #' @param negation Boolean value indicating whether to negate the condition.
-#' @return A gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
 #' @return A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
 #'

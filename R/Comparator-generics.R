@@ -73,6 +73,8 @@ setGeneric(
 #' @section \%ends_with\%:
 #' A condition where the dimension (LHS) matches values that end with the
 #' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %ends_with% "/index.html")
 #' @rdname comparators
 #' @export
 setGeneric(
@@ -84,6 +86,8 @@ setGeneric(
 #' @section \%contains\%:
 #' A condition where the dimension (LHS) matches values that contain the
 #' character string given by the operand (RHS).
+#' @examples
+#' Expr(~PagePath %contains% "thank-you")
 #' @rdname comparators
 #' @export
 setGeneric(
@@ -95,6 +99,8 @@ setGeneric(
 #' @section \%matches\%:
 #' A condition where the dimension (LHS) matches a regular expression given by
 #' the operand (RHS).
+#' @examples
+#' Expr(~PagePath %matches% "*.thank[\\-_]?you.*")
 #' @rdname comparators
 #' @export
 setGeneric(
@@ -109,6 +115,8 @@ setGeneric(
 #' A condition where the var (LHS) is within the lower and upper bounds
 #' specified by first and second vector value (respectively) of the operand
 #' (RHS).
+#' @examples
+#' Expr(~transactionRevenue %between% c(200, 500))
 #' @rdname comparators
 #' @export
 setGeneric(
@@ -120,6 +128,8 @@ setGeneric(
 #' @section \%in\%:
 #' A condition where the dimension (LHS) matches one of the values in the vector
 #' specified by the operand (RHS).
+#' @examples
+#' Expr(~browser %in% c("Chrome", "Firefox"))
 #' @rdname comparators
 #' @export
 setGeneric("%in%")
