@@ -59,29 +59,37 @@ setMethod(
   }
 )
 
-# -- GaView ----
-#' @describeIn GaView Returns the ID of the supplied view, or the first view
-#'   within the supplied property or the first view within the first property of
-#'   the supplied account, or coerce a numeric or character into a viewId.
-setMethod("GaView", c("ANY", "missing"),
-          function(object) {
-            as(object, "viewId")
-          }
-        )
-
-#' @describeIn GaView gets the view ID of the supplied query
-setMethod("GaView", c(".query", "missing"),
-          function(object) {
-            object@viewId
-          }
+#' @describeIn GaView Returns the ID of the supplied view, or the default view
+#'   within the supplied property or the default view within the first property
+#'   of the supplied account, or coerces a numeric or character into a viewId.
+setMethod(
+  "GaView",
+  signature = c("ANY", "missing"),
+  definition = function(object) {
+    as(object, "viewId")
+  }
 )
 
-#' @describeIn GaView Set the view of a query, returning the query with the updated view applied.
-setMethod("GaView", c(".query", "ANY"),
-          function(object, value) {
-            as(object, "viewId") <- value
-          }
-        )
+#' @describeIn GaView gets the view ID of the supplied query
+setMethod(
+  "GaView",
+  signature = c(".query", "missing"),
+  definition = function(object) {
+    object@viewId
+  }
+)
+
+#' @describeIn GaView Set the view of a query, returning the query with the
+#'   updated view applied.
+setMethod(
+  "GaView",
+  signature = c(".query", "ANY"),
+  definition = function(object, value) {
+    as(object, "viewId") <- value
+    validObject(object)
+    object
+  }
+)
 
 #' @describeIn GaView Replaces the view being used by a query.
 setMethod(
