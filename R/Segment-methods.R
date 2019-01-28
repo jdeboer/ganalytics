@@ -141,9 +141,21 @@ setMethod(
 #' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
 setMethod(
   f = "ScopeLevel",
-  signature = ".gaSegmentFilter",
+  signature = c(".gaSegmentFilter", "missing"),
   definition = function(object) {
     object@scope
+  }
+)
+
+#' @describeIn ScopeLevel Set the scope level of a .gaSegmentFilter to either
+#'   "user" or "session" level.
+setMethod(
+  "ScopeLevel",
+  signature = c(".gaSegmentFilter", "character"),
+  definition = function(object, value) {
+    object@scope <- value
+    validObject(object)
+    object
   }
 )
 

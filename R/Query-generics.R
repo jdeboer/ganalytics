@@ -16,7 +16,7 @@ NULL
 setGeneric(
   "MaxResults",
   function(object, value) {standardGeneric("MaxResults")},
-  valueClass = "numeric"
+  valueClass = c("numeric", ".query")
 )
 
 #' MaxResults<-

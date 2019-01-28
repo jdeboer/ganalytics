@@ -219,9 +219,21 @@ modify_query <- function(
 #'   to return.
 setMethod(
   f = "MaxResults",
-  signature = ".query",
+  signature = c(".query", "missing"),
   definition = function(object) {
     object@maxResults
+  }
+)
+
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to
+#'   return.
+setMethod(
+  f = "MaxResults",
+  signature = c(".query", "ANY"),
+  definition = function(object, value) {
+    object@maxResults <- as.integer(value)
+    validObject(object)
+    object
   }
 )
 
@@ -241,9 +253,20 @@ setMethod(
 #'   has been set to.
 setMethod(
   f = "SamplingLevel",
-  signature = ".standardQuery",
+  signature = c(".standardQuery", "missing"),
   definition = function(object) {
     object@samplingLevel
+  }
+)
+
+#' @describeIn SamplingLevel Set the sampling level of the query.
+setMethod(
+  f = "SamplingLevel",
+  signature = c(".standardQuery", "ANY"),
+  definition = function(object, value) {
+    object@samplingLevel <- as.character(value)
+    validObject(object)
+    object
   }
 )
 
