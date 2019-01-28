@@ -68,26 +68,8 @@ setMethod(
 
 #' @rdname comparators
 setMethod(
-  f = "%matches%",
-  signature = c(".var", "character"),
-  function(var, operand) {
-    Expr(var, "=~", operand)
-  }
-)
-
-#' @rdname comparators
-setMethod(
   f = "%starts_with%",
   signature = c(".var", ".dimOperand"),
-  function(var, operand) {
-    Expr(var, "BEGINS_WITH", operand)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = "%starts_with%",
-  signature = c(".var", "character"),
   function(var, operand) {
     Expr(var, "BEGINS_WITH", operand)
   }
@@ -104,26 +86,8 @@ setMethod(
 
 #' @rdname comparators
 setMethod(
-  f = "%ends_with%",
-  signature = c(".var", "character"),
-  function(var, operand) {
-    Expr(var, "ENDS_WITH", operand)
-  }
-)
-
-#' @rdname comparators
-setMethod(
   f = "%contains%",
   signature = c(".var", ".dimOperand"),
-  function(var, operand) {
-    Expr(var, "=@", operand)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = "%contains%",
-  signature = c(".var", "character"),
   function(var, operand) {
     Expr(var, "=@", operand)
   }
@@ -176,29 +140,11 @@ setMethod(
 #' @section Greater-than (\code{>}):
 #' Is the value on the left greater than the value on the right.
 #' @examples
-#' Var("pageviews") > 100
+#' Expr(~pageviews > 100)
 #' @rdname comparators
 setMethod(
   f = ">",
   signature = c(".var", ".metOperand"),
-  function(e1, e2) {
-    Expr(e1, ">", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = ">",
-  signature = c(".var", "numeric"),
-  function(e1, e2) {
-    Expr(e1, ">", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = ">",
-  signature = c(".var", "integer"),
   function(e1, e2) {
     Expr(e1, ">", e2)
   }
@@ -215,24 +161,6 @@ setMethod(
   }
 )
 
-#' @rdname comparators
-setMethod(
-  f = "<",
-  signature = c(".var", "numeric"),
-  function(e1, e2) {
-    Expr(e1, "<", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = "<",
-  signature = c(".var", "integer"),
-  function(e1, e2) {
-    Expr(e1, "<", e2)
-  }
-)
-
 #' @section Greater-than-or-equal-to (\code{>=}):
 #' Is the value on the left greater than or equal to the value on the right.
 #' @rdname comparators
@@ -244,48 +172,12 @@ setMethod(
   }
 )
 
-#' @rdname comparators
-setMethod(
-  f = ">=",
-  signature = c(".var", "numeric"),
-  function(e1, e2) {
-    Expr(e1, ">=", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = ">=",
-  signature = c(".var", "integer"),
-  function(e1, e2) {
-    Expr(e1, ">=", e2)
-  }
-)
-
 #' @section Less-than-or-equal-to (\code{<=}):
 #' Is the value on the left less than or equal to the value on the right.
 #' @rdname comparators
 setMethod(
   f = "<=",
   signature = c(".var", ".metOperand"),
-  function(e1, e2) {
-    Expr(e1, "<=", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = "<=",
-  signature = c(".var", "numeric"),
-  function(e1, e2) {
-    Expr(e1, "<=", e2)
-  }
-)
-
-#' @rdname comparators
-setMethod(
-  f = "<=",
-  signature = c(".var", "integer"),
   function(e1, e2) {
     Expr(e1, "<=", e2)
   }
