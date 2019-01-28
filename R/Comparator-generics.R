@@ -44,9 +44,9 @@ setGeneric(
 #' @param var The name of a single Google Analytics dimension or metric, as a
 #'   character string or a \code{.var} object generated with \code{\link{Var}}.
 #' @param operand An operand appropriate to the selected \code{var} and
-#'   comparison operator of length-one, or exactly length-two in the case of
-#'   \code{\%between\%}, or at least length-two in the case of \code{\%in\%}.
-#'   Usually either a character string or numeric value.
+#'   comparison operator. A vector usually of length-one, or exactly length-two
+#'   in the case of \code{\%between\%}, or at least length-two in the case of
+#'   \code{\%in\%}. Usually either a character string or numeric value.
 #'
 #' @return an \code{expr} object.
 #'

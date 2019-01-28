@@ -17,7 +17,7 @@ PerHit(object, ..., negation)
 \S4method{PerHit}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{A gaMetExpr object to coerce to hit-level or if multiple
+\item{object}{A \code{gaMetExpr} object to coerce to hit-level or if multiple
 expressions are provided, then the first expression to combine into a
 single step of sequence filter.}
 
@@ -27,7 +27,7 @@ defining a sequence filter of length one.}
 \item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-A gaMetExpr or gaSegmentSequenceFilter.
+A \code{gaMetExpr} or \code{gaSegmentSequenceFilter}.
 }
 \description{
 Set the scope of a gaMetExpr object to hit-level, or transforms a condition

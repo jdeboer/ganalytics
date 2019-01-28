@@ -1,12 +1,12 @@
 #' ga_view_selector
 #'
-#' GaView A menu user-interface for selecting a Google Analytics view.
+#' A menu user-interface for selecting a Google Analytics view.
 #'
 #' @param creds Optional. An OAuth2.0 credentials object to use for the request.
 #' @param with_gui Optional. Boolean value indicating whether to use a GUI for
-#'   the menu. Default is FALSE.
+#'   the menu. Default is \code{FALSE}.
 #'
-#' @return A gaView object.
+#' @return A \code{gaView} object.
 #'
 #' @export
 #' @rdname GaView
@@ -69,7 +69,7 @@ ga_view_selector <- function(creds = GoogleApiCreds(), with_gui = FALSE) {
 #'   gaView of, such as a query, default view of a web property, or the default
 #'   view of the first web property in a Google Analytics account.
 #' @param value The optional replacement view if the object supplied is a query,
-#'   in which case GaView will return the modified query.
+#'   in which case \code{GaView} will return the modified query.
 #'
 #' @export
 #' @rdname GaView

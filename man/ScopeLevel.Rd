@@ -8,7 +8,8 @@
 \alias{ScopeLevel,gaSegMetExpr,missing-method}
 \alias{ScopeLevel,gaSegMetExpr,character-method}
 \alias{ScopeLevel<-,gaMetExpr,character-method}
-\alias{ScopeLevel,.gaSegmentFilter,ANY-method}
+\alias{ScopeLevel,.gaSegmentFilter,missing-method}
+\alias{ScopeLevel,.gaSegmentFilter,character-method}
 \alias{ScopeLevel<-,.gaSegmentFilter,character-method}
 \alias{ScopeLevel<-,gaDynSegment,character-method}
 \title{ScopeLevel}
@@ -23,27 +24,32 @@ ScopeLevel(object) <- value
 
 \S4method{ScopeLevel}{gaMetExpr,character}(object) <- value
 
-\S4method{ScopeLevel}{.gaSegmentFilter,ANY}(object)
+\S4method{ScopeLevel}{.gaSegmentFilter,missing}(object)
+
+\S4method{ScopeLevel}{.gaSegmentFilter,character}(object, value)
 
 \S4method{ScopeLevel}{.gaSegmentFilter,character}(object) <- value
 
 \S4method{ScopeLevel}{gaDynSegment,character}(object) <- value
 }
 \arguments{
-\item{object}{A .gaSegmentFilter or a metric expression.}
+\item{object}{A \code{.gaSegmentFilter} or \code{gaMetExpr} object.}
 
-\item{value}{New scope level to return an updated copy of the object
-with the new scope applied. For .gaSegmentFilters this can be
-either 'users' or 'sessions'. For metric expressions use either 'perUser',
-'perSession', 'perHit' or 'perProduct'.}
+\item{value}{New scope level to return an updated copy of the object with the
+new scope applied. For \code{.gaSegmentFilters} this can be either
+\code{'users'} or \code{'sessions'}. For metric expressions use either
+\code{'perUser'}, \code{'perSession'}, \code{'perHit'} or
+\code{'perProduct'}.}
 }
 \value{
-The scope level as a character string, a .gaSegmentFilter or gaMetExpr.
+The scope level as a character string, or returns a
+\code{.gaSegmentFilter} or \code{gaMetExpr} object with the newly set
+scope.
 }
 \description{
 Get the scope level of a .gaSegmentFilter or gaMetExpr.
 
-Set the scope level of a gaDynSegment or a gaMetExpr
+Set the scope level of a .gaSegmentFilter or a gaMetExpr.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -58,7 +64,10 @@ expression.
 be applied to the supplied metric condition for use within a segment
 expression.
 
-\item \code{object = .gaSegmentFilter,value = ANY}: Returns the scope of the supplied .gaSegmentFilter.
+\item \code{object = .gaSegmentFilter,value = missing}: Returns the scope of the supplied .gaSegmentFilter.
+
+\item \code{object = .gaSegmentFilter,value = character}: Set the scope level of a .gaSegmentFilter to either
+"user" or "session" level.
 
 \item \code{object = .gaSegmentFilter,value = character}: Set the scope level of a .gaSegmentFilter to either
 "user" or "session" level.
@@ -67,6 +76,14 @@ expression.
 "user" or "session" level.
 }}
 
+\examples{
+sessions_with_value <- Expr(~eventValue > 0, metricScope = "perSession")
+ScopeLevel(sessions_with_value)
+users_with_value_sessions <- Include(sessions_with_value)
+ScopeLevel(users_with_value_sessions) <- "users"
+sessions_with_value_segment <- ScopeLevel(users_with_value_sessions, "sessions")
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Exclude}}, \code{\link{Include}},

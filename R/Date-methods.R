@@ -52,6 +52,8 @@ NULL
 #' @param N the number of the separate date ranges to be split into; use 0 for
 #'   single days.
 #'
+#' @family date range functions
+#'
 #' @export
 SplitDateRange <- function(dateRange, N = 0L) {
   # TO DO

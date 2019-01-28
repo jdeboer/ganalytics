@@ -30,7 +30,7 @@ including dynamic segments, built-in and/or custom segments by their ID.}
 the segment's definition (ANDed)}
 }
 \value{
-An object belonging to the .gaSegment superclass.
+An object belonging to the \code{.gaSegment} superclass.
 }
 \description{
 Define a segment for use in a query's segment list.

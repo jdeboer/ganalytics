@@ -3,11 +3,14 @@
 #' Create a new gaSegmentConditionFilter object
 #'
 #' @param object An expression to be used as a non-sequential segment condition.
-#' @param ... Other expressions to be ANDed to the first expression provided.
-#' @param negation Optional logical TRUE or FALSE to match segments where this condition
-#'   has not been met. Default is FALSE, i.e. inclusive filter.
-#' @param scope Optional scope, "users" or "sessions".
-#' @return A gaSegmentConditionFilter object.
+#' @param ... Other expressions to be \code{And}ed to the first expression
+#'   provided.
+#' @param negation Optional logical \code{TRUE} or \code{FALSE} to match
+#'   segments where this condition has not been met. Default is \code{FALSE},
+#'   i.e. inclusive filter.
+#' @param scope Optional scope, \code{"users"} or \code{"sessions"} (default).
+#'
+#' @return A \code{gaSegmentConditionFilter} object.
 #'
 #' @family dynamic segment functions
 #'
@@ -24,7 +27,8 @@ setGeneric(
 #'
 #' @param object A segment condition or sequence filter to include.
 #' @param ... Additional segment conditions to include.
-#' @param scope Optional scope, "users" or "sessions"
+#' @param scope Optional scope, "users" or "sessions" (default).
+#'
 #' @return A .gaSegmentFilter object with its negate slot set to FALSE.
 #'
 #' @family dynamic segment functions
@@ -43,6 +47,7 @@ setGeneric(
 #' @param object A segment condition or sequence filter to exclude.
 #' @param ... Additional segment conditions to add to the exclude filter.
 #' @param scope Optional scope, "users" or "sessions"
+#'
 #' @return A .gaSegmentFilter object with its negate slot set to TRUE.
 #'
 #' @family dynamic segment functions
@@ -94,16 +99,18 @@ setGeneric(
 #' DynSegment
 #'
 #' Combine one or more segment condition filters and/or sequence filters into a
-#' gaDynSegment that is scoped to either 'user' or 'session' level.
+#' \code{gaDynSegment} that is scoped to either \code{'user'} or
+#' \code{'session'} level.
 #'
-#' A segment filter is either sequential or non-sequential conditions.
+#' Segment filter are either sequential or non-sequential conditions.
 #' Sequential and non-sequential conditions can be combined using this function.
 #'
 #' @param object The first filter to include in the segment definition.
 #' @param ... Additional filters to include in the segment definition, if
 #'   needed.
 #' @param name An optional name given to the dynamic segment.
-#' @return A gaDynSegment object.
+#'
+#' @return A \code{gaDynSegment} object.
 #'
 #' @family dynamic segment functions
 #'
@@ -137,13 +144,14 @@ setGeneric(
 #' filter to a sequence filter of length one (i.e. a combination of conditions
 #' for matching a single hit).
 #'
-#' @param object A gaMetExpr object to coerce to hit-level or if multiple
+#' @param object A \code{gaMetExpr} object to coerce to hit-level or if multiple
 #'   expressions are provided, then the first expression to combine into a
 #'   single step of sequence filter.
 #' @param ... Further expressions to be included in the filter definition if
 #'   defining a sequence filter of length one.
 #' @param negation Boolean value indicating whether to negate the condition.
-#' @return A gaMetExpr or gaSegmentSequenceFilter.
+#'
+#' @return A \code{gaMetExpr} or \code{gaSegmentSequenceFilter}.
 #'
 #' @family dynamic segment functions
 #'
@@ -156,17 +164,21 @@ setGeneric(
 
 #' PerSession
 #'
-#' Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.
+#' Set the scope of a \code{.gaSegmentFilter} or \code{gaMetExpr} object to
+#' session-level.
 #'
-#' @param object A .gaSegmentFilter or gaMetExpr object to coerce to
-#'   session-level. Alternatively, an dimension expression or segment filter to
-#'   coerce into a session scoped gaDynSegment.
-#' @param ... Other filters to include in the gaDynSegment.
+#' @param object A \code{.gaSegmentFilter} or \code{gaMetExpr} object to coerce
+#'   to session-level. Alternatively, an dimension expression or segment filter
+#'   to coerce into a session scoped \code{gaDynSegment}.
+#' @param ... Other filters to include in the \code{gaDynSegment}.
 #' @param negation Boolean value indicating whether to negate the condition.
 #' @return A gaMetExpr, .gaSegmentFilter or gaDynSegment.
 #'
-#' @note To define a gaDynSegment comprised of a single metric expression,
-#'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
+#' @return A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
+#'
+#' @note To define a \code{gaDynSegment} comprised of a single metric
+#'   expression, wrap the metric expression in an \code{Include} or
+#'   \code{Exclude} call.
 #'
 #' @family dynamic segment functions
 #'
@@ -179,16 +191,16 @@ setGeneric(
 
 #' PerUser
 #'
-#' Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
+#' Set the scope of a \code{.gaSegmentFilter} or \code{gaMetExpr} object to user-level.
 #'
-#' @param object a .gaSegmentFilter or gaMetExpr object to coerce to
+#' @param object a \code{.gaSegmentFilter} or \code{gaMetExpr} object to coerce to
 #'   user-level. Alternatively, an dimension expression or segment filter to
-#'   coerce into a user scoped gaDynSegment.
-#' @param ... Other filters to include in the gaDynSegment.
+#'   coerce into a user scoped \code{gaDynSegment}.
+#' @param ... Other filters to include in the \code{gaDynSegment}.
 #' @param negation Boolean value indicating whether to negate the condition.
-#' @return A gaMetExpr, .gaSegmentFilter or gaDynSegment.
+#' @return A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
 #'
-#' @note To define a gaDynSegment comprised of a single metric expression,
+#' @note To define a \code{gaDynSegment} comprised of a single metric expression,
 #'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
 #'
 #' @family dynamic segment functions
@@ -208,7 +220,7 @@ setGeneric(
 #'   including dynamic segments, built-in and/or custom segments by their ID.
 #' @param ... Other segment conditions, filters or filter lists to include in
 #'   the segment's definition (ANDed)
-#' @return An object belonging to the .gaSegment superclass.
+#' @return An object belonging to the \code{.gaSegment} superclass.
 #'
 #' @family dynamic segment functions
 #'

@@ -15,10 +15,15 @@ Include(object, ..., scope)
 
 \item{...}{Additional segment conditions to include.}
 
-\item{scope}{Optional scope, "users" or "sessions"}
+\item{scope}{Optional scope, "users" or "sessions" (default).}
 }
 \value{
 A .gaSegmentFilter object with its negate slot set to FALSE.
+
+return_shoppers <- Include(
+Expr(~transactions > 1, metricScope = "perUser"),
+scope = "users"
+)
 }
 \description{
 Set the negation flag of a segment filter to FALSE.

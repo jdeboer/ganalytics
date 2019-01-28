@@ -4,7 +4,8 @@
 \name{MaxResults}
 \alias{MaxResults}
 \alias{MaxResults<-}
-\alias{MaxResults,.query-method}
+\alias{MaxResults,.query,missing-method}
+\alias{MaxResults,.query,ANY-method}
 \alias{MaxResults<-,.query-method}
 \title{MaxResults}
 \usage{
@@ -12,7 +13,9 @@ MaxResults(object, value)
 
 MaxResults(object) <- value
 
-\S4method{MaxResults}{.query}(object)
+\S4method{MaxResults}{.query,missing}(object)
+
+\S4method{MaxResults}{.query,ANY}(object, value)
 
 \S4method{MaxResults}{.query}(object) <- value
 }
@@ -28,9 +31,14 @@ Set the maximum rows returned by a ganalytics query.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.query}: Return the maximum number of rows a query is allowed to return.
+\item \code{object = .query,value = missing}: Return the maximum number of rows a query is allowed
+to return.
 
-\item \code{.query}: Set the maximum number of rows a query is allowed to return.
+\item \code{object = .query,value = ANY}: Set the maximum number of rows a query is allowed to
+return.
+
+\item \code{.query}: Set the maximum number of rows a query is allowed to
+return.
 }}
 
 \seealso{

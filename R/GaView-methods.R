@@ -25,7 +25,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaView Select the default view of the property
+#' @describeIn GaView Select the default view of the property.
 setMethod(
   "GaView",
   signature = c("gaProperty", "missing"),
@@ -38,8 +38,8 @@ setMethod(
   }
 )
 
-#' @describeIn GaView Selects the first property of the account, which is then
-#' used to select a view (as above).
+#' @describeIn GaView Select the default view of the first listed property of
+#'   the account.
 setMethod(
   "GaView",
   signature = c("gaAccount", "missing"),

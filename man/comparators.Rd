@@ -10,29 +10,17 @@
 \alias{\%between\%}
 \alias{\%in\%}
 \alias{\%matches\%,.var,.dimOperand-method}
-\alias{\%matches\%,.var,character-method}
 \alias{\%starts_with\%,.var,.dimOperand-method}
-\alias{\%starts_with\%,.var,character-method}
 \alias{\%ends_with\%,.var,.dimOperand-method}
-\alias{\%ends_with\%,.var,character-method}
 \alias{\%contains\%,.var,.dimOperand-method}
-\alias{\%contains\%,.var,character-method}
 \alias{\%between\%,.var,.operand-method}
 \alias{\%in\%,.var,.operand-method}
 \alias{==,.var,.operand-method}
 \alias{!=,.var,.operand-method}
 \alias{>,.var,.metOperand-method}
-\alias{>,.var,numeric-method}
-\alias{>,.var,integer-method}
 \alias{<,.var,.metOperand-method}
-\alias{<,.var,numeric-method}
-\alias{<,.var,integer-method}
 \alias{>=,.var,.metOperand-method}
-\alias{>=,.var,numeric-method}
-\alias{>=,.var,integer-method}
 \alias{<=,.var,.metOperand-method}
-\alias{<=,.var,numeric-method}
-\alias{<=,.var,integer-method}
 \title{Comparison operators}
 \usage{
 var \%starts_with\% operand
@@ -49,19 +37,11 @@ x \%in\% table
 
 \S4method{\%matches\%}{.var,.dimOperand}(var, operand)
 
-\S4method{\%matches\%}{.var,character}(var, operand)
-
 \S4method{\%starts_with\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%starts_with\%}{.var,character}(var, operand)
 
 \S4method{\%ends_with\%}{.var,.dimOperand}(var, operand)
 
-\S4method{\%ends_with\%}{.var,character}(var, operand)
-
 \S4method{\%contains\%}{.var,.dimOperand}(var, operand)
-
-\S4method{\%contains\%}{.var,character}(var, operand)
 
 \S4method{\%between\%}{.var,.operand}(var, operand)
 
@@ -73,36 +53,20 @@ x \%in\% table
 
 \S4method{>}{.var,.metOperand}(e1, e2)
 
-\S4method{>}{.var,numeric}(e1, e2)
-
-\S4method{>}{.var,integer}(e1, e2)
-
 \S4method{<}{.var,.metOperand}(e1, e2)
-
-\S4method{<}{.var,numeric}(e1, e2)
-
-\S4method{<}{.var,integer}(e1, e2)
 
 \S4method{>=}{.var,.metOperand}(e1, e2)
 
-\S4method{>=}{.var,numeric}(e1, e2)
-
-\S4method{>=}{.var,integer}(e1, e2)
-
 \S4method{<=}{.var,.metOperand}(e1, e2)
-
-\S4method{<=}{.var,numeric}(e1, e2)
-
-\S4method{<=}{.var,integer}(e1, e2)
 }
 \arguments{
 \item{var}{The name of a single Google Analytics dimension or metric, as a
 character string or a \code{.var} object generated with \code{\link{Var}}.}
 
 \item{operand}{An operand appropriate to the selected \code{var} and
-comparison operator of length-one, or exactly length-two in the case of
-\code{\%between\%}, or at least length-two in the case of \code{\%in\%}.
-Usually either a character string or numeric value.}
+comparison operator. A vector usually of length-one, or exactly length-two
+in the case of \code{\%between\%}, or at least length-two in the case of
+\code{\%in\%}. Usually either a character string or numeric value.}
 
 \item{x}{A dimension.}
 
@@ -187,7 +151,17 @@ Is the value on the left less than or equal to the value on the right.
 
 \examples{
 Expr(~PagePath \%starts_with\% "/products")
-Var("pageviews") > 100
+Expr(~PagePath \%ends_with\% "/index.html")
+Expr(~PagePath \%contains\% "thank-you")
+Expr(~PagePath \%matches\% "*.thank[\\\\-_]?you.*")
+Expr(~transactionRevenue \%between\% c(200, 500))
+Expr(~browser \%in\% c("Chrome", "Firefox"))
+Expr(~productName == "apple")
+Expr(~bounces == 0)
+Expr(~deviceCategory != "tablet")
+Expr(~sessionDuration != 0)
+Expr(~pageviews > 100)
+Expr(~exits < 100)
 }
 \seealso{
 Other comparator functions: \code{\link{Comparator}}

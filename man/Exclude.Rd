@@ -29,6 +29,13 @@ Set the negation flag of a segment filter to TRUE.
 expressions.
 }}
 
+\examples{
+exclude_one_time_shoppers <- Exclude(
+  Expr(~transactions == 1, metricScope = "perUser"),
+  scope = "users"
+)
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Include}}, \code{\link{IsNegated}},

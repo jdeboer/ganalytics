@@ -21,9 +21,11 @@ Set the start date.
 }
 \seealso{
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{EndDate}}
+  \code{\link{DateRange}}, \code{\link{EndDate}},
+  \code{\link{SplitDateRange}}
 
 Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{EndDate}}
+  \code{\link{DateRange}}, \code{\link{EndDate}},
+  \code{\link{SplitDateRange}}
 }
 \concept{date range functions}

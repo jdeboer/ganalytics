@@ -23,9 +23,11 @@ Set a cohort of a query.
 }
 \seealso{
 Other date range functions: \code{\link{DateRange}},
-  \code{\link{EndDate}}, \code{\link{StartDate}}
+  \code{\link{EndDate}}, \code{\link{SplitDateRange}},
+  \code{\link{StartDate}}
 
 Other date range functions: \code{\link{DateRange}},
-  \code{\link{EndDate}}, \code{\link{StartDate}}
+  \code{\link{EndDate}}, \code{\link{SplitDateRange}},
+  \code{\link{StartDate}}
 }
 \concept{date range functions}

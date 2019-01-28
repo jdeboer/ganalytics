@@ -162,7 +162,8 @@ modify_query <- function(
   query, # A single query object
   ids = NA, # A vector of of view IDs
   periods = NA, # A vector of lubridate period objects
-  columns = NA, # metrics, dimensions and sorting are inferred by non ambiguious character vector called columns
+  columns = NA, # metrics, dimensions and sorting are inferred by non ambiguious
+                # character vector called columns
   filters = NA, # A vector of gaFilter objects
   segments = NA, # A vector of gaSegment objects
   sampling_level = NA,
@@ -214,7 +215,8 @@ modify_query <- function(
   # dateRange
 }
 
-#' @describeIn MaxResults Return the maximum number of rows a query is allowed to return.
+#' @describeIn MaxResults Return the maximum number of rows a query is allowed
+#'   to return.
 setMethod(
   f = "MaxResults",
   signature = ".query",
@@ -223,7 +225,8 @@ setMethod(
   }
 )
 
-#' @describeIn MaxResults Set the maximum number of rows a query is allowed to return.
+#' @describeIn MaxResults Set the maximum number of rows a query is allowed to
+#'   return.
 setMethod(
   f = "MaxResults<-",
   signature = c(".query", "ANY"),

@@ -35,20 +35,20 @@ GaView(object) <- value
 \item{creds}{Optional. An OAuth2.0 credentials object to use for the request.}
 
 \item{with_gui}{Optional. Boolean value indicating whether to use a GUI for
-the menu. Default is FALSE.}
+the menu. Default is \code{FALSE}.}
 
 \item{object}{An object to coerce to a gaView class object or to get the
 gaView of, such as a query, default view of a web property, or the default
 view of the first web property in a Google Analytics account.}
 
 \item{value}{The optional replacement view if the object supplied is a query,
-in which case GaView will return the modified query.}
+in which case \code{GaView} will return the modified query.}
 }
 \value{
-A gaView object.
+A \code{gaView} object.
 }
 \description{
-GaView A menu user-interface for selecting a Google Analytics view.
+A menu user-interface for selecting a Google Analytics view.
 
 Get the viewId of the query
 
@@ -56,19 +56,31 @@ Set the viewId for the query.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{object = gaProperty,value = missing}: Select the default view of the property
+\item \code{object = gaProperty,value = missing}: Select the default view of the property.
 
-\item \code{object = gaAccount,value = missing}: Selects the first property of the account, which is then
-used to select a view (as above).
+\item \code{object = gaAccount,value = missing}: Select the default view of the first listed property of
+the account.
 
-\item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the first view
-within the supplied property or the first view within the first property of
-the supplied account, or coerce a numeric or character into a viewId.
+\item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the default view
+within the supplied property or the default view within the first property
+of the supplied account, or coerces a numeric or character into a viewId.
 
 \item \code{object = .query,value = missing}: gets the view ID of the supplied query
 
-\item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the updated view applied.
+\item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the
+updated view applied.
 
 \item \code{.query}: Replaces the view being used by a query.
 }}
 
+\examples{
+\dontrun{
+   my_ga_account <- GaAccounts()[['60253332']]
+   my_website_property <- my_ga_account$properties[['UA-60253332-2']]
+   my_default_view <- GaView(my_website_property)
+}
+\dontrun{
+   my_ga_account <- GaAccounts()[['60253332']]
+   my_default_view <- GaView(my_ga_account)
+}
+}

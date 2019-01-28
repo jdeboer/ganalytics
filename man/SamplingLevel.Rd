@@ -4,26 +4,30 @@
 \name{SamplingLevel}
 \alias{SamplingLevel}
 \alias{SamplingLevel<-}
-\alias{SamplingLevel,.standardQuery-method}
+\alias{SamplingLevel,.standardQuery,missing-method}
+\alias{SamplingLevel,.standardQuery,ANY-method}
 \alias{SamplingLevel<-,.standardQuery-method}
-\alias{SamplingLevel,data.frame-method}
+\alias{SamplingLevel,data.frame,ANY-method}
 \title{SamplingLevel}
 \usage{
 SamplingLevel(object, value)
 
 SamplingLevel(object) <- value
 
-\S4method{SamplingLevel}{.standardQuery}(object)
+\S4method{SamplingLevel}{.standardQuery,missing}(object)
+
+\S4method{SamplingLevel}{.standardQuery,ANY}(object, value)
 
 \S4method{SamplingLevel}{.standardQuery}(object) <- value
 
-\S4method{SamplingLevel}{data.frame}(object)
+\S4method{SamplingLevel}{data.frame,ANY}(object)
 }
 \arguments{
 \item{object}{The query or response to check the sampling level of.}
 
-\item{value}{If \code{object} is a query, then use  value to set the sampling
-level to of that query.}
+\item{value}{Optional. If \code{object} is a query, then value can be
+provided to set the sampling level to of that query, in which case an
+updated query object will be returned.}
 }
 \description{
 Get the sampling level.
@@ -32,12 +36,14 @@ Set the sampling level for a ganalytics query.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{.standardQuery}: Return what level the sampling level of the query
+\item \code{object = .standardQuery,value = missing}: Return what level the sampling level of the query
 has been set to.
+
+\item \code{object = .standardQuery,value = ANY}: Set the sampling level of the query.
 
 \item \code{.standardQuery}: Set the sampling level of the query.
 
-\item \code{data.frame}: Return details about any sampling that was applied
+\item \code{object = data.frame,value = ANY}: Return details about any sampling that was applied
 in the response of the query.
 }}
 

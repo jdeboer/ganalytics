@@ -23,19 +23,19 @@ PerUser(object, ..., negation)
 \S4method{PerUser}{formula}(object, ..., negation)
 }
 \arguments{
-\item{object}{a .gaSegmentFilter or gaMetExpr object to coerce to
+\item{object}{a \code{.gaSegmentFilter} or \code{gaMetExpr} object to coerce to
 user-level. Alternatively, an dimension expression or segment filter to
-coerce into a user scoped gaDynSegment.}
+coerce into a user scoped \code{gaDynSegment}.}
 
-\item{...}{Other filters to include in the gaDynSegment.}
+\item{...}{Other filters to include in the \code{gaDynSegment}.}
 
 \item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-A gaMetExpr, .gaSegmentFilter or gaDynSegment.
+A \code{gaMetExpr}, \code{.gaSegmentFilter} or \code{gaDynSegment}.
 }
 \description{
-Set the scope of a .gaSegmentFilter or gaMetExpr object to user-level.
+Set the scope of a \code{.gaSegmentFilter} or \code{gaMetExpr} object to user-level.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -56,7 +56,7 @@ metric condition to user-level.
 }}
 
 \note{
-To define a gaDynSegment comprised of a single metric expression,
+To define a \code{gaDynSegment} comprised of a single metric expression,
 wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
 \seealso{

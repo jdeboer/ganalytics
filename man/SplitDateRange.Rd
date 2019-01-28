@@ -16,3 +16,9 @@ single days.}
 Splits a gaDateRange object into N pieces. Useful for splitting a query into
 smaller chunks in order to overcome sampling.
 }
+\seealso{
+Other date range functions: \code{\link{Cohort}},
+  \code{\link{DateRange}}, \code{\link{EndDate}},
+  \code{\link{StartDate}}
+}
+\concept{date range functions}

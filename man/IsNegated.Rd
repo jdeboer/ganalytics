@@ -36,6 +36,14 @@ define an exclude filter for the segment.
 used as an exclude filter in a segment definition.
 }}
 
+\examples{
+exclude_one_time_shoppers <- Exclude(
+  Expr(~transactions == 1, metricScope = "perUser"),
+  scope = "users"
+)
+IsNegated(exclude_one_time_shoppers) # TRUE
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Exclude}}, \code{\link{Include}},

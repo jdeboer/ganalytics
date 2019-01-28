@@ -22,14 +22,15 @@ needed.}
 \item{name}{An optional name given to the dynamic segment.}
 }
 \value{
-A gaDynSegment object.
+A \code{gaDynSegment} object.
 }
 \description{
 Combine one or more segment condition filters and/or sequence filters into a
-gaDynSegment that is scoped to either 'user' or 'session' level.
+\code{gaDynSegment} that is scoped to either \code{'user'} or
+\code{'session'} level.
 }
 \details{
-A segment filter is either sequential or non-sequential conditions.
+Segment filter are either sequential or non-sequential conditions.
 Sequential and non-sequential conditions can be combined using this function.
 }
 \section{Methods (by class)}{
@@ -40,6 +41,17 @@ expressions applied using the specified scope.
 \item \code{gaDynSegment}: Returns itself.
 }}
 
+\examples{
+return_shoppers <- SegmentConditionFilter(
+  Expr(~transactions > 1, metricScope = "perUser"),
+  scope = "users"
+)
+watched_video_then_purchased <- Sequence(
+  Expr(~eventCategory == "video") & Expr(~eventAction == "play"),
+  Later(Expr(~transactions > 0))
+)
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{Exclude}},
   \code{\link{Include}}, \code{\link{IsNegated}},

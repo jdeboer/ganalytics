@@ -41,8 +41,9 @@ setGeneric(
 #' Get the sampling level.
 #'
 #' @param object The query or response to check the sampling level of.
-#' @param value If \code{object} is a query, then use  value to set the sampling
-#'   level to of that query.
+#' @param value Optional. If \code{object} is a query, then value can be
+#'   provided to set the sampling level to of that query, in which case an
+#'   updated query object will be returned.
 #'
 #' @family query object functions
 #'
