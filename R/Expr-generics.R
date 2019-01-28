@@ -117,7 +117,7 @@ setGeneric(
 
 #' ScopeLevel<-
 #'
-#' Set the scope level of a gaDynSegment or a gaMetExpr
+#' Set the scope level of a .gaSegmentFilter or a gaMetExpr.
 #'
 #' @family dynamic segment functions
 #'
