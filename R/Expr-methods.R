@@ -176,6 +176,8 @@ setMethod(
   signature = c("gaSegMetExpr", "character"),
   definition = function(object, value) {
     object@metricScope <- value
+    validObject(object)
+    object
   }
 )
 

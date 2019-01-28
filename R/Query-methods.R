@@ -229,6 +229,7 @@ setMethod(
   signature = c(".query", "ANY"),
   definition = function(object, value) {
     object@maxResults <- as.integer(value)
+    validObject(object)
     object
   }
 )
@@ -249,6 +250,7 @@ setMethod(
   signature = c(".standardQuery", "ANY"),
   definition = function(object, value) {
     object@samplingLevel <- as.character(value)
+    validObject(object)
     object
   }
 )
