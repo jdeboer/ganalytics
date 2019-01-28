@@ -113,3 +113,13 @@ test_that("Non standard evaluation can be used to define conditions and sequence
   expect_identical(nse_sequence, se_sequence)
 })
 
+test_that("Atomic metric expressions maintain their scope as does the dynamic segment that contains it.", {
+  return_shoppers <- SegmentConditionFilter(
+    Expr(~transactions > 1, metricScope = "perUser"),
+    scope = "users"
+  )
+  expect_identical(
+    as(DynSegment(return_shoppers), "character"),
+    "users::condition::perUser::ga:transactions>1"
+  )
+})

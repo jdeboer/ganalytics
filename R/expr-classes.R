@@ -336,5 +336,6 @@ setClassUnion(".compoundExpr", c(
   # signatures - it has not been asertained as to why this is the case, but
   # could have something to do with the implications of namespaces on R's S4
   # class inheritance tree caching.
-  "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr"
+  "gaMetExpr", "gaDimExpr", "mcfMetExpr", "mcfDimExpr", "rtMetExpr", "rtDimExpr",
+  "gaSegMetExpr"
 ))
