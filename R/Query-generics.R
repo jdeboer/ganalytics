@@ -52,7 +52,7 @@ setGeneric(
 setGeneric(
   "SamplingLevel",
   function(object, value) {standardGeneric("SamplingLevel")},
-  valueClass = c("character", "list")
+  valueClass = c("character", "list", ".standardQuery")
 )
 
 #' SamplingLevel<-
