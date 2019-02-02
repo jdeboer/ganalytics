@@ -45,12 +45,12 @@ NULL
 
 #' SplitDateRange
 #'
-#' Splits a gaDateRange object into N pieces. Useful for splitting a query into
-#' smaller chunks in order to overcome sampling.
+#' Splits a gaDateRange object into \code{N} pieces. Useful for splitting a
+#' query into smaller chunks in order to overcome sampling.
 #'
-#' @param dateRange the gaDateRange object to be split
-#' @param N the number of the separate date ranges to be split into; use 0 for
-#'   single days.
+#' @param dateRange the \code{gaDateRange} object to be split
+#' @param N the number of the separate date ranges to be split into; use
+#'   \code{0} for single days.
 #'
 #' @family date range functions
 #'
@@ -58,7 +58,7 @@ NULL
 SplitDateRange <- function(dateRange, N = 0L) {
   # TO DO
   #
-  # If N = 0 then split date range into single days
+  # If N = 0 then split date range into single days.
   # If N = 1, then the date range returned will be of length 1
   #   i.e. it will be the same or of shorter length than the original.
   #
@@ -111,22 +111,22 @@ setMethod("EndDate", "character", function(object) {
   as(object, "Date")
 })
 
-#' @describeIn DateRange Return the start dates of a date range vector
+#' @describeIn DateRange Return the start dates of a date range vector.
 setMethod("StartDate", "dateRange", function(object) {as.Date(int_start(object))})
 
-#' @describeIn DateRange Return the end dates of a date range vector
+#' @describeIn DateRange Return the end dates of a date range vector.
 setMethod("EndDate", "dateRange", function(object) {as.Date(int_end(object))})
 
-#' @describeIn DateRange Return the start dates of a date range vector
+#' @describeIn DateRange Return the start dates of a date range vector.
 setMethod("StartDate", "Interval", function(object) {StartDate(DateRange(object))})
 
-#' @describeIn DateRange Return the end dates of a date range vector
+#' @describeIn DateRange Return the end dates of a date range vector.
 setMethod("EndDate", "Interval", function(object) {EndDate(DateRange(object))})
 
-#' @describeIn DateRange Return the start dates of a query's date range vector
+#' @describeIn DateRange Return the start dates of a query's date range vector.
 setMethod("StartDate", ".standardQuery", function(object) {StartDate(object@dateRange)})
 
-#' @describeIn DateRange Return the end dates of a query's date range vector
+#' @describeIn DateRange Return the end dates of a query's date range vector.
 setMethod("EndDate", ".standardQuery", function(object) {EndDate(object@dateRange)})
 
 #' @describeIn DateRange Get the date when a view first started receiving hits.

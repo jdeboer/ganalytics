@@ -63,9 +63,9 @@ ga_view_selector <- function(creds = GoogleApiCreds(), with_gui = FALSE) {
 
 #' GaView
 #'
-#' Get the viewId of the query
+#' Get the view ID of the query.
 #'
-#' @param object An object to coerce to a gaView class object or to get the
+#' @param object An object to coerce to a \code{gaView} object or to get the
 #'   gaView of, such as a query, default view of a web property, or the default
 #'   view of the first web property in a Google Analytics account.
 #' @param value The optional replacement view if the object supplied is a query,
@@ -81,7 +81,7 @@ setGeneric(
 
 #' GaView<-
 #'
-#' Set the viewId for the query.
+#' Set the view ID for the query.
 #'
 #' @export
 #' @rdname GaView

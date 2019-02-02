@@ -152,7 +152,7 @@
     <tr>
       <th>object</th>
       <td><p>A dimension or metric variable, or another object to be coerced
-to an .expr object.</p></td>
+to an <code>.expr</code> object.</p></td>
     </tr>
     <tr>
       <th>comparator</th>
@@ -164,8 +164,9 @@ to an .expr object.</p></td>
     </tr>
     <tr>
       <th>metricScope</th>
-      <td><p>Optional scope to use for segmentation if using a metric.
-Possible values include "perUser" or "perSession".</p></td>
+      <td><p>Optional scope to use in the case of metric variables for
+segmentation. Possible values include <code>"perUser"</code> or
+<code>"perSession"</code>.</p></td>
     </tr>
     </table>
     
@@ -173,7 +174,8 @@ Possible values include "perUser" or "perSession".</p></td>
 
     <ul>
 <li><p><code>object = character,comparator = character</code>: Return a Google Analytics expression using the supplied
-variable, operator and operand.</p></li>
+variable, operator and operand.
+bounces &lt;- GaExpr("bounces", "&gt;", 0)</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

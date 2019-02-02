@@ -158,13 +158,17 @@
     </tr>
     <tr>
       <th>scope</th>
-      <td><p>Optional scope, "users" or "sessions"</p></td>
+      <td><p>Optional scope, "users" or "sessions" (default).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A .gaSegmentFilter object with its negate slot set to FALSE.</p>
+<p>return_shoppers &lt;- Include(
+Expr(~transactions &gt; 1, metricScope = "perUser"),
+scope = "users"
+)</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 

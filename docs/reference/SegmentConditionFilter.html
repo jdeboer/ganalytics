@@ -154,22 +154,24 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other expressions to be ANDed to the first expression provided.</p></td>
+      <td><p>Other expressions to be <code>And</code>ed to the first expression
+provided.</p></td>
     </tr>
     <tr>
       <th>negation</th>
-      <td><p>Optional logical TRUE or FALSE to match segments where this condition
-has not been met. Default is FALSE, i.e. inclusive filter.</p></td>
+      <td><p>Optional logical <code>TRUE</code> or <code>FALSE</code> to match
+segments where this condition has not been met. Default is <code>FALSE</code>,
+i.e. inclusive filter.</p></td>
     </tr>
     <tr>
       <th>scope</th>
-      <td><p>Optional scope, "users" or "sessions".</p></td>
+      <td><p>Optional scope, <code>"users"</code> or <code>"sessions"</code> (default).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A gaSegmentConditionFilter object.</p>
+    <p>A <code>gaSegmentConditionFilter</code> object.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
@@ -190,6 +192,12 @@ scoped at session-level, or to a single hit if scoped at user-level.</p></li>
   <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>bounced_sessions</span> <span class='kw'>&lt;-</span> <span class='fu'>SegmentConditionFilter</span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>bounces</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>))
+<span class='no'>return_shoppers</span> <span class='kw'>&lt;-</span> <span class='fu'>SegmentConditionFilter</span>(
+  <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>transactions</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>, <span class='kw'>metricScope</span> <span class='kw'>=</span> <span class='st'>"perUser"</span>),
+  <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"users"</span>
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -201,7 +209,9 @@ scoped at session-level, or to a single hit if scoped at user-level.</p></li>
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

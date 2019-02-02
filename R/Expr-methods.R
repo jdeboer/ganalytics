@@ -49,6 +49,8 @@ setMethod("Expr", ".expr", function(object) {object})
 #' @describeIn Expr Use non-standard formula evaluation to define an expression.
 #'   Accepts a formula in the form of: \code{~ <variable> <comparator>
 #'   <operand>} where only the \code{<operand>} is evaluated.
+#' @examples
+#' source_google <- Expr(~source == "google")
 setMethod(
   f = "Expr",
   signature = c("formula", "ANY"),
@@ -63,6 +65,9 @@ setMethod(
 
 #' @describeIn Expr Return an expression composed of the supplied variable,
 #'   comparator and operand arguments.
+#' @examples
+#' source_google <- Expr("source", "==", "google")
+#' bounces <- Expr("bounces", ">", 0)
 setMethod(
   f = "Expr",
   signature = c("character", "character", "ANY", "ANY"),
@@ -80,6 +85,7 @@ setMethod(
 
 #' @describeIn GaExpr Return a Google Analytics expression using the supplied
 #'   variable, operator and operand.
+#'   bounces <- GaExpr("bounces", ">", 0)
 setMethod(
   f = "GaExpr",
   signature = c("character", "character", "ANY"),

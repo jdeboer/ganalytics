@@ -32,9 +32,9 @@
 
 <meta property="og:title" content="ga_view_selector — ga_view_selector" />
 
-<meta property="og:description" content="GaView A menu user-interface for selecting a Google Analytics view.
-Get the viewId of the query
-Set the viewId for the query." />
+<meta property="og:description" content="A menu user-interface for selecting a Google Analytics view.
+Get the view ID of the query.
+Set the view ID for the query." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -132,15 +132,15 @@ Set the viewId for the query." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ga_view_selector</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Query-generics.R'><code>R/Query-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/GaView-methods.R'><code>R/GaView-methods.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/GaView-generics.R'><code>R/GaView-generics.R</code></a>, <a href='https://github.com/jdeboer/ganalytics/blob/master/R/GaView-methods.R'><code>R/GaView-methods.R</code></a></small>
     <div class="hidden name"><code>GaView.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>GaView A menu user-interface for selecting a Google Analytics view.</p>
-<p>Get the viewId of the query</p>
-<p>Set the viewId for the query.</p>
+    <p>A menu user-interface for selecting a Google Analytics view.</p>
+<p>Get the view ID of the query.</p>
+<p>Set the view ID for the query.</p>
     
     </div>
 
@@ -178,40 +178,51 @@ Set the viewId for the query." />
     <tr>
       <th>with_gui</th>
       <td><p>Optional. Boolean value indicating whether to use a GUI for
-the menu. Default is FALSE.</p></td>
+the menu. Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>object</th>
-      <td><p>An object to coerce to a gaView class object or to get the
+      <td><p>An object to coerce to a <code>gaView</code> object or to get the
 gaView of, such as a query, default view of a web property, or the default
 view of the first web property in a Google Analytics account.</p></td>
     </tr>
     <tr>
       <th>value</th>
       <td><p>The optional replacement view if the object supplied is a query,
-in which case GaView will return the modified query.</p></td>
+in which case <code>GaView</code> will return the modified query.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A gaView object.</p>
+    <p>A <code>gaView</code> object.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
     <ul>
-<li><p><code>object = gaProperty,value = missing</code>: Select the default view of the property</p></li>
-<li><p><code>object = gaAccount,value = missing</code>: Selects the first property of the account, which is then
-used to select a view (as above).</p></li>
-<li><p><code>object = ANY,value = missing</code>: Returns the ID of the supplied view, or the first view
-within the supplied property or the first view within the first property of
-the supplied account, or coerce a numeric or character into a viewId.</p></li>
-<li><p><code>object = .query,value = missing</code>: gets the view ID of the supplied query</p></li>
-<li><p><code>object = .query,value = ANY</code>: Set the view of a query, returning the query with the updated view applied.</p></li>
+<li><p><code>object = gaProperty,value = missing</code>: Select the default view of the property.</p></li>
+<li><p><code>object = gaAccount,value = missing</code>: Select the default view of the first listed property of
+the account.</p></li>
+<li><p><code>object = ANY,value = missing</code>: Returns the ID of the supplied view, or the default view
+within the supplied property or the default view within the first property
+of the supplied account, or coerces a numeric or character into a
+<code>viewId</code>.</p></li>
+<li><p><code>object = .query,value = missing</code>: gets the view ID of the supplied query.</p></li>
+<li><p><code>object = .query,value = ANY</code>: Set the view of a query, returning the query with the
+updated view applied.</p></li>
 <li><p><code>.query</code>: Replaces the view being used by a query.</p></li>
 </ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+   <span class='no'>my_ga_account</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='GaAccounts.html'>GaAccounts</a></span>()<span class='kw'>[[</span><span class='st'>'60253332'</span>]]
+   <span class='no'>my_website_property</span> <span class='kw'>&lt;-</span> <span class='no'>my_ga_account</span>$<span class='no'>properties</span><span class='kw'>[[</span><span class='st'>'UA-60253332-2'</span>]]
+   <span class='no'>my_default_view</span> <span class='kw'>&lt;-</span> <span class='fu'>GaView</span>(<span class='no'>my_website_property</span>)
+<span class='co'># }</span><span class='co'># NOT RUN {</span>
+   <span class='no'>my_ga_account</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='GaAccounts.html'>GaAccounts</a></span>()<span class='kw'>[[</span><span class='st'>'60253332'</span>]]
+   <span class='no'>my_default_view</span> <span class='kw'>&lt;-</span> <span class='fu'>GaView</span>(<span class='no'>my_ga_account</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -221,7 +232,9 @@ the supplied account, or coerce a numeric or character into a viewId.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

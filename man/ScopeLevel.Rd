@@ -35,8 +35,8 @@ ScopeLevel(object) <- value
 \arguments{
 \item{object}{A \code{.gaSegmentFilter} or \code{gaMetExpr} object.}
 
-\item{value}{New scope level to return an updated copy of the object with the
-new scope applied. For \code{.gaSegmentFilters} this can be either
+\item{value}{Optional new scope level to return an updated copy of the object
+with the new scope applied. For \code{.gaSegmentFilters} this can be either
 \code{'users'} or \code{'sessions'}. For metric expressions use either
 \code{'perUser'}, \code{'perSession'}, \code{'perHit'} or
 \code{'perProduct'}.}
@@ -47,9 +47,9 @@ The scope level as a character string, or returns a
 scope.
 }
 \description{
-Get the scope level of a .gaSegmentFilter or gaMetExpr.
+Get or set the scope level of a \code{.gaSegmentFilter} or \code{gaMetExpr}.
 
-Set the scope level of a .gaSegmentFilter or a gaMetExpr.
+Set the scope level of a \code{.gaSegmentFilter} or a \code{gaMetExpr}.
 }
 \section{Methods (by class)}{
 \itemize{

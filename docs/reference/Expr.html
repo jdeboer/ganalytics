@@ -158,7 +158,7 @@
     <tr>
       <th>object</th>
       <td><p>A dimension or metric variable, or another object to be coerced
-to an .expr object.</p></td>
+to an <code>.expr</code> object.</p></td>
     </tr>
     <tr>
       <th>comparator</th>
@@ -170,8 +170,9 @@ to an .expr object.</p></td>
     </tr>
     <tr>
       <th>metricScope</th>
-      <td><p>Optional scope to use for segmentation if using a metric.
-Possible values include "perUser" or "perSession".</p></td>
+      <td><p>Optional scope to use in the case of metric variables for
+segmentation. Possible values include <code>"perUser"</code> or
+<code>"perSession"</code>.</p></td>
     </tr>
     </table>
     
@@ -192,6 +193,10 @@ comparator and operand arguments.</p></li>
   <code><a href='McfExpr.html'>McfExpr</a></code>, <code><a href='RtExpr.html'>RtExpr</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>source_google</span> <span class='kw'>&lt;-</span> <span class='fu'>Expr</span>(~<span class='no'>source</span> <span class='kw'>==</span> <span class='st'>"google"</span>)
+<span class='no'>source_google</span> <span class='kw'>&lt;-</span> <span class='fu'>Expr</span>(<span class='st'>"source"</span>, <span class='st'>"=="</span>, <span class='st'>"google"</span>)
+<span class='no'>bounces</span> <span class='kw'>&lt;-</span> <span class='fu'>Expr</span>(<span class='st'>"bounces"</span>, <span class='st'>"&gt;"</span>, <span class='fl'>0</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -201,7 +206,9 @@ comparator and operand arguments.</p></li>
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

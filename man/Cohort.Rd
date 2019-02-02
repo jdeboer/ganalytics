@@ -14,7 +14,8 @@ Cohort(object) <- value
 
 \item{value}{The value to set the object's cohorts to.}
 
-\item{type}{The type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.}
+\item{type}{The type of cohort. Only the default of \code{"FIRST_VISIT_DATE"}
+is currently valid.}
 }
 \description{
 Get or define a cohort.

@@ -146,13 +146,16 @@ Set the sampling level for a ganalytics query." />
 
 <span class='fu'>SamplingLevel</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
 
-<span class='co'># S4 method for .standardQuery</span>
+<span class='co'># S4 method for .standardQuery,missing</span>
 <span class='fu'>SamplingLevel</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for .standardQuery,ANY</span>
+<span class='fu'>SamplingLevel</span>(<span class='no'>object</span>, <span class='no'>value</span>)
 
 <span class='co'># S4 method for .standardQuery</span>
 <span class='fu'>SamplingLevel</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
 
-<span class='co'># S4 method for data.frame</span>
+<span class='co'># S4 method for data.frame,ANY</span>
 <span class='fu'>SamplingLevel</span>(<span class='no'>object</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -164,18 +167,20 @@ Set the sampling level for a ganalytics query." />
     </tr>
     <tr>
       <th>value</th>
-      <td><p>If <code>object</code> is a query, then use  value to set the sampling
-level to of that query.</p></td>
+      <td><p>Optional. If <code>object</code> is a query, then value can be
+provided to set the sampling level to of that query, in which case an
+updated query object will be returned.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
     <ul>
-<li><p><code>.standardQuery</code>: Return what level the sampling level of the query
+<li><p><code>object = .standardQuery,value = missing</code>: Return what level the sampling level of the query
 has been set to.</p></li>
+<li><p><code>object = .standardQuery,value = ANY</code>: Set the sampling level of the query.</p></li>
 <li><p><code>.standardQuery</code>: Set the sampling level of the query.</p></li>
-<li><p><code>data.frame</code>: Return details about any sampling that was applied
+<li><p><code>object = data.frame,value = ANY</code>: Return details about any sampling that was applied
 in the response of the query.</p></li>
 </ul>
     

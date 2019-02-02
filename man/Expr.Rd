@@ -19,14 +19,15 @@ Expr(object, comparator, operand, metricScope = "")
 }
 \arguments{
 \item{object}{A dimension or metric variable, or another object to be coerced
-to an .expr object.}
+to an \code{.expr} object.}
 
 \item{comparator}{The comparator to use for the expression.}
 
 \item{operand}{The operand to use for the expression.}
 
-\item{metricScope}{Optional scope to use for segmentation if using a metric.
-Possible values include "perUser" or "perSession".}
+\item{metricScope}{Optional scope to use in the case of metric variables for
+segmentation. Possible values include \code{"perUser"} or
+\code{"perSession"}.}
 }
 \description{
 Define a Google Analytics expression.
@@ -43,6 +44,11 @@ Accepts a formula in the form of: \code{~ <variable> <comparator>
 comparator and operand arguments.
 }}
 
+\examples{
+source_google <- Expr(~source == "google")
+source_google <- Expr("source", "==", "google")
+bounces <- Expr("bounces", ">", 0)
+}
 \seealso{
 Other expression generators: \code{\link{GaExpr}},
   \code{\link{McfExpr}}, \code{\link{RtExpr}}

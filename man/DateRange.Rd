@@ -72,11 +72,12 @@ DateRange(object) <- value
 }
 \arguments{
 \item{object}{The start date of the date range or a object to coerce to a
-date range. Alternatively, a query object to replace the date range of.}
+date range. Alternatively, a \code{.query} object to replace the date range
+of.}
 
 \item{endDate}{The end date of the date range. Alternatively, if
-\code{object} is a '.query' object, then endDate is the replacement date
-range.}
+\code{object} is a \code{.query} object, then \code{endDate} is the
+replacement date range.}
 
 \item{value}{The replacement date range.}
 }
@@ -93,17 +94,17 @@ object.
 \item \code{character}: Coerce a character vector into a Google Analytics date
 object.
 
-\item \code{dateRange}: Return the start dates of a date range vector
+\item \code{dateRange}: Return the start dates of a date range vector.
 
-\item \code{dateRange}: Return the end dates of a date range vector
+\item \code{dateRange}: Return the end dates of a date range vector.
 
-\item \code{Interval}: Return the start dates of a date range vector
+\item \code{Interval}: Return the start dates of a date range vector.
 
-\item \code{Interval}: Return the end dates of a date range vector
+\item \code{Interval}: Return the end dates of a date range vector.
 
-\item \code{.standardQuery}: Return the start dates of a query's date range vector
+\item \code{.standardQuery}: Return the start dates of a query's date range vector.
 
-\item \code{.standardQuery}: Return the end dates of a query's date range vector
+\item \code{.standardQuery}: Return the end dates of a query's date range vector.
 
 \item \code{gaView}: Get the date when a view first started receiving hits.
 
