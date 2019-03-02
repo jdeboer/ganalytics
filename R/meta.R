@@ -84,7 +84,7 @@ GaMetaUpdate <- function(creds = get_creds()) {
   )
 
   extdata_path <- function() {file.path(system.file(package = "ganalytics"), "extdata")}
-  metadata_path <- function() {file.path(extdata_path, "metadata.RDA")}
+  metadata_path <- function() {file.path(extdata_path(), "metadata.RDA")}
 
   if (nchar(get_metadata_path()) == 0) {
     if (!dir.exists(extdata_path())) {
