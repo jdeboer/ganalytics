@@ -1,7 +1,7 @@
 Package: ganalytics
 Title: Interact with 'Google Analytics'
-Version: 0.10.6.9000
-Date: 2018-12-22
+Version: 0.10.7
+Date: 2019-03-02
 Authors@R: person(
     given = "Johann",
     family = "de Boer",
