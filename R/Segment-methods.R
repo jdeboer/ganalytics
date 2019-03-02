@@ -33,7 +33,7 @@ setSegmentFilterScopeNegation <- function(object, negation, scope) {
 #' @describeIn Include Define an include segment filter using the supplied
 #'   expression.
 setMethod(
-  f = "Include",
+  "Include",
   signature = "ANY",
   definition = function(object, ..., scope) {
     negation <- FALSE
@@ -48,7 +48,7 @@ setMethod(
 #' @describeIn Exclude Define an exclude segment filter using the supplied
 #'   expressions.
 setMethod(
-  f = "Exclude",
+  "Exclude",
   signature = "ANY",
   definition = function(object, ..., scope) {
     negation <- TRUE
@@ -67,7 +67,7 @@ setMethod(
 #'   hold true within a single session if applied to a gaDynSegment
 #'   scoped at session-level, or to a single hit if scoped at user-level.
 setMethod(
-  f = "SegmentConditionFilter",
+  "SegmentConditionFilter",
   signature = "ANY",
   definition = function(object, ..., negation, scope) {
     exprList <- unnest_objects(object, ..., class = "gaSegmentConditionFilter")
@@ -87,7 +87,7 @@ setMethod(
 #' @describeIn IsNegated Tests whether a segment filter is negated, i.e. used to
 #'   define an exclude filter for the segment.
 setMethod(
-  f = "IsNegated",
+  "IsNegated",
   signature = ".gaSegmentFilter",
   definition = function(object) {
     object@negation
@@ -97,7 +97,7 @@ setMethod(
 #' @describeIn IsNegated Sets whether a segment filter should be negated, i.e.
 #'   used as an exclude filter in a segment definition.
 setMethod(
-  f = "IsNegated<-",
+  "IsNegated<-",
   signature = c(".gaSegmentFilter", "logical"),
   definition = function(object, value) {
     object@negation <- value
@@ -124,7 +124,7 @@ setMethod(
 #' @describeIn DynSegment Defines a list of filters from one or more
 #'   expressions applied using the specified scope.
 setMethod(
-  f = "DynSegment",
+  "DynSegment",
   signature = "ANY",
   definition = function(object, ..., name) {
     exprList <- list(object, ...)
@@ -143,7 +143,7 @@ setMethod(
 
 #' @describeIn DynSegment Returns itself.
 setMethod(
-  f = "DynSegment",
+  "DynSegment",
   signature = "gaDynSegment",
   definition = function(object) {
     object
@@ -154,7 +154,7 @@ setMethod(
 
 #' @describeIn ScopeLevel Returns the scope of the supplied .gaSegmentFilter.
 setMethod(
-  f = "ScopeLevel",
+  "ScopeLevel",
   signature = c(".gaSegmentFilter", "missing"),
   definition = function(object) {
     object@scope
@@ -176,7 +176,7 @@ setMethod(
 #' @describeIn ScopeLevel Set the scope level of a .gaSegmentFilter to either
 #'   "user" or "session" level.
 setMethod(
-  f = "ScopeLevel<-",
+  "ScopeLevel<-",
   signature = c(".gaSegmentFilter", "character"),
   definition = function(object, value) {
     object@scope <- value
@@ -188,7 +188,7 @@ setMethod(
 #' @describeIn ScopeLevel Set the scope level of a gaDynSegment to either
 #'   "user" or "session" level.
 setMethod(
-  f = "ScopeLevel<-",
+  "ScopeLevel<-",
   signature = c("gaDynSegment", "character"),
   definition = function(object, value) {
     object <- lapply(object, function(segmentFilter) {
@@ -206,7 +206,7 @@ setMethod(
 #' @describeIn PerSession Create a session level segment filter list from the
 #'   supplied expressions, interpreted as condition filters.
 setMethod(
-  f = "PerSession",
+  "PerSession",
   signature = "ANY",
   definition = function(object, ...) {
     SegmentConditionFilter(object, ..., scope = "sessions")
@@ -216,7 +216,7 @@ setMethod(
 #' @describeIn PerSession Create a session-level segment sequence filter from the supplied
 #'   sequence expression.
 setMethod(
-  f = "PerSession",
+  "PerSession",
   signature = "gaSegmentSequenceStep",
   definition = function(object, ...) {
     Sequence(object, ..., scope = "sessions")
@@ -226,7 +226,7 @@ setMethod(
 #' @describeIn PerSession Create a session-level segment sequence filter from the supplied
 #'   sequence expression.
 setMethod(
-  f = "PerSession",
+  "PerSession",
   signature = "gaSegmentSequenceFilter",
   definition = function(object, ...) {
     Sequence(object, ..., scope = "sessions")
@@ -236,7 +236,7 @@ setMethod(
 #' @describeIn PerSession Set the scope of the supplied metric condition to
 #'   session-level.
 setMethod(
-  f = "PerSession",
+  "PerSession",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
@@ -251,7 +251,7 @@ setMethod(
 #' @describeIn PerSession Set the scope of the supplied non-standard-evaluation
 #'   metric condition to session-level.
 setMethod(
-  f = "PerSession",
+  "PerSession",
   signature = "formula",
   definition = function(object, ...) {
     PerSession(Expr(object), ...)
@@ -261,7 +261,7 @@ setMethod(
 #' @describeIn PerUser Create a user-level segment filter list from the supplied
 #'   expressions, each interpreted as an include segment filter.
 setMethod(
-  f = "PerUser",
+  "PerUser",
   signature = "ANY",
   definition = function(object, ...) {
     SegmentConditionFilter(object, ..., scope = "users")
@@ -271,7 +271,7 @@ setMethod(
 #' @describeIn PerUser Create a user-level segment sequence filter from the supplied
 #'   sequence expression.
 setMethod(
-  f = "PerUser",
+  "PerUser",
   signature = "gaSegmentSequenceStep",
   definition = function(object, ...) {
     Sequence(object, ..., scope = "users")
@@ -281,7 +281,7 @@ setMethod(
 #' @describeIn PerUser Create a user-level segment sequence filter from the supplied
 #'   sequence expression.
 setMethod(
-  f = "PerUser",
+  "PerUser",
   signature = "gaSegmentSequenceFilter",
   definition = function(object, ...) {
     Sequence(object, ..., scope = "users")
@@ -291,7 +291,7 @@ setMethod(
 #' @describeIn PerUser Set the scope of the supplied metric condition to
 #'   user-level.
 setMethod(
-  f = "PerUser",
+  "PerUser",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
@@ -306,7 +306,7 @@ setMethod(
 #' @describeIn PerUser Set the scope of the supplied non-standard-evaluation
 #'   metric condition to user-level.
 setMethod(
-  f = "PerUser",
+  "PerUser",
   signature = "formula",
   definition = function(object, ...) {
     PerUser(Expr(object), ...)
@@ -316,7 +316,7 @@ setMethod(
 #' @describeIn PerHit Create a single step sequence filter from the supplied
 #'   expression.
 setMethod(
-  f = "PerHit",
+  "PerHit",
   signature = ".compoundExpr",
   definition = function(object, ...) {
     Sequence(And(object, ...))
@@ -326,7 +326,7 @@ setMethod(
 #' @describeIn PerHit Set the scope of the supplied metric condition to
 #'   hit-level.
 setMethod(
-  f = "PerHit",
+  "PerHit",
   signature = "gaMetExpr",
   definition = function(object, ...) {
     if (missing(...)) {
@@ -341,7 +341,7 @@ setMethod(
 #' @describeIn PerHit Set the scope of the supplied non-standard-evaluation
 #'   metric condition to hit-level.
 setMethod(
-  f = "PerHit",
+  "PerHit",
   signature = "formula",
   definition = function(object, ...) {
     PerHit(Expr(object), ...)
@@ -351,7 +351,7 @@ setMethod(
 #' @describeIn PerProduct Set the scope of the supplied metric condition to
 #'   product-level.
 setMethod(
-  f = "PerProduct",
+  "PerProduct",
   signature = "gaMetExpr",
   definition = function(object) {
     ScopeLevel(object) <- "perProduct"
@@ -362,7 +362,7 @@ setMethod(
 #' @describeIn PerProduct Set the scope of the supplied non-standard-evaluation
 #'   metric condition to product-level.
 setMethod(
-  f = "PerProduct",
+  "PerProduct",
   signature = "formula",
   definition = function(object) {
     PerProduct(Expr(object))
@@ -390,7 +390,7 @@ setMethod(
 
 #' @describeIn Segment Interpret the supplied numeric value as a segment ID.
 setMethod(
-  f = "Segment",
+  "Segment",
   signature = "numeric",
   definition = function(object) {
     as(object, "gaSegmentId")
@@ -399,7 +399,7 @@ setMethod(
 
 #' @describeIn Segment Interpret the supplied character value as a segment ID.
 setMethod(
-  f = "Segment",
+  "Segment",
   signature = "character",
   definition = function(object) {
     as(object, "gaSegmentId")
@@ -409,7 +409,7 @@ setMethod(
 #' @describeIn Segment Create a non-sequential segment using the supplied
 #'   expressions.
 setMethod(
-  f = "Segment",
+  "Segment",
   signature = "ANY",
   definition = function(object, ...) {
     dyn_segment_def <- list(object, ...)
@@ -425,7 +425,7 @@ setMethod(
 
 #' @describeIn Segment returns NULL
 setMethod(
-  f = "Segment",
+  "Segment",
   signature = "NULL",
   definition = function(object) {
     new("gaDynSegment", list())
@@ -435,7 +435,7 @@ setMethod(
 #' @describeIn Segment Return the segment ID of the supplied GA Management API
 #'   user segment.
 setMethod(
-  f = "Segment",
+  "Segment",
   signature = "gaUserSegment",
   definition = function(object) {
     Segment(object$segmentId)
@@ -472,7 +472,7 @@ setMethod(
 
 #' @describeIn Segments Returns itself
 setMethod(
-  f = "Segments",
+  "Segments",
   signature = "gaSegmentList",
   definition = function(object) {
     object
@@ -481,7 +481,7 @@ setMethod(
 
 #' @describeIn Segments Return the definition of the segment applied to the view.
 setMethod(
-  f = "Segments",
+  "Segments",
   signature = "gaQuery",
   definition = function(object) {
     object@segments
@@ -490,7 +490,7 @@ setMethod(
 
 #' @describeIn Segments Coerce an object into a segmentList of length 1.
 setMethod(
-  f = "Segments",
+  "Segments",
   signature = "ANY",
   definition = function(object) {
     if(inherits(object, c(
@@ -511,7 +511,7 @@ setMethod(
 
 #' @describeIn Segments Set the segments to be used within a query.
 setMethod(
-  f = "Segments<-",
+  "Segments<-",
   signature = c("gaQuery", "ANY"),
   definition = function(object, value) {
     # Need to define coercions to .gaSegment from char and numeric
