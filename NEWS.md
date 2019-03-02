@@ -1,6 +1,11 @@
+# ganalytics 0.10.7
+
+* Support for staged installation in R 3.6.0 and updates to documentation.
+
 # ganalytics 0.10.6
 
-* Update released to CRAN.
+* Integration with the googleAnalyticsR package: ganalytics custom segments and custom filters can now be used by googleAnalyticsR. Please refer to the vignettes included with this release for examples of how to make use of this integration.
+* Added a new function ga_view_selector() which provides a user-interactive way to select a view from the available Google Analytics accounts and properties within those accounts.
 
 # ganalytics 2018-09-08
 
@@ -17,7 +22,7 @@
 
 # ganalytics 2018-07-01
 
-* Released ganalytics to CRAN.
+* Released ganalytics 0.10.6 to CRAN.
 
 # ganalytics 2018-06-23
 
