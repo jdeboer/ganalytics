@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>McfQuery. — McfQuery • ganalytics</title>
+<title>setSegmentFilterScopeNegation — setSegmentFilterScopeNegation • ganalytics</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="McfQuery. — McfQuery" />
+<meta property="og:title" content="setSegmentFilterScopeNegation — setSegmentFilterScopeNegation" />
 
-<meta property="og:description" content="Create a Multi-Channel Funnel Reporting API query object" />
+<meta property="og:description" content="Given a .gaSegmentFilter object, or an object that can be coerced to a
+.gaSegmentFilter object, set the negation and/or scope
+of that .gaSegmentFilter object as per the non-missing arguments." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,67 +131,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>McfQuery.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Query-methods.R'><code>R/Query-methods.R</code></a></small>
-    <div class="hidden name"><code>McfQuery.Rd</code></div>
+    <h1>setSegmentFilterScopeNegation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jdeboer/ganalytics/blob/master/R/Segment-methods.R'><code>R/Segment-methods.R</code></a></small>
+    <div class="hidden name"><code>setSegmentFilterScopeNegation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a Multi-Channel Funnel Reporting API query object</p>
+    <p>Given a <code>.gaSegmentFilter</code> object, or an object that can be coerced to a
+<code>.gaSegmentFilter</code> object, set the <code>negation</code> and/or <code>scope</code>
+of that <code>.gaSegmentFilter</code> object as per the non-missing arguments.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>McfQuery</span>(<span class='kw'>view</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>creds</span> <span class='kw'>=</span> <span class='fu'>get_creds</span>(), <span class='kw'>startDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span>() - <span class='fl'>8</span>,
-  <span class='kw'>endDate</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span>() - <span class='fl'>2</span>, <span class='kw'>metrics</span> <span class='kw'>=</span> <span class='st'>"mcf:totalConversions"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='st'>"mcf:nthDay"</span>, <span class='kw'>sortBy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>filters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>samplingLevel</span> <span class='kw'>=</span> <span class='st'>"DEFAULT"</span>, <span class='kw'>maxResults</span> <span class='kw'>=</span> <span class='no'>kGaMaxResults</span>)</pre>
+    <pre class="usage"><span class='fu'>setSegmentFilterScopeNegation</span>(<span class='no'>object</span>, <span class='no'>negation</span>, <span class='no'>scope</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>view</th>
-      <td><p>view id to use</p></td>
+      <th>object</th>
+      <td><p>a <code>.gaSegmentFilter</code> object, or an object that can be
+coerced to a <code>.gaSegmentFilter</code> object.</p></td>
     </tr>
     <tr>
-      <th>creds</th>
-      <td><p>authentication credentials object created using GoogleApiCreds()</p></td>
+      <th>negation</th>
+      <td><p>optional boolean value of <code>TRUE</code> or <code>FALSE</code>.</p></td>
     </tr>
     <tr>
-      <th>startDate</th>
-      <td><p>start date</p></td>
-    </tr>
-    <tr>
-      <th>endDate</th>
-      <td><p>end date</p></td>
-    </tr>
-    <tr>
-      <th>metrics</th>
-      <td><p>character vector of metrics</p></td>
-    </tr>
-    <tr>
-      <th>dimensions</th>
-      <td><p>character vector of dimensions</p></td>
-    </tr>
-    <tr>
-      <th>sortBy</th>
-      <td><p>a sort by object</p></td>
-    </tr>
-    <tr>
-      <th>filters</th>
-      <td><p>a filters object</p></td>
-    </tr>
-    <tr>
-      <th>samplingLevel</th>
-      <td><p>either <code>"DEFAULT"</code>, <code>"HIGHER_PRECISION"</code> or <code>"FASTER"</code></p></td>
-    </tr>
-    <tr>
-      <th>maxResults</th>
-      <td><p>the maximum number of results to return,
-up to 1,000,000</p></td>
+      <th>scope</th>
+      <td><p>optional either <code>"sessions"</code> or <code>"users"</code>.</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a <code>.gaSegmentFilter</code> object.</p>
     
 
   </div>
@@ -197,7 +174,9 @@ up to 1,000,000</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

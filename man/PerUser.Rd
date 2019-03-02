@@ -59,6 +59,10 @@ metric condition to user-level.
 To define a \code{gaDynSegment} comprised of a single metric expression,
 wrap the metric expression in an \code{Include} or \code{Exclude} call.
 }
+\examples{
+spent_more_than_100_per_user <- PerUser(Expr(~transactionRevenue > 100))
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Exclude}}, \code{\link{Include}},

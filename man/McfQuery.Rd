@@ -26,7 +26,7 @@ McfQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
 
 \item{filters}{a filters object}
 
-\item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
+\item{samplingLevel}{either \code{"DEFAULT"}, \code{"HIGHER_PRECISION"} or \code{"FASTER"}}
 
 \item{maxResults}{the maximum number of results to return,
 up to 1,000,000}

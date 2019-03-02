@@ -64,20 +64,18 @@ expr7 <- Expr(~eventCategory == "video") & Expr(~eventAction == "play")
 expr8 <- Expr(~source == "google")
 Segment(
   PerUser(
-    expr1, # treat an expression as 'condition type segment filter' by default
-    PerHit(
-      expr3
-    )
+    expr1,        # treat an expression as 'condition type segment filter' by default
+    PerHit(expr3)
   ),
   Sequence(
     expr2,
-    Then(expr4), # 'then' means 'immediately followed by'
-    Later(expr5) # 'later' means 'followed by', but not necessarily immediately.
+    Then(expr4),  # 'then' means 'immediately followed by'.
+    Later(expr5)  # 'later' means 'followed by', but not necessarily immediately.
   ),
   Sequence(
     First(expr6), # First expressly means 'first interaction' within the date range.
-    Then(expr7), # By default, treat an expression within a sequence as happening
-    expr8 # at any point after any preceding steps in the sequence, i.e. 'later'.
+    Then(expr7),  # By default, treat an expression within a sequence as happening
+    expr8         # at any point after any preceding steps in the sequence, i.e. 'later'.
   )
 )
 

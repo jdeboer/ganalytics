@@ -21,6 +21,10 @@ If used at the beginning of a sequence, indicates that this step must match
 the first interaction of included sessions and users within the select date
 range. First expressly means 'first interaction' within the date range.
 }
+\examples{
+session_starts_from_home <- First(Expr(~pagepath == "/"))
+
+}
 \seealso{
 \code{\link{Sequence}}
 

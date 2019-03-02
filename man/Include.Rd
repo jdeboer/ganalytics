@@ -15,18 +15,14 @@ Include(object, ..., scope)
 
 \item{...}{Additional segment conditions to include.}
 
-\item{scope}{Optional scope, "users" or "sessions" (default).}
+\item{scope}{Optional scope, \code{"users"} or \code{"sessions"} (default).}
 }
 \value{
-A .gaSegmentFilter object with its negate slot set to FALSE.
-
-return_shoppers <- Include(
-Expr(~transactions > 1, metricScope = "perUser"),
-scope = "users"
-)
+A \code{.gaSegmentFilter} object with its negate slot set to
+\code{FALSE}.
 }
 \description{
-Set the negation flag of a segment filter to FALSE.
+Set the negation flag of a segment filter to \code{FALSE}.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -34,6 +30,13 @@ Set the negation flag of a segment filter to FALSE.
 expression.
 }}
 
+\examples{
+return_shoppers <- Include(
+  Expr(~transactions > 1, metricScope = "perUser"),
+  scope = "users"
+)
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Exclude}}, \code{\link{IsNegated}},

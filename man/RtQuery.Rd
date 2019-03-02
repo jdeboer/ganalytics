@@ -11,15 +11,15 @@ RtQuery(view = NA, creds = get_creds(), metrics = "rt:pageviews",
 \arguments{
 \item{view}{view id to use}
 
-\item{creds}{authentication credentials object created using GoogleApiCreds()}
+\item{creds}{authentication credentials object created using \code{GoogleApiCreds()}}
 
 \item{metrics}{character vector of metrics}
 
 \item{dimensions}{character vector of dimensions}
 
-\item{sortBy}{a sort by object}
+\item{sortBy}{a \code{.sortBy} object}
 
-\item{filters}{a filters object}
+\item{filters}{a \code{.tableFilter} object}
 
 \item{maxResults}{the maximum number of results to return,
 up to 1,000,000}

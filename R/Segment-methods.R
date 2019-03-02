@@ -6,6 +6,20 @@
 #' @importFrom methods new setMethod callNextMethod
 NULL
 
+#' setSegmentFilterScopeNegation
+#'
+#' Given a \code{.gaSegmentFilter} object, or an object that can be coerced to a
+#' \code{.gaSegmentFilter} object, set the \code{negation} and/or \code{scope}
+#' of that \code{.gaSegmentFilter} object as per the non-missing arguments.
+#'
+#' @param object a \code{.gaSegmentFilter} object, or an object that can be
+#'   coerced to a \code{.gaSegmentFilter} object.
+#' @param negation optional boolean value of \code{TRUE} or \code{FALSE}.
+#' @param scope optional either \code{"sessions"} or \code{"users"}.
+#'
+#' @return a \code{.gaSegmentFilter} object.
+#'
+#' @keywords internal
 setSegmentFilterScopeNegation <- function(object, negation, scope) {
   object <- as(object, ".gaSegmentFilter")
   if(!missing(scope)) object@scope <- scope

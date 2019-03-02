@@ -80,7 +80,7 @@ GaQuery <- function(
 #' @param dimensions character vector of dimensions
 #' @param sortBy a sort by object
 #' @param filters a filters object
-#' @param samplingLevel either "DEFAULT", "HIGHER_PRECISION" or "FASTER"
+#' @param samplingLevel either \code{"DEFAULT"}, \code{"HIGHER_PRECISION"} or \code{"FASTER"}
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #'
@@ -124,11 +124,11 @@ McfQuery <- function(
 #' Create a Real-Time reporting API query object
 #'
 #' @param view view id to use
-#' @param creds authentication credentials object created using GoogleApiCreds()
+#' @param creds authentication credentials object created using \code{GoogleApiCreds()}
 #' @param metrics character vector of metrics
 #' @param dimensions character vector of dimensions
-#' @param sortBy a sort by object
-#' @param filters a filters object
+#' @param sortBy a \code{.sortBy} object
+#' @param filters a \code{.tableFilter} object
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #'

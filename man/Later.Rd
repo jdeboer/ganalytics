@@ -20,9 +20,11 @@ Treat a step within a sequence as happening at any point after any preceding
 steps in the sequence, i.e. 'later'. 'Later' means 'followed by', but not
 necessarily immediately.
 }
-\seealso{
-\code{\link{Sequence}}
+\examples{
+purchased_sometime_later <- Later(Expr(~transactions > 0))
 
+}
+\seealso{
 Other sequence segment functions: \code{\link{First}},
   \code{\link{Sequence}}, \code{\link{Then}}
 }
