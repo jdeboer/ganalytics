@@ -9,7 +9,14 @@
 * Win-Builder x86_64-w64-mingw32 (64-bit), R-devel (2019-03-01 r76188)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
+There were no ERRORs, WARNINGs or NOTEs across all test environments except for 1 WARNING when built under R-Hub Builder Fedora Linux, R-devel, clang, gfortran:
+
+  Warning in (function (filename = "Rplot%03d.png", width = 480, height = 480,  :
+    unable to open connection to X11 display ''
+  Quitting from lines 55-63 (googleAnalyticsR-table-filters.Rmd) 
+  Error: processing vignette 'googleAnalyticsR-table-filters.Rmd' failed with diagnostics:
+  unable to start device PNG
+  --- failed re-building ‘googleAnalyticsR-table-filters.Rmd’
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
