@@ -23,4 +23,4 @@
 client_secret.json
 ^~/\.google_apis_auth\.RDS$
 figure$
-^R/WIP/.*$
+^R/WIP$
