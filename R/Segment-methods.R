@@ -28,6 +28,88 @@ setSegmentFilterScopeNegation <- function(object, negation, scope) {
   object
 }
 
+#' select_segment_filters_with_scope
+#'
+#' Given a Dynamic Segment object, or an object that can be coerced to a
+#' \code{gaDynSegment}, returns segment filters within object that are of the
+#' specified scope (\code{'sessions'} or \code{'users'}).
+#'
+#' @param object a Dynamic Segment object, or an object that can be coerced to a
+#'   \code{gaDynSegment}.
+#' @param scope either \code{"sessions"} or \code{"users"} to specify which
+#'   segment filters to return as a dynamic segment subset.
+#'
+#' @return a \code{gaDynSegment} object.
+#'
+#' @keywords internal
+select_segment_filters_with_scope <- function(object, scope) {
+  assert_that(
+    length(scope) == 1L,
+    scope %in% c("sessions", "users")
+  )
+  dyn_segment <- as(object, "gaDynSegment")
+  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
+  new("gaDynSegment", dyn_segment[matching_filters])
+}
+
+setMethod(
+  "initialize",
+  signature = "gaDynSegment",
+  definition = function(.Object, value, name, ...) {
+    .Object <- callNextMethod(.Object, ...)
+    if(!missing(value)) {
+      .Object@.Data <- value
+    }
+    if(!missing(name)) {
+      .Object@name <- name
+    }
+    validObject(.Object)
+    return(.Object)
+  }
+)
+
+setMethod(
+  "initialize",
+  signature = "gaSegmentId",
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
+    if (!missing(value)) {
+      value <- sub(kGaPrefix, "gaid::", value)
+      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
+        value <- paste("gaid", value, sep = "::")
+      }
+      .Object@.Data <- value
+      validObject(.Object)
+    }
+    return(.Object)
+  }
+)
+
+setMethod(
+  "initialize",
+  signature = "gaSegmentList",
+  definition = function(.Object, value, ...) {
+    .Object <- callNextMethod(.Object, ...)
+    if (!missing(value)) {
+      segment_names <- names(value)
+      .Object@.Data <- lapply(seq_along(value), function(i) {
+        value[[i]] <- as(value[[i]], ".gaSegment")
+        if(is(value[[i]], "gaDynSegment")) {
+          segment_name <- segment_names[i]
+          if(is.null(segment_name)) {
+            segment_name <- character(0)
+          }
+          value[[i]]@name <- segment_name
+        }
+        value[[i]]
+      })
+      names(.Object) <- segment_names
+      validObject(.Object)
+    }
+    .Object
+  }
+)
+
 # ---- Include, Exclude ----
 
 #' @describeIn Include Define an include segment filter using the supplied
@@ -102,22 +184,6 @@ setMethod(
   definition = function(object, value) {
     object@negation <- value
     object
-  }
-)
-
-setMethod(
-  f = "initialize",
-  signature = "gaDynSegment",
-  definition = function(.Object, value, name, ...) {
-    .Object <- callNextMethod(.Object, ...)
-    if(!missing(value)) {
-      .Object@.Data <- value
-    }
-    if(!missing(name)) {
-      .Object@name <- name
-    }
-    validObject(.Object)
-    return(.Object)
   }
 )
 
@@ -371,23 +437,6 @@ setMethod(
 
 # ---- Segment ----
 
-setMethod(
-  f = "initialize",
-  signature = "gaSegmentId",
-  definition = function(.Object, value, ...) {
-    .Object <- callNextMethod(.Object, ...)
-    if (!missing(value)) {
-      value <- sub(kGaPrefix, "gaid::", value)
-      if (!grepl("^gaid::\\-?[0-9A-Za-z]+$", value)) {
-        value <- paste("gaid", value, sep = "::")
-      }
-      .Object@.Data <- value
-      validObject(.Object)
-    }
-    return(.Object)
-  }
-)
-
 #' @describeIn Segment Interpret the supplied numeric value as a segment ID.
 setMethod(
   "Segment",
@@ -444,32 +493,6 @@ setMethod(
 
 # ---- Segments, Segments<- ----
 
-
-setMethod(
-  f = "initialize",
-  signature = "gaSegmentList",
-  definition = function(.Object, value, ...) {
-    .Object <- callNextMethod(.Object, ...)
-    if (!missing(value)) {
-      segment_names <- names(value)
-      .Object@.Data <- lapply(seq_along(value), function(i) {
-        value[[i]] <- as(value[[i]], ".gaSegment")
-        if(is(value[[i]], "gaDynSegment")) {
-          segment_name <- segment_names[i]
-          if(is.null(segment_name)) {
-            segment_name <- character(0)
-          }
-          value[[i]]@name <- segment_name
-        }
-        value[[i]]
-      })
-      names(.Object) <- segment_names
-      validObject(.Object)
-    }
-    .Object
-  }
-)
-
 #' @describeIn Segments Returns itself
 setMethod(
   "Segments",
@@ -520,25 +543,3 @@ setMethod(
   }
 )
 
-#' select_segment_filters_with_scope.
-#'
-#' Given a Dynamic Segment object, or an object that can be coerced to a
-#' gaDynSegment, returns segment filters within object that are of the specified
-#' scope ('sessions' or 'users').
-#'
-#' @param object a Dynamic Segment object, or an object that can be coerced to a
-#'   gaDynSegment.
-#' @param scope either 'sessions' or 'users' to specify which segment filters to
-#'   return as a dynamic segment subset.
-#' @return a gaDynSegment object.
-#'
-#' @keywords internal
-select_segment_filters_with_scope <- function(object, scope) {
-  assert_that(
-    length(scope) == 1L,
-    scope %in% c("sessions", "users")
-  )
-  dyn_segment <- as(object, "gaDynSegment")
-  matching_filters <- unlist(lapply(dyn_segment, ScopeLevel)) %in% scope
-  new("gaDynSegment", dyn_segment[matching_filters])
-}
