@@ -2,23 +2,23 @@
 % Please edit documentation in R/Segment-methods.R
 \name{select_segment_filters_with_scope}
 \alias{select_segment_filters_with_scope}
-\title{select_segment_filters_with_scope.}
+\title{select_segment_filters_with_scope}
 \usage{
 select_segment_filters_with_scope(object, scope)
 }
 \arguments{
 \item{object}{a Dynamic Segment object, or an object that can be coerced to a
-gaDynSegment.}
+\code{gaDynSegment}.}
 
-\item{scope}{either 'sessions' or 'users' to specify which segment filters to
-return as a dynamic segment subset.}
+\item{scope}{either \code{"sessions"} or \code{"users"} to specify which
+segment filters to return as a dynamic segment subset.}
 }
 \value{
-a gaDynSegment object.
+a \code{gaDynSegment} object.
 }
 \description{
 Given a Dynamic Segment object, or an object that can be coerced to a
-gaDynSegment, returns segment filters within object that are of the specified
-scope ('sessions' or 'users').
+\code{gaDynSegment}, returns segment filters within object that are of the
+specified scope (\code{'sessions'} or \code{'users'}).
 }
 \keyword{internal}

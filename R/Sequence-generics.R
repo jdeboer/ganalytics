@@ -10,7 +10,8 @@
 #'
 #' @return A \code{gaSegmentSequenceStep} object, with the immediate flag not set.
 #'
-#' @seealso \code{\link{Sequence}}
+#' @examples
+#' purchased_sometime_later <- Later(Expr(~transactions > 0))
 #'
 #' @family sequence segment functions
 #'
@@ -32,6 +33,9 @@ setGeneric(
 #'   first one but before any others in the sequence.
 #'
 #' @return A \code{gaSegmentSequenceStep} object, with the immediate flag set.
+#'
+#' @examples
+#' purchased_immediately_after <- Then(Expr(~transactions > 0))
 #'
 #' @family sequence segment functions
 #'
@@ -55,6 +59,9 @@ setGeneric(
 #'   expression.
 #'
 #' @return A \code{gaSegmentSequenceStep} object, with the immediate flag set.
+#'
+#' @examples
+#' session_starts_from_home <- First(Expr(~pagepath == "/"))
 #'
 #' @family sequence segment functions
 #'
@@ -89,20 +96,18 @@ setGeneric(
 #' expr8 <- Expr(~source == "google")
 #' Segment(
 #'   PerUser(
-#'     expr1, # treat an expression as 'condition type segment filter' by default
-#'     PerHit(
-#'       expr3
-#'     )
+#'     expr1,        # treat an expression as 'condition type segment filter' by default
+#'     PerHit(expr3)
 #'   ),
 #'   Sequence(
 #'     expr2,
-#'     Then(expr4), # 'then' means 'immediately followed by'
-#'     Later(expr5) # 'later' means 'followed by', but not necessarily immediately.
+#'     Then(expr4),  # 'then' means 'immediately followed by'.
+#'     Later(expr5)  # 'later' means 'followed by', but not necessarily immediately.
 #'   ),
 #'   Sequence(
 #'     First(expr6), # First expressly means 'first interaction' within the date range.
-#'     Then(expr7), # By default, treat an expression within a sequence as happening
-#'     expr8 # at any point after any preceding steps in the sequence, i.e. 'later'.
+#'     Then(expr7),  # By default, treat an expression within a sequence as happening
+#'     expr8         # at any point after any preceding steps in the sequence, i.e. 'later'.
 #'   )
 #' )
 #'

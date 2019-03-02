@@ -61,7 +61,8 @@ setMethod(
 
 #' @describeIn GaView Returns the ID of the supplied view, or the default view
 #'   within the supplied property or the default view within the first property
-#'   of the supplied account, or coerces a numeric or character into a viewId.
+#'   of the supplied account, or coerces a numeric or character into a
+#'   \code{viewId}.
 setMethod(
   "GaView",
   signature = c("ANY", "missing"),
@@ -70,7 +71,7 @@ setMethod(
   }
 )
 
-#' @describeIn GaView gets the view ID of the supplied query
+#' @describeIn GaView gets the view ID of the supplied query.
 setMethod(
   "GaView",
   signature = c(".query", "missing"),

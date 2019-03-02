@@ -20,6 +20,10 @@ A \code{gaSegmentSequenceStep} object, with the immediate flag set.
 Treat a step within a sequence as happening immediately after any preceding
 steps in the sequence, i.e. 'immediately following'.
 }
+\examples{
+purchased_immediately_after <- Then(Expr(~transactions > 0))
+
+}
 \seealso{
 \code{\link{Sequence}}
 

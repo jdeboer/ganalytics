@@ -7,14 +7,14 @@
 SplitDateRange(dateRange, N = 0L)
 }
 \arguments{
-\item{dateRange}{the gaDateRange object to be split}
+\item{dateRange}{the \code{gaDateRange} object to be split}
 
-\item{N}{the number of the separate date ranges to be split into; use 0 for
-single days.}
+\item{N}{the number of the separate date ranges to be split into; use
+\code{0} for single days.}
 }
 \description{
-Splits a gaDateRange object into N pieces. Useful for splitting a query into
-smaller chunks in order to overcome sampling.
+Splits a gaDateRange object into \code{N} pieces. Useful for splitting a
+query into smaller chunks in order to overcome sampling.
 }
 \seealso{
 Other date range functions: \code{\link{Cohort}},

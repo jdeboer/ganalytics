@@ -107,10 +107,10 @@
 <h2 class="hasAnchor">
 <a href="#setupconfig" class="anchor"></a>Setup/Config</h2>
 <p>Once installed, load these packages. Please refer to the <code>googleAnalyticsR</code> package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googleAnalyticsR)</a></code></pre></div>
-<pre><code>## 2019-01-27 15:21:17&gt; Set API cache</code></pre>
-<pre><code>## 2019-01-27 15:21:17&gt; No environment argument found, looked in GA_AUTH_FILE</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ganalytics)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googleAnalyticsR)</a></code></pre></div>
+<pre><code>## 2019-02-04 23:04:34&gt; Set API cache</code></pre>
+<pre><code>## 2019-02-04 23:04:34&gt; No environment argument found, looked in GA_AUTH_FILE</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ganalytics)</a></code></pre></div>
 <pre><code>## Welcome to ganalytics.
 ## 
 ## To get started, use the GoogleApiCreds() function to set credentials for
@@ -132,7 +132,7 @@
 ## Analytics - this will open within your default web browser. Unless a file path
 ## is provided at the time of authentication, tokens will be cached by httr in your
 ## home directory.</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -141,49 +141,49 @@
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/ga_auth.html">ga_auth</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"~"</span>, <span class="st">"ga.oauth"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/ga_auth.html">ga_auth</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"~"</span>, <span class="st">"ga.oauth"</span>))</a></code></pre></div>
 <pre><code>## Token cache file: ~/ga.oauth</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">view_id &lt;-<span class="st"> "117987738"</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">start_date &lt;-<span class="st"> "2018-05-01"</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">end_date &lt;-<span class="st"> "2018-06-30"</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">view_id &lt;-<span class="st"> "117987738"</span></a>
+<a class="sourceLine" id="cb12-2" title="2">start_date &lt;-<span class="st"> "2018-05-01"</span></a>
+<a class="sourceLine" id="cb12-3" title="3">end_date &lt;-<span class="st"> "2018-06-30"</span></a></code></pre></div>
 </div>
 <div id="pull-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pull-the-data" class="anchor"></a>Pull the Data</h2>
 <p>In this example, we’ll define a list of six segments: * Bounced sessions: Sessions where the bounces metric is not zero. * Mobile or tablet sessions: Sessions by mobile and tablet users. * Converters: Users who performed any type of conversion during the defined date range. * Multi-session users: Users who have visited more than once during the defined date range. * New desktop users: Sessions by new visitors using a desktop device. * Bounced before converting = Users who bounced in one session before converting later.</p>
 <p>The above list of dynamic segments is defined using <code>ganalytics</code> expressions as follows:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">bounces &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>bounces <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">conversions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>goalCompletionsAll <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>transactions <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">mobile_or_tablet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"mobile"</span>, <span class="st">"tablet"</span>))</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">multi_session_users &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Include.html">Include</a></span>(<span class="kw"><a href="../reference/PerUser.html">PerUser</a></span>(<span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>sessions <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)), <span class="dt">scope =</span> <span class="st">"users"</span>)</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">new_desktop_users &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "desktop"</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>userType <span class="op">==</span><span class="st"> "new"</span>)</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">my_segment_list &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">  <span class="dt">bounced_sessions =</span> <span class="kw"><a href="../reference/PerSession.html">PerSession</a></span>(bounces),</a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">  <span class="dt">mobile_or_tablet =</span> mobile_or_tablet,</a>
-<a class="sourceLine" id="cb13-10" data-line-number="10">  <span class="dt">converters =</span> <span class="kw"><a href="../reference/PerUser.html">PerUser</a></span>(conversions),</a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">  <span class="dt">multi_session_users =</span> multi_session_users,</a>
-<a class="sourceLine" id="cb13-12" data-line-number="12">  <span class="dt">new_desktop_users =</span> new_desktop_users,</a>
-<a class="sourceLine" id="cb13-13" data-line-number="13">  <span class="dt">bounced_before_converting =</span> <span class="kw"><a href="../reference/Sequence.html">Sequence</a></span>(bounces, conversions, <span class="dt">scope =</span> <span class="st">"users"</span>)</a>
-<a class="sourceLine" id="cb13-14" data-line-number="14">)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">bounces &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>bounces <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2">conversions &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>goalCompletionsAll <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>transactions <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3">mobile_or_tablet &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"mobile"</span>, <span class="st">"tablet"</span>))</a>
+<a class="sourceLine" id="cb13-4" title="4">multi_session_users &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Include.html">Include</a></span>(<span class="kw"><a href="../reference/PerUser.html">PerUser</a></span>(<span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>sessions <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)), <span class="dt">scope =</span> <span class="st">"users"</span>)</a>
+<a class="sourceLine" id="cb13-5" title="5">new_desktop_users &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "desktop"</span>) <span class="op">&amp;</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>userType <span class="op">==</span><span class="st"> "new"</span>)</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7">my_segment_list &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(</a>
+<a class="sourceLine" id="cb13-8" title="8">  <span class="dt">bounced_sessions =</span> <span class="kw"><a href="../reference/PerSession.html">PerSession</a></span>(bounces),</a>
+<a class="sourceLine" id="cb13-9" title="9">  <span class="dt">mobile_or_tablet =</span> mobile_or_tablet,</a>
+<a class="sourceLine" id="cb13-10" title="10">  <span class="dt">converters =</span> <span class="kw"><a href="../reference/PerUser.html">PerUser</a></span>(conversions),</a>
+<a class="sourceLine" id="cb13-11" title="11">  <span class="dt">multi_session_users =</span> multi_session_users,</a>
+<a class="sourceLine" id="cb13-12" title="12">  <span class="dt">new_desktop_users =</span> new_desktop_users,</a>
+<a class="sourceLine" id="cb13-13" title="13">  <span class="dt">bounced_before_converting =</span> <span class="kw"><a href="../reference/Sequence.html">Sequence</a></span>(bounces, conversions, <span class="dt">scope =</span> <span class="st">"users"</span>)</a>
+<a class="sourceLine" id="cb13-14" title="14">)</a></code></pre></div>
 <p>Because the Google Analytics Reporting API can only be used to query 4 segments at a time, we need to break our list segments into chunks.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">segment_chunks &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/split">split</a></span>(my_segment_list, (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_along</a></span>(my_segment_list) <span class="op">-</span><span class="st"> </span>1L) <span class="op">%/%</span><span class="st"> </span>4L)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">segment_chunks &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/split">split</a></span>(my_segment_list, (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_along</a></span>(my_segment_list) <span class="op">-</span><span class="st"> </span>1L) <span class="op">%/%</span><span class="st"> </span>4L)</a></code></pre></div>
 <p>We can now use <code>googleAnalyticsR</code> to query each chunk of segments and bind the results into a single <code>data.frame</code>. For each segment, we will request a count of users and sessions.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw">map_df</span>(segment_chunks, <span class="cf">function</span>(chunk) {</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/google_analytics.html">google_analytics</a></span>(</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">    <span class="dt">viewId =</span> view_id,</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">    <span class="dt">date_range =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(start_date, end_date),</a>
-<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="dt">metrics =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"users"</span>, <span class="st">"sessions"</span>),</a>
-<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="dt">dimensions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"segment"</span>),</a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">    <span class="dt">segments =</span> <span class="kw"><a href="../reference/Segments.html">Segments</a></span>(chunk)</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">  )</a>
-<a class="sourceLine" id="cb15-9" data-line-number="9">})</a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">kable</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">results &lt;-<span class="st"> </span><span class="kw">map_df</span>(segment_chunks, <span class="cf">function</span>(chunk) {</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/google_analytics.html">google_analytics</a></span>(</a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="dt">viewId =</span> view_id,</a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="dt">date_range =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(start_date, end_date),</a>
+<a class="sourceLine" id="cb15-5" title="5">    <span class="dt">metrics =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"users"</span>, <span class="st">"sessions"</span>),</a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="dt">dimensions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"segment"</span>),</a>
+<a class="sourceLine" id="cb15-7" title="7">    <span class="dt">segments =</span> <span class="kw"><a href="../reference/Segments.html">Segments</a></span>(chunk)</a>
+<a class="sourceLine" id="cb15-8" title="8">  )</a>
+<a class="sourceLine" id="cb15-9" title="9">})</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">kable</span>(results)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">segment</th>
@@ -208,8 +208,8 @@
 </tr>
 <tr class="even">
 <td align="left">multi_session_users</td>
-<td align="right">0</td>
-<td align="right">0</td>
+<td align="right">171</td>
+<td align="right">519</td>
 </tr>
 <tr class="odd">
 <td align="left">bounced_before_converting</td>
@@ -228,9 +228,9 @@
 <h2 class="hasAnchor">
 <a href="#data-munging-and-visualization" class="anchor"></a>Data Munging and Visualization</h2>
 <p>We will compare users and sessions for each segment using a horizontal column chart. To do this we need to transform the results table into long format in which the count of users and sessions for each segment are on separate rows.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">results_long &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">gather</span>(metric, count, users, sessions)</a></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">kable</span>(results_long)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">results_long &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">gather</span>(metric, count, users, sessions)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">kable</span>(results_long)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">segment</th>
@@ -256,7 +256,7 @@
 <tr class="even">
 <td align="left">multi_session_users</td>
 <td align="left">users</td>
-<td align="right">0</td>
+<td align="right">171</td>
 </tr>
 <tr class="odd">
 <td align="left">bounced_before_converting</td>
@@ -286,7 +286,7 @@
 <tr class="even">
 <td align="left">multi_session_users</td>
 <td align="left">sessions</td>
-<td align="right">0</td>
+<td align="right">519</td>
 </tr>
 <tr class="odd">
 <td align="left">bounced_before_converting</td>
@@ -300,12 +300,12 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">ggplot</span>(results_long) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">aes</span>(segment, count, <span class="dt">fill =</span> metric) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">ggplot</span>(results_long) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">aes</span>(segment, count, <span class="dt">fill =</span> metric) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.y.left =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="dv">0</span>))</a></code></pre></div>
 <p><img src="googleAnalyticsR-dynamic-segments_files/figure-html/visualize-results-1.png" width="960"></p>
 </div>
   </div>

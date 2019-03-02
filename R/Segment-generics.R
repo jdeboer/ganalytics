@@ -30,14 +30,16 @@ setGeneric(
 
 #' Include
 #'
-#' Set the negation flag of a segment filter to FALSE.
+#' Set the negation flag of a segment filter to \code{FALSE}.
 #'
 #' @param object A segment condition or sequence filter to include.
 #' @param ... Additional segment conditions to include.
-#' @param scope Optional scope, "users" or "sessions" (default).
+#' @param scope Optional scope, \code{"users"} or \code{"sessions"} (default).
 #'
-#' @return A .gaSegmentFilter object with its negate slot set to FALSE.
+#' @return A \code{.gaSegmentFilter} object with its negate slot set to
+#'   \code{FALSE}.
 #'
+#' @examples
 #' return_shoppers <- Include(
 #'   Expr(~transactions > 1, metricScope = "perUser"),
 #'   scope = "users"
@@ -54,13 +56,12 @@ setGeneric(
 
 #' Exclude
 #'
-#' Set the negation flag of a segment filter to TRUE.
+#' Set the negation flag of a segment filter to \code{TRUE}.
 #'
-#' @param object A segment condition or sequence filter to exclude.
-#' @param ... Additional segment conditions to add to the exclude filter.
-#' @param scope Optional scope, "users" or "sessions"
+#' @inheritParams Include
 #'
-#' @return A .gaSegmentFilter object with its negate slot set to TRUE.
+#' @return A \code{.gaSegmentFilter} object with its negate slot set to
+#'   \code{TRUE}.
 #'
 #' @examples
 #' exclude_one_time_shoppers <- Exclude(
@@ -160,9 +161,12 @@ setGeneric(
 #'
 #' Set the scope of a gaMetExpr object to product-level.
 #'
-#' @param object A gaMetExpr object to coerce to hit-level
+#' @param object A \code{gaMetExpr} object to coerce to hit-level
 #' @param negation Boolean value indicating whether to negate the condition.
-#' @return A gaMetExpr object.
+#' @return A \code{gaMetExpr} object.
+#'
+#' @examples
+#' with_products_added_more_than_once <- PerProduct(Expr(~productAddsToCart > 1))
 #'
 #' @family dynamic segment functions
 #'
@@ -175,18 +179,26 @@ setGeneric(
 
 #' PerHit
 #'
-#' Set the scope of a gaMetExpr object to hit-level, or transforms a condition
+#' Set the scope of a \code{gaMetExpr} object to hit-level, or transforms a condition
 #' filter to a sequence filter of length one (i.e. a combination of conditions
 #' for matching a single hit).
 #'
 #' @param object A \code{gaMetExpr} object to coerce to hit-level or if multiple
 #'   expressions are provided, then the first expression to combine into a
-#'   single step of sequence filter.
+#'   single step sequence filter.
 #' @param ... Further expressions to be included in the filter definition if
 #'   defining a sequence filter of length one.
 #' @param negation Boolean value indicating whether to negate the condition.
 #'
 #' @return A \code{gaMetExpr} or \code{gaSegmentSequenceFilter}.
+#'
+#' @examples
+#' spent_more_than_100_in_a_transaction <- PerHit(Expr(~transactionRevenue > 100))
+#' played_intro_video <- PerHit(
+#'   Expr(~eventCategory == "Video") &
+#'   Expr(~eventAction == "Play") &
+#'   Expr(~eventLabel == "Intro")
+#' )
 #'
 #' @family dynamic segment functions
 #'
@@ -214,6 +226,9 @@ setGeneric(
 #'   expression, wrap the metric expression in an \code{Include} or
 #'   \code{Exclude} call.
 #'
+#' @examples
+#' spent_more_than_100_in_a_session <- PerSession(Expr(~transactionRevenue > 100))
+#'
 #' @family dynamic segment functions
 #'
 #' @export
@@ -236,6 +251,9 @@ setGeneric(
 #'
 #' @note To define a \code{gaDynSegment} comprised of a single metric expression,
 #'   wrap the metric expression in an \code{Include} or \code{Exclude} call.
+#'
+#' @examples
+#' spent_more_than_100_per_user <- PerUser(Expr(~transactionRevenue > 100))
 #'
 #' @family dynamic segment functions
 #'
@@ -278,6 +296,15 @@ setGeneric(
 #'   built-in and/or custom segments by their ID.
 #' @return A \code{gaSegmentList}
 #'
+#' @examples
+#' my_segments <- Segments(list(
+#'   bounces = PerSession(Expr(~bounces != 0)),
+#'   conversions = PerUser(Expr(~goalCompletionsAll > 0) | Expr(~transactions > 0)),
+#'   mobile_or_tablet = Expr(~deviceCategory %in% c("mobile", "tablet")),
+#'   multi_session_users = Include(PerUser(Expr(~sessions > 1)), scope = "users"),
+#'   new_desktop_users = Expr(~deviceCategory == "desktop") & Expr(~userType == "new")
+#' ))
+#'
 #' @family dynamic segment functions
 #'
 #' @export
@@ -295,6 +322,17 @@ setGeneric(
 #' @param value A named list of segments or a single segment.
 #'
 #' @family dynamic segment functions
+#'
+#' @examples
+#' my_query <- GaQuery(view = "987654321")
+#' my_segments_list <- list(
+#'   bounces = PerSession(Expr(~bounces != 0)),
+#'   conversions = PerUser(Expr(~goalCompletionsAll > 0) | Expr(~transactions > 0)),
+#'   mobile_or_tablet = Expr(~deviceCategory %in% c("mobile", "tablet")),
+#'   multi_session_users = Include(PerUser(Expr(~sessions > 1)), scope = "users"),
+#'   new_desktop_users = Expr(~deviceCategory == "desktop") & Expr(~userType == "new")
+#' )
+#' Segments(my_query) <- my_segments_list
 #'
 #' @export
 #' @rdname Segments

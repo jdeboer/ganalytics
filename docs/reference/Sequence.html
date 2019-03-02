@@ -212,20 +212,18 @@ order specified.</p></li>
 <span class='no'>expr8</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>source</span> <span class='kw'>==</span> <span class='st'>"google"</span>)
 <span class='fu'><a href='Segment.html'>Segment</a></span>(
   <span class='fu'><a href='PerUser.html'>PerUser</a></span>(
-    <span class='no'>expr1</span>, <span class='co'># treat an expression as 'condition type segment filter' by default</span>
-    <span class='fu'><a href='PerHit.html'>PerHit</a></span>(
-      <span class='no'>expr3</span>
-    )
+    <span class='no'>expr1</span>,        <span class='co'># treat an expression as 'condition type segment filter' by default</span>
+    <span class='fu'><a href='PerHit.html'>PerHit</a></span>(<span class='no'>expr3</span>)
   ),
   <span class='fu'>Sequence</span>(
     <span class='no'>expr2</span>,
-    <span class='fu'><a href='Then.html'>Then</a></span>(<span class='no'>expr4</span>), <span class='co'># 'then' means 'immediately followed by'</span>
-    <span class='fu'><a href='Later.html'>Later</a></span>(<span class='no'>expr5</span>) <span class='co'># 'later' means 'followed by', but not necessarily immediately.</span>
+    <span class='fu'><a href='Then.html'>Then</a></span>(<span class='no'>expr4</span>),  <span class='co'># 'then' means 'immediately followed by'.</span>
+    <span class='fu'><a href='Later.html'>Later</a></span>(<span class='no'>expr5</span>)  <span class='co'># 'later' means 'followed by', but not necessarily immediately.</span>
   ),
   <span class='fu'>Sequence</span>(
     <span class='fu'><a href='First.html'>First</a></span>(<span class='no'>expr6</span>), <span class='co'># First expressly means 'first interaction' within the date range.</span>
-    <span class='fu'><a href='Then.html'>Then</a></span>(<span class='no'>expr7</span>), <span class='co'># By default, treat an expression within a sequence as happening</span>
-    <span class='no'>expr8</span> <span class='co'># at any point after any preceding steps in the sequence, i.e. 'later'.</span>
+    <span class='fu'><a href='Then.html'>Then</a></span>(<span class='no'>expr7</span>),  <span class='co'># By default, treat an expression within a sequence as happening</span>
+    <span class='no'>expr8</span>         <span class='co'># at any point after any preceding steps in the sequence, i.e. 'later'.</span>
   )
 )</div><div class='output co'>#&gt; An object of class "gaDynSegment"
 #&gt; [[1]]
@@ -260,7 +258,10 @@ order specified.</p></li>
 #&gt; [[2]]
 #&gt; An object of class "orExpr"
 #&gt; [[1]]
-#&gt; An object of class "gaMetExpr"
+#&gt; An object of class "gaSegMetExpr"
+#&gt; Slot "metricScope":
+#&gt; [1] "perHit"
+#&gt; 
 #&gt; Slot "var":
 #&gt; An object of class "gaMetVar"
 #&gt; [1] "ga:timeOnPage"

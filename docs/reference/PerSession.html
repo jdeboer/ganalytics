@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="PerSession — PerSession" />
 
-<meta property="og:description" content="Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level." />
+<meta property="og:description" content="Set the scope of a .gaSegmentFilter or gaMetExpr object to
+session-level." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -136,7 +137,8 @@
 
     <div class="ref-description">
     
-    <p>Set the scope of a .gaSegmentFilter or gaMetExpr object to session-level.</p>
+    <p>Set the scope of a <code>.gaSegmentFilter</code> or <code>gaMetExpr</code> object to
+session-level.</p>
     
     </div>
 
@@ -162,13 +164,13 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>A .gaSegmentFilter or gaMetExpr object to coerce to
-session-level. Alternatively, an dimension expression or segment filter to
-coerce into a session scoped gaDynSegment.</p></td>
+      <td><p>A <code>.gaSegmentFilter</code> or <code>gaMetExpr</code> object to coerce
+to session-level. Alternatively, an dimension expression or segment filter
+to coerce into a session scoped <code>gaDynSegment</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other filters to include in the gaDynSegment.</p></td>
+      <td><p>Other filters to include in the <code>gaDynSegment</code>.</p></td>
     </tr>
     <tr>
       <th>negation</th>
@@ -178,7 +180,7 @@ coerce into a session scoped gaDynSegment.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A gaMetExpr, .gaSegmentFilter or gaDynSegment.</p>
+    <p>A <code>gaMetExpr</code>, <code>.gaSegmentFilter</code> or <code>gaDynSegment</code>.</p>
     
     <h2 class="hasAnchor" id="methods-by-class-"><a class="anchor" href="#methods-by-class-"></a>Methods (by class)</h2>
 
@@ -197,8 +199,9 @@ metric condition to session-level.</p></li>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>To define a gaDynSegment comprised of a single metric expression,
-wrap the metric expression in an <code>Include</code> or <code>Exclude</code> call.</p>
+    <p>To define a <code>gaDynSegment</code> comprised of a single metric
+expression, wrap the metric expression in an <code>Include</code> or
+<code>Exclude</code> call.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -211,6 +214,8 @@ wrap the metric expression in an <code>Include</code> or <code>Exclude</code> ca
   <code><a href='Segments.html'>Segments</a></code>, <code><a href='Segment.html'>Segment</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>spent_more_than_100_in_a_session</span> <span class='kw'>&lt;-</span> <span class='fu'>PerSession</span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>transactionRevenue</span> <span class='kw'>&gt;</span> <span class='fl'>100</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -224,7 +229,9 @@ wrap the metric expression in an <code>Include</code> or <code>Exclude</code> ca
       <li><a href="#note">Note</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

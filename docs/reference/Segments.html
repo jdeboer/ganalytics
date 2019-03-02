@@ -211,6 +211,24 @@ built-in and/or custom segments by their ID.</p></td>
   <code><a href='Segment.html'>Segment</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>my_segments</span> <span class='kw'>&lt;-</span> <span class='fu'>Segments</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
+  <span class='kw'>bounces</span> <span class='kw'>=</span> <span class='fu'><a href='PerSession.html'>PerSession</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>bounces</span> <span class='kw'>!=</span> <span class='fl'>0</span>)),
+  <span class='kw'>conversions</span> <span class='kw'>=</span> <span class='fu'><a href='PerUser.html'>PerUser</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>goalCompletionsAll</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) <span class='kw'>|</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>transactions</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>)),
+  <span class='kw'>mobile_or_tablet</span> <span class='kw'>=</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>deviceCategory</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"mobile"</span>, <span class='st'>"tablet"</span>)),
+  <span class='kw'>multi_session_users</span> <span class='kw'>=</span> <span class='fu'><a href='Include.html'>Include</a></span>(<span class='fu'><a href='PerUser.html'>PerUser</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>sessions</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>)), <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"users"</span>),
+  <span class='kw'>new_desktop_users</span> <span class='kw'>=</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>deviceCategory</span> <span class='kw'>==</span> <span class='st'>"desktop"</span>) <span class='kw'>&amp;</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>userType</span> <span class='kw'>==</span> <span class='st'>"new"</span>)
+))
+
+<span class='no'>my_query</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='GaQuery.html'>GaQuery</a></span>(<span class='kw'>view</span> <span class='kw'>=</span> <span class='st'>"987654321"</span>)
+<span class='no'>my_segments_list</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(
+  <span class='kw'>bounces</span> <span class='kw'>=</span> <span class='fu'><a href='PerSession.html'>PerSession</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>bounces</span> <span class='kw'>!=</span> <span class='fl'>0</span>)),
+  <span class='kw'>conversions</span> <span class='kw'>=</span> <span class='fu'><a href='PerUser.html'>PerUser</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>goalCompletionsAll</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>) <span class='kw'>|</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>transactions</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>)),
+  <span class='kw'>mobile_or_tablet</span> <span class='kw'>=</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>deviceCategory</span> <span class='kw'>%in%</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"mobile"</span>, <span class='st'>"tablet"</span>)),
+  <span class='kw'>multi_session_users</span> <span class='kw'>=</span> <span class='fu'><a href='Include.html'>Include</a></span>(<span class='fu'><a href='PerUser.html'>PerUser</a></span>(<span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>sessions</span> <span class='kw'>&gt;</span> <span class='fl'>1</span>)), <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"users"</span>),
+  <span class='kw'>new_desktop_users</span> <span class='kw'>=</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>deviceCategory</span> <span class='kw'>==</span> <span class='st'>"desktop"</span>) <span class='kw'>&amp;</span> <span class='fu'><a href='Expr.html'>Expr</a></span>(~<span class='no'>userType</span> <span class='kw'>==</span> <span class='st'>"new"</span>)
+)
+<span class='fu'>Segments</span>(<span class='no'>my_query</span>) <span class='kw'>&lt;-</span> <span class='no'>my_segments_list</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -222,7 +240,9 @@ built-in and/or custom segments by their ID.</p></td>
       <li><a href="#methods-by-class-">Methods (by class)</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

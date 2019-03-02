@@ -305,13 +305,11 @@ user_segment_type_levels <- c(
   "BUILT_IN", "CUSTOM"
 )
 
-metadata_path <- get_metadata_path()
-# if (nchar(metadata_path) == 0L) {
+# if (nchar(metadata_path()) == 0L) {
 #   if (interactive()) GaMetaUpdate()
-#   metadata_path <- get_metadata_path()
 # }
-assertthat::assert_that(file.exists(metadata_path))
-load(metadata_path)
+assertthat::assert_that(file.exists(get_metadata_path()))
+load(get_metadata_path())
 
 metric_data_types <- c(
   "Integer",

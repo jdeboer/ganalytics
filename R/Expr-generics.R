@@ -3,11 +3,12 @@
 #' Define a Google Analytics expression.
 #'
 #' @param object A dimension or metric variable, or another object to be coerced
-#'   to an .expr object.
+#'   to an \code{.expr} object.
 #' @param comparator The comparator to use for the expression.
 #' @param operand The operand to use for the expression.
-#' @param metricScope Optional scope to use for segmentation if using a metric.
-#'   Possible values include "perUser" or "perSession".
+#' @param metricScope Optional scope to use in the case of metric variables for
+#'   segmentation. Possible values include \code{"perUser"} or
+#'   \code{"perSession"}.
 #'
 #' @family expression generators
 #'
@@ -24,11 +25,12 @@ setGeneric(
 #'
 #' Create a Core Reporting API expression.
 #'
+#' @inheritParams Expr
+#'
 #' @examples
 #' myQuery <- GaQuery(view = 123456789)
 #' source_matches_google <- GaExpr("source", "~", "google")
 #' TableFilter(myQuery) <- source_matches_google
-#' @inheritParams Expr
 #'
 #' @family expression generators
 #'
@@ -68,12 +70,12 @@ setGeneric(
 #'
 #' Create a Real-Time Reporting API expression.
 #'
+#' @inheritParams McfExpr
+#'
 #' @examples
 #' myQuery <- RtQuery(view = 123456789)
 #' source_matches_google <- RtExpr("rt:source", "~", "google")
 #' TableFilter(myQuery) <- source_matches_google
-#'
-#' @inheritParams McfExpr
 #'
 #' @family expression generators
 #'
@@ -86,11 +88,11 @@ setGeneric(
 
 #' ScopeLevel
 #'
-#' Get the scope level of a .gaSegmentFilter or gaMetExpr.
+#' Get or set the scope level of a \code{.gaSegmentFilter} or \code{gaMetExpr}.
 #'
 #' @param object A \code{.gaSegmentFilter} or \code{gaMetExpr} object.
-#' @param value New scope level to return an updated copy of the object with the
-#'   new scope applied. For \code{.gaSegmentFilters} this can be either
+#' @param value Optional new scope level to return an updated copy of the object
+#'   with the new scope applied. For \code{.gaSegmentFilters} this can be either
 #'   \code{'users'} or \code{'sessions'}. For metric expressions use either
 #'   \code{'perUser'}, \code{'perSession'}, \code{'perHit'} or
 #'   \code{'perProduct'}.
@@ -117,7 +119,7 @@ setGeneric(
 
 #' ScopeLevel<-
 #'
-#' Set the scope level of a .gaSegmentFilter or a gaMetExpr.
+#' Set the scope level of a \code{.gaSegmentFilter} or a \code{gaMetExpr}.
 #'
 #' @family dynamic segment functions
 #'

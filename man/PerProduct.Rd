@@ -14,12 +14,12 @@ PerProduct(object, negation)
 \S4method{PerProduct}{formula}(object)
 }
 \arguments{
-\item{object}{A gaMetExpr object to coerce to hit-level}
+\item{object}{A \code{gaMetExpr} object to coerce to hit-level}
 
 \item{negation}{Boolean value indicating whether to negate the condition.}
 }
 \value{
-A gaMetExpr object.
+A \code{gaMetExpr} object.
 }
 \description{
 Set the scope of a gaMetExpr object to product-level.
@@ -33,6 +33,10 @@ product-level.
 metric condition to product-level.
 }}
 
+\examples{
+with_products_added_more_than_once <- PerProduct(Expr(~productAddsToCart > 1))
+
+}
 \seealso{
 Other dynamic segment functions: \code{\link{DynSegment}},
   \code{\link{Exclude}}, \code{\link{Include}},

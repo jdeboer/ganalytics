@@ -13,7 +13,8 @@ GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
 \arguments{
 \item{view}{view id to use}
 
-\item{creds}{authentication credentials object created using GoogleApiCreds()}
+\item{creds}{authentication credentials object created using
+\code{GoogleApiCreds()}}
 
 \item{startDate}{start date}
 
@@ -31,10 +32,10 @@ GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
 
 \item{cohorts}{a cohort object or a list of cohorts}
 
-\item{samplingLevel}{either "DEFAULT", "HIGHER_PRECISION" or "FASTER"}
+\item{samplingLevel}{either \code{"DEFAULT"}, \code{"HIGHER_PRECISION"} or
+\code{"FASTER"}}
 
-\item{maxResults}{the maximum number of results to return,
-up to 1,000,000}
+\item{maxResults}{the maximum number of results to return, up to 1,000,000}
 }
 \description{
 Create a ganalytics query object

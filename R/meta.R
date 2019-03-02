@@ -83,21 +83,19 @@ GaMetaUpdate <- function(creds = get_creds()) {
     mets = str_trim(html_text(html_nodes(rt_ref_html, css = "div.entity.table > div.met > div.line > a")))
   )
 
-  metadata_path <- get_metadata_path()
+  extdata_path <- function() {file.path(system.file(package = "ganalytics"), "extdata")}
+  metadata_path <- function() {file.path(extdata_path(), "metadata.RDA")}
 
-  if (nchar(metadata_path) == 0) {
-    package_path <- system.file(package = "ganalytics")
-    extdata_path <- file.path(package_path, "extdata")
-    if (!dir.exists(extdata_path)) {
-      dir.create(extdata_path)
+  if (nchar(get_metadata_path()) == 0) {
+    if (!dir.exists(extdata_path())) {
+      dir.create(extdata_path())
     }
-    assert_that(dir.exists(extdata_path))
-    metadata_path <- file.path(extdata_path, "metadata.RDA")
+    assert_that(dir.exists(extdata_path()))
   }
 
   prompt <- paste0(
     "Ready to update the metadata file for ganalytics located in: ",
-    metadata_path,
+    metadata_path(),
     "\nPress enter to continue..."
   )
   if (interactive()) {
@@ -105,7 +103,7 @@ GaMetaUpdate <- function(creds = get_creds()) {
     assert_that(nchar(keypress) == 0)
   }
 
-  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, file = metadata_path)
+  save(kGaVars, kGaVars_df, kMcfVars, kRtVars, file = metadata_path())
 
   # devtools::use_data(kGaVars, kGaVars_df, kMcfVars, kRtVars, pkg = "ganalytics", internal = TRUE, overwrite = TRUE)
 

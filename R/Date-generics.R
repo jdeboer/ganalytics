@@ -3,10 +3,11 @@
 #' Get the date range.
 #'
 #' @param object The start date of the date range or a object to coerce to a
-#'   date range. Alternatively, a query object to replace the date range of.
+#'   date range. Alternatively, a \code{.query} object to replace the date range
+#'   of.
 #' @param endDate The end date of the date range. Alternatively, if
-#'   \code{object} is a '.query' object, then endDate is the replacement date
-#'   range.
+#'   \code{object} is a \code{.query} object, then \code{endDate} is the
+#'   replacement date range.
 #'
 #' @family date range functions
 #'
@@ -111,7 +112,8 @@ setGeneric(
 #'
 #' @param object The object to get or set the cohorts of.
 #' @param value The value to set the object's cohorts to.
-#' @param type The type of cohort. Only the default of "FIRST_VISIT_DATE" is currently valid.
+#' @param type The type of cohort. Only the default of \code{"FIRST_VISIT_DATE"}
+#'   is currently valid.
 #'
 #' @family date range functions
 #' @export

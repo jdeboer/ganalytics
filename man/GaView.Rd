@@ -37,7 +37,7 @@ GaView(object) <- value
 \item{with_gui}{Optional. Boolean value indicating whether to use a GUI for
 the menu. Default is \code{FALSE}.}
 
-\item{object}{An object to coerce to a gaView class object or to get the
+\item{object}{An object to coerce to a \code{gaView} object or to get the
 gaView of, such as a query, default view of a web property, or the default
 view of the first web property in a Google Analytics account.}
 
@@ -50,9 +50,9 @@ A \code{gaView} object.
 \description{
 A menu user-interface for selecting a Google Analytics view.
 
-Get the viewId of the query
+Get the view ID of the query.
 
-Set the viewId for the query.
+Set the view ID for the query.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -63,9 +63,10 @@ the account.
 
 \item \code{object = ANY,value = missing}: Returns the ID of the supplied view, or the default view
 within the supplied property or the default view within the first property
-of the supplied account, or coerces a numeric or character into a viewId.
+of the supplied account, or coerces a numeric or character into a
+\code{viewId}.
 
-\item \code{object = .query,value = missing}: gets the view ID of the supplied query
+\item \code{object = .query,value = missing}: gets the view ID of the supplied query.
 
 \item \code{object = .query,value = ANY}: Set the view of a query, returning the query with the
 updated view applied.

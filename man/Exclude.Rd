@@ -11,17 +11,18 @@ Exclude(object, ..., scope)
 \S4method{Exclude}{ANY}(object, ..., scope)
 }
 \arguments{
-\item{object}{A segment condition or sequence filter to exclude.}
+\item{object}{A segment condition or sequence filter to include.}
 
-\item{...}{Additional segment conditions to add to the exclude filter.}
+\item{...}{Additional segment conditions to include.}
 
-\item{scope}{Optional scope, "users" or "sessions"}
+\item{scope}{Optional scope, \code{"users"} or \code{"sessions"} (default).}
 }
 \value{
-A .gaSegmentFilter object with its negate slot set to TRUE.
+A \code{.gaSegmentFilter} object with its negate slot set to
+\code{TRUE}.
 }
 \description{
-Set the negation flag of a segment filter to TRUE.
+Set the negation flag of a segment filter to \code{TRUE}.
 }
 \section{Methods (by class)}{
 \itemize{

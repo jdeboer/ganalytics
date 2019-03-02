@@ -107,10 +107,10 @@
 <h2 class="hasAnchor">
 <a href="#setupconfig" class="anchor"></a>Setup/Config</h2>
 <p>Once installed, load these packages. Please refer to the <code>googleAnalyticsR</code> package documentation on configuration steps you may need to complete in order to use the Google Analytics APIs.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googleAnalyticsR)</a></code></pre></div>
-<pre><code>## 2019-01-27 15:21:32&gt; Set API cache</code></pre>
-<pre><code>## 2019-01-27 15:21:32&gt; No environment argument found, looked in GA_AUTH_FILE</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ganalytics)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googleAnalyticsR)</a></code></pre></div>
+<pre><code>## 2019-02-04 23:04:55&gt; Set API cache</code></pre>
+<pre><code>## 2019-02-04 23:04:55&gt; No environment argument found, looked in GA_AUTH_FILE</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ganalytics)</a></code></pre></div>
 <pre><code>## Welcome to ganalytics.
 ## 
 ## To get started, use the GoogleApiCreds() function to set credentials for
@@ -132,7 +132,7 @@
 ## Analytics - this will open within your default web browser. Unless a file path
 ## is provided at the time of authentication, tokens will be cached by httr in your
 ## home directory.</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -141,40 +141,40 @@
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/ga_auth.html">ga_auth</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"~"</span>, <span class="st">"ga.oauth"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyr)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(purrr)</a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/ga_auth.html">ga_auth</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(<span class="st">"~"</span>, <span class="st">"ga.oauth"</span>))</a></code></pre></div>
 <pre><code>## Token cache file: ~/ga.oauth</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">view_id &lt;-<span class="st"> "117987738"</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">start_date &lt;-<span class="st"> "2018-05-01"</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">end_date &lt;-<span class="st"> "2018-06-30"</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">view_id &lt;-<span class="st"> "117987738"</span></a>
+<a class="sourceLine" id="cb12-2" title="2">start_date &lt;-<span class="st"> "2018-05-01"</span></a>
+<a class="sourceLine" id="cb12-3" title="3">end_date &lt;-<span class="st"> "2018-06-30"</span></a></code></pre></div>
 </div>
 <div id="pull-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pull-the-data" class="anchor"></a>Pull the Data</h2>
 <p>In this example, we’ll define the following filters: * Device category is desktop or tablet - a dimension filter using an OR condition. * New visitors using either a desktop or tablet device - a dimension filter involving both an AND and an OR condition. * At least one goal completion or transaction - a metric filter using an OR condition.</p>
 <p>The above list of filters will be defined using <code>ganalytics</code> expressions as follows:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Device category is desktop or tablet - a dimension filter using an OR condition.</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">desktop_or_mobile &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "desktop"</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "tablet"</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co"># New visitors using either a desktop or tablet device - a dimension filter involving both an AND and an OR condition.</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">new_desktop_and_mobile_visitors &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>userType <span class="op">==</span><span class="st"> "new"</span>) <span class="op">&amp;</span><span class="st"> </span>desktop_or_mobile</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co"># At least one goal completion or transaction - a metric filter using an OR condition.</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">at_least_one_conversion &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>goalCompletionsAll <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>transactions <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Device category is desktop or tablet - a dimension filter using an OR condition.</span></a>
+<a class="sourceLine" id="cb13-2" title="2">desktop_or_mobile &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "desktop"</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>deviceCategory <span class="op">==</span><span class="st"> "tablet"</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co"># New visitors using either a desktop or tablet device - a dimension filter involving both an AND and an OR condition.</span></a>
+<a class="sourceLine" id="cb13-5" title="5">new_desktop_and_mobile_visitors &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>userType <span class="op">==</span><span class="st"> "new"</span>) <span class="op">&amp;</span><span class="st"> </span>desktop_or_mobile</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="co"># At least one goal completion or transaction - a metric filter using an OR condition.</span></a>
+<a class="sourceLine" id="cb13-8" title="8">at_least_one_conversion &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>goalCompletionsAll <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">|</span><span class="st"> </span><span class="kw"><a href="../reference/Expr.html">Expr</a></span>(<span class="op">~</span>transactions <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <p>We can now use <code>googleAnalyticsR</code> to</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">results &lt;-<span class="st"> </span><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/google_analytics.html">google_analytics</a></span>(</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="dt">viewId =</span> view_id,</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="dt">date_range =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(start_date, end_date),</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="dt">metrics =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"users"</span>, <span class="st">"sessions"</span>, <span class="st">"goalCompletionsAll"</span>, <span class="st">"transactions"</span>),</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="dt">dimensions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"deviceCategory"</span>, <span class="st">"userType"</span>),</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">  <span class="dt">dim_filters =</span> new_desktop_and_mobile_visitors,</a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">  <span class="dt">met_filters =</span> at_least_one_conversion</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8">)</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">kable</span>(results)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">results &lt;-<span class="st"> </span><span class="kw"><a href="https://code.markedmondson.me/googleAnalyticsR//reference/google_analytics.html">google_analytics</a></span>(</a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">viewId =</span> view_id,</a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">date_range =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(start_date, end_date),</a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">metrics =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"users"</span>, <span class="st">"sessions"</span>, <span class="st">"goalCompletionsAll"</span>, <span class="st">"transactions"</span>),</a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">dimensions =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"deviceCategory"</span>, <span class="st">"userType"</span>),</a>
+<a class="sourceLine" id="cb14-6" title="6">  <span class="dt">dim_filters =</span> new_desktop_and_mobile_visitors,</a>
+<a class="sourceLine" id="cb14-7" title="7">  <span class="dt">met_filters =</span> at_least_one_conversion</a>
+<a class="sourceLine" id="cb14-8" title="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">kable</span>(results)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">deviceCategory</th>
