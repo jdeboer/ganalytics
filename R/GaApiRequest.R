@@ -1,7 +1,7 @@
 #' @import httpuv
 #' @importFrom jsonlite fromJSON toJSON
 #' @importFrom httr GET POST PUT DELETE oauth_endpoints oauth1.0_token oauth2.0_token config
-#'   stop_for_status content oauth_app modify_url add_headers
+#'   stop_for_status content oauth_app modify_url add_headers oauth_service_token
 #' @importFrom R6 R6Class
 #' @importFrom stringr str_c str_pad str_detect
 #' @importFrom selectr querySelector querySelectorAll
@@ -31,7 +31,10 @@ get_creds <- function() {
 #' @param appCreds Filename or named vector for client_id and client_secret.
 #' @param cache httr OAuth2.0 cache
 #' @param use_oob as per httr
-#' @param appname prefix of environment variables that hold the client ID and client secret.
+#' @param appname prefix of environment variables that hold the client ID and
+#'   client secret.
+#' @param secrets File path to service account secrets JSON file downloaded from
+#'   the Google APIs console.
 #'
 #' @export
 GoogleApiCreds <- function(
@@ -39,7 +42,8 @@ GoogleApiCreds <- function(
   appCreds = NULL,
   cache = character(0),
   use_oob = FALSE,
-  appname = "GOOGLE_APIS"
+  appname = "GOOGLE_APIS",
+  secrets = NULL
 ){
   if (userName == "") {
     userName <- character(0)
@@ -64,7 +68,8 @@ GoogleApiCreds <- function(
       login = userName,
       cache = cache
     ),
-    use_oob = use_oob
+    use_oob = use_oob,
+    secrets = secrets
   )
   set_creds(creds)
   creds
@@ -168,6 +173,14 @@ google_api_request <- function(creds, scope,
                                body_list = NULL, fields = NULL,
                                max_results = NULL) {
   api_name <- "google"
+
+  if(is.null(creds$secrets)) {
+    oauth_version <- "2.0"
+  } else {
+    oauth_version <- "service"
+    creds$secrets <- jsonlite::fromJSON(creds$secrets)
+  }
+
   api_request(
     api_name = api_name,
     app = creds$app,
@@ -180,7 +193,9 @@ google_api_request <- function(creds, scope,
     ),
     body_list = body_list,
     user = creds$user,
-    use_oob = creds$use_oob
+    use_oob = creds$use_oob,
+    oauth_version = oauth_version,
+    secrets = creds$secrets
   )
 }
 
@@ -190,7 +205,7 @@ api_request <- function(api_name, app, base_url,
                         user = list(login = NA, cache = NA),
                         oauth_in_header = TRUE,
                         use_oob = FALSE,
-                        oauth_version = "2.0") {
+                        oauth_version = "2.0", secrets = NULL) {
   req_type <- toupper(req_type)
   api_name <- tolower(api_name)
   stopifnot(
@@ -226,6 +241,14 @@ api_request <- function(api_name, app, base_url,
         use_oob = use_oob,
         as_header = oauth_in_header,
         cache = user$cache
+      )
+    },
+    `service` = {
+      token <- oauth_service_token(
+        endpoint = endpoint,
+        secrets = secrets,
+        scope = scope,
+        sub = user$login
       )
     }
   )

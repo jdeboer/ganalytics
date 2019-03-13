@@ -27,3 +27,11 @@ up to 1,000,000}
 \description{
 Create a Real-Time reporting API query object
 }
+\examples{
+my_rt_query <- RtQuery(
+  view = 117987738,
+  metrics = "activeUsers",
+  dimensions = "userType"
+)
+
+}

@@ -1,3 +1,7 @@
+# ganalytics 0.10.7.9000
+
+* Support for authentication via serviced account.
+
 # ganalytics 0.10.7
 
 * Support for staged installation in R 3.6.0 and updates to documentation.

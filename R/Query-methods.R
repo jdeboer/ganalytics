@@ -132,6 +132,13 @@ McfQuery <- function(
 #' @param maxResults the maximum number of results to return,
 #'  up to 1,000,000
 #'
+#' @examples
+#' my_rt_query <- RtQuery(
+#'   view = 117987738,
+#'   metrics = "activeUsers",
+#'   dimensions = "userType"
+#' )
+#'
 #' @export
 RtQuery <- function(
   view = NA,

@@ -6,7 +6,7 @@
 \usage{
 GoogleApiCreds(userName = Sys.getenv(paste0(appname, "_USER")),
   appCreds = NULL, cache = character(0), use_oob = FALSE,
-  appname = "GOOGLE_APIS")
+  appname = "GOOGLE_APIS", secrets = NULL)
 }
 \arguments{
 \item{userName}{Google username email address hint}
@@ -17,7 +17,11 @@ GoogleApiCreds(userName = Sys.getenv(paste0(appname, "_USER")),
 
 \item{use_oob}{as per httr}
 
-\item{appname}{prefix of environment variables that hold the client ID and client secret.}
+\item{appname}{prefix of environment variables that hold the client ID and
+client secret.}
+
+\item{secrets}{File path to service account secrets JSON file downloaded from
+the Google APIs console.}
 }
 \description{
 Create a Google APIs OAuth2.0 credentials object
