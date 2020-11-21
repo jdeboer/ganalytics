@@ -48,6 +48,7 @@ Suggests:
     tidyr,
     spelling,
     covr,
+    ggplot2
 Collate: 
     'Bool-generics.R'
     'utils.R'
