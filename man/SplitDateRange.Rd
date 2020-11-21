@@ -13,12 +13,14 @@ SplitDateRange(dateRange, N = 0L)
 \code{0} for single days.}
 }
 \description{
-Splits a gaDateRange object into \code{N} pieces. Useful for splitting a
+Splits a \code{gaDateRange} object into \code{N} pieces. Useful for splitting a
 query into smaller chunks in order to overcome sampling.
 }
 \seealso{
-Other date range functions: \code{\link{Cohort}},
-  \code{\link{DateRange}}, \code{\link{EndDate}},
-  \code{\link{StartDate}}
+Other date range functions: 
+\code{\link{Cohort}()},
+\code{\link{DateRange}()},
+\code{\link{EndDate}()},
+\code{\link{StartDate}()}
 }
 \concept{date range functions}

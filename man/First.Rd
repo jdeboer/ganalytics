@@ -28,7 +28,9 @@ session_starts_from_home <- First(Expr(~pagepath == "/"))
 \seealso{
 \code{\link{Sequence}}
 
-Other sequence segment functions: \code{\link{Later}},
-  \code{\link{Sequence}}, \code{\link{Then}}
+Other sequence segment functions: 
+\code{\link{Later}()},
+\code{\link{Sequence}()},
+\code{\link{Then}()}
 }
 \concept{sequence segment functions}

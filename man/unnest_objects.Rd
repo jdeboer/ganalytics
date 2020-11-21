@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{unnest_objects}
 \alias{unnest_objects}
-\title{unnest_objects.}
+\title{unnest_objects}
 \usage{
 unnest_objects(..., class)
 }

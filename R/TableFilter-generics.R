@@ -20,8 +20,6 @@ setGeneric(
 #'
 #' Set the filter.
 #'
-#' @family query object functions
-#'
 #' @export
 #' @rdname TableFilter
 setGeneric(

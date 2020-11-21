@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{ArgList}
 \alias{ArgList}
-\title{ArgList.}
+\title{ArgList}
 \usage{
 ArgList(...)
 }

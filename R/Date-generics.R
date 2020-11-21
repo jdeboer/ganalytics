@@ -25,8 +25,6 @@ setGeneric(
 #'
 #' @param value The replacement date range.
 #'
-#' @family date range functions
-#'
 #' @export
 #' @rdname DateRange
 setGeneric(
@@ -58,8 +56,6 @@ setGeneric(
 #' StartDate<-
 #'
 #' Set the start date.
-#'
-#' @family date range functions
 #'
 #' @export
 #' @rdname StartDate
@@ -93,8 +89,6 @@ setGeneric(
 #'
 #' Set the endDate of the date range.
 #'
-#' @family date range functions
-#'
 #' @export
 #' @rdname EndDate
 setGeneric(
@@ -110,8 +104,8 @@ setGeneric(
 #'
 #' Get or define a cohort.
 #'
-#' @param object The object to get or set the cohorts of.
-#' @param value The value to set the object's cohorts to.
+#' @param object The object to get or set the cohorts of, generally a \code{".query"}.
+#' @param value A \code{"dateRange"} to set the object's cohort to.
 #' @param type The type of cohort. Only the default of \code{"FIRST_VISIT_DATE"}
 #'   is currently valid.
 #'
@@ -127,8 +121,6 @@ setGeneric(
 #' Cohort<-
 #'
 #' Set a cohort of a query.
-#'
-#' @family date range functions
 #'
 #' @export
 #' @rdname Cohort

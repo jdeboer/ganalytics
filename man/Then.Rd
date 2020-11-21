@@ -27,7 +27,9 @@ purchased_immediately_after <- Then(Expr(~transactions > 0))
 \seealso{
 \code{\link{Sequence}}
 
-Other sequence segment functions: \code{\link{First}},
-  \code{\link{Later}}, \code{\link{Sequence}}
+Other sequence segment functions: 
+\code{\link{First}()},
+\code{\link{Later}()},
+\code{\link{Sequence}()}
 }
 \concept{sequence segment functions}

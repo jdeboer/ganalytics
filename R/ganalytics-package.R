@@ -40,7 +40,7 @@ NULL
 #' querying and analysis of Google Analytics data.}
 #'   \item{\code{\link{GetGaData}}}{This function will execute the supplied query object.}
 #'   \item{\code{\link{Expr}}}{This is used to define expressions involving Google Analytics
-#' dimensions and/or metrics used for use in segments and filters.}
+#' dimensions and/or metrics used for segments and filters.}
 #'   \item{\code{\link{Sequence}}}{This function takes one or more expressions to construct
 #' a sequence-based segment.}
 #' }

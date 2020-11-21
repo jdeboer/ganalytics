@@ -2,11 +2,17 @@
 % Please edit documentation in R/Query-methods.R
 \name{RtQuery}
 \alias{RtQuery}
-\title{RtQuery.}
+\title{RtQuery}
 \usage{
-RtQuery(view = NA, creds = get_creds(), metrics = "rt:pageviews",
-  dimensions = "rt:minutesAgo", sortBy = NULL, filters = NULL,
-  maxResults = kGaMaxResults)
+RtQuery(
+  view = NA,
+  creds = get_creds(),
+  metrics = "rt:pageviews",
+  dimensions = "rt:minutesAgo",
+  sortBy = NULL,
+  filters = NULL,
+  maxResults = kGaMaxResults
+)
 }
 \arguments{
 \item{view}{view id to use}

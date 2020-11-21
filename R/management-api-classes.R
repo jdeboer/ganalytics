@@ -218,7 +218,7 @@ gaAccountSummaries <- R6Class(
   )
 )
 
-#' GTM Account Summaries
+#' GA Account Summaries
 #'
 #' Get a collection of Google Analytics account summaries.
 #'
@@ -305,7 +305,7 @@ gaAccounts <- R6Class(
   )
 )
 
-#' GTM Accounts
+#' GA Accounts
 #'
 #' Get the collection of GA accounts accessible to the user with the credentials
 #' supplied by \code{creds}..

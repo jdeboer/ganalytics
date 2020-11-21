@@ -2,7 +2,7 @@
 #' @importFrom assertthat assert_that
 NULL
 
-#' sequential_segment.
+#' sequential_segment
 #'
 #' Create a sequence using non-standard evaluation syntax.
 #'

@@ -4,9 +4,14 @@
 \alias{GoogleApiCreds}
 \title{Google APIs OAuth 2.0 Credentials.}
 \usage{
-GoogleApiCreds(userName = Sys.getenv(paste0(appname, "_USER")),
-  appCreds = NULL, cache = character(0), use_oob = FALSE,
-  appname = "GOOGLE_APIS", secrets = NULL)
+GoogleApiCreds(
+  userName = Sys.getenv(paste0(appname, "_USER")),
+  appCreds = NULL,
+  cache = character(0),
+  use_oob = FALSE,
+  appname = "GOOGLE_APIS",
+  secrets = NULL
+)
 }
 \arguments{
 \item{userName}{Google username email address hint}

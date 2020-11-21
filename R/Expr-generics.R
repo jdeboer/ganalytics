@@ -121,8 +121,6 @@ setGeneric(
 #'
 #' Set the scope level of a \code{.gaSegmentFilter} or a \code{gaMetExpr}.
 #'
-#' @family dynamic segment functions
-#'
 #' @export
 #' @rdname ScopeLevel
 setGeneric(

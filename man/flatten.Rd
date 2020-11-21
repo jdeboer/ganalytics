@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{flatten}
 \alias{flatten}
-\title{flatten.}
+\title{flatten}
 \usage{
 flatten(x)
 }

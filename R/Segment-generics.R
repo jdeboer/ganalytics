@@ -109,8 +109,6 @@ setGeneric(
 #' @param value The value of the negation slot, either \code{TRUE} or
 #'   \code{FALSE}.
 #'
-#' @family dynamic segment functions
-#'
 #' @rdname IsNegated
 #' @export
 setGeneric(
@@ -128,7 +126,7 @@ setGeneric(
 #' \code{gaDynSegment} that is scoped to either \code{'user'} or
 #' \code{'session'} level.
 #'
-#' Segment filter are either sequential or non-sequential conditions.
+#' Segment filters are either sequential or non-sequential conditions.
 #' Sequential and non-sequential conditions can be combined using this function.
 #'
 #' @param object The first filter to include in the segment definition.
@@ -287,7 +285,7 @@ setGeneric(
 #' Segments
 #'
 #' Get the list of segments from the object or coerce the supplied objects into
-#' a a named list of segments.
+#' a named list of segments.
 #'
 #' @param object A query object to get the segment list from or to set the
 #'   segment list of.
@@ -320,8 +318,6 @@ setGeneric(
 #' Set the segments of the query object.
 #'
 #' @param value A named list of segments or a single segment.
-#'
-#' @family dynamic segment functions
 #'
 #' @examples
 #' my_query <- GaQuery(view = "987654321")

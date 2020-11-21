@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{GaAccounts}
 \alias{GaAccounts}
-\title{GTM Accounts}
+\title{GA Accounts}
 \usage{
 GaAccounts(creds = get_creds())
 }

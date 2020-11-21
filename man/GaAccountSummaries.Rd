@@ -2,7 +2,7 @@
 % Please edit documentation in R/management-api-classes.R
 \name{GaAccountSummaries}
 \alias{GaAccountSummaries}
-\title{GTM Account Summaries}
+\title{GA Account Summaries}
 \usage{
 GaAccountSummaries(creds = get_creds())
 }

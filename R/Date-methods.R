@@ -45,7 +45,7 @@ NULL
 
 #' SplitDateRange
 #'
-#' Splits a gaDateRange object into \code{N} pieces. Useful for splitting a
+#' Splits a \code{gaDateRange} object into \code{N} pieces. Useful for splitting a
 #' query into smaller chunks in order to overcome sampling.
 #'
 #' @param dateRange the \code{gaDateRange} object to be split
@@ -99,37 +99,37 @@ GetDataByDateRange <- function(query, dates) {
 
 # StartDate and EndDate
 
-#' @describeIn DateRange Coerce a character vector into a Google Analytics date
+#' @describeIn StartDate Coerce a character vector into a Google Analytics date
 #'   object.
 setMethod("StartDate", "character", function(object) {
   as(object, "Date")
 })
 
-#' @describeIn DateRange Coerce a character vector into a Google Analytics date
+#' @describeIn EndDate Coerce a character vector into a Google Analytics date
 #'   object.
 setMethod("EndDate", "character", function(object) {
   as(object, "Date")
 })
 
-#' @describeIn DateRange Return the start dates of a date range vector.
+#' @describeIn StartDate Return the start dates of a date range vector.
 setMethod("StartDate", "dateRange", function(object) {as.Date(int_start(object))})
 
-#' @describeIn DateRange Return the end dates of a date range vector.
+#' @describeIn EndDate Return the end dates of a date range vector.
 setMethod("EndDate", "dateRange", function(object) {as.Date(int_end(object))})
 
-#' @describeIn DateRange Return the start dates of a date range vector.
+#' @describeIn StartDate Return the start dates of a date range vector.
 setMethod("StartDate", "Interval", function(object) {StartDate(DateRange(object))})
 
-#' @describeIn DateRange Return the end dates of a date range vector.
+#' @describeIn EndDate Return the end dates of a date range vector.
 setMethod("EndDate", "Interval", function(object) {EndDate(DateRange(object))})
 
-#' @describeIn DateRange Return the start dates of a query's date range vector.
+#' @describeIn StartDate Return the start dates of a query's date range vector.
 setMethod("StartDate", ".standardQuery", function(object) {StartDate(object@dateRange)})
 
-#' @describeIn DateRange Return the end dates of a query's date range vector.
+#' @describeIn EndDate Return the end dates of a query's date range vector.
 setMethod("EndDate", ".standardQuery", function(object) {EndDate(object@dateRange)})
 
-#' @describeIn DateRange Get the date when a view first started receiving hits.
+#' @describeIn StartDate Get the date when a view first started receiving hits.
 setMethod("StartDate", "gaView", function(object) {
   start_date <- as.Date(object$created)
   end_date <- today()
@@ -144,7 +144,7 @@ setMethod("StartDate", "gaView", function(object) {
   GetGaData(query)$date
 })
 
-#' @describeIn DateRange Get the last day a view received hits.
+#' @describeIn EndDate Get the last day a view received hits.
 setMethod("EndDate", "gaView", function(object) {
   start_date <- as.Date(object$created)
   end_date <- today()
@@ -159,7 +159,7 @@ setMethod("EndDate", "gaView", function(object) {
   GetGaData(query)$date
 })
 
-#' @describeIn DateRange Set a new start date for a date range.
+#' @describeIn StartDate Set a new start date for a date range.
 setMethod(
   f = "StartDate<-",
   signature = c("dateRange", "ANY"),
@@ -170,7 +170,7 @@ setMethod(
   }
 )
 
-#' @describeIn DateRange Set a new end date for a date range.
+#' @describeIn EndDate Set a new end date for a date range.
 setMethod(
   f = "EndDate<-",
   signature = c("dateRange", "ANY"),
@@ -181,7 +181,7 @@ setMethod(
   }
 )
 
-#' @describeIn DateRange Set a new start date for a query.
+#' @describeIn StartDate Set a new start date for a query.
 setMethod(
   f = "StartDate<-",
   signature = c(".standardQuery", "ANY"),
@@ -193,7 +193,7 @@ setMethod(
   }
 )
 
-#' @describeIn DateRange Set a new end date for a query.
+#' @describeIn EndDate Set a new end date for a query.
 setMethod(
   f = "EndDate<-",
   signature = c(".standardQuery", "ANY"),

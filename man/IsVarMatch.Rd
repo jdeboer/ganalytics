@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{IsVarMatch}
 \alias{IsVarMatch}
-\title{IsVarMatch.}
+\title{IsVarMatch}
 \usage{
 IsVarMatch(thisVar, inVars)
 }

@@ -2,13 +2,22 @@
 % Please edit documentation in R/Query-methods.R
 \name{GaQuery}
 \alias{GaQuery}
-\title{GaQuery.}
+\title{GaQuery}
 \usage{
-GaQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
-  endDate = Sys.Date() - 2, metrics = "ga:sessions",
-  dimensions = "ga:date", sortBy = NULL, filters = NULL,
-  segments = NULL, cohorts = NULL, samplingLevel = "DEFAULT",
-  maxResults = kGaMaxResults)
+GaQuery(
+  view = NA,
+  creds = get_creds(),
+  startDate = Sys.Date() - 8,
+  endDate = Sys.Date() - 2,
+  metrics = "ga:sessions",
+  dimensions = "ga:date",
+  sortBy = NULL,
+  filters = NULL,
+  segments = NULL,
+  cohorts = NULL,
+  samplingLevel = "DEFAULT",
+  maxResults = kGaMaxResults
+)
 }
 \arguments{
 \item{view}{view id to use}

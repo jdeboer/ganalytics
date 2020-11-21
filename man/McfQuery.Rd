@@ -2,12 +2,20 @@
 % Please edit documentation in R/Query-methods.R
 \name{McfQuery}
 \alias{McfQuery}
-\title{McfQuery.}
+\title{McfQuery}
 \usage{
-McfQuery(view = NA, creds = get_creds(), startDate = Sys.Date() - 8,
-  endDate = Sys.Date() - 2, metrics = "mcf:totalConversions",
-  dimensions = "mcf:nthDay", sortBy = NULL, filters = NULL,
-  samplingLevel = "DEFAULT", maxResults = kGaMaxResults)
+McfQuery(
+  view = NA,
+  creds = get_creds(),
+  startDate = Sys.Date() - 8,
+  endDate = Sys.Date() - 2,
+  metrics = "mcf:totalConversions",
+  dimensions = "mcf:nthDay",
+  sortBy = NULL,
+  filters = NULL,
+  samplingLevel = "DEFAULT",
+  maxResults = kGaMaxResults
+)
 }
 \arguments{
 \item{view}{view id to use}

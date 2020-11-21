@@ -21,8 +21,8 @@ NULL
     'Please note: Authentication will automatically direct you to Google\'s website',
     'where you will be asked to grant permission for your project to access Google',
     'Analytics - this will open within your default web browser. Unless a file path',
-    'is provided at the time of authentication, tokens will be cached by httr in your',
-    'home directory.',
+    'is provided at the time of authentication, tokens will be cached by httr into',
+    'your home directory.',
     sep = "\n"
   ))
 }

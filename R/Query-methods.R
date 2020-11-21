@@ -6,7 +6,7 @@
 #' @importFrom methods new as
 NULL
 
-#' GaQuery.
+#' GaQuery
 #'
 #' Create a ganalytics query object
 #'
@@ -68,7 +68,7 @@ GaQuery <- function(
   )
 }
 
-#' McfQuery.
+#' McfQuery
 #'
 #' Create a Multi-Channel Funnel Reporting API query object
 #'
@@ -119,7 +119,7 @@ McfQuery <- function(
   )
 }
 
-#' RtQuery.
+#' RtQuery
 #'
 #' Create a Real-Time reporting API query object
 #'

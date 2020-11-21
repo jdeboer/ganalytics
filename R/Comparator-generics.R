@@ -24,8 +24,6 @@ setGeneric(
 #'
 #' @param value The value to set the comparator to.
 #'
-#' @family comparator functions
-#'
 #' @export
 #' @rdname Comparator
 setGeneric(
@@ -55,7 +53,7 @@ setGeneric(
 #' @name comparators
 NULL
 
-#' @section \%starts_with\%:
+#' @section %starts_with%:
 #' A condition where the dimension (LHS) matches values that start with the
 #' character string given by the operand (RHS).
 #' @examples
@@ -70,7 +68,7 @@ setGeneric(
 
 # Base R functions: `startsWith` and `endsWith`
 
-#' @section \%ends_with\%:
+#' @section %ends_with%:
 #' A condition where the dimension (LHS) matches values that end with the
 #' character string given by the operand (RHS).
 #' @examples
@@ -83,7 +81,7 @@ setGeneric(
   valueClass = ".dimExpr"
 )
 
-#' @section \%contains\%:
+#' @section %contains%:
 #' A condition where the dimension (LHS) matches values that contain the
 #' character string given by the operand (RHS).
 #' @examples
@@ -96,7 +94,7 @@ setGeneric(
   valueClass = ".dimExpr"
 )
 
-#' @section \%matches\%:
+#' @section %matches%:
 #' A condition where the dimension (LHS) matches a regular expression given by
 #' the operand (RHS).
 #' @examples
@@ -111,7 +109,7 @@ setGeneric(
 
 # Base R function `grepl`
 
-#' @section \%between\%:
+#' @section %between%:
 #' A condition where the var (LHS) is within the lower and upper bounds
 #' specified by first and second vector value (respectively) of the operand
 #' (RHS).
@@ -125,7 +123,7 @@ setGeneric(
   valueClass = ".expr"
 )
 
-#' @section \%in\%:
+#' @section %in%:
 #' A condition where the dimension (LHS) matches one of the values in the vector
 #' specified by the operand (RHS).
 #' @examples

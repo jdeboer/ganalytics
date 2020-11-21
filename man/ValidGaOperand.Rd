@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{ValidGaOperand}
 \alias{ValidGaOperand}
-\title{ValidGaOperand.}
+\title{ValidGaOperand}
 \usage{
 ValidGaOperand(var, operand)
 }

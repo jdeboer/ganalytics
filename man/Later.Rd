@@ -25,7 +25,9 @@ purchased_sometime_later <- Later(Expr(~transactions > 0))
 
 }
 \seealso{
-Other sequence segment functions: \code{\link{First}},
-  \code{\link{Sequence}}, \code{\link{Then}}
+Other sequence segment functions: 
+\code{\link{First}()},
+\code{\link{Sequence}()},
+\code{\link{Then}()}
 }
 \concept{sequence segment functions}

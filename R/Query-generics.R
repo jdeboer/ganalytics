@@ -23,8 +23,6 @@ setGeneric(
 #'
 #' Set the maximum rows returned by a ganalytics query.
 #'
-#' @family query object functions
-#'
 #' @export
 #' @rdname MaxResults
 setGeneric(
@@ -59,7 +57,10 @@ setGeneric(
 #'
 #' Set the sampling level for a ganalytics query.
 #'
-#' @family query object functions
+#' Valid sampling levels are:
+#' * "DEFAULT"
+#' * "SMALL" (or "FASTER")
+#' * "LARGE" (or "HIGHER_PRECISION")
 #'
 #' @export
 #' @rdname SamplingLevel

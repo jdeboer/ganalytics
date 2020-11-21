@@ -2,7 +2,7 @@
 % Please edit documentation in R/sequence.R
 \name{sequential_segment}
 \alias{sequential_segment}
-\title{sequential_segment.}
+\title{sequential_segment}
 \usage{
 sequential_segment(steps)
 }

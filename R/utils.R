@@ -4,7 +4,7 @@
 #' @importFrom methods slot .valueClassTest
 NULL
 
-#' IsVarMatch.
+#' IsVarMatch
 #'
 #' The following method is a temporary workaround to support XX placeholders in dimension and metric
 #' names, such as with custom dimensions, metrics and various goal related variables.
@@ -19,7 +19,7 @@ IsVarMatch <- function(thisVar, inVars) {
   any(str_detect(as.character(thisVar), inVars))
 }
 
-#' ValidGaOperand.
+#' ValidGaOperand
 #'
 #' Checks whether an operand value is valid for a selected dimension.
 #'
@@ -53,7 +53,7 @@ ValidGaOperand <- function(var, operand) {
   }
 }
 
-#' ArgList.
+#' ArgList
 #'
 #' If the only argument passed was already a list, then extract that list.
 #'
@@ -66,7 +66,7 @@ ArgList <- function(...) {
   )
 }
 
-#' unnest_objects.
+#' unnest_objects
 #'
 #' Concatenate objects of class \code{class} with lists of objects into a flattened list.
 #'
@@ -81,7 +81,7 @@ unnest_objects <- function(..., class) {
   exprList
 }
 
-#' flatten.
+#' flatten
 #'
 #' Flatten a nested list while preserving the class of each element
 #' Convert a list type object into a non-nested list, preserving

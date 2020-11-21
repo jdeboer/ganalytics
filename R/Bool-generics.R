@@ -78,7 +78,7 @@ setGeneric(
 #' @param x,y Conditions for an EXCLUSIVE-OR expression.
 #'
 #' @examples
-#' either_enquired_or_downloaded <- xor(
+#' either_enquired_or_downloaded_but_not_both <- xor(
 #'   Expr(~eventCategory == "enquiry"),
 #'   Expr(~eventCategory == "download")
 #' )

@@ -10,9 +10,9 @@ Cohort(object, value, type)
 Cohort(object) <- value
 }
 \arguments{
-\item{object}{The object to get or set the cohorts of.}
+\item{object}{The object to get or set the cohorts of, generally a \code{".query"}.}
 
-\item{value}{The value to set the object's cohorts to.}
+\item{value}{A \code{"dateRange"} to set the object's cohort to.}
 
 \item{type}{The type of cohort. Only the default of \code{"FIRST_VISIT_DATE"}
 is currently valid.}
@@ -23,12 +23,10 @@ Get or define a cohort.
 Set a cohort of a query.
 }
 \seealso{
-Other date range functions: \code{\link{DateRange}},
-  \code{\link{EndDate}}, \code{\link{SplitDateRange}},
-  \code{\link{StartDate}}
-
-Other date range functions: \code{\link{DateRange}},
-  \code{\link{EndDate}}, \code{\link{SplitDateRange}},
-  \code{\link{StartDate}}
+Other date range functions: 
+\code{\link{DateRange}()},
+\code{\link{EndDate}()},
+\code{\link{SplitDateRange}()},
+\code{\link{StartDate}()}
 }
 \concept{date range functions}
