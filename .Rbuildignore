@@ -22,5 +22,6 @@
 ^.*\.o$
 client_secret.json
 ^~/\.google_apis_auth\.RDS$
+^.*google_apis_auth\.RDS$
 figure$
 ^R/WIP$
