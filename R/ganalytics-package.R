@@ -25,7 +25,9 @@ NULL
 #' To report bugs, please run the following command:
 #' \code{utils::bug.report(package = "ganalytics")}
 #'
-#' When posting a bug, please try rerun any API queries wrapped within a call to
+#' When posting a bug, try executing `traceback()` immediately after any error
+#' message you receive and provide a copy of the results of the traceback in
+#' your report. Also, please try rerun any API queries wrapped within a call to
 #' \code{httr::with_verbose} and include the output in the bug report (taking
 #' care not to include any private data). For example:
 #' \code{httr::with_verbose(GetGaData(my_query))}
