@@ -87,6 +87,22 @@ setAs(".compoundExpr", ".filter_clauses_ga4", def = function(from, to) {
   as(as(from, "gaFilter"), to)
 })
 
+setAs("gaFilter", "dim_fil_ga4", def = function(from, to) {
+  as(from, ".filter_clauses_ga4")
+})
+
+setAs("gaFilter", "met_fil_ga4", def = function(from, to) {
+  as(from, ".filter_clauses_ga4")
+})
+
+setAs(".compoundExpr", "dim_fil_ga4", def = function(from, to) {
+  as(as(from, "gaFilter"), to)
+})
+
+setAs(".compoundExpr", "met_fil_ga4", def = function(from, to) {
+  as(as(from, "gaFilter"), to)
+})
+
 setAs("gaDimExpr", "segmentFilterClause_ga4", def = function(from, to) {
   exp_details <- get_expression_details(from, kGa4Ops$dimension_operators)
   segmentDimensionFilter <- list(
