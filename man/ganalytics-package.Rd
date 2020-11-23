@@ -38,6 +38,13 @@ care not to include any private data). For example:
 For a step-by-step guide with examples, run this command:
 \code{browseVignettes(package = "ganalytics")}
 
+Getting started:
+Demos can be listed using \code{demo(package = "ganalytics")}
+Vignettes can be listed using \code{vignette(package = "ganalytics")},
+Use the GoogleApiCreds() function to set credentials for authenticating with
+your Google Analytics API project. For example:
+\code{creds <- GoogleApiCreds("<my_user_name>@gmail.com", ".my_app_oauth_creds.json")}
+
 Important functions to be familiar with in this package are:
 \describe{
 \item{\code{\link{GaQuery}}}{This function is used to define a Google Analytics query
