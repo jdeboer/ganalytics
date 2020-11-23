@@ -3,6 +3,7 @@ doc
 .Rproj.user
 .Rhistory
 .RData
+*google_apis_auth.RDS
 Read-and-delete-me
 *-Ex.R
 .httr-oauth
